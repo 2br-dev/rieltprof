@@ -542,3 +542,15 @@ button[type="submit"]{
 #object .outdated {
     display: none;
 }
+.not-actual td.photo-holder,
+.not-actual td.features,
+.not-actual td.district,
+.not-actual td.price,
+.not-actual td.rooms,
+.not-actual td.date,
+.not-actual td.personal-note {
+    opacity: 0.3;
+}
+.global-wrapper#account .content .main-block table .my-objects-data .actions a.republish-object {
+    background-image: url(../img/refresh.svg);
+}

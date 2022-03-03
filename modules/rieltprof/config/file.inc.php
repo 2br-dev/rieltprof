@@ -331,4 +331,13 @@ class File extends ConfigObject
 
         return $out;
     }
+
+    public function getObjectByType($type_object, $id)
+    {
+        switch (substr($type_object, 0, -4)){
+            case 'flat': return new \Rieltprof\Model\Orm\Flat($id); break;
+            case 'house': return new \Rieltprof\Model\Orm\House($id); break;
+            default: return new \Catalog\Model\Orm\Product($id);
+        }
+    }
 }

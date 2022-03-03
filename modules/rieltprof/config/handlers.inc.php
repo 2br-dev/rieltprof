@@ -2,7 +2,9 @@
 
 namespace rieltprof\Config;
 
+use Alerts\Model\Manager;
 use Catalog\Controller\Block\SearchLine as CatalogSearchLine;
+use Rieltprof\Model\Notice\UserRemovedFromPublic;
 use rieltprof\Model\Orm\District;
 use RS\Config\Loader as ConfigLoader;
 use RS\Event\HandlerAbstract;
@@ -27,6 +29,7 @@ class Handlers extends HandlerAbstract
             ->bind('getroute', null, null, 0)
             ->bind('initialize')
             ->bind('getmenus')
+            ->bind('cron')
 
             ->bind('orm.init.users-user')
             ->bind('orm.afterwrite.users-user')
@@ -82,6 +85,45 @@ class Handlers extends HandlerAbstract
 
             ->bind('orm.init.catalog-dir')
             ;
+    }
+
+    public static function cron($params)
+    {
+        $config = \RS\Config\Loader::byModule('rieltprof');
+        $public_object = \RS\Orm\Request::make()
+            ->from(new \Catalog\Model\Orm\Product())
+            ->where([
+                'public' => 1
+            ])->exec()->fetchAll();
+
+//        foreach ($params['minutes'] as $minute) {
+//            if($minute % 1438 == 0){
+                //каждый день в 23:59 проверяем активные обявления на актуальность. Актуальность - не более 30 дней
+                foreach ($public_object as $key => $value){
+                    // Проверяем объявление на атуальность
+                    $is_actual = $config->isActualAd($value);
+                    // Если не актуальное то реквизит public = 0
+                    if(!$is_actual){
+                        $object = $config->getObjectByType($value['controller'], $value['id']);
+                        $table = $object::_getTableArray();
+                        \RS\Orm\Request::make()
+                            ->update($table[1])
+                            ->set([
+                                'public' => 0
+                            ])
+                            ->where([
+                                'id' => $value['id']
+                            ])->exec();
+                        //Отправить письмо владелцу объявления если обновление прошло успешно
+                        //TODO - подумать над тем чтоб не отправлять сообщения прямо в 23:59
+                        $user = new \Users\Model\Orm\User($object['owner']);
+                        $notice = new UserRemovedFromPublic();
+                        $notice->init($user, $object);
+                        Manager::send($notice);
+                    }
+                }
+//            }
+//        }
     }
 
     /**

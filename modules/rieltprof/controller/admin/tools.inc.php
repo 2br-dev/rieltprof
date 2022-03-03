@@ -56,6 +56,9 @@ class Tools extends \RS\Controller\Admin\Front
         return $this->result->setSuccess(true)->addMessage('Сохранено');
     }
 
+    /**
+     * Показать телефон владельца сообщения
+     */
     function actionGetOwnerPhone()
     {
         $user_id = $this->url->request('user', TYPE_INTEGER, 0);

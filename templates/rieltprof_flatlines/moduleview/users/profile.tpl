@@ -97,7 +97,7 @@
                 <div class="switch-district">
                     <div class="segmented-radio">
                         {if $smarty.server.REQUEST_URI == "/my/"}
-                            <p class="sale-category-link active">Мои объект</p>
+                            <p class="sale-category-link active">Мои объекты</p>
                         {else}
                             <a href="/my/" class="sale-category-link">Мои объекты</a>
                         {/if}
@@ -147,7 +147,7 @@
                                         </thead>
                                         <tbody class="my-objects-data">
                                             {foreach $ads as $ad}
-                                                <tr data-id="{$ad['id']}" class="object-link">
+                                                <tr data-id="{$ad['id']}" class="object-link {if !$ad['public']}not-actual{/if}" id="ad-{$ad['id']}">
 {*                                                    <td class="expand-wrapper"><a href="javascript:void(0);" class="expand-row"></a></td>*}
                                                     <td class="photo-holder"><a href="" class="photo lazy-image" data-src="{$ad->getMainImage()->getUrl('360', '215', 'xy')}"></a></td>
                                                     <td class="features">
@@ -182,8 +182,17 @@
                                                     <td class="personal-note">{$ad['personal_note']}</td>
                                                     <td class="actions">
                                                         {$cont = 'rieltprof-'|cat:$ad['controller']}
-                                                        {if !$config->isActualAd($ad)}
-                                                            <div class="info" title="Не актуализировался более 30 дней">&nbsp;</div>
+{*                                                        {if !$config->isActualAd($ad)}*}
+{*                                                            <div class="info" title="Не актуализировался более 30 дней">&nbsp;</div>*}
+{*                                                        {/if}*}
+                                                        {if !$ad['public']}
+                                                            <a
+                                                                data-url="{$router->getUrl('rieltprof-front-objects', ['Act' => 'republish'])}"
+                                                                data-id="{$ad['id']}"
+                                                                data-type="{$ad['controller']}"
+                                                                class="republish-object"
+                                                                title="Опубликовать"
+                                                            ></a>
                                                         {/if}
                                                         <a href="{$router->getAdminUrl('edit', ['referer' => '/my/', 'id' => $ad['id'], 'dir' => $category['id'], 'action' => 'sale', 'object' => $ad['object']], $cont)}" class="edit crud-edit">&nbsp;</a>
                                                         <a href="{$router->getAdminUrl('delProd', ['referer' => '/my/', 'id' => $ad['id']], $cont)}" class="remove delete crud-get crud-close-dialog">&nbsp;</a>

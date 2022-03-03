@@ -6,6 +6,7 @@ $(() => {
     $('body').on('click', '#add-contact', addContact);
     $('body').on('click', '.trigger-action-link', setActionInCookie);
     $('body').on('click', '.toggle-view', toggleViewInCookie);
+    $('body').on('click', '.republish-object', republishObject);
 
     if($('.rating_user').length){
         var initial_value = Math.round($('.rating_user').data('initial'));
@@ -180,4 +181,29 @@ function toggleViewInCookie(){
     var mode = $(this).data('mode');
     console.log(mode);
     document.cookie = 'view_mode = ' + mode;
+}
+
+function republishObject(e) {
+    if(e !== 'undefined'){
+        e.preventDefault();
+    }
+    $.ajax({
+        url: $(this).data('url'),
+        data: {
+            'id': $(this).data('id'),
+            'type': $(this).data('type')
+        },
+        type: 'POST',
+        dataType: 'JSON',
+        success: function(res){
+            if(res.success){
+                if (res.reloadPage) {
+                    location.replace(window.location.href);
+                }
+            }
+        },
+        error: function(err){
+            console.error(err);
+        }
+    });
 }
