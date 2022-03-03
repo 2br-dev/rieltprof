@@ -1,0 +1,1 @@
+<input type="checkbox" name="{$cell->getName()}" value="{$cell->getValue()}" {$cell->getCellAttr()}>

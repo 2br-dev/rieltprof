@@ -1,0 +1,114 @@
+@import "../global/variable";
+
+// Header
+.header {
+  &-top {
+    font-family: $themeFontLight;
+    font-size: 13px;
+    line-height: 2;
+    position: relative;
+    z-index: 26;
+    &-city {
+      @media only screen and (max-width:$xs-end) {
+        @include flexbox;
+        @include flex-direction(row);
+        @include flex-wrap(wrap);
+        @include justify-content(space-between);
+        padding: 0 5px;
+        width: 100%;
+      }
+      &_select {
+        display: inline-block;
+        font-size: 12px;
+        margin-right: 31px;
+        i {
+          color: $iconColor;
+        }
+        @media (max-width:$xs-end) {
+          margin-right:0;
+        }
+      }
+      &_icon {
+        background: url(../img/arrow-bottom.png) no-repeat center center;
+        color: $iconColor;
+        display: block;
+        float: right;
+        height: 14px;
+        margin: 5px 0 0 8px;
+        width: 14px;
+      }
+      &_link {
+        color: #000;
+        cursor: pointer;
+        margin-left: 2px;
+        i {
+          position: relative;
+          top: -1px;
+        }
+      }
+      &_city {
+        display: inline-block;
+        font-size: 12px;
+        padding: 0 15px;
+      }
+      &_phone {
+        color: #000;
+      }
+    }
+  }
+  &-middle {
+    background-color: #fff;
+    min-height: 70px;
+    padding: 8px 0;
+    position: relative;
+    z-index: 25;
+    .logo {
+      display: table;
+      margin: 6px auto;
+      @media only screen and (max-width:$sm-end) {
+        float: right;
+      }
+    }
+    .theme-btn_search {
+      margin-left: -50px;
+      position:relative;
+      z-index:2;
+    }
+  }
+  &-bottom {
+    .navbar {
+      margin-bottom: 0;
+      & > li {
+        a {
+          line-height: 28px;
+        }
+      }
+    }
+  }
+  & + div {
+    padding-top: 29px;
+  }
+}
+
+.slogan {
+  font-size: 11px;
+  text-align: center;
+}
+
+.logo .slogan {
+  margin-top:5px;
+}
+
+.counter {
+  position: absolute;
+  padding: 0 6px;
+  background: #ffac00;
+  border-radius: 50%;
+  height: 21px;
+  right: 0;
+  top: 0;
+  line-height: 21px;
+  text-align: center;
+  font-style: normal;
+  font-size: 12px;
+}

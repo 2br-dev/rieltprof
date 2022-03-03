@@ -1,0 +1,1 @@
+<option value="{$map.id}" data-value='{str_ireplace( '&quot;','`', $map->getJson())}'>{$map.title}</option>

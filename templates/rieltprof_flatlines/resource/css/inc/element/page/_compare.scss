@@ -1,0 +1,120 @@
+@import "../../global/variable";
+
+// Page Compare
+
+.sec-page-compare {
+
+}
+
+.compare {
+  &_wrapper {
+    background-color: #fff;
+    margin-bottom: 29px;
+    margin-top: 29px;
+    @media (max-width: $sm-end) {
+      margin-top: 29px;
+      margin-bottom: 0;
+    }
+    @media (max-width: $md-end) {
+      border-bottom: 1px solid #e8e8e8;
+    }
+    h1 {
+      padding:0 15px;
+      width: 100%;
+    }
+  }
+  &_list {
+    opacity: 1;
+  }
+  &_product {
+    padding: 0 25px 25px;
+    @include flexbox;
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+
+    .card-product_ticket {
+        position:static;
+    }
+
+    &:hover {
+      .compare_product_img {
+        a {
+          width: 100%;
+        }
+        img {
+          @include transform(scale(1.05));
+        }
+      }
+    }
+    @media (max-width: $xs-end) {
+      border-top: 1px solid #e8e8e8;
+      padding: 15px;
+    }
+    @media (min-width: $md-start) and (max-width: $md-end) {
+      @include justify-content(center);
+    }
+    &_img {
+      text-align: center;
+      width: 40%;
+      @include flexbox;
+      @include justify-content(center);
+      @include align-items(center);
+      @media (max-width: $xx-end) {
+        width: 100%;
+        padding: 25px;
+      }
+      @media (min-width: $xs-start) and (max-width: $xs-end) {
+        width: 50%;
+        padding: 25px;
+      }
+      @media (min-width: $sm-start) and (max-width: $sm-end) {
+        width: 100%;
+        padding-bottom: 25px;
+      }
+      img {
+        transition: ease-in-out 0.3s;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+    &_text {
+      width: 60%;
+      padding: 0 15px;
+      @include flexbox;
+      @include flex-direction(column);
+      @include justify-content(center);
+      @media (max-width: $xx-end) {
+        width: 100%;
+      }
+      @media (min-width: $xs-start) and (max-width: $xs-end) {
+        width: 50%;
+      }
+      @media (min-width: $sm-start) and (max-width: $sm-end) {
+        width: 100%;
+      }
+    }
+    &_category {
+      font-family: $themeFontLight;
+      opacity: .65;
+    }
+    &_title {
+      font-family: $themeFontLight;
+      font-size: 18px;
+      letter-spacing: .75px;
+      line-height: 1.25;
+      padding: 5px 0;
+    }
+    .link-more {
+      margin: 0;
+    }
+    .link-del {
+      width: 112px;
+      padding: 7px 0 7px 20px;
+      display: inline-block;
+      i {
+        top: 2px;
+        left: 6px;
+      }
+    }
+  }
+}

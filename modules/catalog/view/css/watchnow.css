@@ -1,0 +1,72 @@
+.widget .last-watch {
+    padding:0 7px 3px;
+    position:relative;
+}
+
+.widget .last-watch .prev,
+.widget .last-watch .next {
+    position: absolute;
+    top:50%;
+    left:20px;
+
+    width:30px;
+    height:30px;
+    line-height:100%;
+    margin-top:-32px;
+    font-size:24px;
+
+    border:1px solid #aaa;
+    color:#aaa;
+    border-radius:50%;
+    text-align:center;
+}
+
+.widget .last-watch .zmdi {
+    vertical-align: middle;
+}
+
+.widget .last-watch .next {
+    left:auto;
+    right:20px;
+}
+
+.widget .last-watch .prev:hover,
+.widget .last-watch .next:hover {
+    color:#333;
+    border-color:#333;
+}
+
+
+.widget .last-watch .picture {
+    margin:0 33px;
+    height:150px;
+    text-align:center;
+    overflow:hidden;
+}
+
+.widget .last-watch .description {
+    margin:10px 0;
+    text-align:center;
+    color: #3d4754;
+}
+
+.widget .last-watch .description a {
+    text-decoration: underline;
+}
+
+.widget .last-watch .description .title {
+    font-size:14px;
+}
+
+.widget .last-watch .description .path,
+.widget .last-watch .description .time,
+.widget .last-watch .description .login
+ {
+    font-size:10px;
+}
+
+.widget .last-watch .empty {
+    text-align:center;
+    padding-top:35px;
+    color: #808080;
+}

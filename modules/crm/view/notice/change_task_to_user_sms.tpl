@@ -1,0 +1,1 @@
+{t task_num=$data->task->task_num}Задача №%task_num была изменена{/t}

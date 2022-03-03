@@ -1,0 +1,110 @@
+.rs-cartAmount.rs-inCart .rs-to-cart {
+    display: none;
+}
+
+.cartAmount {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    display: inline-block;
+}
+
+.cartAmount_input {
+    line-height: 1.65;
+    display: block;
+    height: 100%;
+    border: none;
+    font-size: 16px;
+    margin: 0 24% 0 24%;
+    padding: 0 24% 0 0;
+    text-align: right;
+    width: 52%;
+}
+
+.cartAmount_addButton {
+    width: 100%;
+    height: 100%;
+    font-family: "UbuntuLight";
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
+    position: absolute;
+    z-index: 20;
+    background-color: #ffac00;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+}
+.cartAmount_addButton:hover {
+    color: #fff;
+}
+
+.cartAmount_decreaseButton,
+.cartAmount_increaseButton {
+    position: absolute;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    top: 6px;
+    border-radius: 30px;
+    font-size: 24px;
+    line-height: 1.1;
+    transition: ease-in-out 0.3s;
+    z-index: 10;
+    text-align: center;
+    font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+    user-select: none;
+}
+.cartAmount_decreaseButton:hover,
+.cartAmount_increaseButton:hover {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.cartAmount_decreaseButton {
+    color: #333;
+    left: 0;
+    border: 1px solid #ccc;
+}
+
+.cartAmount_increaseButton {
+    right: 0;
+    background-color: #ffac00;
+    border: none;
+    color: #fff;
+}
+
+.cartAmount.style-product {
+    width: 180px;
+    height: 49px;
+}
+
+.cartAmount.style-product .cartAmount_input {
+    font-size: 18px;
+}
+
+.cartAmount.style-product .cartAmount_decreaseButton,
+.cartAmount.style-product .cartAmount_increaseButton {
+    width: 37px;
+    height: 37px;
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+.cartAmount.style-floatCart {
+    width: 74px;
+    height: 25px;
+    display: block;
+}
+
+.cartAmount.style-floatCart .cartAmount_input {
+    font-size: 12.5px;
+}
+
+.cartAmount.style-floatCart .cartAmount_decreaseButton,
+.cartAmount.style-floatCart .cartAmount_increaseButton {
+    width: 18px;
+    height: 18px;
+    top: 4px;
+    font-size: 19px;
+    line-height: 15px;
+}

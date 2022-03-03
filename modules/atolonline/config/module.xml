@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>    
+        <name multilanguage="true">АТОЛ ONLINE</name>
+        <description multilanguage="true">Интеграция с кассовыми аппаратами АТОЛ онлайн</description>        
+        <version>4.0.12</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <api_version>3</api_version>
+    </defaultValues>
+</config>

@@ -1,0 +1,67 @@
+@import "../../global/variable";
+
+// Social block (Modal, Footer)
+
+.block-social {
+  @include flexbox;
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
+  @include justify-content(space-between);
+  @media (max-width:$sm-end) {
+    @include justify-content(flex-start);
+  }
+  @media (max-width:$xs-end) {
+    @include justify-content(center);
+  }
+  > a {
+    display: block;
+    height: 45px;
+    margin: 10px 10px 0 0;
+    transition: ease-in-out 0.3s;
+    width: 45px;
+    &:hover {
+      opacity: 0.95;
+      @include transform(scale(1.15));
+    }
+  }
+  .google {
+    background: url("../img/google.svg");
+    background-size: contain;
+  }
+  .facebook {
+    background: url("../img/facebook.svg");
+    background-size: contain;
+  }
+  .twitter {
+    background: url("../img/twiter.svg");
+    background-size: contain;
+  }
+  .yandex {
+    background: url("../img/yandex.svg");
+    background-size: contain;
+  }
+  .vk {
+    background: url("../img/vk.svg");
+    background-size: contain;
+  }
+  .instagram {
+    background: url("../img/instagram.svg");
+    background-size: contain;
+  }
+  .youtube {
+    background: url("../img/youtube.svg");
+    background-size: contain;
+  }
+  .viber {
+    background: url("../img/viber.svg");
+    background-size: contain;
+  }
+  .telegram {
+    background: url("../img/telegram.svg");
+    background-size: contain;
+  }
+  .whatsapp {
+    background: url("../img/whatsapp.svg");
+    background-size: contain;
+  }
+}

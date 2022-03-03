@@ -1,0 +1,56 @@
+@import "../../global/variable";
+
+// Section default
+.sec {
+  &> .title {
+    position:relative;
+    background-color: $themeColor;
+    height: 70px;
+    span {
+      color: $themeTitle;
+      float: left;
+      font-family: $themeFontLight;
+      font-size: 28px;
+      letter-spacing: 1px;
+      line-height: 2.45;
+      padding: 0 15px;
+      @media (max-width:$xx-end) {
+        font-size: 18px;
+        padding: 13px 0;
+      }
+      @media (min-width:$xs-start) and (max-width:$xs-end) {
+        font-size: 21px;
+        padding: 9px 0;
+      }
+    }
+
+    a.title-text {
+      color: #fff;
+      float: left;
+      font-family: "UbuntuLight";
+      font-size: 28px;
+      letter-spacing: 1px;
+      line-height: 2.45;
+      padding: 0 15px;
+
+      &:hover {
+        opacity:0.9;
+      }
+    }
+  }
+  @media (max-width:$xx-end) {
+    &-category > .container {
+      padding: 0;
+    }
+    &-news > .container {
+      padding: 0;
+    }
+  }
+}
+
+@media(min-width:1540px) {
+  .anti-container {
+    margin-left: calc((1540px - 100vw) / 2);
+    margin-right: calc((1540px - 100vw) / 2);
+  }
+}

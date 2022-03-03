@@ -1,0 +1,294 @@
+@import "../../global/variable";
+
+// Order Registration
+.page-order-registration {
+  @media (max-width: $sm-end) {
+    margin-top: 0;
+  }
+  .sidebar {
+    display: block;
+  }
+}
+
+.t-order {
+  h3 {
+    font-family:$themeFontMedium;
+  }
+
+  .user-authorization-info {
+    border-left: 3px solid #ff9530;
+    padding: 10px;
+    margin-bottom:25px;
+  }
+
+  .rs-has-account,
+  &.user .t-order_contact-information:not(.user-contacts),
+  &.user .next,
+  &.user .captcha,
+  &.user .user-register,
+  &.user .user-without-register,
+  &.authorized .user-without-register,
+  &.noregister .user-register,
+  &.person .user-without-register,
+  &.company .user-without-register,
+  &.person .organization {
+    display:none;
+  }
+
+  &.user .rs-has-account,
+  &.noregister .user-without-register {
+    display:block;
+    width:100%;
+  }
+
+  .last-address {
+    border-bottom: 1px solid #eaeaea;
+    border-top: 1px solid #eaeaea;
+    list-style: outside none none;
+    padding: 15px 0;
+  }
+
+  &_contact-information,
+  &_hipment,
+  &_method-of-payment,
+  &_comment-to-shipment {
+    background-color: #fff;
+    padding: 15px 30px;
+    margin-bottom: 29px;
+    @media (min-width: $xs-start) and (max-width: $xs-end) {
+      @include flexbox;
+      @include flex-direction(column);
+      @include align-items(center);
+    }
+    @media (max-width: $sm-end) {
+      padding: 15px;
+      .order-list-items .h3 {
+        font-size:18px;
+        text-align: left;
+        margin-top: 5px;
+      }
+    }
+  }
+  &_hipment {
+    position: relative;
+    &-map {
+      min-height: 320px;
+      margin-bottom: 15px;
+      max-width: 100%;
+    }
+    &-info {
+      background-color: #fff;
+      width: 325px;
+      position: absolute;
+      top: 125px;
+      right: 40px;
+      padding: 30px 15px;
+      font-family: $themeFontLight;
+      @media (max-width: $xs-end) {
+        display: none;
+      }
+      @media (min-width: $sm-start) and (max-width: $sm-end) {
+        width: 150px;
+        height: 200px;
+        padding: 15px;
+        top: 110px;
+        right: 25px;
+        h3.h3 {
+          font-size: 16px;
+          line-height: 1;
+        }
+        span {
+          font-size: 12px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+      @media (min-width: $md-start) and (max-width: $md-end) {
+        width: 200px;
+        height: 200px;
+        padding: 15px;
+      }
+      h3 {
+        margin: 0 0 5px;
+        font-size: 21px;
+        text-align: left;
+      }
+      span {
+        opacity: 0.65;
+      }
+      p {
+        margin: 15px 0 0;
+      }
+    }
+  }
+  &_wrapper {
+    @include flexbox;
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+    @include justify-content(space-between);
+    margin: 35px 0 0;
+    @media (max-width: $xs-end) {
+      @include justify-content(center);
+    }
+    .t-pay-receipt {
+      margin: 0 5px 29px;
+      width: 245px;
+      @media (min-width: $sm-end) and (max-width: $md-end) {
+        width: 48%;
+      }
+    }
+  }
+  &-structure {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0 30px;
+    @media (max-width: $md-end) {
+      padding: 0 15px;
+    }
+    &_item {
+      @include flexbox;
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
+      @include justify-content(center);
+      margin-bottom:20px;
+
+    }
+    &_img {
+      width: 65px;
+      height: 65px;
+      @include flexbox;
+      @include flex-direction(row);
+      @include justify-content(center);
+      @include align-items(center);
+      margin: 10px;
+    }
+    &_text {
+      font-family: $themeFontLight;
+      @include flexbox;
+      @include flex-direction(column);
+      width: calc(100% - 85px);
+
+      @media (max-width:$xx-end) {
+        width: 100%;
+        text-align:center;
+      }
+
+      @media (min-width:$md-start) and (max-width: $md-end) {
+        width: 100%;
+        text-align:center;
+      }
+
+      small {
+        opacity: 0.65;
+      }
+      .price {
+        font-family: $themeFontBold;
+        font-size: 14px;
+      }
+      .discount {
+        font-family: $themeFontLight;
+        font-size: 12px;
+        color:green;
+      }
+
+      .code-line {
+        font-size:12px;
+      }
+
+      .multioffers-wrap {
+        .value {
+          margin-bottom:0;
+          font-size:12px;
+        }
+      }
+    }
+  }
+  &-checkout,
+  &-total {
+    padding: 15px;
+    &_wrapper {
+      @include flexbox;
+      @include flex-direction(column);
+      @include justify-content(space-between);
+      @include flex-wrap(wrap);
+      @include align-items(center);
+      margin: 0 0 15px 0;
+      p {
+        font-size: 19px;
+        margin: 0 0 10px;
+      }
+    }
+    &_price {
+      @media (max-width: $md-end) {
+        @include flexbox;
+        @include flex-direction(column);
+        @include align-items(center);
+      }
+      small {
+        opacity: 0.65;
+        text-decoration: line-through;
+        padding: 0 5px;
+        font-size: 12px;
+      }
+      span {
+        font-size: 24px;
+        font-family: $themeFontBold;
+        line-height: 1;
+      }
+    }
+  }
+  &_button-block {
+    @include flexbox;
+    @include flex-direction(row);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    @include justify-content(center);
+    .link {
+      width: 150px;
+      font-size: 14px;
+      padding: 8px 0;
+      margin: 5px 5px;
+      @media (max-width: $xx-end) {
+        width: 100%;
+        margin-bottom: 25px;
+        font-size: 18px;
+      }
+      @media (min-width: $sm-start) and (max-width: $md-end) {
+        margin: 0 0 10px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .t-order {
+    color:#666;
+  }
+}
+
+.t-payment-and-delivery {
+  padding: 0 30px 15px;
+  border-bottom: 1px solid #e8e8e8;
+  h3 {
+    text-align: left;
+  }
+  @media (max-width: $md-end) {
+    padding: 0 15px 15px;
+  }
+  p {
+    b {
+      opacity: 0.65;
+    }
+  }
+}
+
+.t-buy-oneclick {
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 25px 10px;
+  text-align:center;
+
+}
+
+.ymaps-2-1-47-input__control {
+  margin: 0!important;
+}

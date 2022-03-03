@@ -1,0 +1,51 @@
+.admin-style .switch-site-access {
+    padding:10px 0;
+    border-bottom:2px solid #777;
+}
+
+.admin-style .switch-site-access label {
+    display:inline;
+}
+
+.admin-style .moduleWrapper .rs-table td{
+    font-size:14px;
+}
+
+.admin-style .treeblock {
+    display:flex;
+    justify-content: space-between;
+}
+
+.admin-style .treeblock .treebody {
+    overflow:auto;
+    height:400px;    
+}
+
+.admin-style .treeblock > div  {
+    width:49%;
+}
+
+.admin-style .full-access {
+    background: #f2f2f2;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.admin-style .full-access input[type="checkbox"] {
+    margin:0 5px 0 9px;
+}
+
+.admin-style .full-access label {
+    margin:0;
+}
+
+@media(max-width:767px) {
+    .admin-style .treeblock {
+        display:block;
+    }
+
+    .admin-style .treeblock > div {
+        width:100%;
+        margin-bottom:20px;
+    }
+}

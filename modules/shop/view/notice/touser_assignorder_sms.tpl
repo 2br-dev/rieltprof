@@ -1,0 +1,1 @@
+{t order_num=$data->order->order_num}Вам назначен заказ N%order_num для доставки.{/t} 

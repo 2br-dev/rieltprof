@@ -1,0 +1,1 @@
+<i class="img-circle p-10 zmdi f-16 {$cell->getRow()->icon}" style="color:#183151; background-color:{$cell->getRow()->bgcolor}"></i>

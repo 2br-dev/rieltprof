@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Капча - защита от роботов</name>
+        <description multilanguage="true">Отображает картинку с цифрами, которые человек должен набрать вручную</description>
+        <version>3.0.8</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <recaptcha_v3_success_score>0.5</recaptcha_v3_success_score>
+        <rs_captcha_allowed_symbols>123456789abcdefghikmnpqrstuvw</rs_captcha_allowed_symbols>
+        <rs_captcha_length>6</rs_captcha_length>
+        <rs_captcha_width>100</rs_captcha_width>
+        <rs_captcha_height>42</rs_captcha_height>
+    </defaultValues>
+</config>

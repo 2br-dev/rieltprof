@@ -1,0 +1,60 @@
+.designer-block{
+  .d-atom-text-wrapper{
+    position: relative;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    .d-atom-text-center{
+      flex-shrink: 0;
+      -webkit-flex-shrink: 0;
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  .d-atom{
+    .d-atom-width-padding-wrapper{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .d-atom-width-padding{
+      display: none;
+      position: absolute;
+      top: 0;
+      width: 20px;
+      height: 100%;
+
+      &.d-left{
+        left: -20px;
+      }
+
+      &.d-right{
+        right: -20px;
+      }
+    }
+
+    .d-blow-pixels-wrapper{
+      &.d-left{
+        left: -9px;
+      }
+
+      &.d-right{
+        right: -25px;
+        left: inherit;
+      }
+    }
+
+    &.hover{
+      .d-atom-width-padding{
+        display: block;
+      }
+    }
+  }
+
+}

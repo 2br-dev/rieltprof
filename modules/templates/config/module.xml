@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Шаблоны, блоки</name>
+        <description multilanguage="true">Предоставляет возможность редактировать шаблоны, управлять блоками</description>
+        <version>4.0.21</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>        
+    </defaultValues>
+</config>

@@ -1,0 +1,8 @@
+.brand-category {
+  &_list {
+    list-style:none;
+    -webkit-column-width: 300px;
+       -moz-column-width: 300px;
+            column-width: 300px;
+  }
+}

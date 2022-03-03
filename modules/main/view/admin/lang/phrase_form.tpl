@@ -1,0 +1,1 @@
+<textarea class="resize-vertical w-100" rows="5" {if $cell->getField() == 'source'}readonly{else}name="{$cell->getField()}[{$cell->getRow('id')}]"{/if}>{$cell->getValue()}</textarea>

@@ -1,0 +1,10 @@
+.comError {
+    border:1px dotted #8A0000;
+    padding:1px;
+}
+
+.comError div {
+    background: white;
+    background: #FFC0C0;    
+    padding:4px;
+}

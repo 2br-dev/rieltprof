@@ -1,0 +1,3 @@
+User-agent: *
+Host: rieltprof.local
+Sitemap: http:///?site_id=1&controller=sitemap-front-sitemap

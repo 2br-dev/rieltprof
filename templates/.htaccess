@@ -1,0 +1,5 @@
+# Запрещаем открывать php файлы напрямую
+<Files ~ "(\.php.?)$">
+Order allow,deny
+Deny from all
+</Files>

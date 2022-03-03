@@ -1,0 +1,47 @@
+@import "../../global/variable";
+
+// Mobile menu
+
+#mmenu {
+  z-index: 101;
+  display: block;
+  transition: ease-in-out 0.3s;
+  @include transform(translateX(-100%));
+
+  &.mm-opened {
+    @include transform(translateX(0));
+  }
+}
+
+.mm-mmenu.mm-offcanvas.mm-current {
+  display: block;
+}
+
+html.mm-blocking #mm-blocker {
+  z-index: 100;
+  background-color: rgba(0,0,0,0.65);
+  transition: ease-in-out 0.3s;
+}
+
+.mm-listview {
+  .theme-form_search {
+    border-radius: 0;
+    margin: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: block;
+    float: left;
+    width: 65%;
+  }
+  .theme-btn_search {
+    border-radius: 0;
+    display: block;
+    top: 0;
+    position: relative;
+    width: 35%;
+    @media (max-width: $xs-end) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}

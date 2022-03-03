@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Магазин дополнений</name>
+        <description multilanguage="true">Позволяет устанавливать дополнения</description>
+        <version>4.0.4</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+    </defaultValues>
+</config>

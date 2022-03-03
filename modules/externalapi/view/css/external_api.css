@@ -1,0 +1,123 @@
+body {
+  font-family: Arial;
+  margin:0 auto;
+  max-width:1200px;
+  font-size:14px;
+  line-height:150%;
+}
+
+a {
+    color:#428bca;
+}
+
+a:hover {
+    color:#2a6496;
+}
+
+h1 {
+    font-weight:normal;
+}
+
+h2 {
+    font-weight:normal;
+    margin:25px 0 20px;
+}
+
+ul {
+    margin:10px 0;
+    padding-left:15px;
+}
+
+.apihelp-table {
+    border-collapse:collapse;
+    border:1px solid #ddd;
+    width:100%;
+}
+
+.apihelp-table th,
+.apihelp-table td {
+    padding:10px;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+.apihelp-table th {
+    border-bottom-width:2px;
+}
+
+.apihelp-table > tbody > tr:nth-child(2n) > td {
+    background-color:#f9f9f9;
+}
+
+.apihelp-table > tbody > tr:hover td {
+    background-color:#f5f5f5;
+}
+
+.apihelp-table__method {
+    width:20%;
+    min-width:200px;
+}
+
+td.apihelp-table__version {
+    width:10%;
+    text-align:right;
+    color:#666;
+    font-size:14px;
+}
+
+pre {
+    border-left: 5px solid #eee;
+    margin: 0 0 20px;
+    padding: 10px 20px;
+}
+
+
+.apihelp-tabs::after {
+    content: " ";
+    display: table;
+    clear:both;
+}
+
+.apihelp-tabs {
+    border-bottom: 1px solid #ddd;
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
+.apihelp-tabs li {
+    float: left;
+    margin-bottom: -1px;
+    display: block;
+    position: relative;
+}
+
+.apihelp-tabs li a {
+    display:block;
+    padding:5px 15px;
+    border-radius:5px 5px 0 0;
+}
+
+.apihelp-tabs li.active a {
+    border:1px solid #ddd;
+    border-bottom:none;
+    background:white;
+    display:block;
+}
+
+.apihelp-tab-content .apihelp-tab-pane {
+    display:none;
+}
+
+.apihelp-tab-content .apihelp-tab-pane.active {
+    display:block;
+}
+
+tbody .align-center {
+    text-align:center;
+}
+
+.lang.active {
+    font-weight:bold;
+}

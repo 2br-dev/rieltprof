@@ -1,0 +1,2 @@
+{addjs file="jquery.rs.viewobject.js" basepath="common"}
+<a class="all-is-viewed" data-view-all-url="{$cell->getViewAllUrl()}"><i class="zmdi zmdi-check-all" title="{t}Отметить все прочитанным{/t}"></i></a>

@@ -1,0 +1,400 @@
+@import "../../global/variable";
+
+// Card-product
+
+.card {
+  .page-basket .catalog-list &-concomitant {
+    max-width:100%;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom:0;
+
+    .card-image,
+    .card-text,
+    .card-price {
+      height:auto;
+      @media(max-width:$xs-end) {
+        text-align:center;
+        display:inline-block;
+      }
+    }
+
+    .card-image {
+      padding:39px 30px 0;
+      top:0;
+      line-height:normal;
+    }
+
+    .card-text {
+      padding: 30px 0 0;
+      @media(max-width:$xs-end) {
+        padding-top: 5px;
+      }
+    }
+
+    .card-price {
+      padding: 30px 0;
+      @media(max-width:$xs-end) {
+        padding-top: 5px;
+      }
+    }
+  }
+  &-product {
+    &:hover .card-image {
+      @include transform(scale(1.05));
+    }
+    @media (max-width:$xx-end) {
+      padding: 0 15px;
+    }
+    &_ticket {
+      height: 50px;
+      padding: 25px 15px 0;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      .ticket-new {
+        background-color: #fc5039;
+        color: #fff;
+        display: table;
+        font-family: $themeFontNormal;
+        font-size: 10px;
+        letter-spacing: 1px;
+        line-height: 1.7;
+        margin: 5px 0;
+        padding: 0 10px;
+        pointer-events: none;
+        text-transform: uppercase;
+      }
+
+      a.ticket-compare {
+        background: url(../img/icons/chart.svg) 6px 6px no-repeat;
+        position: absolute;
+        top: 24px;
+
+        right: 55px;
+        display: block;
+        width: 25px;
+        height: 25px;
+        border:1px solid #ccc;
+        border-radius:50%;
+
+        &:hover {
+          background-position: -15px 6px;
+          border-color: #ffac00;
+        }
+
+        &.rs-in-compare {
+          background-position:-37px 6px;
+          border-color: #ffac00;
+        }
+      }
+
+      a.ticket-favorite {
+        background: url(../img/icons/favourite.svg) 5px 6px no-repeat;
+
+        display: block;
+        height: 25px;
+        position: absolute;
+        right: 26px;
+        top: 24px;
+        width: 25px;
+        border:1px solid #ccc;
+        border-radius: 30px;
+
+        &:hover {
+          background-position: -22px 6px;
+          border-color: #fc5039;
+        }
+
+        &.rs-in-favorite {
+          background-position: -56px 6px;
+          border-color: #fc5039;
+        }
+      }
+    }
+    .card-image {
+      @include flexbox;
+      @include flex-direction(column);
+      @include flex-wrap(wrap);
+      height: 250px;
+      @include justify-content(center);
+      padding: 10px 15px;
+      text-align: center;
+      transition: ease-in-out 0.3s;
+      img {
+        margin: 0 auto!important;
+        max-height: 100%;
+        max-width: 100%;
+        width: initial!important;
+      }
+    }
+    .card-text {
+      @include flexbox;
+      @include flex-direction(column);
+      @include flex-wrap(wrap);
+      @include justify-content(space-between);
+      padding: 7px 15px 0;
+    }
+    &_category-name {
+      line-height: 1;
+      height: 10px;
+      small {
+        font-family: $themeFontLight;
+        opacity: .65;
+      }
+    }
+    &_info {
+      height:100px;
+      overflow:hidden;
+      width:100%;
+    }
+    &_title {
+      font-family: $themeFontLight;
+      position:relative;
+      font-size: 18px;
+      letter-spacing: .75px;
+      line-height: 1.25;
+      overflow: hidden;
+      padding: 5px 0;
+      max-height:75px;
+      width: 100%;
+      span {
+        color: #000;
+      }
+
+      &:after {
+        background: url("../img/gradient_white.png") repeat-y;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 25px;
+        position: absolute;
+        right: 0;
+        width: 60px;
+      }
+    }
+    &_rating {
+      .rating {
+        background: url("../img/icons/star.svg") top left repeat-x;
+        display: block;
+        height: 15px;
+        margin: 5px 0 0 0;
+        width: 100px;
+        position:relative;
+        .value {
+          height:15px;
+          background: url("../img/icons/star-active.svg") top left repeat-x;
+          position:absolute;
+          top:0;
+          left:0;
+        }
+      }
+      .comments {
+        display: table;
+
+        a {
+          color: #000;
+          font-family: $themeFontLight;
+          @include flexbox;
+          i {
+            font-size: 19px;
+          }
+          span {
+            padding: 0 3px;
+          }
+        }
+      }
+    }
+    &_price {
+      @include align-items(center);
+      @include flexbox;
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
+      @include justify-content(space-between);
+      letter-spacing: 0.5px;
+      padding: 10px 0 15px;
+      width: 100%;
+      @media (max-width: 1199px){
+        min-height: 143px;
+      }
+      @media (max-width:$xx-end) {
+        @include flex-direction(column);
+        @include justify-content(center);
+      }
+      @media (max-width:$md-end) {
+        @include flex-direction(column);
+      }
+      span {
+        font-family: $themeFontBold;
+        font-size: 17px;
+        @media (max-width:$md-end) {
+          font-size: 21px;
+          padding: 5px 0;
+        }
+      }
+      .link-more {
+        font-family: $themeFontLight;
+        letter-spacing: .1px;
+        @media (max-width:$md-end) {
+          font-size: 16px;
+          padding: 8px 0;
+          text-align: center;
+          width: 130px;
+        }
+      }
+    }
+    &_quantity {
+      @media (max-width:$xs-end) {
+        padding: 15px 0 0 30px;
+      }
+
+      .error {
+        color:red;
+        font-size:13px;
+        margin:10px 0;
+      }
+
+    }
+  }
+}
+
+.prop-title{
+  float: left;
+  vertical-align: middle;
+  display: block;
+  padding: 0;
+}
+
+.prop-title-td .popover-button{
+  border: 1px solid;
+  border-radius: 10px;
+  width: 18px;
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 16px;
+  margin-left: 10px;
+  outline: none;
+  color: #857575;
+  box-sizing: border-box;
+}
+
+.prop-title-td{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px dashed #e8e8e8;
+}
+
+.quantity {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  display:inline-block;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number]
+{
+  -moz-appearance: textfield;
+}
+
+.quantity input.rs-field-amount {
+  line-height: 1.65;
+  display: block;
+  height: 42px;
+  border: none;
+  font-size: 16px;
+
+  margin: 0 49px 0 30px;
+  padding: 0 37px 0 0;
+  text-align: right;
+  width: 78px;
+}
+
+.quantity input.rs-field-amount:focus {
+  outline: 0;
+}
+
+.quantity-text {
+  color:#666;
+}
+
+.quantity-unit {
+  font-size: 11px;
+  position: absolute;
+  right: 52px;
+  top: 15px;
+}
+
+.quantity-button {
+  position: relative;
+  cursor: pointer;
+  border-left: 1px solid #eee;
+  width: 20px;
+  text-align: center;
+  color: #333;
+  font-size: 13px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+  line-height: 1.7;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.quantity-button.quantity-up {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background-color: $iconColor;
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.1;
+  transition: ease-in-out 0.3s;
+  z-index: 10;
+  &:hover {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.quantity-button.quantity-down {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  font-size: 24px;
+  line-height: 1.1;
+  transition: ease-in-out 0.3s;
+  z-index: 10;
+  &:hover {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.quantity-float .quantity-button {
+  width:18px;
+  height:18px;
+  font-size:19px;
+  line-height:15px;
+  position:static;
+  display:inline-block;
+  @include transform(none);
+}
+
+.quantity-num-wrapper {
+  min-width:31px;
+  display:inline-block;
+}

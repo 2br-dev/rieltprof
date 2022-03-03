@@ -1,0 +1,1 @@
+{$data->action_template->client_sms_message}

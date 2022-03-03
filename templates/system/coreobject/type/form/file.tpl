@@ -1,0 +1,1 @@
+{include file="%system%/admin/fileinput.tpl" field=$field}

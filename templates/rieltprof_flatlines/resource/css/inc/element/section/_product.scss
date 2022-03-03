@@ -1,0 +1,297 @@
+@import "../../global/variable";
+
+// Product section
+.sec-page-product {
+  .wrapper_product-card {
+    background-color: #fff;
+    @include flexbox;
+    @include flex-wrap(wrap);
+    margin-bottom: 30px;
+  }
+}
+.page-product {
+  &_quantity {
+    margin-bottom:20px;
+  }
+
+  &_gallery {
+    margin: 0 0 29px 0;
+    padding: 25px;
+    @media (max-width:$sm-end) {
+      height: auto;
+      margin-bottom: 0;
+    }
+    .bx-wrapper {
+      margin-bottom: 0;
+      img {
+        margin: 0 auto;
+      }
+    }
+  }
+  &_description {
+    @include flexbox;
+    @include flex-direction(row);
+    @include justify-content(center);
+    margin: 0 0 29px 0;
+    @media (max-width:$xs-end) {
+      @include flex-direction(column);
+      height: auto;
+      padding-bottom: 15px;
+    }
+
+    &_short {
+      padding-bottom:15px;
+    }
+
+    &_left {
+      @include flexbox;
+      @include flex-direction(column);
+      padding-top: 25px;
+      @media (max-width:$xs-end) {
+        @include flex-direction(row);
+        @include justify-content(space-around);
+        padding: 15px 50px 0;
+      }
+    }
+    &_icon {
+      padding:9px;
+      display:block;
+    }
+
+    &_right {
+      padding: 0 30px;
+      @media (max-width:$xx-end) {
+        padding: 0 15px;
+      }
+      @media (max-width:$xs-end) {
+        text-align: center;
+      }
+      .card-price_old {
+        display: block;
+        font-size: 16px;
+        line-height: 1.2;
+        text-decoration: line-through;
+      }
+      .card-price_new {
+        display: block;
+        font-size: 39px;
+        line-height: 1;
+        margin-bottom: 15px;
+
+        .rs-unit-block {
+          position: relative;
+          margin-left: 20px;
+
+          .rs-unit-dash {
+            position: absolute;
+            max-width: 100%;
+            overflow: hidden;
+            left: -20px;
+          }
+        }
+      }
+      .link-more {
+        display: table;
+        float: left;
+        font-family: $themeFontLight;
+        font-size: 18px;
+        margin: 0 15px 10px 0;
+        padding: 12px;
+        text-align: center;
+        width: 180px;
+        @media (max-width:$xs-end) {
+          margin: 10px;
+          max-width: 100%;
+          width: 200px;
+        }
+      }
+      .link-one-click {
+        display: table;
+        font-family: $themeFontLight;
+        font-size: 16px;
+        margin: 0;
+        padding: 12px;
+        text-align: center;
+        width: 180px;
+        @media (max-width:$xs-end) {
+          margin: 10px;
+          max-width: 100%;
+          width: 200px;
+        }
+      }
+    }
+    &_characteristics {
+      border-bottom: 1px solid #e8e8e8;
+      border-top: 1px solid #e8e8e8;
+      font-family: $themeFontLight;
+      line-height: 1.8;
+      list-style: none;
+      margin-bottom: 22px;
+      padding: 25px 0;
+      @media (max-width:$xx-end) {
+        padding: 15px 0;
+        text-align: left;
+      }
+    }
+    &_price {
+      @media (max-width:$xs-end) {
+        @include align-items(center);
+        @include flexbox;
+        @include flex-direction(column);
+        @include flex-wrap(wrap);
+        @include justify-content(center);
+      }
+    }
+  }
+  &_content {
+    margin-bottom: 29px;
+    .nav-tabs {
+      border: none;
+      >li>a {
+        border: none!important;
+        color: #000;
+        font-family: $themeFontMedium;
+        font-size: 14px;
+        margin-bottom: 1px;
+        @media (max-width:$xs-end) {
+          font-size: 21px;
+          padding-left: 0;
+          padding-right: 0;
+        }
+        span {
+          color: #61acd2;
+        }
+      }
+    }
+  }
+}
+
+.unobt.pull-right {
+  color: red;
+  font-family: "UbuntuLight";
+  letter-spacing: .1px;
+  margin: 4px 9px;
+  padding: 7px 11px;
+  font-size: 14px;
+}
+.nullComplects{
+  color: #aaa;
+}
+.i-svg {
+  display: inline-block;
+
+  &.i-svg-view-blocks {
+    width:14px;
+    height:30px;
+    background:url(../img/icons/view-as-block.svg) no-repeat left center;
+
+    .active & {
+      background-position:-28px 50%;
+    }
+  }
+
+  &.i-svg-view-table {
+    width:14px;
+    height:30px;
+    background:url(../img/icons/view-as-table.svg) no-repeat left center;
+
+    .active & {
+      background-position:-28px 50%;
+    }
+  }
+
+  &.i-svg-cart {
+    width:26px;
+    height:24px;
+    background: url(../img/icons/cart.svg) no-repeat top left;
+    &:hover {
+      background-position:-48px 0;
+    }
+  }
+
+  &.i-svg-user {
+    width:26px;
+    height:25px;
+    background: url(../img/icons/user.svg) no-repeat top left;
+    &:hover {
+      background-position:-45px 0;
+    }
+  }
+
+  &.i-svg-favorite {
+    width: 26px;
+    height: 25px;
+    background: url(../img/icons/ifav.svg) no-repeat top left;
+    .cart-wrapper.open &,
+    &:hover {
+      background-position: -58px 0;
+    }
+
+    .rs-in-favorite > & {
+      background-position: -120px 0;
+    }
+  }
+
+  &.i-svg-compare {
+    width:26px;
+    height:25px;
+    background:url(../img/icons/icmp.svg) no-repeat top left;
+
+    .cart-wrapper.open &,
+    &:hover {
+      background-position:-43px 0;
+    }
+
+    .rs-in-compare > & {
+      background-position:-83px 0;
+    }
+  }
+
+  &.i-svg-commenting {
+    width:20px;
+    height:20px;
+    background:url(../img/icons/icomments.svg) no-repeat top left;
+  }
+}
+
+/* Остатки на складах в карточке товара */
+.rs-warehouse-row {
+  .stick-wrap {
+    display: block;
+    float: left;
+    font-size: 0;
+    padding: 4px;
+    white-space: nowrap;
+
+    .stick {
+      background: #ebebeb none repeat scroll 0 0;
+      display: inline-block;
+      height: 14px;
+      margin-left: 6px;
+      vertical-align: bottom;
+      width: 14px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &.filled {
+        background-color: #faad3d;
+      }
+    }
+
+  }
+
+  .rs-stick-empty {
+    display:none;
+  }
+
+  &.rs-warehouse-empty {
+    .rs-stick-empty {
+      display:block;
+    }
+    .stick-wrap {
+      display:none;
+    }
+  }
+}

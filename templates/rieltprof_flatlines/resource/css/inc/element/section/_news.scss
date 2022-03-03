@@ -1,0 +1,133 @@
+
+// Section News
+section.sec {
+  &-news {
+    .row-news {
+      padding:30px 0;
+    }
+
+    div.news {
+      transition: ease-in-out 0.3s;
+      &:hover {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        z-index: 2;
+      }
+      &-image {
+        overflow: hidden;
+        min-height: 300px;
+        @include flexbox;
+        @include flex-direction(row);
+        @include justify-content(center);
+        a {
+          width: inherit;
+          min-height: 300px;
+          @media (min-width:$sm-start) and (max-width:$sm-end) {
+            width: 100%;
+          }
+        }
+        img {
+          min-height: inherit;
+          min-width: inherit;
+          max-width: inherit;
+          width: inherit;
+          @media (max-width:$sm-end) {
+            min-width: 100%;
+          }
+        }
+        @media (max-width:$xx-end) {
+          min-height: inherit;
+        }
+        @media (max-width:$md-end) {
+          + div .news-block_description {
+              height: 32px;
+          }
+        }
+        @media (min-width:$lg-start) and (max-width:$lg-end) {
+          + div .news-block_description {
+              height: 64px;
+          }
+        }
+        @media (min-width:$xl-start) {
+          + div .news-block_description {
+              height: 80px;
+          }
+        }
+      }
+      &-block {
+        background-color: #fff;
+        margin-bottom: 2px;
+        position: relative;
+        @media (max-width:$xs-end) {
+          height: inherit;
+        }
+        &_publisher {
+          small {
+            opacity: 0.65;
+          }
+        }
+        &_title {
+          font-family: $themeFontNormal;
+          font-size: 23px;
+          letter-spacing: 0.75px;
+          overflow: hidden;
+          padding: 4px 0 0;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 100%;
+          @media (min-width: $xx-start) and (max-width:$xs-end) {
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 1;
+            margin-bottom: 15px;
+            padding: 4px 0 0;
+          }
+          @media (min-width:$md-start) and (max-width:$md-end) {
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 1.4;
+            padding: 0;
+          }
+          @media (min-width:$lg-start) and (max-width:$lg-end) {
+            font-size: 18px;
+          }
+          span {
+            white-space: nowrap;
+          }
+        }
+        &_description {
+          font-family: $themeFontLight;
+          font-size: 14px;
+          height: 32px;
+          letter-spacing: -0.25px;
+          line-height: 1.2;
+          overflow: hidden;
+          margin-bottom:10px;
+        }
+        &_link {
+          .link-more {
+            display: table;
+            margin: 2px;
+            padding: 8px 28px;
+          }
+        }
+      }
+      &-list {
+        background-color: #fff;
+        margin-bottom: 2px;
+        position: relative;
+      }
+      &-text {
+        display: block;
+        overflow: hidden;
+        padding: 10px 25px 25px;
+        width: 100%;
+        @media (max-width:$xx-end) {
+          padding:7px 30px 15px;
+        }
+        @media (min-width:$xs-start) and (max-width:$md-end) {
+          padding: 7px 25px 16px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+.no_margin {}
+.no_margin p {
+    margin:0px;
+}
+
+body {
+    background:white;
+}

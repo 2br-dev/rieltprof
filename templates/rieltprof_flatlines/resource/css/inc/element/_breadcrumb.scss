@@ -1,0 +1,23 @@
+@import "../global/variable";
+
+// Breadcrumb
+ol.breadcrumb {
+  font-family: $themeFontLight;
+  font-size: 12px;
+  margin-top: -15px;
+  padding: 5px 0;
+  @media (max-width:776px) {
+    margin: 10px 0 15px;
+    text-align: center;
+  }
+
+  li {
+    a {
+      color: #000;
+    }
+    +li:before {
+      content: "\003e";
+      padding: 0 10px;
+    }
+  }
+}

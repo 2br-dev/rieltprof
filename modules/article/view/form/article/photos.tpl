@@ -1,0 +1,1 @@
+{moduleinsert name="\Photo\Controller\Admin\BlockPhotos" type="article" linkid=$elem.id}

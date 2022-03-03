@@ -1,0 +1,202 @@
+
+<div class="formbox" >
+            
+    <div class="rs-tabs" role="tabpanel">
+        <ul class="tab-nav" role="tablist">
+                    <li class=" active"><a data-target="#rieltprof-commercial-tab0" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(0)}</a></li>
+                    <li class=""><a data-target="#rieltprof-commercial-tab6" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(6)}</a></li>
+                    <li class=""><a data-target="#rieltprof-commercial-tab7" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(7)}</a></li>
+                    <li class=""><a data-target="#rieltprof-commercial-tab8" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(8)}</a></li>
+                    <li class=""><a data-target="#rieltprof-commercial-tab9" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(9)}</a></li>
+        
+        </ul>
+        <form method="POST" action="{urlmake}" enctype="multipart/form-data" class="tab-content crud-form">
+            <input type="submit" value="" style="display:none"/>
+                        <div class="tab-pane active" id="rieltprof-commercial-tab0" role="tabpanel">
+                                                                                                                                    {include file=$elem.__id->getRenderTemplate() field=$elem.__id}
+                                                                                                                                                                                            {include file=$elem.___tmpid->getRenderTemplate() field=$elem.___tmpid}
+                                                                                                                                                                                                                                                                                                                            
+                                            <table class="otable">
+                                                                                                                                                        
+                                <tr>
+                                    <td class="otitle">{$elem.__dateof->getTitle()}&nbsp;&nbsp;{if $elem.__dateof->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__dateof->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__dateof->getRenderTemplate() field=$elem.__dateof}</td>
+                                </tr>
+                                
+                                                                                                                                                                                        
+                                <tr>
+                                    <td class="otitle">{$elem.__actual_on_date->getTitle()}&nbsp;&nbsp;{if $elem.__actual_on_date->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__actual_on_date->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__actual_on_date->getRenderTemplate() field=$elem.__actual_on_date}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__cost_rent->getTitle()}&nbsp;&nbsp;{if $elem.__cost_rent->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__cost_rent->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__cost_rent->getRenderTemplate() field=$elem.__cost_rent}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__note->getTitle()}&nbsp;&nbsp;{if $elem.__note->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__note->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__note->getRenderTemplate() field=$elem.__note}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__personal_note->getTitle()}&nbsp;&nbsp;{if $elem.__personal_note->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__personal_note->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__personal_note->getRenderTemplate() field=$elem.__personal_note}</td>
+                                </tr>
+                                
+                                                            
+                        </table>
+                                                </div>
+                        <div class="tab-pane" id="rieltprof-commercial-tab6" role="tabpanel">
+                                                                                                            {include file=$elem.___photo_->getRenderTemplate() field=$elem.___photo_}
+                                                                                                
+                                                </div>
+                        <div class="tab-pane" id="rieltprof-commercial-tab7" role="tabpanel">
+                                                                                                                                                                                                                                                                                                                                                                                                            
+                                            <table class="otable">
+                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__county->getTitle()}&nbsp;&nbsp;{if $elem.__county->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__county->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__county->getRenderTemplate() field=$elem.__county}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__district->getTitle()}&nbsp;&nbsp;{if $elem.__district->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__district->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__district->getRenderTemplate() field=$elem.__district}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__street->getTitle()}&nbsp;&nbsp;{if $elem.__street->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__street->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__street->getRenderTemplate() field=$elem.__street}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__house->getTitle()}&nbsp;&nbsp;{if $elem.__house->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__house->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__house->getRenderTemplate() field=$elem.__house}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__liter->getTitle()}&nbsp;&nbsp;{if $elem.__liter->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__liter->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__liter->getRenderTemplate() field=$elem.__liter}</td>
+                                </tr>
+                                
+                                                            
+                        </table>
+                                                </div>
+                        <div class="tab-pane" id="rieltprof-commercial-tab8" role="tabpanel">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                            <table class="otable">
+                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__rooms->getTitle()}&nbsp;&nbsp;{if $elem.__rooms->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__rooms->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__rooms->getRenderTemplate() field=$elem.__rooms}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__rooms_isolated->getTitle()}&nbsp;&nbsp;{if $elem.__rooms_isolated->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__rooms_isolated->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__rooms_isolated->getRenderTemplate() field=$elem.__rooms_isolated}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__split_wc->getTitle()}&nbsp;&nbsp;{if $elem.__split_wc->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__split_wc->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__split_wc->getRenderTemplate() field=$elem.__split_wc}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__material->getTitle()}&nbsp;&nbsp;{if $elem.__material->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__material->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__material->getRenderTemplate() field=$elem.__material}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__year->getTitle()}&nbsp;&nbsp;{if $elem.__year->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__year->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__year->getRenderTemplate() field=$elem.__year}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__state->getTitle()}&nbsp;&nbsp;{if $elem.__state->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__state->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__state->getRenderTemplate() field=$elem.__state}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__square->getTitle()}&nbsp;&nbsp;{if $elem.__square->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__square->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__square->getRenderTemplate() field=$elem.__square}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__flat->getTitle()}&nbsp;&nbsp;{if $elem.__flat->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__flat->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__flat->getRenderTemplate() field=$elem.__flat}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__flat_house->getTitle()}&nbsp;&nbsp;{if $elem.__flat_house->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__flat_house->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__flat_house->getRenderTemplate() field=$elem.__flat_house}</td>
+                                </tr>
+                                
+                                                            
+                        </table>
+                                                </div>
+                        <div class="tab-pane" id="rieltprof-commercial-tab9" role="tabpanel">
+                                                                                                                                                                                                                                                                    
+                                            <table class="otable">
+                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__quickly->getTitle()}&nbsp;&nbsp;{if $elem.__quickly->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__quickly->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__quickly->getRenderTemplate() field=$elem.__quickly}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__mark->getTitle()}&nbsp;&nbsp;{if $elem.__mark->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__mark->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__mark->getRenderTemplate() field=$elem.__mark}</td>
+                                </tr>
+                                
+                                                                                                                            
+                                <tr>
+                                    <td class="otitle">{$elem.__exclusive->getTitle()}&nbsp;&nbsp;{if $elem.__exclusive->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__exclusive->getHint()|escape}">?</a>{/if}
+                                    </td>
+                                    <td>{include file=$elem.__exclusive->getRenderTemplate() field=$elem.__exclusive}</td>
+                                </tr>
+                                
+                                                            
+                        </table>
+                                                </div>
+            
+        </form>
+    </div>
+    </div>

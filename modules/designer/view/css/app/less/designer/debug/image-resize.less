@@ -1,0 +1,219 @@
+.designer-block{
+  .d-round-width-handler{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: black;
+    border-radius: 50%;
+    border: 1px solid white;
+    z-index: 6;
+    cursor: ew-resize;
+    margin-top: -8px;
+  }
+
+  .d-atom-flex-wrapper{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+  }
+
+  .d-atom{
+    &.hover{
+      .d-atom-instance-image-wrapper{
+        .d-overflow-inner{
+          outline: 1px solid lightblue;
+        }
+      }
+    }
+  }
+
+  .d-atom-instance-image-wrapper{
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .d-atom-image-all-wrapper{
+    .d-atom{
+      max-width: 100%;
+
+      img{
+        max-width: 100%;
+      }
+    }
+  }
+
+  .d-atom-image-wrapper{
+    position: relative;
+
+    .d-overflow{
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      justify-content: center;
+      -webkit-justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .d-overflow-inner{
+      overflow: hidden;
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      justify-content: center;
+      -webkit-justify-content: center;
+      flex-shrink: 0;
+      -webkit-flex-shrink: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .d-image-close-copping{
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      bottom: 19px;
+      right: 0;
+      background: no-repeat center center url("../../img/presetcategories/done.svg");
+      background-size: contain;
+      z-index: 2;
+    }
+
+    .d-loading{
+      display: inline-block;
+      top: 50%;
+      left: 50%;
+      width: 32px;
+      height: 32px;
+      margin-top: -16px;
+      margin-left: -16px;
+      position: absolute;
+      z-index: 3;
+      background: no-repeat center center;
+      background-image: url(../../img/loader.gif);
+      background-size: contain;
+    }
+
+    img{
+      width: 100%;
+    }
+
+    &.d-image-svg{
+      img{
+        max-height: 100%;
+      }
+    }
+
+    .d-button{
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      margin-top: -10px;
+      border-radius: 50%;
+      background-color: white;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 70% 70%;
+      z-index: 2;
+      border: 1px solid gray;
+
+      &.d-button-upload{
+        margin-left: -31px;
+        background-image: url("../../img/presetcategories/picture.svg");
+        background-size: 80% 80%;
+      }
+
+      &.d-button-menu{
+        margin-left: -11px;
+        margin-top: -26px;
+        background-image: url("../../img/presetcategories/settings.svg");
+      }
+
+      &.d-button-crop{
+        margin-left: 9px;
+        background-image: url("../../img/presetcategories/crop.svg");
+        background-size: 65% 65%;
+      }
+
+      &:hover{
+        background-color: #eeeeee;
+      }
+    }
+
+    .d-atom-image-width-padding{
+      position: absolute;
+      top: 0;
+      width: 20px;
+      height: 100%;
+
+      &.d-left{
+        left: 0;
+      }
+
+      &.d-right{
+        right: 0;
+      }
+    }
+
+    &.d-with-padding{
+      .d-overflow-inner{
+        width: inherit;
+      }
+
+      .d-atom-image-width-padding{
+        position: absolute;
+        top: inherit;
+        left: inherit;
+        width: 20px;
+      }
+    }
+  }
+
+  .d-round-width-handler{
+    top: 50%;
+
+    &.d-left{
+      right: 0;
+      margin-right: -8px;
+    }
+
+    &.d-right{
+      left: 0;
+      margin-left: -8px;
+    }
+
+    &.d-bottom{
+      width: 18px;
+      height: 18px;
+      top: inherit;
+      left: 50%;
+      bottom: 0;
+      margin-left: -9px;
+      margin-bottom: -9px;
+      cursor: ns-resize;
+    }
+  }
+
+  .hover{
+    .d-button{
+      display: block;
+    }
+  }
+
+  .d-blow-pixels-wrapper{
+    position: absolute;
+    margin-left: -8px;
+    margin-top: -8px;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+  }
+
+}

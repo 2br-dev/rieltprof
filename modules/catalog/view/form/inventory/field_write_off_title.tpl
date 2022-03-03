@@ -1,0 +1,2 @@
+{$amount = $cell->getRow()->getProductsAmount()}
+<a href="{$router->getAdminUrl('edit', ['id' => $cell->getRow()->id], 'catalog-inventorywriteoffctrl')}" class="crud-edit">{t n=$amount}Списание %n [plural:%n:товара|товаров|товаров]{/t}</a>

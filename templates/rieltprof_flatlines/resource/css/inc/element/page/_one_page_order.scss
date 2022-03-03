@@ -1,0 +1,46 @@
+.t-order-products {
+  padding:0;
+  border-bottom: 1px solid #e8e8e8;
+
+  h3 {
+    padding:0 30px;
+  }
+
+  .product-side-list {
+    padding:0 30px;
+    max-height: 410px;
+    overflow: auto;
+  }
+}
+
+.table-keyvalue {
+  width:100%;
+
+  td {
+    padding:7px;
+  }
+}
+
+.t-opo {
+  @media(max-width:$sm-end) {
+    @include flexbox;
+    @include flex-direction(column);
+
+    &_items {
+      order: 2;
+    }
+
+    &_info {
+      order: 1;
+    }
+  }
+
+  &.user {
+    .onePagePaymentBlock,
+    .onePageDeliveryBlock,
+    .t-order_comment-to-shipment,
+    .t-order_button-block {
+      display:none;
+    }
+  }
+}

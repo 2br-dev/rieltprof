@@ -1,0 +1,11 @@
+.textvalue .link {background:url(../img/admin/type_link.gif) no-repeat left center;}
+.textvalue .empty {background:url(../img/admin/type_template.gif) no-repeat left center;}
+.textvalue .article {background:url(../img/admin/type_article.gif) no-repeat left center;}
+
+.textvalue .type {
+    width:22px;
+    height:30px;
+    display:inline-block;
+    line-height:30px;
+    margin-right:5px;
+}

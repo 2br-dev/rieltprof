@@ -1,0 +1,68 @@
+@import "../../global/variable";
+
+// Catalog News
+.sec-catalog-news {
+  h2 {
+    margin: 10px 0;
+  }
+}
+
+.catalog-news {
+  .news {
+    &-block {
+      background-color: #fff;
+      font-family: $themeFontLight;
+      margin-bottom: 29px;
+      &_publisher {
+        margin: 15px 0 0;
+      }
+      &_title {
+        font-size: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+        span {
+          white-space: nowrap;
+          font-family: $themeFontNormal;
+        }
+      }
+      &_description {
+        overflow: hidden;
+        height: 60px;
+      }
+      &_link {
+        @include flexbox;
+        .link-more {
+          margin: 5px 0 0;
+        }
+      }
+    }
+    &-image {
+      overflow: hidden;
+      height:300px;
+      @include flexbox;
+      @include flex-direction(row);
+      @include align-items(center);
+      text-align:center;
+      @include justify-content(center);
+
+      img {
+        max-width:100%;
+        max-height:100%;
+      }
+
+      &_stub {
+        height:300px;
+        background:url(../img/icons/news.svg) no-repeat center center;
+      }
+    }
+    &-text {
+      padding: 0 15px 15px;
+      p {
+
+      }
+    }
+  }
+}
+

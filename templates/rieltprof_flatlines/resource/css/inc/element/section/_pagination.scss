@@ -1,0 +1,36 @@
+.paginator {
+    padding:10px 0 20px;
+
+    a {
+        width:37px;
+        height:37px;
+        line-height:37px;
+        text-align:center;
+        margin:0 3px;
+        display:inline-block;
+        border-radius:50%;
+        color:black;
+        border:1px solid transparent;
+
+        &:hover {
+            background-color:#ccc;
+        }
+
+        &.active {
+            background:$themeColor;
+            color:white;
+        }
+
+        i {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: -3px;
+            vertical-align: middle;
+        }
+    }
+
+    .prev,
+    .next {
+          border-color:#ccc;
+    }
+}

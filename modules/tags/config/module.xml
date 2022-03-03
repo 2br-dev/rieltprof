@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Тэги</name>
+        <description multilanguage="true">Подключение к различным объектам описания в виде тэгов</description>
+        <version>3.0.2</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>        
+    </defaultValues>
+</config>

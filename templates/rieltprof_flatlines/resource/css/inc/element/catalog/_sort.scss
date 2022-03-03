@@ -1,0 +1,84 @@
+@import "../../global/variable";
+
+// Sort block
+
+.catalog-sort {
+  background-color: #fff;
+  @include flexbox;
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
+  @include justify-content(space-between);
+  line-height: 30px;
+  margin-bottom: 29px;
+  padding: 10px 15px;
+  @media (max-width:$xx-end) {
+    > div {
+      @include flexbox;
+      @include flex-direction(column);
+      @include justify-content(space-around);
+    }
+  }
+  a {
+    color: #000;
+    font-family: $themeFontLight;
+    font-size: 13px;
+    padding: 0 8px;
+    transition: ease-in-out 0.3s;
+    &:hover {
+      color: #cfcfcf;
+      text-decoration: none;
+    }
+  }
+  .active {
+    color: #cfcfcf;
+  }
+  &_list, &_table {
+    border-radius: 30px;
+    display: block;
+    float: left;
+    height: 30px;
+    margin: 0 5px;
+    padding: 0;
+    text-align: center;
+    transition: ease-in-out 0.3s;
+    width: 30px;
+    &:hover {
+      background-color: #faad3d;
+      color: #fff;
+    }
+    &.active {
+      background-color: #faad3d;
+      color: #fff;
+      padding: 0;
+    }
+  }
+  &_order {
+    margin-right:20px;
+
+    .dropdown-toggle {
+      cursor:pointer;
+      color:#666;
+    }
+
+    .dropdown-toggle .dashed:hover {
+      color:black;
+      border-color:black;
+    }
+
+  }
+
+  .sort-order {
+    &_direction {
+      font-size:23px;
+      vertical-align:middle;
+      padding:0;
+    }
+  }
+
+  &_pagesize{
+    display: inline;
+    & .dropdown{
+      display: inline;
+    }
+  }
+}

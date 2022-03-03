@@ -1,0 +1,667 @@
+@media screen and (min-width: 760px) and (max-width: 980px) {
+    /*
+      960 Grid System ~ Core CSS.
+      Learn more ~ http://960.gs/
+
+      Licensed under GPL and MIT.
+    */
+
+    /*
+      Forces backgrounds to span full width,
+      even if there is horizontal scrolling.
+      Increase this if your layout is wider.
+
+      Note: IE6 works fine without this fix.
+    */
+
+    body {
+      min-width: 720px;
+    }
+
+    /* `Containers
+    ----------------------------------------------------------------------------------------------------*/
+
+    .container_12 {
+      margin-left: auto;
+      margin-right: auto;
+      width: 720px;
+    }
+
+    /* `Grid >> Global
+    ----------------------------------------------------------------------------------------------------*/
+
+    .grid_1,
+    .grid_2,
+    .grid_3,
+    .grid_4,
+    .grid_5,
+    .grid_6,
+    .grid_7,
+    .grid_8,
+    .grid_9,
+    .grid_10,
+    .grid_11,
+    .grid_12 {
+      display: inline;
+      float: left;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .push_1, .pull_1,
+    .push_2, .pull_2,
+    .push_3, .pull_3,
+    .push_4, .pull_4,
+    .push_5, .pull_5,
+    .push_6, .pull_6,
+    .push_7, .pull_7,
+    .push_8, .pull_8,
+    .push_9, .pull_9,
+    .push_10, .pull_10,
+    .push_11, .pull_11 {
+      position: relative;
+    }
+
+    /* `Grid >> Children (Alpha ~ First, Omega ~ Last)
+    ----------------------------------------------------------------------------------------------------*/
+
+    .alpha {
+      margin-left: 0;
+    }
+
+    .omega {
+      margin-right: 0;
+    }
+
+    /* `Grid >> 12 Columns
+    ----------------------------------------------------------------------------------------------------*/
+
+    .container_12 .grid_1 {
+      width: 40px;
+    }
+
+    .container_12 .grid_2 {
+      width: 100px;
+    }
+
+    .container_12 .grid_3 {
+      width: 160px;
+    }
+
+    .container_12 .grid_4 {
+      width: 220px;
+    }
+
+    .container_12 .grid_5 {
+      width: 280px;
+    }
+
+    .container_12 .grid_6 {
+      width: 340px;
+    }
+
+    .container_12 .grid_7 {
+      width: 400px;
+    }
+
+    .container_12 .grid_8 {
+      width: 460px;
+    }
+
+    .container_12 .grid_9 {
+      width: 520px;
+    }
+
+    .container_12 .grid_10 {
+      width: 580px;
+    }
+
+    .container_12 .grid_11 {
+      width: 640px;
+    }
+
+    .container_12 .grid_12 {
+      width: 700px;
+    }
+
+    /* `Prefix Extra Space >> 12 Columns
+    ----------------------------------------------------------------------------------------------------*/
+
+    .container_12 .prefix_1 {
+      padding-left: 60px;
+    }
+
+    .container_12 .prefix_2 {
+      padding-left: 120px;
+    }
+
+    .container_12 .prefix_3 {
+      padding-left: 180px;
+    }
+
+    .container_12 .prefix_4 {
+      padding-left: 240px;
+    }
+
+    .container_12 .prefix_5 {
+      padding-left: 300px;
+    }
+
+    .container_12 .prefix_6 {
+      padding-left: 360px;
+    }
+
+    .container_12 .prefix_7 {
+      padding-left: 420px;
+    }
+
+    .container_12 .prefix_8 {
+      padding-left: 480px;
+    }
+
+    .container_12 .prefix_9 {
+      padding-left: 540px;
+    }
+
+    .container_12 .prefix_10 {
+      padding-left: 600px;
+    }
+
+    .container_12 .prefix_11 {
+      padding-left: 660px;
+    }
+
+    /* `Suffix Extra Space >> 12 Columns
+    ----------------------------------------------------------------------------------------------------*/
+
+    .container_12 .suffix_1 {
+      padding-right: 60px;
+    }
+
+    .container_12 .suffix_2 {
+      padding-right: 120px;
+    }
+
+    .container_12 .suffix_3 {
+      padding-right: 180px;
+    }
+
+    .container_12 .suffix_4 {
+      padding-right: 240px;
+    }
+
+    .container_12 .suffix_5 {
+      padding-right: 300px;
+    }
+
+    .container_12 .suffix_6 {
+      padding-right: 360px;
+    }
+
+    .container_12 .suffix_7 {
+      padding-right: 420px;
+    }
+
+    .container_12 .suffix_8 {
+      padding-right: 480px;
+    }
+
+    .container_12 .suffix_9 {
+      padding-right: 540px;
+    }
+
+    .container_12 .suffix_10 {
+      padding-right: 600px;
+    }
+
+    .container_12 .suffix_11 {
+      padding-right: 660px;
+    }
+
+    /* `Push Space >> 12 Columns
+    ----------------------------------------------------------------------------------------------------*/
+
+    .container_12 .push_1 {
+      left: 60px;
+    }
+
+    .container_12 .push_2 {
+      left: 120px;
+    }
+
+    .container_12 .push_3 {
+      left: 180px;
+    }
+
+    .container_12 .push_4 {
+      left: 240px;
+    }
+
+    .container_12 .push_5 {
+      left: 300px;
+    }
+
+    .container_12 .push_6 {
+      left: 360px;
+    }
+
+    .container_12 .push_7 {
+      left: 420px;
+    }
+
+    .container_12 .push_8 {
+      left: 480px;
+    }
+
+    .container_12 .push_9 {
+      left: 540px;
+    }
+
+    .container_12 .push_10 {
+      left: 600px;
+    }
+
+    .container_12 .push_11 {
+      left: 660px;
+    }
+
+    /* `Pull Space >> 12 Columns
+    ----------------------------------------------------------------------------------------------------*/
+
+    .container_12 .pull_1 {
+      left: -60px;
+    }
+
+    .container_12 .pull_2 {
+      left: -120px;
+    }
+
+    .container_12 .pull_3 {
+      left: -180px;
+    }
+
+    .container_12 .pull_4 {
+      left: -240px;
+    }
+
+    .container_12 .pull_5 {
+      left: -300px;
+    }
+
+    .container_12 .pull_6 {
+      left: -360px;
+    }
+
+    .container_12 .pull_7 {
+      left: -420px;
+    }
+
+    .container_12 .pull_8 {
+      left: -480px;
+    }
+
+    .container_12 .pull_9 {
+      left: -540px;
+    }
+
+    .container_12 .pull_10 {
+      left: -600px;
+    }
+
+    .container_12 .pull_11 {
+      left: -660px;
+    }
+
+    /* `Clear Floated Elements
+    ----------------------------------------------------------------------------------------------------*/
+
+    /* http://sonspring.com/journal/clearing-floats */
+
+    .clear {
+      clear: both;
+      display: block;
+      overflow: hidden;
+      visibility: hidden;
+      width: 0;
+      height: 0;
+    }
+
+    /* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+
+    .clearfix:before,
+    .clearfix:after,
+    .container_12:before,
+    .container_12:after {
+      content: '.';
+      display: block;
+      overflow: hidden;
+      visibility: hidden;
+      font-size: 0;
+      line-height: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .clearfix:after,
+    .container_12:after {
+      clear: both;
+    }
+
+    /*
+      The following zoom:1 rule is specifically for IE6 + IE7.
+      Move to separate stylesheet if invalid CSS is a problem.
+    */
+
+    .clearfix,
+    .container_12 {
+      zoom: 1;
+    }
+
+    .auth {
+        padding-top:17px;
+    }
+
+    .auth a {
+        display:block;
+        margin-left:0;
+        padding-left:0;
+        border-left:none;
+        margin-bottom:10px;
+    }
+
+    .advBlock {
+        font-size:80%;
+    }
+
+    .advBlock .info {
+        padding-top:10px;
+    }
+
+    .scost {
+        font-size:12px;
+    }
+
+    .compareProducts {
+        width:103%;
+    }
+
+    .compareProducts .title,
+    .compareProducts .categoryName {
+        display:none;
+    }
+
+    .compareProducts li {
+        width:47.75%;
+        margin-right:1.820388%;
+        margin-bottom:3px;
+        float:left;
+        height:72px;
+        line-height:72px;
+        background: white;
+        position:relative;
+        text-align:center;
+    }
+
+    .compareProducts .image {
+        display:block;
+        width:80%;
+        padding:0 10%;
+        vertical-align: middle;
+    }
+
+    .compareProducts .image img {
+        vertical-align: middle;
+    }
+
+    .compareProducts .remove {
+        position:absolute;
+        z-index:2;
+        right:0;
+        top:0;
+        opacity:0.7;
+    }
+
+    .lastViewedList li {
+        width:47.75%;
+        margin-right:1.820388%;
+    }
+
+    .productList > li {
+        width:47%;
+        margin-right:2.5%;
+    }
+
+    .collapse720 .lineTrigger {
+        background: url(../../img/down.png) no-repeat right center;
+        padding-right:25px;
+        display:inline;
+    }
+
+    .collapse720 {
+        display:inline-block;    
+        position:relative;
+    }
+
+    .collapse720 .lineList {
+        display:none;
+        position:absolute;
+        left:0;
+        top:100%;
+        z-index:10;
+        border:1px solid #ebebe5;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .collapse720.on .lineList { display:inline-block; }
+    .collapse720 .lineList li { display:block; }
+    .collapse720 .lineList li i { border:none; }
+    .collapse720 .lineList li .act {
+        background: none;
+        border-radius:0;
+    }
+
+    .collapse720 .lineList li .item {
+        display:block;
+        line-height:normal;
+    }
+
+    .collapse720 .lineList li .item:hover {
+        background: #2bbfbd;
+        color: white;
+    }
+
+    .product .mainPicture {
+        height:220px;
+        line-height:220px;
+    }
+    
+    .checkoutSteps .icon {
+        display:none;
+    }
+    
+    .checkoutSteps .item {
+        margin-top:10px;
+    }
+    
+    .checkoutSteps .act .item {
+        margin-top:9px;
+    }
+    
+    
+    .orderInfo {
+        float:none;
+        width:auto;
+    }
+    
+    .cartInfo {
+        margin-right:0;
+    }
+    
+    
+    
+    .orderList td{
+        display:block;
+        border:none;
+        padding:5px 0;
+    }
+    
+    .orderList tr {
+        position:relative;
+        display:block;
+        border-bottom:1px solid #dcdcc9;
+        margin-bottom:20px;
+        padding-bottom:10px;
+        overflow:hidden;
+    }
+    
+    .orderList .status {
+        position:absolute;
+        top:0;
+        left:80px;
+    }
+    
+    .orderList .date {
+        padding:10px 0 15px;
+    }
+    
+    .orderList .price {
+        float:left;
+    }
+    
+    .orderList .actions {
+        float:right;
+    }
+
+    .cartFooter .total {
+        width:auto;
+    }    
+    
+    .balanceTable thead th {
+        background: none;
+        display:block;
+        float:left;
+        color: white;
+    }
+    
+    .balanceTable .addFundsHead {
+        background: #f29b30; 
+        padding:7px;
+    }
+    
+    .balanceTable .takeFundsHead {
+        background: #2b71bf;
+        margin-left:10px;
+        padding:7px;
+    }
+    
+    .cart .head .price {
+        width:156px;
+    }
+    
+    .cartProducts .colPrice {
+        width:100px;
+    }    
+    
+    .cart .head .amount,
+    .cartProducts .colAmount {
+        width:95px;
+    }        
+    
+    .brandLine ul li {
+        margin-right: 1.82039%;
+        width: 47.75%;    
+    }
+    
+    .warehouseCard .warehouseInfo {
+        padding:15px 25px;
+    }
+    
+    .warehouseCard .warehouseInfo .address,
+    .warehouseCard .warehouseInfo .phone,
+    .warehouseCard .warehouseInfo .worktime {
+        display:block;
+        float:none;
+        padding:10px 0;
+        width:auto;
+        text-align:left;
+    }
+    
+    .cdekWidjet .formSave{
+        margin-top: 10px;
+    }
+    
+    .citySelect,
+    .cityContacts {        
+        font-size:13px;
+    }
+    
+    .cityContacts {
+        margin-left:6px;                
+    }
+    
+    .toggleOneClickCart .tabletHidden {
+        display:none;
+    }
+    
+    .cart .toggleOneClickCart {
+        background-image:url(../../img/oneclick.png);
+        background-repeat:no-repeat;
+        background-position:center center;
+        width:16px;
+        height:20px;
+    }
+    
+    .compareTopBlock .title,
+    .favoriteLink .title {
+        display:none;
+    }
+    
+    .compareTopBlock .compareItemsCount,
+    .favoriteLink .countFavorite {
+        display:inline;
+    }
+
+    .lineListBlock .lineTrigger {
+        background: url(../../img/down.png) no-repeat right center;
+        padding-right:25px;
+        display:inline;
+    }
+
+    .lineListBlock {
+        display:inline-block;
+        position:relative;
+    }
+
+    .lineListBlock .lineList {
+        display:none;
+        position:absolute;
+        left:0;
+        top:100%;
+        z-index:10;
+        border:1px solid #ebebe5;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .lineListBlock.on .lineList { display:inline-block; }
+    .lineListBlock .lineList li { display:block; }
+    .lineListBlock .lineList li i { border:none; }
+    .lineListBlock .lineList li .act {
+        background: none;
+        border-radius:0;
+    }
+
+    .lineListBlock .lineList li .item {
+        display:block;
+        line-height:normal;
+        border-radius: 0;
+    }
+
+    .lineListBlock .lineList li .item:hover {
+        background-color: #2bbfbd;
+        color: white;
+    }
+}

@@ -1,0 +1,2 @@
+{* Добавление фото в товарах *}
+{moduleinsert name="\Photo\Controller\Admin\BlockPhotos" type="catalog" linkid=$elem.id indexTemplate="%catalog%/form/product/photo/form_product.tpl" photoTemplate="%catalog%/form/product/photo/form_onepic_product.tpl"}

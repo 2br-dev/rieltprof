@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Генератор модулей</name>
+        <description multilanguage="true">Генерация структуры и исходного кода модулей</description>
+        <version>4.0.4</version>
+        <author>ReadyScript lab.</author>
+    </defaultValues>
+</config>

@@ -1,0 +1,63 @@
+.admin-style .files-block .progress-bar {
+    display:inline-block;
+    border:1px solid #aaa;
+    height:20px;
+    width:300px;
+    position:relative;
+}
+
+.admin-style .files-block .progress-bar .bar {
+    background: #4e64b7 none repeat scroll 0 0;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.admin-style .files-block .progress-bar .percent {
+    color: #c0c0c0;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+
+.admin-style .files-list .access label * {
+    vertical-align:middle;
+    font-size:14px;
+}
+
+.admin-style .files-list .access label {
+    white-space: nowrap;    
+}
+
+.admin-style .files-list .error {
+    font-size:14px;
+    color:red;
+}
+
+.admin-style .files-list .size {
+    white-space:nowrap;
+}
+
+.admin-style .files-list .access .hint {
+    font-size:11px;
+}
+
+@media(max-width:767px) {
+    .admin-style .files-list .access label * {
+        font-size:11px;
+        white-space:normal;
+    }
+
+    .admin-style .files-list {
+        table-layout: fixed;
+    }
+
+    .admin-style .files-list .description,
+    .admin-style .files-list .size {
+        width:0;
+    }
+}

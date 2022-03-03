@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="20" height="15" viewBox="0 0 20 15">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #edbc38;
+        fill-rule: evenodd;
+      }
+    </style>
+
+    <clipPath id="clip-path-1">
+      <rect x="-1017.065" y="-426.375" width="1920" height="4560"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip-path-1)">
+    <path d="M8.368,-0.001 L11.130,4.713 L16.749,5.729 L12.838,9.658 L13.547,14.998 L8.368,12.712 L3.188,14.998 L3.898,9.658 L-0.013,5.729 L5.605,4.713 L8.368,-0.001 " transform="translate(1.63)" class="cls-1"/>
+  </g>
+</svg>

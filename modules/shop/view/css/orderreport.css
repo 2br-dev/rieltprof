@@ -1,0 +1,32 @@
+.orderReportWrapper table{
+  border-collapse:collapse;
+  cell-padding:0px;
+  width:100%;
+}
+
+.orderReportWrapper td{
+  padding: 3px;
+  padding-right: 10px;
+  border-bottom: 1px solid silver;
+}
+
+.orderReportWrapper td.value{
+  color: #ef533a;
+  font-weight: bold;
+  text-align:right;
+}
+
+.orderReportWrapper .reportColumns{
+  overflow: hidden;
+  display:flex;
+  justify-content: space-between;
+  padding-bottom:40px;
+}
+
+.orderReportWrapper .reportColumns .col{
+  width: 49%;
+}
+
+.orderReportWrapper .reportColumns .col .key{
+  max-width: 280px;
+}

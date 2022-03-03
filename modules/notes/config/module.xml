@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Заметки</name>
+        <description multilanguage="true">Модуль позволяет вести заметки на странице с виджетами интернет-магазина</description>
+        <version>3.0.4</version>
+        <author>ReadyScript lab.</author>
+        <widget_notes_page_size>10</widget_notes_page_size>
+        <is_system>1</is_system>
+    </defaultValues>
+</config>

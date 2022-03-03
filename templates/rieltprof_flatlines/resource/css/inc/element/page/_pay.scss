@@ -1,0 +1,39 @@
+@import "../../global/variable";
+
+// Pay
+
+.t-pay {
+  &_wrapper {
+    background-color: #f5f5f5;
+    @include flexbox;
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+    @include justify-content(space-between);
+    margin-bottom:20px;
+  }
+  &-receipt {
+    background-color: #ffffff;
+    width: 48%;
+    border: 2px solid #d8d8d8;
+    margin:15px 0;
+    transition: ease-in-out 0.3s;
+    @media (max-width: $xs-end) {
+      width: 100%;
+      margin: 29px 0 0;
+    }
+    h2 {
+      text-align:center;
+    }
+    .inside {
+      background:none;
+      color: #000;
+      padding: 35px 15px;
+      display: block;
+      font-weight:normal;
+      cursor:pointer;
+    }
+    &:hover {
+      border-color: $themeColor;
+    }
+  }
+}

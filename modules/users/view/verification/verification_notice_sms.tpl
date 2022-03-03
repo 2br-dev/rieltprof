@@ -1,0 +1,1 @@
+{t operation=$data.operation domain=$data.domain code=$data.code}Код для %operation на сайте %domain - %code{/t}

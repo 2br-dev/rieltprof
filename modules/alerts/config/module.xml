@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>    
+        <name multilanguage="true">Уведомления</name>
+        <description multilanguage="true">Отправка e-mail и sms уведомлений</description>        
+        <version>4.0.16</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <sms_sender_class>smsuslugi</sms_sender_class>
+        <notice_items_delete_hours>120</notice_items_delete_hours>
+        <allow_user_groups type="array">
+            <value>supervisor</value>
+            <value>admins</value>
+        </allow_user_groups>        
+    </defaultValues>
+</config>

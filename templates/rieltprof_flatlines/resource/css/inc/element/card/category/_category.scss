@@ -1,0 +1,79 @@
+@import "../../../global/variable";
+
+// Card Category
+
+.card {
+  &-category {
+    @media (min-width:$sm-start) and (max-width:$sm-end) {
+      height: 350px;
+    }
+    @media (min-width:$md-start) and (max-width:$md-end) {
+      height: 400px;
+    }
+    &:hover .card-image {
+      @include transform(scale(1.05));
+    }
+    .card-image {
+      position: relative;
+      transition: ease-in-out 0.3s;
+      @media (max-width:$xs-end) {
+        height: inherit;
+      }
+      //@media (min-width:$md-start) and (max-width:$md-end) {
+      //  height: 375px;
+      //}
+      img {
+        max-width: 100%;
+        @media (max-width:$xs-end) {
+          display: table;
+          margin: 0 auto 50px;
+          position: relative;
+        }
+      }
+    }
+    .card-text {
+      bottom: 0;
+      height: 50px;
+      padding: 10px 15px;
+      position: absolute;
+      @include flexbox;
+
+      @media (max-width:$sm-end) {
+        a.link-more {
+          font-size: 14px;
+          padding: 8px 0;
+          text-align: center;
+          width: 95px;
+          margin: -4px;
+        }
+      }
+      span {
+        display: block;
+        font-family: $themeFontLight;
+        font-size: 21px;
+        line-height: 26px;
+        @include flex(1);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        @media (max-width:$xs-end) {
+          max-width: 60%;
+        }
+        @media (min-width:$sm-start) and (max-width:$sm-end) {
+          max-width: 225px;
+        }
+        @media (min-width:$sm-start) and (max-width:$md-end) {
+          font-size: 18px;
+        }
+      }
+      .link-more {
+        margin: -2px -5px 0 0;
+        @media (max-width:$xs-end) {
+          font-family: $themeFontNormal;
+          text-align: center;
+          width: 130px;
+        }
+      }
+    }
+  }
+}

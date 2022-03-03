@@ -1,0 +1,30 @@
+@import "../../global/variable";
+
+// Delivery address
+
+.t-delivery-address {
+  background-color: #fff;
+  padding: 15px 30px 30px;
+  margin-bottom: 29px;
+  @media (min-width: $xs-start) and (max-width: $xs-end) {
+    @include flexbox;
+    @include flex-direction(column);
+    @include align-items(center);
+  }
+  @media (min-width: $sm-start) and (max-width: $sm-end) {
+    padding: 15px;
+    h3 {
+      text-align: left;
+      margin-top: 5px;
+    }
+  }
+  &_form {
+    @include flexbox;
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+    .checkbox {
+      line-height: 3.8;
+      width: 100%;
+    }
+  }
+}

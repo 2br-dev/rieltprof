@@ -1,0 +1,142 @@
+@import "../global/variable";
+
+// Footer
+footer {
+  background-color: #303030;
+  padding: 37px 0 27px;
+  .column {
+    margin-bottom: 25px;
+    min-height: 200px;
+    @media (max-width:$sm-end) {
+      min-height: inherit;
+      text-align: center;
+      padding: 0 15px;
+    }
+    &_menu {
+      @media (max-width:$xs-end) {
+        @include flexbox;
+        @include flex-direction(column);
+        @include justify-content(space-around);
+        margin: 10px 0 0;
+      }
+    }
+    &_title {
+      margin-bottom: 10px;
+      span {
+        color: #ccc;
+        font-family: $themeFontNormal;
+        line-height: .15px;
+      }
+    }
+    &_text {
+      p {
+        color: #999;
+        font-family: $themeFontLight;
+        font-size: 12px;
+        line-height: 1.25;
+      }
+      .pay-card {
+        padding: 5px 2px 15px;
+      }
+    }
+    &_menu {
+      line-height: 1.8;
+      padding: 0;
+      li {
+        a {
+          color: #fff;
+          font-family: $themeFontNormal;
+        }
+      }
+    }
+    &_contact {
+      a {
+        color: #fff;
+        display: block;
+        font-family: $themeFontLight;
+        font-size: 26px;
+        letter-spacing: .1px;
+        line-height: 1.4;
+        padding: 0 3px;
+        text-decoration: none;
+        @media (min-width:$md-start) and (max-width:$md-end) {
+          font-size: 17px;
+          line-height: inherit;
+        }
+      }
+      small {
+        color: #fff;
+        font-family: $themeFontLight;
+        padding: 0 4px;
+        position: relative;
+        top: -7px;
+      }
+    }
+  }
+  .footer {
+    &-logo {
+      display: block;
+      margin-bottom: 35px;
+    }
+    &-menu_wrapper {
+      text-align: left;
+    }
+    &-social_wrapper {
+      text-align: left;
+      >span {
+        display: block;
+        margin-bottom: 10px;
+      }
+      @media (max-width:$xs-end) {
+        text-align: center;
+      }
+      .link-social {
+        @media (max-width:$xs-end) {
+          @include justify-content(center);
+        }
+        @media (min-width:$sm-start) and (max-width:$sm-end) {
+          @include justify-content(flex-start);
+        }
+      }
+    }
+  }
+  .copyright {
+    color: #fff;
+    font-family: $themeFontLight;
+    line-height: 1.3;
+    margin: 24px 0 0 16px;
+    @media (max-width:$xs-end) {
+      margin: 24px 15px 0;
+      text-align: center;
+    }
+  }
+  .developers {
+    float: right;
+    font-family: $themeFontLight;
+    margin: 24px 0;
+    padding: 0 15px;
+    @media (max-width:$xs-end) {
+      float: initial;
+      margin: 24px auto;
+      text-align: center;
+    }
+    a {
+      color: #fff;
+      b {
+        color: $footerDeveloper;
+      }
+    }
+  }
+}
+
+.footer_logo .slogan {
+  color:white;
+  margin-top:5px;
+}
+
+.line-before:before {
+  border-top: 1px solid #5d5d5d;
+  content: "";
+  display: block;
+  margin: 0 15px;
+}

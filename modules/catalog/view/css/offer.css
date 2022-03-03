@@ -1,0 +1,414 @@
+.admin-style .main-offer-back {
+    background-color: #f5f5f5;
+    padding:10px 0;
+}
+
+.admin-style .offer-container thead td {
+    font-weight:bold;
+}
+
+.admin-style .offer-container {
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:20px;
+}
+
+.admin-style .offer-container table{
+    width: 100%;
+    border-collapse:collapse;
+}
+
+.admin-style .offer-container thead{
+    font-weight: bold;
+}
+
+
+.admin-style .offer-container td,
+.admin-style .offer-container th {
+    vertical-align:top;
+    padding:10px 0;    
+    text-align:left;
+}
+
+.admin-style .offer-container td.col2 {
+   padding-left: 20px;
+   
+}
+
+.admin-style .offer-container td.col3 {
+   padding: 10px 20px;
+}
+
+.admin-style .offer-container td.col5 {
+   padding: 0px;
+}
+
+.admin-style .offer-container .label {
+   margin:5px 0 3px;
+   font-size:12px;
+}
+
+.admin-style .offer-container .title-td input {
+    width:100%;
+}
+
+.admin-style .offer-container .keyval-td {
+    padding:10px 0px;
+}
+
+.admin-style .offer-container .over .sort {
+    background-position: -15px 0;
+}
+
+
+.admin-style .offer-container .offerItem.in-drag > .sort-td {
+    background: #687280;
+}
+
+.admin-style .offer-container .offerItem.in-drag > .sort-td .sort {
+    background-position: -30px 0;
+}
+
+.admin-style .offer-container .vtable td{
+    padding:3px;
+    vertical-align:middle;
+    text-align: left;
+}
+
+.admin-style .offer-container .vtable .c2 {
+    border-left:1px solid #ACACAC;
+    white-space:nowrap;
+}
+
+.admin-style .offer-container .main-offer .images-row {
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.admin-style .offer-images-line {
+    overflow: hidden;
+}
+
+
+.admin-style .offer-images-line a {
+    display: inline-block;
+    float: left;
+    width:32px;
+    height:32px;
+    line-height: 29px;
+    text-align: center;
+    background-color: white;
+    border: 2px solid #c0c0c0;
+    margin-left: 3px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    overflow:hidden;
+    box-sizing: content-box;
+}
+
+.admin-style .offer-images-line a.act,
+.admin-style .offer-images-line a.act:hover {
+    border:2px solid #f36306;
+}
+.admin-style .offer-images-line a:hover {
+    border:2px solid #51afc3;
+}
+
+.admin-style .offer-images-line a img {
+    vertical-align: middle;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+ 
+.admin-style .offer-container .titlecode td{
+    padding:0;
+    vertical-align:middle;
+}
+
+.admin-style .offer-container .mainOffer td {
+    background: #F0F0F0;
+}
+
+.admin-style .offer-container .unit{
+   margin-top: 10px; 
+}
+
+.admin-style .oneprice-data {
+    white-space:nowrap;
+}
+
+
+
+
+/**
+* Многомерные комплектации
+*/
+
+
+.admin-style #multioffer-wrap.cant-use #multi-check-wrap{
+    display: none;
+}
+
+.admin-style #multioffer-wrap.cant-use .multioffer-wrap{
+    display: none;
+}
+
+.admin-style #multioffer-wrap .multioffer-warning{
+    display: none;
+}
+
+.admin-style #multioffer-wrap.cant-use .multioffer-warning{
+    color: gray;
+    font-size: 12px;
+    display: block;
+}
+
+.admin-style .multioffer-warning{
+    margin-bottom: 6px;
+    margin-left: 3px;
+}
+
+.admin-style .multioffer-wrap,
+.admin-style .multioffer-wrapME{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid silver;
+    position: relative;
+}
+
+.admin-style .multioffer-wrap .item,
+.admin-style .multioffer-wrapME .item
+{
+    margin-bottom: 10px;
+    
+}
+
+.admin-style .multioffer-wrap .is_photo,
+.admin-style .multioffer-wrapME .is_photo
+{
+    width: 85px;
+}
+
+.admin-style .multioffer-wrap .line .is_photo input,
+.admin-style .multioffer-wrapME .lineME .is_photo input,
+.admin-style .multioffer-wrap .line .is_photo span,
+.admin-style .multioffer-wrapME .lineME .is_photo span {
+    vertical-align:middle;
+}
+
+.admin-style .multioffer-wrap .line .key,
+.admin-style .multioffer-wrapME .lineME .key
+{
+    padding-right:10px;
+}
+
+.admin-style .multioffer-wrap .line .key input,
+.admin-style .multioffer-wrapME .lineME .key input
+{
+    width: 100%;
+}
+
+.admin-style .multioffer-wrap .line.error .key input,
+.admin-style .multioffer-wrapME .lineME.error .key input
+{
+    border:1px solid red;
+}
+
+.admin-style .multioffer-wrap .line .title,
+.admin-style .multioffer-wrapME .lineME .title
+{
+    font-size: 12px;
+    margin: 5px 0 3px; 
+}
+
+.admin-style .multioffer-wrap .line select option.hide,
+.admin-style .multioffer-wrapME .lineME select option.hide
+{
+    display: none;
+}
+
+
+.admin-style .multioffer-wrap  .keyval-container,
+.admin-style .multioffer-wrapME  .keyval-container
+{
+    margin-bottom: 10px;
+}
+
+.admin-style .multioffer-wrap .add-level,
+.admin-style .multioffer-wrapME .add-levelME
+{
+
+}
+
+.admin-style .multioffer-wrap .bottom-bar,
+.admin-style .multioffer-wrapME .bottom-bar
+{
+    margin-top: 10px;
+}
+
+.admin-style .multioffer-wrap .mbutton,
+.admin-style .multioffer-wrapME .mbutton
+{
+    background: none repeat scroll 0 0 #E2E2E2;
+    border: medium none;
+    color: #3F3F3F;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 30px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.admin-style .multioffer-wrap .create-complexs,
+.admin-style .multioffer-wrapME .create-complexs
+{
+    display:none;   
+}
+
+.admin-style .multioffer-wrap a.delete-level,
+.admin-style .multioffer-wrapME a.delete-levelME
+{
+    font-size: 21px;
+}
+
+.admin-style a.editMO,
+.admin-style a.how-to
+{
+    color: #CA2847;
+    font-size: 12px;
+}
+
+.admin-style a.editMO:hover,
+.admin-style a.how-to:hover
+{
+    color:black;
+}
+
+.admin-style .offerImagesToggle {
+    border-bottom:1px dashed #3a8dce;
+    color:#3a8dce;
+}
+
+.admin-style .tools-top {
+    overflow:hidden;
+    padding:10px 0;
+}
+
+.admin-style .offer-block .paginator {
+    margin:0;
+}
+
+.admin-style .photolink-dialog {
+    z-index:1003;
+}
+
+.admin-style .offers-photo-select-dialog{
+    display: block;
+    background-color: white;
+}
+
+.admin-style .offers-photo-select-dialog .title{
+   font-weight:bold; 
+   margin-bottom: 5px;
+}
+
+.admin-style .offers-photo-select-dialog .photo-select{
+   width: 100%; 
+   height:420px;
+   display: block;
+   margin-bottom: 20px;
+}
+
+
+.admin-style .offers-photo-select-dialog .add{
+   background: none repeat scroll 0 0 #71b422;
+   color: white;
+   float: left;
+   font-size: 16px;
+   line-height: 33px;
+   margin-right: 10px;
+   padding: 0 10px;
+}
+
+.admin-style .offers-photo-select-dialog .params-row{
+   border:1px dashed #95DCF7;
+   padding: 10px;       
+   margin-bottom: 20px;
+}
+
+.admin-style .offers-photo-select-dialog .params-row .items{
+   margin-top: 3px; 
+   margin-bottom: 2px; 
+}
+
+.admin-style .offers-photo-select-dialog .params-row .items .item{
+   margin-bottom: 10px; 
+   margin-right: 10px; 
+   display: inline-block;
+}
+
+.admin-style .offers-photo-select-dialog .param-title{
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.admin-style .offer-photo-clear {
+    float:right;
+    line-height:33px;
+}
+
+.admin-style .offers-photo-select-dialog .gray {
+    color:gray;
+    font-size:12px;
+    margin-bottom:5px;
+    display:block;
+}
+
+.admin-style .one-price {
+    font-size:13px;
+    white-space:nowrap;
+}
+
+.admin-style .multioffer-table td {
+    padding:2px 2px 2px 0;
+}
+
+.admin-style .multioffer-table .delete-level-td {
+    width:25px;
+    text-align: center;
+}
+
+@media(max-width: 1023px) {
+
+    .admin-style .main-offer,
+    .admin-style .main-offer > tbody,
+    .admin-style .main-offer > tbody > tr,
+    .admin-style .main-offer > tbody > tr > td {
+        display:block;
+    }
+
+    .admin-style .main-offer > tbody > tr > td {
+        padding:10px 20px;
+    }
+}
+
+@media(max-width: 767px) {
+
+    .admin-style .offer-list {
+        table-layout: fixed;
+    }
+    .admin-style .offer-list .amount,
+    .admin-style .offer-list .price {
+        width:0;
+        overflow:hidden;
+        padding:0 !important;
+    }
+
+    .admin-style .multioffer-table {
+        table-layout: fixed;
+        width:100%;
+    }
+}

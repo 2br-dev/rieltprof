@@ -1,0 +1,44 @@
+.wrapperSubscribeWindow{
+    padding: 0 20px 20px;
+}
+
+.dialogTitle{
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.wrapperSubscribeWindow .desc{
+    font-size: 12px;
+    color: gray;
+    padding-bottom: 10px;
+}
+
+.wrapperSubscribeWindow .email {
+    width:100%;
+    box-sizing: border-box;
+    
+    border: 1px solid silver;
+    height: 33px;
+    line-height: 33px;
+}
+
+.wrapperSubscribeWindow .error {
+    color:red;
+}
+
+.wrapperSubscribeWindow .formSave {    
+    margin-top: 20px;
+}
+
+.wrapperSubscribeWindow .formSuccessText{
+    padding: 20px;
+    margin: 40px;
+    color: green;
+    font-size:16px;
+    border:none;
+}
+
+.wrapperSubscribeWindow .buttonsLine {
+    text-align:center;
+}

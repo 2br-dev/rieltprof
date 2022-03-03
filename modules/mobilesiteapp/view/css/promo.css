@@ -1,0 +1,271 @@
+.admin-style .mobile-site-app {
+    text-align:center;
+}
+
+.admin-style .mobile-site-app h2 {
+    font-weight:normal;
+    margin-top:0;
+}
+
+.admin-style .mobile-site-app .check-items h3 {
+    margin-bottom:28px;
+}
+
+.admin-style .mobile-site-app .check-items {
+    color:#333;
+}
+
+.admin-style .mobile-site-app .description .item {
+    margin-bottom:28px;
+    color:#333;
+}
+
+.admin-style .mobile-site-app .description h3 {
+    margin-bottom:15px;
+}
+
+.admin-style .mobile-site-app .info-columns {
+    -webkit-display:flex;
+       -moz-display:flex;
+            display:flex;
+    max-width:1200px;
+    margin:0 auto;
+    -webkit-justify-content: space-between;
+       -moz-justify-content: space-between;
+            justify-content: space-between;
+    font-size:16px;
+    line-height:150%;
+}
+
+.admin-style .mobile-site-app .btn-yellow {
+    background-color:#fed42b;
+    padding:16px 50px;
+    color:black;
+    margin-top:28px;
+    transition:background-color 0.2s ease, color 0.2s ease;
+    -webkit-border-radius:30px;
+       -moz-border-radius:30px;
+            border-radius:30px;
+}
+
+.admin-style .mobile-site-app .btn-yellow:hover {
+    background-color:#4caf50;
+    color:white;
+}
+
+.admin-style .mobile-site-app .check-items,
+.admin-style .mobile-site-app .description {
+    max-width:315px;
+    text-align:left;
+    padding:0 20px;
+}
+
+.admin-style .mobile-site-app .check-items ul {
+    padding:0;
+    list-style: none;
+}
+
+.admin-style .mobile-site-app .check-items ul li {
+    background:url(../img/check.png) no-repeat left top;
+    padding-left:41px;
+    margin-bottom:30px;
+}
+
+.admin-style .mobile-site-app .screenshots {
+    position:relative;
+    width:280px;
+    min-width:280px;
+    height:610px;
+    margin:0 auto;
+}
+
+.admin-style .mobile-site-app .preview .phone,
+.admin-style .mobile-site-app .screenshots .phone {
+    width:280px;
+    height:579px;
+    background:url(../img/phone.png) no-repeat;
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+.admin-style .mobile-site-app .screenshots .images {
+    width:234px;
+    position: relative;
+    left: 23px;
+    top: 79px;
+}
+
+.admin-style .mobile-site-app .screenshots .pages {
+    position:absolute;
+    width:100%;
+    bottom:0;
+    text-align:center;
+}
+
+.admin-style .mobile-site-app .screenshots .pages .owl-dot {
+    border:2px solid #cccccc;
+    width:12px;
+    height:12px;
+    margin-left:3px;
+    -webkit-border-radius:50%;
+       -moz-border-radius:50%;
+            border-radius:50%;
+    display:inline-block;
+    cursor:pointer;
+}
+
+.admin-style .mobile-site-app .screenshots .pages .owl-dot:first-child {
+    margin:0;
+}
+
+.admin-style .mobile-site-app .screenshots .pages .owl-dot.active {
+    background-color:#0088ca;
+    border-color:#0088ca;
+}
+
+/* Просмотр параметров действующей подписки */
+
+.admin-style .mobile-site-app.view h2 {
+    margin-bottom:30px;
+}
+
+.admin-style .mobile-site-app .view-columns {
+    -webkit-display:flex;
+       -moz-display:flex;
+        display:flex;
+
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 20px;
+}
+
+.admin-style .mobile-site-app .view-columns .preview {
+    width:280px;
+    height:579px;
+    position:relative;
+    margin:0 auto;
+}
+
+.admin-style .mobile-site-app .view-columns .page {
+    width:234px;
+    height:420px;
+    position:relative;
+    top:79px;
+    left:23px;
+    overflow:hidden;
+}
+
+.admin-style .mobile-site-app .view-columns .comment {
+    background:#ffedae;
+    padding:14px;
+    border-radius:15px;
+    color:black;
+    position:relative;
+    margin-left:18px;
+}
+
+.admin-style .mobile-site-app .view-columns .comment:before {
+    content:'';
+    width:18px;
+    height:16px;
+    position:absolute;
+    left:-18px;
+    top:10px;
+    background:url(../img/corner_filled.png) no-repeat;
+}
+
+.admin-style .mobile-site-app .view-columns .page .wait {
+    background:#fee580 url(../img/time.png) no-repeat center center;
+    width:234px;
+    height:420px;
+}
+
+.admin-style .mobile-site-app .view-columns .info {
+    flex:1;
+    text-align:left;
+    padding:15px 20px 0 65px;
+    white-space:normal;
+}
+
+.admin-style .mobile-site-app .view-columns .info .item {
+    margin-bottom:48px;
+}
+
+.admin-style .mobile-site-app .view-columns .info .value {
+    font-weight:bold;
+    font-size:16px;
+}
+
+.admin-style .mobile-site-app .view-columns .info .google-play {
+    width:167px;
+    height:54px;
+    background:url(../img/googleplay.png) no-repeat;
+    margin-right:6px;
+    display:inline-block;
+}
+
+.admin-style .mobile-site-app .view-columns .info .app-store {
+    width:167px;
+    height:54px;
+    background:url(../img/appstore.png) no-repeat;
+    display:inline-block;
+}
+
+.admin-style .mobile-site-app .tools .btn {
+    margin-bottom:4px;
+}
+
+#rs-mobile .rs-page-mobile.fade {
+    transition: opacity 0s;
+}
+
+#rs-mobile .rs-page-mobile.fade.in {
+    transition: opacity 0.3s;
+}
+
+
+@media (max-width:1023px) {
+    .admin-style .mobile-site-app .info-columns {
+        font-size:15px;
+    }
+
+    .admin-style .mobile-site-app .check-items h3 {
+        font-size:20px;
+    }
+}
+
+@media (max-width:896px) {
+    .admin-style .mobile-site-app .info-columns {
+        font-size:14px;
+    }
+
+    .admin-style .mobile-site-app .check-items ul li {
+        background-size:20px 20px;
+        padding-left:23px;
+    }
+}
+
+@media (max-width:767px) {
+    .admin-style .mobile-site-app .view-columns,
+    .admin-style .mobile-site-app .info-columns {
+        -webkit-flex-direction: column;
+           -moz-flex-direction: column;
+                flex-direction: column;
+    }
+
+    .admin-style .mobile-site-app .check-items,
+    .admin-style .mobile-site-app .screenshots,
+    .admin-style .mobile-site-app .description {
+        max-width:none;
+        text-align:center;
+    }
+
+    .admin-style .mobile-site-app .check-items ul li {
+        text-align:left;
+    }
+
+    .admin-style .mobile-site-app .view-columns .info {
+        padding:30px 20px;
+    }
+}

@@ -1,0 +1,41 @@
+@import "../../global/variable";
+
+// Pagination
+
+ul.pagination {
+  width: 360px;
+  @include inline-flex;
+  margin: 0 0 25px;
+  li {
+    a, a:first-child, a:last-child {
+      background-color: transparent;
+      border: none;
+      border-radius: 30px;
+      color: #000;
+      cursor: pointer;
+      margin: 5px;
+      display: block;
+      padding: 0;
+      width: 50px;
+      height: 50px;
+      line-height: 3;
+      font-family: $themeFontLight;
+      font-size: 16px;
+      transition: ease-in-out 0.3s;
+      &:hover {
+        background-color: #fff;
+        box-shadow: 3px 3px 14px 0 rgba(0, 0, 0, 0.2);
+        color: #000;
+      }
+    }
+    &.active a {
+      background-color: $themeColor;
+      color: #fff;
+      &:hover {
+        background-color: $themeColor;
+        box-shadow: none;
+        color: #fff;
+      }
+    }
+  }
+}

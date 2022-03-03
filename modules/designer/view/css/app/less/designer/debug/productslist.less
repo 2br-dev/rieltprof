@@ -1,0 +1,105 @@
+.designer-block{
+  .d-atom-productslist {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    .d-productslist-item-wrapper{
+      display: flex;
+      display: -webkit-flex;
+      flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+    }
+
+    .d-productslist-item-photo,
+    .d-productslist-item-infoblock{
+      width: 100%;
+    }
+
+    .d-productslist-wrapper{
+      display: flex;
+      display: -webkit-flex;
+      flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+      width: 100%;
+
+      .d-productslist-item-title{
+        overflow: hidden;
+      }
+    }
+
+    .d-atom-item{
+      width: 100%;
+    }
+
+    .d-productslist-button-wrapper{
+      display: flex;
+      display: -webkit-flex;
+      flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+
+      span{
+        display: inline-block;
+      }
+
+      a:last-child{
+        margin-bottom: 0 !important;
+      }
+    }
+
+    .d-productslist-item{
+      display: block;
+      box-sizing: border-box;
+    }
+
+    .d-productslist-buy-button,
+    .d-productslist-order-button,
+    .d-productslist-oneclick-button{
+      display: flex;
+      display: -webkit-flex;
+      max-width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      -webkit-flex-shrink: 0;
+      flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .d-atom-item {
+      width: 100%;
+    }
+
+    .d-productlist-loadmore-wrapper{
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+    }
+
+    .d-productlist-loadmore{
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 767px){
+      .d-productslist-item{
+        width: 50% !important;
+      }
+
+      .d-productslist-buy-button,
+      .d-productslist-order-button,
+      .d-productslist-oneclick-button,
+      .d-productslist-item-photo,
+      .d-productslist-item-infoblock{
+        max-width: 100% !important;
+      }
+    }
+
+    @media (max-width: 480px){
+      .d-productslist-item{
+        width: 100% !important;
+      }
+    }
+  }
+}

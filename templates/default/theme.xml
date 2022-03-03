@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme scriptType="shop" scriptMajorVersion="2" themeType="pc">
+    <general>
+        <author>ReadyScript lab.</author>
+        <name>Классическая</name>
+        <description>Адаптивная тема, предусматривает различное отображение контента для различных устройств</description>
+        <version>4.0.144</version>
+    </general>    
+    <options>
+        <group name="Основные">
+            <option name="enable_one_click_cart" type="checkbox">
+                <description>Включить заказ в 1 клик в корзине</description>
+                <default>1</default>
+            </option>
+            <option name="enable_favorite" type="checkbox">
+                <description>Включить добавление товаров в избранное</description>
+                <default>1</default>
+            </option>
+            <option name="enable_compare" type="checkbox">
+                <description>Включить сравнение товаров</description>
+                <default>1</default>
+            </option>
+            <option name="cat_description_bottom" type="checkbox">
+                <description>Переместить описание категории вниз страницы</description>
+                <default>0</default>
+            </option>
+        </group>
+    </options>
+</theme>

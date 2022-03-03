@@ -1,0 +1,28 @@
+@import "../../global/variable";
+
+// Card default
+
+.card {
+    background-color: #fff;
+    margin: 0 auto 29px;
+    overflow: hidden;
+    position: relative;
+    transition: ease-in-out 0.3s;
+    width: 100%;
+    max-width: 360px;
+    &:hover {
+        box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        z-index: 10;
+        @media (max-width:992px) {
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+    }
+    &-image {
+        overflow: hidden;
+    }
+    &-text {
+        background-color: #fff;
+        box-shadow: 0 0 30px 5px #fff;
+        width: 100%;
+    }
+}

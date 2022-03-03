@@ -1,0 +1,1 @@
+{$elem->getProductsDialogConcomitant()->getHtml()}

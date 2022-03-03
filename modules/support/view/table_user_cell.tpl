@@ -1,0 +1,1 @@
+{if $cell->getRow()->newadmcount>0}<b>{/if}{$cell->getRow()->getUser()->getFio()}{if $cell->getRow()->newadmcount>0}</b>{/if} <span class="cell-sgray">({$cell->getValue()})</span>

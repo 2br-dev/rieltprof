@@ -1,0 +1,283 @@
+.admin-style .property-tools {
+    border:2px solid #71b422;
+    margin-bottom:15px;
+}
+
+.admin-style .property-actions a {
+    line-height:36px;
+    margin-right:20px;
+    margin-left:10px;    
+}
+
+.admin-style .property-actions .add-property,
+.admin-style .property-actions .add-some-property {
+    padding-left:20px;
+}
+
+.admin-style .property-actions .add-property i,
+.admin-style .property-actions .add-some-property i {
+    font-size:21px;
+    color:green;
+}
+
+.admin-style .property-actions .act span {
+    background: none;
+    color: #42879d;
+}
+
+.admin-style .property-actions {
+    position:relative;
+}
+
+.admin-style .property-actions .success-text {
+    position:absolute;
+    right:0;
+    top:0;
+    height:36px;
+    padding:0 10px;
+    line-height:36px;
+    background: #71b422;
+    color: white;
+    display:none;
+}
+
+.admin-style .property-container {
+    width:100%;
+    border-collapse:collapse;
+}
+
+.admin-style .property-container td {
+    padding:10px 2px;
+}
+
+.admin-style .property-container .property-item:hover td{
+    background: #fed42b;
+}
+
+.admin-style .property-container .item-title {
+    width:300px;
+}
+
+.admin-style .property-container .item-val {
+    width:73%;
+}
+
+.admin-style .property-container .item-info,
+.admin-style .property-container .item-useval {
+    width:20px;
+}
+
+.admin-style .property-container input[type=text] {
+    width:97%;
+}
+
+.admin-style .property-container .property-group td{
+    padding:30px 0 5px;
+}
+
+.admin-style .property-container .property-group td .back {
+    border-bottom: 2px solid #969696;
+    padding:5px;
+    font-weight:bold;
+}
+
+.admin-style .some-property-form,
+.admin-style .property-form {
+    display:none;
+    padding:10px;
+}
+
+.admin-style .property-table td {
+    vertical-align:top;
+    padding:7px 0;
+}
+
+.admin-style .property-table .key{
+    text-align:right;
+    font-size:12px;
+    line-height:30px;
+    width:180px;
+    padding-right:15px;
+}
+
+.admin-style .property-table input.p-title {
+    width:500px;
+}
+
+.admin-style .property-table input.p-new-group {
+    width:145px;
+}
+
+.admin-style .property-table .p-values {
+    width:500px;
+}
+
+.admin-style .property-table input[type=text].p-val {
+    width:500px;
+}
+
+.admin-style .some-property-table .add-some,
+.admin-style .property-table .add {
+    float:left;
+}
+
+.admin-style .property-table .clean {
+    float:right;
+    color: #f6607d;
+    line-height:33px;
+    font-size:16px;
+    margin-right:10px;
+}
+
+.admin-style .property-table .close {
+    float:right;
+    line-height:33px;    
+    background: url(../img/collapse.gif) no-repeat right center;
+    padding-right:12px;
+    font-size:16px;
+}
+
+.admin-style .property-table .ploading {
+    display:none;
+}
+
+.admin-style .property-table .makenew {
+    font-size:11px;
+}
+
+.admin-style .property-table {
+    table-layout:fixed;
+}
+
+@media(max-width:767px) {
+    .admin-style .property-container {
+        table-layout: fixed;
+    }
+
+    .admin-style .property-table td,
+    .admin-style .property-table .key {
+        padding:2px 0;
+        text-align:left;
+        display:block;
+        width:auto;
+        line-height: normal;
+    }
+
+    .admin-style .property-table tr {
+        display:block;
+        margin-bottom:20px;
+    }
+
+    .admin-style .property-table select,
+    .admin-style .property-table input[type="text"] {
+        width:100%;
+    }
+}
+
+.admin-style .p-val-block .list-item {
+    padding:3px 0;
+}
+
+.admin-style .p-values-block .apply {
+    font-size:11px;
+    position:relative;
+    display:inline-block;
+}
+
+.admin-style .inline-item {
+    margin-right:5px;
+    line-height:27px;
+    border-left:1px solid #969696;
+    padding:3px 3px 3px 8px;
+}
+
+.admin-style .property-type-list {
+    width:185px; 
+    display: block; 
+    float:left;
+}
+
+.admin-style .inline-item.first {
+    border-left:none;
+    padding-left:0;
+}
+
+
+.admin-style tr.now-edit td,
+.admin-style .property-item:hover.now-edit td {
+    background: #3f3f3f;
+    color: #e2e2e2;
+}
+
+.admin-style .now-edit .hint {
+    visibility:hidden;
+}
+
+.admin-style .property-container .edit-form > td{
+    vertical-align:top;
+    padding:0;
+}
+
+.admin-style .property-container .edit-form .bordered{
+    border:3px solid #3f3f3f;
+}
+
+.admin-style .now-edit .item-tools a {
+    visibility:visible;
+    color:white;
+}
+
+.admin-style .formbox .property-container .edit-form select, 
+.admin-style .formbox .property-container .edit-form input {
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.admin-style .formbox .property-container .edit-form select {
+    padding: 5px 5px 5px 0;
+}
+
+.admin-style .set-self-val {
+    float:right;
+}
+
+.admin-style #multipropertyblock .property-form {
+    border-bottom:1px solid #aaa;
+}
+
+.admin-style .oh {
+    overflow: hidden;
+}
+
+.admin-style .property-table input.p-new-value {
+    width:200px;
+}
+
+.admin-style .p-list-values {
+    list-style:none;
+    padding:0;
+}
+
+.admin-style .item-val .p-remove-val {
+    visibility:hidden;
+}
+
+.admin-style .now-edit .item-val .p-remove-val {
+    visibility:visible;
+    color:white;
+}
+
+.admin-style .loading-p-values {
+    font-size:12px;
+    padding-left:20px;
+    background:url(../../../../resource/img/adminstyle/small-loader.gif) no-repeat left center;
+    line-height:30px;
+    height:30px;
+}
+
+.admin-style .p-list-empty {
+    font-size:12px;
+    line-height:30px;
+    height:30px;    
+}

@@ -1,0 +1,1 @@
+<a href="{$router->getUrl('feedback-front-form', ['form_id' => $form_id])}" class="link link-more">{t}Написать нам{/t}</a>

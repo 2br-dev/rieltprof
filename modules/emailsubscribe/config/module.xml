@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>    
+        <name multilanguage="true">Подписка на E-mail рассылку</name>
+        <description multilanguage="true">Добавляет возможность подписки пользователя на рассылку</description>        
+        <version>4.0.6</version>
+        <author>ReadyScript lab.</author>
+        <dialog_open_delay>0</dialog_open_delay>
+        <is_system>1</is_system>
+        
+        <send_confirm_email>1</send_confirm_email>
+    </defaultValues>
+</config>

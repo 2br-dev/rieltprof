@@ -1,0 +1,328 @@
+@import "../../global/variable";
+
+// Response
+
+.response {
+  &_review {
+    @media (max-width: $xx-end) {
+      text-align: center;
+    }
+  }
+}
+
+.review_response {
+  margin-bottom: 29px;
+  &_wrapper {
+    background: #f5f5f5;
+    margin-bottom: 1px;
+    padding: 30px 20px 30px 45px;
+    position: relative;
+    @media (max-width:$xs-end) {
+      padding: 15px 15px 35px;
+    }
+  }
+  &_comment {
+    p i {
+      margin: 2px 0 0 -20px;
+      position: absolute;
+      @media only screen and (max-width:$xs-end) {
+        margin: 3px 5px;
+        position: relative;
+      }
+    }
+  }
+  &_response {
+    @include flexbox;
+    @include flex-direction(row);
+    @media only screen and (max-width:$xs-end) {
+      @include flex-direction(column);
+      @include justify-content(center);
+      > * {
+        margin: 15px auto 0;
+      }
+    }
+    .comments {
+      @include flexbox;
+      @include flex-direction(column);
+      @include justify-content(center);
+      width: 225px;
+      i {
+        color: #ccc;
+        font-size: 28px;
+        padding: 0 8px 0 22px;
+      }
+      span {
+        color: #ccc;
+        font-size: 16px;
+        line-height: 2;
+      }
+    }
+  }
+  &_question i, &_minus i, &_plus i {
+    font-size: 16px;
+    margin: 3px 0 0 -25px;
+    position: absolute;
+    @media only screen and (max-width:$xs-end) {
+      margin: 3px 5px;
+      position: relative;
+    }
+  }
+  &_question i {
+    color: green;
+  }
+  &_plus i {
+    color: green;
+  }
+  &_minus i {
+    color: red;
+  }
+  &_responses {
+    .nav-tabs_review {
+      &_autor {
+        padding: 8px 0 25px;
+      }
+      &_assessment {
+        bottom: 0;
+        @include flexbox;
+        @include flex-direction(row);
+        @include justify-content(space-around);
+        padding: 15px;
+        position: absolute;
+        right: 0;
+        width: 250px;
+        @media only screen and (max-width:$xx-end) {
+          padding: 0 0 10px;
+          width: 100%;
+        }
+        span {
+          display: block;
+          float: right;
+          font-family: $themeFontLight;
+          font-size: 16px;
+          padding: 5px 0 0 5px;
+        }
+        &_good {
+          .icon-thumbs-up {
+            background-color: green;
+            mask-repeat: no-repeat;
+            mask-position: center center;
+            mask-size: 30px;
+            width: 30px;
+            height: 30px;
+            display: block;
+            float: left;
+            mask-image: url(../img/icons/like.svg);
+          }
+        }
+        &_bed {
+          .icon-thumbs-down {
+            background-color: red;
+            mask-repeat: no-repeat;
+            mask-position: center center;
+            mask-size: 25px;
+            width: 30px;
+            height: 30px;
+            display: block;
+            float: left;
+            mask-image: url(../img/icons/dislike.svg);
+          }
+        }
+      }
+    }
+  }
+  &_autor {
+    margin-bottom: 15px;
+    @media (max-width:$sm-end) {
+      text-align: center;
+    }
+    &_name {
+      font-family: $themeFontLight;
+      font-size: 26px;
+      line-height: 1.6;
+      @media (max-width:$md-end) {
+        font-size: 18px;
+      }
+    }
+    small {
+      font-family: $themeFontLight;
+      font-size: 16px;
+      line-height: 1.6;
+      opacity: 0.65;
+    }
+    label {
+      @include inline-flex;
+      font-family: $themeFontLight;
+      font-size: 16px;
+      padding: 18px 0 0 2px;
+      width: 100%;
+      @media (max-width:$sm-end) {
+        @include justify-content(center);
+      }
+    }
+    &_stars {
+      background: url(../img/bgstars_na.gif) no-repeat;
+      display: block;
+      font-size: 15px;
+      height: 14px;
+      margin: 5px 20px;
+      padding: 5px 5px;
+      width: 79px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.review {
+  margin-bottom: 29px;
+  &_wrapper {
+    background: #f5f5f5;
+    margin-bottom: 1px;
+    padding: 30px 20px 30px 45px;
+    position: relative;
+    @media (max-width:$xs-end) {
+      padding: 15px 15px 35px;
+    }
+  }
+  &_comment {
+    p i {
+      margin: 2px 0 0 -25px;
+      position: absolute;
+      @media only screen and (max-width:$xs-end) {
+        margin: 3px 5px;
+        position: relative;
+      }
+    }
+  }
+  &_response {
+    @include flexbox;
+    @include flex-direction(row);
+    @media only screen and (max-width:$md-end) {
+      @include flex-direction(column);
+      @include justify-content(center);
+      > * {
+        margin: 15px auto 0;
+      }
+    }
+    .comments {
+      @include flexbox;
+      @include flex-direction(column);
+      @include justify-content(center);
+      padding-right: 15px;
+      padding-left: 25px;
+      i {
+        color: #ccc;
+        font-size: 28px;
+        padding: 0 8px 0 22px;
+      }
+      span {
+        color: #ccc;
+        font-size: 14px;
+        line-height: 2;
+      }
+    }
+  }
+  &_question i, &_minus i, &_plus i {
+    font-size: 16px;
+    margin: 3px 0 0 -20px;
+    position: absolute;
+    @media only screen and (max-width:$xs-end) {
+      margin: 3px 5px;
+      position: relative;
+    }
+  }
+  &_question i {
+    color: green;
+  }
+  &_plus i {
+    color: green;
+  }
+  &_minus i {
+    color: red;
+  }
+  &_autor {
+    padding: 8px 0 25px;
+  }
+  &_assessment {
+    @include align-items(center);
+    bottom: 0;
+    @include flexbox;
+    @include flex-direction(row);
+    @include justify-content(space-around);
+    padding: 10px 15px 15px;
+    width: 180px;
+    min-width: 180px;
+    @media only screen and (max-width:$xx-end) {
+      padding: 0 0 10px;
+      width: 100%;
+    }
+    span {
+      display: block;
+      float: right;
+      font-family: $themeFontLight;
+      font-size: 16px;
+      padding: 5px 0 0 5px;
+    }
+    &__good {
+      .icon-thumbs-up {
+        opacity: 1;
+      }
+    }
+    &__bed {
+      .icon-thumbs-down {
+        opacity: 1;
+      }
+    }
+  }
+  &_autor {
+    margin-bottom: 15px;
+    @media (max-width:$sm-end) {
+      text-align: center;
+    }
+    &__name {
+      font-family: $themeFontLight;
+      font-size: 26px;
+      line-height: 1.6;
+      @media (max-width:$md-end) {
+        font-size: 18px;
+      }
+    }
+    small {
+      font-family: $themeFontLight;
+      font-size: 16px;
+      line-height: 1.6;
+      opacity: 0.65;
+    }
+    label {
+      @include inline-flex;
+      font-family: $themeFontLight;
+      font-size: 16px;
+      padding: 18px 0 0 2px;
+      width: 100%;
+      @media (max-width:$sm-end) {
+        @include justify-content(center);
+      }
+    }
+    &_stars {
+      background: url(../img/bgstars_na.gif) no-repeat;
+      display: block;
+      font-size: 15px;
+      height: 14px;
+      margin: 5px 20px;
+      padding: 5px 5px;
+      width: 79px;
+    }
+  }
+}

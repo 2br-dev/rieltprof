@@ -1,0 +1,85 @@
+.mod-exists {
+    margin:10px 0 0;
+}
+
+.mod-exists a {
+    text-decoration:underline;
+}
+
+.mod-exists a:hover {
+    color:blue;
+}
+
+.new-module-info {
+    border-bottom:2px solid #ACACAC;
+    margin-bottom:30px;    
+}
+
+.new-module-info td {
+    padding: 5px 0;
+}
+
+.new-module-info .ctitle {
+    text-align:right;
+    padding-right:5px;
+    width:180px;
+}
+
+.new-module-info .last {
+    height:10px;
+}
+
+.new-module-info span {
+    padding:4px;
+    background: #ACACAC;
+    color: white;
+    line-height:25px;
+}
+
+.right-part {
+    width:40%;
+    float:right;
+}
+
+.right-part textarea {
+    width:97%;
+    height:230px;
+    resize:vertical;
+}
+
+.green {
+    color: green;
+}
+
+.next_do {
+    list-style:square;
+}
+
+.next_do li {
+    line-height:25px;
+}
+
+.next_do a {
+    text-decoration:underline;
+}
+
+.next_do a:hover {
+    color: #1c80a1;
+}
+
+.not_installed {
+    color: red;
+    font-size:11px;
+    text-decoration:underline;
+}
+
+@keyframes oneZoomIn {
+    0% {transform:scale(1);}
+    50% {transform:scale(1.05);}
+    100% {transform:scale(1);}
+}
+
+.goto-highlight {
+    text-shadow: 0 0 10px #dda71f;
+    animation: oneZoomIn 0.7s ease-out;
+}

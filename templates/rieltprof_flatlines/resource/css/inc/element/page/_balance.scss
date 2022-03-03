@@ -1,0 +1,70 @@
+@import "../../global/variable";
+
+// Balance
+
+.t-balance {
+  &-list {
+    padding: 0;
+    margin-bottom: -15px;
+    list-style: none;
+    li {
+      @include align-items(center);
+      border-top: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
+      margin: 0 -15px -1px;
+      padding: 15px;
+      @include flexbox;
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
+      @media (max-width: $xs-end) {
+        @include align-items(baseline);
+        @include flex-direction(column);
+        text-align: center;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  &_title {
+    @media (max-width: $xx-end) {
+      font-size: 21px;
+    }
+    @media (min-width: $xs-start) and (max-width: $md-end) {
+      font-size: 26px;
+    }
+  }
+  &_left {
+    font-family: $themeFontLight;
+    opacity: 0.65;
+    width: 130px;
+    @media (max-width: $xs-end) {
+      width: 100%;
+      padding: 0 15px;
+    }
+  }
+  &_center {
+    font-family: $themeFontLight;
+    font-size: 16px;
+    padding: 0 15px;
+    width: calc(100% - 300px);
+    @media (max-width: $xs-end) {
+      width: 100%;
+      padding: 15px;
+    }
+  }
+  &_right {
+    background-color: #fff;
+    position: absolute;
+    right: 30px;
+    font-family: $themeFontBold;
+    font-size: 24px;
+    @media (max-width: $xs-end) {
+      width: 100%;
+      padding: 0 15px;
+      position: relative;
+      right: inherit;
+    }
+  }
+
+}

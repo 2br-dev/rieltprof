@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<structure grid_system="bootstrap">
+  <page route_id="catalog-front-compare" context="theme" template="%THEME%/fullscreen.tpl" inherit="1"/>
+  <page route_id="catalog-front-listproducts" context="theme" template="" inherit="1">
+    <container columns="12" css_class="" title="Контент" is_fluid="1" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="12" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="sec sec-breadcrumb" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="0">
+            <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+          </block>
+        </section>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="1">
+        <section alias="" width_xs="12" width_sm="12" width="3" width_lg="3" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="catalog\controller\block\sidefilters" public="1" sortn="0">
+            <name><![CDATA[czo0MjoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVNpZGVGaWx0ZXJzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozMDoiYmxvY2tzL3NpZGVmaWx0ZXJzL2ZpbHRlcnMudHBsIjs=]]></indexTemplate>
+            <use_allowed_values><![CDATA[aToxOw==]]></use_allowed_values>
+            <show_cost_filter><![CDATA[aToxOw==]]></show_cost_filter>
+            <show_brand_filter><![CDATA[aToxOw==]]></show_brand_filter>
+            <show_only_public><![CDATA[aToxOw==]]></show_only_public>
+            <show_is_num><![CDATA[aToxOw==]]></show_is_num>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="12" width="9" width_lg="9" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+          <block module_controller="main\controller\block\maincontent" public="1" sortn="0"/>
+        </section>
+      </section>
+    </container>
+  </page>
+  <page route_id="catalog-front-product" context="theme" template="" inherit="1">
+    <container columns="12" css_class="" title="Контент" is_fluid="1" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="12" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="sec sec-breadcrumb" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="0">
+            <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+          </block>
+        </section>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="1">
+        <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="sec sec-page-product" is_clearfix_after="1" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\maincontent" public="1" sortn="1"/>
+        </section>
+        <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="1" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+          <block module_controller="catalog\controller\block\recommended" public="1" sortn="0">
+            <name><![CDATA[czo0MjoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVJlY29tbWVuZGVkLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozNDoiYmxvY2tzL3JlY29tbWVuZGVkL3JlY29tbWVuZGVkLnRwbCI7]]></indexTemplate>
+            <random><![CDATA[aTowOw==]]></random>
+            <in_stock><![CDATA[aTowOw==]]></in_stock>
+          </block>
+        </section>
+        <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="3">
+          <block module_controller="catalog\controller\block\lastviewed" public="1" sortn="0">
+            <name><![CDATA[czo0MToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUxhc3RWaWV3ZWQtaW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+            <pageSize><![CDATA[aToxNjs=]]></pageSize>
+          </block>
+        </section>
+      </section>
+    </container>
+  </page>
+  <page route_id="default" context="theme" template="" inherit="1">
+    <container columns="12" css_class="" title="Навигация" is_fluid="1" wrap_css_class="header-top navbar-theme" wrap_element="div" outside_template="" inside_template="" type="1">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="12" width_sm="6" width="6" width_lg="8" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="menu\controller\block\menu" public="1" sortn="0">
+            <name><![CDATA[czozMjoiTWVudS1Db250cm9sbGVyLUJsb2NrLU1lbnUtaW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czoyNDoiYmxvY2tzL21lbnUvaG9yX21lbnUudHBsIjs=]]></indexTemplate>
+            <root><![CDATA[czoxOiIwIjs=]]></root>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="6" width="6" width_lg="4" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="text-right" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1"/>
+      </section>
+    </container>
+    <container columns="12" css_class="" title="шапка" is_fluid="1" wrap_css_class="header-middle" wrap_element="div" outside_template="" inside_template="" type="2">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="2" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="visible-xs hidden" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\usertemplate" public="1" sortn="0">
+            <name><![CDATA[czo0MDoiTWFpbi1Db250cm9sbGVyLUJsb2NrLVVzZXJUZW1wbGF0ZS1pbmRleCI7]]></name>
+            <indexTemplate><![CDATA[czo1MzoiJVRIRU1FJS9oZWxwZXJzL3RwbC9oZWFkZXIvcmVzcG9uc2l2ZV9tZW51X2J1dHRvbi50cGwiOw==]]></indexTemplate>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="3" width="3" width_lg="2" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+          <block module_controller="main\controller\block\logo" public="1" sortn="0">
+            <name><![CDATA[czozMjoiTWFpbi1Db250cm9sbGVyLUJsb2NrLUxvZ28taW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czoyMDoiYmxvY2tzL2xvZ28vbG9nby50cGwiOw==]]></indexTemplate>
+            <width><![CDATA[aToxNTU7]]></width>
+            <height><![CDATA[aTo0Mjs=]]></height>
+            <link><![CDATA[czowOiIiOw==]]></link>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="6" width="6" width_lg="7" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="hidden-xs" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+          <block module_controller="catalog\controller\block\searchline" public="1" sortn="0">
+            <name><![CDATA[czo0MToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVNlYXJjaExpbmUtaW5kZXgiOw==]]></name>
+            <searchLimit><![CDATA[aTo1Ow==]]></searchLimit>
+            <hideAutoComplete><![CDATA[aTowOw==]]></hideAutoComplete>
+            <indexTemplate><![CDATA[czozMjoiYmxvY2tzL3NlYXJjaGxpbmUvc2VhcmNoZm9ybS50cGwiOw==]]></indexTemplate>
+            <imageWidth><![CDATA[aTo2Mjs=]]></imageWidth>
+            <imageHeight><![CDATA[aTo2Mjs=]]></imageHeight>
+            <imageResizeType><![CDATA[czoyOiJ4eSI7]]></imageResizeType>
+            <order_field><![CDATA[czo4OiJyZWxldmFudCI7]]></order_field>
+            <order_direction><![CDATA[czozOiJhc2MiOw==]]></order_direction>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="3" width="3" width_lg="3" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="%THEME%/helpers/layout/gridblock_wrapper.tpl" outside_template="" element_type="col" sortn="3">
+          <block module_controller="catalog\controller\block\favorite" public="1" sortn="2">
+            <name><![CDATA[czozOToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUZhdm9yaXRlLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czoyODoiYmxvY2tzL2Zhdm9yaXRlL2Zhdm9yaXRlLnRwbCI7]]></indexTemplate>
+          </block>
+          <block module_controller="catalog\controller\block\compare" public="1" sortn="3">
+            <name><![CDATA[czozODoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNvbXBhcmUtaW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+            <listTemplate><![CDATA[czowOiIiOw==]]></listTemplate>
+          </block>
+        </section>
+      </section>
+    </container>
+    <container columns="12" css_class="" title="Категории" is_fluid="1" wrap_css_class="navbar navbar-inverse hidden-xs" wrap_element="div" outside_template="" inside_template="" type="3">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="hidden-xs" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="catalog\controller\block\category" public="1" sortn="0">
+            <name><![CDATA[czozOToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNhdGVnb3J5LWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czoyODoiYmxvY2tzL2NhdGVnb3J5L2NhdGVnb3J5LnRwbCI7]]></indexTemplate>
+            <root><![CDATA[czoxOiIwIjs=]]></root>
+          </block>
+        </section>
+      </section>
+    </container>
+    <container columns="12" css_class="" title="Контент" is_fluid="1" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="12" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="sec sec-breadcrumb" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="0">
+            <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+          </block>
+        </section>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="1">
+        <section alias="" width_xs="12" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\maincontent" public="1" sortn="0"/>
+        </section>
+      </section>
+    </container>
+    <container columns="12" css_class="" title="Подвал" is_fluid="1" wrap_css_class="" wrap_element="footer" outside_template="" inside_template="" type="5">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="12" width_sm="3" width="3" width_lg="2" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="text-center" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\logo" public="1" sortn="0">
+            <name><![CDATA[czozMjoiTWFpbi1Db250cm9sbGVyLUJsb2NrLUxvZ28taW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czoyNzoiYmxvY2tzL2xvZ28vZm9vdGVyX2xvZ28udHBsIjs=]]></indexTemplate>
+            <width><![CDATA[aToxNTU7]]></width>
+            <height><![CDATA[aTo0Mjs=]]></height>
+            <link><![CDATA[czowOiIiOw==]]></link>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="3" width="2" width_lg="2" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+          <block module_controller="menu\controller\block\menu" public="1" sortn="0">
+            <name><![CDATA[czozMjoiTWVudS1Db250cm9sbGVyLUJsb2NrLU1lbnUtaW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czoyNzoiYmxvY2tzL21lbnUvZm9vdGVyX21lbnUudHBsIjs=]]></indexTemplate>
+            <root><![CDATA[czoxOiIwIjs=]]></root>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="6" width="3" width_lg="3" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+          <block module_controller="main\controller\block\usertemplate" public="1" sortn="0">
+            <name><![CDATA[czo0MDoiTWFpbi1Db250cm9sbGVyLUJsb2NrLVVzZXJUZW1wbGF0ZS1pbmRleCI7]]></name>
+            <indexTemplate><![CDATA[czozODoiJVRIRU1FJS9oZWxwZXJzL3RwbC9mb290ZXIvcGF5bWVudC50cGwiOw==]]></indexTemplate>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="6" width="2" width_lg="3" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="3">
+          <block module_controller="main\controller\block\usertemplate" public="1" sortn="0">
+            <name><![CDATA[czo0MDoiTWFpbi1Db250cm9sbGVyLUJsb2NrLVVzZXJUZW1wbGF0ZS1pbmRleCI7]]></name>
+            <indexTemplate><![CDATA[czozNzoiJVRIRU1FJS9oZWxwZXJzL3RwbC9mb290ZXIvcGhvbmVzLnRwbCI7]]></indexTemplate>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="6" width="2" width_lg="2" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="4">
+          <block module_controller="main\controller\block\usertemplate" public="1" sortn="0">
+            <name><![CDATA[czo0MDoiTWFpbi1Db250cm9sbGVyLUJsb2NrLVVzZXJUZW1wbGF0ZS1pbmRleCI7]]></name>
+            <indexTemplate><![CDATA[czozNzoiJVRIRU1FJS9oZWxwZXJzL3RwbC9mb290ZXIvc29jaWFsLnRwbCI7]]></indexTemplate>
+          </block>
+        </section>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="line-before" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="1">
+        <section alias="" width_xs="12" width_sm="8" width="9" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\usertemplate" public="1" sortn="0">
+            <name><![CDATA[czo0MDoiTWFpbi1Db250cm9sbGVyLUJsb2NrLVVzZXJUZW1wbGF0ZS1pbmRleCI7]]></name>
+            <indexTemplate><![CDATA[czo0MDoiJVRIRU1FJS9oZWxwZXJzL3RwbC9mb290ZXIvY29weXJpZ2h0LnRwbCI7]]></indexTemplate>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="4" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+          <block module_controller="main\controller\block\usertemplate" public="1" sortn="0">
+            <name><![CDATA[czo0MDoiTWFpbi1Db250cm9sbGVyLUJsb2NrLVVzZXJUZW1wbGF0ZS1pbmRleCI7]]></name>
+            <indexTemplate><![CDATA[czo0MToiJVRIRU1FJS9oZWxwZXJzL3RwbC9mb290ZXIvZGV2ZWxvcGVycy50cGwiOw==]]></indexTemplate>
+          </block>
+        </section>
+      </section>
+    </container>
+  </page>
+  <page route_id="main.index" context="theme" template="" inherit="1">
+    <container columns="12" css_class="" title="Контент" is_fluid="1" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="12" width_sm="" width="12" width_lg="6" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="banners\controller\block\slider" public="1" sortn="0">
+            <name><![CDATA[czozNzoiQmFubmVycy1Db250cm9sbGVyLUJsb2NrLVNsaWRlci1pbmRleCI7]]></name>
+            <indexTemplate><![CDATA[czoyNDoiYmxvY2tzL3NsaWRlci9zbGlkZXIudHBsIjs=]]></indexTemplate>
+            <zone><![CDATA[aToyOw==]]></zone>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="4" width="4" width_lg="3" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+          <block module_controller="catalog\controller\block\topcategories" public="1" sortn="0">
+            <name><![CDATA[czo0NDoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVRvcENhdGVnb3JpZXMtaW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czo3NjoidGhlbWU6ZmxhdGxpbmVzL21vZHVsZXZpZXcvY2F0YWxvZy9ibG9ja3MvdG9wY2F0ZWdvcmllcy90b3Bfb25lX2NhdGVnb3J5LnRwbCI7]]></indexTemplate>
+            <category_ids><![CDATA[YToxOntpOjA7czoxOiIxIjt9]]></category_ids>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="4" width="4" width_lg="3" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+          <block module_controller="catalog\controller\block\topcategories" public="1" sortn="0">
+            <name><![CDATA[czo0NDoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVRvcENhdGVnb3JpZXMtaW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czo3NjoidGhlbWU6ZmxhdGxpbmVzL21vZHVsZXZpZXcvY2F0YWxvZy9ibG9ja3MvdG9wY2F0ZWdvcmllcy90b3Bfb25lX2NhdGVnb3J5LnRwbCI7]]></indexTemplate>
+            <category_ids><![CDATA[YToxOntpOjA7czoyOiI0OSI7fQ==]]></category_ids>
+          </block>
+        </section>
+        <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="clearfix" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="3">
+          <block module_controller="catalog\controller\block\topcategories" public="1" sortn="1">
+            <name><![CDATA[czo0NDoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVRvcENhdGVnb3JpZXMtaW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+            <category_ids><![CDATA[YTo3OntpOjA7czoyOiIyMCI7aToxO3M6MjoiMTUiO2k6MjtzOjE6IjQiO2k6MztzOjI6IjE4IjtpOjQ7czoyOiIzMiI7aTo1O3M6MjoiNDMiO2k6NjtzOjI6IjQ0Ijt9]]></category_ids>
+          </block>
+        </section>
+        <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="clearfix" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="4">
+          <block module_controller="catalog\controller\block\topproducts" public="1" sortn="1">
+            <name><![CDATA[czo0MjoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVRvcFByb2R1Y3RzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozNToiYmxvY2tzL3RvcHByb2R1Y3RzL3RvcF9wcm9kdWN0cy50cGwiOw==]]></indexTemplate>
+            <pageSize><![CDATA[aTo0Ow==]]></pageSize>
+            <dirs><![CDATA[czoyOiIzMSI7]]></dirs>
+            <order><![CDATA[czoyOiJpZCI7]]></order>
+            <only_in_stock><![CDATA[aTowOw==]]></only_in_stock>
+          </block>
+          <block module_controller="banners\controller\block\bannerzone" public="1" sortn="2">
+            <name><![CDATA[czo0MToiQmFubmVycy1Db250cm9sbGVyLUJsb2NrLUJhbm5lclpvbmUtaW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czozMToiYmxvY2tzL2Jhbm5lcnpvbmUvbWFpbl96b25lLnRwbCI7]]></indexTemplate>
+            <zone><![CDATA[aTo0Ow==]]></zone>
+            <rotate><![CDATA[aTowOw==]]></rotate>
+          </block>
+          <block module_controller="catalog\controller\block\topproducts" public="1" sortn="2">
+            <name><![CDATA[czo0MjoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVRvcFByb2R1Y3RzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozNToiYmxvY2tzL3RvcHByb2R1Y3RzL3RvcF9wcm9kdWN0cy50cGwiOw==]]></indexTemplate>
+            <pageSize><![CDATA[aTo4Ow==]]></pageSize>
+            <dirs><![CDATA[czoyOiI0MiI7]]></dirs>
+            <order><![CDATA[czoyOiJpZCI7]]></order>
+            <only_in_stock><![CDATA[aTowOw==]]></only_in_stock>
+          </block>
+          <block module_controller="catalog\controller\block\lastviewed" public="1" sortn="3">
+            <name><![CDATA[czo0MToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUxhc3RWaWV3ZWQtaW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+            <pageSize><![CDATA[aToxNjs=]]></pageSize>
+          </block>
+          <block module_controller="article\controller\block\lastnews" public="1" sortn="4">
+            <name><![CDATA[czozOToiQXJ0aWNsZS1Db250cm9sbGVyLUJsb2NrLUxhc3ROZXdzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czoyODoiYmxvY2tzL2xhc3RuZXdzL2xhc3RuZXdzLnRwbCI7]]></indexTemplate>
+            <pageSize><![CDATA[aTo0Ow==]]></pageSize>
+            <order><![CDATA[czo3OiJpZCBERVNDIjs=]]></order>
+            <category><![CDATA[czoxOiIxIjs=]]></category>
+          </block>
+          <block module_controller="catalog\controller\block\brandlist" public="1" sortn="5">
+            <name><![CDATA[czo0MDoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUJyYW5kTGlzdC1pbmRleCI7]]></name>
+            <indexTemplate><![CDATA[czoyNDoiYmxvY2tzL2JyYW5kcy9icmFuZHMudHBsIjs=]]></indexTemplate>
+            <pageSize><![CDATA[aToyMDs=]]></pageSize>
+          </block>
+          <block module_controller="emailsubscribe\controller\block\subscribebutton" public="1" sortn="6">
+            <name><![CDATA[czo1MzoiRW1haWxTdWJzY3JpYmUtQ29udHJvbGxlci1CbG9jay1TdWJzY3JpYmVCdXR0b24taW5kZXgiOw==]]></name>
+            <indexTemplate><![CDATA[czoyNDoiYmxvY2tzL2J1dHRvbi9idXR0b24udHBsIjs=]]></indexTemplate>
+          </block>
+        </section>
+      </section>
+    </container>
+  </page>
+  <page route_id="users-front-auth" context="theme" template="" inherit="1">
+    <container columns="12" css_class="" title="Контент" is_fluid="1" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="12" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="sec sec-breadcrumb" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="0">
+            <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+          </block>
+        </section>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="1">
+        <section alias="" width_xs="12" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="%THEME%/helpers/layout/auth_wrapper.tpl" outside_template="" element_type="col" sortn="0">
+          <section alias="" width_xs="12" width_sm="" width="6" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+            <block module_controller="main\controller\block\maincontent" public="1" sortn="0"/>
+          </section>
+        </section>
+      </section>
+    </container>
+  </page>
+  <page route_id="users-front-profile" context="theme" template="" inherit="1">
+    <container columns="12" css_class="" title="Контент" is_fluid="1" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="12" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="sec sec-breadcrumb" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="0">
+            <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+          </block>
+        </section>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="1">
+        <section alias="" width_xs="12" width_sm="12" width="3" width_lg="3" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\usertemplate" public="1" sortn="0">
+            <name><![CDATA[czo0MDoiTWFpbi1Db250cm9sbGVyLUJsb2NrLVVzZXJUZW1wbGF0ZS1pbmRleCI7]]></name>
+            <indexTemplate><![CDATA[czo0MToiJVRIRU1FJS9oZWxwZXJzL3RwbC9hY2NvdW50L3NpZGVfbWVudS50cGwiOw==]]></indexTemplate>
+          </block>
+        </section>
+        <section alias="" width_xs="12" width_sm="12" width="9" width_lg="9" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+          <block module_controller="main\controller\block\maincontent" public="1" sortn="0"/>
+        </section>
+      </section>
+    </container>
+  </page>
+  <page route_id="users-front-register" context="theme" template="" inherit="1">
+    <container columns="12" css_class="" title="Контент" is_fluid="1" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="0">
+        <section alias="" width_xs="12" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="sec sec-breadcrumb" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+          <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="0">
+            <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+            <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+          </block>
+        </section>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="" width_lg="" inset_align="" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="row" sortn="1">
+        <section alias="" width_xs="12" width_sm="" width="" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="%THEME%/helpers/layout/register_wrapped.tpl" outside_template="" element_type="col" sortn="0">
+          <section alias="" width_xs="12" width_sm="" width="6" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+            <block module_controller="main\controller\block\maincontent" public="1" sortn="0"/>
+          </section>
+        </section>
+      </section>
+    </container>
+  </page>
+  <hooks>
+    <hook name="catalog-product:images"><![CDATA[testbuy]]></hook>
+    <hook name="catalog-product:images"><![CDATA[test]]></hook>
+    <hook name="catalog-product:rating"><![CDATA[custom]]></hook>
+    <hook name="catalog-product:rating"><![CDATA[demo]]></hook>
+  </hooks>
+</structure>

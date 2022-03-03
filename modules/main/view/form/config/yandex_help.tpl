@@ -1,0 +1,1 @@
+{t}Чтобы получить API ключи к сервисам Яндекса, перейдите по ссылке в{/t} <a href="https://developer.tech.yandex.ru/" target="_blank">{t}кабинет разработчика{/t}</a>

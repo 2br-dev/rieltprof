@@ -1,0 +1,13 @@
+body .noUi-handle:before,
+.sec-nav,
+.sec > .title,
+.sec-form,
+.paginator a.active,
+ul.pagination li.active a,
+.theme-btn_search {
+  background-color:$themeColor;
+}
+
+.t-pay-receipt:hover {
+  border-color: $themeColor;
+}

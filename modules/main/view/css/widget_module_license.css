@@ -1,0 +1,16 @@
+.module-license-total {
+    text-align: center;
+    border-top: 1px solid #ddd;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+.module-license-status-column {
+    display:flex;
+}
+
+.module-license-status-column .zmdi {
+    display:inline-block;
+    margin-top:4px;
+    margin-right:5px;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">CRM ReadyScript</name>
+        <description multilanguage="true">Модуль предоставляет возможность для фиксации взаимодействий с пользователями интернет-магазина.</description>
+        <version>4.0.32</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <widget_task_pagesize>15</widget_task_pagesize>
+        <expiration_task_notice_statuses type="array">
+            <value>0</value>
+        </expiration_task_notice_statuses>
+        <expiration_task_default_notice_time type="array">
+            <value>300</value>
+        </expiration_task_default_notice_time>
+        <tel_enable_call_notification>1</tel_enable_call_notification>
+        <tel_bottom_offset_px>0</tel_bottom_offset_px>
+        <implementer_user_groups type="array">
+            <value>supervisor</value>
+            <value>admins</value>
+        </implementer_user_groups>
+    </defaultValues>
+</config>

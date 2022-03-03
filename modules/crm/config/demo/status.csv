@@ -1,0 +1,10 @@
+"Тип объекта, к которому привязан статус";"Наименование статуса";"Англ. идентификатор";Цвет;Порядок
+crm-task;Новая;new;#cc4b83;1
+crm-task;Сделать;todo;#edaf3b;2
+crm-task;"В работе";in-work;#d1cd5a;3
+crm-task;"На проверке";review;#6fb3f2;4
+crm-task;Выполнена;complete;#28c950;5
+crm-deal;Новая;new;#c6d460;1
+crm-deal;"В работе";in-work;#4c4cf5;2
+crm-deal;"Успешно завершена";success;#3bc753;3
+crm-deal;Отменена;fail;#f21d1d;4

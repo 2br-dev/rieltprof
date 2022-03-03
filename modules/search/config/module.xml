@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Поиск</name>
+        <description multilanguage="true">Дополняет систему функциями поиска данных</description>
+        <version>3.0.9</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <search_service>\Search\Model\Engine\Mysql</search_service>
+        <search_type>like</search_type>
+        <search_type_likeplus_ignore_symbols>`~!@#$%^&amp;amp;*()-_=+\|[]{};:&amp;quot;',.&amp;lt;&amp;gt;/?№</search_type_likeplus_ignore_symbols>
+        <search_type_likeplus_spell_checker_enable>0</search_type_likeplus_spell_checker_enable>
+    </defaultValues>
+</config>

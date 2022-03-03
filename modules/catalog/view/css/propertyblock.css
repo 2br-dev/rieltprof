@@ -1,0 +1,26 @@
+.admin-style .pvl-item-color {
+    border:1px solid #aaa;
+    padding:1px;
+    display:inline-block;
+    width:16px;
+    height:16px;    
+    vertical-align: middle;
+    box-sizing:content-box;
+}
+
+.admin-style .pvl-item-inside {
+    box-sizing:content-box;
+    display:inline-block;
+    width:16px;
+    height:16px;
+}
+
+.admin-style .pvl-item-image {
+    box-sizing:content-box;
+    display:inline-block;
+    padding:1px;
+    line-height: 100%;
+    vertical-align: middle;
+    height:16px;
+    width:30px;
+}

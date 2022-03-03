@@ -1,0 +1,257 @@
+.photo_block .upload-block {
+    overflow: hidden;
+    margin-bottom:10px;
+}
+
+.admin-style .upload-block.can-delete .apply-offers-list,
+.admin-style .upload-block.can-delete .delete-list {
+    display:block;
+}
+
+.admin-style .upload-block.no-photos .check-all {
+    display: none;
+}
+
+.photo-list {
+    margin-top:11px;
+    padding:0;
+    list-style:none;
+}
+
+.photo-list .sortable-placeholder,
+.photo-list .photo-one {
+    width:142px;
+    height:226px;
+    margin-right:8px;
+    margin-bottom:21px;
+    float:left;
+}
+
+.photo-list.photo-list-product .photo-one {
+    height:254px;
+}
+
+.photo-list .sortable-placeholder {
+    border:1px dashed #D0D0D0;
+}
+
+.photo-list .photo-one .chk {
+    background: #e2e2e2;
+    text-align:center;
+    height:18px;
+    margin-bottom:1px;
+}
+
+.photo-list .photo-one .checked {
+    background: #3AABD1;
+}
+
+.photo-list .photo-one .image {
+    border:1px solid #e2e2e2;
+    height:148px;
+    overflow:hidden;
+    position:relative;    
+    background: white;
+}
+
+.photo-list .uploading  .chk {
+    background: #F4963C;
+}
+
+.photo-list .inqueue  .chk {
+    background: #333;
+}
+
+.photo-list .fail .chk {
+    background: #d13a3a;
+}
+
+.photo-list .photo-one .image .cancel,
+.photo-list .photo-one .image .delete {
+    position:absolute;
+    right:0;
+    top:0;
+    background: #ff5d37 url(../img/close.png) no-repeat center center;
+    width:22px;
+    height:22px;
+    display:none;
+}
+
+/*
+.photo-list .ui-sortable-helper .image {
+    order:1px dashed #687280;
+}
+*/
+
+.photo-list .over .image .cancel,
+.photo-list .over .image .delete {
+    display:block;
+}
+
+
+.photo-list .photo-one .image img {
+    vertical-align:bottom;
+}
+
+.photo-list .photo-one .image .wait {
+    height:32px;
+    background:url(../../../../resource/img/adminstyle/ajax-loader.gif) no-repeat center center;
+    padding:20px 0 0;
+}
+
+.photo-list .photo-one .image .action {
+    text-align:center;
+    padding-top:5px;
+    padding-bottom:15px;
+}
+
+.photo-list .fail .image .action {
+    padding-top:25px;
+}
+
+.photo-list .photo-one .image .filename {
+    font-size:12px;
+    text-align:center;
+}
+
+.photo-list .photo-one .title {
+    margin-top:1px;
+    position:relative;
+}
+
+.photo-list .photo-one .title .short {
+    height:22px;
+    line-height:22px;
+    border:1px solid #c0c0c0;
+    overflow:hidden;
+    padding:0 15px 0 7px;
+    cursor:pointer;
+    background: white;
+    font-size:11px;
+}
+
+.photo-list .photo-one .title .more {
+    position:absolute;
+    right:3px;
+    top:0;
+    line-height:22px;
+    height:22px;
+    color:#ACACAC;
+    z-index:11;
+}
+
+.photo-list .photo-one .title .progress {
+    height:22px;
+    line-height:22px;
+    border:1px solid #c0c0c0;
+    overflow:hidden;
+    background: white;    
+    position: relative;
+}
+
+.photo-list .photo-one .title .bar {
+    position:absolute;
+    height:22px;
+    background: #3AABD1;
+    z-index:5;
+}
+
+.photo-list .photo-one .title .percent {
+    position:absolute;
+    color: black;
+    height:22px;
+    width:100%;
+    text-align:center;
+    z-index:10;
+}
+
+.photo-list .photo-one .title .edit_title{
+    position:absolute;
+    top:0;
+    left:0;
+    margin:0;
+    border:1px solid #c0c0c0;
+    width:306px;
+    height:73px;
+    min-height:22px;
+    z-index:11;
+    display:none;
+    box-shadow:2px 2px 3px #ddd;
+    background: white;
+    box-sizing: content-box;
+}
+
+.photo-list .photo-one .bigview {
+    display:block;
+    text-align:center;
+}
+
+.photo-list .photo-one .move {
+    height:32px;
+    background: #e2e2e2;
+    display:block;
+    position:relative;
+    -moz-user-select: none; 
+    user-select: none;        
+}
+
+.photo-list .photo-one .move a {
+    margin-top:8px;
+}
+
+.photo-list .photo-one .ccw {
+    width:16px;
+    height:15px;
+    display:block;
+    margin-left:10px;
+    float:left;
+    background: url(../img/rotate_ccw.gif) no-repeat top left;
+}
+
+.photo-list .photo-one .cw {
+    width:16px;
+    height:15px;
+    display:block;
+    margin-right:10px;
+    float:right;
+    background: url(../img/rotate_cw.gif) no-repeat top left;
+}
+
+.photo-list .photo-one .ccw:hover,
+.photo-list .photo-one .cw:hover {
+    background-position: -15px 0;
+}
+
+
+.photo-list .photo-one .move .handle{
+    width:16px;
+    height:16px;
+    background: url(../img/drag_photo.gif) no-repeat top left;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-top:-8px;
+    margin-left:-8px;
+    cursor:move;
+}
+
+.photo-list .photo-one .complekts {
+    background-color: #e2e2e2;
+    text-align: center;
+    line-height: 26px;
+    cursor: pointer;
+    border-top:1px solid #c0c0c0;
+}
+
+.photo-list .photo-one .complekts:hover {
+    background-color:#bebebe;
+    color: white;
+}
+
+.photo-list .photo-one .move .handle:hover {
+    background-position:-16px 0;
+}
+
+.disable-sort .move .handle {
+    display:none;
+}

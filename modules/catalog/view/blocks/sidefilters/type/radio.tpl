@@ -1,0 +1,1 @@
+{include "%catalog%/blocks/sidefilters/type/list.tpl"}

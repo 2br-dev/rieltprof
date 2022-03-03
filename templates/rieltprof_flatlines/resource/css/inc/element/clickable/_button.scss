@@ -1,0 +1,57 @@
+@import "../../global/variable";
+
+// Buttons
+.theme-btn {
+  &_search {
+    background-color: $linkColor;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    color: #fff;
+    font-family: $themeFontNormal;
+    font-size: 16px;
+    padding: 8px 35px;
+    vertical-align:bottom;
+    height: 40px;
+    transition: ease-in-out 0.3s;
+    &:hover {
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+      color: #fff;
+      opacity: 0.85;
+      @include transform(scale(1.05));
+    }
+  }
+  &_subscribe {
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    color: #fff;
+    display: table;
+    font-family: $themeFontNormal;
+    font-size: 17px;
+    letter-spacing: -0.5px;
+    line-height: 30px;
+    margin: 0 auto;
+    padding: 0 40px;
+    transition: ease-in-out 0.3s;
+    &:hover {
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+      color: #fff;
+      opacity: 0.85;
+      @include transform(scale(1.05));
+    }
+  }
+  &_reset {
+    background-color: transparent;
+    border: none;
+    color: #cfcfcf;
+    cursor: pointer;
+    display: table;
+    font-family: $themeFontNormal;
+    font-size: 12px;
+    margin: 10px auto 15px;
+    img {
+      float: left;
+      margin: 0 5px;
+    }
+  }
+}

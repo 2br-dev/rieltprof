@@ -1,0 +1,59 @@
+@import "../global/variable";
+
+// Baner
+.banner {
+  height: 275px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  position: relative;
+  @include flexbox;
+  img {
+    position: absolute;
+  }
+  &_description {
+    background-color: rgba(0,174,217,0.75);
+    box-shadow: 0 0 50px 10px rgba(0,174,217,1);
+    border-radius: 10%;
+    padding: 15px 0;
+    height: 220px;
+    @include flexbox;
+    @include flex-wrap(wrap);
+    @include flex-direction(column);
+    @include justify-content(center);
+    @media (max-width:$xs-end) {
+      text-align: center;
+      margin: 0 auto 0;
+      * {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    @media (min-width:$sm-start) and (max-width:$md-end) {
+      text-align: center;
+      * {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    @media (min-width:$lg-start) {
+      .theme-btn_subscribe {
+        margin-left: 0;
+      }
+    }
+    h3 {
+      color: #fff;
+      font-family: $themeFontLight;
+      font-size: 28px;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+      @media (max-width:$md-end) {
+        font-size: 24px;
+      }
+    }
+    p {
+      color: #fff;
+      font-family: $themeFontLight;
+      letter-spacing: 1.1px;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">XML Sitemap</name>
+        <description multilanguage="true">Формирует XML с картой сайта для поисковых систем</description>
+        <version>3.0.7</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>        
+        
+        <lifetime>1440</lifetime>
+        <set_generate_time_as_lastdate>1</set_generate_time_as_lastdate>
+        <priority>0.5</priority>
+        <changefreq>disabled</changefreq>
+        <_before_form_template>%sitemap%/sitemap_url.tpl</_before_form_template>
+        <max_chunk_item_count>50000</max_chunk_item_count>
+        <make_gzip>0</make_gzip>
+    </defaultValues>
+</config>

@@ -1,0 +1,119 @@
+.admin-style .treeblock .label {
+    text-align:center;
+    font-size:14px;
+    padding-top:5px;
+    color: #5f8ab6;
+}
+
+.admin-style .treeblock .scroll {
+    overflow:auto;
+    height:400px;
+}
+
+.admin-style .wrap {
+    border:1px dotted #C0C0C0;
+    padding:1px;
+}
+
+.admin-style .overlay {
+    width:100%;
+    height:100%;
+    background:#fafafa;
+    z-index:1;
+    position:absolute;
+    opacity:.7;
+    filter:Alpha(Opacity=70);
+    display:none;
+}
+
+.admin-style .dialog-window .overlay {
+    background:white;
+}
+
+.admin-style .moduleWrapper {
+    position:relative;
+    zoom:1;
+}
+
+.admin-style .moduleRow {
+    display: flex;
+}
+
+.admin-style .moduleRow > * {
+    display: flex;
+    align-items: center;
+}
+
+.admin-style .stickyHead {
+    position: sticky;
+    top: 62px;
+    background: white;
+    height: 39px;
+    border-bottom: 1px solid #ececec;
+    display: table-cell;
+}
+
+.admin-style .access_branch {
+    list-style: none;
+    padding-left: 10px;
+    margin-left: 5px;
+}
+
+.admin-style ul.access_branch .access_branch {
+    border-left: 1px solid;
+}
+
+.admin-style .full_access_access_item {
+    width: 100%;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    margin-left: 5px;
+}
+.admin-style .access_item {
+    width: 100%;
+    padding-top:4px;
+    padding-bottom:4px;
+}
+
+.admin-style .access_oneGroup {
+    font-weight: 700;
+    padding-top: 10px;
+}
+
+.admin-style .access_oneRight:not(.moduleRow) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-style .access_radioBlock {
+    white-space: nowrap;
+}
+
+.admin-style .access_radio {
+    width: 75px;
+    font-size: 11px;
+    display: inline-block;
+    text-align: center;
+}
+
+.admin-style .column-module {
+    justify-content: center;
+    text-align: center;
+    width: 180px;
+    min-width: 180px;
+}
+
+.admin-style .column-name {
+    width: 300px;
+    min-width: 300px;
+}
+
+.admin-style .column-descr {
+    width: 100%;
+}
+
+.admin-style .column-access {
+    min-width: 400px;
+    max-width: 400px;
+}

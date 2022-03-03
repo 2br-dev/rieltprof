@@ -1,0 +1,1 @@
+{t url=$url->getDomainStr() order_num=$data->order.order_num}На сайте %url оплачен заказ "%order_num" на сумму{/t} {$data->order.totalcost|format_price}.

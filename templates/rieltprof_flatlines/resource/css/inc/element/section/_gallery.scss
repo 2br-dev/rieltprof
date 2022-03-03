@@ -1,0 +1,15 @@
+.sec-gallery {
+  background:#fff;
+  padding:25px;
+
+
+  .gallery {
+    padding:0;
+    list-style:none;
+    overflow:hidden;
+
+    li {
+      float:left;
+    }
+  }
+}

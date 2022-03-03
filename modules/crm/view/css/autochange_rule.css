@@ -1,0 +1,71 @@
+.autochange-rule {
+    border:1px solid #eee;
+    position:relative;
+}
+
+.autochange-rule .group {
+    margin:10px;
+    border:1px dashed #ddd;
+    padding:10px;
+}
+
+.autochange-group-tools {
+    background: #eee;
+    padding:10px;
+}
+
+.autochange-rule .one-group-tools {
+    padding-top:10px;
+}
+
+.autochange-rule .groups .group {
+    position:relative;
+}
+
+.autochange-rule .rule-remove,
+.autochange-rule .groups .group .group-remove {
+    color:red;
+    position:absolute;
+    right:10px;
+    top:0;
+    font-size:24px;
+}
+
+.autochange-rule .group-item:first-child .remove,
+.autochange-rule .group:first-child .group-remove {
+    display:none;
+}
+
+.autochange-rule .groups .group .group-remove:hover {
+    color:black;
+}
+
+.autochange-rule .groups .group:before {
+    content:'И';
+    position:absolute;
+    top:-10px;
+    left:3px;
+    background:white;
+    padding:0 7px;
+}
+
+.autochange-rule .groups .group:first-child:before {
+    display:none;
+}
+
+
+.autochange-rule .groups .group-item {
+    margin:5px 0;
+}
+
+.autochange-rule .groups .group-item:first-child .or-text {
+    visibility:hidden;
+}
+
+.autochange-rule .set-status-text {
+    padding:10px;
+}
+
+.autochange-rule {
+    margin:10px 0;
+}

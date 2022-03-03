@@ -1,0 +1,386 @@
+.admin-style .wtable .w-date {
+    text-align:right;
+    color:#999;
+    font-size:11px;
+}
+
+.admin-style .wtable .w-point {
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    display:inline-block;
+}
+
+.admin-style .wtable .w-list {
+    padding-left:15px;
+    margin:5px 0;
+}
+
+#widget-zone {
+    position:relative;
+    zoom:1;
+    font-size:0;
+    
+    display:flex;
+    justify-content: space-between;
+}
+
+.admin-style .widget-column {
+    display:none;
+    width:100%;
+}
+
+.admin-style .widget-ph {
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.admin-style .widget-filters {
+    padding-left:20px;
+    padding-right:20px;
+}
+
+#noWidgetText {
+    display:none;
+    color:#D0D0D0;
+    font-size:24px;
+    position:relative;
+    z-index:2;
+}
+
+#noWidgetText.visible {
+    display:block;
+}
+
+.admin-style .widget {
+    font-size:12px;    
+    background: #fff;
+    margin-bottom:10px;
+    border:1px solid #d3d3d3;
+    
+    -webkit-box-sizing:border-box;
+       -moz-box-sizing:border-box;
+            box-sizing:border-box;
+}
+
+.admin-style .widget:hover {
+    border-color:#fed42b;
+}
+
+.admin-style .widget .widget-head {
+    display:flex;
+    justify-content: space-between;
+}
+
+.admin-style .widget .widget-tools {
+    padding:23px 18px 23px 5px;
+    font-size:24px;
+    white-space:nowrap;
+}
+
+.admin-style .widget .widget-tools .widget-close:hover {
+    color:#d30000;
+}
+
+.admin-style .widget .widget-tools a {
+    color:#ccc;
+    margin-left:10px;
+}
+
+.admin-style .widget .widget-tools a:hover {
+    color:black;
+}
+
+#widget-zone .sortable-placeholder {
+    width:100% !important;
+    background:#fed42b url(../../../../resource/img/adminstyle/flatadmin/widget.svg) no-repeat center center;
+    position: relative;
+    display:inline-block;
+    margin-bottom:10px;
+    min-height:150px;
+}
+
+#widget-zone .sortable-placeholder:before {
+    content:'';
+    position:absolute;
+    border:2px dashed #000;
+    top:4px;
+    left:4px;
+    right:4px;
+    bottom:4px;
+}
+
+.admin-style .ui-sortable-placeholder {
+    border: 1px dashed #D0D0D0;
+    background: none;
+}
+
+.admin-style .widget .widget-title {
+    padding-left:5px;
+    font-size:20px;
+    color:black;
+    padding:23px 18px;
+}
+
+.admin-style .widget .widget-content {
+    min-height:100px;
+}
+
+/* Таблица */
+
+.admin-style .wtable {
+    border-collapse:collapse;
+    width:100%;
+}
+
+.admin-style .wtable.overable tr:hover td {
+    background:#fed42b;
+}
+
+.admin-style .wtable.overable-type2 tr td:first-child {
+    border-left:2px solid transparent;
+}
+
+.admin-style .wtable.overable-type2 tr td:last-child {
+    border-right:2px solid transparent;
+}
+
+.admin-style .wtable.overable-type2 tr:hover td:first-child,
+.admin-style .wtable.overable-type2 tr:hover td:last-child {
+    border-color:#fed42b;
+}
+
+.admin-style .wtable thead th{
+    padding:10px 4px;
+    font-weight:normal;
+    text-align: left;
+    font-size:12px;
+    border-bottom:1px solid #e5e5e5;
+}
+
+.admin-style .wtable .highlight td:first-child {
+    border-left:3px solid red;
+}
+
+.admin-style .wtable td {
+    padding:7px 4px;
+}
+
+.admin-style .wtable.mrg th:first-child,
+.admin-style .wtable.mrg td:first-child {
+    padding-left:20px;
+}
+
+.admin-style .wtable.mrg th:last-child,
+.admin-style .wtable.mrg td:last-child {
+    padding-right:20px;
+}
+
+.admin-style .wtable tr.clickable {
+    cursor:pointer;
+}
+
+/* Кнопки */
+
+.admin-style .widget-collection-block.empty .widget-collection-zone,
+.admin-style .widget-collection-block .rs-side-panel__empty {
+    display:none;
+}
+
+.admin-style .widget-collection-block.empty .rs-side-panel__empty {
+    display:block;
+}
+
+.admin-style .widget-collection .item {
+    border:1px solid #d3d3d3;
+    padding:24px 20px;
+    margin-bottom:6px;
+    cursor:pointer;
+}
+
+.admin-style .widget-collection .item:hover {
+    background-color:#fed42b;
+    border-color:#fed42b;
+}
+
+.admin-style .widget-collection .item .move-handle {
+    font-size:24px;
+    float:right;
+    cursor:move;
+    color:black;
+}
+
+.admin-style .widget-collection .item .add {
+    float:right;
+    font-size:24px;
+    color:black;
+    display:none;
+}
+
+.admin-style .widget-collection .item .item-description {
+    margin-bottom:5px;
+}
+
+.admin-style .widget-collection .item .item-module {
+    color:#999;
+}
+
+.admin-style .widget-collection .item .item-head .title {
+    color: black;
+    font-size: 20px;
+    padding-bottom:18px;
+}
+
+.admin-style .widget-collection .item .item-head {
+    position:relative;
+}
+
+.welcome-disk {
+    text-align: center;
+}
+
+.welcome-disk img {
+    max-width:100%;
+}
+
+#noWidgetText .text {
+    font-family: Arial Narrow,Arial;
+    font-stretch: ultra-condensed; 
+    font-size:80px;    
+    line-height:55px;
+    margin:50px 0 30px;
+    text-align: center;
+}
+
+#noWidgetText .text .small {
+    font-size:48px;
+}
+
+.admin-style .widget .empty-widget {
+    color: #808080;
+    text-align:center;
+    padding:30px 0;
+}
+
+.admin-style .widget-tabs {
+    list-style:none;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    border-bottom:2px solid #bee1ed;
+}
+
+.admin-style .widget-tabs li {
+    float:left;
+}
+
+.admin-style .widget-tabs li a {
+    padding:0 10px;
+    line-height:25px;
+    height:25px;
+    border:2px solid white;
+    border-bottom:none;
+    display:block;
+}
+
+.admin-style .widget-tabs li.act a{
+    border-color:#bee1ed;
+    border-bottom:none;    
+    font-weight:bold;
+}
+
+.admin-style .edit-mode .btn-alt.widget-change-position {
+    border-color:#2196f3;
+    background-color:#2196f3 !important;
+    color:white;
+}
+
+.admin-style .edit-mode .widget-change-position .change,
+.admin-style .widget-change-position .save {
+    display:none;
+}
+
+.admin-style .edit-mode .widget-change-position .save {
+    display:inline;
+}
+
+.empty #widget-zone,
+.rs-adding-widget .empty #noWidgetText {
+    display:none;
+}
+
+.empty #noWidgetText {
+    display:block;
+}
+
+#widgets-block .widget-change-position {
+    display:none;
+}
+
+.rs-adding-widget .empty #widget-zone {
+    display:flex;
+}
+
+@media (max-width: 1023px) {
+    #noWidgetText .text {
+        position:static;
+        text-align:center;
+        margin-bottom:50px;
+        font-size:65px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .admin-style .edit-mode .widget-content {
+        height:0;
+        min-height:0;
+        overflow:hidden;
+    }
+
+    .admin-style .widget-collection .item .add {
+        display:inline;
+    }
+
+    .admin-style .widget-collection .item .move-handle {
+        display:none;
+    }
+
+    #widget-zone .sortable-placeholder {
+        background-image:none;
+        min-height:0;
+    }
+
+    #widgets-block.cansort .widget-change-position {
+        display:block;
+    }
+}
+
+@media (min-width: 768px) {
+    #widget-zone {
+        min-height:calc(100vh - 250px);
+    }
+    .admin-style .widget-column {
+        width:49%;
+    }
+
+    .admin-style .widget .widget-title {
+        cursor:move;
+    }
+}
+
+@media (min-width: 1350px) {
+    .admin-style .widget-column {
+        width:33%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .admin-style .widget-column[data-column="1"],
+    .admin-style .widget-column[data-column="3"] {
+        width:27%;
+    }
+    .admin-style .widget-column[data-column="2"] {
+        width:44%;
+    }
+}

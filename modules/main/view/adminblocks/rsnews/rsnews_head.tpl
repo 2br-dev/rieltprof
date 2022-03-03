@@ -1,0 +1,1 @@
+<a class="rs-side-panel__head-link all-viewed {if !$unviewed}disabled{/if}"><i class="zmdi zmdi-check"></i> {t}Все прочитано{/t}</a>

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<structure grid_system="gs960">
+  <page route_id="article-front-previewlist" context="theme" template="" inherit="1">
+    <container columns="12" css_class="mainContent" title="контент" is_fluid="0" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="catalog\controller\block\category" public="1" sortn="0">
+          <name><![CDATA[czozOToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNhdGVnb3J5LWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czoyODoiYmxvY2tzL2NhdGVnb3J5L2NhdGVnb3J5LnRwbCI7]]></indexTemplate>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="9" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_fr" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+        <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="0">
+          <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+        </block>
+        <block module_controller="main\controller\block\maincontent" public="1" sortn="1"/>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_cleft" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+        <block module_controller="catalog\controller\block\compare" public="1" sortn="0">
+          <name><![CDATA[czozODoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNvbXBhcmUtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+          <listTemplate><![CDATA[czowOiIiOw==]]></listTemplate>
+        </block>
+        <block module_controller="catalog\controller\block\lastviewed" public="1" sortn="1">
+          <name><![CDATA[czo0MToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUxhc3RWaWV3ZWQtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czozMDoiYmxvY2tzL2xhc3R2aWV3ZWQvcHJvZHVjdHMudHBsIjs=]]></indexTemplate>
+        </block>
+        <block module_controller="catalog\controller\block\brandlist" public="1" sortn="2">
+          <name><![CDATA[czo0MDoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUJyYW5kTGlzdC1pbmRleCI7]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+          <pageSize><![CDATA[aTowOw==]]></pageSize>
+        </block>
+      </section>
+    </container>
+  </page>
+  <page route_id="catalog-front-compare" context="theme" template="%THEME%/fullscreen.tpl" inherit="1"/>
+  <page route_id="catalog-front-listproducts" context="theme" template="" inherit="1">
+    <container columns="12" css_class="" title="контент &quot;список товаров&quot;" is_fluid="0" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="9" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_fr" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="1">
+          <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+        <block module_controller="catalog\controller\block\category" public="1" sortn="0">
+          <name><![CDATA[czozOToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNhdGVnb3J5LWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czozNzoiYmxvY2tzL2NhdGVnb3J5L2NvbGxhcHNlX2NhdGVnb3J5LnRwbCI7]]></indexTemplate>
+        </block>
+        <block module_controller="catalog\controller\block\sidefilters" public="1" sortn="1">
+          <name><![CDATA[czo0MjoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVNpZGVGaWx0ZXJzLWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czozMDoiYmxvY2tzL3NpZGVmaWx0ZXJzL2ZpbHRlcnMudHBsIjs=]]></indexTemplate>
+          <show_cost_filter><![CDATA[aToxOw==]]></show_cost_filter>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="9" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_fr" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+        <block module_controller="main\controller\block\maincontent" public="1" sortn="0"/>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_cleft" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="3">
+        <block module_controller="catalog\controller\block\compare" public="1" sortn="0">
+          <name><![CDATA[czozODoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNvbXBhcmUtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+        </block>
+        <block module_controller="catalog\controller\block\lastviewed" public="1" sortn="1"/>
+        <block module_controller="article\controller\block\lastnews" public="1" sortn="2">
+          <category><![CDATA[czoxOiIxIjs=]]></category>
+          <pageSize><![CDATA[aTo1Ow==]]></pageSize>
+        </block>
+      </section>
+    </container>
+  </page>
+  <page route_id="catalog-front-product" context="theme" template="" inherit="1">
+    <container columns="12" css_class="mainContent" title="контент" is_fluid="0" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="catalog\controller\block\category" public="1" sortn="0">
+          <name><![CDATA[czozOToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNhdGVnb3J5LWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czoyODoiYmxvY2tzL2NhdGVnb3J5L2NhdGVnb3J5LnRwbCI7]]></indexTemplate>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="9" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_fr" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+        <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="0">
+          <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+        </block>
+        <block module_controller="main\controller\block\maincontent" public="1" sortn="1"/>
+        <block module_controller="catalog\controller\block\recommended" public="1" sortn="2">
+          <name><![CDATA[czo0MjoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVJlY29tbWVuZGVkLWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czozNDoiYmxvY2tzL3JlY29tbWVuZGVkL3JlY29tbWVuZGVkLnRwbCI7]]></indexTemplate>
+        </block>
+        <block module_controller="comments\controller\block\comments" public="1" sortn="3">
+          <name><![CDATA[czo0MDoiQ29tbWVudHMtQ29udHJvbGxlci1CbG9jay1Db21tZW50cy1pbmRleCI7]]></name>
+          <indexTemplate><![CDATA[czozMzoiYmxvY2tzL2NvbW1lbnRzL2NvbW1lbnRfYmxvY2sudHBsIjs=]]></indexTemplate>
+          <type><![CDATA[czozNDoiXGNhdGFsb2dcbW9kZWxcY29tbWVudHR5cGVccHJvZHVjdCI7]]></type>
+          <pageSize><![CDATA[aToxMDs=]]></pageSize>
+          <listTemplate><![CDATA[czowOiIiOw==]]></listTemplate>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_cleft" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+        <block module_controller="catalog\controller\block\compare" public="1" sortn="0">
+          <name><![CDATA[czozODoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNvbXBhcmUtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+        </block>
+        <block module_controller="catalog\controller\block\lastviewed" public="1" sortn="1">
+          <name><![CDATA[czo0MToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUxhc3RWaWV3ZWQtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czozMDoiYmxvY2tzL2xhc3R2aWV3ZWQvcHJvZHVjdHMudHBsIjs=]]></indexTemplate>
+        </block>
+        <block module_controller="article\controller\block\lastnews" public="1" sortn="2">
+          <category><![CDATA[czoxOiIxIjs=]]></category>
+          <pageSize><![CDATA[aTo1Ow==]]></pageSize>
+        </block>
+        <block module_controller="catalog\controller\block\brandlist" public="1" sortn="3">
+          <name><![CDATA[czo0MDoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUJyYW5kTGlzdC1pbmRleCI7]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+          <pageSize><![CDATA[aTowOw==]]></pageSize>
+        </block>
+      </section>
+    </container>
+  </page>
+  <page route_id="default" context="theme" template="" inherit="1">
+    <container columns="12" css_class="" title="навигация" is_fluid="0" wrap_css_class="navContainer" wrap_element="div" outside_template="" inside_template="" type="1">
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0"/>
+      <section alias="" width_xs="" width_sm="" width="9" width_lg="" inset_align="right" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="topNav" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+        <block module_controller="menu\controller\block\menu" public="1" sortn="0">
+          <name><![CDATA[czozMjoiTWVudS1Db250cm9sbGVyLUJsb2NrLU1lbnUtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czoyNDoiYmxvY2tzL21lbnUvaG9yX21lbnUudHBsIjs=]]></indexTemplate>
+          <root><![CDATA[aTowOw==]]></root>
+        </block>
+      </section>
+    </container>
+    <container columns="12" css_class="" title="шапка" is_fluid="0" wrap_css_class="headerContainer" wrap_element="header" outside_template="" inside_template="" type="2">
+      <section alias="" width_xs="" width_sm="" width="4" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="main\controller\block\logo" public="1" sortn="0">
+          <name><![CDATA[czozMjoiTWFpbi1Db250cm9sbGVyLUJsb2NrLUxvZ28taW5kZXgiOw==]]></name>
+          <link><![CDATA[czowOiIiOw==]]></link>
+          <indexTemplate><![CDATA[czoyMDoiYmxvY2tzL2xvZ28vbG9nby50cGwiOw==]]></indexTemplate>
+          <width><![CDATA[aToyMDY7]]></width>
+          <height><![CDATA[aTo0Njs=]]></height>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="1" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="" pull_lg="" push_xs="" push_sm="" push="" push_lg="" css_class="favBlock" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+        <block module_controller="catalog\controller\block\favorite" public="1" sortn="0">
+          <name><![CDATA[czozOToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUZhdm9yaXRlLWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+        </block>
+        <block module_controller="catalog\controller\block\compare" public="1" sortn="1">
+          <name><![CDATA[czozODoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNvbXBhcmUtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czozNzoiJWNhdGFsb2clL2Jsb2Nrcy9jb21wYXJlL3RvcGJsb2NrLnRwbCI7]]></indexTemplate>
+          <listTemplate><![CDATA[czowOiIiOw==]]></listTemplate>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="authBlock" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+        <block module_controller="users\controller\block\authblock" public="1" sortn="0">
+          <name><![CDATA[czozODoiVXNlcnMtQ29udHJvbGxlci1CbG9jay1BdXRoQmxvY2staW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="4" width_lg="" inset_align="right" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="basketZone" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="3">
+        <block module_controller="shop\controller\block\cart" public="1" sortn="0">
+          <name><![CDATA[czozMjoiU2hvcC1Db250cm9sbGVyLUJsb2NrLUNhcnQtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+        </block>
+      </section>
+    </container>
+    <container columns="12" css_class="" title="поиск" is_fluid="0" wrap_css_class="searchContainer" wrap_element="div" outside_template="" inside_template="" type="3">
+      <section alias="" width_xs="" width_sm="" width="12" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="catalog\controller\block\searchline" public="1" sortn="0">
+          <name><![CDATA[czo0MToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLVNlYXJjaExpbmUtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czozMjoiYmxvY2tzL3NlYXJjaGxpbmUvc2VhcmNoZm9ybS50cGwiOw==]]></indexTemplate>
+        </block>
+      </section>
+    </container>
+    <container columns="12" css_class="mainContent" title="контент" is_fluid="0" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="catalog\controller\block\category" public="1" sortn="0">
+          <name><![CDATA[czozOToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNhdGVnb3J5LWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czoyODoiYmxvY2tzL2NhdGVnb3J5L2NhdGVnb3J5LnRwbCI7]]></indexTemplate>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="9" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_fr" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+        <block module_controller="main\controller\block\breadcrumbs" public="1" sortn="0">
+          <name><![CDATA[czozOToiTWFpbi1Db250cm9sbGVyLUJsb2NrLUJyZWFkQ3J1bWJzLWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czozNDoiYmxvY2tzL2JyZWFkY3J1bWJzL2JyZWFkY3J1bWJzLnRwbCI7]]></indexTemplate>
+        </block>
+        <block module_controller="main\controller\block\maincontent" public="1" sortn="1"/>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_cleft" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+        <block module_controller="catalog\controller\block\compare" public="1" sortn="0">
+          <name><![CDATA[czozODoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNvbXBhcmUtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+          <listTemplate><![CDATA[czowOiIiOw==]]></listTemplate>
+        </block>
+        <block module_controller="catalog\controller\block\lastviewed" public="1" sortn="1">
+          <name><![CDATA[czo0MToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUxhc3RWaWV3ZWQtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+          <pageSize><![CDATA[aToxNjs=]]></pageSize>
+        </block>
+        <block module_controller="article\controller\block\lastnews" public="1" sortn="2">
+          <category><![CDATA[czoxOiIxIjs=]]></category>
+          <pageSize><![CDATA[aTo1Ow==]]></pageSize>
+        </block>
+      </section>
+    </container>
+    <container columns="12" css_class="" title="подвал" is_fluid="0" wrap_css_class="" wrap_element="footer" outside_template="" inside_template="" type="5">
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="bottomLogoSection" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="main\controller\block\logo" public="1" sortn="0">
+          <name><![CDATA[czozMjoiTWFpbi1Db250cm9sbGVyLUJsb2NrLUxvZ28taW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czoyNToiYmxvY2tzL2xvZ28vZm9vdF9sb2dvLnRwbCI7]]></indexTemplate>
+          <link><![CDATA[czowOiIiOw==]]></link>
+          <width><![CDATA[aToxNTg7]]></width>
+          <height><![CDATA[aTo0MDs=]]></height>
+        </block>
+      </section>
+      <section alias="footmenu" width_xs="" width_sm="" width="2" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="bottomMenuSection" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+        <block module_controller="menu\controller\block\menu" public="1" sortn="0">
+          <indexTemplate><![CDATA[czoyNToiYmxvY2tzL21lbnUvZm9vdF9tZW51LnRwbCI7]]></indexTemplate>
+          <root><![CDATA[czoxOiI1Ijs=]]></root>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="4" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+        <block module_controller="catalog\controller\block\category" public="1" sortn="0">
+          <name><![CDATA[czozOToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNhdGVnb3J5LWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czozMzoiYmxvY2tzL2NhdGVnb3J5L2Zvb3RfY2F0ZWdvcnkudHBsIjs=]]></indexTemplate>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="3">
+        <block module_controller="feedback\controller\block\button" public="1" sortn="0">
+          <form_id><![CDATA[czoxOiIxIjs=]]></form_id>
+        </block>
+        <block module_controller="main\controller\block\usertemplate" public="1" sortn="1">
+          <name><![CDATA[czo0MDoiTWFpbi1Db250cm9sbGVyLUJsb2NrLVVzZXJUZW1wbGF0ZS1pbmRleCI7]]></name>
+          <indexTemplate><![CDATA[czoxODoiJVRIRU1FJS9zb2NpYWwudHBsIjs=]]></indexTemplate>
+        </block>
+      </section>
+    </container>
+  </page>
+  <page route_id="main.index" context="theme" template="" inherit="1">
+    <container columns="12" css_class="mainContent" title="контент" is_fluid="0" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="4">
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="catalog\controller\block\category" public="1" sortn="0">
+          <name><![CDATA[czozOToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNhdGVnb3J5LWluZGV4Ijs=]]></name>
+          <indexTemplate><![CDATA[czoyODoiYmxvY2tzL2NhdGVnb3J5L2NhdGVnb3J5LnRwbCI7]]></indexTemplate>
+          <root><![CDATA[czoxOiIwIjs=]]></root>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="9" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_fr" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+        <block module_controller="catalog\controller\block\bannerview" public="1" sortn="1">
+          <categories><![CDATA[YToyOntpOjA7czoyOiI0MSI7aToxO2I6MDt9]]></categories>
+        </block>
+        <block module_controller="catalog\controller\block\topproducts" public="1" sortn="2">
+          <dirs><![CDATA[czoxOiIxIjs=]]></dirs>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="3" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="grid_cleft" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="2">
+        <block module_controller="catalog\controller\block\compare" public="1" sortn="0">
+          <name><![CDATA[czozODoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUNvbXBhcmUtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+          <listTemplate><![CDATA[czowOiIiOw==]]></listTemplate>
+        </block>
+        <block module_controller="article\controller\block\lastnews" public="1" sortn="1">
+          <category><![CDATA[czoxOiIxIjs=]]></category>
+          <pageSize><![CDATA[aTo1Ow==]]></pageSize>
+        </block>
+        <block module_controller="catalog\controller\block\lastviewed" public="1" sortn="2">
+          <name><![CDATA[czo0MToiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUxhc3RWaWV3ZWQtaW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czozMDoiYmxvY2tzL2xhc3R2aWV3ZWQvcHJvZHVjdHMudHBsIjs=]]></indexTemplate>
+        </block>
+        <block module_controller="banners\controller\block\bannerzone" public="1" sortn="3">
+          <zone><![CDATA[czoxOiIxIjs=]]></zone>
+          <rotate><![CDATA[aToxOw==]]></rotate>
+        </block>
+        <block module_controller="catalog\controller\block\brandlist" public="1" sortn="4">
+          <name><![CDATA[czo0MDoiQ2F0YWxvZy1Db250cm9sbGVyLUJsb2NrLUJyYW5kTGlzdC1pbmRleCI7]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+          <pageSize><![CDATA[aTowOw==]]></pageSize>
+        </block>
+      </section>
+    </container>
+  </page>
+  <page route_id="shop-front-checkout" context="theme" template="" inherit="0">
+    <container columns="12" css_class="" title="Шапка" is_fluid="0" wrap_css_class="headerContainer headerCheckout" wrap_element="header" outside_template="" inside_template="" type="1">
+      <section alias="" width_xs="" width_sm="" width="4" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="centerLogo" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="main\controller\block\logo" public="1" sortn="0">
+          <name><![CDATA[czozMjoiTWFpbi1Db250cm9sbGVyLUJsb2NrLUxvZ28taW5kZXgiOw==]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+          <link><![CDATA[czowOiIiOw==]]></link>
+          <width><![CDATA[aToyMDY7]]></width>
+          <height><![CDATA[aTo0Njs=]]></height>
+        </block>
+      </section>
+      <section alias="" width_xs="" width_sm="" width="8" width_lg="" inset_align="right" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="1">
+        <block module_controller="shop\controller\block\checkoutstep" public="1" sortn="0">
+          <name><![CDATA[czo0MDoiU2hvcC1Db250cm9sbGVyLUJsb2NrLUNoZWNrb3V0U3RlcC1pbmRleCI7]]></name>
+          <indexTemplate><![CDATA[czowOiIiOw==]]></indexTemplate>
+        </block>
+      </section>
+    </container>
+    <container columns="12" css_class="" title="контент" is_fluid="0" wrap_css_class="" wrap_element="" outside_template="" inside_template="" type="2">
+      <section alias="" width_xs="" width_sm="" width="12" width_lg="" inset_align="wide" prefix_xs="" prefix_sm="" prefix="0" prefix_lg="" suffix="0" pull_xs="" pull_sm="" pull="0" pull_lg="" push_xs="" push_sm="" push="0" push_lg="" css_class="" is_clearfix_after="0" clearfix_after_css="" inset_template="" outside_template="" element_type="col" sortn="0">
+        <block module_controller="main\controller\block\maincontent" public="1" sortn="0"/>
+      </section>
+    </container>
+  </page>
+</structure>

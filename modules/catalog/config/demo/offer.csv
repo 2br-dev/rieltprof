@@ -1,0 +1,109 @@
+Название;Артикул;"Остаток по складу ""Основной склад""";"Порядковый номер";"Идентификатор товара в системе 1C";Товар;"Характеристики комплектации";Цена_Розничная;Цена_Розничная_Валюта;"Цена_Зачеркнутая цена";"Цена_Зачеркнутая цена_Валюта"
+16GB;;10;0;;"Планшет Archos A9 PCtablet";"Встроенная память:16 GB";;;;
+32GB;Archos32GB;12;1;;"Планшет Archos A9 PCtablet";"Встроенная память:32GB";(+)1000;RUB;(+)1000;RUB
+64GB;Archos64GB;5;2;;"Планшет Archos A9 PCtablet";"Встроенная память:64GB";(+)1500;RUB;(+)1500;RUB
+16GB;;12;0;;"Планшет HTC Flyer 32GB + 3G";;;;;
+18GB;18GB;20;1;;"Планшет HTC Flyer 32GB + 3G";;(+)500;RUB;(+)500;RUB
+16GB;;30;0;;"HTC A6380 Gratia White";;;;;
+32GB;A638032GB;18;1;;"HTC A6380 Gratia White";;(+)1200;RUB;(+)1200;RUB
+64GB;A638064GB;20;2;;"HTC A6380 Gratia White";;(+)3400;RUB;(+)3400;RUB
+L;LO790EWBCK91-L;0;3;;"Платье Love &amp; Light";;(+)0;RUB;(+)0;RUB
+M;LO790EWBCK91-M;0;2;;"Платье Love &amp; Light";;(+)0;RUB;(+)0;RUB
+S;LO790EWBCK91-S;0;1;;"Платье Love &amp; Light";;(+)0;RUB;(+)0;RUB
+XL;LO790EWBCK91-XL;0;4;;"Платье Love &amp; Light";;(+)0;RUB;(+)0;RUB
+XS;;0;0;;"Платье Love &amp; Light";;;;;
+42;;0;0;;"Платье Savage";;;;;
+44;SA004EWANW76-1;0;1;;"Платье Savage";;(+)0;RUB;(+)0;RUB
+46;SA004EWANW76-2;0;2;;"Платье Savage";;(+)0;RUB;(+)0;RUB
+48;SA004EWANW76-3;0;3;;"Платье Savage";;(+)0;RUB;(+)0;RUB
+50;SA004EWANW76-4;0;4;;"Платье Savage";;(+)0;RUB;(+)0;RUB
+42;;15;0;;"Платье Mango";;;;;
+42/44;MA002EWLW396-1;15;1;;"Платье Mango";;(+)0;RUB;(+)0;RUB
+44/46;MA002EWLW396-2;15;2;;"Платье Mango";;(+)0;RUB;(+)0;RUB
+48;MA002EWLW396-3;15;3;;"Платье Mango";;(+)0;RUB;(+)0;RUB
+50/52;MA002EWLW396-4;15;4;;"Платье Mango";;(+)0;RUB;(+)0;RUB
+42;;15;0;;"Сарафан Sinequanone";;;;;
+44;SI954EWBDB89-1;15;1;;"Сарафан Sinequanone";;(+)0;RUB;(+)0;RUB
+46;SI954EWBDB89-2;15;2;;"Сарафан Sinequanone";;(+)0;RUB;(+)0;RUB
+48;SI954EWBDB89-3;15;3;;"Сарафан Sinequanone";;(+)0;RUB;(+)0;RUB
+50;SI954EWBDB89-4;15;4;;"Сарафан Sinequanone";;(+)0;RUB;(+)0;RUB
+40;;15;0;;"Блуза Incity";;;;;
+42;IN002EWBQH65-1;15;1;;"Блуза Incity";;(+)0;RUB;(+)0;RUB
+44;IN002EWBQH65-2;15;2;;"Блуза Incity";;(+)0;RUB;(+)0;RUB
+46;IN002EWBQH65-3;15;3;;"Блуза Incity";;(+)0;RUB;(+)0;RUB
+48;IN002EWBQH65-4;15;4;;"Блуза Incity";;(+)0;RUB;(+)0;RUB
+42;;15;0;;"Блуза Sela";;;;;
+44;SE001EWAEW32-1;15;1;;"Блуза Sela";;(+)0;RUB;(+)0;RUB
+46;SE001EWAEW32-2;15;2;;"Блуза Sela";;(+)0;RUB;(+)0;RUB
+48;SE001EWAEW32-3;15;3;;"Блуза Sela";;(+)0;RUB;(+)0;RUB
+50;SE001EWAEW32-4;15;4;;"Блуза Sela";;(+)0;RUB;(+)0;RUB
+52;SE001EWAEW32-5;15;5;;"Блуза Sela";;(+)0;RUB;(+)0;RUB
+42;;15;0;;"Рубашка Insect Blocker";;;;;
+42/44;CO214EWBCC77-1;15;1;;"Рубашка Insect Blocker";;(+)0;RUB;(+)0;RUB
+44/46;CO214EWBCC77-2;15;2;;"Рубашка Insect Blocker";;(+)0;RUB;(+)0;RUB
+48;CO214EWBCC77-3;15;3;;"Рубашка Insect Blocker";;(+)0;RUB;(+)0;RUB
+42;;15;0;;"Джемпер Savage";;;;;
+44;SA004EWANW98-1;15;1;;"Джемпер Savage";;(+)0;RUB;(+)0;RUB
+46;SA004EWANW98-2;15;2;;"Джемпер Savage";;(+)0;RUB;(+)0;RUB
+48;SA004EWANW98-3;15;3;;"Джемпер Savage";;(+)0;RUB;(+)0;RUB
+50;SA004EWANW98-4;15;4;;"Джемпер Savage";;(+)0;RUB;(+)0;RUB
+52;SA004EWANW98-5;15;5;;"Джемпер Savage";;(+)0;RUB;(+)0;RUB
+42;;15;0;;"Куртка джинсовая Sela";;;;;
+44;SE001EWAEW18-1;15;1;;"Куртка джинсовая Sela";;(+)0;RUB;(+)0;RUB
+46;SE001EWAEW18-2;15;2;;"Куртка джинсовая Sela";;(+)0;RUB;(+)0;RUB
+48;SE001EWAEW18-3;15;3;;"Куртка джинсовая Sela";;(+)0;RUB;(+)0;RUB
+50;SE001EWAEW18-4;15;4;;"Куртка джинсовая Sela";;(+)0;RUB;(+)0;RUB
+42;;15;0;;"Куртка кожаная Camelot";;;;;
+42/44;CA011EWALS32-1;15;1;;"Куртка кожаная Camelot";;(+)0;RUB;(+)0;RUB
+44/46;CA011EWALS32-2;15;2;;"Куртка кожаная Camelot";;(+)0;RUB;(+)0;RUB
+48;CA011EWALS32-3;15;3;;"Куртка кожаная Camelot";;(+)0;RUB;(+)0;RUB
+40;;15;0;;"Юбка Sinequanone";;;;;
+42;SI954EWBDA89-1;15;1;;"Юбка Sinequanone";;(+)0;RUB;(+)0;RUB
+44;SI954EWBDA89-2;15;2;;"Юбка Sinequanone";;(+)0;RUB;(+)0;RUB
+46;SI954EWBDA89-3;15;3;;"Юбка Sinequanone";;(+)0;RUB;(+)0;RUB
+48;SI954EWBDA89-4;15;4;;"Юбка Sinequanone";;(+)0;RUB;(+)0;RUB
+38;;15;0;;"Худи Sela";;;;;
+42;SE001EWAEW87-1;15;1;;"Худи Sela";;(+)0;RUB;(+)0;RUB
+42/44;SE001EWAEW87-2;15;2;;"Худи Sela";;(+)0;RUB;(+)0;RUB
+44/46;SE001EWAEW87-3;15;3;;"Худи Sela";;(+)0;RUB;(+)0;RUB
+48;SE001EWAEW87-4;15;4;;"Худи Sela";;(+)0;RUB;(+)0;RUB
+39;400742BL40-0;15;0;;"Роликовые коньки мужские Roces Gymnasium";;;;;
+40;400742BL40-1;15;1;;"Роликовые коньки мужские Roces Gymnasium";;(+)0;RUB;(+)0;RUB
+41;400742BL40-2;15;2;;"Роликовые коньки мужские Roces Gymnasium";;(+)0;RUB;(+)0;RUB
+43;400742BL40-3;15;3;;"Роликовые коньки мужские Roces Gymnasium";;(+)0;RUB;(+)0;RUB
+43.5;400742BL40-4;15;4;;"Роликовые коньки мужские Roces Gymnasium";;(+)0;RUB;(+)0;RUB
+44;400742BL40-5;15;5;;"Роликовые коньки мужские Roces Gymnasium";;(+)0;RUB;(+)0;RUB
+45;400742BL40-6;15;6;;"Роликовые коньки мужские Roces Gymnasium";;(+)0;RUB;(+)0;RUB
+36;ALI-W-36-0;15;0;;"Коньки фигурные Nordway Alice";;;;;
+37;ALI-W-36-1;15;1;;"Коньки фигурные Nordway Alice";;(+)0;RUB;(+)0;RUB
+38;ALI-W-36-2;15;2;;"Коньки фигурные Nordway Alice";;(+)0;RUB;(+)0;RUB
+39;ALI-W-36-3;15;3;;"Коньки фигурные Nordway Alice";;(+)0;RUB;(+)0;RUB
+40;ALI-W-36-4;15;4;;"Коньки фигурные Nordway Alice";;(+)0;RUB;(+)0;RUB
+41;ALI-W-36-5;15;5;;"Коньки фигурные Nordway Alice";;(+)0;RUB;(+)0;RUB
+42;ALI-W-36-6;15;6;;"Коньки фигурные Nordway Alice";;(+)0;RUB;(+)0;RUB
+140;DIAMOND140-0;15;0;;"Сноуборд Bone Diamond";;;;;
+145;DIAMOND140-1;15;1;;"Сноуборд Bone Diamond";;(+)0;RUB;(+)0;RUB
+150;DIAMOND140-2;15;2;;"Сноуборд Bone Diamond";;(+)0;RUB;(+)0;RUB
+155;DIAMOND140-3;15;3;;"Сноуборд Bone Diamond";;(+)0;RUB;(+)0;RUB
+160;DIAMOND140-4;15;4;;"Сноуборд Bone Diamond";;(+)0;RUB;(+)0;RUB
+35;AN003AWBAO57-0;15;0;;"Босоножки Antonio Biaggi";;;;;
+36;AN003AWBAO57-1;15;1;;"Босоножки Antonio Biaggi";;(+)0;RUB;(+)0;RUB
+37;AN003AWBAO57-2;15;2;;"Босоножки Antonio Biaggi";;(+)0;RUB;(+)0;RUB
+38;AN003AWBAO57-3;15;3;;"Босоножки Antonio Biaggi";;(+)0;RUB;(+)0;RUB
+39;AN003AWBAO57-4;15;4;;"Босоножки Antonio Biaggi";;(+)0;RUB;(+)0;RUB
+36;GR025AWAPS42-0;15;0;;"Босоножки Grand Style";;;;;
+37;GR025AWAPS42-1;15;1;;"Босоножки Grand Style";;(+)0;RUB;(+)0;RUB
+38;GR025AWAPS42-2;15;2;;"Босоножки Grand Style";;(+)0;RUB;(+)0;RUB
+39;GR025AWAPS42-3;15;3;;"Босоножки Grand Style";;(+)0;RUB;(+)0;RUB
+40;GR025AWAPS42-4;15;4;;"Босоножки Grand Style";;(+)0;RUB;(+)0;RUB
+36;LA002AWAAB87-0;15;0;;"Босоножки Lamania";;;;;
+37;LA002AWAAB87-1;15;1;;"Босоножки Lamania";;(+)0;RUB;(+)0;RUB
+38;LA002AWAAB87-2;15;2;;"Босоножки Lamania";;(+)0;RUB;(+)0;RUB
+39;LA002AWAAB87-3;15;3;;"Босоножки Lamania";;(+)0;RUB;(+)0;RUB
+40;LA002AWAAB87-4;15;4;;"Босоножки Lamania";;(+)0;RUB;(+)0;RUB
+35;EL242AWBRB76-0;15;0;;"Босоножки Elche";;;;;
+36;EL242AWBRB76-1;15;1;;"Босоножки Elche";;(+)0;RUB;(+)0;RUB
+37;EL242AWBRB76-2;15;2;;"Босоножки Elche";;(+)0;RUB;(+)0;RUB
+38;EL242AWBRB76-3;15;3;;"Босоножки Elche";;(+)0;RUB;(+)0;RUB
+39;EL242AWBRB76-4;15;4;;"Босоножки Elche";;(+)0;RUB;(+)0;RUB
+40;EL242AWBRB76-5;15;5;;"Босоножки Elche";;(+)0;RUB;(+)0;RUB

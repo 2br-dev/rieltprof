@@ -1,0 +1,1 @@
+a:11:{s:7:"enabled";b:1;s:9:"installed";b:1;s:7:"site_id";s:1:"1";s:4:"name";s:31:"Центр обновления";s:11:"description";s:111:"Позволяет устанавливать обновления системы с сервера ReadyScript";s:7:"version";s:7:"4.0.047";s:6:"author";s:16:"ReadyScript lab.";s:9:"is_system";s:1:"1";s:26:"file_download_part_size_mb";s:1:"7";s:10:"lastupdate";i:1613725408;s:11:"deactivated";N;}

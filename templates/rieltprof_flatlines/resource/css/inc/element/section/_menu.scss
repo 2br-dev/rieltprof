@@ -1,0 +1,45 @@
+.theme-list.top-menu {
+  li {
+    position:relative;
+
+    a:hover {
+      color:$linkColor;
+    }
+
+    // Второй уровень
+    & ul {
+      list-style:none;
+      padding:0;
+      position:absolute;
+      top:100%;
+      background-color:#f5f5f5;
+      -webkit-box-shadow: 2px 2px 2px #aaa;
+      -moz-box-shadow: 2px 2px 2px #aaa;
+      box-shadow: 2px 2px 2px #aaa;
+      display:none;
+      min-width:150px;
+
+      li {
+        display:list-item;
+        border-top:1px solid #e8e8e8;
+      }
+
+      a {
+        display:block;
+        padding:15px;
+      }
+
+        //Третий уровень
+      & ul {
+        position:absolute;
+        left:100%;
+        top:-1px;
+
+      }
+    }
+
+    &:hover > ul {
+      display:block;
+    }
+  }
+}

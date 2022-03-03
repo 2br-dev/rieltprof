@@ -1,0 +1,71 @@
+.upload-files-dnd {
+    border:2px dashed #ACACAC; 
+    margin:20px 0; 
+    height:100px; 
+    line-height:100px; 
+    text-align:center;
+    color:#808080;
+    font-size:16px;
+}
+
+.upload-files-dnd a {
+    text-decoration:underline;
+}
+
+.upload-files-table {
+    width:100%;
+    border-collapse:collapse;
+}
+
+.upload-files-table td {
+    border-top:1px solid #D0D0D0;
+    border-bottom:1px solid #D0D0D0;
+    padding:8px 0;
+    height:22px;
+}
+
+.upload-files-table th {
+    text-align:left;
+    padding:8px 0;
+}
+
+.upload-files-notice {
+    margin-top:10px;
+}
+
+.upload-files-table .progress-bar {
+    border: 1px solid #ACACAC;
+    height:20px;
+    width:150px;
+    position:relative;
+}
+
+.upload-files-table .progress-bar .bar {
+    position:absolute;
+    top:0;
+    left:0;
+    height:20px;
+    background:#4e64b7;
+}
+
+.upload-files-table .progress-bar .percent {
+    width:100%;
+    height:20px;    
+    position:absolute;
+    top:0;
+    left:0;
+    text-align:center;
+    color:#C0C0C0;
+}
+
+.upload-files-table .cancel-all {
+    text-decoration:underline;
+}
+
+.upload-files-table .fail .status {
+    color:red;
+}
+
+.upload-files-table .success .status {
+    color:green;
+}

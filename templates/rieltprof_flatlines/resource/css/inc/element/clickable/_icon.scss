@@ -1,0 +1,43 @@
+@import "../../global/variable";
+
+// Custom icon
+
+.icon {
+  &-commenting {
+    svg {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      margin-left: -25px;
+      fill: #999;
+      @media (max-width: $xs-end) {
+        position: relative;
+        float: left;
+        margin: 0 5px 0 0;
+      }
+      @media (min-width: $sm-start) and (max-width: $md-end) {
+        position: relative;
+        float: left;
+        margin: 0 5px 0 -25px;
+      }
+    }
+  }
+  &-thumbs {
+    &-up svg {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      margin-top: -5px;
+      margin-left: -30px;
+      fill: green;
+    }
+    &-down svg {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      margin-top: 5px;
+      margin-left: -30px;
+      fill: red;
+    }
+  }
+}

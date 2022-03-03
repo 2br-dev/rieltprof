@@ -1,0 +1,137 @@
+@import "../global/variable";
+// Modal
+.rs-dialog {
+
+  .mobile-2-column {
+    width:100%;
+    -webkit-columns:2;
+       -moz-columns:2;
+            columns: 2;
+
+    -webkit-column-gap: 100px;
+       -moz-column-gap: 100px;
+            column-gap: 100px;
+
+    & > * {
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    @media(max-width:$xs-end) {
+      -webkit-columns: auto auto;
+      -moz-columns: auto auto;
+      columns: auto auto;
+    }
+  }
+
+  .form-style .form__menu_buttons {
+    margin-top:30px;
+    button {
+      margin-left:0;
+      margin-right:0;
+    }
+    a {
+      line-height:1;
+      color:inherit;
+    }
+  }
+
+  .mobile-flex,
+  .form-style .mobile-flex {
+    @include flexbox;
+    @include justify-content(space-between);
+    @include align-items(center);
+  }
+
+  .mfp-content {
+    background:#fff;
+    padding: 10px 15px 15px;
+    position:relative;
+  }
+
+  .modal-body {
+    width:550px;
+    max-width:100%;
+
+    .h2 {
+      margin-top:0;
+    }
+
+    input,
+    select {
+      max-width:none;
+    }
+
+    input[type=text],
+    input[type=password],
+    input[type=email],
+    select {
+      width:100%;
+    }
+
+    button {
+      border: none;
+      display: table;
+      &.close {
+        border-radius: 30px;
+        width: 45px;
+        &:hover i {
+          @include transform(rotate(90deg));
+        }
+        i {
+          transition: ease-in-out 0.3s;
+        }
+      }
+    }
+
+    .link-more {
+      padding: 12px 35px;
+    }
+  }
+
+  .mobile-width-small {
+    width:380px;
+  }
+
+  .mobile-width-wide {
+    width:1200px;
+  }
+
+  .mobile-center {
+    text-align:center;
+    @include align-items(center);
+  }
+}
+
+#rs-overlay {
+  background-image:url(../img/icons/loader.svg);
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+
+.mfp-close,
+.mfp-close:active {
+  top:10px;
+}
+
+@keyframes clientLeftRightLoading {
+  from {
+    left:50%;
+    width:0%;
+  }
+  to {
+    left:0%;
+    width:100%;
+  }
+}
+
+.rs-client-loading {
+  position:absolute;
+  top:0;
+  height:3px;
+  left:50%;
+  width:0%;
+  background-color:#ffac00;
+  animation: clientLeftRightLoading 1s ease 0s infinite;
+}

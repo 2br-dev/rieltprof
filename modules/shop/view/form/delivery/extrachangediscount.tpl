@@ -1,0 +1,2 @@
+{include file=$elem.__extrachange_discount->getOriginalTemplate() field=$elem.__extrachange_discount} 
+{include file=$elem.__extrachange_discount_type->getRenderTemplate() field=$elem.__extrachange_discount_type}

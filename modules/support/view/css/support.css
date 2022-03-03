@@ -1,0 +1,41 @@
+.legend {
+    margin:0;
+    list-style:none;
+    text-align:right;
+}
+
+.legend li {
+    margin-right:20px;
+    display:inline-block;
+}
+
+.lgbox,
+.legend li > div {
+    height:10px;
+    width:10px;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:5px;
+}
+
+.legend .new, .lgbox.new{
+    background: #0099cc;
+}
+
+.legend .user, .lgbox.user{
+    background: #aaa;
+}
+
+.legend .admin, .lgbox.admin{
+    background: #ff8800;
+}
+
+@media(max-width:767px) {
+    .legend {
+        text-align:left;
+    }
+
+    .username {
+        padding-bottom:10px;
+    }
+}

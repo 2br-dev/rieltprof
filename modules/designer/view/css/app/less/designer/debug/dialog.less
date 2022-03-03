@@ -1,0 +1,133 @@
+.d-dialog-wrapper{
+  position: relative;
+  padding: 15px;
+
+  .close{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: no-repeat center center;
+    background-image: url("../../img/presetcategories/delete_gray.svg");
+    background-size: contain;
+  }
+
+  .d-dialog-tabs-list{
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    flex-wrap: -webkit-wrap;
+    list-style: none;
+    margin: 0;
+    padding: 6px 5px 0 5px;
+    box-shadow: inset 0 -2px 0 0 #eee;
+
+    .d-dialog-tabitem{
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      position: relative;
+
+      a{
+        display: inline-block;
+        text-decoration: none;
+        padding: 5px 20px;
+        color:#7a7a7a;
+        cursor: pointer;
+        line-height: inherit;
+        font-size: 14px;
+
+
+        &:after {
+          content: "";
+          height: 2px;
+          position: absolute;
+          width: 100%;
+          left: 0;
+          bottom: 0;
+          background: #2196F3;
+          display:none;
+        }
+      }
+
+      &.d-active a {
+        color:black;
+      }
+
+      &.d-active a:after {
+        display:block;
+      }
+
+      /*
+      &.d-active,
+      &:hover{
+        &::after,
+        &::after{
+          content: " ";
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: #fff;
+          z-index: 2;
+          border-bottom-color: white;
+        }
+
+        a{
+          background-color: white;
+        }
+      }*/
+
+
+    }
+  }
+
+  .d-dialog-tabsections{
+    max-height: 500px;
+    overflow-y: auto;
+    margin-top: 10px;
+  }
+
+  .d-dialog-tabs-list{
+    .d-tab-locked{
+      display: inline-block;
+      vertical-align: text-top;
+      width: 16px;
+      height: 16px;
+      margin-left: 7px;
+      background: no-repeat center center;
+      background-image: url("../../img/presetcategories/lock_black.svg");
+      background-size: contain;
+    }
+  }
+}
+
+.toasted-container .toasted{
+
+  &.toasted-primary.error a{
+    color:white;
+    text-decoration: underline;
+
+    &:hover{
+      text-decoration: none;
+    }
+  }
+
+  .action.d-toast-close{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    padding: 7px;
+    margin-left: 20px;
+    background: no-repeat center center;
+    background-image: url("../../img/presetcategories/close_white.svg");
+    background-size: contain;
+
+    &:hover{
+      opacity: 0.8;
+    }
+  }
+}

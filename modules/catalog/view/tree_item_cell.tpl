@@ -1,0 +1,1 @@
+{$cell->getValue()} <sup class="sup-text">{$cell->getRow('itemcount')}</sup>

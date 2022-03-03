@@ -1,0 +1,80 @@
+.deliveryWidjet .title{
+    margin-top: 20px;
+    margin-bottom: 7px;
+    font-size: 12px;
+}
+
+.deliveryWidjet .pickpointsMap{
+    max-width: 800px;
+    height: 350px;
+    margin-top: 10px;
+}
+
+.deliveryWidjet .pickpointsAdditionalInfo{
+    margin-top: 7px;
+    font-size: 12px;
+}
+
+.deliveryWidjet .pickpointsAdditionalInfo .key{
+    margin-right: 5px;
+    border-bottom: 0;
+}
+
+.deliveryWidjet .pickpointsAdditionalInfo .row{
+    display: block;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color:gray;
+}
+
+.deliveryWidjet .pickpointsMapFilters{
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    align-items: flex-start;
+    -webkit-align-items: flex-start;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.deliveryWidjet .pickpointsMapFilters .oneFilter{
+    margin-right: 20px;
+}
+
+.deliveryWidjet .pickpointsMapFilters input[type="checkbox"]{
+    margin: 0;
+    margin-right: 3px;
+    vertical-align: middle;
+}
+
+.deliveryWidjet .pickpointsMapFilters label{
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.deliveryWidjet .additionalTitleInfo{
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: gray;
+}
+
+.deliveryWidjet .deliveryInfoRow{
+    margin-top: 10px;
+}
+
+.deliveryWidjet .formSave{
+    display: inline-block;
+    width: auto;
+    padding: 8px 20px;
+    margin-top: 0px;
+}
+
+.additionalInfo .timeSelect{
+    display: inline-block;
+    max-width: 65px;
+}
+
+.placemarkBalloonBody td:last-child{
+    padding-left: 5px;
+}

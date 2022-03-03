@@ -1,0 +1,2 @@
+{$amount = $cell->getRow()->getProductsAmount()}
+<a href="{$router->getAdminUrl('edit', ['id' => $cell->getRow()->id], 'catalog-inventorywaitingsctrl')}" class="crud-edit">{t n=$amount}Ожидание %n [plural:%n:товара|товаров|товаров]{/t}</a>

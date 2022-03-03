@@ -1,0 +1,1 @@
+<a href="{$router->getUrl('support-front-support')}" class="mail">{$new_count}</a>

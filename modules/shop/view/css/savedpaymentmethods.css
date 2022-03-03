@@ -1,0 +1,131 @@
+.savedPaymentMethods_hint {
+    padding: 20px 30px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.savedPaymentMethods_emptyList {
+    background-color: white;
+    padding: 40px 0;
+    text-align: center;
+    font-size: 18px;
+}
+
+.savedPaymentMethods_paymentItem {
+    padding: 0 30px 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.savedPaymentMethods_methodEmptyList {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.savedPaymentMethods_methodItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-top: 1px solid #ececec;
+}
+
+.savedPaymentMethods_methodItem > * {
+    display: flex;
+    align-items: center;
+}
+
+.savedPaymentMethods_methodItem > * > *:not(:first-child) {
+    margin-left: 8px;
+}
+
+.savedPaymentMethods_methodItem_type,
+.savedPaymentMethods_methodItem_default {
+    font-size: 90%;
+    color: darkgray;
+}
+
+.savedPaymentMethods_methodItem_title {
+    font-weight: bold;
+}
+
+.savedPaymentMethod_makeDefault,
+.savedPaymentMethod_delete {
+    cursor: pointer;
+}
+
+.savedPaymentMethods_add.link {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.selectPaymentMethod {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.selectPaymentMethod_hint {
+    margin: 24px 0;
+}
+
+.selectPaymentMethod_list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.selectPaymentMethod_item {
+    font-weight: normal;
+    margin: 0;
+    cursor: pointer;
+}
+
+.selectPaymentMethod_itemRadio {
+    display: none;
+}
+
+.selectPaymentMethod_itemBlock {
+    padding: 24px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: all .3s;
+    margin-bottom: 16px;
+}
+
+.selectPaymentMethod_itemBlock > * {
+    display: flex;
+    align-items: flex-end;
+}
+
+.selectPaymentMethod_itemBlock > * > *:not(:first-child) {
+    margin-left: 8px;
+}
+
+.selectPaymentMethod_itemRadio:checked + .selectPaymentMethod_itemBlock {
+    background-color: #ffac0033;
+    border-color: #ffac00;
+}
+
+.selectPaymentMethod_methodItem_type,
+.selectPaymentMethod_methodItem_default {
+    font-size: 90%;
+    color: darkgray;
+}
+
+.selectPaymentMethod_methodItem_subtype {
+}
+
+.selectPaymentMethod_methodItem_title {
+    font-weight: bold;
+}
+
+.selectPaymentMethod_itemBlock_hint {
+    font-size: 90%;
+    color: darkgray;
+}

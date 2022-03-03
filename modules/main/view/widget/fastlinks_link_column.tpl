@@ -1,0 +1,1 @@
+<a href="{$cell->getValue()}" {if $cell->getRow()->target == 'blank'}target="_blank"{/if}>{$cell->getValue()}</a>

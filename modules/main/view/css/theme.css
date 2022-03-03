@@ -1,0 +1,76 @@
+.theme-info {
+    overflow:hidden;
+    border-bottom:1px solid #D0D0D0;
+    margin-bottom:10px;
+    padding-bottom:10px;
+}
+
+.theme-info .preview {
+    width: 188px;
+    height:133px;
+    background: #fff;
+    border:1px solid #a9a9a9;
+    float:left;
+    margin-right:10px;
+    margin-bottom:5px;
+}
+
+.theme-info .preview .padd {
+    padding:4px;
+}
+
+.theme-info h3 {
+    font-size: 14px;
+    font-weight:bold;
+    margin:0 0 10px 0;
+    padding:0;
+    
+}
+
+.theme-options .text {
+    margin-bottom:10px;
+}
+
+.theme-options table {
+    margin-left:10px;
+    
+}
+.theme-options table td{
+    padding:5px 0;
+}
+
+.theme-options table .radio {
+    border-right:1px solid #D0D0D0;
+    padding-right:5px;
+}
+
+.theme-options table .descr {
+    padding-left:5px;
+}
+
+.theme-buttons a.button{
+    float:right;
+    display:block;
+    width:75px;
+    height:30px;
+    line-height:30px;
+    padding-left:28px;    
+    margin-top:20px;
+    margin-left:10px;
+}
+
+.theme-buttons a:hover.button {
+    font-weight:bold;
+}
+
+.theme-buttons a.install {
+    background: url(/modules/msystem/view/img/install.png) no-repeat top left;
+}
+
+.theme-buttons a.cancel {
+    background: url(/modules/msystem/view/img/cancel.png) no-repeat top left;    
+}
+
+#setterTheme {
+    vertical-align: middle;
+}

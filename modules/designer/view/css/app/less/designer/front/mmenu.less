@@ -1,0 +1,113 @@
+body.mmenu-hidden{
+  overflow: hidden;
+}
+
+.designer-block{
+  .d-mmenu-wrapper{
+    display: none;
+  }
+}
+
+.d-mobile-mmenu-fog{
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 988;
+  opacity: 0;
+  transition: all .3s;
+
+  &.open{
+    display: block;
+  }
+}
+
+.d-mobile-mmenu{
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  transition: all .3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 989;
+  box-shadow: 0 0 3px gray;
+
+  &.d-open{
+    width: 300px;
+
+    & + .d-mobile-mmenu-fog{
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+
+  .d-mobile-mmenu-header{
+    flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+    width: 100%;
+  }
+
+  .d-mobile-mmenu-content{
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+
+  .d-mobile-mmenu-level{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    list-style: none;
+    transition: all .3s;
+
+    &.d-open{
+      width: 100%;
+    }
+
+    li, a{
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    li{
+      display: flex;
+      display: -webkit-flex;
+      align-items: stretch;
+      -webkit-align-items: stretch;
+    }
+
+    a{
+      cursor: pointer;
+      width: 100%;
+    }
+
+    span{
+      flex-shrink: 0;
+      -webkit-flex-shrink: 0;
+    }
+  }
+
+  .d-mobile-mmenu-close{
+    position: absolute;
+    z-index: 1;
+  }
+
+  .d-mobile-mmenu-open-level{
+    cursor: pointer;
+  }
+}

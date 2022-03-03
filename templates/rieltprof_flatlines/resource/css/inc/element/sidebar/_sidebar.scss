@@ -1,0 +1,108 @@
+@import "../../global/variable";
+
+// Sidebar
+.sidebar {
+  background-color: #fff;
+  margin-bottom: 29px;
+  padding: 0;
+  width: 100%;
+  &_menu {
+    color: #555;
+    margin: 0;
+    padding: 0;
+    @media (max-width:$xx-end) {
+      background-color: #fff;
+    }
+    > div,
+    > li {
+      border-bottom: 1px solid #e8e8e8;
+      display: block;
+      list-style: none;
+      overflow: hidden;
+      &:last-child {
+        border: none;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        a {
+          color: #cfcfcf;
+          font-family: $themeFontLight;
+          line-height: 1.8;
+          transition: ease-in-out 0.3s;
+          &:hover, &:active {
+            color: #61acd2;
+          }
+        }
+      }
+    }
+    &_buttons {
+      @media (max-width:$xx-end) {
+        background-color: #fff;
+        padding-top: 1px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+  .expand {
+    border-bottom: 1px solid transparent;
+    color: #000;
+    cursor: pointer;
+    display: block;
+    font-family: $themeFontLight;
+    font-size: 18px;
+    padding: 15px;
+    transition: ease-in-out 0.3s;
+    @media (max-width:$xx-end) {
+      font-size: 14px
+    }
+    @media (min-width:$md-start) and (max-width:$md-end) {
+      font-size: 16px;
+    }
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+    .open > & {
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .right-arrow {
+      float: right;
+      @include transform(scale(0.75));
+      transition: ease-in-out 0.3s;
+      margin: -6px -3px 0 0;
+      width: 32px;
+      height: 32px;
+      @media (max-width:$xx-end) {
+        width: 28px;
+        height: 28px;
+      }
+      @media (min-width:$sm-start) and (max-width:$sm-end) {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+  #left, #right {
+    display: table;
+  }
+  .detail {
+    display: none;
+    padding: 15px 15px 10px;
+  }
+  .open {
+    .detail {
+      display: block;
+    }
+    .right-arrow {
+      @include transform(scale(0.75) rotate(180deg));
+    }
+  }
+  .theme-btn_search {
+    display: table;
+    margin: 35px auto 0;
+    padding: 4px 50px;
+    @media (min-width:$md-start) and (max-width:$md-end) {
+      margin: 15px auto 0;
+    }
+  }
+}

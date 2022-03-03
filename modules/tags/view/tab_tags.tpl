@@ -1,0 +1,1 @@
+{moduleinsert name="\Tags\Controller\Admin\BlockTags" type="article" linkid=$elem.id}

@@ -1,0 +1,65 @@
+@import "../../global/variable";
+
+// Slider
+.slide {
+  margin-bottom: 29px;
+  overflow: hidden;
+  @media (min-width:$md-start) and (max-width:$hhd-end) {
+    //height: 280px;
+  }
+  @media (min-width:$hd-start) and (max-width:$lg-end) {
+    //height: 370px;
+  }
+  .carousel-inner > .item img {
+    margin: 0 auto;
+    min-width: 100%;
+    max-width: 100%;
+    @media (min-width:$sm-start) and (max-width:$md-end) {
+      height: 100%;
+      min-width: initial;
+    }
+  }
+  .carousel-indicators {
+    bottom: 6px!important;
+    li {
+      background-color: #fff;
+      height: 4px;
+      margin: 7px;
+      width: 4px;
+      &.active:before {
+        border: 1px solid #fff;
+        border-radius: 30px;
+        content: "";
+        display: block;
+        height: 10px;
+        margin: -4px;
+        width: 10px;
+      }
+    }
+  }
+  .sec-nav {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    .pull-left {
+      a {
+        color: $arrowColor;
+        opacity: 0.5;
+        transition: ease-in-out 0.3s;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+    .pull-right {
+      a {
+        color: $arrowColor;
+        opacity: 0.5;
+        transition: ease-in-out 0.3s;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+.designer-block{
+  .d-atom-form {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    width: 100%;
+
+    .d-atom-form-fields-wrapper,
+    .d-atom-form-title-field-wrapper{
+      display: flex;
+      display: -webkit-flex;
+      flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+      width: 100%;
+    }
+
+    @media (max-width: 767px){
+      .d-atom-form-title-field-wrapper{
+        max-width: none !important;
+      }
+    }
+
+    .d-in-loading{
+      align-self: center;
+      -webkit-align-self: center;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+  }
+
+  .hover {
+    .d-atom-form {
+      .d-atom-item{
+        outline: 1px solid lightblue !important;
+      }
+    }
+  }
+
+  .d-atom-item{
+    position: relative;
+    width: 100%;
+  }
+
+  .d-atom-none-select{
+    max-width: 300px;
+    width: 100%;
+    align-self: center;
+    -webkit-align-self: center;
+
+    .d-atom-none-select-select-wrapper{
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      p{
+        font-size: 12px;
+        font-family: Arial;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .d-atom-none-select-form-select{
+      display: block;
+      width: 100%;
+      line-height: 32px;
+      height: 32px;
+      font-size: 12px;
+      font-family: Arial;
+      background-color: white;
+      border: 1px solid silver;
+    }
+
+    .d-gray-button,
+    .d-green-button{
+      margin-bottom: 20px;
+      font-size: 12px;
+      font-family: Arial;
+    }
+  }
+
+  .d-atom-form-fields{
+    width: 100%;
+  }
+
+  .d-atom-form-field{
+    width: 100%;
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    select,
+    textarea{
+      display: block;
+      width: 100%;
+    }
+
+    input[type="file"]{
+      -webkit-appearance: none;
+    }
+
+    select{
+      -webkit-appearance: none;
+      position: relative;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAJCAYAAAA/33wPAAAAvklEQVQoFY2QMQqEMBBFv7ERa/EMXkGw11K8QbDXzuN4BHv7QO6ifUgj7v4UAdlVM8Uwf+b9YZJISnlqrfEUZVlinucnBGKaJgghbiHOyLyFKIoCbdvecpyReYvo/Ma2bajrGtbaC58kCdZ1RZ7nl/4/4d5EsO/7nzl7IUtodBexMMagaRrs+06JLMvcNWmaOv2W/C/TMAyD58dxROgSmvxFFMdxoOs6lliWBXEcuzokXRbRoJRyvqqqQvye+QDMDz1D6yuj9wAAAABJRU5ErkJggg==) !important;
+      background-position : right center !important;
+      background-repeat: no-repeat !important;
+      padding-right: 1.5em;
+    }
+
+    button{
+      -webkit-appearance: none;
+    }
+  }
+}

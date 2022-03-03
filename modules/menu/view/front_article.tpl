@@ -1,0 +1,3 @@
+<article>
+    {$article.content}
+</article>

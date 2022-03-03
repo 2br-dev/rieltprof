@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Дизайнер</name>
+        <description multilanguage="true">Позволяет конструировать собственные визуальные блоки</description>
+        <version>1.0.4</version>
+        <is_system>1</is_system>
+        <author>ReadyScript lab.</author>
+        <ya_map_key/>
+    </defaultValues>
+</config>

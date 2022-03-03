@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Магазин</name>
+        <description multilanguage="true">Модуль предоставляет возможность оформлять и администрировать заказы, управлять корзиной</description>
+        <version>4.0.198</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <check_quantity>0</check_quantity>
+        <basketminlimit>0</basketminlimit>
+        <dependfrom>catalog</dependfrom>
+        <discount_code_len>10</discount_code_len>
+        <reservation_required_fields>phone_email</reservation_required_fields>
+        <user_orders_page_size>10</user_orders_page_size>
+        <checkout_type>cart_checkout</checkout_type>
+        <checkout_register_option>user_chooses</checkout_register_option>
+        <register_user_default_checked>0</register_user_default_checked>
+        <default_checkout_tab>person</default_checkout_tab>
+        <default_region_id>0</default_region_id>
+        <default_zipcode/>
+        <require_country>1</require_country>
+        <require_region>1</require_region>
+        <require_city>1</require_city>
+        <require_zipcode>0</require_zipcode>
+        <require_address>1</require_address>
+        <check_captcha>1</check_captcha>
+        <show_contact_person>1</show_contact_person>
+        <use_geolocation_address>1</use_geolocation_address>
+        <use_selected_address_in_checkout>1</use_selected_address_in_checkout>
+        <require_email_in_noregister>1</require_email_in_noregister>
+        <require_phone_in_noregister>0</require_phone_in_noregister>
+        <use_personal_account>1</use_personal_account>
+        <reservation>0</reservation>
+        <allow_concomitant_count_edit>0</allow_concomitant_count_edit>
+        <use_generated_order_num>0</use_generated_order_num>
+        <generated_ordernum_mask>{n}</generated_ordernum_mask>
+        <generated_ordernum_numbers>6</generated_ordernum_numbers>
+        <hide_delivery>0</hide_delivery>
+        <hide_payment>0</hide_payment>
+        <auto_send_supply_notice>1</auto_send_supply_notice>
+        <remove_nopublic_from_cart>0</remove_nopublic_from_cart>
+        <cashregister_class>atolonline</cashregister_class>
+        <cashregister_enable_auto_check>1</cashregister_enable_auto_check>
+
+        <return_rules>
+            <![CDATA[<p>Статья 25. Право потребителя на обмен товара надлежащего качества</p>
+            <p>1. Потребитель вправе обменять непродовольственный товар надлежащего качества на аналогичный товар у продавца, у которого этот товар был
+            приобретен, если указанный товар не подошел по форме, габаритам, фасону, расцветке, размеру или комплектации.
+            Потребитель имеет право на обмен непродовольственного товара надлежащего качества в течение четырнадцати дней, не считая дня его покупки.
+            Обмен непродовольственного товара надлежащего качества проводится, если указанный товар не был в употреблении, сохранены его товарный вид,
+            потребительские свойства, пломбы, фабричные ярлыки, а также имеется товарный чек или кассовый чек либо иной подтверждающий оплату указанного
+            товара документ. Отсутствие у потребителя товарного чека или кассового чека либо иного подтверждающего оплату товара документа не лишает его
+            возможности ссылаться на свидетельские показания.</p>
+            <p>Перечень товаров, не подлежащих обмену по основаниям, указанным в настоящей статье, утверждается Правительством Российской Федерации.</p>
+            ]]>
+        </return_rules>
+        <return_print_form_tpl>%shop%/return/pdf_form.tpl</return_print_form_tpl>
+        <return_enable>0</return_enable>
+        <ofd>platformofd</ofd>
+        <ban_courier_del>0</ban_courier_del>
+        <discount_combination>max</discount_combination>
+        <fixed_discount_max_order_percent>100</fixed_discount_max_order_percent>
+        <cart_item_max_discount>100</cart_item_max_discount>
+        <payment_method>full_prepayment</payment_method>
+        <personal_account_payment_method>advance</personal_account_payment_method>
+        <personal_account_payment_subject>payment</personal_account_payment_subject>
+        <check_conformity_uit_to_barcode>1</check_conformity_uit_to_barcode>
+        <show_number_of_lines_in_cart>1</show_number_of_lines_in_cart>
+        <checkout_type>four_step</checkout_type>
+        <recurring_show_methods_menu>0</recurring_show_methods_menu>
+        <cdek_default_delivery>0</cdek_default_delivery>
+    </defaultValues>
+</config>

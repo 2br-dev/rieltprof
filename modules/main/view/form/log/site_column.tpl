@@ -1,0 +1,1 @@
+<span class="va-m-c"><span class="f-18">&#x2219</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$cell->getValue()}</span></span>

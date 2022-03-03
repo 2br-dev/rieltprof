@@ -1,0 +1,3 @@
+<input type="radio" name="period" value="forever" {if $elem.period != 'timelimit'}checked{/if} id="forever"> <label for="forever">{t}Не ограничена по времени{/t}</label><br>
+<input type="radio" name="period" value="timelimit" {if $elem.period == 'timelimit'}checked{/if} id="timelimit"> <label for="timelimit">{t}Действует до{/t}</label>
+{include file=$elem.__endtime->getRenderTemplate() field=$elem.__endtime}

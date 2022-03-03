@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Мобильное приложение для Администратора или Курьера</name>
+        <description multilanguage="true">Позволяет управлять заказами и видеть статистику через мобильное приложение</description>
+        <version>4.0.3</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <allow_user_groups type="array">
+            <value>supervisor</value>
+            <value>admins</value>
+        </allow_user_groups>
+        <push_enable>1</push_enable>
+    </defaultValues>
+</config>

@@ -1,0 +1,9 @@
+.pushTokenMessageWrapper .ptmType{
+    display: none;
+}
+
+.pushTokenMessageWrapper .ptmType.show{
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

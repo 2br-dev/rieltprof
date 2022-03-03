@@ -1,0 +1,19 @@
+.admin-style .call-circle {
+    border:3px solid green;
+    color:green;
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size:45px;
+}
+
+.admin-style .table-va-center > tbody tr td {
+    vertical-align:middle;
+}
+
+.admin-style .audio {
+    min-width:100px;
+}

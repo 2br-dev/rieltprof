@@ -1,0 +1,1 @@
+{if $level.section["{$field}_xs"] != ''} bcol-xs-{$name}{$level.section["{$field}_xs"]}{/if}{if $level.section["{$field}_sm"] != ''} bcol-sm-{$name}{$level.section["{$field}_sm"]}{/if}{if $level.section["{$field}"] != ''} bcol-md-{$name}{$level.section["{$field}"]}{/if}{if $level.section["{$field}_lg"] != ''} bcol-lg-{$name}{$level.section["{$field}_lg"]}{/if}

@@ -1,0 +1,683 @@
+.container_12,
+.container_16 {
+    margin:0;
+    width:100%;
+}
+
+.selector {
+    list-style:none;
+    padding:0;
+    margin-top:15px;
+}
+
+.selector .title {
+    font-size:12px;
+    background: none;
+    border:none;
+    color: gray;
+}
+
+.selector > li {
+    background: #e2e2e2;
+    line-height:33px;
+    height:33px;
+    display:block;
+    margin-right:3px;
+    margin-bottom:3px;
+    padding:0 5px 0 13px;
+    font-size:14px;    
+    float:left;
+}
+
+.selector > li:hover {
+    background-color: #c0c0c0;
+}
+
+.selector > li.act:hover,
+.selector .act {
+    background: #000;
+    color: white;
+}
+
+.selector > li a {
+    color: black;    
+    font-size:12px;
+    text-decoration:none;
+}
+
+.selector .act a {
+    color: white;
+}
+
+.bigtools {
+    overflow:hidden;
+    zoom:1;
+    margin-bottom:10px;
+}
+
+.bigtools .right a {
+    display:block;
+    background: #f2f2f2;
+    padding:5px 10px;
+    float:right;
+    text-decoration:none;
+    color: black;
+    border-radius:3px;
+}
+
+.breadcrumbs {
+    padding:0;
+    margin:0;
+    list-style:none;
+    font-size:13px;
+    float:left;    
+}
+
+.breadcrumbs li {
+    float:left;
+    background: url(../img/arrow.gif) no-repeat left center;    
+    padding-right:7px;
+    padding-left:16px;    
+    font-size:14px;
+}
+
+.breadcrumbs li a {
+    color: #808080;
+    text-decoration:underline;    
+}
+
+.breadcrumbs .first {
+    background:none;
+    padding-left:0;
+}
+
+.gs-manager {
+    padding:0 0 10px;
+}
+
+.gs-manager .clearfix-after {
+    position:absolute;
+    top:0;
+    bottom:0;
+    border-right:1px dashed #000;
+    right:-7px;
+}
+
+.bootstrap .gs-manager .clearfix-after {
+    right:7px;    
+}
+
+.bootstrap .gs-manager .area.row > .clearfix-after {
+    right:-5px;
+}
+
+.gs-manager .workarea {
+    min-height:150px;
+}
+
+.gs-manager .workarea:before,
+.gs-manager .workarea:after {
+    content:"";
+    display:table;
+}
+
+.gs-manager .workarea:after {
+  clear:both;
+}
+
+.gs-manager .workarea {
+  zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+.gs-manager .area .workarea {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.gs-manager .commontools {
+    line-height:32px;
+    height:32px;
+    background: #d7d7d7;
+    color: #9b9b9b;
+    font-weight:bold;
+    padding:0 3px;
+}
+
+.gs-manager.container > .commontools {
+    margin-left:-15px;
+    margin-right:-15px;
+}
+
+.gs-manager .workarea .commontools {
+    background: #687482;
+    color: #a7bcc2;
+}
+
+.gs-manager .workarea .row > .commontools {
+    background:#7f7f7f;
+}
+
+.gs-manager .drag-handler {
+    background: url(../img/s_drag.gif) repeat-y top left;
+    height:22px;
+    width:4px;
+    margin:5px 0;
+    float:right;
+    display:block;
+    cursor:move;
+}
+
+.gs-manager .sortable-placeholder {
+    background: #b4d9e4;
+    position:relative;
+}
+
+.gs-manager .sortable-placeholder .border{
+    border:1px dashed #3aabd1;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}   
+
+.gs-manager .block {
+    background: white;
+    border:1px solid #687482;
+    padding:2px 12px 2px 2px;
+    margin:3px 1px;
+    position:relative;
+    font-size: 12px;
+    border-radius:2px;
+    min-width:20%;
+    max-width:100%;
+}
+
+.gs-manager .sortable-placeholder.block {
+    border:1px dashed #687482;
+}
+
+.gs-manager .block .drag-block-handler {
+    background: url(../img/b_drag.gif) repeat-y top left;
+    position:absolute;
+    right:4px;
+    top:0;
+    height:22px;
+    width:4px;
+    margin:5px 0;
+    float:right;
+    display:block;
+    cursor:move;    
+}
+
+.gs-manager > .commontools > .drag-handler {
+    background: url(../img/bl_drag.gif) repeat-y top left;
+}
+
+.gs-manager .block .help {
+    background: none repeat scroll 0 0 #E2E2E2;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 5px;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor:help;
+}
+
+.gs-manager .block .tools {
+    overflow:hidden;
+    padding:5px 0;
+}
+
+.gs-manager .block .tools a {
+    float:left;
+    margin-left:5px;
+}
+
+.gs-manager .block.wide .title-small,
+.gs-manager .block .title-wide {
+    display:none;
+}
+
+.gs-manager .block.wide .title-wide {
+    display:block;
+}
+
+.gs-manager .alignleft {
+    float:left;
+}
+.gs-manager .alignright {
+    float:right;
+}
+
+.gs-manager .commontools .buttons{
+    position:absolute;
+}
+
+.gs-manager.sourceContainer {
+    opacity:0.5;
+}
+
+.gs-manager.destinationContainer {
+    position:relative;
+}
+
+.gs-manager.destinationContainer .dstOverlay {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:2;
+    border:1px dashed #3aabd1;
+    background: #b4d9e4;
+    opacity:0.5;
+}
+
+
+.col16 {
+    background: url(../img/16_col.gif) repeat-y top left;
+    background-size:contain;
+}
+
+.col12 {
+    background: url(../img/12_col.gif) repeat-y top left;
+    background-size:contain;
+}
+
+.bs_col12 {
+    background: url(../img/12_col_bootstrap.png) repeat-y top left;
+    background-size:contain;
+}
+
+.area {
+    margin-top:10px;
+    margin-bottom:10px;
+    position:relative;
+    flex:1;
+}
+
+.area.row {
+    margin-top:1px;
+}
+
+.area.row .area.row {
+    margin-left:0;
+    margin-right:0;
+}
+
+.gs-sep {
+    border-bottom:1px dotted #ccc;
+    padding-bottom:20px;
+    margin-bottom:20px;
+}
+
+.pageview {
+    width:960px;
+    max-width:100%;
+
+    margin:0 auto;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;    
+}
+
+.bootstrap .container,
+.bootstrap .pageview {
+    width:1200px;
+    max-width:100%;
+}
+
+.bg {
+    padding-bottom:10px;
+}
+
+.bg.bootstrap {
+    margin-top:0;    
+    padding-top:0;
+}
+
+.itool i {
+    display:inline-block;
+    padding:2px 5px;
+    opacity:0.7;
+    font-size:19px;
+    vertical-align:middle;
+    color:#333;
+    width:24px;
+}
+
+.itool i:hover {
+    opacity:1;
+}
+
+.iplus i{ }
+.iplusrow i{ }
+.iplusmodule i{ }
+.isettings i{ }
+.iremove i{ color:red; }
+.iswitch i{ color: gray; }
+.block.on .iswitch i{ color:green; }
+
+.inherit .make-container {
+    color: green;
+    border-bottom:1px dotted green;
+}
+
+/* Правила для инструментов в одну строку */
+
+.no_block_options {
+    font-size:18px;
+    text-align:center;
+    color: #969696;
+    padding:30px;
+}
+
+.container-tools {
+    text-align:center;
+    display: inline-block;
+}
+
+.device-selector {
+    margin: 20px auto 0;
+    width: 1200px;
+    max-width:100%;
+    overflow:hidden;
+    list-style:none;
+    padding:0;
+
+    position:sticky;
+    top:62px;
+    z-index:2;
+    display:flex;
+}
+
+.device-selector li {
+    flex:1;
+    height:44px;
+    line-height:44px;
+    text-align:center;
+    border-left:1px solid white;
+    background: #eee;
+    cursor:pointer;
+    box-sizing:border-box;
+    font-size:12px;
+    position:relative;
+}
+
+.device-selector li:first-child {
+    border-left:none;
+    border-radius:5px 0 0 0;
+    -moz-border-radius:5px 0 0 0;
+    -webkit-border-radius:5px 0 0 0;
+}
+
+.device-selector li:last-child {
+    border-radius:0 5px 0 0;
+    -moz-border-radius:0 5px 0 0;
+    -webkit-border-radius:0 5px 0 0;
+}
+
+.device-selector li:hover {
+    background:#e9e9e9;
+}
+
+.device-selector li.act {
+    background:#aed0a8;
+    border-bottom: 2px solid #7ea078;
+    color:black;
+}
+
+.device-selector li i {
+    background:url(../img/devices.png) no-repeat;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:7px;
+}
+
+.device-selector li .device-xs {
+    width:15px;
+    height:26px;
+}
+
+.device-selector li .device-sm {
+    background-position:-18px 0;
+    width:21px;
+    height:28px;
+}
+
+.device-selector li .device-md {
+    background-position:-42px 0;
+    width:30px;
+    height:30px;
+}
+
+.device-selector li .device-lg {
+    background-position:-75px 0;
+    width:32px;
+    height:32px;
+}
+
+.device-selector.bootstrap4 li i {
+    background:url(../img/devices_bootstrap4.png) no-repeat;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:7px;
+}
+
+.device-selector.bootstrap4 li .device-xs {
+    width:15px;
+    height:26px;
+}
+
+.device-selector.bootstrap4 li .device-sm {
+    background-position:-18px 0;
+    width:21px;
+    height:28px;
+}
+
+.device-selector.bootstrap4 li .device-md {
+    background-position:-41px 0;
+    width:28px;
+    height:21px;
+}
+
+.device-selector.bootstrap4 li .device-lg {
+    background-position:-71px 0;
+    width:30px;
+    height:30px;
+}
+
+.device-selector.bootstrap4 li .device-xl {
+    background-position:-104px 0;
+    width:32px;
+    height:32px;
+}
+
+
+
+
+.admin-style .otable .bootstrap-multi-values input {
+    width:40px;
+    text-align:center;
+}
+
+.admin-style .otable .bootstrap-multi-values td {
+    text-align:center;
+    padding:0 5px 0 0;
+}
+
+.admin-style .bootstrap-subtext {
+    font-size:10px;
+}
+
+.admin-style .bootstrap-subtext .act {
+    font-weight:bold;
+}
+
+.admin-style .bootstrap-multi-values .act select,
+.admin-style .bootstrap-multi-values .act input {
+    border-color: black;
+    
+}
+
+.gs-manager .visible-switcher,
+.gs-manager .grid-switcher {
+    float:right;
+    cursor:pointer;
+    margin-top:4px;
+    margin-right:10px;
+    font-size:24px;
+}
+
+.gs-manager .grid-switcher:before {
+    content: '\f315';
+}
+
+.gs-manager .visible-switcher:hover,
+.gs-manager .grid-switcher:hover {
+    opacity:0.7;
+}
+
+.gs-manager .grid-switcher.off:before {
+    content: '\f314';
+}
+
+.gs-manager .visible-switcher:before {
+    content: '\f15b';
+}
+
+.gs-manager .visible-switcher.off:before {
+    content: '\f15c';
+}
+
+.gs-manager.grid-disabled .area {
+    width:auto !important; 
+    float:none !important; 
+    position:static !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    padding:0 !important;
+}
+
+.pageview-text {
+    padding:20px;
+}
+
+.context-setup {
+    padding:0 0 30px;
+}
+
+.bottom-container-tools {
+    text-align:center;
+}
+
+.admin-style .bottom-container-tools .btn {
+    margin:3px 0;
+}
+
+.smart-dropdown .rs-dropdown-handler {
+    background-color:#ededed;
+    display:inline-block;
+    border-radius:50%;
+    width:18px;
+    max-width:100%;
+    height:18px;
+    line-height:18px;
+    margin:3px 0;
+    text-align: center;
+}
+
+.smart-dropdown .rs-dropdown-handler:hover {
+    background-color: #dcdcdc;
+}
+
+.wide > .commontools .smart-dropdown .dropdown-menu .title,
+.wide > .smart-dropdown .dropdown-menu .title {
+    display:none
+}
+
+.wide > .commontools .smart-dropdown .rs-dropdown-handler,
+.wide > .smart-dropdown .rs-dropdown-handler {
+    display:none;
+}
+
+.wide > .commontools .smart-dropdown .dropdown-menu,
+.wide > .smart-dropdown .dropdown-menu {
+    display:inline-block;
+    position:static;
+    background:none;
+    box-shadow: none;
+    min-width:0;
+    float:none;
+    padding:0;
+    margin:0;
+}
+
+.wide > .commontools .smart-dropdown .dropdown-menu li,
+.wide > .smart-dropdown .dropdown-menu li {
+    display:inline-block;
+}
+
+.wide > .commontools .smart-dropdown .dropdown-menu li a,
+.wide > .commontools .smart-dropdown .dropdown-menu li a:hover,
+.wide > .smart-dropdown .dropdown-menu li a,
+.wide > .smart-dropdown .dropdown-menu li a:hover {
+    padding:0;
+    background:none;
+}
+
+.commontools .smart-dropdown {
+    display:inline-block;
+    max-width:100%;
+}
+
+.wide > .commontools .smart-dropdown .dropdown-menu li {
+    vertical-align:middle;
+    padding-bottom:3px;
+}
+
+.wide > .commontools .smart-dropdown .dropdown-menu li i {
+    color:white;
+}
+
+.wide > .commontools .smart-dropdown {
+    visibility:hidden;
+    opacity:0;
+    transition: opacity 0.2s ease;
+}
+
+.wide > .commontools:hover .smart-dropdown {
+    visibility:visible;
+    opacity:1;
+}
+
+.section-title {
+    display:none;
+}
+
+.wide > .commontools .section-title {
+    display:inline;
+}
+
+.gs960 .area {
+    box-sizing:content-box !important;
+}
+
+/* Для блоков со 100% шириной */
+
+.bootstrap .area:not(.row) {
+    clear:left;
+}
+
+.bcol-xs-1, .bcol-xs-2, .bcol-xs-3, .bcol-xs-4, .bcol-xs-5, .bcol-xs-6, .bcol-xs-7, .bcol-xs-8, .bcol-xs-9, .bcol-xs-10, .bcol-xs-11, .bcol-xs-12,
+.bcol-sm-1, .bcol-sm-2, .bcol-sm-3, .bcol-sm-4, .bcol-sm-5, .bcol-sm-6, .bcol-sm-7, .bcol-sm-8, .bcol-sm-9, .bcol-sm-10, .bcol-sm-11, .bcol-sm-12,
+.bcol-md-1, .bcol-md-2, .bcol-md-3, .bcol-md-4, .bcol-md-5, .bcol-md-6, .bcol-md-7, .bcol-md-8, .bcol-md-9, .bcol-md-10, .bcol-md-11, .bcol-md-12,
+.bcol-lg-1, .bcol-lg-2, .bcol-lg-3, .bcol-lg-4, .bcol-lg-5, .bcol-lg-6, .bcol-lg-7, .bcol-lg-8, .bcol-lg-9, .bcol-lg-10, .bcol-lg-11, .bcol-lg-12 {
+    clear:none !important;
+}
+
+/* --- */

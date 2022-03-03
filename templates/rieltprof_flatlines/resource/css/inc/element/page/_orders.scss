@@ -1,0 +1,443 @@
+@import "../../global/variable";
+
+// Orders
+.page-orders {
+
+}
+
+.t-order {
+  width:100%;
+
+  &_confirm-box {
+    @media(max-width:$sm-end) {
+      @include flexbox;
+      @include flex-direction(column);
+
+      &_items {
+        order: 2;
+      }
+
+      &_info {
+        order: 1;
+      }
+    }
+
+    @media(max-width:$xx-end) {
+      .card-order-product {
+        @include flex-direction(column);
+        padding:30px 0;
+
+        .card-text,
+        .card-quantity,
+        .card-price {
+          width:100%;
+          text-align:center;
+          padding:5px 0;
+        }
+      }
+    }
+  }
+
+  &_confirm {
+    background:#fff;
+  }
+
+  &_comments {
+    padding:15px 30px;
+    border-bottom:1px solid #e8e8e8;
+  }
+
+  &_head {
+    padding:0 30px;
+  }
+
+  &-top {
+    padding: 0 30px 15px;
+    @media (max-width: $xs-end) {
+      padding: 0 15px 15px;
+    }
+  }
+  &-wrapper {
+    background-color: #fff;
+    margin-bottom: 29px;
+  }
+  &_title {
+    img {
+      display: block;
+      float: left;
+      margin: 3px 10px 0 0;
+    }
+  }
+  &_description {
+    padding: 0 15px;
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(center);
+    @media (max-width: $xs-end) {
+      padding: 0 5px;
+    }
+  }
+  &-usertext {
+    padding:15px;
+    background:#fffcc8;
+    border-top:1px solid #d8d8d8;
+  }
+  &_name {
+    color: #000;
+    font-size: 20px;
+    font-family: $themeFontLight;
+    @media (max-width: $xs-end) {
+      font-size: 14px;
+    }
+  }
+  &_left {
+    width: 100px;
+    opacity: 0.65;
+    @media (max-width: $xx-end) {
+      width: 100%;
+      text-align: center;
+      br {
+        display: none;
+      }
+    }
+  }
+  &-errors {
+    color:red;
+    text-align:center;
+  }
+  &_center {
+    width: calc(100% - 225px);
+    @include flexbox;
+    @media (max-width: $xs-end) {
+      width: 100%;
+      margin: 25px 0;
+    }
+  }
+  &_wide {
+    width: calc(100% - 225px);
+    @media (max-width: $xx-end) {
+      text-align:center;
+    }
+    @media (max-width: $xs-end) {
+      width: 100%;
+      margin: 25px 0;
+    }
+  }
+  &_img {
+    min-width: 100px;
+    max-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    @include flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+  }
+  &_right {
+    background-color: #fff;
+    position: absolute;
+    right: 30px;
+    span {
+      font-size: 24px;
+      font-family: $themeFontBold;
+    }
+    @media (max-width: $xs-end) {
+      position: relative;
+      right: inherit;
+      span {
+        font-size: 18px;
+        width: 125px;
+        display: block;
+        text-align: center;
+      }
+    }
+
+    &_item-block {
+      background:white;
+    }
+
+  }
+  // END .t-order_right
+  &_table {
+    font-family: $themeFontLight;
+    font-size: 16px;
+    width: 100%;
+    margin: 15px 0;
+    tr {
+      @media (max-width: $xx-end) {
+        display: block;
+        margin-bottom: 15px;
+      }
+    }
+    td {
+      padding-bottom: 15px;
+      &:nth-child(2n) {
+        padding: 0 15px 15px;
+        opacity: 0.65;
+        @include flexbox;
+        @include flex-direction(row);
+        @include align-items(baseline);
+        @include flex-wrap(wrap);
+        span {
+          padding-right: 15px;
+          @media (max-width: $xx-end) {
+            padding: 0;
+          }
+        }
+        @media (max-width: $xx-end) {
+          padding: 0;
+        }
+      }
+      @media (max-width: $xx-end) {
+        width: 100%;
+        display: block;
+        padding-bottom: 0;
+      }
+    }
+    &_buttons {
+      @include flexbox;
+      @include flex-direction(row);
+      @include justify-content(flex-start);
+      @media (max-width: $xx-end) {
+        width: 100%;
+        @include justify-content(space-around);
+        margin: 15px 0 0;
+      }
+      .link {
+        margin: 5px 15px 0 0;
+        border: 1px solid transparent;
+      }
+      .link-one-click {
+        border-color: #d8d8d8;
+        color: #999;
+      }
+    }
+  }
+  // END .t-order_table
+  &-list {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    overflow: hidden;
+    transition: ease-in-out 0.3s;
+    height: 0;
+    position: relative;
+    &.open {
+      height: 100%;
+    }
+    li {
+      @include align-items(center);
+      border-top: 1px solid #d8d8d8;
+      @include flexbox;
+      @include flex-direction(row);
+      padding: 15px 30px;
+      @media (max-width: $xx-end) {
+        @include flex-direction(column);
+      }
+      @media (max-width: $xs-end) {
+        padding: 15px;
+      }
+    }
+  }
+  // END .t-order-list
+  &-card {
+    @include flexbox;
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+    &_description {
+      width: 60%;
+      padding: 0 30px;
+      @media (max-width: $xs-end) {
+        border-bottom: 1px solid #d8d8d8;
+        width: 100%;
+        padding: 0 15px;
+        h2.h2 {
+          text-align: left;
+          margin: 0 -15px;
+          padding: 15px;
+          border-bottom: 1px solid #d8d8d8;
+          width: calc(100% + 30px);
+        }
+      }
+    }
+    &_sum-info {
+      width: 40%;
+      margin: 25px 0;
+      border-left: 1px solid #d8d8d8;
+      @include flexbox;
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include align-items(center);
+      font-family: $themeFontLight;
+      @media (max-width: $xs-end) {
+        border-left: none;
+        width: 100%;
+      }
+      &_icon {
+        width: 60px;
+        height: 65px;
+        fill: $iconColor;
+      }
+      &_num {
+        font-size: 24px;
+        margin: 10px 0 0;
+      }
+      &_sum {
+        font-size: 30px;
+        font-family: $themeFontBold;
+      }
+      .link-del {
+        width: 200px;
+        transition: ease-in-out 0.3s;
+        &.active i {
+          @include transform(rotate(180deg));
+        }
+      }
+    }
+  }
+  // END .t-order-card
+}
+
+
+.table-underlined {
+  width: 100%;
+  margin-top: 15px;
+  @media (max-width:$sm-end) {
+    tr {
+      @include flexbox;
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
+      @include justify-content(space-between);
+    }
+    &-text {
+      border-bottom: 1px dashed;
+      margin: 2px 0;
+      padding-bottom: 1px;
+    }
+  }
+  &-text td {
+    padding: 6px 0;
+    span {
+      background-color: #fff;
+      font-family: $themeFontLight;
+      font-size: 16px;
+      padding: 10px 0;
+      @media (max-width:$xx-end) {
+        font-size: 14px;
+      }
+      @media (max-width:$sm-end) {
+        padding: 5px;
+      }
+    }
+    &:nth-child(1):after {
+      border-bottom: 1px dashed #e8e8e8;
+      content: "";
+      display: block;
+    }
+    &:nth-child(2) {
+      padding-left: 10px;
+    }
+  }
+}
+
+/* Список доставок и оплат */
+
+.order-list-items .item {
+
+  border-top:1px solid #ececec;
+  padding-top:20px;
+
+  &:first-child {
+    border-top:none;
+    padding-top:0;
+  }
+
+  @include flexbox;
+  margin-bottom:20px;
+
+  .h3 {
+    margin:0;
+  }
+
+  .radio-column {
+    width:25px;
+  }
+
+  .info-column {
+    @include flex(1);
+
+    .line {
+      @media (min-width: 479px) {
+
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -moz-flex;
+          display: -ms-flexbox;
+          display: flex;
+
+      }
+      @include justify-content(space-between);
+      margin-bottom:7px;
+      @include align-items(center);
+    }
+
+    .price-value {
+      font-size:20px;
+      white-space: nowrap;
+    }
+
+    .price,
+    .help{
+      white-space: nowrap;
+    }
+
+    .something-wrong {
+      color:red;
+      font-size:13px;
+      margin:10px 0;
+    }
+
+    .cdekWidjet .cdekMap {
+      height: 350px;
+      margin-top: 10px;
+    }
+  }
+}
+
+/* Список товаров в заказе */
+
+.card-order-product {
+    @include flexbox;
+    max-width:none;
+    margin-bottom:0;
+    border-bottom:1px solid #e8e8e8;
+    @include align-items(center);
+
+    .card-text {
+      width:50%;
+      padding:30px;
+    }
+
+    .card-quantity {
+      width:20%;
+      padding:30px;
+
+      .error {
+        color: red;
+        font-size: 13px;
+        margin: 10px 0;
+      }
+    }
+
+    .card-price {
+      width:30%;
+      padding:30px;
+      text-align:right;
+
+      &_present {
+        font-family: $themeFontBold;
+        font-size: 24px;
+        white-space:nowrap;
+      }
+    }
+}

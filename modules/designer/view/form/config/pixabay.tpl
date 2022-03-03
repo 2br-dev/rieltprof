@@ -1,0 +1,2 @@
+{$field->formView()}
+<p>{t alias="pixabay_api_config"}Для получения иденитификатора зарегистрируйтесь на сайте <a href="https://pixabay.com" target="_blank">https://pixabay.com</a> и запросите <a href="https://pixabay.com/api/docs/?request_full_access" target="_blank">расширенный доступ к API</a>{/t}</p>

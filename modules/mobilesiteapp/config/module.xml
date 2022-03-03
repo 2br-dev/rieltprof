@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>    
+        <name multilanguage="true">Мобильное приложение(клиентское)</name>
+        <description multilanguage="true">Предоставляет API для мобильного сервиса ReadyScript Mobile</description>
+        <version>4.0.12</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <default_theme>mobilesiteapp</default_theme>
+        <allow_user_groups type="array">
+            <value>supervisor</value>
+            <value>admins</value>
+            <value>clients</value>
+            <value>guest</value>
+        </allow_user_groups>
+        <disable_buy>0</disable_buy>
+        <push_enable>1</push_enable>
+        <banner_zone>0</banner_zone>
+        <root_dir>0</root_dir>
+        <top_products_dir>0</top_products_dir>
+        <menu_root_dir>0</menu_root_dir>
+        <tablet_root_dir_sizes>ssMssMssss</tablet_root_dir_sizes>
+        <products_pagesize>20</products_pagesize>
+        <top_products_pagesize>8</top_products_pagesize>
+        <top_products_order>title</top_products_order>
+        <mobile_products_size>6</mobile_products_size>
+        <tablet_products_size>4</tablet_products_size>
+        <enable_app_sticker>1</enable_app_sticker>
+        <mobile_phone/>
+        <news_category>0</news_category>
+    </defaultValues>
+</config>

@@ -1,0 +1,2 @@
+<input id="{$fitem->getId()}" data-key="{$fitem->getKey()}" type="checkbox" value="{$fitem->getValue()}" {if $fitem->getDefault()}checked{/if}/>
+<label for="{$fitem->getId()}">{$fitem->getTitle()}</label>

@@ -1,0 +1,129 @@
+.designer-block{
+  .d-atom-product-zone{
+    position: relative;
+    width: 100%;
+  }
+
+  .d-atom-product{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    .d-atom-item{
+      width: 100%;
+    }
+
+    .d-atom-product-description{
+      p, b, span, strong, i, ul, ol, li{
+        font-size: inherit;
+      }
+
+      ul,ol{
+        display: list-item;
+        margin-left: 30px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: inherit;
+
+        li{
+          margin: 0;
+          padding: 0;
+          margin-bottom: 10px;
+          font-size: inherit;
+        }
+      }
+
+      ul{
+        list-style: disc;
+      }
+      ol{
+        list-style: decimal;
+      }
+    }
+
+    .d-product-swiper-thumbs-wrapper{
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: row;
+    }
+
+    .d-no-product-title{
+      font-size: 18px;
+      font-weight: bolder;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    .d-atom-product-button-wrapper{
+      display: flex;
+      display: -webkit-flex;
+      flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+    }
+
+    .d-atom-product-amount-wrapper input{
+      display: block;
+      width: 100%;
+    }
+
+    .d-atom-product-button,
+    .d-atom-product-button-order,
+    .d-atom-product-button-buy-one-click{
+      display: flex;
+      display: -webkit-flex;
+      max-width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      -webkit-flex-shrink: 0;
+      flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+    }
+
+    .swiper-container{
+      width: 100%;
+      height: auto;
+    }
+
+    .swiper-wrapper{
+      display: flex;
+      display: -webkit-flex;
+
+      .swiper-slide{
+        text-align: center;
+
+        a{
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+
+    .d-top-swiper{
+      .swiper-slide{
+        background: center no-repeat;
+        background-size: contain;
+        -moz-background-size: contain;
+
+        img{
+          width: 100%;
+        }
+      }
+    }
+
+    .swiper-wrapper-thumbs{
+      .swiper-wrapper {
+        align-items: center;
+        -webkit-align-items: center;
+      }
+
+      .swiper-slide{
+        text-align: center;
+      }
+    }
+
+    .swiper-pagination{
+      text-align: center;
+    }
+  }
+}

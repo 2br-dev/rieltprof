@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Управление сайтами</name>
+        <description multilanguage="true">Добавление, изменение сайтов в системе</description>
+        <version>4.0.13</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <enable_agreement_personal_data>1</enable_agreement_personal_data>
+    </defaultValues>
+</config>

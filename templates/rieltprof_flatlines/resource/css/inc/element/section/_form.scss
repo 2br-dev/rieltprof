@@ -1,0 +1,118 @@
+@import "../../global/variable";
+
+// Section Form
+.sec {
+  &-form {
+    background-color: $themeFormBg;
+    min-height: 210px;
+    &_description {
+      margin: 0 auto;
+      padding: 40px 0 0 28px;
+      width: 550px;
+      @media (min-width:$sm-start) and (max-width:$md-end) {
+        width: 100%;
+      }
+      @media (max-width:$xs-end) {
+        padding: 10px 15px 0;
+        text-align: center;
+        width: inherit;
+      }
+      h3 {
+        color: #fff;
+        font-family: $themeFontLight;
+        font-size: 31px;
+        letter-spacing: -0.5px;
+        margin-bottom: 6px;
+        @media (max-width:$xs-end) {
+          font-size: 21px;
+        }
+      }
+      p {
+        color: #fff;
+        font-family: $themeFontLight;
+        letter-spacing: 1.1px;
+      }
+    }
+    &_subscribe {
+      padding: 66px 0 0 15px;
+      @media (max-width:$xs-end) {
+        margin: 0 auto;
+        padding: 0 0 25px 0;
+        text-align: center;
+      }
+      @media (min-width:$sm-start) and (max-width:$md-end) {
+        padding: 25px;
+      }
+
+      .sec-form_unsubscribe {
+        font-size:12px;
+        margin-left:23px;
+        color:white;
+        opacity:0.7;
+      }
+
+      .sec-form_succes {
+        color:white;
+        padding-left:3px;
+
+        font-family: $themeFontLight;
+        font-size: 26px;
+        letter-spacing: -0.5px;
+        margin-bottom: 6px;
+      }
+
+      .form-group {
+        display: inline-block;
+        margin-bottom: 0;
+        padding-bottom: 12px;
+        vertical-align: middle;
+        &:first-child {
+          width: 60%;
+          input {
+            width: 100%;
+          }
+        }
+        .form-control {
+          border-radius: 30px;
+          font-family: $themeFontNormal;
+          height: 47px;
+          letter-spacing: 1.15px;
+          padding: 10px 20px;
+          width: 210px;
+          @media (max-width:$sm-end) {
+            text-align: center;
+          }
+        }
+      }
+      .theme-btn_subscribe {
+        background-color: transparent;
+        border: 2px solid #fff;
+        border-radius: 30px;
+        color: #fff;
+        font-family: $themeFontNormal;
+        font-size: 17px;
+        height: 46px;
+        letter-spacing: -.5px;
+        line-height: 43px;
+        margin: 0 7px;
+        padding: 0 40px;
+      }
+      .checkbox {
+        input {
+          height: 18px;
+          margin: 4px 8px 0 0;
+          width: 18px;
+          @media (max-width:$xs-end) {
+            margin: -2px -25px;
+          }
+        }
+        span {
+          color: #fff;
+          font-family: $themeFontLight;
+          position: relative;
+          top: -4px;
+        }
+      }
+    }
+  }
+}

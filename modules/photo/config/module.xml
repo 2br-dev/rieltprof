@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Блок фотографий</name>
+        <description multilanguage="true">Позволяет привязывать фотографии к различным объектам в системе</description>
+        <version>4.0.17</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        
+        <original_photos_resize>1</original_photos_resize>
+        <original_photos_width>1500</original_photos_width>
+        <original_photos_height>1500</original_photos_height>
+        <product_sort_photo_desc>0</product_sort_photo_desc>
+    </defaultValues>
+</config>

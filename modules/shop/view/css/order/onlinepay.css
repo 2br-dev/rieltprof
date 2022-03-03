@@ -1,0 +1,38 @@
+.payment-result_content:not(.new) .title-new,
+.payment-result_content:not(.hold) .title-hold,
+.payment-result_content:not(.success) .title-success,
+.payment-result_content:not(.fail) .title-fail {
+    display: none;
+}
+
+.payment-result {
+    padding: 200px 0;
+    text-align: center;
+}
+
+.payment-result_content {
+    background: #fff;
+    padding: 50px 70px;
+    max-width: 490px;
+    display: inline-block;
+}
+
+.payment-result .descr {
+    padding-left: 70px;
+}
+
+.payment-result h2 {
+    background: none;
+    margin: 0;
+    font-size: 24px;
+    min-height: 60px;
+    align-items: center;
+}
+
+.payment-result h2 img {
+    margin-right: 20px;
+}
+
+.payment-result h2 span {
+    background: none;
+}

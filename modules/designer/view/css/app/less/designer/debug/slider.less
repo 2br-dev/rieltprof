@@ -1,0 +1,54 @@
+.designer-block{
+  .d-atom.hover{
+    .d-atom-slider{
+      .d-atom-item{
+        outline: 1px solid lightblue !important;
+      }
+    }
+  }
+
+  .d-atom-slider{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    margin-left: -10px;
+    margin-right: -10px;
+
+    .d-atom-item{
+      width: 100%;
+      position: relative;
+    }
+
+    .swiper-container{
+      width: 100%;
+      height: auto;
+    }
+
+    .swiper-wrapper{
+      display: flex;
+      display: -webkit-flex;
+
+      .swiper-slide{
+        text-align: center;
+        background: center no-repeat;
+        background-size: contain;
+        -moz-background-size: contain;
+
+        a{
+          display: block;
+          width: 100%;
+          text-align: center;
+        }
+
+        img{
+          width: 100%;
+        }
+      }
+    }
+
+    .swiper-pagination{
+      text-align: center;
+    }
+  }
+}

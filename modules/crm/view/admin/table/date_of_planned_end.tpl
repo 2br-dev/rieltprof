@@ -1,0 +1,1 @@
+<span class="c-{$cell->getRow()->getPlannedEndStatus()}" title="{$cell->getRow()->getPlannedEndStatusTitle()}">{$cell->getValue()|dateformat:"@date @time"}</span>

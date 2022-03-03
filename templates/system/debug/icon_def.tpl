@@ -1,0 +1,1 @@
+<a {foreach from=$tool->getAttr() key=key item=item} {$key}="{$item}"{/foreach}>{$tool->getText()}</a>

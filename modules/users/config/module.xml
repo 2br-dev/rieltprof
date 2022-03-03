@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>    
+        <name multilanguage="true">Пользователи и группы</name>
+        <description multilanguage="true">Управление пользователями. Добавление, удаление, назначение прав</description>        
+        <version>4.0.57</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        
+        <generate_password_length>8</generate_password_length>
+        <generate_password_symbols>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#?</generate_password_symbols>
+        <csv_id_fields type="array">
+            <value>e_mail</value>
+        </csv_id_fields>
+        <clear_random>5</clear_random>
+        <clear_for_last_time>2160</clear_for_last_time>
+        <replace_country_phone_code>8</replace_country_phone_code>
+        <default_country_phone_code>7</default_country_phone_code>
+        <country_phone_length>11</country_phone_length>
+        <type_auth>0</type_auth>
+        <visible_fields type="array">
+            <value>e_mail</value>
+            <value>phone</value>
+            <value>name</value>
+            <value>surname</value>
+            <value>midname</value>
+        </visible_fields>
+        <require_fields type="array">
+            <value>e_mail</value>
+            <value>phone</value>
+            <value>name</value>
+            <value>surname</value>
+        </require_fields>
+        <login_fields type="array">
+            <value>login</value>
+            <value>e_mail</value>
+        </login_fields>
+        <two_factor_auth>2</two_factor_auth>
+        <two_factor_register>1</two_factor_register>
+        <lifetime_resolved_session_hours>2</lifetime_resolved_session_hours>
+        <phone_pass_recover>0</phone_pass_recover>
+        <register_by_phone>0</register_by_phone>
+        <send_count_limit>5</send_count_limit>
+        <try_count_limit>10</try_count_limit>
+        <block_delay_minutes>20</block_delay_minutes>
+        <lifetime_session_hours>2</lifetime_session_hours>
+        <lifetime_code_minutes>10</lifetime_code_minutes>
+        <resend_delay_seconds>60</resend_delay_seconds>
+        <code_length>4</code_length>
+        <ignore_sms_provider>0</ignore_sms_provider>
+        <type_code_provider>sms</type_code_provider>
+        <ip_limit_session_count>30</ip_limit_session_count>
+        <user_one_fio_field>0</user_one_fio_field>
+    </defaultValues>
+</config>

@@ -1,0 +1,172 @@
+.bordered {
+    border: 1px solid #ACACAC;
+    padding:10px;
+    position:relative;
+    margin-top:10px;
+}
+
+.bordered h3 {
+    position: absolute;
+    top:-8px;
+    left:5px;
+    padding:0;
+    margin:0;
+    background: #fafafa;
+    padding:0 5px;
+    font-size:12px;
+}
+
+.order-table {
+    width:100%;
+    border-collapse:collapse;
+}
+.order-table td{
+    padding:3px;
+    border-bottom:1px solid #D0D0D0;
+}
+
+.order-table tr:last-child td {
+    border-bottom:none;
+}
+
+.order-table .otitle {
+    width:30%;
+    border-right:1px solid #D0D0D0;
+}
+
+.order-table .hl {
+    background: #F7F7F7;
+}
+ 
+.f {
+    margin-left: 0;
+}
+
+.floatbox {
+    overflow:hidden;
+    zoom:1;
+}
+
+.o-leftcol {
+    float:left;
+    width:60%;
+}
+
+.o-leftcol.width100pr{
+   width:100%; 
+}
+
+.o-rightcol {
+    float:right;
+    width:38%;
+}
+
+.o-rightcol .padd{
+    padding-right:5px;
+}
+
+.pr-table {
+    border-collapse:collapse;
+    width:100%;
+    border:1px solid #D0D0D0;
+}
+
+.pr-table th, .pr-table td {
+    border:1px solid #D0D0D0;
+}
+
+.pr-table th.chk {
+    background: #3AABD1;
+}
+.pr-table .chk.checked {
+    background: #3AABD1;
+}
+
+.pr-table thead,
+.pr-table tfoot
+{
+    background: #ACACAC;
+    color: white;
+    white-space:nowrap;
+}
+
+.pr-table thead th {
+    padding:5px 10px;
+    text-align:left;
+    font-weight:normal;
+}
+
+.pr-table tfoot td {
+    padding:5px 0;
+}
+
+.pr-table tbody td {
+    text-align:left;
+    padding:10px;
+}
+
+.pr-table tbody tr {
+    border-bottom:1px dotted #E0E0E0;
+}
+
+.pr-table .title {
+    text-decoration:underline;
+}
+
+.pr-table .packages-block {
+    margin-top:5px;
+}
+
+.pr-table .total {
+    font-size:18px;
+}
+
+.pr-table tfoot td {
+    padding:3px;
+}
+
+.pr-table tfoot tr {
+    border-bottom:1px dotted #ACACAC;
+}
+
+.pr-table .cost {
+    font-weight:bold;
+}
+
+.pr-table .discount {
+    color: green;
+}
+
+.pr-table .additems {
+    background: #f2f2f2;
+}
+
+.pr-table .parameters{
+    font-size: 12px;
+}
+
+.left-49p {
+    float:left;
+    width:49%;
+}
+
+.right-49p {
+    float:right;
+    width:49%;
+}
+
+.fleft {
+    float:left;
+}
+
+.fright {
+    float:right;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.oneOrder {
+    page-break-after: always;
+}

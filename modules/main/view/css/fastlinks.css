@@ -1,0 +1,31 @@
+.fastlinks {
+    margin:10px 0;
+    font-size:16px;
+    list-style:none;
+    padding:0;
+
+    column-width: 200px;
+}
+
+.fastlinks li {
+    margin:10px 0;
+    display:inline-block;
+    width:100%;
+}
+
+.fastlinks li .icon {
+    margin-right: 7px;
+    margin-top: -8px;
+    float: left;
+    color: #183151;
+    background: #eee;
+    padding: 12px 15px;
+    border-radius: 50%;
+    font-size: 21px;
+}
+
+.fastlinks li a {
+    text-decoration: underline;
+    margin-left:53px;
+    display:block;
+}

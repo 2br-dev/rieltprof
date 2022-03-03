@@ -1,0 +1,74 @@
+@import "../../global/variable";
+
+// Navbar
+
+nav.navbar {
+  border: none;
+}
+
+ul.nav.navbar-nav {
+  &:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 58px;
+    background-color: #262626;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 20;
+  }
+  > li {
+    font-family: $themeFontLight;
+    margin-bottom: 0;
+    position: static;
+    transition: ease-in-out 0.2s;
+    > a {
+      background-color: #262626;
+      color: #fff;
+      letter-spacing: -0.05px;
+      line-height: 28px;
+      padding: 15px 20px;
+      z-index: 21;
+      @media only screen and (max-width:$sm-end) {
+        padding: 15px 10px;
+      }
+      &:hover {
+        background: rgba(0,0,0,1);
+      }
+      &.sale {
+        color: $linkColor;
+      }
+    }
+  }
+}
+.navbar {
+  border:none;
+  border-radius: 0;
+  &-theme {
+    background: #f5f5f5;
+    .theme-list {
+      display: table;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        display: table-cell;
+        font-family: $themeFontLight;
+        font-size: 12px;
+        a {
+          color: #000;
+          display: block;
+          font-size: 11.5px;
+          letter-spacing: .175px;
+          line-height: 1.2;
+          padding: 7px 7px 10px 15px;
+        }
+      }
+    }
+  }
+}
+
+.navbar-inverse {
+  background:#262626;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<structure grid_system="gs960">
+  <page route_id="article-front-view" context="theme" template="%THEME%/wrapper_article.tpl" inherit="1"/>
+  <page route_id="catalog-front-compare" context="theme" template="%THEME%/fullscreen.tpl" inherit="1"/>
+  <page route_id="catalog-front-listproducts" context="theme" template="%THEME%/wrapper_catalog.tpl" inherit="1"/>
+  <page route_id="catalog-front-product" context="theme" template="theme:rieltprof_flatlines/wrapper_product.tpl" inherit="1"/>
+  <page route_id="default" context="theme" template="%THEME%/default.tpl" inherit="1"/>
+  <page route_id="main.index" context="theme" template="%THEME%/index.tpl" inherit="1"/>
+  <page route_id="rieltprof-front-myreview" context="theme" template="theme:rieltprof_flatlines/wrapper_profile.tpl" inherit="1"/>
+  <page route_id="shop-front-cartpage" context="theme" template="%THEME%/wrapper_cart.tpl" inherit="1"/>
+  <page route_id="shop-front-checkout" context="theme" template="%THEME%/wrapper_checkout.tpl" inherit="1"/>
+  <page route_id="shop-front-mybalance" context="theme" template="%THEME%/wrapper_profile.tpl" inherit="1"/>
+  <page route_id="shop-front-myorders" context="theme" template="%THEME%/wrapper_profile.tpl" inherit="1"/>
+  <page route_id="shop-front-myorderview" context="theme" template="%THEME%/wrapper_profile.tpl" inherit="1"/>
+  <page route_id="shop-front-myproductsreturn" context="theme" template="%THEME%/wrapper_profile.tpl" inherit="1"/>
+  <page route_id="support-front-support" context="theme" template="%THEME%/wrapper_profile.tpl" inherit="1"/>
+  <page route_id="users-front-profile" context="theme" template="%THEME%/wrapper_profile.tpl" inherit="1"/>
+  <templateModules/>
+</structure>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Центр обновления</name>
+        <description multilanguage="true">Позволяет устанавливать обновления системы с сервера ReadyScript</description>
+        <version>4.0.047</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>        
+        <file_download_part_size_mb>7</file_download_part_size_mb>
+    </defaultValues>
+</config>

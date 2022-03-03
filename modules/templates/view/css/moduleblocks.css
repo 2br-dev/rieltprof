@@ -1,0 +1,161 @@
+/* Добавление блока в менеджере блоков */
+
+.module-blocks {
+    display: flex;
+    display: -webkit-flex;
+    margin-top:10px;
+}
+
+.module-blocks .left {
+    width: 250px;
+    margin-bottom:20px;
+    flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+    border-right:1px solid #d4d4d4;
+}
+
+.module-blocks .right {
+    margin-left:25px;
+    width: 100%;
+}
+
+.module-blocks .columntitle {
+    height:25px;
+    line-height:25px;
+    margin-bottom:15px;
+    margin-left:9px;
+    font-size:20px;
+}
+
+.module-blocks .left .columntitle span{
+    padding:0 5px;
+}
+
+.module-blocks .right .columntitle span{
+    display:block;
+    padding:0 5px;
+}
+
+.module-blocks .modules {
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.module-blocks .modules li a{
+    padding:9px;
+    display:block;
+}
+
+.module-blocks .modules li a:hover {
+    background: #F0F0F0;
+}
+
+.admin-style .module-blocks .modules .act a,
+.admin-style .module-blocks .modules .act a:hover {
+    background: #333;
+    color: white;
+}
+
+.module-blocks .search-wrap input{
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.module-blocks .blocks .module-list{
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+
+.module-blocks .blocks .item {
+    width:225px;
+    height:82px;
+    font-size:14px;
+    color: #3d4754;
+    background: #efefef;
+    margin-right:12px;
+    margin-bottom:12px;
+}
+
+.module-blocks .blocks .item .limiter {
+    overflow:hidden;
+    height:72px;
+}
+
+.module-blocks .blocks .item:hover {
+    background: #fed42b;
+}
+
+.module-blocks .blocks .item .name {
+    padding:10px;
+    display:block;
+}
+
+.module-blocks .blocks .item .info {
+    font-size:11px;
+    padding:0 10px 10px;
+    display:block;
+    color: #777;
+}
+
+.module-blocks .blocks .item:hover .info {
+    color: black;
+    background: #fed42b;
+    position:relative;
+}
+
+.module-blocks .blocks .item:hover .limiter {
+    height:auto;
+    overflow:visible;
+}
+
+.admin-style .module-blocks .dropdown-menu > li > a {
+    padding-left:11px;
+    padding-right:11px;
+}
+
+@media(max-width:767px) {
+    .module-blocks {
+        flex-direction: column;
+    }
+
+    .module-blocks .left {
+        border-right:none;
+    }
+
+    .module-blocks .left,
+    .module-blocks .right {
+        float:none;
+        width:auto;
+        margin:0 0 20px;
+    }
+}
+
+@media(min-width:768px) {
+    .admin-style .module-blocks .dropdown .dropdown-toggle {
+        display:none;
+    }
+
+    .admin-style .module-blocks .dropdown .dropdown-menu {
+        display: block;
+        float:none;
+        position:static;
+        box-shadow:none;
+        padding:0;
+        border-radius:0;
+    }
+
+    .admin-style .module-blocks .dropdown .dropdown-menu li a {
+        white-space:normal;
+    }
+}
+
+@media(max-width:541px) {
+    .module-blocks .blocks .item{
+        float: none;
+        width: 100%;
+        height: auto;
+    }
+}

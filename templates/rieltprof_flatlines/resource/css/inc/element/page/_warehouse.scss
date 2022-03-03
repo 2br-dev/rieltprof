@@ -1,0 +1,68 @@
+@import "../../global/variable";
+
+.page-warehouse {
+  background:#fff;
+  padding: 3px 35px 28px;
+  margin-bottom:29px;
+  @media (max-width:$sm-end) {
+    padding: 3px 15px 0;
+  }
+
+
+  .warehouse-card {
+    &_info {
+      @include flexbox;
+      @include justify-content(space-between);
+      margin: 30px 0;
+      padding: 20px 0;
+      border-bottom: 1px solid #ececec;
+      border-top: 1px solid #ececec;
+
+      @media(max-width:$xs-end) {
+        display:block;
+
+        .phone,
+        .worktime {
+          margin-top:20px;
+          padding-top:20px;
+          border-top: 1px solid #ececec;
+        }
+
+      }
+
+      .icon {
+        font-size:60px;
+        float:left;
+      }
+
+      .title {
+        margin-left:70px;
+        font-weight:bold;
+      }
+
+      .value {
+        margin-left:70px;
+      }
+    }
+
+    &_image {
+      text-align:center;
+      margin-bottom:20px;
+      overflow:auto;
+      @media(max-width:$sm-end) {
+        overflow:visible;
+      }
+    }
+
+    &_image img {
+      @media(max-width:$sm-end) {
+        max-width:100%;
+      }
+    }
+
+    &_map {
+      height:400px;
+    }
+  }
+
+}

@@ -1,0 +1,127 @@
+.designer-block{
+  .d-atom-video,
+  .d-atom-video-wrapper{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+  }
+
+  .d-atom-video{
+    margin-left: -10px;
+    margin-right: -10px;
+
+
+    &.hover{
+      .d-atom-video-inner{
+        outline: 1px solid lightblue;
+      }
+    }
+
+    .d-atom-item{
+      width: 100%;
+    }
+
+    .d-atom-video-inner{
+      position: relative;
+    }
+
+    .d-atom-video-inner.ratio21by9{
+      padding-bottom: 42.85%;
+      height: 0;
+    }
+
+    .d-atom-video-inner.ratio16by9{
+      padding-bottom: 56.25%;
+      padding-top: 25px;
+      height: 0;
+    }
+
+    .d-atom-video-inner.ratio4by3{
+      padding-bottom: 75%;
+      height: 0;
+    }
+
+    .d-atom-video-inner.ratio1by1{
+      padding-bottom: 100%;
+      height: 0;
+    }
+
+    .d-atom-video-play,
+    .d-atom-video-play-wrapper{
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      background: no-repeat center center;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    .d-atom-video-play-wrapper{
+      background-size: cover;
+      -webkit-background-size: cover;
+    }
+
+    iframe{
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    video{
+      width: 100%;
+    }
+  }
+
+  .d-atom-video-wrapper{
+    align-self: center;
+    -webkit-align-self: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .d-atom-video-title{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .d-atom-video-type{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid silver;
+  }
+
+  .d-atom-video-text{
+    display: block;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid silver;
+    margin-bottom: 30px;
+  }
+
+  .d-atom-video-error{
+    text-align: center;
+    font-size: 14px;
+    color: red;
+    margin-bottom: 20px;
+  }
+}

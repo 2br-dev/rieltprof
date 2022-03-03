@@ -1,0 +1,1 @@
+{$elem->getUserFieldsManager()->getAdminForm(t('Будут запрошены при оформлении заказа'))}

@@ -1,0 +1,49 @@
+@import "../../global/variable";
+
+// Sidebar personal page
+
+.sidebar_menu-list {
+  background-color: #ffffff;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    a {
+      border-bottom: 1px solid #d8d8d8;
+      box-shadow: none;
+      color: #000;
+      cursor: pointer;
+      display: block;
+      font-family: $themeFontLight;
+      font-size: 18px;
+      padding: 15px;
+      transition: ease-in-out 0.3s;
+      &:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+      }
+      &.active {
+        border: 1px solid #adadad;
+        cursor: default;
+        &:hover {
+          box-shadow: none;
+        }
+      }
+    }
+    &:last-child a {
+      border: none;
+    }
+  }
+}
+
+
+.form_label__block {
+  @include flexbox;
+  input {
+    width: 20px!important;
+    float: left;
+  }
+  label {
+    font-family: $themeFontNormal;
+    padding: 6px 0 0 5px;
+  }
+}

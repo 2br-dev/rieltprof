@@ -1,0 +1,54 @@
+.container-fluid {
+  max-width:1540px;
+}
+
+.exception-body {
+  background: url(../img/404bg.png) repeat;
+
+  .exception-nav {
+    @include flexbox;
+    @include justify-content(space-evenly);
+    @include flex-wrap(wrap);
+    list-style:none;
+    padding:55px 0;
+    @media(max-width: $sm-end) {
+      padding:20px 0;
+    }
+
+    li {
+      font-family:$themeFontLight;
+      font-size:18px;
+      padding:10px;
+
+      a {
+        color:#333;
+      }
+    }
+  }
+
+  .exception-message {
+    text-align:center;
+
+    &_code {
+      font-size:400px;
+      line-height:100%;
+      font-family:$themeFontBold;
+      font-weight:bold;
+      text-shadow: 7px 7px 25px #cecece;
+      color:white;
+      @media(max-width: $sm-end) {
+          font-size:250px;
+      }
+
+      @media(max-width: $xs-end) {
+        font-size:160px;
+      }
+    }
+
+    &_text {
+      font-size:20px;
+      font-family:$themeFontNormal;
+      padding-bottom:10px;
+    }
+  }
+}

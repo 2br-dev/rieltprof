@@ -1,0 +1,71 @@
+/**
+ * Сбрасывает стили, чтобы можно было нормально работать с назначением стилей
+ */
+.designer-block{
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  line-height: 1;
+  font-size: 100%; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  position: inherit;
+  text-indent: inherit;
+
+  h1,h2,h3,h4,h5,h6,div,p,ul,ol,li,a,hr{
+    display: inherit;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    text-align: left;
+    text-indent: inherit;
+    opacity: inherit;
+  }
+
+  h1,h2,h3,h4,h5,h6,div,p{
+    display: block;
+  }
+
+  label{
+    display: inline-block;
+    font-weight: normal;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="file"]{
+    background: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+  }
+
+  input[type="file"]{
+    width: 100%;
+  }
+
+  h1{
+    font-size: 2em;
+  }
+  h2{
+    font-size: 1.7em;
+  }
+  h3{
+    font-size: 1.47em;
+  }
+  h4{
+    font-size: 1.3em;
+  }
+  h4{
+    font-size: 1.2em;
+  }
+  h5{
+    font-size: 1em;
+  }
+  h5{
+    font-size: 0.9em;
+  }
+}

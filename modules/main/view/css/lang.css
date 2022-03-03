@@ -1,0 +1,10 @@
+.table-group-row {
+    border-bottom:2px solid #fed32c;
+    text-align:center;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.resize-vertical {
+    resize: vertical;
+}

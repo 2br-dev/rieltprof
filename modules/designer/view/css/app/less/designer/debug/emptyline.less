@@ -1,0 +1,37 @@
+.designer-block{
+  .d-atom-emptyline{
+    display: flex;
+    flex-direction: column;
+
+    .d-atom-item{
+      position: relative;
+      width: 100%;
+    }
+
+    .d-round-handler{
+      top: 50%;
+      left: 50%;
+      margin-right: -8px;
+      margin-top: -8px;
+    }
+  }
+
+  .d-atom-emptyline-zone{
+    .d-atom-item{
+      &:hover{
+        background-color: rgba(101, 103, 224, .1);
+      }
+    }
+
+    &.drag-resize{
+      opacity: 1;
+
+      .d-blow-pixels{
+        display: inline-block;
+        position: absolute;
+        left: 30px;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,84 @@
+.designer-block{
+  .d-atom-form{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    position: relative;
+
+    .d-atom-instance{
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+    }
+
+    .d-atom-form-fields-wrapper,
+    .d-atom-form-title-field-wrapper{
+      display: flex;
+      display: -webkit-flex;
+      flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+      width: 100%;
+    }
+
+    @media (max-width: 767px){
+      .d-atom-form-title-field-wrapper{
+        max-width: none !important;
+      }
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select{
+      display: block;
+      width: 100%;
+    }
+
+    input[type="file"]{
+      -webkit-appearance: none;
+    }
+
+    select{
+      -webkit-appearance: none;
+      position: relative;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAJCAYAAAA/33wPAAAAvklEQVQoFY2QMQqEMBBFv7ERa/EMXkGw11K8QbDXzuN4BHv7QO6ifUgj7v4UAdlVM8Uwf+b9YZJISnlqrfEUZVlinucnBGKaJgghbiHOyLyFKIoCbdvecpyReYvo/Ma2bajrGtbaC58kCdZ1RZ7nl/4/4d5EsO/7nzl7IUtodBexMMagaRrs+06JLMvcNWmaOv2W/C/TMAyD58dxROgSmvxFFMdxoOs6lliWBXEcuzokXRbRoJRyvqqqQvye+QDMDz1D6yuj9wAAAABJRU5ErkJggg==) !important;
+      background-position : right center !important;
+      background-repeat: no-repeat !important;
+      padding-right: 1.5em;
+    }
+
+    button{
+      -webkit-appearance: none;
+    }
+
+    & > form{
+      align-self: center;
+      width: 100%;
+
+      &.d-in-loading::after{
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.5) center center no-repeat url("../../img/loader.gif");
+        background-size: 40px 40px;
+        -moz-background-size: 40px 40px;
+        z-index: 2;
+      }
+    }
+  }
+
+  .d-atom-form-fields{
+    width: 100%;
+  }
+
+  .d-atom-form-field{
+    width: 100%;
+  }
+
+}

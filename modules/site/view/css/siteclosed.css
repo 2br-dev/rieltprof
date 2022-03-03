@@ -1,0 +1,16 @@
+.site-closed-body {
+    background:url(../img/siteclosedbg.png);
+    text-align: center;
+    line-height:100vh;
+    margin:0;
+}
+
+.site-closed {
+    display:inline-block;
+}
+
+.site-closed .message {
+    line-height:normal;
+    padding:20px;
+    font-size:4em;
+}

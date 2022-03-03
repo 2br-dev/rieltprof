@@ -1,0 +1,1 @@
+<input type="hidden" name="{$field->getFormName()}" value="{$field->get()}" {$field->getAttr()} />

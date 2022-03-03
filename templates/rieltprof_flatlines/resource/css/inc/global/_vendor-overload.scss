@@ -1,0 +1,32 @@
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background:#e8e8e8;
+}
+
+.nav-tabs {
+  &_scroll-x {
+    overflow-x:auto;
+    white-space:nowrap;
+    font-size:0;
+  }
+
+  > li {
+    display:inline-block;
+    float:none;
+    margin-bottom:0;
+  }
+}
+
+.lg-outer .lg-thumb-item {
+  @include flexbox;
+  @include align-items(center);
+  @include justify-content(center);
+  background-color:white;
+
+  img {
+    width:auto;
+    height:auto;
+    max-width:100%;
+    max-height:100%;
+  }
+}

@@ -1,0 +1,43 @@
+.admin-style .tags .notags {
+    margin: 30px 10px;
+    color: #D0D0D0;
+    font-size:18px;
+    text-align:center;    
+}
+
+.admin-style .taglist {
+    overflow:hidden;
+    list-style: none;
+    padding:10px 0;
+    margin:0;
+}
+
+.admin-style .taglist li {
+    float:left;
+    display:block;
+    height:25px;
+    overflow:hidden;
+    margin-right:10px;
+}
+
+.admin-style .taglist li .padd {
+    padding:3px;
+}
+
+.admin-style .taglist .tagdel {
+    color: #ff0000;
+    font-size: 17px;
+    vertical-align: middle;
+}
+
+/* блок-форма */
+.admin-style .grayblock {
+    border:2px solid #E0E0E0;
+    padding:10px;
+}
+
+.admin-style .grayblock form {
+    display:block;
+    margin:0;
+    padding:10px;
+}

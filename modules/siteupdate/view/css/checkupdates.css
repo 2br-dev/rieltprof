@@ -1,0 +1,148 @@
+.checkUpdatesWidget {
+    text-align:center;
+}
+
+.checkUpdatesWidget .greenButton {
+    background: #71b422;
+    padding:8px 20px;
+    color: white;
+    font-size:16px;
+    display:inline-block;
+}
+
+.checkUpdatesWidget .greenButton:hover {
+    background: #63a219;
+}
+
+.checkUpdatesWidget .nolicense {
+    padding:8px;
+}
+
+.checkUpdatesWidget .nolicense p{
+    margin:10px 0;
+}
+
+.checkUpdatesWidget .padd5 {
+    padding:5px;
+    overflow:hidden;
+}
+
+.checkUpdatesWidget .allok {    
+    background: #71b422;
+    height:100px;
+    color: white;
+}
+
+.checkUpdatesWidget .allok {
+    font-size:16px;
+}
+
+.checkUpdatesWidget .timeleft {
+    height:100px;
+}
+
+.checkUpdatesWidget .timeleft .l1,
+.checkUpdatesWidget .timeleft .l2 {
+    border-bottom:1px dotted #3f3f3f;
+}
+
+.checkUpdatesWidget .timeleft .l1 {
+    font-size:24px;
+    margin:10px 0 5px;
+    line-height:40px;
+}
+
+.checkUpdatesWidget .timeleft .l2 {
+    margin:0 0 20px;
+}
+
+.checkUpdatesWidget .frame60 {
+    float:left;
+    width:60%;    
+    overflow:hidden;
+}
+
+.checkUpdatesWidget table td {
+    vertical-align:middle;
+}
+
+.checkUpdatesWidget .frame40 {
+    float:right;
+    width:40%;
+    overflow:hidden;
+}
+
+#col_left .checkUpdatesWidget .frame60,
+#col_right .checkUpdatesWidget .frame60,
+#col_left .checkUpdatesWidget .frame40,
+#col_right .checkUpdatesWidget .frame40 {
+    float:none;
+    width:100%;
+}
+
+
+.checkUpdatesWidget .gotoUpdate {
+    background: #ff5d37;
+    height:90px;
+    font-size:16px;
+    color: white;
+    vertical-align:middle;
+}
+
+.checkUpdatesWidget .needUpdate {
+    width:100%;
+}
+
+.checkUpdatesWidget .gotoUpdate a {
+    color:white;
+}
+
+.checkUpdatesWidget .gotoUpdate a img {
+    vertical-align:middle;
+    margin-right:10px;
+}
+
+.checkUpdatesWidget .updateText {
+    margin:5px 0;
+}
+
+.checkUpdatesWidget .checking {
+    padding:20px 0;
+}
+
+.checkUpdatesWidget .checking p {
+    margin:5px 0;
+    font-size:16px;
+}
+
+.checkUpdatesWidget .errors .msg {
+    color: red;
+    margin:30px 0 5px;
+}
+
+.checkUpdatesWidget .errors .checkForUpdates {
+    font-size:16px;
+    border-bottom:1px dotted #3f3f3f;
+}
+
+.checkUpdatesWidget .updateBestPrice {
+    background: #ff5d37;
+    color: white;
+    padding:20px;
+    font-size:14px;
+    line-height:140%;
+    margin-top:0;
+}
+
+.checkUpdatesWidget .whiteButton {
+    padding:8px 20px;
+    color: black;
+    background:white;
+    font-size:16px;
+    display:inline-block;
+    margin-top:20px;
+}
+
+.checkUpdatesWidget .whiteButton:hover {
+    opacity:0.9;
+}

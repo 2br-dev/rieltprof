@@ -1,0 +1,83 @@
+html, 
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+.centerColumn{
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div{
+   font-size:12px;
+}
+
+.bottomInfo{
+    margin-top:20px;
+}
+.pechatDiv{
+    position:relative;
+    top:-10px;
+}
+.headTable{
+    width:100%;
+    border:0px;
+}
+.headTable td{
+    border:0px; 
+    vertical-align:top;
+    font-size:12px;
+}
+.topTable{
+   margin-top:30px;
+   margin-bottom:10px;
+   border-top:1px solid black;
+   border-left:1px solid black;
+}
+
+.topTable td{
+   border-bottom:1px solid black;
+   border-right:1px solid black; 
+   font-size:12px;
+}
+
+.bottomTable{
+   margin-top:40px;
+   border:0px;
+   width:100%;
+}
+
+.bottomTable td{
+   border:0px;
+   font-size:12px;
+}
+.acenter{
+    text-align:center;
+}
+.aright{
+    text-align:right;
+}   
+.pt40{
+    padding-top:40px;
+}
+.h1{
+    font-size:26px;
+    text-align:center;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.fz{
+    font-size:10px;
+    padding-top:60px;
+}
+.itogo{
+    font-size:12px;
+    margin:0px;
+    padding:0px;
+}
+.oneOrder {
+    page-break-after: always;
+}

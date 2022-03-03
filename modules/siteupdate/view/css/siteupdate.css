@@ -1,0 +1,202 @@
+.admin-style .clicktostart {
+    font-weight:bold;
+    padding-top:12px;
+}
+
+.admin-style .stepbystep-wrapper {
+    background:#f5f5f5;
+    padding:20px 0;
+}
+
+.admin-style .stepbystep {
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.admin-style .stepbystep li {
+    float:left;
+    background: url(../img/longright.gif) no-repeat left center;
+    padding-left:100px;
+    margin-left:10px;
+    line-height:33px;
+    font-size:14px;
+    position:relative;
+}
+
+.admin-style .stepbystep .first {
+    padding-left:0;
+    margin-left:0;
+    margin-right:10px;
+    background:none;
+}
+
+.admin-style .stepbystep .first .item {
+    padding:0;
+}
+
+.admin-style .stepbystep .item{
+    padding:0 10px;
+    font-size:16px;
+    color: #808080;
+    
+    line-height: 33px;
+    height:33px;
+    display:inline-block;    
+}
+
+
+.admin-style .stepbystep .already a.item:hover {
+    height:30px;
+    border-bottom:2px solid #e07a1e;
+    color: #585858;
+}
+
+.admin-style .stepbystep .act .item {
+    border-bottom:2px solid #3aabd1;
+    color: black;
+    font-size:18px;
+    padding:0 10px;
+    position:relative;
+}
+
+.admin-style .stepbystep .act.step1 .item {
+    background:#71b422;
+    border:none;
+    color: white;
+    font-size:16px;
+}
+
+.admin-style .stepbystep .act .item.disabled  {
+    background-color: #C0C0C0;
+    color: #969696;
+    text-shadow:0 1px 0 #eee;
+    cursor:default;
+}
+
+.admin-style .stepbystep .already .item{
+    
+}
+
+.admin-style .sp-block {
+    margin-top:25px;
+}
+
+.admin-style .sp-text {
+    line-height:20px;
+}
+
+.admin-style .sp-block select {
+    vertical-align:middle;
+    min-width:200px;
+}
+
+.admin-style .progress-block {
+    margin:30px 0 15px;
+    border:1px dotted #aaa;
+    padding:20px 60px 20px 20px;
+}
+
+.admin-style .progress-block .title {
+    margin:5px 0;
+}
+
+.admin-style .progress-block .progress-container {
+    background: #3aabd1;
+    height:18px;
+    position:relative;
+}
+
+.admin-style .progress-container .progress-bar {
+    position:absolute;
+    top:0;
+    left:0;
+    height:18px;
+    background: #3f3f3f url(../img/black_progress.gif) repeat-x top left;
+}
+
+.admin-style .progress-container .percent {
+    position:absolute;
+    left:100%;
+    margin-left:10px;
+    top:0;
+}
+
+.admin-style .progress-block .module {
+    margin:10px 0;
+}
+
+.admin-style .system-updated {
+    margin:30px 0px;
+    background: #f8f8f8;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
+    padding:150px 20px;
+    color: black;
+    text-align:center;
+}
+
+.admin-style .system-updated h2 {
+    color:green;
+}
+
+@media(max-width:1023px) {
+    .admin-style .stepbystep li {
+        background-position:-46px center;
+        padding-left:50px;
+    }
+
+    .admin-style .clicktostart {
+        font-size:12px;
+        padding-top:13px;
+    }
+}
+
+@media(max-width:767px) {
+    .admin-style .system-updated {
+        padding-top:50px;
+        padding-bottom:50px;
+    }
+
+    .admin-style .stepbystep,
+    .admin-style .stepbystep li {
+        float:none;
+        text-align:center;
+        background:none;
+        margin-left:0;
+        padding-left:0;
+    }
+
+    .admin-style .clicktostart {
+        text-align:center;
+        float:none;
+    }
+}
+
+/* Patch, чтобы SiteUpdate корректно отображался при первой установке на RS 2.x */
+
+#content-layout > .viewport .viewport {
+    width:auto;
+}
+
+#content-layout > .viewport .stepbystep-wrapper {
+    background:none;
+}
+
+#content-layout > .viewport .clicktostart {
+    padding-top: 6px;
+}
+
+#content-layout > .viewport .btn {
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}

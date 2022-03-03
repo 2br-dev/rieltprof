@@ -1,0 +1,202 @@
+@import "../../global/variable";
+
+// Catalog List
+
+.catalog {
+  &-description {
+    margin:15px 0;
+  }
+
+  &-subcategory {
+    margin:5px 0;
+    a {
+      background-color: #fff;
+      border-radius: 0.3rem;
+      color: #666;
+      display: inline-block;
+      margin: 0 10px 10px 0;
+      padding: 3px 10px;
+      vertical-align: middle;
+      &:hover {
+        color:black;
+        box-shadow:0 0 1px #aaa;
+      }
+    }
+  }
+
+  &-table {
+    .card-price_old {
+      text-decoration: line-through;
+      font-size: 16px;
+    }
+  }
+}
+
+.catalog-list {
+  .card {
+    &-product {
+      max-width: 100%;
+      &_ticket {
+        position: absolute;
+        width: 45%;
+        @media (max-width:$xs-end) {
+          height: inherit;
+          line-height: inherit;
+          width: 100%;
+        }
+        @media (min-width:$sm-start) and (max-width:$md-end) {
+          width: 35%;
+        }
+      }
+      &_rating {
+        max-width: 190px;
+        padding: 10px 0;
+        @media (max-width:$xs-end) {
+          max-width: 100%;
+        }
+        .rating {
+          margin: 5px 0 0 5px;
+        }
+      }
+
+      &_description {
+        opacity: 0.65;
+        font-size: 13px;
+        margin-top: 15px;
+      }
+
+      &_characteristics ul {
+        display: table;
+        line-height: 1.8;
+        list-style: none;
+        padding: 15px 0 0;
+        width: 100%;
+        @media (max-width:$xs-end) {
+          margin: 0;
+          padding: 10px 5px 0;
+        }
+        li {
+          opacity: 0.65;
+          @media (max-width:$xs-end) {
+            width: 100%;
+            &:nth-child(2n-1) {
+              font-family: $themeFontMedium;
+              opacity: 1;
+            }
+            &:nth-child(2n) {
+              border-bottom: 1px solid rgba(0,0,0,0.5);
+              border-top: 1px solid rgba(0,0,0,0.5);
+            }
+          }
+        }
+      }
+    }
+    &-image, &-text, &-price {
+      float: left;
+      position: relative;
+    }
+    &-image {
+      height: 300px;
+      line-height: 225px;
+      top: 50px;
+      width: 45%;
+      @media (max-width:$xs-end) {
+        height: inherit;
+        line-height: inherit;
+        padding: 50px 0 25px;
+        top: 0;
+        width: 100%;
+      }
+      @media (min-width:$sm-start) and (max-width:$md-end) {
+        width: 35%;
+      }
+    }
+    &-text {
+      height: initial;
+      padding: 67px 5px 10px 0;
+      width: 30%;
+      @media (max-width:$xx-end) {
+        height: inherit;
+        line-height: inherit;
+        padding: 0;
+        width: 100%;
+      }
+      @media (min-width:$xs-start) and (max-width:$xs-end) {
+        height: inherit;
+        line-height: inherit;
+        padding: 15px;
+        width: 100%;
+      }
+      @media (min-width:$sm-start) and (max-width:$md-end) {
+        width: 40%;
+      }
+    }
+    &-price {
+      border-left: 1px solid #e8e8e8;
+      @include flexbox;
+      @include flex-direction(column);
+      @include flex-wrap(wrap);
+      height: 363px;
+      padding: 65px 15px;
+      width: 25%;
+      @include align-items(center);
+      @include justify-content(center);
+      @media (max-width:$xs-end) {
+        border: none;
+        @include flexbox;
+        @include flex-direction(row);
+        height: inherit;
+        @include justify-content(space-around);
+        line-height: inherit;
+        padding: 10px 20px 20px;
+        width: 100%;
+      }
+      > div {
+        width: 100%;
+        @include flexbox;
+        @include flex-wrap(wrap);
+        flex-direction: row-reverse;
+        @include justify-content(space-around);
+      }
+      &_old {
+        font-size: 16px;
+        text-decoration: line-through;
+      }
+      &_new {
+        font-size: 24px;
+        line-height: 1;
+        margin-bottom: 12px;
+        white-space:nowrap;
+      }
+      &_present {
+        font-family: $themeFontBold;
+        font-size: 24px;
+        white-space:nowrap;
+      }
+      .link-where-buy {
+        position: inherit;
+        right: inherit;
+        top: inherit;
+      }
+      .link-more, .link-one-click {
+        margin: 0 0 10px;
+        padding: 8px 10px;
+        text-align: center;
+        width: 200px;
+      }
+    }
+  }
+}
+
+.empty-list {
+  font-family: $themeFontNormal;
+  color: #585858;
+  font-size: 24px;
+  padding: 100px 0;
+  text-align: center;
+  text-shadow: 0 1px 0 white;
+}
+.card-price_old {
+  text-decoration: line-through;
+  font-size: 16px;
+}

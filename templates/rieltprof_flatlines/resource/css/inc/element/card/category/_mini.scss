@@ -1,0 +1,44 @@
+@import "../../../global/variable";
+
+// Card Category Mini
+
+.card {
+  &-category-mini {
+    height: 212px;
+    &:hover .card-image {
+      @include transform(scale(1.05));
+    }
+    .card-image {
+      line-height: 135px;
+      padding: 10px 0;
+      transition: ease-in-out 0.3s;
+      img {
+        max-width: 90%;
+      }
+    }
+    .card-text {
+      bottom: 0;
+      max-width: 100%;
+      padding: 10px 15px;
+      position: absolute;
+      height: 57px;
+      @media (max-width:$md-end) {
+        min-height: 40px;
+        padding: 5px 20px;
+      }
+      span {
+        display: block;
+        font-family: $themeFontLight;
+        font-size: 19.5px;
+        letter-spacing: .2px;
+        line-height: 1;
+        max-height: 45px;
+        overflow: hidden;
+        @media (max-width:$md-end) {
+          font-size: 16px;
+          max-height: 40px;
+        }
+      }
+    }
+  }
+}

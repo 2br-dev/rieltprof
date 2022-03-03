@@ -1,0 +1,1 @@
+{include file="%system%/admin/keyvaleditor.tpl" arr=$elem->getAdditionalAttributes() field_name="attributes_list"}

@@ -1,0 +1,231 @@
+.admin-style .order-shipment-form {
+    position: relative;
+    max-height: calc(95vh - 144px);
+}
+
+.admin-style .order-shipment-table {
+    overflow-y: auto;
+    max-height: inherit;
+}
+
+.admin-style .order-shipment-table-head,
+.admin-style .order-shipment-table-row {
+    margin: 0;
+    align-items: center;
+    border-bottom: 1px solid #ececec;
+    display: grid;
+    grid-template-columns: 60px 200px 1fr 200px 130px 70px 90px 214px 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+            "image name name article barcode amount shipped-amount uit uit";
+}
+
+.admin-style .order-shipment-table-head > *,
+.admin-style .order-shipment-table-row > * {
+    padding: 15px 10px;
+}
+
+.admin-style .order-shipment-table-head {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+.admin-style .order-shipment-table-info {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    text-align: center;
+    padding: 8px;
+    color:white;
+    background-color: #60c64a;
+}
+
+.admin-style .order-shipment-table .column-image {
+    grid-area: image;
+    text-align: center;
+}
+.admin-style .order-shipment-table .column-name {
+    grid-area: name;
+}
+.admin-style .order-shipment-table .column-article {
+    grid-area: article;
+}
+.admin-style .order-shipment-table .column-barcode {
+    grid-area: barcode;
+}
+.admin-style .order-shipment-table .column-amount {
+    text-align: center;
+    grid-area: amount;
+}
+.admin-style .order-shipment-table .column-shipped-amount {
+    text-align: center;
+    grid-area: shipped-amount;
+}
+.admin-style .order-shipment-table .column-uit {
+    grid-area: uit;
+}
+
+.admin-style .order-shipment-table .order-shipment-item-uit-actions {
+    text-align: start;
+}
+
+.admin-style .order-shipment-error-float-head {
+    position: absolute;
+    top: 0;
+    margin: 0 25%;
+    width: 50%;
+    text-align: center;
+    padding: 20px 40px;
+    background: #ff7070;
+    opacity: 0;
+    color: black;
+    font-size: 16px;
+    transition: opacity 2s ease-in 1s;
+    pointer-events: none;
+    z-index: 10;
+}
+.admin-style .order-shipment-error-float-head.empty {
+    transition: none;
+}
+.admin-style .order-shipment-error-float-head.show-error {
+    opacity: 0.8;
+    transition: opacity 0.2s ease-out ;
+}
+
+.admin-style .order-shipment-item {
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.admin-style .order-shipment-item:hover {
+    background-color: #eaf0f3;;
+}
+
+.admin-style .order-shipment-item.item-selected {
+    background-color: #d5e9ef;
+}
+
+.admin-style .order-shipment-item-uit-actions > * {
+    margin: 0 4px 4px 0;
+}
+
+.admin-style .order-shipment-item-uit-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.admin-style .uit-list-item {
+    border-bottom: 1px solid lightskyblue;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.admin-style .uit-list-item-field {
+    margin: 0 8px;
+    font-size: 13px;
+}
+
+.admin-style .uit-list-item-field-title,
+.admin-style .uit-hint,
+.admin-style .mobile-column-title{
+    color: gray;
+    font-size: 12px;
+    margin-right: 2px;
+}
+
+.admin-style .uit-list-item-loading {
+    min-height: 20px;
+}
+.admin-style .uit-list-item-loading:after {
+    content: '';
+}
+
+.admin-style .uit-list-item-remove {
+    color: red;
+    margin-left: 8px;
+}
+
+.admin-style .rs-order-shipment .order-shipment-highlight {
+    background-color: #faffa8;
+    transition: background-color 0s;
+}
+
+.admin-style .rs-order-shipment .order-shipment-highlight-fading {
+    transition: background-color 5s ease-in;
+}
+
+.admin-style .rs-order-shipment .order-shipment-highlight-error {
+    background-color: #ffa7a7;
+}
+
+.admin-style .shipment-total-sum {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+@media (min-width: 1201px) {
+    .admin-style .order-shipment-table .mobile-column-title {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .admin-style .order-shipment-table-row {
+        grid-template-columns: 60px 200px 1fr 200px 100px 214px 1fr;
+        grid-template-areas:
+                "image name name article amount uit uit"
+                "image name name barcode shipped-amount uit uit";
+    }
+
+    .admin-style .order-shipment-table-head {
+        display: none;
+    }
+
+    .admin-style .order-shipment-table .column-article,
+    .admin-style .order-shipment-table .column-amount {
+        align-self: end;
+        padding-bottom: 5px;
+        text-align: start;
+    }
+
+    .admin-style .order-shipment-table .column-barcode,
+    .admin-style .order-shipment-table .column-shipped-amount {
+        align-self: start;
+        padding-top: 5px;
+        text-align: start;
+    }
+}
+
+@media (max-width: 920px) {
+    .admin-style .order-shipment-table-row {
+        grid-template-columns: 60px auto;
+        grid-template-areas:
+                "image name"
+                "article article"
+                "barcode barcode"
+                "amount amount"
+                "shipped-amount shipped-amount"
+                "uit uit";
+    }
+
+    .admin-style .order-shipment-table-row {
+        padding: 12px 0;
+    }
+
+    .admin-style .order-shipment-table .order-shipment-table-row > * {
+        padding: 4px 10px;
+    }
+
+    .admin-style .order-shipment-table .column-image {
+        justify-self: center;
+    }
+
+    .admin-style .order-shipment-table .column-uit {
+        padding: 12px 10px;
+    }
+}

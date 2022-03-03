@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Внешнее API</name>
+        <description multilanguage="true">Позволяет взаимодействовать с сайтом извне по API</description>
+        <version>3.0.31</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <enable_api_help>0</enable_api_help>
+        <show_internal_error_details>0</show_internal_error_details>
+        <disable_image_webp>1</disable_image_webp>
+        <token_lifetime>31536000</token_lifetime>
+        <default_api_version>1</default_api_version>
+        <allow_api_methods type="array">
+            <value>all</value>
+        </allow_api_methods>
+    </defaultValues>
+</config>

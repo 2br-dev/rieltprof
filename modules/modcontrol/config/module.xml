@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Управление модулями</name>
+        <description multilanguage="true">Установка параметров модулей, активация/деакцивация модулей, установка новых модулей</description>
+        <version>4.0.18</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+    </defaultValues>
+</config>

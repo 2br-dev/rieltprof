@@ -1,0 +1,56 @@
+
+// Thumbnail gallery
+
+.page-product_gallery {
+  .owl-thumb-item {
+
+  }
+  .product-gallery-thumb {
+    max-width: 85%;
+    margin: 0 auto;
+    text-align: center;
+    .owl-item {
+      padding-bottom: 15px;
+      &:hover > div {
+        box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+  .owl-nav {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    display: block!important;
+    .owl-next {
+      background: url(../img/arrow.png) no-repeat center center #fff;
+      background-size: contain;
+      position: absolute;
+      top: 38px;
+      right: -20px;
+      width: 24px;
+      height: 24px;
+      @include transform(rotate(180deg));
+      opacity: .5;
+      font-size:0;
+      transition: ease-in-out 0.3s;
+      &:hover {
+        opacity:1;
+      }
+    }
+    .owl-prev {
+      background: url(../img/arrow.png) no-repeat center center #fff;
+      background-size: contain;
+      position: absolute;
+      top: 38px;
+      left: -20px;
+      width: 24px;
+      height: 24px;
+      font-size: 0;
+      opacity: .5;
+      transition: ease-in-out 0.3s;
+      &:hover {
+        opacity:1;
+      }
+    }
+  }
+}

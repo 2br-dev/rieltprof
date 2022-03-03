@@ -1,0 +1,211 @@
+@import "../../global/variable";
+
+// Complete set
+.t-page-complect {
+  width:900px;
+  @media(max-width:916px) {
+    width:100%;
+  }
+}
+
+.t-complect {
+  &_wrapper {
+    background-color: #fff;
+    padding: 15px 30px;
+    margin-bottom: 29px;
+    @media (max-width: $xx-end) {
+      padding: 15px 0;
+    }
+
+    .product-offers {
+      margin-bottom:40px;
+    }
+  }
+  &_product {
+    @include flexbox;
+    @include flex-direction(column);
+    @include flex-wrap(wrap);
+    width:340px;
+    @media (max-width: $xs-end) {
+      width: 100%;
+      @include align-items(center);
+      text-align: center;
+      padding-bottom: 25px;
+    }
+
+
+    &-wrapper {
+      @include flexbox;
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
+      margin-bottom: 29px;
+      @media (max-width: $xs-end) {
+        @include flex-direction(column);
+        @include align-items(center);
+      }
+    }
+  }
+  &_img {
+    width: 310px;
+    height: 310px;
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+  }
+  &_text {
+
+  }
+  &_category {
+
+  }
+  &_title {
+    font-family: $themeFontLight;
+    font-size: 20px;
+    width: 300px;
+    margin-bottom: 15px;
+    @media (max-width: $xs-end) {
+      width: inherit;
+    }
+  }
+
+  &_price_old {
+    text-decoration:line-through;
+    font-size: 16px;
+    line-height: 1.2;
+    text-decoration: line-through;
+    display:block;
+  }
+
+  &_price_new {
+    font-size: 18px;
+    font-family: $themeFontBold;
+    display:block;
+  }
+
+  &_characteristics {
+    border-bottom: 1px solid #e8e8e8;
+    border-top: 1px solid #e8e8e8;
+    font-family: $themeFontLight;
+    line-height: 1.8;
+    list-style: outside none none;
+    margin-bottom: 22px;
+    padding: 25px 0;
+    @media (max-width: $xs-end) {
+      text-align:center;
+    }
+  }
+
+  &_list {
+    border-left: 1px solid #d8d8d8;
+    padding: 0 30px;
+    font-family: $themeFontLight;
+    @include flex(1);
+
+    @media (max-width: $xs-end) {
+      border-left: none;
+      width: 100%;
+      padding: 25px 0 0 0;
+      text-align:center;
+    }
+    &-option {
+      font-size: 18px;
+      margin: 0 0 35px 0;
+      &.color {
+        input {
+          margin: 15px 15px 0 0;
+        }
+      }
+      select {
+        background-color: transparent;
+        border: none;
+        width: 250px;
+        border-radius: 30px;
+        height: 40px;
+        opacity: 0.65;
+        display: block;
+        padding: 5px 35px 5px 0;
+      }
+    }
+    .link-more {
+      width: 150px;
+      padding: 12px;
+      margin: 0;
+      font-size: 16px;
+      @media (max-width: $xs-end) {
+        width: 180px;
+      }
+    }
+    form {
+      @media (max-width: $xs-end) {
+        @include flexbox;
+        @include flex-direction(row);
+        @include flex-wrap(wrap);
+        @include align-items(center);
+        text-align: center;
+        @include justify-content(space-around);
+      }
+    }
+  }
+  &_select {
+    background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 95% 5px transparent;
+    border: 1px solid #d8d8d8;
+    border-radius: 30px;
+    height: 40px;
+    overflow: hidden;
+    width: 180px;
+  }
+}
+
+.t-radio-color {
+  margin: 15px 0 0;
+  label {
+    display: inline-block;
+    input {
+      display: none;
+      + span {
+        position: relative;
+        padding: 15px 0 15px 30px;
+        white-space: nowrap;
+        &:before {
+          content: '';
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          margin-top: -10px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          transition: ease-in-out 0.3s;
+        }
+        &:hover:before {
+          box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
+        }
+      }
+      &:checked + span:before {
+        @include transform(scale(1.25));
+      }
+      &.color1 {
+        + span:before {
+          background: #858dce;
+        }
+      }
+      &.color2 {
+        + span:before {
+          background: #ff8729;
+        }
+      }
+      &.color3 {
+        + span:before {
+          background: #ff627f;
+        }
+      }
+      &.color4 {
+        + span:before {
+          background: #00c378;
+        }
+      }
+    }
+  }
+}

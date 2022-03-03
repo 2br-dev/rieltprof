@@ -1,0 +1,32 @@
+.productsReturnStatus{
+    margin-bottom: 20px;
+}
+
+.productsReturnTable th{
+    padding-bottom: 20px;
+}
+
+.productsReturnTable td{
+    vertical-align: middle;
+}
+
+.returnSumTotal{
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.form-style .productsReturnAmount{
+    margin: 0;
+}
+
+.returnReceipt {
+    margin-top: 32px;
+    padding: 10px 5px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.admin-style input[type=checkbox].returnReceiptCheckbox {
+    margin-right: 32px;
+}

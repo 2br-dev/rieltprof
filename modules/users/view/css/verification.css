@@ -1,0 +1,33 @@
+/* Стили, необходимые для отображения блока верификации */
+.rs-verify-code-block {
+    margin-bottom:20px;
+}
+
+.rs-verify-code-block .rs-verify-send-message {
+    font-size:12px;
+    color:gray;
+}
+
+.rs-verify-code-block .rs-verify-timer {
+    font-size:12px;
+}
+
+.rs-verify-code-block .rs-verify-timer-line .rs-verify-timer,
+.rs-verify-code-block .rs-verify-timer-line.rs-wait .rs-verify-refresh-code {
+    display:none;
+}
+
+.rs-verify-code-block .rs-verify-timer-line.rs-wait .rs-verify-timer {
+    display:inline;
+}
+
+/* Инлайн форма подтверждения номера телефона */
+
+.rs-verify-code-block.rs-inline .rs-verify-line {
+    display:flex;
+    align-items: center;
+}
+
+.rs-verify-code-block.rs-inline .rs-verify-line input[data-key] {
+    width:100px;
+}

@@ -1,0 +1,34 @@
+.footer-signup-wrapper{
+    padding-top: 10px;    
+    padding-bottom: 10px;    
+}
+
+.footer-signup-wrapper .title{
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+
+
+.footer-signup-wrapper input{
+    border: 1px solid silver;
+    box-sizing: border-box;
+    height: 33px;
+    line-height: 33px;
+    width: 100%;
+}
+
+.footer-signup-wrapper .buttonsLine{
+    text-align: center;
+}
+
+.footer-signup-wrapper button{
+    background: #2bbfbd none repeat scroll 0 0;
+    border: medium none;
+    color: white;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}

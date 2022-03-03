@@ -1,0 +1,1 @@
+{moduleinsert name="\Catalog\Controller\Admin\Block\PropertyValuesBlock" property=$elem}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Комментарии</name>
+        <description multilanguage="true">Комментирование различных объектов</description>        
+        <version>4.0.3</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <allow_more_comments>0</allow_more_comments>
+        <need_moderate>N</need_moderate>
+        <need_authorize>N</need_authorize>
+        <author>ReadyScript lab.</author>
+        <widget_newlist_pagesize>8</widget_newlist_pagesize>
+        <block_links>1</block_links>
+    </defaultValues>
+</config>

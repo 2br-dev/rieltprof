@@ -1,0 +1,116 @@
+@import "../../global/variable";
+
+// Page basket
+
+.page-basket {
+  .card-product {
+    margin: 0;
+    border-bottom: 1px solid #e8e8e8;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  .catalog-list {
+    .card-text {
+      @media (max-width: $xs-end) {
+        @include flexbox;
+        text-align: center;
+        @include align-items(center);
+      }
+    }
+    .card-product {
+      border-bottom: 1px solid #e8e8e8;
+      &_title {
+        max-height:none;
+      }
+      &_title:after {
+        content:none;
+      }
+    }
+    > div:last-child {
+      margin-bottom: 29px;
+      > div {
+        border-bottom: none;
+      }
+    }
+  }
+  .t-payment-and-delivery {
+    border-top: 1px solid #e8e8e8;
+  }
+  .t-order_button-block .link {
+    width: 200px;
+    text-align: center;
+    margin: 15px;
+  }
+  .t-actions {
+    border-top: 1px solid #e8e8e8;
+    padding: 0 30px 30px;
+    @media (max-width: $md-end) {
+      padding: 0 15px 15px;
+    }
+    @media(max-width:$sm-end) {
+      text-align:center;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    input {
+      font-size: 16px;
+      line-height: 3;
+      display: block;
+      width: 100%;
+      max-width:400px;
+      margin: 20px 20px 40px 0;
+      border: none;
+      border-bottom: 1px solid #d8d8d8;
+      @media(max-width:$sm-end) {
+        margin-left:auto;
+        margin-right:auto;
+      }
+    }
+    button {
+      border: none;
+      border-radius: 30px;
+      padding: 8px 0;
+      width: 200px;
+      color: #fff;
+      font-family: $themeFontLight;
+      max-width: 100%;
+    }
+
+    &-line {
+      @include flexbox;
+      @include justify-content(space-between);
+      @include align-items(center);
+    }
+  }
+
+  .sidebar_blocks {
+    @media(max-width:$sm-end) {
+      @include flexbox;
+      @include flex-direction(column);
+
+      .t-order-total {
+        order:1;
+      }
+
+      .t-buy-oneclick {
+        order:2;
+      }
+
+      .t-actions {
+        order:3;
+      }
+
+      .t-order-checkout {
+        order:4;
+      }
+    }
+  }
+
+}
+
+.sticky {
+  @media (min-width: $md-start) {
+    position: sticky !important;
+    top: 60px;
+  }
+}

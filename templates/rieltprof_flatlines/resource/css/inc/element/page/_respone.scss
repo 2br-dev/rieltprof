@@ -1,0 +1,56 @@
+@import "../../global/variable";
+
+// Response
+
+.t-response_wrapper {
+  margin: 0 -30px 0;
+  padding: 25px 30px;
+  border-bottom: 1px solid #e8e8e8;
+  @media (max-width:$xs-end) {
+    padding: 15px;
+  }
+  &:first-child {
+    padding-top: 0;
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.page-responses {
+  background-color: #fff;
+  padding: 0 30px 1px;
+  margin-bottom: 29px;
+  h2 {
+    margin-bottom: 0;
+  }
+}
+.t-response {
+  &_title {
+    padding-bottom: 15px;
+    position:relative;
+    p {
+      font-size: 18px;
+      padding-right:30px;
+    }
+    small {
+      font-family: $themeFontLight;
+      font-size: 14px;
+      opacity: 0.35;
+    }
+  }
+
+  &_delete {
+    width:20px;
+    height:20px;
+    background:url(../img/icons/icon-del.png) no-repeat;
+    position:absolute;
+    right:0;
+    top:3px;
+    display:block;
+    opacity:0.5;
+
+    &:hover {
+      opacity:1;
+    }
+  }
+}

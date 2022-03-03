@@ -1,0 +1,177 @@
+@import "../../global/variable";
+
+// Registration step
+
+.page-registration-steps {
+  a.link-more {
+    margin: 35px 0 15px;
+    width: 200px;
+    padding: 12px 0;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    @media (max-width: $xx-end) {
+      margin: 35px auto 15px;
+    }
+  }
+}
+
+.t-registration {
+  opacity: 1;
+  &-steps {
+    opacity: 1;
+    &_wrapper {
+      background-color: #fff;
+      padding: 25px 15px 15px;
+      @include flexbox;
+      @include flex-direction(row);
+      @include justify-content(center);
+      @include flex-wrap(wrap);
+      margin-bottom: 29px;
+
+    }
+  }
+  &-step {
+    @include flexbox;
+    @include flex-direction(column);
+    @include align-items(center);
+    width: 125px;
+    margin: 0 25px;
+    text-align: center;
+    position: relative;
+    @media (max-width: $xx-end) {
+      width: 50%;
+      margin: 0 0 25px;
+    }
+    @media (min-width: $xs-start) and (max-width: $xs-end) {
+      width: 100px;
+      margin: 0;
+    }
+    @media (max-width: $xx-end) {
+      &:nth-child(2n):after {
+        display: none;
+      }
+    }
+    &:after {
+      border-top: 2px solid #000;
+      border-right: 2px solid #000;
+      @include transform(rotate(45deg));
+      position: absolute;
+      display: block;
+      content: "";
+      width: 10px;
+      height: 10px;
+      right: -28px;
+      top: 25px;
+      @media (max-width: $xs-end) {
+        right: 0;
+      }
+    }
+    &:last-child:after {
+      display: none;
+    }
+    svg {
+      width: 50px;
+    }
+    span {
+      padding: 5px 15px;
+    }
+    &.active {
+      fill: $iconColor;
+      &:after {
+        border-color: $iconColor;
+      }
+
+      .step-image {
+        &.address {
+          background-position:-53px 0;
+        }
+
+        &.delivery {
+          background-position:-57px 0;
+        }
+
+        &.payment {
+          background-position:-64px 0;
+        }
+
+        &.confirm {
+          background-position:-68px 0;
+        }
+      }
+
+    }
+
+    .step-image {
+      height:50px;
+      width:50px;
+      display:inline-block;
+
+      &.address {
+        background:url(../img/steps/contact.svg) no-repeat 6px top;
+      }
+
+      &.delivery {
+        background:url(../img/steps/delivery.svg) no-repeat 1px top;
+      }
+
+      &.payment {
+        background:url(../img/steps/payment.svg) no-repeat 4px top;
+      }
+
+      &.confirm {
+        background:url(../img/steps/confirm.svg) no-repeat 0 top;
+      }
+    }
+
+  }
+  &-end {
+    .t-order-sidebar {
+      padding:15px 30px;
+    }
+
+    .t-order-card {
+      @include flex-direction(column);
+      &_end-sum {
+        @include flexbox;
+        @include flex-direction(row);
+        @include justify-content(space-between);
+        @include flex-wrap(wrap);
+        @include align-items(baseline);
+        padding: 30px 30px 15px;
+        p {
+          font-size: 20px;
+        }
+        span {
+          font-family: $themeFontBold;
+          font-size: 30px;
+        }
+      }
+    }
+    .link-choise {
+      display: initial;
+    }
+    .t-order-card_description {
+      width: 100%;
+      border-top: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .t-order_button-block {
+      padding-bottom: 30px;
+      button,
+      a {
+        width: 300px;
+        margin: 0 15px 30px;
+        padding: 12px 0;
+        font-size: 16px;
+        @media (max-width: $xs-end) {
+          width: 250px;
+          font-size: 14px;
+          margin: 5px auto;
+        }
+      }
+    }
+  }
+}
+
+

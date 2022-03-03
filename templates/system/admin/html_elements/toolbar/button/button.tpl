@@ -1,0 +1,1 @@
+<a {if $button->getHref()!=''}href="{$button->getHref()}"{/if} {$button->getAttrLine()}>{$button->getTitle()}</a>

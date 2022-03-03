@@ -1,0 +1,1 @@
+{t order_num=$data->order->order_num}Спасибо за заказ №%order_num! Ваш трекномер {$data->order.track_number}.{/t}

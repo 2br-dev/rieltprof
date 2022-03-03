@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Расширенный обмен данными о товарах в CSV</name>
+        <description multilanguage="true">Предоставляет расширенные возможности для импорта/экспорта товаров в CSV</description>
+        <version>4.0.8</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+        <csv_recommended_id_field>title</csv_recommended_id_field>
+        <csv_concomitant_id_field>title</csv_concomitant_id_field>
+        
+        <csv_id_fields type="array">
+            <value>barcode</value>
+        </csv_id_fields>
+    </defaultValues>
+</config>

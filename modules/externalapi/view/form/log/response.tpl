@@ -1,0 +1,3 @@
+<pre>
+{$elem->getResponseView()}
+</pre>

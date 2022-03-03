@@ -1,0 +1,125 @@
+.admin-style .toolsBlock {
+    border:2px solid #71b422;
+    margin-bottom:15px;
+}
+
+.admin-style .toolsBlock .actions a {
+    line-height:36px;
+    margin-right:20px;
+    margin-left:10px;    
+}
+
+.admin-style .toolsBlock .actions .add {
+    background: url(../img/plusgreen.gif) no-repeat left center;
+    padding-left:20px;
+}
+
+.admin-style .toolsBlock .actions .act span {
+    background: none;
+    color: #42879d;
+}
+
+.admin-style .toolsBlock .actions {
+    position:relative;
+}
+
+.admin-style .toolsBlock .actions .successText {
+    position:absolute;
+    right:0;
+    top:0;
+    height:36px;
+    padding:0 10px;
+    line-height:36px;
+    background: #71b422;
+    color: white;
+    display:none;
+}
+
+.admin-style .toolsContainer {
+    width:100%;
+    border-collapse:collapse;
+    table-layout: fixed;
+}
+
+.admin-style .toolsContainer .head {
+    border-bottom: 2px solid #969696;
+}
+
+.admin-style .toolsContainer td {
+    padding:10px 2px;
+}
+
+.admin-style .toolsContainer .item-tools {
+    white-space:nowrap;
+    padding-left:10px;
+    width:40px;
+}
+
+.admin-style .toolsBlock .form {
+    display:none;
+    padding:10px;
+}
+
+.admin-style .toolsBlock .form .p-regions {
+    min-width:300px;
+}
+
+.admin-style .some-property-table td {
+    vertical-align:top;
+    padding:7px 0;
+}
+
+.admin-style .some-property-table .key {
+    text-align:right;
+    font-size:12px;
+    line-height:30px;
+    width:180px;
+    padding-right:15px;
+}
+
+.admin-style .some-property-table .fieldhelp {
+    line-height:normal;
+}
+
+.admin-style .some-property-table .addRate {
+    background: #71B422;
+    font-size: 16px;
+    line-height: 33px;
+    margin-right: 10px;
+    padding: 0 10px;
+    color: white;
+    float:left;
+}
+
+.admin-style .some-property-table .close {
+    float:right;
+    line-height:33px;    
+    background: url(../img/collapse.gif) no-repeat right center;
+    padding-right:12px;
+    font-size:16px;
+}
+
+@media(max-width:767px) {
+    .admin-style .property-table {
+        table-layout:fixed;
+    }
+
+    .admin-style .property-table td,
+    .admin-style .property-table .key {
+        padding:2px 0;
+        text-align:left;
+        display:block;
+        width:auto;
+        line-height: normal;
+    }
+
+    .admin-style .property-table tr {
+        display:block;
+        margin-bottom:20px;
+    }
+
+    .admin-style .property-table select,
+    .admin-style .property-table input[type="text"] {
+        width:100%;
+    }
+}

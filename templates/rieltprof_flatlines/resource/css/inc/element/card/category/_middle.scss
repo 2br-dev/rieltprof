@@ -1,0 +1,59 @@
+@import "../../../global/variable";
+
+// Card Category Middle
+
+.card {
+  &-category-middle {
+    height: 453px;
+    @media (min-width:$sm-start) and (max-width:$sm-end) {
+      height: 350px;
+    }
+    @media (min-width:$md-start) and (max-width:$md-end) {
+      height: 400px;
+    }
+    &:hover .card-image {
+      @include transform(scale(1.05));
+    }
+    .card-image {
+      height: 350px;
+      padding: 15px;
+      transition: ease-in-out 0.3s;
+      @include flexbox;
+      @include align-items(center);
+      @media (min-width:$sm-start) and (max-width:$sm-end) {
+        height: 270px;
+      }
+      @media (min-width:$md-start) and (max-width:$md-end) {
+        height: 300px;
+      }
+      img {
+        max-width: 100%;
+      }
+
+      & > a {
+        @include flex(1);
+      }
+    }
+    .card-text {
+      height: 110px;
+      line-height: 1.3;
+      margin: 0 auto;
+      width: 80%;
+      z-index: 1;
+      position: relative;
+      @media (min-width:$sm-start) and (max-width:$sm-end) {
+        height: 96px;
+      }
+      span {
+        display: block;
+        font-family: $themeFontLight;
+        font-size: 19px;
+        max-height: 100px;
+        overflow: hidden;
+        @media (min-width:$sm-start) and (max-width:$sm-end) {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

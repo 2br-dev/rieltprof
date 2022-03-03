@@ -1,0 +1,90 @@
+.search-options-block {
+    display:flex;
+    flex-direction: column;
+    height:90%;
+}
+
+.search-options-block .result-zone-wrapper {
+    position:relative;
+    flex:1;
+    margin-left:-20px;
+    margin-right:-20px;
+}
+
+.result-zone {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    overflow-y:auto;
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.result-zone ul {
+    list-style:none;
+}
+
+.result-zone > ul > li {
+    margin-bottom:20px;
+    border-bottom:1px solid #e2e2e2;
+    padding-bottom:5px;
+}
+
+.result-zone > ul > li:last-child {
+    border-bottom:none;
+}
+
+.result-zone a {
+    display:inline-block;
+    color:black;
+}
+
+.result-zone .modules-names {
+    padding-left:0;
+}
+
+.result-zone .modules-names > li > a {
+    font-size:18px;
+}
+
+.result-zone .tabs-names {
+    padding-left:15px;
+    margin-top:5px;
+}
+
+.result-zone .tabs-names > li > a {
+    font-size:16px;
+}
+
+.result-zone .tabs-names > li > a > i {
+    margin-right:7px;
+}
+
+.result-zone .field-names {
+    padding-left:15px;
+    margin-top:10px;
+}
+
+.result-zone .field-names a {
+    color:#2a548c;
+}
+
+.result-zone .field-names a i {
+    color: black;
+}
+
+.result-zone .field-names a:hover {
+    color:#183151;
+}
+
+.result-zone .field-names > li {
+    margin-bottom:15px;
+}
+
+.result-zone .field-help {
+    font-size:12px;
+    color:gray;
+    margin-top:5px;
+}

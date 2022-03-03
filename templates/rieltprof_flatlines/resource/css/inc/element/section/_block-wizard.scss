@@ -1,0 +1,43 @@
+.block-wizard {
+  border:1px dashed #888;
+  margin:10px 0;
+  padding:10px;
+  text-align:left;
+
+  &__title {
+    font-size:18px;
+    font-family: $themeFontLight;
+
+    i {
+      margin-right:10px;
+    }
+  }
+
+  &__do {
+    padding-left:62px;
+  }
+
+  &.text-center {
+    text-align:center;
+  }
+
+  &.text-center &__do {
+    padding-left:20px;
+  }
+
+  &.white {
+    color:white;
+
+    a {
+      color:#73baf7;
+      &:hover {
+        color:#63aae7;
+      }
+    }
+  }
+}
+
+.col-padding  {
+  padding-left:15px;
+  padding-right:15px;
+}

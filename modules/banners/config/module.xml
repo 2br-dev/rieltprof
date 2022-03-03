@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Баннеры</name>
+        <description multilanguage="true">Позволяет администрировать баннеры для разных зон</description>        
+        <version>4.0.7</version>
+        <author>ReadyScript lab.</author>
+        <is_system>1</is_system>
+    </defaultValues>
+</config>
