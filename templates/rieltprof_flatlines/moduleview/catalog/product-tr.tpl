@@ -119,45 +119,45 @@
                     </div>
                 </div>
                 <div class="features">
-                    {if $ad['square']}
+                    {if $product['square']}
                         <div class="feature">
-                            <div class="value">{$ad['square']}м²</div>
+                            <div class="value">{$product['square']}м²</div>
                             <div class="key">Общая</div>
                         </div>
                     {/if}
-                    {if $ad['square_living']}
+                    {if $product['square_living']}
                         <div class="feature">
-                            <div class="value">{$ad['square_living']}м²</div>
+                            <div class="value">{$product['square_living']}м²</div>
                             <div class="key">Жилая</div>
                         </div>
                     {/if}
-                    {if $ad['square_kitchen']}
+                    {if $product['square_kitchen']}
                         <div class="feature">
-                            <div class="value">{$ad['square_kitchen']}м²</div>
+                            <div class="value">{$product['square_kitchen']}м²</div>
                             <div class="key">Кухня</div>
                         </div>
                     {/if}
-                    {if $ad['rooms']}
+                    {if $product['rooms']}
                         <div class="feature">
-                            <div class="value">{$ad['rooms']}</div>
+                            <div class="value">{$product['rooms']}</div>
                             <div class="key">Комнат</div>
                         </div>
                     {/if}
-                    {if $ad['flat']}
+                    {if $product['flat']}
                         <div class="feature">
-                            <div class="value">{$ad['flat']}</div>
+                            <div class="value">{$product['flat']}</div>
                             <div class="key">Этаж</div>
                         </div>
                     {/if}
-                    {if $ad['flat_house']}
+                    {if $product['flat_house']}
                         <div class="feature">
-                            <div class="value">{$ad['flat_house']}</div>
+                            <div class="value">{$product['flat_house']}</div>
                             <div class="key">Этажность</div>
                         </div>
                     {/if}
-                    {if $ad['land_area']}
+                    {if $product['land_area']}
                         <div class="feature">
-                            <div class="value">{$ad['land_area']}сот.</div>
+                            <div class="value">{$product['land_area']}сот.</div>
                             <div class="key">Участок</div>
                         </div>
                     {/if}
