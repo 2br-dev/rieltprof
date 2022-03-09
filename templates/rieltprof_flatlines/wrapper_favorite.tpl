@@ -1,13 +1,8 @@
-<div class="global-wrapper">
-{*    <div class="categories-sidebar collapsed">*}
-{*        {include file="%catalog%/sidebar-catalog.tpl"}*}
-{*    </div>*}
-    {block name="content"}
-        {moduleinsert name="\Main\Controller\Block\BreadCrumbs"}
-        <div class="title">
-            <span>Избранное</span>
-        </div>
-        {$app->blocks->getMainContent()}
-    {/block}
-    {include file='%rieltprof%/statusbar.tpl'}
-</div>
+{extends file="%THEME%/wrapper.tpl"}
+{block name = 'content'}
+    <div class="filters-block desktop{if $query == ""} active{/if}" id="filters">
+        <a href="" class="close-filters-trigger"></a>
+        {moduleinsert name="\Catalog\Controller\Block\SideFilters"}
+    </div>
+    {$app->blocks->getMainContent()}
+{/block}
