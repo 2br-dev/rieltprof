@@ -84,7 +84,7 @@
                         {/if}
                     </td>
                     <td class="date">
-                        {$ad->dateFormat('d.m.Y', 'dateof')}
+                        {$ad->dateFormat('d.m.Y', 'actual_on_date')}
                     </td>
 {*                    <td class="profile">*}
 {*                        <a*}

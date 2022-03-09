@@ -101,7 +101,7 @@ class Handlers extends HandlerAbstract
                 //каждый день в 23:59 проверяем активные обявления на актуальность. Актуальность - не более 30 дней
                 foreach ($public_object as $key => $value){
                     // Проверяем объявление на атуальность
-                    $is_actual = $config->isActualAd($value);
+                    $is_actual = $config->isActualAd($value, 90);
                     // Если не актуальное то реквизит public = 0
                     if(!$is_actual){
                         $object = $config->getObjectByType($value['controller'], $value['id']);

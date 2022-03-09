@@ -69,7 +69,7 @@
         {/if}
     </td>
     <td class="date">
-        {$product->dateFormat('d.m.Y', 'dateof')}
+        {$product->dateFormat('d.m.Y', 'actual_on_date')}
     </td>
 {*    <td class="profile">*}
 {*        <a*}
