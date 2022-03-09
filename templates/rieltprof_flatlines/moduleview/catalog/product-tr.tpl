@@ -119,30 +119,48 @@
                     </div>
                 </div>
                 <div class="features">
-                    <div class="feature">
-                        <div class="value">36м²</div>
-                        <div class="key">Общая</div>
-                    </div>
-                    <div class="feature">
-                        <div class="value">27м²</div>
-                        <div class="key">Жилая</div>
-                    </div>
-                    <div class="feature">
-                        <div class="value">10м²</div>
-                        <div class="key">Кухня</div>
-                    </div>
-                    <div class="feature">
-                        <div class="value">1</div>
-                        <div class="key">Комнат</div>
-                    </div>
-                    <div class="feature">
-                        <div class="value">4</div>
-                        <div class="key">Этаж</div>
-                    </div>
-                    <div class="feature">
-                        <div class="value">20</div>
-                        <div class="key">Этажность</div>
-                    </div>
+                    {if $ad['square']}
+                        <div class="feature">
+                            <div class="value">{$ad['square']}м²</div>
+                            <div class="key">Общая</div>
+                        </div>
+                    {/if}
+                    {if $ad['square_living']}
+                        <div class="feature">
+                            <div class="value">{$ad['square_living']}м²</div>
+                            <div class="key">Жилая</div>
+                        </div>
+                    {/if}
+                    {if $ad['square_kitchen']}
+                        <div class="feature">
+                            <div class="value">{$ad['square_kitchen']}м²</div>
+                            <div class="key">Кухня</div>
+                        </div>
+                    {/if}
+                    {if $ad['rooms']}
+                        <div class="feature">
+                            <div class="value">{$ad['rooms']}</div>
+                            <div class="key">Комнат</div>
+                        </div>
+                    {/if}
+                    {if $ad['flat']}
+                        <div class="feature">
+                            <div class="value">{$ad['flat']}</div>
+                            <div class="key">Этаж</div>
+                        </div>
+                    {/if}
+                    {if $ad['flat_house']}
+                        <div class="feature">
+                            <div class="value">{$ad['flat_house']}</div>
+                            <div class="key">Этажность</div>
+                        </div>
+                    {/if}
+                    {if $ad['land_area']}
+                        <div class="feature">
+                            <div class="value">{$ad['land_area']}сот.</div>
+                            <div class="key">Участок</div>
+                        </div>
+                    {/if}
                 </div>
                 <div class="obj-footer">
                     <a href="{$product->getUrl()}">Подробнее</a>
