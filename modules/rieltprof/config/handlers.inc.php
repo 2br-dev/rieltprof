@@ -274,7 +274,7 @@ class Handlers extends HandlerAbstract
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
                 'list' => array(['\Rieltprof\Model\ParamsApi', 'getMaterialList'], [0 => 'Не выбрано']),
-                'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')],
+//                'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')],
                 'runtime' => true
             ]),
             '_material' => new Type\Varchar([
@@ -284,12 +284,12 @@ class Handlers extends HandlerAbstract
             'year' => new Type\Integer([
                 'description' => t('Год постройки'),
                 'maxLength' => 4,
-                'checker' => ['chkEmpty', t('Заполниет поле - Год постройки')]
+//                'checker' => ['chkEmpty', t('Заполниет поле - Год постройки')]
             ]),
             'state' => new Type\Integer([
                 'description' => t('Состояние'),
                 'list' => array(array('\Rieltprof\Model\ParamsApi', 'getStateList'), [0 => 'Не выбрано']),
-                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
             ]),
             '_state' => new Type\Varchar([
                 'description' => t('Состояние (serialize)'),
@@ -300,24 +300,24 @@ class Handlers extends HandlerAbstract
                 'maxLength' => 11,
                 'decimal' => 3,
                 'allowEmpty' => false,
-//                'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
-                'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
+                'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
+//                'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
             ]),
             'square_kitchen' => new Type\Double([
                 'description' => t('Площадь кухни'),
                 'maxLength' => 11,
                 'decimal' => 3,
-                'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
+//                'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
             ]),
             'square_living' => new Type\Double([
                 'description' => t('Жилая площадь'),
                 'maxLength' => 11,
-                'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
+//                'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
             ]),
             'flat_house' => new Type\Integer([
                 'description' => t('Этажность дома'),
                 'maxLength' => 3,
-                'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
+//                'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
             ]),
             t('Дополнительные'),
             'quickly' => new Type\Integer([
@@ -495,7 +495,7 @@ class Handlers extends HandlerAbstract
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
                 'list' => array(['\Rieltprof\Model\ParamsApi', 'getMaterialList'], [0 => 'Не выбрано']),
-                'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')],
+//                'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')],
                 'runtime' => true
             ]),
             '_material' => new Type\Varchar([
@@ -505,12 +505,12 @@ class Handlers extends HandlerAbstract
             'year' => new Type\Integer([
                 'description' => t('Год постройки'),
                 'maxLength' => 4,
-                'checker' => ['chkEmpty', t('Заполниет поле - Год постройки')]
+//                'checker' => ['chkEmpty', t('Заполниет поле - Год постройки')]
             ]),
             'state' => new Type\Integer([
                 'description' => t('Состояние'),
                 'list' => array(array('\Rieltprof\Model\ParamsApi', 'getStateList'), [0 => 'Не выбрано']),
-                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
             ]),
             '_state' => new Type\Varchar([
                 'description' => t('Состояние (serialize)'),
@@ -521,24 +521,24 @@ class Handlers extends HandlerAbstract
                 'maxLength' => 11,
                 'decimal' => 3,
                 'allowEmpty' => false,
-//                'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
-                'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
+                'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
+//                'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
             ]),
             'square_kitchen' => new Type\Double([
                 'description' => t('Площадь кухни'),
                 'maxLength' => 11,
                 'decimal' => 3,
-                'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
+//                'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
             ]),
             'square_living' => new Type\Double([
                 'description' => t('Жилая площадь'),
                 'maxLength' => 11,
-                'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
+//                'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
             ]),
             'flat_house' => new Type\Integer([
                 'description' => t('Этажность дома'),
                 'maxLength' => 3,
-                'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
+//                'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
             ]),
             t('Дополнительные'),
             'quickly' => new Type\Integer([
@@ -701,7 +701,7 @@ class Handlers extends HandlerAbstract
             'rooms' => new Type\Integer([
                 'description' => t('Количество комнат'),
                 'maxLength' => 2,
-                'Checker' => ['chkEmpty', t('Укажите количество комнат')]
+//                'Checker' => ['chkEmpty', t('Укажите количество комнат')]
             ]),
             'rooms_isolated' => new Type\Integer([
                 'description' => t('Все комнаты изолированы'),
@@ -716,7 +716,7 @@ class Handlers extends HandlerAbstract
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
                 'list' => array(['\Rieltprof\Model\ParamsApi', 'getMaterialList'], [0 => 'Не выбрано']),
-                'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')],
+//                'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')],
                 'runtime' => true
             ]),
             '_material' => new Type\Varchar([
@@ -726,12 +726,12 @@ class Handlers extends HandlerAbstract
             'year' => new Type\Integer([
                 'description' => t('Год постройки'),
                 'maxLength' => 4,
-                'checker' => ['chkEmpty', t('Заполниет поле - Год постройки')]
+//                'checker' => ['chkEmpty', t('Заполниет поле - Год постройки')]
             ]),
             'state' => new Type\Integer([
                 'description' => t('Состояние'),
                 'list' => array(array('\Rieltprof\Model\ParamsApi', 'getStateList'), [0 => 'Не выбрано']),
-                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
             ]),
             '_state' => new Type\Varchar([
                 'description' => t('Состояние (serialize)'),
@@ -742,24 +742,24 @@ class Handlers extends HandlerAbstract
                 'maxLength' => 11,
                 'decimal' => 3,
                 'allowEmpty' => false,
-//                'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
-                'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
+                'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
+//                'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
             ]),
             'square_kitchen' => new Type\Double([
                 'description' => t('Площадь кухни'),
                 'maxLength' => 11,
                 'decimal' => 3,
-                'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
+//                'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
             ]),
             'square_living' => new Type\Double([
                 'description' => t('Жилая площадь'),
                 'maxLength' => 11,
-                'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
+//                'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
             ]),
             'flat_house' => new Type\Integer([
                 'description' => t('Этажность дома'),
                 'maxLength' => 3,
-                'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
+//                'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
             ]),
             t('Дополнительные'),
             'quickly' => new Type\Integer([
@@ -938,7 +938,7 @@ class Handlers extends HandlerAbstract
                 'state' => new Type\Integer([
                     'description' => t('Состояние'),
                     'list' => array(array('\Rieltprof\Model\ParamsApi', 'getStateList'), [0 => 'Не выбрано']),
-                    'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                    'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
                 ]),
                 '_state' =>new Type\Varchar([
                     'description' => t('Состояние (serialize)'),
@@ -949,31 +949,31 @@ class Handlers extends HandlerAbstract
                     'maxLength' => 11,
                     'decimal' => 3,
                     'allowEmpty' => false,
-//                    'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
-                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
+                    'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
+//                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
                 ]),
                 'square_kitchen' => new Type\Double([
                     'description' => t('Площадь кухни'),
                     'maxLength' => 11,
                     'decimal' => 3,
-                    'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
+//                    'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
                 ]),
                 'square_living' => new Type\Double([
                     'description' => t('Жилая площадь'),
                     'maxLength' => 11,
-                    'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
+//                    'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
                 ]),
                 'flat' => new Type\Integer([
                     'description' => t('Этаж'),
                     'maxLength' => 3,
 //                    'Checker' => ['chkEmpty', t('Заполните поле Этаж')]
-                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkFlat'], t('поле Этаж')]
+//                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkFlat'], t('поле Этаж')]
                 ]),
                 'flat_house' => new Type\Integer([
                     'description' => t('Этажность дома'),
                     'maxLength' => 3,
 //                    'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
-                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkFlatHouse'], t('поле Этажность дома')]
+//                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkFlatHouse'], t('поле Этажность дома')]
                 ]),
                 'is_first' => new Type\Integer([
                     'description' => t('Первый этаж'),
@@ -1176,7 +1176,7 @@ class Handlers extends HandlerAbstract
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
                 'list' => array(['\Rieltprof\Model\ParamsApi', 'getMaterialList'], [0 => 'Не выбрано']),
-                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
             ]),
             '_material' => new Type\Varchar([
                 'description' => t('Материал стен (serialize)'),
@@ -1189,7 +1189,7 @@ class Handlers extends HandlerAbstract
             'state' => new Type\Integer([
                 'description' => t('Состояние'),
                 'list' => array(array('\Rieltprof\Model\ParamsApi', 'getStateList'), [0 => 'Не выбрано']),
-                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
             ]),
             '_state' => new Type\Varchar([
                 'description' => t('Состояние (serialize)'),
@@ -1200,32 +1200,33 @@ class Handlers extends HandlerAbstract
                 'maxLength' => 11,
                 'decimal' => 3,
                 'allowEmpty' => false,
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkSquare'], t('Поле Площадь')]
+                'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkSquare'], t('Поле Площадь')]
             ]),
             'square_kitchen' => new Type\Double([
                 'description' => t('Площадь кухни'),
                 'maxLength' => 11,
                 'decimal' => 3,
 //                'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatSquareKitchen'], t('Заполните поле Площадь кухни')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatSquareKitchen'], t('Заполните поле Площадь кухни')]
             ]),
             'square_living' => new Type\Double([
                 'description' => t('Жилая площадь'),
                 'maxLength' => 11,
 //                'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatSquareKitchen'], t('Заполните поле Жилая площадь')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatSquareKitchen'], t('Заполните поле Жилая площадь')]
             ]),
             'flat' => new Type\Integer([
                 'description' => t('Этаж'),
                 'maxLength' => 3,
 //                'Checker' => ['chkEmpty', t('Заполните поле Этаж')]
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlat'], t('Поле Этаж')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlat'], t('Поле Этаж')]
             ]),
             'flat_house' => new Type\Integer([
                 'description' => t('Этажность дома'),
                 'maxLength' => 3,
 //                'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatHouse'], t('Поле Этажность дома')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatHouse'], t('Поле Этажность дома')]
             ]),
             'is_first' => new Type\Integer([
                 'description' => t('Первый этаж'),
@@ -1410,7 +1411,7 @@ class Handlers extends HandlerAbstract
                 'rooms' => new Type\Integer([
                     'description' => t('Количество комнат'),
                     'maxLength' => 2,
-                    'Checker' => ['chkEmpty', t('Укажите количество комнат')]
+//                    'Checker' => ['chkEmpty', t('Укажите количество комнат')]
                 ]),
                 'rooms_isolated' => new Type\Integer([
                     'description' => t('Все комнаты изолированы'),
@@ -1425,7 +1426,7 @@ class Handlers extends HandlerAbstract
                 'material' => new Type\Integer([
                     'description' => t('Материал стен'),
                     'list' => array(['\Rieltprof\Model\ParamsApi', 'getMaterialList'], [0 => 'Не выбрано']),
-                    'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')],
+//                    'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')],
                     'runtime' => true
                 ]),
                 '_material' => new Type\Varchar([
@@ -1435,12 +1436,12 @@ class Handlers extends HandlerAbstract
                 'year' => new Type\Integer([
                     'description' => t('Год постройки'),
                     'maxLength' => 4,
-                    'checker' => ['chkEmpty', t('Заполниет поле - Год постройки')]
+//                    'checker' => ['chkEmpty', t('Заполниет поле - Год постройки')]
                 ]),
                 'state' => new Type\Integer([
                     'description' => t('Состояние'),
                     'list' => array(array('\Rieltprof\Model\ParamsApi', 'getStateList'), [0 => 'Не выбрано']),
-                    'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                    'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
                 ]),
                 '_state' => new Type\Varchar([
                     'description' => t('Состояние (serialize)'),
@@ -1451,24 +1452,24 @@ class Handlers extends HandlerAbstract
                     'maxLength' => 11,
                     'decimal' => 3,
                     'allowEmpty' => false,
-//                    'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
-                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
+                    'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
+//                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
                 ]),
                 'square_kitchen' => new Type\Double([
                     'description' => t('Площадь кухни'),
                     'maxLength' => 11,
                     'decimal' => 3,
-                    'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
+//                    'Checker' => ['chkEmpty', t('Заполните поле Площадь кухни')]
                 ]),
                 'square_living' => new Type\Double([
                     'description' => t('Жилая площадь'),
                     'maxLength' => 11,
-                    'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
+//                    'Checker' => ['chkEmpty', t('Заполните поле Жилая площадь')]
                 ]),
                 'flat_house' => new Type\Integer([
                     'description' => t('Этажность дома'),
                     'maxLength' => 3,
-                    'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
+//                    'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
                 ]),
             t('Дополнительные'),
                 'quickly' => new Type\Integer([
@@ -1745,7 +1746,7 @@ class Handlers extends HandlerAbstract
                 'material' => new Type\Integer([
                     'description' => t('Материал стен'),
                     'list' => array(['\Rieltprof\Model\ParamsApi', 'getMaterialList'], [0 => 'Не выбрано']),
-                    'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')]
+//                    'Checker' => [['\Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Материал стен')]
                 ]),
                 '_material' => new Type\Varchar([
                     'description' => t('Материал стен (serialize)'),
@@ -1758,7 +1759,7 @@ class Handlers extends HandlerAbstract
                 'state' => new Type\Integer([
                     'description' => t('Состояние'),
                     'list' => array(array('\Rieltprof\Model\ParamsApi', 'getStateList'), [0 => 'Не выбрано']),
-                    'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                    'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
                 ]),
                 '_state' =>new Type\Varchar([
                     'description' => t('Состояние (serialize)'),
@@ -1774,7 +1775,7 @@ class Handlers extends HandlerAbstract
                 'flat_house' => new Type\Integer([
                     'description' => t('Этажность'),
                     'maxLength' => 3,
-                    'Checker' => ['chkEmpty', t('Укажите Этажность')]
+//                    'Checker' => ['chkEmpty', t('Укажите Этажность')]
                 ]),
             t('Дополнительные'),
                 'quickly' => new Type\Integer([
@@ -1962,7 +1963,7 @@ class Handlers extends HandlerAbstract
                 'state' => new Type\Integer([
                     'description' => t('Состояние'),
                     'list' => array(array('\Rieltprof\Model\ParamsApi', 'getStateList'), [0 => 'Не выбрано']),
-                    'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                    'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
                 ]),
                 '_state' => new Type\Varchar([
                     'description' => t('Состояние (serialize)'),
@@ -1973,20 +1974,20 @@ class Handlers extends HandlerAbstract
                     'maxLength' => 11,
                     'decimal' => 3,
                     'allowEmpty' => false,
-//                    'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
-                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
+                    'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
+//                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
                 ]),
                 'flat' => new Type\Integer([
                     'description' => t('Этаж'),
                     'maxLength' => 3,
 //                    'Checker' => ['chkEmpty', t('Заполните поле Этаж')]
-                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkFlat'], t('поле Этаж')]
+//                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkFlat'], t('поле Этаж')]
                 ]),
                 'flat_house' => new Type\Integer([
                     'description' => t('Этажность дома'),
                     'maxLength' => 3,
 //                    'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
-                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkFlatHouse'], t('поле Этажность дома')]
+//                    'checker' => [['\Rieltprof\Model\ParamsApi', 'checkFlatHouse'], t('поле Этажность дома')]
                 ]),
                 'is_first' => new Type\Integer([
                     'description' => t('Первый этаж'),
@@ -2183,7 +2184,7 @@ class Handlers extends HandlerAbstract
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
                 'list' => array(['\Rieltprof\Model\ParamsApi', 'getMaterialList'], [0 => 'Не выбрано']),
-                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
             ]),
             '_material' => new Type\Varchar([
                 'description' => t('Материал стен (serialize)'),
@@ -2196,7 +2197,7 @@ class Handlers extends HandlerAbstract
             'state' => new Type\Integer([
                 'description' => t('Состояние'),
                 'list' => array(array('\Rieltprof\Model\ParamsApi', 'getStateList'), [0 => 'Не выбрано']),
-                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
+//                'Checker' => [['Rieltprof\Model\ParamsApi', 'checkEmpty'], t('Заполните поле - Состояние')]
             ]),
             '_state' => new Type\Varchar([
                 'description' => t('Состояние (serialize)'),
@@ -2207,31 +2208,31 @@ class Handlers extends HandlerAbstract
                 'maxLength' => 11,
                 'decimal' => 3,
                 'allowEmpty' => false,
-//                'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
+                'Checker' => ['chkEmpty', t('Заполните поле Площадь')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkSquare'], t('поле Площадь')]
             ]),
             'square_kitchen' => new Type\Double([
                 'description' => t('Площадь кухни'),
                 'maxLength' => 11,
                 'decimal' => 3,
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatSquareKitchen'], t('Заполните поле Площадь кухни')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatSquareKitchen'], t('Заполните поле Площадь кухни')]
             ]),
             'square_living' => new Type\Double([
                 'description' => t('Жилая площадь'),
                 'maxLength' => 11,
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatSquareKitchen'], t('Заполните поле Жилая площадь')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatSquareKitchen'], t('Заполните поле Жилая площадь')]
             ]),
             'flat' => new Type\Integer([
                 'description' => t('Этаж'),
                 'maxLength' => 3,
 //                'Checker' => ['chkEmpty', t('Заполните поле Этаж')]
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlat'], t('поле Этаж')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlat'], t('поле Этаж')]
             ]),
             'flat_house' => new Type\Integer([
                 'description' => t('Этажность дома'),
                 'maxLength' => 3,
 //                'Checker' => ['chkEmpty', t('Укажите Этажность дома')]
-                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatHouse'], t('поле Этажность дома')]
+//                'checker' => [['Rieltprof\Model\ParamsApi', 'checkFlatHouse'], t('поле Этажность дома')]
             ]),
             'is_first' => new Type\Integer([
                 'description' => t('Первый этаж'),
