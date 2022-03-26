@@ -250,7 +250,7 @@ class Handlers extends HandlerAbstract
             ]),
             'house' => new Type\Integer([
                 'description' => t('Дом'),
-                'maxLength' => 3
+                'maxLength' => 7
             ]),
             'liter' => new Type\Varchar([
                 'description' => t('Литер/Корпус'),
@@ -269,7 +269,7 @@ class Handlers extends HandlerAbstract
             'split_wc' => new Type\Integer([
                 'description' => t('Раздельный санузел'),
                 'CheckBoxView' => array(1,0),
-                'default' => 1
+                'default' => 0
             ]),
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
@@ -471,7 +471,7 @@ class Handlers extends HandlerAbstract
             ]),
             'house' => new Type\Integer([
                 'description' => t('Дом'),
-                'maxLength' => 3
+                'maxLength' => 7
             ]),
             'liter' => new Type\Varchar([
                 'description' => t('Литер/Корпус'),
@@ -490,7 +490,7 @@ class Handlers extends HandlerAbstract
             'split_wc' => new Type\Integer([
                 'description' => t('Раздельный санузел'),
                 'CheckBoxView' => array(1,0),
-                'default' => 1
+                'default' => 0
             ]),
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
@@ -692,7 +692,7 @@ class Handlers extends HandlerAbstract
             ]),
             'house' => new Type\Integer([
                 'description' => t('Дом'),
-                'maxLength' => 3
+                'maxLength' => 7
             ]),
             'liter' => new Type\Varchar([
                 'description' => t('Литер/Корпус'),
@@ -711,7 +711,7 @@ class Handlers extends HandlerAbstract
             'split_wc' => new Type\Integer([
                 'description' => t('Раздельный санузел'),
                 'CheckBoxView' => array(1,0),
-                'default' => 1
+                'default' => 0
             ]),
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
@@ -912,7 +912,7 @@ class Handlers extends HandlerAbstract
                 ]),
                 'house' => new Type\Integer([
                     'description' => t('Дом'),
-                    'maxLength' => 3
+                    'maxLength' => 7
                 ]),
                 'liter' => new Type\Varchar([
                     'description' => t('Литер/Корпус'),
@@ -1148,7 +1148,7 @@ class Handlers extends HandlerAbstract
             ]),
             'house' => new Type\Integer([
                 'description' => t('Дом'),
-                'maxLength' => 3
+                'maxLength' => 7
             ]),
             'liter' => new Type\Varchar([
                 'description' => t('Литер/Корпус'),
@@ -1171,7 +1171,7 @@ class Handlers extends HandlerAbstract
             'split_wc' => new Type\Integer([
                 'description' => t('Раздельный санузел'),
                 'CheckBoxView' => array(1,0),
-                'default' => 1
+                'default' => 0
             ]),
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
@@ -1402,7 +1402,7 @@ class Handlers extends HandlerAbstract
                 ]),
                 'house' => new Type\Integer([
                     'description' => t('Дом'),
-                    'maxLength' => 3
+                    'maxLength' => 7
                 ]),
                 'liter' => new Type\Varchar([
                     'description' => t('Литер/Корпус'),
@@ -1421,7 +1421,7 @@ class Handlers extends HandlerAbstract
                 'split_wc' => new Type\Integer([
                     'description' => t('Раздельный санузел'),
                     'CheckBoxView' => array(1,0),
-                    'default' => 1
+                    'default' => 0
                 ]),
                 'material' => new Type\Integer([
                     'description' => t('Материал стен'),
@@ -1623,7 +1623,7 @@ class Handlers extends HandlerAbstract
                 ]),
                 'house' => new Type\Integer([
                     'description' => t('Дом'),
-                    'maxLength' => 3
+                    'maxLength' => 7
                 ]),
                 'liter' => new Type\Varchar([
                     'description' => t('Литер/Корпус'),
@@ -1740,7 +1740,7 @@ class Handlers extends HandlerAbstract
                 ]),
                 'house' => new Type\Integer([
                     'description' => t('Дом'),
-                    'maxLength' => 3
+                    'maxLength' => 7
                 ]),
             t('Параметры'),
                 'material' => new Type\Integer([
@@ -1928,7 +1928,7 @@ class Handlers extends HandlerAbstract
                 ]),
                 'house' => new Type\Integer([
                     'description' => t('Дом'),
-                    'maxLength' => 3
+                    'maxLength' => 7
                 ]),
                 'liter' => new Type\Varchar([
                     'description' => t('Литер/Корпус'),
@@ -1946,7 +1946,7 @@ class Handlers extends HandlerAbstract
                 'split_wc' => new Type\Integer([
                     'description' => t('Раздельный санузел'),
                     'CheckBoxView' => array(1,0),
-                    'default' => 1
+                    'default' => 0
                 ]),
                 'material' => new Type\Integer([
                     'description' => t('Материал стен'),
@@ -2156,7 +2156,7 @@ class Handlers extends HandlerAbstract
             ]),
             'house' => new Type\Integer([
                 'description' => t('Дом'),
-                'maxLength' => 3
+                'maxLength' => 7
             ]),
             'liter' => new Type\Varchar([
                 'description' => t('Литер/Корпус'),
@@ -2179,7 +2179,7 @@ class Handlers extends HandlerAbstract
             'split_wc' => new Type\Integer([
                 'description' => t('Раздельный санузел'),
                 'CheckBoxView' => array(1,0),
-                'default' => 1
+                'default' => 0
             ]),
             'material' => new Type\Integer([
                 'description' => t('Материал стен'),
