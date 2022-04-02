@@ -34,9 +34,9 @@
         {/if}
     {/if}
 </div>
-<div class="feature tooltipped {if $product['mark']}stowage{/if}" {if $product['mark']}title="Закладка" data-tooltip="Закладку можно"{/if}>
+<div class="feature tooltipped {if $product['mark']}stowage{/if}" {if $product['mark']}title="Закладка" data-tooltip="Закладку можно/плачу комиссию"{/if}>
     {if $product['mark']}
-        З<span class="ext">акладку можно</span>
+        З<span class="ext">акладку можно/плачу комиссию</span>
     {/if}
 </div>
 <div class="feature tooltipped {if $product['breakdown']}breakdown{/if}" {if $product['breakdown']}title="Разбивка" data-tooltip="Разбивка по сумме"{/if}>

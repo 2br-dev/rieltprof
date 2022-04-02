@@ -698,7 +698,7 @@
                                                 value="1"
                                                 {if $filters[$prop.id] == '1'}checked{/if}
                                         >
-                                        <label for="mark">Возможна закладка</label>
+                                        <label for="mark">Возможна закладка/плачу комиссию</label>
                                     </div>
                                 </div>
                             </div>

@@ -326,7 +326,7 @@ class Handlers extends HandlerAbstract
                 'default' => 0,
             ]),
             'mark' => new Type\Integer([
-                'description' => t('Закладку можно'),
+                'description' => t('Закладку можно/плачу комиссию'),
                 'CheckBoxView' => array(1,0),
                 'default' => 0,
             ]),
@@ -547,7 +547,7 @@ class Handlers extends HandlerAbstract
                 'default' => 0,
             ]),
             'mark' => new Type\Integer([
-                'description' => t('Закладку можно'),
+                'description' => t('Закладку можно/плачу комиссию'),
                 'CheckBoxView' => array(1,0),
                 'default' => 0,
             ]),
@@ -768,7 +768,7 @@ class Handlers extends HandlerAbstract
                 'default' => 0,
             ]),
             'mark' => new Type\Integer([
-                'description' => t('Закладку можно'),
+                'description' => t('Закладку можно/плачу комиссию'),
                 'CheckBoxView' => array(1,0),
                 'default' => 0,
             ]),
@@ -994,7 +994,7 @@ class Handlers extends HandlerAbstract
                     'default' => 0,
                 ]),
                 'mark' => new Type\Integer([
-                    'description' => t('Закладку можно'),
+                    'description' => t('Закладку можно/плачу комиссию'),
                     'CheckBoxView' => array(1,0),
                     'default' => 0,
                 ]),
@@ -1247,7 +1247,7 @@ class Handlers extends HandlerAbstract
                 'default' => 0,
             ]),
             'mark' => new Type\Integer([
-                'description' => t('Закладку можно'),
+                'description' => t('Закладку можно/плачу комиссию'),
                 'CheckBoxView' => array(1,0),
                 'default' => 0,
             ]),
@@ -1478,7 +1478,7 @@ class Handlers extends HandlerAbstract
                     'default' => 0,
                 ]),
                 'mark' => new Type\Integer([
-                    'description' => t('Закладку можно'),
+                    'description' => t('Закладку можно/плачу комиссию'),
                     'CheckBoxView' => array(1,0),
                     'default' => 0,
                 ]),
@@ -1635,7 +1635,7 @@ class Handlers extends HandlerAbstract
                     'default' => 0,
                 ]),
                 'mark' => new Type\Integer([
-                    'description' => t('Закладку можно'),
+                    'description' => t('Закладку можно/плачу комиссию'),
                     'CheckBoxView' => array(1,0),
                     'default' => 0,
                 ]),
@@ -1784,7 +1784,7 @@ class Handlers extends HandlerAbstract
                     'default' => 0,
                 ]),
                 'mark' => new Type\Integer([
-                    'description' => t('Закладку можно'),
+                    'description' => t('Закладку можно/плачу комиссию'),
                     'CheckBoxView' => array(1,0),
                     'default' => 0,
                 ]),
@@ -2008,7 +2008,7 @@ class Handlers extends HandlerAbstract
                     'default' => 0,
                 ]),
                 'mark' => new Type\Integer([
-                    'description' => t('Закладку можно'),
+                    'description' => t('Закладку можно/плачу комиссию'),
                     'CheckBoxView' => array(1,0),
                     'default' => 0,
                 ]),
@@ -2253,7 +2253,7 @@ class Handlers extends HandlerAbstract
                 'default' => 0,
             ]),
             'mark' => new Type\Integer([
-                'description' => t('Закладку можно'),
+                'description' => t('Закладку можно/плачу комиссию'),
                 'CheckBoxView' => array(1,0),
                 'default' => 0,
             ]),
@@ -2680,6 +2680,17 @@ class Handlers extends HandlerAbstract
                         </div>';
             });
             $columns[] = new \RS\Html\Table\Type\Text('admin_comment', t('Коммент. Админа'));
+            $columns[] = new \RS\Html\Table\Type\Userfunc('count_ads', t('Количество объектов'), function($value, $field){
+                /**
+                 * @var \Users\Model\Orm\User $user
+                 */
+                //TODO - сделать механизм обновления количества объявлений при добавлении объявления пользователем или удалении
+                $user = $field->getRow();
+                $count_ads = $user->getCountAds($user['id']);
+                $user['count_ads'] = $count_ads;
+                $user->update();
+                return $count_ads;
+            }, ['ThAttr' => ['width' => '50'], 'Sortable' => SORTABLE_BOTH, 'CurrentSort' => SORTABLE_DESC]);
             $columns[] = $last_column;
             $table->setColumns($columns);
         }
@@ -2721,6 +2732,10 @@ class Handlers extends HandlerAbstract
                 'admin_comment' => new \RS\Orm\Type\Text([
                     'description' => t('Комментарий админа'),
                     'Attr' => array(array('rows' => 3, 'cols' => 80)),
+                ]),
+            t('Объявления'),
+                'count_ads' => new Type\Integer([
+                    'description' => t('Количество')
                 ])
         ));
     }

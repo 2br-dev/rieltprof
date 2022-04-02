@@ -16,7 +16,7 @@
     {/if}
 {/if}
 {if $product['mark']}
-    <div class="chip tooltipped bottom" data-tooltip="Закладку можно" id="stowage">З<span class="hide-mobile">акладку можно</span></div>
+    <div class="chip tooltipped bottom" data-tooltip="Закладку можно/плачу комиссию" id="stowage">З<span class="hide-mobile">акладку можно/плачу комиссию</span></div>
 {/if}
 {if $product['breakdown']}
     <div class="chip tooltipped bottom breakdown" title="Разбивка" data-tooltip="Разбивка по сумме">Р<span class="hide-mobile">азбивка</span></div>
