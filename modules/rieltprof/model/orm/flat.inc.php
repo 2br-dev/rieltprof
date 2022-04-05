@@ -198,7 +198,8 @@ class Flat extends OrmObject
             )),
             'dateof' => new Type\Datetime(array(
                 'description' => t('Дата добавления'),
-                'index' => true
+                'index' => true,
+                'visible' => false
             )),
             'xcost' => new Type\MixedType(array(
                 'description' => t('Цены в базовой валюте'),
@@ -786,6 +787,7 @@ class Flat extends OrmObject
             $this['actual_on_date'] = $this['dateof'];
             $this['controller'] = 'flatctrl';
             $this['public'] = 1;
+            $this['actual_on_date'] = $this['date'];
 
             //Вып олняем проверку не привышен ли лимит на количество товаров
             if (defined('PRODUCTS_LIMIT')) {
@@ -800,9 +802,10 @@ class Flat extends OrmObject
                 }
             }
 
-            if ($this['dateof']) {
+//            if ($this['dateof']) {
                 $this['dateof'] = date('Y-m-d H:i:s');
-            }
+//            }
+            $this['actual_on_date'] = date('Y-m-d');
         }
 
         return null;
