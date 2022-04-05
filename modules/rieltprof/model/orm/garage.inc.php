@@ -191,7 +191,8 @@ class Garage extends OrmObject
             )),
             'dateof' => new Type\Datetime(array(
                 'description' => t('Дата добавления'),
-                'index' => true
+                'index' => true,
+                'visible' => false
             )),
             'xcost' => new Type\MixedType(array(
                 'description' => t('Цены в базовой валюте'),
@@ -727,6 +728,7 @@ class Garage extends OrmObject
             $this->addProperty($config['prop_cost_rent'], $this['cost_rent']);
         }
         $this['public'] = 1;
+        $this['actual_on_date'] = date('Y-m-d');
 
         if ($flag == self::INSERT_FLAG) {
             $owner = \RS\Application\Auth::getCurrentUser();
@@ -734,7 +736,7 @@ class Garage extends OrmObject
             $this['object'] = $object;
             $this['maindir'] = $dir;
             $this['xdir'] = $dir;
-            $this['actual_on_date'] = $this['dateof'];
+//            $this['actual_on_date'] = $this['dateof'];
             $this['controller'] = 'garagectrl';
             $this['public'] = 1;
 
@@ -752,9 +754,9 @@ class Garage extends OrmObject
                 }
             }
 
-            if ($this['dateof']) {
+//            if ($this['dateof']) {
                 $this['dateof'] = date('Y-m-d H:i:s');
-            }
+//            }
         }
 
         return null;

@@ -170,7 +170,8 @@ class Handlers extends HandlerAbstract
                 'visible' => false
             ]),
             'actual_on_date' => new Type\Date([
-                'description' => t('актуально на дату')
+                'description' => t('актуально на дату'),
+                'visible' => false
                 // При добавлении = дата создания
             ]),
             'cost_product' => new Type\Integer([
@@ -391,7 +392,8 @@ class Handlers extends HandlerAbstract
                 'visible' => false
             ]),
             'actual_on_date' => new Type\Date([
-                'description' => t('актуально на дату')
+                'description' => t('актуально на дату'),
+                'visible' => false
                 // При добавлении = дата создания
             ]),
             'cost_product' => new Type\Integer([
@@ -612,7 +614,8 @@ class Handlers extends HandlerAbstract
                 'visible' => false
             ]),
             'actual_on_date' => new Type\Date([
-                'description' => t('актуально на дату')
+                'description' => t('актуально на дату'),
+                'visible' => false
                 // При добавлении = дата создания
             ]),
             'cost_product' => new Type\Integer([
@@ -833,7 +836,8 @@ class Handlers extends HandlerAbstract
                     'visible' => false
                 ]),
                 'actual_on_date' => new Type\Date([
-                    'description' => t('актуально на дату')
+                    'description' => t('актуально на дату'),
+                    'visible' => false
                     // При добавлении = дата создания
                 ]),
                 'cost_product' => new Type\Integer([
@@ -1323,7 +1327,8 @@ class Handlers extends HandlerAbstract
                     'visible' => false
                 ]),
                 'actual_on_date' => new Type\Date([
-                    'description' => t('актуально на дату')
+                    'description' => t('актуально на дату'),
+                    'visible' => false
                     // При добавлении = дата создания
                 ]),
                 'cost_product' => new Type\Integer([
@@ -1544,7 +1549,8 @@ class Handlers extends HandlerAbstract
                 'visible' => false
             ]),
             'actual_on_date' => new Type\Date([
-                'description' => t('актуально на дату')
+                'description' => t('актуально на дату'),
+                'visible' => false
                 // При добавлении = дата создания
             ]),
             'cost_product' => new Type\Integer([
@@ -1666,7 +1672,8 @@ class Handlers extends HandlerAbstract
                     'visible' => false
                 ]),
                 'actual_on_date' => new Type\Date([
-                    'description' => t('актуально на дату')
+                    'description' => t('актуально на дату'),
+                    'visible' => false
                     // При добавлении = дата создания
                 ]),
                 'cost_product' => new Type\Integer([
@@ -1849,7 +1856,8 @@ class Handlers extends HandlerAbstract
                     'visible' => false
                 ]),
                 'actual_on_date' => new Type\Date([
-                    'description' => t('актуально на дату')
+                    'description' => t('актуально на дату'),
+                    'visible' => false
                     // При добавлении = дата создания
                 ]),
                 'cost_product' => new Type\Integer([
@@ -2077,7 +2085,8 @@ class Handlers extends HandlerAbstract
                 'visible' => false
             ]),
             'actual_on_date' => new Type\Date([
-                'description' => t('актуально на дату')
+                'description' => t('актуально на дату'),
+                'visible' => false
                 // При добавлении = дата создания
             ]),
             'cost_product' => new Type\Integer([
@@ -2353,7 +2362,6 @@ class Handlers extends HandlerAbstract
         $url = \RS\Http\Request::commonInstance();
         $action = $url->request('action', TYPE_STRING);
         $orm = new \Rieltprof\Model\Orm\Flat();
-        $orm['__actual_on_date']->setVisible(true);
         if($action == 'sale'){
             $helper->setFormSwitch('sale');
             $orm['__cost_rent']->removeAllCheckers();

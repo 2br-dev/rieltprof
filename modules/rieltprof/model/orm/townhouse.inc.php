@@ -191,7 +191,8 @@ class TownHouse extends OrmObject
             )),
             'dateof' => new Type\Datetime(array(
                 'description' => t('Дата добавления'),
-                'index' => true
+                'index' => true,
+                'visible' => false
             )),
             'xcost' => new Type\MixedType(array(
                 'description' => t('Цены в базовой валюте'),
@@ -744,9 +745,10 @@ class TownHouse extends OrmObject
             $this['object'] = $object;
             $this['maindir'] = $dir;
             $this['xdir'] = $dir;
-            $this['actual_on_date'] = $this['dateof'];
+//            $this['actual_on_date'] = $this['dateof'];
             $this['controller'] = 'townhousectrl';
             $this['public'] = 1;
+            $this['actual_on_date'] = date('Y-m-d');
 
 
             //Вып олняем проверку не привышен ли лимит на количество товаров
@@ -762,9 +764,9 @@ class TownHouse extends OrmObject
                 }
             }
 
-            if ($this['dateof']) {
+//            if ($this['dateof']) {
                 $this['dateof'] = date('Y-m-d H:i:s');
-            }
+//            }
         }
 
         return null;

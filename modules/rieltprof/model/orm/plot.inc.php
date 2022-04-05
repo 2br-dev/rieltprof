@@ -191,7 +191,8 @@ class Plot extends OrmObject
             )),
             'dateof' => new Type\Datetime(array(
                 'description' => t('Дата добавления'),
-                'index' => true
+                'index' => true,
+                'visible' => false
             )),
             'xcost' => new Type\MixedType(array(
                 'description' => t('Цены в базовой валюте'),
@@ -706,6 +707,7 @@ class Plot extends OrmObject
         }
         $this->addProperty($config['prop_land_area'], $this['land_area']);
         $this['public'] = 1;
+        $this['actual_on_date'] = date('Y-m-d');
 
         if ($flag == self::INSERT_FLAG) {
             $owner = \RS\Application\Auth::getCurrentUser();
@@ -713,7 +715,7 @@ class Plot extends OrmObject
             $this['object'] = $object;
             $this['maindir'] = $dir;
             $this['xdir'] = $dir;
-            $this['actual_on_date'] = $this['dateof'];
+//            $this['actual_on_date'] = $this['dateof'];
             $this['controller'] = 'plotctrl';
             $this['public'] = 1;
 
@@ -731,9 +733,9 @@ class Plot extends OrmObject
                 }
             }
 
-            if ($this['dateof']) {
+//            if ($this['dateof']) {
                 $this['dateof'] = date('Y-m-d H:i:s');
-            }
+//            }
         }
 
         return null;

@@ -198,7 +198,8 @@ class NewBuilding extends OrmObject
             )),
             'dateof' => new Type\Datetime(array(
                 'description' => t('Дата добавления'),
-                'index' => true
+                'index' => true,
+                'visible' => false
             )),
             'xcost' => new Type\MixedType(array(
                 'description' => t('Цены в базовой валюте'),
@@ -773,6 +774,7 @@ class NewBuilding extends OrmObject
             $this->addProperty($config['prop_cost_rent'], $this['cost_rent']);
         }
         $this['public'] = 1;
+        $this['actual_on_date'] = date('Y-m-d');
 //        $this->addProperty($config[''])
 
         if ($flag == self::INSERT_FLAG) {
@@ -781,7 +783,7 @@ class NewBuilding extends OrmObject
             $this['object'] = $object;
             $this['maindir'] = $dir;
             $this['xdir'] = $dir;
-            $this['actual_on_date'] = $this['dateof'];
+//            $this['actual_on_date'] = $this['dateof'];
             $this['controller'] = 'newbuildingctrl';
             $this['public'] = 1;
 
@@ -799,9 +801,9 @@ class NewBuilding extends OrmObject
                 }
             }
 
-            if ($this['dateof']) {
+//            if ($this['dateof']) {
                 $this['dateof'] = date('Y-m-d H:i:s');
-            }
+//            }
         }
 
         return null;
