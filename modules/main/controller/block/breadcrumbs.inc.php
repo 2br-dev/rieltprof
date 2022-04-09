@@ -7,6 +7,9 @@
 */
 namespace Main\Controller\Block;
 
+use Main\Model\Microdata\MicrodataBreadcrumbs;
+use RS\Application\Application;
+
 /**
 * Блок Хлебные крошки
 */
@@ -23,7 +26,9 @@ class BreadCrumbs extends \RS\Controller\StandartBlock
         
     function actionIndex()
     {
+        $breadcrumbs_data = Application::getInstance()->breadcrumbs->getBreadCrumbs();
+        Application::getInstance()->microdata->addMicrodata(new MicrodataBreadcrumbs($breadcrumbs_data));
+
         return $this->result->setTemplate( $this->getParam('indexTemplate') );
-    }    
-    
+    }
 }

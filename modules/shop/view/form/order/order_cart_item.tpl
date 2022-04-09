@@ -17,6 +17,9 @@
         {/if}
     </td>
     <td>
+        <span class="zmdi {$products_in_cargo_status[$n].zmdi_class} m-r-5 product-in-cargo-status {$products_in_cargo_status[$n].status}" title="{$products_in_cargo_status[$n].status_text}"></span>
+    </td>
+    <td>
         {hook name="shop-orderview:cart-body-product-title" title=t('Редактирование заказа(админ. панель):Название товара в корзине заказа') item=$item}
             {if $product.id}
                 <a href="{$product->getUrl()}" target="_blank" class="title">{$item.cartitem.title}</a>
@@ -96,16 +99,21 @@
     <td>{$item.cartitem.single_weight}</td>
     <td><input type="text" name="items[{$n}][single_cost]" class="invalidate single_cost" value="{$item.single_cost_noformat}" size="10" {if !$order->canEdit()}disabled{/if}></td>
     <td>
-        <input type="text" name="items[{$n}][amount]" class="invalidate num" value="{$item.cartitem.amount}" size="4" data-product-id="{$product.id}" {if !$order->canEdit()}disabled{/if}>
-        {if $catalog_config.use_offer_unit}
-            <span class="unit">
+        <div class="amount-block {if $shop_config.check_quantity && $item.cartitem.amount > $order_available_stocks[$item.cartitem.offer]}amount-error{/if}" {if $shop_config.check_quantity}data-max-amount="{$order_available_stocks[$item.cartitem.offer]}"{/if}>
+            <input type="text" name="items[{$n}][amount]" class="invalidate num" value="{$item.cartitem.amount}" size="4" data-product-id="{$product.id}" {if !$order->canEdit()}disabled{/if}>
+            {if $catalog_config.use_offer_unit}
+                <span class="unit">
                 {$item.cartitem.data.unit}
             </span>
-        {/if}
+            {/if}
+            {if $shop_config.check_quantity}
+                <i title="{t}Недостаточно товара на складе.<br>Максимально доступное количество:{/t} {$order_available_stocks[$item.cartitem.offer]}" class="icon-amount-error zmdi zmdi-alert-triangle"></i>
+            {/if}
+        </div>
     </td>
     <td>
         <span class="cost">{$item.total}</span>
-        {if $item.discount>0}<div class="discount">{t discount=$item.discount}скидка %discount{/t}</div>{/if}
+        {if $item.discount_unformated > 0}<div class="discount">{t discount=$item.discount}скидка %discount{/t}</div>{/if}
     </td>
     <td class="r-w-space"></td>
 </tr>

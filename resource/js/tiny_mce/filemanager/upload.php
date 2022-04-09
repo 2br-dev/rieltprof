@@ -56,6 +56,7 @@ if ( ! empty($_FILES))
 	$user = \RS\Application\Auth::getCurrentUser();
     $user->setIgnoreClientSideGroups();
     $allow_to_upload = \RS\AccessControl\Rights::CheckRightError('main', \RS\AccessControl\DefaultModuleRights::RIGHT_CREATE) === false;
+
 	if (in_array(fix_strtolower($info['extension']), $ext) && $allow_to_upload)
 	{
 		$tempFile = $_FILES['file']['tmp_name'];
@@ -87,7 +88,7 @@ if ( ! empty($_FILES))
 		move_uploaded_file($tempFile,$targetFile);
 		chmod($targetFile, 0755);
 
-		if ($is_img)
+		if ($is_img && $info['extension'] != 'svg')
 		{
 			$memory_error = FALSE;
 			if ( ! create_img($targetFile, $targetFileThumb, 122, 91))

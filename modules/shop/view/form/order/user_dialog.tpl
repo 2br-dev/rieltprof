@@ -78,7 +78,7 @@
 
         </div>
     </form>
-    <script type="text/javascript">
+    <script>
         /**
         * Получает массив объектов параметров из запроса
         */

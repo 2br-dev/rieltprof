@@ -21,8 +21,7 @@
     <div class="caption-line">
 
         <div class="logo-line">
-            <img class="rs-cart" src="{$Setup.IMG_PATH}/adminstyle/flatadmin/auth/rs-cart.svg" alt="">
-            <img class="rs-text" src="{$Setup.IMG_PATH}/adminstyle/flatadmin/auth/rs-logo.svg" alt="">
+            <img class="rs-auth-logo" src="{$Setup.IMG_PATH}/adminstyle/flatadmin/auth/rs-logo.svg" alt="ReadyScript lab.">
         </div>
 
         <div class="select-lang dropdown">

@@ -90,6 +90,7 @@ class TableCell extends BlockFrameDecorator
             switch ($style->vertical_align) {
                 default:
                 case "baseline":
+                    // FIXME: this isn't right
 
                 case "top":
                     // Don't need to do anything

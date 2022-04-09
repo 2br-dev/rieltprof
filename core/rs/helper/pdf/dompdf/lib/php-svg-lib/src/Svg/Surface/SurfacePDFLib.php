@@ -111,6 +111,7 @@ class SurfacePDFLib implements SurfaceInterface
     public function beginPath()
     {
         if (self::DEBUG) echo __FUNCTION__ . "\n";
+        // TODO: Implement beginPath() method.
     }
 
     public function closePath()
@@ -141,6 +142,7 @@ class SurfacePDFLib implements SurfaceInterface
     public function strokeText($text, $x, $y, $maxWidth = null)
     {
         if (self::DEBUG) echo __FUNCTION__ . "\n";
+        // TODO: Implement drawImage() method.
     }
 
     public function drawImage($image, $sx, $sy, $sw = null, $sh = null, $dx = null, $dy = null, $dw = null, $dh = null)
@@ -184,6 +186,7 @@ class SurfacePDFLib implements SurfaceInterface
     {
         if (self::DEBUG) echo __FUNCTION__ . "\n";
 
+        // FIXME not accurate
         $this->canvas->curveTo($cpx, $cpy, $cpx, $cpy, $x, $y);
     }
 
@@ -335,10 +338,10 @@ class SurfacePDFLib implements SurfaceInterface
         }
 
         if ($fillRule = strtolower($style->fillRule)) {
-            $map = [
+            $map = array(
                 "nonzero" => "winding",
                 "evenodd" => "evenodd",
-            ];
+            );
 
             if (isset($map[$fillRule])) {
                 $fillRule = $map[$fillRule];
@@ -347,22 +350,22 @@ class SurfacePDFLib implements SurfaceInterface
             }
         }
 
-        $opts = [];
+        $opts = array();
         if ($style->strokeWidth > 0.000001) {
             $opts[] = "linewidth=$style->strokeWidth";
         }
 
-        if (in_array($style->strokeLinecap, ["butt", "round", "projecting"])) {
+        if (in_array($style->strokeLinecap, array("butt", "round", "projecting"))) {
             $opts[] = "linecap=$style->strokeLinecap";
         }
 
-        if (in_array($style->strokeLinejoin, ["miter", "round", "bevel"])) {
+        if (in_array($style->strokeLinejoin, array("miter", "round", "bevel"))) {
             $opts[] = "linejoin=$style->strokeLinejoin";
         }
 
         $canvas->set_graphics_option(implode(" ", $opts));
 
-        $opts = [];
+        $opts = array();
         $opacity = $style->opacity;
         if ($opacity !== null && $opacity < 1.0) {
             $opts[] = "opacityfill=$opacity";
@@ -393,7 +396,7 @@ class SurfacePDFLib implements SurfaceInterface
 
     private function getFont($family, $style)
     {
-        $map = [
+        $map = array(
             "serif"      => "Times",
             "sans-serif" => "Helvetica",
             "fantasy"    => "Symbol",
@@ -402,7 +405,7 @@ class SurfacePDFLib implements SurfaceInterface
 
             "arial"      => "Helvetica",
             "verdana"    => "Helvetica",
-        ];
+        );
 
         $family = strtolower($family);
         if (isset($map[$family])) {
@@ -414,5 +417,6 @@ class SurfacePDFLib implements SurfaceInterface
 
     public function setFont($family, $style, $weight)
     {
+        // TODO: Implement setFont() method.
     }
 }

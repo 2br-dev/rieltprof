@@ -164,4 +164,56 @@ $(function() {
         return false;
     });
 
+    $('.rs-checkout_pvzSelectButton').click(function () {
+        let block = this.closest('.deliveryParamsPvz');
+        let url = new URL(block.dataset.pvzSelectUrl);
+        let cityId = block.dataset.cityId;
+        let delivery = this.closest('.row').querySelector('[name="delivery"]').value;
+
+        url.searchParams.append('city_id', cityId);
+        url.searchParams.append('delivery', delivery);
+
+        // todo кусочек jQuery в нативном классе
+        $.openDialog({
+            url: url.toString(),
+            callback: (params) => {
+                let selectPvzElement = document.querySelector('.rs-selectPvz');
+                if (selectPvzElement) {
+                    let waiting = setInterval(() => {
+                        if (selectPvzElement.selectPvz) {
+                            clearInterval(waiting);
+                            selectPvzElement.selectPvz.setDispatchEventTarget(block);
+                        }
+                    }, 10);
+                }
+            },
+        });
+    });
+
+    document.querySelectorAll('.deliveryParamsPvz').forEach((element) => {
+        element.addEventListener('pvzSelected', (event) => {
+            let pvzInput = element.querySelector('[name="delivery_extra[pvz_data]"]');
+            pvzInput.value = pvzInput.querySelector('[data-pvz-code="'+event.detail.pvz.code+'"]').value;
+        });
+    });
+
+    document.querySelectorAll('[name="delivery"]').forEach((element) => {
+        element.addEventListener('change', () => {
+            document.querySelectorAll('.additionalInfo select, .additionalInfo input').forEach((element) => {
+                element.disabled = true;
+            });
+            document.querySelector('[name="delivery"]:checked').closest('.item').querySelectorAll('.additionalInfo select, .additionalInfo input').forEach((element) => {
+                element.disabled = false;
+            });
+        });
+    });
+    document.querySelectorAll('.additionalInfo select, .additionalInfo input').forEach((element) => {
+        element.disabled = true;
+    });
+    let checked = document.querySelector('[name="delivery"]:checked');
+    if (checked) {
+        checked.closest('.item').querySelectorAll('.additionalInfo select, .additionalInfo input').forEach((element) => {
+            element.disabled = false;
+        });
+    }
 });   

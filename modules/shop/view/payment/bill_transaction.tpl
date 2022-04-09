@@ -178,6 +178,7 @@
 <br />
 <div>
 Всего наименований 1 на сумму {$transaction->cost} рублей.<br />
+НДС не облагается<br>
 <strong>{$sumstr}</strong></div>
 <br /><br />
 <div style="background-color:#000000; width:100%; font-size:1px; height:2px;">&nbsp;</div>

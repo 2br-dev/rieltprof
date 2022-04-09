@@ -19,6 +19,7 @@
 {addcss file="flatadmin/app.css?v=2" basepath="common"}
 {addcss file="common/animate.css" basepath="common"}
 {addcss file="common/tour.css" basepath="common"}
+{$app->setBodyClass('rs-admin-top-panel', true)}
 
 {if $this_controller->getDebugGroup()}
     {addcss file="flatadmin/debug.css" basepath="common"}
@@ -36,12 +37,12 @@
                 <div class="viewport">
                     <div class="fixed-tools">
                         <a href="{$router->getUrl('main.admin')}" class="to-admin">
-                            <i class="rs-icon rs-icon-admin"></i><br>
+                            <i class="rs-icon rs-icon-admin"><!----></i><br>
                             <span>{t}управление{/t}</span>
                         </a>
 
                         <a href="{$router->getUrl('main.admin', ["Act" => "cleanCache"])}" class="rs-clean-cache">
-                            <i class="rs-icon rs-icon-refresh"></i><br>
+                            <i class="rs-icon rs-icon-refresh"><!----></i><br>
                             <span>{t}кэш{/t}</span>
                         </a>
 
@@ -85,7 +86,7 @@
 
                     <div class="float-tools">
                         <div class="dropdown">
-                            <a class="toggle visible-xs-inline-block" data-toggle="dropdown" id="floatTools" aria-haspopup="true"><i class="zmdi zmdi-more-vert"></i></a>
+                            <a class="toggle visible-xs-inline-block" data-toggle="dropdown" id="floatTools" aria-haspopup="true"><i class="zmdi zmdi-more-vert"><!----></i></a>
 
                             <ul class="ft-dropdown-menu" aria-labelledby="floatTools">
                                 {moduleinsert name="\Main\Controller\Admin\Block\HeaderPanel" public=true indexTemplate="%main%/adminblocks/headerpanel/header_public_panel_items.tpl"}
@@ -96,6 +97,14 @@
                                             <span>{t}Отчет{/t}</span>
                                         </a>
                                     </li>
+                                {/if}
+                                {if $has_debug_right}
+                                <li>
+                                    <a title="{t}Настройка темы{/t}" href="{adminUrl mod_controller="templates-blockctrl" do="contextOptions" context="{$THEME_CONTEXT}" front="1"}" class="crud-edit">
+                                        <i class="rs-icon rs-public-icon zmdi zmdi-tune"><!----></i>
+                                        <span>{t}Настройка темы{/t}</span>
+                                    </a>
+                                </li>
                                 {/if}
                                 <li>
                                     <a class="hidden-xs action start-tour" data-tour-id="welcome" title="{t}Обучение{/t}">

@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Блок файлов</name>
         <description multilanguage="true">Позволяет прикреплять файлы к различным объектам в системе</description>
-        <version>4.0.6</version>
+        <version>6.0.1</version>
         <is_system>1</is_system>
         <author>ReadyScript</author>
     </defaultValues>

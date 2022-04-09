@@ -33,14 +33,10 @@ class MarkedClassCommon extends AbstractMarkedClass
      */
     public function getNomenclatureCode(OrderItemUIT $uit): string
     {
-        $tag_name_part = '8A04';
-        $data_length_part = '1500';
-        $marking_type_part = $this->getMarkingTypeId();
-        $gtin_part = str_pad(dechex((int)$uit['gtin']), 12, '0', STR_PAD_LEFT);
-        $serial_part = bin2hex($uit['serial']);
+        $gtin_part = str_pad($uit['gtin'], 14, '0', STR_PAD_LEFT);
+        $serial_part = $uit['serial'];
 
-        $result = strtoupper($tag_name_part . $data_length_part . $marking_type_part . $gtin_part . $serial_part);
-        $result = trim(chunk_split($result, 2, ' '));
+        $result = '01' . $gtin_part . '21' . htmlspecialchars_decode($serial_part, 3);
 
         return $result;
     }
@@ -54,15 +50,16 @@ class MarkedClassCommon extends AbstractMarkedClass
      */
     protected function parseCode(string $code): array
     {
-        preg_match('/01(\d{14})21(\w{13})/', $code, $matches);
+        preg_match('/01(\d{14})21(.{13})/u', $code, $matches);
 
         if (empty($matches)) {
             throw new MarkingException(t('Некорректный код'), MarkingException::ERROR_SINGLE_CODE_PARSE);
         }
-
+        
         $result = [
             MarkingApi::USE_ID_GTIN => $matches[1] ? ltrim($matches[1], '0') : null,
             MarkingApi::USE_ID_SERIAL => $matches[2] ?? null,
+            'n_code' => $matches[0],
         ];
 
         return $result;

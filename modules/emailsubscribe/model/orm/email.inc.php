@@ -40,7 +40,7 @@ class Email extends OrmObject
         parent::_init()->append([
             'site_id' => new Type\CurrentSite(),
             'email' => new Type\Varchar([
-                'maxLength' => '250',
+                'maxLength' => '150',
                 'description' => t('E-mail'),
             ]),
             'dateof' => new Type\Datetime([

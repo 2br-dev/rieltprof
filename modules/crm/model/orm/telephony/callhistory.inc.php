@@ -100,6 +100,7 @@ class CallHistory extends OrmObject
             ]),
             'call_id' => new Type\Varchar([
                 'description' => t('Внутренний ID вызова'),
+                'maxLength' => 150,
                 'visible' => false,
             ]),
             'call_api_id' => new Type\Varchar([
@@ -107,14 +108,16 @@ class CallHistory extends OrmObject
                 'visible' => false,
             ]),
             'caller_number' => new Type\Varchar([
-                'description' => t('Номер вызывающего абонента')
+                'description' => t('Номер вызывающего абонента'),
+                'maxLength' => 50,
             ]),
             'caller_id' => new Type\Varchar([
                 'description' => t('ID вызывающего абонента'),
                 'visible' => false,
             ]),
             'called_number' => new Type\Varchar([
-                'description' => t('Номер вызываемого абонента')
+                'description' => t('Номер вызываемого абонента'),
+                'maxLength' => 50,
             ]),
             'called_id' => new Type\Varchar([
                 'description' => t('ID вызываемого абонента'),
@@ -133,6 +136,7 @@ class CallHistory extends OrmObject
             ]),
             'record_id' => new Type\Varchar([
                 'description' => t('ID файла записи разговора'),
+                'maxLength' => 150,
                 'allowEmpty' => false,
                 'visible' => false
             ]),

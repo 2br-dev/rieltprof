@@ -39,9 +39,9 @@ class Remove extends \ExternalApi\Model\AbstractMethods\AbstractMethod
 
     /**
     * Удаляет товар из корзины и возвращает корзину пользователя со всеми сведениями
-    * 
-    * @param string $token Авторизационный токен
+    *
     * @param string $id уникальный id товара в корзине
+    * @param string $token Авторизационный токен
     * 
     * @example GET /api/methods/cart.remove?id=xzrbcvmpyz
     * Ответ:
@@ -141,7 +141,7 @@ class Remove extends \ExternalApi\Model\AbstractMethods\AbstractMethod
     * 
     * @return array Возвращает список со сведения об элементах в корзине
     */
-    protected function process($token = null, $id)
+    protected function process($id, $token = null)
     {
         \Shop\Model\Cart::currentCart()->removeItem($id);
         

@@ -33,12 +33,12 @@
                     <div class="container-tools">
                         {block name="container_tools"}{/block}
                         <a class="isettings itool crud-edit" title="{t}Настройки{/t}" href="{adminUrl do=editContainer id=$container.object.id page_id=$currentPage.id type=$container.object.type}">
-                            <i class="zmdi zmdi-settings"></i>
+                            <i class="zmdi zmdi-settings"><!----></i>
 
                         </a>
                         {if $currentPage.route_id != 'default' || $container@last}
                             <a class="iremove itool crud-remove-one" title="{t}Удалить контейнер{/t}" href="{adminUrl do=removeContainer id=$container.object.id}">
-                                <i class="zmdi zmdi-delete"></i>
+                                <i class="zmdi zmdi-delete"><!----></i>
                             </a>
                         {/if}
                     </div>

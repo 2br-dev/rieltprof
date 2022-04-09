@@ -110,10 +110,10 @@ abstract class AbstractOfferType
      *
      * @param ExportProfile $profile
      * @param \XMLWriter $writer
-     * @param mixed $product
-     * @param mixed $offer_index
+     * @param Product $product
+     * @param int $offer_id
      */
-    abstract public function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_index);
+    abstract public function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_id);
 
     /**
      * Получение значения unit для экспорта
@@ -189,19 +189,19 @@ abstract class AbstractOfferType
     }
 
     /**
-     * Запись элемента в соответсвии с настройками сопоставления полей экспорта свойствам товара
+     * Запись элемента в соответствии с настройками сопоставления полей экспорта свойствам товара
      *
      * @param Field $field
-     * @param ExportProfile $profile
-     * @param \XMLWriter $writer
-     * @param Product $product
-     * @param int $offer_index
+     * @param ExportProfile $profile - объект профиля экспорта
+     * @param \XMLWriter $writer - объект библиотеки для записи XML
+     * @param Product $product - объект товара
+     * @param integer $offer_id - индекс комплектации для отображения
      * @throws RSException
      */
-    protected function writeElementFromFieldmap(Field $field, ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_index = null)
+    protected function writeElementFromFieldmap(Field $field, ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_id = null)
     {
         if ($field instanceof ComplexFieldInterface) {
-            $field->writeSomeTags($writer, $profile, $product, $offer_index);
+            $field->writeSomeTags($writer, $profile, $product, $offer_id);
         } else {
             $value = $this->getElementFromFieldmap($field, $profile, $writer, $product);
             if (!empty($value)) {
@@ -211,7 +211,7 @@ abstract class AbstractOfferType
     }
 
     /**
-     * Получить элемент в соответсвии с настройками сопоставления полей экспорта свойствам товара
+     * Получить элемент в соответствии с настройками сопоставления полей экспорта свойствам товара
      *
      * @param Field $field
      * @param ExportProfile $profile
@@ -223,6 +223,7 @@ abstract class AbstractOfferType
     protected function getElementFromFieldmap(Field $field, ExportProfile $profile, \XMLWriter $writer, Product $product)
     {
         // Получаем объект типа экспорта (в нем хранятся соотвествия полей - fieldmap)
+        $result = null;
         $export_type_object = $profile->getTypeObject();
         if (!empty($export_type_object['fieldmap'][$field->name]['prop_id'])) {
             // Идентификатор свойстава товара
@@ -236,34 +237,40 @@ abstract class AbstractOfferType
                 // Если значение свойства 1 или непустая строка - выводим 'true', в противном случае 'false'
 
                 if ($field->boolAsInt) {
-                    return $value === 'есть' ? '1' : (!isset($value) ? '1' : '0');
+                    $result = $value === 'есть' ? '1' : (!isset($value) ? '1' : '0');
                 }
-                if ((!$value || $value == t('нет')) && (!$default_value || $default_value == t('нет'))) {
-                    return "false";
+                elseif ((!$value || $value == t('нет')) && (!$default_value || $default_value == t('нет'))) {
+                    $result = "false";
+                } else {
+                    $result = "true";
                 }
-                return "true";
             } else {
                 // Выводим значение свойства, либо значение по умолчанию
-                return $value === null ? $default_value : $value;
+                $result = $value === null ? $default_value : $value;
             }
         }
-        return null;
+
+        if (is_callable($field->modifier)) {
+            $result = call_user_func($field->modifier, $result, $field, $profile, $product);
+        }
+
+        return $result;
     }
 
     /**
      * Запись "Особенных" полей, для данного типа описания
      * Перегружается в потомке. По умолчанию выводит все поля в соответсвии с fieldmap
      *
-     * @param ExportProfile $profile
-     * @param \XMLWriter $writer
-     * @param Product $product
-     * @param mixed $offer_index
+     * @param ExportProfile $profile - объект профиля экспорта
+     * @param \XMLWriter $writer - объект библиотеки для записи XML
+     * @param Product $product - объект товара
+     * @param integer $offer_id - индекс комплектации для отображения
      * @throws RSException
      */
-    protected function writeEspecialOfferTags(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_index)
+    protected function writeEspecialOfferTags(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_id)
     {
         foreach ($this->getEspecialTags() as $field) {
-            $this->writeElementFromFieldmap($field, $profile, $writer, $product, $offer_index);
+            $this->writeElementFromFieldmap($field, $profile, $writer, $product, $offer_id);
         }
     }
 

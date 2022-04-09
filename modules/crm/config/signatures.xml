@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>76d6c41cd0a1676908ebcd59e6f7f99d17ac645f</sign>
+    <sign>51a58cda353e0bee3d7a95db75eecb3c95dfb677</sign>
   </file>
   <file>
     <path>config/demo/status.csv</path>
@@ -10,11 +10,11 @@
   </file>
   <file>
     <path>config/file.inc.php</path>
-    <sign>8dc4f1648e01928987a339fc524fb26c1512bac1</sign>
+    <sign>b36b0e8c59b465ce1ee2c624e45a26d1946c72d1</sign>
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>8bf1fb182cf7dc6bb165bef54ad6c815ba019538</sign>
+    <sign>5cde68aa81465c21b05d9c5dd3a401e9bc5b78c0</sign>
   </file>
   <file>
     <path>config/install.inc.php</path>
@@ -22,7 +22,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>c38d2ff98156aac4b87cf7820b32f75c52e87230</sign>
+    <sign>0bd8710913d9fd2097a591ac365ed2273ba09e1f</sign>
   </file>
   <file>
     <path>config/modulerights.inc.php</path>
@@ -86,7 +86,11 @@
   </file>
   <file>
     <path>controller/admin/taskctrl.inc.php</path>
-    <sign>3805bcd67c9708d8aca2621bd396e8b85dbede0c</sign>
+    <sign>9c90aeef2b618db2d524b22fedeb7d8dd4461e42</sign>
+  </file>
+  <file>
+    <path>controller/admin/taskgantctrl.inc.php</path>
+    <sign>4823a1ff75d32cff51e965205b869f80ce73b7b1</sign>
   </file>
   <file>
     <path>controller/admin/telphinctrl.inc.php</path>
@@ -229,6 +233,10 @@
     <sign>8ad640b36032a26b9c4102cd4603bf1185358e37</sign>
   </file>
   <file>
+    <path>model/gantapi.inc.php</path>
+    <sign>a76965e421c1a98bce99cccfd141aeb5bb30c12e</sign>
+  </file>
+  <file>
     <path>model/interactionapi.inc.php</path>
     <sign>7ff4bf103f2d6bab607bbb3040dcd78db8f82833</sign>
   </file>
@@ -238,31 +246,31 @@
   </file>
   <file>
     <path>model/links/type/abstracttype.inc.php</path>
-    <sign>7ff8a4629d7d6b107fbcddf0000eeba574633ba7</sign>
+    <sign>a16bfd9581e9921aef394ebd666d8e9123a243e0</sign>
   </file>
   <file>
     <path>model/links/type/linktypecall.inc.php</path>
-    <sign>7830d04f855a84639455ba5bc86858ddd76b2620</sign>
+    <sign>837c7557110e41066609c111f1afa08148a0feed</sign>
   </file>
   <file>
     <path>model/links/type/linktypedeal.inc.php</path>
-    <sign>3be7cb205f23cdc1e0c223733312b03c9af487cc</sign>
+    <sign>e00f5346c07db5e6476c8e3159d7e715bc208584</sign>
   </file>
   <file>
     <path>model/links/type/linktypeoneclickitem.inc.php</path>
-    <sign>bda7ed0ca6f921f13c229f171881a4f79299c8b9</sign>
+    <sign>975584dd42fae4677d40511a5966bb4b2a032bdd</sign>
   </file>
   <file>
     <path>model/links/type/linktypeorder.inc.php</path>
-    <sign>52ef8d37bcee77839ea7f0db53c568fbe4e55ac5</sign>
+    <sign>2bcff1d3e661298aaa64c87255587f6be0b2ed0e</sign>
   </file>
   <file>
     <path>model/links/type/linktypereservation.inc.php</path>
-    <sign>bb8082ec881fefc19786f7691f414da6d147342b</sign>
+    <sign>7b318f7767782954942efbb7ea783e7f4c89786e</sign>
   </file>
   <file>
     <path>model/links/type/linktypeuser.inc.php</path>
-    <sign>e6697e77539a64f76c957cf488b164118ef9ad2f</sign>
+    <sign>463033d4ff0426bad7373f0206cc3162903a5489</sign>
   </file>
   <file>
     <path>model/log/logtelephony.inc.php</path>
@@ -286,11 +294,11 @@
   </file>
   <file>
     <path>model/orm/customdata.inc.php</path>
-    <sign>83b5c5c111039a71bdf552829c1234569b9f4611</sign>
+    <sign>d624e666379708eaa0bcc8081ab2184b9f541631</sign>
   </file>
   <file>
     <path>model/orm/deal.inc.php</path>
-    <sign>55fbadcc90c396924e41dc14aeab47a26be59a1e</sign>
+    <sign>bdc969e4d1629b56398b3196453cfccbe297763c</sign>
   </file>
   <file>
     <path>model/orm/interaction.inc.php</path>
@@ -314,7 +322,7 @@
   </file>
   <file>
     <path>model/orm/telephony/callhistory.inc.php</path>
-    <sign>fc0f865a73122f78b093b48c77168092e9cefa58</sign>
+    <sign>a4334238e010619348c54195d243b429f031b41b</sign>
   </file>
   <file>
     <path>model/ormtype/customfields.inc.php</path>
@@ -406,15 +414,15 @@
   </file>
   <file>
     <path>view/admin/blocks/deal/deal_list.tpl</path>
-    <sign>5f132367cf3b1473667ba96a2a1d4b1dc1ea15bb</sign>
+    <sign>b4013075e0bd9057693377f6e06c0e8c1273e9ba</sign>
   </file>
   <file>
     <path>view/admin/blocks/interaction/interaction_list.tpl</path>
-    <sign>80e215bbeefe0037d47440cfbed69b4cfd8aad72</sign>
+    <sign>b09b01b8669cc793c9fc4fda1374558b3a3e1f14</sign>
   </file>
   <file>
     <path>view/admin/blocks/task/task_list.tpl</path>
-    <sign>592c6e4e14687a7e46af45caf581eda127b1ef6f</sign>
+    <sign>a4a3ed5e78b9092d7138730daa4955f615d337d8</sign>
   </file>
   <file>
     <path>view/admin/board/board.tpl</path>
@@ -449,8 +457,44 @@
     <sign>dcb34ef826f471f4080692ef2631f75f21f871e0</sign>
   </file>
   <file>
+    <path>view/admin/gant/filter.tpl</path>
+    <sign>508b3a43b99944293059ddd531628bb7674ffe34</sign>
+  </file>
+  <file>
+    <path>view/admin/gant/tasks.tpl</path>
+    <sign>ece2b163f757c39a347f10866b7678846be96c4d</sign>
+  </file>
+  <file>
+    <path>view/admin/gant/user.tpl</path>
+    <sign>7d922acbf9d7a74e032900ab7021b58d3115d2e0</sign>
+  </file>
+  <file>
     <path>view/admin/links/dialog.tpl</path>
-    <sign>468a695150f672f9413ec63920c6d98d08e09b76</sign>
+    <sign>f36a08e8b759ca0333c214fbabbc128131764c97</sign>
+  </file>
+  <file>
+    <path>view/admin/links/lastobjects/call.tpl</path>
+    <sign>ed2b8039e2b0b363165fdb2f397c127fb409c7c5</sign>
+  </file>
+  <file>
+    <path>view/admin/links/lastobjects/deal.tpl</path>
+    <sign>fa9de29922a7a4110b7cf26f4ba8566e7945a89d</sign>
+  </file>
+  <file>
+    <path>view/admin/links/lastobjects/oneclick.tpl</path>
+    <sign>3588abf865b9de38b0f9463ad57c6e4115fc8db5</sign>
+  </file>
+  <file>
+    <path>view/admin/links/lastobjects/order.tpl</path>
+    <sign>33a3b6f7b0ebcb2d20110eabdf199a790e10f4c6</sign>
+  </file>
+  <file>
+    <path>view/admin/links/lastobjects/reservation.tpl</path>
+    <sign>692851b47371479e8fc9d9a21e12a01fb1fc9fd5</sign>
+  </file>
+  <file>
+    <path>view/admin/links/lastobjects/user.tpl</path>
+    <sign>5e4e29f09af958c04a540efd6123fa52efab7a81</sign>
   </file>
   <file>
     <path>view/admin/links/link_item.tpl</path>
@@ -511,6 +555,14 @@
   <file>
     <path>view/css/board.css</path>
     <sign>ea9059506dd2526451c168ee5a11a98b45718f3e</sign>
+  </file>
+  <file>
+    <path>view/css/gant.css</path>
+    <sign>0146c7f6463ba30bb352a71c378a990e667d76c0</sign>
+  </file>
+  <file>
+    <path>view/css/links.css</path>
+    <sign>706f3b172ba1fa2ca66b8eec2431a2a04357c6f2</sign>
   </file>
   <file>
     <path>view/css/show_call.css</path>
@@ -629,6 +681,10 @@
     <sign>98d3baa78f8026668f672cccf494748a3caccbf1</sign>
   </file>
   <file>
+    <path>view/js/gant.js</path>
+    <sign>9d0effc30f111a47d5abd8922c9d2ad3ce07e690</sign>
+  </file>
+  <file>
     <path>view/js/jquery.rs.ajaxpagination.js</path>
     <sign>d754fe6c11e3fd1227ef8b1e4e382418bf19ffc0</sign>
   </file>
@@ -650,7 +706,7 @@
   </file>
   <file>
     <path>view/js/jquery.rs.linkmanager.js</path>
-    <sign>d45b123c07a1b4ec06f1e4f672ae4515dec938fe</sign>
+    <sign>acc79046ae20a1e5684fe59857fe737d6b57b13c</sign>
   </file>
   <file>
     <path>view/js/jquery.rs.taskrule.js</path>
@@ -730,7 +786,7 @@
   </file>
   <file>
     <path>view/telephony/provider_test_fields.tpl</path>
-    <sign>d69a6cb0d6a5fd581a9f831d1ad7541838ac961b</sign>
+    <sign>7a84b219a0c53fd86519e0d948b8b80c9caf9c94</sign>
   </file>
   <file>
     <path>view/telephony/show_call.tpl</path>
@@ -792,5 +848,5 @@
     <path>view/telephony/telphin/settings_info.tpl</path>
     <sign>b499b1a110ecd429935263b6309b6dbda1f18c23</sign>
   </file>
-  <masterSign>22fef5df396c3802184414b0b7ee2917a5cc9e59d250e0715c3ec40a1480195e370b2c14cd7743cc144e40ec1c56cb949006c46cf6439aa99c1cc207ff126622e3d70c2aee297e2d3d243a9d604bf1957dec86b5e47aee53117fea7e8a97509f87145919ee6edd30f490ab17288721c3a9c5bcfec9dd907658cc9ca4e31e0503</masterSign>
+  <masterSign>a02f4b386bab3d269ccaeffe4bd12961ab41fff6571de0931f5efc17194fd76ce997383faec9555b7be25faddd101bd40eb86b3bd52321418b4d541023b877efee27a988030d435cec2db73ca3b08600533bbc166d73f03d0246799bc14df4d9f4b7e86fc43599dc0d17e1e5809a9bd1f0b7477f42b04c471bac8cf2317c9174</masterSign>
 </signatures>

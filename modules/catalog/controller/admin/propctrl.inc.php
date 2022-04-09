@@ -44,10 +44,13 @@ class PropCtrl extends Crud
 
     public function actionIndex()
     {
-        if (!$this->getCategoryApi()->getOneItem($this->dir)) {
-            $this->dir = 0; //Если категории не существует, то выбираем пункт "Все"
+        if ($this->dir > 0 && !$this->getCategoryApi()->getOneItem($this->dir)) {
+            $this->dir = -1; //Если категории не существует, то выбираем пункт "Все"
         }
-        $this->api->setFilter('parent_id', $this->dir);
+
+        if ($this->dir >= 0) { //0 - Без группы, > 0 - Категория
+            $this->api->setFilter('parent_id', $this->dir);
+        }
 
         return parent::actionIndex();
     }
@@ -148,8 +151,8 @@ class PropCtrl extends Crud
             'disabledValue' => '1',
             'activeValue' => $this->dir,
             'rootItem' => [
-                'id' => 0,
-                'title' => t('Без группы'),
+                'id' => -1,
+                'title' => t('Все'),
                 'noOtherColumns' => true,
                 'noCheckbox' => true,
                 'noDraggable' => true,
@@ -192,6 +195,7 @@ class PropCtrl extends Crud
             ],
         ]), $this->getCategoryApi());
 
+        $helper->setCategoryListFunction('getTableList');
         $helper->setCategoryBottomToolbar(new Toolbar\Element([
             'Items' => [
                 new ToolbarButton\Delete(null, null, ['attr' =>
@@ -338,8 +342,8 @@ class PropCtrl extends Crud
 
             $this->result->addSection('group', $group->getValues());
             $this->result->addSection('prop', $property->getValues());
-            $this->result->addSection('group_html', $this->view->fetch('property_group_product.tpl'));
-            $this->result->addSection('property_html', $this->view->fetch('property_product.tpl'));
+            $this->result->addSection('group_html', $this->view->fetch('form/product/property_group_product.tpl'));
+            $this->result->addSection('property_html', $this->view->fetch('form/product/property_product.tpl'));
         } else {
             $this->result->setErrors($prop_api->getElement()->getDisplayErrors());
         }
@@ -376,7 +380,7 @@ class PropCtrl extends Crud
                     'group' => ['group' => $group],
                     'owner_type' => 'group'
                 ]);
-                $group_html = $this->view->fetch('property_group_product.tpl');
+                $group_html = $this->view->fetch('form/product/property_group_product.tpl');
 
                 foreach ($list['properties'][$group_id] as $property) {
                     /** @var PropertyItem $property */
@@ -385,7 +389,7 @@ class PropCtrl extends Crud
                         'properties' => [$property]
                     ]);
 
-                    $property_html = $this->view->fetch('property_product.tpl');
+                    $property_html = $this->view->fetch('form/product/property_product.tpl');
 
                     $result[] = [
                         'group' => $group->getValues(),

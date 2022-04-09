@@ -75,7 +75,7 @@ class Ctrl extends \RS\Controller\Admin\Crud
                     ]
                 ),
                 new TableType\Text('class', t('Тип экспорта')),
-                new TableType\Usertpl('id', t('URL для экспорта'), '%export%/url_cell.tpl'),
+                new TableType\Usertpl('id', t('URL для экспорта'), '%export%/admin/url_cell.tpl'),
                 new TableType\Text('description', t('Описание'), ['Hidden' => true]),
                 new TableType\Yesno('is_enabled', t('Включен'), ['Sortable' => SORTABLE_BOTH, 'toggleUrl' => $this->router->getAdminPattern('ajaxToggleEnabled', [':id' => '@id'])]),
                 new TableType\Actions('id', 
@@ -132,7 +132,7 @@ class Ctrl extends \RS\Controller\Admin\Crud
         }
 
         if ($this->api->getElement()->getTypeObject()->canExchangeByApi() && !CronManager::obj()->isCronWork()) {
-            $this->getHelper()->setHeaderHtml($this->view->fetch('exchangable_alert.tpl'));
+            $this->getHelper()->setHeaderHtml($this->view->fetch('admin/exchangable_alert.tpl'));
         }
         
         $this->getHelper()->setTopTitle($primaryKey ? t('Редактировать профиль {title}') : t('Добавить профиль экспорта данных'));
@@ -223,7 +223,7 @@ class Ctrl extends \RS\Controller\Admin\Crud
         if ($refresh) {
             return $this->result->setHtml($log_content);
         } else {
-            $helper->setForm($this->view->fetch('show_log.tpl'));
+            $helper->setForm($this->view->fetch('admin/show_log.tpl'));
             return $this->result->setTemplate( $helper->getTemplate() );
         }
     }

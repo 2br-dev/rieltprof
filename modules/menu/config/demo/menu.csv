@@ -23,7 +23,7 @@ user;контакты;kontakty;0;1;article;;"<h3>Наш адрес</h3>
 <p>350000, г. Краснодар, ул. Красных партизан, 246</p>
 <p>Время работы: понедельник - пятница, с 10:00 до 19:00</p>
 <h3>Схема проезда</h3>
-<script charset=""utf-8"" type=""text/javascript"" src=""http://api-maps.yandex.ru/services/constructor/1.0/js/?sid=9ah1ecBfrutwDo4iOmpsXyfE1n0BZDkt&amp;width=100%&amp;height=450""></script>
+<script charset=""utf-8"" src=""http://api-maps.yandex.ru/services/constructor/1.0/js/?sid=9ah1ecBfrutwDo4iOmpsXyfE1n0BZDkt&amp;width=100%&amp;height=450""></script>
 <h3>&nbsp;</h3>
 <h3>Служба поддержки клиентов</h3>
 <p>Общая служба поддержки: support@your-shop.ru</p>

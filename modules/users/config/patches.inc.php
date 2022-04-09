@@ -22,6 +22,7 @@ use Users\Model\Orm\AccessMenu;
 use Users\Model\Orm\AccessModule;
 use Users\Model\Orm\AccessModuleRight;
 use Users\Model\Orm\User;
+use Users\Model\Orm\UserInGroup;
 
 /**
 * Патчи к модулю
@@ -37,8 +38,15 @@ class Patches extends AbstractPatches
             '306',
             '400',
             '4010',
-            '4035'
+            '4035',
+            '601'
         ];
+    }
+
+    function beforeUpdate601()
+    {
+        $user_in_group = new UserInGroup();
+        $user_in_group['__group']->setMaxLength(50);
     }
 
     /**

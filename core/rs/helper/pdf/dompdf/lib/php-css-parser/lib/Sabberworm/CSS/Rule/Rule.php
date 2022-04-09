@@ -2,11 +2,11 @@
 
 namespace Sabberworm\CSS\Rule;
 
-use Sabberworm\CSS\OutputFormat;
+use Sabberworm\CSS\Comment\Commentable;
+use Sabberworm\CSS\Parsing\ParserState;
 use Sabberworm\CSS\Renderable;
 use Sabberworm\CSS\Value\RuleValueList;
 use Sabberworm\CSS\Value\Value;
-use Sabberworm\CSS\Comment\Commentable;
 
 /**
  * RuleSets contains Rule objects which always have a key and a value.
@@ -25,9 +25,47 @@ class Rule implements Renderable, Commentable {
 		$this->sRule = $sRule;
 		$this->mValue = null;
 		$this->bIsImportant = false;
-		$this->aIeHack = [];
+		$this->aIeHack = array();
 		$this->iLineNo = $iLineNo;
-		$this->aComments = [];
+		$this->aComments = array();
+	}
+
+	public static function parse(ParserState $oParserState) {
+		$aComments = $oParserState->consumeWhiteSpace();
+		$oRule = new Rule($oParserState->parseIdentifier(), $oParserState->currentLine());
+		$oRule->setComments($aComments);
+		$oRule->addComments($oParserState->consumeWhiteSpace());
+		$oParserState->consume(':');
+		$oValue = Value::parseValue($oParserState, self::listDelimiterForRule($oRule->getRule()));
+		$oRule->setValue($oValue);
+		if ($oParserState->getSettings()->bLenientParsing) {
+			while ($oParserState->comes('\\')) {
+				$oParserState->consume('\\');
+				$oRule->addIeHack($oParserState->consume());
+				$oParserState->consumeWhiteSpace();
+			}
+		}
+		$oParserState->consumeWhiteSpace();
+		if ($oParserState->comes('!')) {
+			$oParserState->consume('!');
+			$oParserState->consumeWhiteSpace();
+			$oParserState->consume('important');
+			$oRule->setIsImportant(true);
+		}
+		$oParserState->consumeWhiteSpace();
+		while ($oParserState->comes(';')) {
+			$oParserState->consume(';');
+		}
+		$oParserState->consumeWhiteSpace();
+
+		return $oRule;
+	}
+
+	private static function listDelimiterForRule($sRule) {
+		if (preg_match('/^font($|-)/', $sRule)) {
+			return array(',', '/', ' ');
+		}
+		return array(',', ' ', '/');
 	}
 
 	/**
@@ -93,19 +131,19 @@ class Rule implements Renderable, Commentable {
 	 */
 	public function getValues() {
 		if (!$this->mValue instanceof RuleValueList) {
-			return [[$this->mValue]];
+			return array(array($this->mValue));
 		}
 		if ($this->mValue->getListSeparator() === ',') {
-			return [$this->mValue->getListComponents()];
+			return array($this->mValue->getListComponents());
 		}
-		$aResult = [];
+		$aResult = array();
 		foreach ($this->mValue->getListComponents() as $mValue) {
 			if (!$mValue instanceof RuleValueList || $mValue->getListSeparator() !== ',') {
-				$aResult[] = [$mValue];
+				$aResult[] = array($mValue);
 				continue;
 			}
 			if ($this->mValue->getListSeparator() === ' ' || count($aResult) === 0) {
-				$aResult[] = [];
+				$aResult[] = array();
 			}
 			foreach ($mValue->getListComponents() as $mValue) {
 				$aResult[count($aResult) - 1][] = $mValue;
@@ -119,7 +157,7 @@ class Rule implements Renderable, Commentable {
 	 */
 	public function addValue($mValue, $sType = ' ') {
 		if (!is_array($mValue)) {
-			$mValue = [$mValue];
+			$mValue = array($mValue);
 		}
 		if (!$this->mValue instanceof RuleValueList || $this->mValue->getListSeparator() !== $sType) {
 			$mCurrentValue = $this->mValue;
@@ -154,10 +192,10 @@ class Rule implements Renderable, Commentable {
 	}
 
 	public function __toString() {
-		return $this->render(new OutputFormat());
+		return $this->render(new \Sabberworm\CSS\OutputFormat());
 	}
 
-	public function render(OutputFormat $oOutputFormat) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
 		$sResult = "{$this->sRule}:{$oOutputFormat->spaceAfterRuleName()}";
 		if ($this->mValue instanceof Value) { //Can also be a ValueList
 			$sResult .= $this->mValue->render($oOutputFormat);

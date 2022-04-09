@@ -1,0 +1,1 @@
+<div class="rs-mapBlock" style="height:{$height}px;{if $width}width:{$width}px;{/if}" data-points='{$this_controller->getPointsJSON()}' data-zoom="{$zoom}"></div>

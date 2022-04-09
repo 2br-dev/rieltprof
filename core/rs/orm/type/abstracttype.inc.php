@@ -88,7 +88,7 @@ abstract class AbstractType
                 $key = trim($key);
                 if (method_exists($this, $method = 'set' . $key) || method_exists($this, $method = 'add' . $key)) {
                     if (!is_array($value)) $value = [$value];
-                    call_user_func_array([$this, $method], $value);
+                    call_user_func_array([$this, $method], array_values($value));
                 } else {
                     $this->$key = $value;
                 }
@@ -471,6 +471,18 @@ abstract class AbstractType
      */
     public function normalizePost()
     {
+    }
+
+    /**
+     * Дополняет список классов элемента формы
+     *
+     * @param string $class - класс
+     * @return static
+     */
+    public function addClass(string $class)
+    {
+        @$this->view_attr['class'] .= " $class";
+        return $this;
     }
 
     /**

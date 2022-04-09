@@ -118,7 +118,7 @@ class Mysql extends AbstractEngine
 
             if ($this->order_type == self::ORDER_RELEVANT) {
                 $q->select("*, MATCH(A.`title`, A.`indextext`) AGAINST('" . \RS\Db\Adapter::escape($this->query) . "' IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION) as rank")
-                    ->orderby('rank DESC');
+                    ->orderby('`rank` DESC');
             } else {
                 $q->orderby($this->order);
             }
@@ -168,7 +168,7 @@ class Mysql extends AbstractEngine
 
         if ($this->order_type == self::ORDER_RELEVANT) {
             $q->select("MATCH($alias.`title`, $alias.`indextext`) AGAINST('" . \RS\Db\Adapter::escape($this->query) . "' IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION) as rank")
-                ->orderby('rank DESC');
+                ->orderby('`rank` DESC');
         }
     }
 

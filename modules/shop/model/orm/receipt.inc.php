@@ -16,11 +16,7 @@ use Shop\Model\CashRegisterApi;
 use Shop\Model\CashRegisterType\AbstractProxy;
 use Shop\Model\CashRegisterType\AbstractType;
 use Shop\Model\CashRegisterType\Stub;
-use \Shop\Model\Orm\Order;
-use \Shop\Model\Orm\Payment;
 use Shop\Model\ReceiptInfo;
-use \Users\Model\Orm\User;
-use \Shop\Model\PaymentType\PersonalAccount;
 
 /**
  * Чеки

@@ -1,50 +1,56 @@
-<ul class="balanceLine">
-    <li class="balance">
-        <span class="cap">{t}Баланс:{/t}</span> <strong>{$balance_string}</strong>
-    </li>
-    <li class="addfunds">
-        <a href="{$router->getUrl('shop-front-mybalance', [Act=>addfunds])}"><img src="{$THEME_IMG}/addfunds.png" alt="">{t}Пополнить баланс{/t}</a>
-    </li>
-</ul>
-
-<br><br>
-<h2><span>{t}История операций{/t}</span></h2>
-
-<table class="orderList balanceTable">
-<thead>
-    <tr>
-        <th></th>
-        <th></th>
-        <th class="addFundsHead">{t}Приход{/t}</th>
-        <th class="takeFundsHead">{t}Расход{/t}</th>
-    </tr>
-</thead>
-<tbody>
-{foreach from=$list item=item}
-    <tr>
-        <td class="date">№ {$item.id}<br>{$item.dateof|date_format:"d.m.Y H:i"}</td>
-        <td class="reason">{$item->reason}</td>
-        <td>
-            {* Приход *}
-            {if !$item->order_id && $item->cost > 0}
-                <span class="scost">{$item->getCost(false, true)}</span>
-            {/if}
-        </td>
-        <td>
-            {* Расход *}
-            
-            {if $item->order_id}
-                <span class="tcost">-{$item->getCost(false, true)}</span>
-            {else}
-                {if $item->cost < 0}
-                    <span class="tcost">{$item->getCost(false, true)}</span>
-                {/if}
-            {/if}
-        </td>
-    </tr>
-{/foreach}
-</tbody>
-</table>
-<br><br>
-{include file="%THEME%/paginator.tpl"}
-
+{* Шаблон страницы просмотра баланса пользователя в личном кабинете *}
+{extends file="%THEME%/helper/wrapper/my-cabinet.tpl"}
+{block name="content"}
+    <div class="col">
+        <h1 class="mb-lg-6 mb-sm-5 mb-4">{t}Баланс:{/t} {$balance_string}</h1>
+        <div class="tab-pills__wrap mb-5">
+            <ul class="nav nav-pills tab-pills">
+                <li class="nav-item">
+                    <a class="nav-link active">{t}История операций{/t}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{$router->getUrl('shop-front-mybalance', [Act=>"addfunds"])}" class="nav-link">{t}Пополнить баланс{/t}</a>
+                </li>
+            </ul>
+        </div>
+        {if $list}
+            <div>
+                {foreach $list as $item}
+                    <div class="lk-balance-history">
+                    <div class="col-md col-12 mb-3 mb-md-0">
+                        <div class="me-3">№ {$item.id} от {$item.dateof|date_format:"d.m.Y H:i"}</div>
+                        {*
+                        <div  data-bs-toggle="tooltip" data-bs-placement="right" title="Чек">
+                            <a class="lk-balance-history__receipt" href="#">
+                                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.5037 0.620712C20.102 0.435707 19.6287 0.507641 19.3002 0.803582L17.7404 2.18466L15.6184 0.286444C15.192 -0.0954812 14.5466 -0.0954812 14.1203 0.286444L12 2.18286L9.87916 0.286444C9.45272 -0.0954812 8.80723 -0.0954812 8.38079 0.286444L6.25818 2.18466L4.69699 0.803638C4.23633 0.394176 3.53092 0.435707 3.12146 0.896365C2.93814 1.10261 2.83772 1.3695 2.83963 1.64543V22.3546C2.83597 22.9718 3.33339 23.4751 3.95061 23.4788C4.2266 23.4804 4.49349 23.3798 4.6998 23.1964L6.25953 21.8153L8.38158 23.7136C8.8079 24.0955 9.45334 24.0955 9.87966 23.7136L12 21.8169L14.1206 23.7133C14.5471 24.0952 15.1926 24.0952 15.619 23.7133L17.7416 21.8152L19.3028 23.1962C19.7634 23.6058 20.4688 23.5644 20.8783 23.1038C21.0618 22.8975 21.1622 22.6304 21.1603 22.3543V1.64543C21.1659 1.20332 20.9077 0.800378 20.5037 0.620712ZM18.4839 20.9733C18.0576 20.5956 17.4158 20.5973 16.9914 20.9773L14.8694 22.8755L12.749 20.9791C12.3227 20.5971 11.6772 20.5971 11.2508 20.9791L9.1302 22.8755L7.0073 20.9773C6.58458 20.5974 5.94392 20.5956 5.51911 20.9733L3.9636 22.3539V19.3583L3.95798 1.64572L5.51602 3.02646C5.9424 3.40417 6.58419 3.40248 7.00854 3.02247L9.13054 1.12431L11.2509 3.02072C11.6773 3.40265 12.3228 3.40265 12.7492 3.02072L14.8697 1.12431L16.9926 3.02247C17.4154 3.40242 18.056 3.40417 18.4808 3.02651L20.0364 1.64543V15.8812L20.042 22.3541L18.4839 20.9733Z" />
+                                    <path d="M17.3273 11.4375H6.67282C6.36244 11.4375 6.11084 11.6891 6.11084 11.9995C6.11084 12.3099 6.36244 12.5615 6.67282 12.5615H17.3273C17.6376 12.5615 17.8892 12.3099 17.8892 11.9995C17.8892 11.6891 17.6376 11.4375 17.3273 11.4375Z" />
+                                    <path d="M12.2694 8.06641H6.67282C6.36244 8.06641 6.11084 8.31801 6.11084 8.62839C6.11084 8.93877 6.36244 9.19038 6.67282 9.19038H12.2694C12.5798 9.19038 12.8314 8.93877 12.8314 8.62839C12.8314 8.31801 12.5797 8.06641 12.2694 8.06641Z" />
+                                    <path d="M17.3273 14.8086H6.67282C6.36244 14.8086 6.11084 15.0602 6.11084 15.3706C6.11084 15.681 6.36244 15.9326 6.67282 15.9326H17.3273C17.6376 15.9326 17.8892 15.681 17.8892 15.3706C17.8892 15.0602 17.6376 14.8086 17.3273 14.8086Z" />
+                                </svg>
+                            </a>
+                        </div>
+                        *}
+                    </div>
+                    <div class="col ms-md-3 ms-0">
+                        <div>{$item->reason}</div>
+                        {if !$item->order_id && $item->cost > 0}
+                            <div class="success-link fw-bold">+{$item->getCost(false, true)}</div>
+                        {/if}
+                        {if $item->order_id}
+                            <div class="danger-link fw-bold">-{$item->getCost(false, true)}</div>
+                        {else}
+                            {if $item->cost < 0}
+                                <div class="danger-link fw-bold">-{$item->getCost(false, true)}</div>
+                            {/if}
+                        {/if}
+                    </div>
+                </div>
+                {/foreach}
+            </div>
+            {include file="%THEME%/paginator.tpl"}
+        {else}
+            {include file="%THEME%/helper/usertemplate/include/empty_list.tpl" reason="{t}Еще не было операций с лицевым счетом{/t}"}
+        {/if}
+    </div>
+{/block}

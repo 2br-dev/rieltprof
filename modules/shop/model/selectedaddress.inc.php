@@ -11,6 +11,7 @@ namespace Shop\Model;
 use Main\Model\GeoIpApi;
 use RS\Config\Loader as ConfigLoader;
 use RS\Event\Manager as EventManager;
+use RS\Helper\Tools;
 use RS\Http\Request as HttpRequest;
 use RS\Orm\Request as OrmRequest;
 use RS\Site\Manager as SiteManager;
@@ -180,6 +181,11 @@ class SelectedAddress
                     $address['country_id'] = $data['country_id'] ?? null;
                     $address['region_id'] = $data['region_id'] ?? null;
                     $address['city_id'] = $data['city_id'] ?? null;
+
+                    $address['country'] = $data['country'] ?? null;
+                    $address['region'] = $data['region'] ?? null;
+                    $address['city'] = $data['city'] ?? null;
+
                     return $address;
                 }
             }
@@ -196,10 +202,17 @@ class SelectedAddress
     protected function saveAddressInCookie(): void
     {
         $address = $this->getAddress();
+        $country = $address->getCountry();
+        $region = $address->getRegion();
+        $city = $address->getCity();
+
         $data = [
-            'country_id' => $address->getCountry()['id'],
-            'region_id' => $address->getRegion()['id'],
-            'city_id' => $address->getCity()['id'],
+            'country_id' => $country['id'],
+            'region_id' => $region['id'],
+            'city_id' => $city['id'],
+            'city' => $city['title'],
+            'region' => $region['title'],
+            'country' => $country['title']
         ];
         setcookie(self::COOKIE_KEY, json_encode($data, JSON_UNESCAPED_UNICODE), time() + 60 * 60 * 24 * 30, '/');
     }

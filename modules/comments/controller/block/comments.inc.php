@@ -58,7 +58,7 @@ class Comments extends \RS\Controller\StandartBlock
                 'description' => t('Шаблон списка')
             ]),
             'formTemplate' => new Type\Varchar([
-                'description' => t('Шаблон формы одного коментария')
+                'description' => t('Шаблон формы одного комментария')
             ]),
             'type' => new Type\Varchar([
                 'description' => t('Тип комментариев'),

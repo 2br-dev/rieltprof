@@ -77,7 +77,7 @@ class Control extends AbstractHtml
         $params = $this->url->request($this->table_var, TYPE_ARRAY, []);
         if (isset($params[ $this->sort_column_var ])) {
             //Устанавливаем текущую сортировку
-            $this->table->setSortColumn( $params[ $this->sort_column_var ], $params[ $this->sort_direction_var ] );
+            $this->table->setSortColumn( $params[ $this->sort_column_var ], $params[ $this->sort_direction_var ] ?? SORT_ASC);
         } else {
             //Устанавливаем сортировку, выставленную в настройках
             if (isset($my_cookie['sort'])) {
@@ -94,6 +94,14 @@ class Control extends AbstractHtml
                     list($column, $value) = explode('=', $column_value);
                     $hidden[(int)$column] = ($value === 'N');
                 }
+            }
+
+            if (isset($my_cookie['order'])) {
+                $columns_order = [];
+                foreach(explode(',', $my_cookie['order']) as $column_original_index) {
+                    $columns_order[] = (int)$column_original_index;
+                }
+                $this->table->setColumnsOrder($columns_order);
             }
         }
 

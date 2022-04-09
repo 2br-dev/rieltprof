@@ -363,7 +363,7 @@ abstract class AbstractType extends AbstractObject
         $query = $this->getProductsSelectionQuery($profile);
 
         $offset = 0;
-        $pageSize = 100;
+        $pageSize = 50;
         $catalogApi = new ProductApi();
 
         while ($products = $query->limit($offset, $pageSize)->objects()) {
@@ -399,25 +399,27 @@ abstract class AbstractType extends AbstractObject
     }
 
     /**
-     * Экпорт одного товарного предложения
+     * Экспорт одного товарного предложения
      *
-     * @param ExportProfile $profile
-     * @param \XMLWriter $writer
-     * @param mixed $product
-     * @param mixed $offer_index
+     * @param ExportProfile $profile - профиль экспорта
+     * @param \XMLWriter $writer - объект записи XML
+     * @param mixed $product - объект продукта
+     * @param mixed $offer_id - id комплектации
      * @throws RSException
      */
-    protected function exportOneOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_index)
+    protected function exportOneOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_id)
     {
-        if ($profile['only_available'] && $product->getNum($offer_index) <= 0) {
+        if ($profile['only_available'] && $product->getNum($offer_id) <= 0) {
             return;
         }
 
-        if ($offer_index !== false && !count($product['offers'])) {
-            throw new RSException(t('Товарные предложения отсутсвуют, но передан аргумент offer_index'));
+        if ($offer_id !== false && !count($product['offers'])) {
+            throw new RSException(t('Товарные предложения отсутствуют, но передан аргумент offer_index'));
         }
 
-        $this->offer_types[$profile['data']['offer_type']]->writeOffer($profile, $writer, $product, $offer_index);
+        /** @var AbstractOfferType $offer_type */
+        $offer_type = $this->offer_types[$profile['data']['offer_type']];
+        $offer_type->writeOffer($profile, $writer, $product, $offer_id);
         $writer->flush();
     }
 
@@ -483,7 +485,7 @@ abstract class AbstractType extends AbstractObject
      */
     public function getExportActionCellTemplate()
     {
-        return '%export%/action_cell.tpl';
+        return '%export%/admin/action_cell.tpl';
     }
 
     /**

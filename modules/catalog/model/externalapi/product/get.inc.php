@@ -261,7 +261,7 @@ class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
     * </pre>
     * @return array
     */
-    function process($token = null, $product_id, $sections = ['image', 'cost', 'recommended', 'concomitant', 'property', 'current_currency'])
+    function process($product_id, $token = null, $sections = ['image', 'cost', 'recommended', 'concomitant', 'property', 'current_currency'])
     {
         $response = parent::process($token, $product_id);
         $this->current_currency = \Catalog\Model\CurrencyApi::getCurrentCurrency(); //Текущая валюта

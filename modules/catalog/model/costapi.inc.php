@@ -31,7 +31,7 @@ class CostApi extends EntityList
 
     protected static $session_old_cost_id;
     protected static $session_default_cost_id;
-    protected static $full_costlist = null;
+    protected static $full_costlist = [];
 
     function __construct()
     {
@@ -173,14 +173,16 @@ class CostApi extends EntityList
 
         //Устанавливаем вычисляемые значения.
         $cost_val = [];
-        foreach (self::$full_costlist as $onecost) {
-            if ($onecost['type'] == 'auto') {
-                $source_val = isset($cost_values[$onecost['depend']]) ? $cost_values[$onecost['depend']] : 0;
-            } else {
-                $source_val = isset($cost_values[$onecost['id']]) ? $cost_values[$onecost['id']] : 0;
-            }
+        if (!empty(self::$full_costlist[$this->site_context])) {
+            foreach (self::$full_costlist[$this->site_context] as $onecost) {
+                if ($onecost['type'] == 'auto') {
+                    $source_val = isset($cost_values[$onecost['depend']]) ? $cost_values[$onecost['depend']] : 0;
+                } else {
+                    $source_val = isset($cost_values[$onecost['id']]) ? $cost_values[$onecost['id']] : 0;
+                }
 
-            $cost_val[$onecost['id']] = $this->calculateAutoCost($source_val, $onecost);
+                $cost_val[$onecost['id']] = $this->calculateAutoCost($source_val, $onecost);
+            }
         }
         return $cost_val;
     }
@@ -228,9 +230,9 @@ class CostApi extends EntityList
      */
     function fillCostList()
     {
-        if (self::$full_costlist === null) {
+        if (!isset(self::$full_costlist[$this->site_context])) {
             $this->clearFilter();
-            self::$full_costlist = $this->getAssocList('id');
+            self::$full_costlist[$this->site_context] = $this->getAssocList('id');
         }
     }
 
@@ -243,7 +245,8 @@ class CostApi extends EntityList
     function getManualType($type_id)
     {
         $this->fillCostList();
-        return (self::$full_costlist[$type_id]['type'] == 'manual') ? $type_id : self::$full_costlist[$type_id]['depend'];
+        return (self::$full_costlist[$this->site_context][$type_id]['type'] == 'manual')
+            ? $type_id : self::$full_costlist[$this->site_context][$type_id]['depend'];
     }
 
     /**
@@ -255,7 +258,7 @@ class CostApi extends EntityList
     function getCostById($id)
     {
         $this->fillCostList();
-        return self::$full_costlist[$id];
+        return self::$full_costlist[$this->site_context][$id];
     }
 
     /**
@@ -268,7 +271,7 @@ class CostApi extends EntityList
     {
         $this->fillCostList();
         $cost_id = self::getUserCost();
-        $cost = self::$full_costlist[$cost_id];
+        $cost = self::$full_costlist[$this->site_context][$cost_id];
         /** @var Typecost $cost */
         if ($cost['type'] == 'auto') {
             if ($cost['val_type'] == 'sum') {
@@ -384,15 +387,15 @@ class CostApi extends EntityList
             ->where([
                 'P.site_id' => $site_id,
             ]);
-        
+
         if ($currency){//Если валюта задана
             $q->where('X.cost_original_currency='.$currency['id']);
         }else{
             $q->where('X.cost_original_currency>0');
         }
-        
-        $offset = 0;            
-        $pagesize = 200;
+
+        $offset = 0;
+        $pagesize = 1000;
         $res = $q->limit($offset, $pagesize)->exec();
         while( $res->rowCount() ) {
             $values = [];
@@ -402,28 +405,28 @@ class CostApi extends EntityList
                 $values[] = "({$row['product_id']},{$row['cost_id']},'{$cost_val}')";
             }
             $sql = "INSERT INTO ".$xcost->_getTable()."(product_id, cost_id, cost_val) VALUES".implode(',', $values).
-                    " ON DUPLICATE KEY UPDATE cost_val = VALUES(cost_val)";
+                " ON DUPLICATE KEY UPDATE cost_val = VALUES(cost_val)";
             DbAdapter::sqlExec($sql);
-            
+
             $offset += $pagesize;
             $res = $q->limit($offset, $pagesize)->exec();
         }
-        
+
         //Обновляем цены в комплектациях.
         $offset = 0;
-        $pageSize = 200;
+        $pageSize = 400;
         $q = OrmRequest::make()
-            ->select('O.*')
+            ->select('DISTINCT O.*')
             ->from(new Orm\Offer(), 'O')
             ->where(['O.site_id' => $site_id])
-            ->limit($offset, $pagesize);
-            
+            ->limit($offset, $pageSize);
+
         if ($currency){//Если валюта задана
             $q->join(new Orm\Product(), 'P.id = O.product_id', 'P')
-            ->join($xcost, 'P.id = X.product_id', 'X')
-            ->where('X.cost_original_currency='.$currency['id']);
+                ->join($xcost, 'P.id = X.product_id', 'X')
+                ->where('X.cost_original_currency='.$currency['id']);
         }
-            
+
         while($list = $q->objects()) {
             foreach($list as $offer) {
                 $offer->update();

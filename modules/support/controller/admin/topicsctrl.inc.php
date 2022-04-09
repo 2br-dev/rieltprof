@@ -45,7 +45,7 @@ class TopicsCtrl extends \RS\Controller\Admin\Crud
                          'href' => $this->router->getAdminPattern(null, [':id' => '@id'], 'support-supportctrl')
                     ]
                 ),
-                new TableType\Usertpl('user_id', t('Пользователь'), '%support%/table_user_cell.tpl', [
+                new TableType\Usertpl('user_id', t('Пользователь'), '%support%/admin/table_user_cell.tpl', [
                          'Sortable' => SORTABLE_BOTH, 
                          'href' => $this->router->getAdminPattern(null, [':id' => '@id'], 'support-supportctrl')
                 ]),

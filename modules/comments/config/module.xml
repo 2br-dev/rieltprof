@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Комментарии</name>
         <description multilanguage="true">Комментирование различных объектов</description>        
-        <version>4.0.3</version>
+        <version>6.0.3</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         <allow_more_comments>0</allow_more_comments>

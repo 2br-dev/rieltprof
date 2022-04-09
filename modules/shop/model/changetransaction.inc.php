@@ -197,4 +197,14 @@ class ChangeTransaction
         $this->changelog_entity_type = $entity_type;
         $this->changelog_entity_id = $entity_id;
     }
+
+    /**
+     * Возвращает объект новой транзакции
+     *
+     * @return Transaction
+     */
+    public function getNewTransaction()
+    {
+        return $this->transaction;
+    }
 }

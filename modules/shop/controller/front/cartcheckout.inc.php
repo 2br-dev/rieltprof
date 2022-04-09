@@ -56,6 +56,10 @@ class CartCheckout extends Front
         $this->app->title->addSection(t('Заказ №%0 успешно оформлен', [$this->order['order_num']]));
         $this->app->breadcrumbs->addBreadCrumb(t('Завершение заказа'));
 
+        if (!$this->order['id']) {
+            $this->app->redirect();
+        }
+
         $this->view->assign([
             'order' => $this->order,
             'cart' => $this->order->getCart(),

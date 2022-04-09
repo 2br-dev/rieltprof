@@ -2,11 +2,11 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>5938cf30950d4d8aa5c5125c46b27826f5e668dc</sign>
+    <sign>8ec676fbe3d145adfb979bba99e39d9e6601df6c</sign>
   </file>
   <file>
     <path>config/demo/menu.csv</path>
-    <sign>608b7f332eaaaef0500cd7587671f6162bfe6833</sign>
+    <sign>0832f35d5fabab5737294cec661f690808b5ec77</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -22,7 +22,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>b748249e4595491c030616914191d644a6f2e896</sign>
+    <sign>d10576c9b672101c079e09d36568359652ee197b</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
@@ -30,7 +30,7 @@
   </file>
   <file>
     <path>controller/admin/ctrl.inc.php</path>
-    <sign>c03f7b97bda8e2624f42a6fee1254c4341a89721</sign>
+    <sign>bd773e93ec9e14c8d7cec4a560475a7a3d40668b</sign>
   </file>
   <file>
     <path>controller/admin/tools.inc.php</path>
@@ -38,7 +38,7 @@
   </file>
   <file>
     <path>controller/admin/view.inc.php</path>
-    <sign>04e043db4638a487681398fc5bf6f37220315abb</sign>
+    <sign>e4a0d49e31b6d4f649aa61a6b75141885496b22e</sign>
   </file>
   <file>
     <path>controller/block/menu.inc.php</path>
@@ -50,7 +50,7 @@
   </file>
   <file>
     <path>model/api.inc.php</path>
-    <sign>385f9b2f8c1b663776887da3dea4135cfe00b056</sign>
+    <sign>427c93a41f1ba7d31723f05fa5a550c894be7a29</sign>
   </file>
   <file>
     <path>model/csvschema/menu.inc.php</path>
@@ -58,67 +58,67 @@
   </file>
   <file>
     <path>model/externalapi/menu/get.inc.php</path>
-    <sign>0b31208c9c31cfe740963d038baf77cda6761c77</sign>
+    <sign>281a9b22240f8146eb421390698e61cb2e974da0</sign>
   </file>
   <file>
     <path>model/externalapi/menu/getlist.inc.php</path>
-    <sign>a08d129f0e9bc3b626a82ada791250376ab6a052</sign>
+    <sign>f96b1db5b783b5b1f497407fbc72fa84b33ca4d2</sign>
   </file>
   <file>
     <path>model/menutype/abstracttype.inc.php</path>
-    <sign>7d0ae032bd2c1615a230e6fd3736c461073d2623</sign>
+    <sign>7a5b89acb7a1e703cf91f5142dffb69876742085</sign>
   </file>
   <file>
     <path>model/menutype/article.inc.php</path>
-    <sign>cc7df0b1a3b667a217adb8059988938d4fbeb862</sign>
+    <sign>fc70d2ded1e4d0c57383151dcfc790b01db4587a</sign>
   </file>
   <file>
     <path>model/menutype/link.inc.php</path>
-    <sign>697f7903aaad1f8f63e2b2b5dce867a7f544d9cb</sign>
+    <sign>c9f03d693f1a89eedb30cd15a76b681c6cf23dbf</sign>
   </file>
   <file>
     <path>model/menutype/page.inc.php</path>
-    <sign>52f20fcc49379a2dd59b9615f195dc426ff1359c</sign>
+    <sign>9bff78649accfa5e5ef601f09012f92cf8fe17b3</sign>
   </file>
   <file>
     <path>model/menutype/separator.inc.php</path>
-    <sign>e9e64add587cf924b1a921755d64a239e9d2b7d4</sign>
+    <sign>2abbd22bd278c84e1ef851c43942efae58757964</sign>
   </file>
   <file>
     <path>model/orm/menu.inc.php</path>
-    <sign>fd7dc2bf5ecb480cf471162f7ca4d977f5460bfd</sign>
+    <sign>ca56d67c9dbc8e4079b3d408ca1453d2be02e528</sign>
   </file>
   <file>
-    <path>view/adminmenu.tpl</path>
-    <sign>ba25dd1bdab5a4c0fe6c5ff2c6b2d59ac8b35eea</sign>
+    <path>view/admin/adminmenu.tpl</path>
+    <sign>109bc979df97fb2b2244403be3e0a0c4d54802c7</sign>
   </file>
   <file>
-    <path>view/adminmenu_branch.tpl</path>
-    <sign>62b229ea5529e7cb96de422cb0d7a6593307e0e5</sign>
+    <path>view/admin/adminmenu_branch.tpl</path>
+    <sign>5fe844592160aee85c4d9ee716476f89a805d3c7</sign>
   </file>
   <file>
-    <path>view/blocks/menu/branch.tpl</path>
-    <sign>d10215ea3c962f62daef2d3edebaca1bf82e104c</sign>
+    <path>view/admin/tree_column.tpl</path>
+    <sign>00047c1c400467d087d7d817e0e6e388c7b24e4c</sign>
   </file>
   <file>
-    <path>view/blocks/menu/foot_menu.tpl</path>
-    <sign>4653789e6e739e833de82888fff4adb25b671e17</sign>
+    <path>view/blocks/menu/footer_menu.tpl</path>
+    <sign>410681949f741694645f8331369aa0929d8e200f</sign>
   </file>
   <file>
     <path>view/blocks/menu/hor_menu.tpl</path>
-    <sign>4d30e0a9eea0ea5d5105db213d3812eb37fbdfac</sign>
+    <sign>098bcd51a47c4139af4d9a8a6351fe99acbf8705</sign>
   </file>
   <file>
-    <path>view/blocks/menu/menu_submenu.tpl</path>
-    <sign>aa81e8c010e7066423d58c8aaec688168552378b</sign>
+    <path>view/blocks/menu/mobile_menu.tpl</path>
+    <sign>6fff295a79f2bc941dbfa9988b6a9aad004a8359</sign>
   </file>
   <file>
     <path>view/css/menucontrol.css</path>
-    <sign>2ac82428a86530e0eddaaea2675641b94312df63</sign>
+    <sign>dca5ae59d86c4d17874bf77731f98e8cdb4c4523</sign>
   </file>
   <file>
     <path>view/form/menu/other.tpl</path>
-    <sign>2384acf1e3600b2a656658dc4cce3dc88c272b1f</sign>
+    <sign>744fbf6d481a6ddd4baf02e8a5f9905161eb9a3d</sign>
   </file>
   <file>
     <path>view/form/menu/type_form.tpl</path>
@@ -127,50 +127,6 @@
   <file>
     <path>view/front_article.tpl</path>
     <sign>830bac740bdbd3ac5ccdd88bb5925bc51fdafc28</sign>
-  </file>
-  <file>
-    <path>view/img/admin/arrow.gif</path>
-    <sign>eb3ebaab083a656a2248511d50bcf15aaf45fc3f</sign>
-  </file>
-  <file>
-    <path>view/img/admin/dropdown.gif</path>
-    <sign>522abe804b2dcc186791b7d9ffb9e011228b833d</sign>
-  </file>
-  <file>
-    <path>view/img/admin/dropdown_act.gif</path>
-    <sign>59149bb1eb4c550b95a37468714fdb563363b733</sign>
-  </file>
-  <file>
-    <path>view/img/admin/dropside.gif</path>
-    <sign>ada9cd1526cad3e504b4ffbbb6b8cf2144e6e2d5</sign>
-  </file>
-  <file>
-    <path>view/img/admin/dropside_act.gif</path>
-    <sign>e5b6524e7d7092c1546d43c95d24b7c8996b3deb</sign>
-  </file>
-  <file>
-    <path>view/img/admin/home.png</path>
-    <sign>1eeea36114636ae3f68c0eeef54e857020911b30</sign>
-  </file>
-  <file>
-    <path>view/img/admin/marker.gif</path>
-    <sign>32cc995a8f741d1f5bf30a70b5ba82338e3fcf5b</sign>
-  </file>
-  <file>
-    <path>view/img/admin/type_article.gif</path>
-    <sign>52c7644ad1050c14435235afd113d4be170e3b94</sign>
-  </file>
-  <file>
-    <path>view/img/admin/type_link.gif</path>
-    <sign>f6f83ece55dc4a8656482c1ed28555f45c9aeed6</sign>
-  </file>
-  <file>
-    <path>view/img/admin/type_template.gif</path>
-    <sign>7aec19f5050a16cb1b248f68580e88e7b7eb899f</sign>
-  </file>
-  <file>
-    <path>view/img/menu.png</path>
-    <sign>b5759252c1664095ea17621490129f234f44e038</sign>
   </file>
   <file>
     <path>view/js/admin_menu.js</path>
@@ -184,13 +140,5 @@
     <path>view/js/usermenu.js</path>
     <sign>8435ec8c3aa8765d8e92d5de41eb57f3b17fe251</sign>
   </file>
-  <file>
-    <path>view/tree_column.tpl</path>
-    <sign>b25bc4fb9db20d1d6077f12422dfeea2cc5006a3</sign>
-  </file>
-  <file>
-    <path>view/user_branch.tpl</path>
-    <sign>ab0d5325b18a69de114b28d573954f707454ad48</sign>
-  </file>
-  <masterSign>029f7ff5da80ac7db486a5d3963752419669d1d265dfe947b6b36206bf2ffd309930a4169ae21cc7a3837069ecffb7b28ea1e85553fc49959956742eef9ecd17806a21ac10d2d30a6916b6394e5dd44ea8a5c2be504512055e57039a0b1a59eec01827b5f6e1b84d6eead85f2c54b34d41ddb75a784cadd0fff0116d99af71a3</masterSign>
+  <masterSign>3bef0492c1b6af70c0b97c0a74c273f64ac14fde548ee6b54325c1cf666db13295ce1a3b816bc3b183286a28e1274e5345d09ded609240d23ca2b4f95b4906cc4bc786288a1d2c4ead98218fdbae7ea370d38ffab344adddc0421abd0856fde9992dd02c51063845c04092bc204515a62d5238f2415dd82aba92f3e4c2064868</masterSign>
 </signatures>

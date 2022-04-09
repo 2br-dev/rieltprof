@@ -32,7 +32,9 @@ class Install extends \RS\Module\AbstractInstall
     {
         //Заполняем демо значения предприятия
         $site_config = \RS\Config\Loader::getSiteConfig(\RS\Site\Manager::getSiteId());
-        $site_config['logo'] = $site_config['__logo']->addFromUrl($this->mod_folder.'/config/demo/logo.png');
+        $site_config['logo'] = $site_config['__logo']->addFromUrl($this->mod_folder.'/config/demo/logo.svg');
+        $site_config['logo_sm'] = $site_config['__logo_sm']->addFromUrl($this->mod_folder.'/config/demo/logo-sm.svg');
+        $site_config['logo_xs'] = $site_config['__logo_xs']->addFromUrl($this->mod_folder.'/config/demo/logo-xs.svg');
         $site_config['slogan'] = t('Ваш интернет-магазин');
         $site_config['firm_name'] = t('ООО Ваше предприятие');
         $site_config['firm_inn'] = t('2308001234');

@@ -61,7 +61,11 @@ class MobileSiteApp extends \ExternalApi\Model\App\AbstractAppType implements In
     {
         return [
             'oauth.token'       => self::FULL_RIGHTS,
-            
+            'oauth.login'       => self::FULL_RIGHTS,
+            'verification.checkCode'        => self::FULL_RIGHTS,
+            'verification.sendCode'         => self::FULL_RIGHTS,
+            'verification.resetSession'     => self::FULL_RIGHTS,
+
             'banner.get'         => self::FULL_RIGHTS,
             'banner.getList'     => self::FULL_RIGHTS,
             

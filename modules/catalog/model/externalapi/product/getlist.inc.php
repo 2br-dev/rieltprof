@@ -102,7 +102,7 @@ class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetList
             'barcode' => [
                 'title' => t('Артикул'),
                 'type' => 'string',
-                'func' => self::FILTER_TYPE_EQ
+                'func' => self::FILTER_TYPE_IN
             ],
             'bfilter' => [
                 'title' => t('Цена от и до и фильтр по брендам'),
@@ -923,13 +923,7 @@ class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetList
      * @throws \RS\Exception
      * @return array Возвращает список объектов и связанные с ним сведения.
      */
-    function process($token = null,
-                     $fulltext_filter = '',
-                     $filter = [],
-                     $sort = 'dateof desc',
-                     $page = 1,
-                     $pageSize = 20,
-                     $sections = ['image', 'cost', 'property', 'concomitant', 'unit', 'current_currency', 'filters'])
+    function process($token = null, $fulltext_filter = '', $filter = [], $sort = 'dateof desc', $page = 1, $pageSize = 20, $sections = ['image', 'cost', 'property', 'concomitant', 'unit', 'current_currency', 'filters'])
     {
         //Если фильтруем только по одной категории, то и получим по ней сведения.
         $root_category = false;

@@ -5,13 +5,18 @@
 * @copyright Copyright (c) ReadyScript lab. (http://readyscript.ru)
 * @license http://readyscript.ru/licenseAgreement/
 */
+
 namespace Shop\Model\CsvSchema;
-use \RS\Csv\Preset;
+
+use RS\Csv\AbstractSchema;
+use RS\Csv\Preset;
+use RS\Orm\Request as OrmRequest;
+use Shop\Model\RegionApi;
 
 /**
-* Схема экспорта/импорта характеристик в CSV
-*/
-class Region extends \RS\Csv\AbstractSchema
+ * Схема экспорта/импорта характеристик в CSV
+ */
+class Region extends AbstractSchema
 {
     function __construct()
     {
@@ -20,21 +25,20 @@ class Region extends \RS\Csv\AbstractSchema
             'excludeFields' => ['id', 'site_id', 'parent_id'],
             'multisite' => true,
             'searchFields' => ['title', 'parent_id'],
-            'multisite' => true,
-            'savedRequest' => \Shop\Model\RegionApi::getSavedRequest('Shop\Controller\Admin\RegionCtrl_list'), //Объект запроса из сессии с параметрами текущего просмотра списка
+            'savedRequest' => RegionApi::getSavedRequest('Shop\Controller\Admin\RegionCtrl_list'), //Объект запроса из сессии с параметрами текущего просмотра списка
         ]), [
             new Preset\TreeParent([
                 'ormObject' => new \Shop\Model\Orm\Region(),
                 'titles' => [
-                    'title' => t('Родитель')
+                    'title' => t('Родитель'),
                 ],
                 'idField' => 'id',
                 'parentField' => 'parent_id',
                 'treeField' => 'title',
                 'rootValue' => 0,
-                'multisite' => true,                
+                'multisite' => true,
                 'linkForeignField' => 'parent_id',
-                'linkPresetId' => 0
+                'linkPresetId' => 0,
             ])
         ]);
     }
@@ -42,27 +46,27 @@ class Region extends \RS\Csv\AbstractSchema
     /**
      * Возвращает запрос для базовой выборки
      *
-     * @return \RS\Orm\Request
+     * @return OrmRequest
      */
     function getBaseQuery()
     {
-
         $this->query = parent::getBaseQuery();
-        // $pid = $this->params['pid']; - параметр передается по умолчанию из getBaseQuery
-
         $q = clone $this->query;
-        $query_id = $q->select('id')->exec()->fetchSelected('id');// Выбираем id всех дочерних элементов
-        $q->where = null;//обнуляем условие на parent_id
-        foreach ($query_id as $key=>$value)
-        {
-            $ids[] = $key;
-            $res = $q->where(['parent_id'=>$key])->exec()->fetchSelected('id');// Собираем id городов от регионов, если их нет то и запросы будут пустыми
-            foreach ($res as $k=>$v)
-                $ids[] = $k;
+
+        $query_ids = $q->select('id')->exec()->fetchSelected('id', 'id');
+
+        if ($query_ids) {
+            $region_api = new RegionApi();
+            $query = clone $region_api->queryObj();
+            $child_ids = $query->whereIn('parent_id', $query_ids)
+                ->exec()->fetchSelected('id', 'id');
+
+            if ($child_ids) {
+                $q->whereIn('id', $child_ids, 'OR')
+                    ->whereIn('parent_id', $child_ids, 'OR');
+            }
         }
 
-        $this->query = $this->query->whereIn('parent_id',$ids,'OR');
-
-        return $this->query;
+        return $q;
     }
 }

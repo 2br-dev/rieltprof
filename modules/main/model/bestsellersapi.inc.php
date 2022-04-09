@@ -52,7 +52,7 @@ class BestSellersApi
      */
     public function getBestSellersApiUrl()
     {
-        return 'http://' . \Setup::$RS_API_SERVER_DOMAIN . '/api/methods/bestsellers.getList';
+        return \Setup::$RS_SERVER_PROTOCOL.'://' . \Setup::$RS_API_SERVER_DOMAIN . '/api/methods/bestsellers.getList';
     }
 
     /**

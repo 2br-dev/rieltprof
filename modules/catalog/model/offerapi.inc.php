@@ -495,10 +495,11 @@ class OfferApi extends \RS\Module\AbstractModel\EntityList
             $title = [];
             $offer->clear();
             $offer->getFromArray($offer_arr,null,null,true);
-
-            foreach($offer['propsdata_arr'] as $key => $value) {
-                $result['params'][$key][$value] = $value;
-                $title[] = $value;
+            if ($offer['propsdata_arr']) {
+                foreach ($offer['propsdata_arr'] as $key => $value) {
+                    $result['params'][$key][$value] = $value;
+                    $title[] = $value;
+                }
             }
 
             $title = trim(implode(', ', $title));

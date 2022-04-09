@@ -22,7 +22,7 @@
                                         {if $item.id==$delivery_id}
                                             {$selected_delivery_type=$delivery_type}
                                         {/if}
-                                        <option value="{$item.id}" data-delivery-query-flag="{if in_array($delivery_type, $user_delivery_type)}0{else}1{/if}" {if $item.id==$delivery_id}selected{/if}>
+                                        <option value="{$item.id}" data-delivery-query-flag="{if in_array($delivery_type, $user_delivery_type)}0{else}1{/if}" {if $item.id==$delivery_id}selected{/if} {if !$item.public}class="c-gray"{/if}>
                                             {$item.title}{if !empty($item.admin_suffix)} ({$item.admin_suffix}){/if}
                                         </option>
                                     {/foreach}
@@ -44,7 +44,7 @@
             </table>
         {/hook}
     </form>
-    <script type="text/javascript">
+    <script>
     
         $(function() {
             /**

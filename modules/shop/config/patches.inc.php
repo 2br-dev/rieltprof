@@ -370,7 +370,7 @@ class Patches extends AbstractPatches
         //Получим текущие сайты
         $sites = \RS\Site\Manager::getSiteList(false);
         if (!empty($sites)){
-            $statuses = UserStatus::getDefaultStatues();
+            $statuses = UserStatus::getDefaultStatuses();
             $status   = $statuses[UserStatus::STATUS_NEEDRECEIPT];
 
             $new_user_status = new UserStatus();

@@ -324,6 +324,8 @@ class InventorizationApi extends EntityList
      */
     function makeTotalInventorization($current_warehouse, $offset, $inventory_id)
     {
+        $default_warehouse = WareHouseApi::getDefaultWareHouse();
+
         $warehouses = WareHouseApi::staticSelectList();
         $manager = new InventoryManager();
         $limit = 200;
@@ -368,6 +370,9 @@ class InventorizationApi extends EntityList
                         //Создаем нулевую комплектацию, если ее не существовало ранее
                         $offer = new Offer();
                         $offer['product_id'] = $product['id'];
+                        $offer['stock_num'] = [
+                            $default_warehouse['id'] => $product['num']
+                        ];
                         $offer->insert();
                         $offers = [$offer];
                     }

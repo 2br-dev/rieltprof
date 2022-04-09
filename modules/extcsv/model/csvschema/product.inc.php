@@ -8,6 +8,7 @@
 namespace ExtCsv\Model\CsvSchema;
 
 use Catalog\Model\Api as ProductApi;
+use Catalog\Model\DirApi;
 use Catalog\Model\WareHouseApi;
 use RS\Config\Loader as ConfigLoader;
 use RS\Csv\AbstractSchema;
@@ -125,9 +126,13 @@ class Product extends AbstractSchema
                 'linkOfferIdField' => 'id',
             ]),
         ];
+
+        $product = new Orm\Product();
+        $product->setFlag(Orm\Product::FLAG_DONT_UPDATE_DIR_COUNTER);
+
         parent::__construct(
             new CustomPreset\Base([
-                'ormObject' => new Orm\Product(),
+                'ormObject' => $product,
                 'excludeFields' => [
                     'site_id', 'processed', 'brand_id', 'unit', 'recommended', 'concomitant', 'maindir', 'num', 'reserve', 'waiting', 'remains', 'writeoff'
                 ],
@@ -138,7 +143,8 @@ class Product extends AbstractSchema
             ]),
             $catalog_config['inventory_control_enable'] ? $presets : array_merge($presets, $inventory_control_off),
             [
-                'beforeLineImport' => [__CLASS__, 'beforeLineImport']
+                'beforeLineImport' => [__CLASS__, 'beforeLineImport'],
+                'AfterImport' => [__CLASS__, 'afterImport'],
             ]
         );
     }
@@ -171,6 +177,16 @@ class Product extends AbstractSchema
             $row['id'] = $time;
             $row['_tmpid'] = $time;
         }
+    }
+
+    /**
+     * Срабатывает после обновления одной партии данных
+     *
+     * @param Product $_this
+     */
+    public static function afterImport($_this)
+    {
+        Dirapi::updateCounts(); //Обновляем счетчики у категорий
     }
 
     /**

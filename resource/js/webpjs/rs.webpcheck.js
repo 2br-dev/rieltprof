@@ -67,7 +67,7 @@
             document.head.appendChild(script);
 
             var loadWebpJS = function() {
-                $(document).ready(function(){
+                document.addEventListener('DOMContentLoaded', function(){
                     var script = document.createElement('script');
                     script.src = global.folder + '/resource/js/webpjs/webp-init.js';
                     script.defer = true;

@@ -40,7 +40,17 @@ class Patches extends AbstractPatches
             '4014',
             '4030',
             '4097',
+            '607'
         ];
+    }
+
+    function beforeUpdate607()
+    {
+        $product = new Orm\Product();
+        $product['__xml_id']->setMaxLength(150);
+
+        $warehouse = new Orm\WareHouse();
+        $warehouse['__xml_id']->setMaxLength(150);
     }
 
     /**

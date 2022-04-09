@@ -69,8 +69,8 @@ class Manager
             $notice_data = $notice->getNoticeDataSms();
             if($notice_data){
                 \Alerts\Model\SMS\Manager::send(
-                    $notice_data->phone, 
-                    $notice->getTemplateSms(), 
+                    $notice_data->phone,
+                    $notice_config->template_sms ? $notice_config->template_sms : $notice->getTemplateSms(),
                     $notice_data->vars
                 );
             }

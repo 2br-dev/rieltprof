@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Блок фотографий</name>
         <description multilanguage="true">Позволяет привязывать фотографии к различным объектам в системе</description>
-        <version>4.0.17</version>
+        <version>6.0.1</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         

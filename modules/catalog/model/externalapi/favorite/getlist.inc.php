@@ -354,10 +354,7 @@ class GetList extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMetho
     * </pre>
     * @return array
     */
-    function process($token = null, 
-                     $page = 1,
-                     $pageSize = 20,
-                     $sections = ['image', 'cost', 'property', 'current_currency'])
+    function process($token = null, $page = 1, $pageSize = 20, $sections = ['image', 'cost', 'property', 'current_currency'])
     {
         if (!$token){ //Если токен не использовали.
             $response['response']['summary']['token_used'] = false; 

@@ -350,7 +350,6 @@ class YandexKassaApi extends AbstractType implements InterfaceRecurringPayments
             ],
         ];
 
-        $order = $transaction->getOrder();
         if ($this->getRecurringPaymentsType() == InterfaceRecurringPayments::RECURRING_TYPE_NONE || empty($transaction['saved_payment_method_id'])) {
             $params['confirmation'] = [
                 'type' => 'redirect',
@@ -391,12 +390,10 @@ class YandexKassaApi extends AbstractType implements InterfaceRecurringPayments
      */
     protected function getParamsForFZ54Check($transaction)
     {
-        $result = [
+        return [
             'customer' => $this->getFZ54CheckCustomerData($transaction),
             'items' => $this->getFZ54CheckItemsData($transaction),
         ];
-
-        return $result;
     }
 
     /**
@@ -419,7 +416,7 @@ class YandexKassaApi extends AbstractType implements InterfaceRecurringPayments
         if (!empty($user['e_mail'])) {
             $customer['email'] = $user['e_mail'];
         }
-        if (!empty($user['company_inn'])) {
+        if (!empty($user['phone'])) {
             $customer['phone'] = preg_replace(['/[^\d]/'], [''], $user['phone']);
         }
 

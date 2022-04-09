@@ -5,7 +5,7 @@
 
 {block name="container_tools"}
     <a class="iplusrow itool crud-add" title="{t}Добавить строку{/t}" href="{adminUrl do=addSection page_id=$currentPage.id parent_id=-$container.object.type element_type="row"}">
-        <i class="zmdi zmdi-plus"></i>
+        <i class="zmdi zmdi-plus"><!----></i>
     </a>
 {/block}
 

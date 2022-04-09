@@ -26,20 +26,20 @@ class File extends BinaryStream {
   /**
    * @var Header
    */
-  public $header = [];
+  public $header = array();
 
   private $tableOffset = 0; // Used for TTC
 
   private static $raw = false;
 
-  protected $directory = [];
-  protected $data = [];
+  protected $directory = array();
+  protected $data = array();
 
-  protected $glyph_subset = [];
+  protected $glyph_subset = array();
 
-  public $glyph_all = [];
+  public $glyph_all = array();
 
-  static $macCharNames = [
+  static $macCharNames = array(
     ".notdef", ".null", "CR",
     "space", "exclam", "quotedbl", "numbersign",
     "dollar", "percent", "ampersand", "quotesingle",
@@ -99,7 +99,7 @@ class File extends BinaryStream {
     "franc", "Gbreve", "gbreve", "Idot",
     "Scedilla", "scedilla", "Cacute", "cacute",
     "Ccaron", "ccaron", "dmacron"
-  ];
+  );
 
   function getTable() {
     $this->parseTableEntries();
@@ -114,7 +114,7 @@ class File extends BinaryStream {
   function parse() {
     $this->parseTableEntries();
 
-    $this->data = [];
+    $this->data = array();
 
     foreach ($this->directory as $tag => $table) {
       if (empty($this->data[$tag])) {
@@ -125,7 +125,7 @@ class File extends BinaryStream {
 
   function utf8toUnicode($str) {
     $len = strlen($str);
-    $out = [];
+    $out = array();
 
     for ($i = 0; $i < $len; $i++) {
       $uni = -1;
@@ -183,10 +183,10 @@ class File extends BinaryStream {
       return;
     }
 
-    $gids = [
+    $gids = array(
       0, // .notdef
       1, // .null
-    ];
+    );
 
     foreach ($subset as $code) {
       if (!isset($glyphIndexArray[$code])) {
@@ -204,7 +204,7 @@ class File extends BinaryStream {
     sort($gids);
 
     $this->glyph_subset = $gids;
-    $this->glyph_all    = array_values($glyphIndexArray);
+    $this->glyph_all    = array_values($glyphIndexArray); // FIXME
   }
 
   function getSubset() {
@@ -215,21 +215,21 @@ class File extends BinaryStream {
     return $this->glyph_subset;
   }
 
-  function encode($tags = []) {
+  function encode($tags = array()) {
     if (!self::$raw) {
-      $tags = array_merge(["head", "hhea", "cmap", "hmtx", "maxp", "glyf", "loca", "name", "post"], $tags);
+      $tags = array_merge(array("head", "hhea", "cmap", "hmtx", "maxp", "glyf", "loca", "name", "post"), $tags);
     }
     else {
       $tags = array_keys($this->directory);
     }
 
     $num_tables = count($tags);
-    $n          = 16;
+    $n          = 16; // @todo
 
     Font::d("Tables : " . implode(", ", $tags));
 
     /** @var DirectoryEntry[] $entries */
-    $entries = [];
+    $entries = array();
     foreach ($tags as $tag) {
       if (!isset($this->directory[$tag])) {
         Font::d("  >> '$tag' table doesn't exist");
@@ -452,7 +452,7 @@ class File extends BinaryStream {
   }
 
   function reduce() {
-    $names_to_keep = [
+    $names_to_keep = array(
       name::NAME_COPYRIGHT,
       name::NAME_NAME,
       name::NAME_SUBFAMILY,
@@ -460,7 +460,7 @@ class File extends BinaryStream {
       name::NAME_FULL_NAME,
       name::NAME_VERSION,
       name::NAME_POSTSCRIPT_NAME,
-    ];
+    );
 
     foreach ($this->data["name"]->data["records"] as $id => $rec) {
       if (!in_array($id, $names_to_keep)) {

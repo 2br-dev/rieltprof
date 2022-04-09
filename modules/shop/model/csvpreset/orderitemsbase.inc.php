@@ -22,9 +22,9 @@ class OrderItemsBase extends \RS\Csv\Preset\Base
     {
         if (!$this->select_request) {
             $q = clone \Shop\Model\OrderApi::getSavedRequest('Shop\Controller\Admin\OrderCtrl_list');
+            $q->select('I.*');
             $q->leftjoin(new Orm\OrderItem(), 'I.order_id = A.id', 'I')
-                ->where(['type' => 'product']);
-            
+                ->where(['I.type' => 'product']);
             $this->select_request = $q;
         }
         return $this->select_request;

@@ -128,60 +128,95 @@ trait TraitInterfaceRecurringPayments
     {
         switch ($action) {
             case InterfaceRecurringPayments::RECURRING_ACTION_SAVED_METHODS_FORM:
-                $saved_payment_methods = $this->getSavedPaymentMethods($order->getUser());
-                if ($saved_payment_methods) {
-                    $assign = [
-                        'order' => $order,
-                        'saved_payment_methods' => $saved_payment_methods,
-                    ];
-
-                    return [
-                        'view_type' => 'form',
-                        'title' => t('Выберите способ платежа'),
-                        'assign' => $assign,
-                        'template' => '%shop%/form/order/select_payment_method.tpl',
-                        'bottom_toolbar' => new ToolbarElement([
-                            'Items' => [
-                                'save' => new ToolbarButton\SaveForm(null, t('Выбрать')),
-                            ],
-                        ]),
-                    ];
-                } else {
-                    return [
-                        'view_type' => 'message',
-                        'message' => t('У пользователя нет сохранённых способов платежа'),
-                    ];
-                }
+                return $this->recurringActionSavedMethodsForm($order);
             case InterfaceRecurringPayments::RECURRING_ACTION_SELECT_SAVED_METHOD:
-                $saved_payment_method_id = HttpRequest::commonInstance()->request('saved_payment_method_id', TYPE_INTEGER);
-                $saved_method = new SavedPaymentMethod($saved_payment_method_id);
-
-                if (!$saved_method['id'] || $saved_method['user_id'] != $order['user_id'] || $saved_method['payment_type'] != $this->getShortName() || $saved_method['payment_type_unique'] != $this->getTypeUnique()) {
-                    throw new ShopException(t('Указан некорректный сохранённый способ оплаты'));
-                }
-
-                $order['saved_payment_method_id'] = $saved_payment_method_id;
-                $order['status'] = UserStatusApi::getStatusIdByType(UserStatus::STATUS_PAYMENT_METHOD_SELECTED);
-                $order->update();
-
-                return [
-                    'view_type' => 'message',
-                    'message' => t('Способ платежа выбран'),
-                ];
+                return $this->recurringActionSelectSavedMethod($order);
             case InterfaceRecurringPayments::RECURRING_ACTION_PAY_WITH_SAVED_METHOD:
-                $saved_method = new SavedPaymentMethod($order['saved_payment_method_id']);
-
-                if (!$saved_method['id'] || $saved_method['user_id'] != $order['user_id'] || $saved_method['payment_type'] != $this->getShortName() || $saved_method['payment_type_unique'] != $this->getTypeUnique()) {
-                    throw new ShopException(t('Указан некорректный сохранённый способ оплаты'));
-                }
-
-                $this->recurringPayOrder($order, $saved_method);
-                return [
-                    'view_type' => 'message',
-                    'message' => t('Заказ успешно оплачен'),
-                ];
+                return $this->recurringActionPayWithSavedMethod($order);
             default:
                 throw new ShopException(t('Указанного действия не существует'));
         }
+    }
+
+    /**
+     * Действие "форма выбора сохранённого метода платежа"
+     *
+     * @param Order $order - заказ
+     * @return array
+     */
+    protected function recurringActionSavedMethodsForm(Order $order): array
+    {
+        $saved_payment_methods = $this->getSavedPaymentMethods($order->getUser());
+        if ($saved_payment_methods) {
+            $assign = [
+                'order' => $order,
+                'saved_payment_methods' => $saved_payment_methods,
+            ];
+
+            return [
+                'view_type' => 'form',
+                'title' => t('Выберите способ платежа'),
+                'assign' => $assign,
+                'template' => '%shop%/form/order/select_payment_method.tpl',
+                'bottom_toolbar' => new ToolbarElement([
+                    'Items' => [
+                        'save' => new ToolbarButton\SaveForm(null, t('Выбрать')),
+                    ],
+                ]),
+            ];
+        } else {
+            return [
+                'view_type' => 'message',
+                'message' => t('У пользователя нет сохранённых способов платежа'),
+            ];
+        }
+    }
+
+    /**
+     * Действие "выбор сохранённого метода платежа"
+     *
+     * @param Order $order - заказ
+     * @return array
+     * @throws ShopException
+     */
+    protected function recurringActionSelectSavedMethod(Order $order): array
+    {
+        $saved_payment_method_id = HttpRequest::commonInstance()->request('saved_payment_method_id', TYPE_INTEGER);
+        $saved_method = new SavedPaymentMethod($saved_payment_method_id);
+
+        if (!$saved_method['id'] || $saved_method['user_id'] != $order['user_id'] || $saved_method['payment_type'] != $this->getShortName() || $saved_method['payment_type_unique'] != $this->getTypeUnique()) {
+            throw new ShopException(t('Указан некорректный сохранённый способ оплаты'));
+        }
+
+        $order['saved_payment_method_id'] = $saved_payment_method_id;
+        $order['status'] = UserStatusApi::getStatusIdByType(UserStatus::STATUS_PAYMENT_METHOD_SELECTED);
+        $order->update();
+
+        return [
+            'view_type' => 'message',
+            'message' => t('Способ платежа выбран'),
+        ];
+    }
+
+    /**
+     * Действие "оплата с использованием сохранённого метода платежа"
+     *
+     * @param Order $order - заказ
+     * @return array
+     * @throws ShopException
+     */
+    protected function recurringActionPayWithSavedMethod(Order $order): array
+    {
+        $saved_method = new SavedPaymentMethod($order['saved_payment_method_id']);
+
+        if (!$saved_method['id'] || $saved_method['user_id'] != $order['user_id'] || $saved_method['payment_type'] != $this->getShortName() || $saved_method['payment_type_unique'] != $this->getTypeUnique()) {
+            throw new ShopException(t('Указан некорректный сохранённый способ оплаты'));
+        }
+
+        $this->recurringPayOrder($order, $saved_method);
+        return [
+            'view_type' => 'message',
+            'message' => t('Заказ успешно оплачен'),
+        ];
     }
 }

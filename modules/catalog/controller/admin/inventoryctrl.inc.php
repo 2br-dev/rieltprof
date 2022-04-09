@@ -6,6 +6,7 @@
 * @license http://readyscript.ru/licenseAgreement/
 */
 namespace Catalog\Controller\Admin;
+use Catalog\Model\WareHouseApi;
 use \RS\Html\Table\Type as TableType,
     \RS\Html\Toolbar\Button as ToolbarButton,
     \RS\Html\Toolbar,
@@ -118,9 +119,15 @@ class InventoryCtrl extends \RS\Controller\Admin\Crud
             ])
                 ->addEMessage($access_error);
         }
+        $default_warehouse = WareHouseApi::getDefaultWareHouse();
+        if (!$default_warehouse['id']) {
+            return $this->result->addEMessage(t('Необходимо создать склад по умолчанию в разделе Товары -> Склады'));
+        }
+
         $warehouse = $this->url->request('warehouse', TYPE_INTEGER, 0);
         $offset = $this->url->request('offset', TYPE_INTEGER, 0);
         $inventory_id = $this->url->request('inventory', TYPE_INTEGER, 0);
+
         $inventory = new \Catalog\Model\Inventory\InventorizationApi();
         $result = $inventory->makeTotalInventorization($warehouse, $offset, $inventory_id);
         if($result === true){
@@ -247,7 +254,6 @@ class InventoryCtrl extends \RS\Controller\Admin\Crud
     function actionAddProductsFromCatalog()
     {
         $ids = $this->url->request('chk', TYPE_ARRAY, [], false);
-        $tools = new InventoryTools();
         $catalog_controller = new \Catalog\Controller\Admin\Ctrl();
         $request_object = $this->api->getSavedRequest($catalog_controller->controller_name.'_list');
         if ($this->url->request($this->selectAllVar, TYPE_STRING) == 'on' &&  $request_object !== null) {
@@ -300,7 +306,7 @@ class InventoryCtrl extends \RS\Controller\Admin\Crud
                     $do = "add";
                 }
                 $crud_add_url = $api->getControllerUrlByDocumentType($type, $do, ['document_type' => $type, 'id' => $document_id, 'exist' => $exist]);
-                $_SESSION[$tools::$session_product_ids] = $ids;
+                $_SESSION[InventoryTools::$session_product_ids] = $ids;
 
                 return $this->result
                     ->setSuccess(true)

@@ -21,6 +21,7 @@ use Catalog\Model\Orm\WareHouse;
 use Catalog\Model\Orm\Xstock;
 use RS\Helper\Pdf\PDFGenerator;
 use RS\Module\AbstractModel\EntityList;
+use RS\Orm\Request;
 use RS\Orm\Request as OrmRequest;
 use RS\Site\Manager as SiteManager;
 use Shop\Model\Orm\Order;
@@ -376,7 +377,7 @@ class DocumentApi extends EntityList
      * @param $archived bool - документ заархивирован?
      * @return string
      */
-    function getProductsTable ($document_id = null, $type, $items = null, $archived = false, $disable_edit = false)
+    function getProductsTable ($document_id, $type, $items = null, $archived = false, $disable_edit = false)
     {
         if($type == Inventorization::DOCUMENT_TYPE_INVENTORY){
             $inventorization_api = new InventorizationApi();
@@ -409,7 +410,7 @@ class DocumentApi extends EntityList
      * @param $archived bool - документ заархивирован?
      * @return string
      */
-    function getAddedItems ($document_id = null, $type, $items = null, $archived = false)
+    function getAddedItems ($document_id, $type, $items = null, $archived = false)
     {
         if($type == Inventorization::DOCUMENT_TYPE_INVENTORY){
             $inventorization_api = new InventorizationApi();
@@ -560,15 +561,49 @@ class DocumentApi extends EntityList
     }
 
     /**
-     *  Получает товары для добавления в документ
+     * Возвращает ID Товаров и ID компоектаций добавленных в документ товаров
      *
-     * @return mixed
+     * @return [
+     *      [
+     *          'offer_id' => int,
+     *          'product_id => int
+     *      ]
+     * ]
      */
     function getProductsToAdd()
     {
-        $ids = $_SESSION[InventoryTools::$session_product_ids];
-        $_SESSION[InventoryTools::$session_product_ids] = null;
-        return $ids;
+        $result = [];
+        $offers_id = [];
+        $ids = $_SESSION[InventoryTools::$session_product_ids] ?? [];
+        unset($_SESSION[InventoryTools::$session_product_ids]);
+
+        foreach($ids as $id) {
+            if (preg_match('/^offer_(.*)/u', $id, $match)) {
+                $offers_id[] =  $match[1];
+            } else {
+                $result[] = [
+                    'product_id' => $id,
+                    'offer_id' => 0
+                ];
+            }
+        }
+
+        if ($offers_id) {
+            $list = Request::make()
+                ->select('id, product_id')
+                ->from(new Offer())
+                ->whereIn('id', $offers_id)
+                ->exec()->fetchSelected('id', 'product_id');
+
+            foreach($list as $offer_id => $product_id) {
+                $result[] = [
+                    'product_id' => $product_id,
+                    'offer_id' => $offer_id
+                ];
+            }
+        }
+
+        return $result;
     }
 
     /**

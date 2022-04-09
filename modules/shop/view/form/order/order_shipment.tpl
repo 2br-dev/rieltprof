@@ -94,7 +94,7 @@
                         <span class="mobile-column-title">{t}Отгружено{/t}:</span> {$already_shipped}
                     </div>
                     <div class="column-uit order-shipment-item-uit">
-                        {if $product.marked_class && $cart_item.sku}
+                        {if $product.marked_class}
                             <ul class="order-shipment-item-uit-list">
                                 {foreach $cart_item->getUITs() as $uit}
                                     {$uit_id = $uit.gtin|cat:$uit.serial}
@@ -129,8 +129,6 @@
                         {else}
                             {if !$product.marked_class}
                                 <span class="uit-hint">{t}Товар не подлежит маркировке{/t}</span>
-                            {elseif !$cart_item.sku}
-                                <span class="uit-hint">{t}Не указан штрихкод{/t}</span>
                             {/if}
                         {/if}
                     </div>

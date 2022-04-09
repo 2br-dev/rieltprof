@@ -18,7 +18,7 @@ class kern extends Table {
   protected function _parse() {
     $font = $this->getFont();
 
-    $data = $font->unpack([
+    $data = $font->unpack(array(
       "version"         => self::uint16,
       "nTables"         => self::uint16,
 
@@ -26,23 +26,23 @@ class kern extends Table {
       "subtableVersion" => self::uint16,
       "length"          => self::uint16,
       "coverage"        => self::uint16,
-    ]);
+    ));
 
     $data["format"] = ($data["coverage"] >> 8);
 
-    $subtable = [];
+    $subtable = array();
 
     switch ($data["format"]) {
       case 0:
-        $subtable = $font->unpack([
+        $subtable = $font->unpack(array(
           "nPairs"        => self::uint16,
           "searchRange"   => self::uint16,
           "entrySelector" => self::uint16,
           "rangeShift"    => self::uint16,
-        ]);
+        ));
 
-        $pairs = [];
-        $tree  = [];
+        $pairs = array();
+        $tree  = array();
 
         $values = $font->readUInt16Many($subtable["nPairs"] * 3);
         for ($i = 0, $idx = 0; $i < $subtable["nPairs"]; $i++) {
@@ -54,11 +54,11 @@ class kern extends Table {
             $value -= 0x10000;
           }
 
-          $pairs[] = [
+          $pairs[] = array(
             "left"  => $left,
             "right" => $right,
             "value" => $value,
-          ];
+          );
 
           $tree[$left][$right] = $value;
         }

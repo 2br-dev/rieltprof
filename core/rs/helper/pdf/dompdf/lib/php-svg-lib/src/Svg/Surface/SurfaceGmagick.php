@@ -94,6 +94,7 @@ class SurfaceGmagick implements SurfaceInterface
     public function beginPath()
     {
         if (self::DEBUG) echo __FUNCTION__ . "\n";
+        // TODO: Implement beginPath() method.
     }
 
     public function closePath()
@@ -124,6 +125,7 @@ class SurfaceGmagick implements SurfaceInterface
     public function strokeText($text, $x, $y, $maxWidth = null)
     {
         if (self::DEBUG) echo __FUNCTION__ . "\n";
+        // TODO: Implement drawImage() method.
     }
 
     public function drawImage($image, $sx, $sy, $sw = null, $sh = null, $dx = null, $dy = null, $dw = null, $dh = null)
@@ -161,6 +163,7 @@ class SurfaceGmagick implements SurfaceInterface
     public function quadraticCurveTo($cpx, $cpy, $x, $y)
     {
         if (self::DEBUG) echo __FUNCTION__ . "\n";
+        // TODO: Implement quadraticCurveTo() method.
     }
 
     public function bezierCurveTo($cp1x, $cp1y, $cp2x, $cp2y, $x, $y)
@@ -261,16 +264,16 @@ class SurfaceGmagick implements SurfaceInterface
            // $canvas->setcolor("fill", "rgb", $fill[0] / 255, $fill[1] / 255, $fill[2] / 255, null);
         }
 
-        $opts = [];
+        $opts = array();
         if ($style->strokeWidth > 0.000001) {
             $opts[] = "linewidth=$style->strokeWidth";
         }
 
-        if (in_array($style->strokeLinecap, ["butt", "round", "projecting"])) {
+        if (in_array($style->strokeLinecap, array("butt", "round", "projecting"))) {
             $opts[] = "linecap=$style->strokeLinecap";
         }
 
-        if (in_array($style->strokeLinejoin, ["miter", "round", "bevel"])) {
+        if (in_array($style->strokeLinejoin, array("miter", "round", "bevel"))) {
             $opts[] = "linejoin=$style->strokeLinejoin";
         }
 
@@ -282,13 +285,13 @@ class SurfaceGmagick implements SurfaceInterface
 
     private function getFont($family, $style)
     {
-        $map = [
+        $map = array(
             "serif"      => "Times",
             "sans-serif" => "Helvetica",
             "fantasy"    => "Symbol",
             "cursive"    => "serif",
             "monospance" => "Courier",
-        ];
+        );
 
         $family = strtolower($family);
         if (isset($map[$family])) {
@@ -300,5 +303,6 @@ class SurfaceGmagick implements SurfaceInterface
 
     public function setFont($family, $style, $weight)
     {
+        // TODO: Implement setFont() method.
     }
 }

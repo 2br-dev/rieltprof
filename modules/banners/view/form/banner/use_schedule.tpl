@@ -10,7 +10,7 @@
         {$elem.__date_end->formView()}
     </div>
 </div>
-<script type="text/javascript">
+<script>
     /**
      * Изменение флажка расписания
      */

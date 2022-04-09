@@ -1,7 +1,7 @@
 <select id="refundsSelectOrder" name="order_num" class="select-order" disabled style="display: none"></select>
 <input id="refundsOrderEnter" name="order_num" class="order-enter" type="text" placeholder="{t}Введите номер заказа{/t}">
 
-<script type="text/javascript">
+<script>
     $.contentReady(function(){
 
         var refunds_select  = $("#refundsSelectOrder"); //Выпадающий список

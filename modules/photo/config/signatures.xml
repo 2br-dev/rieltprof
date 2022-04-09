@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>b066992e9f092c83cb780ccabebb6cf73055e1bc</sign>
+    <sign>95f31066e7c5c36f2893c438e803e82624375410</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -14,7 +14,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>1d0764ed24776207879504d43ffe91d6e47e3bbb</sign>
+    <sign>19f188d950511037530a909400c844d7e9ce7df2</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
@@ -22,7 +22,7 @@
   </file>
   <file>
     <path>controller/admin/blockphotos.inc.php</path>
-    <sign>d24ebe22e9f1fefed7f77cc0bf212525212c3e6b</sign>
+    <sign>9a79cbc6da95cfdf5e9368453b0fa4d074b7e30c</sign>
   </file>
   <file>
     <path>controller/admin/tools.inc.php</path>
@@ -46,7 +46,7 @@
   </file>
   <file>
     <path>model/photoapi.inc.php</path>
-    <sign>43dccc47f0ef908808925665cd2d61b0b31a1daf</sign>
+    <sign>9cab8d47ff7d0a0f0e11b77fe9932c055226ed95</sign>
   </file>
   <file>
     <path>model/stub.inc.php</path>
@@ -57,20 +57,20 @@
     <sign>73b29fdafad0019d495471d13082b3d945c3c915</sign>
   </file>
   <file>
+    <path>view/admin/form.tpl</path>
+    <sign>5337a010b78ae560211e401873c5d29c2645cb9c</sign>
+  </file>
+  <file>
+    <path>view/admin/form_onepic.tpl</path>
+    <sign>f06ee1f15206c725fcfaece3a6afc0524158f300</sign>
+  </file>
+  <file>
     <path>view/blocks/photolist/photolist.tpl</path>
-    <sign>1a5e107e4a9386e9aff70a30341aa4c7e3410fcd</sign>
+    <sign>1792ad816de3f185eda13c2487de5fdff238bd12</sign>
   </file>
   <file>
     <path>view/css/photoblock.css</path>
     <sign>526a90fdb95cbbff2f3196cccc7fa8ba6c18a77e</sign>
-  </file>
-  <file>
-    <path>view/form.tpl</path>
-    <sign>5337a010b78ae560211e401873c5d29c2645cb9c</sign>
-  </file>
-  <file>
-    <path>view/form_onepic.tpl</path>
-    <sign>f06ee1f15206c725fcfaece3a6afc0524158f300</sign>
   </file>
   <file>
     <path>view/img/close.png</path>
@@ -92,5 +92,5 @@
     <path>view/js/photo.js</path>
     <sign>8132551becac88311fc9aeba1ae31e8c120282c5</sign>
   </file>
-  <masterSign>25ef1708472200457d2c606c99204ef3a75e1a0a5699e23ce8eebfde1665f7cef3b43752d02cc1f67bca9c4677dec970d11ef6ee38144e2e4cc865e55d18a0d3855c66393b1765fe467a6fdc56e899f7551ad7b80fb85f2892bf1b44a32434d977c23b9281990b0b5e8cb6798f7857d8b6cf3c4dd186209bbca2dcaab90d1fe5</masterSign>
+  <masterSign>0d4fb77fa7fc1ecdc70777bdf050495171cabddf200b1fda0ae0d697560700ebac8917e0683252b6d42a4f4f0ae261e753a141cac21d5ff9df42b2a465e1969ed55a4e3f08c46198da8b6325f44eaf634098fa79ed4f8db2aad6cf825a8758e027dc4c76275ac188afc5352453a6e9576930b6f12098695a8e1238fdf23ea3d7</masterSign>
 </signatures>

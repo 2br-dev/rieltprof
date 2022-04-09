@@ -36,14 +36,17 @@ class View extends Front
         $id = urldecode($this->url->get('id', TYPE_STRING));
         $last_page = isset($_SESSION[PreviewList::SESSION_PAGE_KEY]) ? $_SESSION[PreviewList::SESSION_PAGE_KEY] : 1;
 
+        /** @var ArticleCategory $dir */
+        $dir = $this->cat_api->getById($category);
+        if ($dir['id']) {
+            $this->api->setFilter('parent', $dir['id']);
+        }
+
         /** @var Article $article */
-        $article = $this->api->getById($id);
+        $article = $this->api->getById($id, $this->api->queryObj());
         if (!$article || !$article['public'] || ($article['dont_show_before_date'] && date('Y-m-d H:i:s') < $article['dateof'])) {
             return $this->e404(t('Статья не найдена'));
         }
-
-        /** @var ArticleCategory $dir */
-        $dir = $this->cat_api->getById($category);
 
         //Если есть alias и открыта страница с id вместо alias, то редирект
         $this->checkRedirectToAliasUrl($id, $article, $article->getUrl());

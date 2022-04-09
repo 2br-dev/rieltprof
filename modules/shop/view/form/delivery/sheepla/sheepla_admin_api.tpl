@@ -2,7 +2,7 @@
 <input id="sheeplaAdminApi" data-url="{$router->getAdminUrl('userAct')}" data-list-id="#sheeplaTemplates" data-list-error="#sheeplaTemplateError" name="{$field->getFormName()}" value="{$field->get()}" {if $field->getMaxLength()>0}maxlength="{$field->getMaxLength()}"{/if} {$field->getAttr()} {if !$attr.type}type="text"{/if}/>
 {include file="%system%/coreobject/type/form/block_error.tpl"}
 
-<script type="text/javascript">
+<script>
    /**
    * Обновляет зону с выбором шаблонов для sheepla
    * 

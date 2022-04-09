@@ -112,7 +112,7 @@
     </div>
 </div>
 
-<script type=" text/javascript">
+<script>
     $.allReady(function() {
         $('.crm-block-task').blockCrm({
             addLink: '.add-task',

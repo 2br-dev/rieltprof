@@ -1,20 +1,36 @@
 {* Шаблон страницы оформления заказа. Используется, если в административной панели опция "Тип оформления заказа" установлена в
  * значение "Оформление на одной странице", "Оформление в корзине". *}
-{addcss file="%shop%/order/checkout.css"}
 {$config = ConfigLoader::byModule('shop')}
 
 {if $cart->getProductItems()}
-    <div class="{if $config->getCheckoutType() == 'cart_checkout'}cartCheckout{else}onePageCheckout{/if}">
+<section class="section {if $config->getCheckoutType() == 'cart_checkout'}cartCheckout{else}onePageCheckout{/if}">
+    <div class="container">
         {if $config->getCheckoutType() == 'cart_checkout'}
-            {moduleinsert name='Shop\Controller\Block\CartFull'}
+            <div class="row row-cols-lg-2">
+                {moduleinsert name='Shop\Controller\Block\CartFull'}
+                {moduleinsert name='Shop\Controller\Block\Checkout'}
+            </div>
+        {else}
+            <div class="row">
+                {moduleinsert name='Shop\Controller\Block\Checkout'}
+            </div>
         {/if}
-        {moduleinsert name='Shop\Controller\Block\Checkout'}
     </div>
+</section>
 {else}
-    <div class="empty-list">
-        <div><img src="{$mod_img}/icons/cart-empty.svg"></div>
-        <h1>Корзина пуста</h1>
-        <p>В вашей корзине еще нет товаров. Добавьте понравившиеся товары из каталога, они будут отображаться здесь</p>
-        <p><a class="link link-more" href="{$router->getUrl('main.index')}">Вернуться на главную</a></p>
-    </div>
+    <section class="section 100vh">
+        <div class="container">
+            <div class="text-center container col-lg-4 col-md-6 col-sm-8">
+                <div class="mb-4">
+                    <img class="empty-page-img" src="{$THEME_IMG}/decorative/cart.svg" alt="">
+                </div>
+                <h2>{t}Корзина пуста{/t}</h2>
+                <p class="mb-lg-6 mb-5">
+                    {t}В вашей корзине еще нет товаров.{/t}
+                    {t}Добавьте понравившиеся товары из каталога, они будут отображаться здесь{/t}
+                </p>
+                <a href="{$router->getRootUrl()}" class="btn btn-primary">{t}Вернуться на главную{/t}</a>
+            </div>
+        </div>
+    </section>
 {/if}

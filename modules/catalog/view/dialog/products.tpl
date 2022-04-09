@@ -15,43 +15,53 @@
 <thead>
     <tr>
         {if !$hideProductCheckbox}
-        <th class="chk"><input type="checkbox" name="select-all"></th>
+            <th class="chk"><input type="checkbox" name="select-all"></th>
         {/if}
+        {if $show_offers}<th></th>{/if}
         <th></th>
         <th>{t}Название{/t}</th>
         <th>№</th>
         <th class="textright">{t}Артикул{/t}</th>
+        <th class="textright">{t}Остаток{/t}</th>
         <th class="textright">{t}Штрихкод{/t}</th>
     </tr>
 </thead>
 <tbody class="product-list">
-{foreach from=$list item=item}
-<tr data-id="{$item.id}">
-    {if !$hideProductCheckbox}
-    <td class="chk">
-        <input type="checkbox" value="{$item.id}"
-               data-barcode="{$item.barcode}"
-               data-image="{$item->getMainImage()->getUrl(30, 30)}"
-               data-preview-url="{$item->getMainImage()->getUrl(200, 200)}"
-               data-weight="{$item.weight}"
-               data-catids="{foreach from=$products_dirs[$item.id] item=cat},{$cat}{/foreach},">
-    </td>
-    {/if}
-    <td class="image"><img src="{$item->getMainImage()->getUrl(30, 30)}" alt=""/></td>
-    <td class="title">{$item.title}</td>
-    <td class="no">{$item.id}</td>
-    <td class="barcode" align="right">{$item.barcode}</td>
-    <td class="barcode" align="right">{$item.sku}</td>
-</tr>
-{/foreach}
+    {foreach from=$list item=item}
+        <tr class="product-item" data-id="{$item.id}" {if $show_offers}data-url-load-offers="{adminurl do='loadOffers' product_id=$item.id}"{/if}>
+            {if !$hideProductCheckbox}
+                <td class="chk">
+                    <input type="checkbox" value="{$item.id}"
+                           data-barcode="{$item.barcode}"
+                           data-image="{$item->getMainImage()->getUrl(30, 30)}"
+                           data-preview-url="{$item->getMainImage()->getUrl(200, 200)}"
+                           data-weight="{$item.weight}"
+                           data-catids="{foreach from=$products_dirs[$item.id] item=cat},{$cat}{/foreach},">
+                </td>
+            {/if}
+            {if $show_offers}
+                <td>
+                    {if count($item->getOffers()) > 1}
+                        <div class="product-offers-toggle zmdi"></div>
+                    {/if}
+                </td>
+            {/if}
+            <td class="image"><img src="{$item->getMainImage()->getUrl(30, 30)}" alt=""/></td>
+            <td class="title">{$item.title}</td>
+            <td class="no">{$item.id}</td>
+            <td class="barcode textright">{$item.barcode}</td>
+            <td class="barcode textright">{$item->getNum()}</td>
+            <td class="barcode textright">{$item.sku}</td>
+        </tr>
+    {/foreach}
 </tbody>
 </table>
 {else}
 <br><br><br><br><br><br><br><br>
 <table width="100%">
-<tr>
-    <td align="center" class="no-goods">{t}Нет товаров{/t}</td>
-</tr>
+    <tr>
+        <td align="center" class="no-goods">{t}Нет товаров{/t}</td>
+    </tr>
 </table>
 {/if}
 {if count($list)>0}

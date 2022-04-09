@@ -93,4 +93,57 @@ class OrderItemUIT extends OrmObject
             throw new MarkingException(t('Код содержит некорректный "%0" (%1)', [MarkingApi::handbookUseIdTitleStr(MarkingApi::USE_ID_SERIAL), $this['serial']]), MarkingException::ERROR_SINGLE_CODE_PARSE);
         }
     }
+
+    /**
+     * Возвращает идентификатор маркировки в формате, требуемом для кассовых чеков
+     *
+     * @return string
+     */
+    public function asString()
+    {
+        if (!$this['gtin'] || !$this['serial']) return '';
+        return '01'.$this['gtin'].'21'.$this['serial'];
+    }
+
+    /**
+     * Возвращает идентификатор маркировки в формате base64
+     *
+     * @return string
+     */
+    public function asBase64()
+    {
+        return base64_encode($this->asString());
+    }
+
+    /**
+     * Возвращает идентификатор маркировки
+     *
+     * @return string
+     */
+    public function asHex()
+    {
+        if (!$this['gtin'] || !$this['serial']) return '';
+
+        //Пример логики формирования: https://clck.ru/Z4qaN
+        $mark_type = '444d'; //Зарезервировано
+
+        //Переводим в hex
+        $gtin_hex = dechex($this['gtin']);
+        $serial_hex = bin2hex($this['serial']);
+
+        //Дополняем байты нулями
+        if (strlen($gtin_hex) % 2 != 0) {
+            $gtin_hex = '0'.$gtin_hex;
+        }
+        if (strlen($serial_hex) % 2 != 0) {
+            $serial_hex = '0'.$serial_hex;
+        }
+
+        //Рассчитываем длину
+        $bytes = strlen($mark_type.$gtin_hex. $serial_hex)/2;
+        $bytes_length = sprintf ('%04s', dechex($bytes));
+        $bytes_length_reverse = $bytes_length[2].$bytes_length[3].$bytes_length[0].$bytes_length[1];
+
+        return strtoupper($bytes_length_reverse.$mark_type.$gtin_hex.$serial_hex);
+    }
 }

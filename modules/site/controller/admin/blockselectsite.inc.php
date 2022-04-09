@@ -11,7 +11,7 @@ class BlockSelectSite extends \RS\Controller\Admin\Block
 {
     protected
         $default_params = [
-            'indexTemplate' => 'block_select_site.tpl',
+            'indexTemplate' => 'adminblocks/blockselectsite/block_select_site.tpl',
     ];
     
     function actionIndex()

@@ -12,15 +12,12 @@ namespace Catalog\Model\ExternalApi\Product;
 */
 class GetOffersList extends \ExternalApi\Model\AbstractMethods\AbstractGet
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
     
     protected $token_require = false;
     protected $costs_loaded = false; //Цены были уже загружены?
     protected $current_currency; //Текущая валюта
-    /**
-     * @var \Catalog\Model\Orm\WareHouse[] $warehouses
-     */
+    /** @var \Catalog\Model\Orm\WareHouse[] $warehouses */
     protected $warehouses_by_id;
 
     /**
@@ -491,7 +488,7 @@ class GetOffersList extends \ExternalApi\Model\AbstractMethods\AbstractGet
      * @return array
      * @throws \ExternalApi\Model\Exception
      */
-    function process($token = null, $product_id, $sections = ['stock', 'costs'])
+    function process($product_id, $token = null, $sections = ['stock', 'costs'])
     {
         //Загруженный товар
         $product  = new \Catalog\Model\Orm\Product($product_id);

@@ -34,7 +34,7 @@ class Engine extends \Smarty
         $this->registerClass('ConfigLoader', '\RS\Config\Loader');
         
         $this->compile_check = \Setup::$SM_COMPILE_CHECK;
-        $this->error_reporting = E_ALL ^ E_NOTICE;
+        $this->error_reporting = E_ALL ^ E_NOTICE ^ E_WARNING;
         $this->_dir_perms = \Setup::$CREATE_DIR_RIGHTS;
         
         //Устанавливаем свой обработчик путей к шаблонам
@@ -61,6 +61,7 @@ class Engine extends \Smarty
             'THEME_JS' => \Setup::$SM_RELATIVE_TEMPLATE_PATH.'/'.$this->theme['theme'].\Setup::$RES_JS_FOLDER,
             'THEME_IMG' => \Setup::$SM_RELATIVE_TEMPLATE_PATH.'/'.$this->theme['theme'].\Setup::$RES_IMG_FOLDER,
             'THEME_SHADE' => $this->theme['shade'],
+            'THEME_CONTEXT' => $this->theme['blocks_context'],
             'THEME_SETTINGS' => $this->theme_settings
         ]);
     }
@@ -106,5 +107,3 @@ class Engine extends \Smarty
         return [];
     }
 }
-
-

@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>4c6049794a850aeac6171823b65458810933f6bc</sign>
+    <sign>d65437979f1f598891d7491948313a98ead7eab1</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -14,7 +14,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>68cc6795dc8447d2b0218761da0ee254ab93032a</sign>
+    <sign>54302a0d78269f7bde54717c7867c3577878de04</sign>
   </file>
   <file>
     <path>controller/admin/ctrl.inc.php</path>
@@ -42,7 +42,7 @@
   </file>
   <file>
     <path>model/orm/email.inc.php</path>
-    <sign>24824541c3ed27d994a23bab5a7ee8730400a3a8</sign>
+    <sign>e9d9ecbfae330f55ebe421090cff6e8a2f5e405c</sign>
   </file>
   <file>
     <path>model/source/emailsubscribe.inc.php</path>
@@ -50,11 +50,11 @@
   </file>
   <file>
     <path>view/activate.tpl</path>
-    <sign>12075d28b915843f655cc584dec662dfbb8f9b6a</sign>
+    <sign>a6a909f597570b2fcf8cb7c820e6f40dbbd886cf</sign>
   </file>
   <file>
     <path>view/blocks/button/button.tpl</path>
-    <sign>d7f823d339c9572a735afcfce39ba789f3e1fbc1</sign>
+    <sign>e9facca196bdfac1b4ae6105d067af0a4d51dbfe</sign>
   </file>
   <file>
     <path>view/css/button.css</path>
@@ -66,15 +66,15 @@
   </file>
   <file>
     <path>view/deactivate.tpl</path>
-    <sign>12075d28b915843f655cc584dec662dfbb8f9b6a</sign>
+    <sign>a6a909f597570b2fcf8cb7c820e6f40dbbd886cf</sign>
   </file>
   <file>
-    <path>view/js/button.js</path>
-    <sign>3a904860294ba2f7594e1395c2c2e0c0b946625e</sign>
+    <path>view/js/rscomponent/emailsubscribe.js</path>
+    <sign>7a51af12b8d6ba3c4c21c319fa240515209fa4c2</sign>
   </file>
   <file>
     <path>view/js/subdialog.js</path>
-    <sign>51fee3f14c55ecb51211547b6f8b8ce0f27ffb59</sign>
+    <sign>443b9e9ffa800d08c9575a1b15a0607cb44cabee</sign>
   </file>
   <file>
     <path>view/notice/touser_subscribe.tpl</path>
@@ -82,7 +82,7 @@
   </file>
   <file>
     <path>view/window.tpl</path>
-    <sign>63bba62d775dc96cb045f4b9c66606afbe6a6e16</sign>
+    <sign>d7caac1a75bbfff16e79aa24f1be626d40f2c10c</sign>
   </file>
-  <masterSign>ab197e76505653651390ecb5bde88255c62d591dc840a266b2fb0c8a24bc3521fbd8bce9221402ce135fc52672807974ccd1ae26797e2df55fc69178d56643ea4e31dcf58f0c50d4e4def1d9eb53a66f7c46321ceafe3a1a16f84be8e4507d96de8299baa6c4b15c5599f8867e204085baa86403c3e2dffe5e752f43bc0bdbff</masterSign>
+  <masterSign>b15f376d926f8a77794c682641500aeddad3744216bbdc35a1f836a128d08a4310a2aec62f7dd256cc34fc531f5f90a850c1ede71dc0b2cea9ad8d9eedaf18ec02b07e29e96a05c4b8f556307f340a9149f84e079b544f7be95ffb1c435cb496a492ae1857531dcf309ce28ba1675d0b1c2d34fa273637ff54530de766d5f024</masterSign>
 </signatures>

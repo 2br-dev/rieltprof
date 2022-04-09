@@ -16,7 +16,6 @@ use RS\Orm\Type;
 use RS\Orm\Type\Checker;
 use Users\Model\Verification\Action\AbstractVerifyAction;
 use Users\Model\Verification\Provider\AbstractProvider;
-use Users\Model\Verification\VerificationEngine;
 use Users\Model\Verification\VerificationException;
 use Users\Model\Verification\VerificationProviderManager;
 
@@ -67,6 +66,7 @@ class VerificationSession extends AbstractObject
         $this->getPropertyIterator()->append([
             'uniq' => new Type\Varchar([
                 'description' => t('Уникальный ключ сессии верификации'),
+                'maxLength' => 150,
                 'allowEmpty' => false,
                 'primaryKey' => true
             ]),

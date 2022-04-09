@@ -17,16 +17,21 @@ use \RS\Orm\Type;
  * @property integer $columns Ширина
  * @property string $title Название
  * @property string $css_class CSS класс
- * @property integer $is_fluid Ширина 100%
+ * @property string $container_type Тип контейнера
+ * @property integer $is_fluid Резиновый контейнер(fluid)
  * @property string $wrap_element Внешний элемент
  * @property string $wrap_css_class CSS-класс оборачивающего блока
  * @property string $outside_template Внешний шаблон
  * @property string $inside_template Внутренний шаблон
+ * @property integer $invisible Невидимый элемент
  * @property integer $type Порядковый номер контейнера на странице
  * --\--
  */
 class SectionContainer extends \rs\orm\OrmObject
 {
+    const ELEMENT_TYPE_CONTAINER = 'container';
+    const CONTAINER_TYPE_NONE = 'none';
+
     protected static
         $table = 'section_containers',
         $cache_sections = []; //Все секции для каждой page_id
@@ -53,6 +58,23 @@ class SectionContainer extends \rs\orm\OrmObject
                 'description' => t('CSS класс'),
                 'hint' => t('CSS класс, который будет добавлен к элементу контейнера')
             ]),
+            'container_type' => new Type\Varchar([
+                'description' => t('Тип контейнера'),
+                'allowEmpty' => false,
+                'hint' => t('Определяет до какого разршения, контейнер будет принимать 100% ширину. Fluid - всегда 100%'),
+                'listFromArray' => [[
+                    '' => '-',
+                    'sm' => 'SM',
+                    'md' => 'MD',
+                    'lg' => 'LG',
+                    'xl' => 'XL',
+                    'xxl' => 'XXL',
+                    'fluid' => 'FLUID',
+                    self::CONTAINER_TYPE_NONE => t('Без класса')
+                ]],
+                'visible' => false,
+                'bootstrap5Visible' => true
+            ]),
             'is_fluid' => new Type\Integer([
                 'description' => t('Резиновый контейнер(fluid)'),
                 'hint' => t('Установите данный флажок, если необходимо, чтобы контейнер не имел фиксированной ширины'),
@@ -60,16 +82,8 @@ class SectionContainer extends \rs\orm\OrmObject
                 'allowEmpty' => false,
                 'checkboxView' => [1,0],
                 'visible' => false,
-                'bootstrapVisible' => true
-            ]),
-            'is_fluid' => new Type\Integer([
-                'description' => t('Ширина 100%'),
-                'hint' => t('Ширина будет 100% у всего контейнера. Резинвый контейнер(fluid) будет игнориоваться.'),
-                'maxLength' => 1,
-                'allowEmpty' => false,
-                'checkboxView' => [1,0],
-                'visible' => false,
-                'bootstrapVisible' => true
+                'bootstrapVisible' => true,
+                'bootstrap4Visible' => true,
             ]),
             'wrap_element' => new Type\Varchar([
                 'description' => t('Внешний элемент'),
@@ -77,6 +91,7 @@ class SectionContainer extends \rs\orm\OrmObject
                 'listFromArray' => [[
                     '' => t('не оборачивать'),
                     'div' => 'div',
+                    'main' => 'main',
                     'header' => 'header',
                     'footer' => 'footer',
                     'section' => 'section'
@@ -93,6 +108,14 @@ class SectionContainer extends \rs\orm\OrmObject
             'inside_template' => new Type\Template([
                 'description' => t('Внутренний шаблон'),
                 'hint' => t('Вы можете создать Smarty шаблон, в котором добавить любой HTML вокруг переменной {$wrapped_content}. Во $wrapped_content будет внутреннее содержимое контейнера.')
+            ]),
+            'invisible' => new Type\Integer([
+                'description' => t('Невидимый элемент'),
+                'hint' => t('В этом случае для элемента не будет создаваться HTML-тэг.'),
+                'checkboxView' => [1, 0],
+                'visible' => false,
+                'bootstrap5Visible' => true,
+                'rowBootstrap5Visible' => true,
             ]),
             'type' => new Type\Integer([
                 'description' => t('Порядковый номер контейнера на странице'),
@@ -237,7 +260,8 @@ class SectionContainer extends \rs\orm\OrmObject
     {
         switch($grid_system) {
             case SectionContext::GS_BOOTSTRAP:
-            case SectionContext::GS_BOOTSTRAP4: {
+            case SectionContext::GS_BOOTSTRAP4:
+            case SectionContext::GS_BOOTSTRAP5: {
                 $gs = [12]; break;
             }
             case SectionContext::GS_GS960: {
@@ -253,5 +277,36 @@ class SectionContainer extends \rs\orm\OrmObject
         }
         $this['__columns']->setListFromArray($result);
     }
-}
 
+    /**
+     * Возвращает классы которые необходимо добавить в публичной части сайта данному контейнеру,
+     * согласно настройкам административной панели, для необходимого типа сетки
+     *
+     * @param $grid_system
+     * @param $extra_class
+     * @return string
+     */
+    function renderElementClass($grid_system, $extra_class = '')
+    {
+        $class = [];
+        switch($grid_system) {
+            case SectionContext::GS_GS960:
+                $class[] = 'container_'.$this['columns'];
+                break;
+            case SectionContext::GS_BOOTSTRAP:
+            case SectionContext::GS_BOOTSTRAP4:
+                $class[] = 'container'.($this['is_fluid'] ? '-fluid' : '');
+                break;
+            case SectionContext::GS_BOOTSTRAP5:
+                if ($this['container_type'] != self::CONTAINER_TYPE_NONE) {
+                    $class[] = 'container' . ($this['container_type'] ? '-' . $this['container_type'] : '');
+                }
+                break;
+        }
+
+        $class[] = $this['css_class'];
+        $class[] = $extra_class;
+
+        return trim(implode(' ', $class));
+    }
+}

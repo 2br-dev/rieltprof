@@ -554,7 +554,7 @@
                     var oneTip = $('<div class="tipTour tipForm" />')
                     oneTip.html('<div class="tipContent">'+tip.tipText+'</div>')
                         .data('substep', data.curSubStep)
-                        .append('<i class="corner"></i>')
+                        .append('<i class="corner"><!----></i>')
                         .append(getStatusLine())
                         .css(tip.css);
 
@@ -864,13 +864,13 @@
                 );
 
                 if (data.curStepIndex>1) {
-                    infoline.prepend( $('<a class="goPrev"><i class="zmdi zmdi-arrow-left"></i><span>'+lang.t('назад')+'</span></a>').on('click', goPrev) );
+                    infoline.prepend( $('<a class="goPrev"><i class="zmdi zmdi-arrow-left"><!----></i><span>'+lang.t('назад')+'</span></a>').on('click', goPrev) );
                     $('body').on('keydown.tour', function(e) {
                         if (e.ctrlKey && e.keyCode == 37) goPrev();
                     });
                 }
                 if (data.curStepIndex < data.tourTotalSteps || showNext) {
-                    infoline.append( $('<a class="goNext"><span>'+lang.t('далее')+'</span><i class="zmdi zmdi-arrow-right"></i></a>').on('click', goNext) );
+                    infoline.append( $('<a class="goNext"><span>'+lang.t('далее')+'</span><i class="zmdi zmdi-arrow-right"><!----></i></a>').on('click', goNext) );
                     $('body').on('keydown.tour', function(e) {
                         if (e.ctrlKey && e.keyCode == 39) goNext();
                     });

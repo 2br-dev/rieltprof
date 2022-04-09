@@ -7,6 +7,8 @@
 */
 namespace RS\Application;
 
+use RS\Application\Microdata\AbstractMicrodataType;
+use RS\Application\Microdata\MicrodataSchemaOrgJsonLd;
 use RS\Cache\Manager as CacheManager;
 use RS\Config\Loader as ConfigLoader;
 use RS\Event\Manager as EventManager;
@@ -47,6 +49,8 @@ class Application
     public $breadcrumbs;
     /** @var \RS\Application\Block\Manager $blocks */
     public $blocks;
+    /** @var AbstractMicrodataType */
+    public $microdata;
 
     protected static $instance;
 
@@ -97,6 +101,7 @@ class Application
         $this->headers     = new Headers();
         $this->breadcrumbs = new BreadCrumbs();
         $this->blocks      = new Block\Manager();
+        $this->microdata   = new MicrodataSchemaOrgJsonLd();
 
         $this->initThemePath();
         $this->is_admin_zone = RouterManager::obj()->isAdminZone();
@@ -871,7 +876,7 @@ class Application
         for ($i = 0; $i < ob_get_level(); $i++) {
             ob_end_clean(); //Очищаем все что было подготовлено на вывод
         }
-        header('Content-Encoding: no'); //Отменяем сообщение о том, что вывод сжимается gzip'ом (посланное ob_start("ob_gzhandler"))
+        header('Content-Encoding: identity'); //Отменяем сообщение о том, что вывод сжимается gzip'ом (посланное ob_start("ob_gzhandler"))
     }
 
     /**

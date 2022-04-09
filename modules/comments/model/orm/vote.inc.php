@@ -26,7 +26,8 @@ class Vote extends \RS\Orm\AbstractObject
     {        
         $this->getPropertyIterator()->append([
             'ip' => new Type\Varchar([
-                'description' => t('IP пользователя, который оставил комментарий')
+                'description' => t('IP пользователя, который оставил комментарий'),
+                'maxLength' => 50
             ]),
             'comment_id' => new Type\Integer([
                 'description' => t('ID комментария')

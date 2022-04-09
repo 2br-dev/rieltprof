@@ -225,6 +225,7 @@ class DList extends DesignAtoms\AbstractAtom {
         $field->setTag('img')
             ->setTitle(t('Картинка элемента списка'))
             ->setClass('d-atom-list-image')
+            ->setAttr([new DesignAtoms\Attrs\Text('alt', t('Альтернативное название'), ' ')])
             ->addCSSPreset([
                 new DesignAtoms\CSSPresets\Background(),
                 new DesignAtoms\CSSPresets\Border(),

@@ -41,7 +41,7 @@ class Log extends OrmObject
                 'description' => t('Дата'),
             ]),
             'class' => new Type\Varchar([
-                'maxLength' => '255',
+                'maxLength' => '150',
                 'description' => t('Класс события'),
             ]),
             'oid' => new Type\Integer([
@@ -65,7 +65,8 @@ class Log extends OrmObject
         
         $this
             ->addIndex(['class', 'user_id', 'group'], self::INDEX_UNIQUE)
-            ->addIndex(['site_id', 'class']);
+            ->addIndex(['site_id', 'class'])
+            ->addIndex(['dateof']);
     }
 
     /**

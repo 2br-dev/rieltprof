@@ -57,7 +57,7 @@ abstract class AbstractFrameDecorator extends Frame
     /**
      * Reflower object used to calculate frame dimensions (Strategy pattern)
      *
-     * @var AbstractFrameReflower
+     * @var \Dompdf\FrameReflower\AbstractFrameReflower
      */
     protected $_reflower;
 
@@ -567,7 +567,7 @@ abstract class AbstractFrameDecorator extends Frame
     }
 
     /**
-     * @return AbstractFrameReflower
+     * @return \Dompdf\FrameReflower\AbstractFrameReflower
      */
     function get_reflower()
     {
@@ -824,6 +824,7 @@ abstract class AbstractFrameDecorator extends Frame
      * @param string $type
      * @return bool|string
      *
+     * TODO: What version is the best : this one or the one in ListBullet ?
      */
     function counter_value($id = self::DEFAULT_COUNTER, $type = "decimal")
     {

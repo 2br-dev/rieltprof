@@ -106,4 +106,21 @@ class ExternalResponse
     {
         $this->response = $response;
     }
+
+    /**
+     * Возвращает mime-тип возвращаемых данных
+     *
+     * @return string|bool(false)
+     */
+    public function getResponseContentType()
+    {
+        $response_type = false;
+        foreach($this->getHeaders() as $header) {
+            if (preg_match('/content-type:\s*([^;]*)/', strtolower($header), $match)) {
+                $response_type = $match[1];
+                break;
+            }
+        }
+        return $response_type;
+    }
 }

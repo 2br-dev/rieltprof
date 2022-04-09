@@ -240,7 +240,7 @@ class PaymentApi extends EntityList
         return QrCodeGenerator::buildUrl($data, [
             'w' => $width,
             'h' => $height,
-            's' => 'dmtx'
+            's' => 'qr-m'
         ], null, $absolute);
     }
 

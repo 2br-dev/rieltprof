@@ -21,4 +21,4 @@
     </li>
 </ul>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.0.js"></script>

@@ -31,7 +31,8 @@ class SubStatus extends \RS\Orm\OrmObject
                 'description' => t('Название статуса')
             ]),
             'alias' => new Type\Varchar([
-                'description' => t('Псевдоним')
+                'description' => t('Псевдоним'),
+                'maxLength' => 100,
             ]),
             'sortn' => new Type\Integer([
                 'description' => t('Порядок сортировки'),

@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>13e163e457b3bdc51392127bcc71df64e007240c</sign>
+    <sign>93a6d477795745bb7bbd4276b27a7458bbfc23dc</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -10,7 +10,7 @@
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>009b8bef901fafb670e3681ea7f752d49e0a6ea3</sign>
+    <sign>abf7615cc15515dfaa3ceec445b7024b0c0ba2f4</sign>
   </file>
   <file>
     <path>config/install.inc.php</path>
@@ -18,19 +18,19 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>d01b6d394f6434c423cb56df5200242c7dc28d1e</sign>
+    <sign>e7b3902e8d8c3d4f7df43ac6888c8eb7cf8c4ed0</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
-    <sign>c3224d432c387b29d71ce9f69a94b4e49d9f2827</sign>
+    <sign>80f48dc2f74784b62eb2ed33d3b9c5f9c652e617</sign>
   </file>
   <file>
     <path>controller/admin/blockselectsite.inc.php</path>
-    <sign>185a721604a38ea5e077b0d7eeff28f75ee55476</sign>
+    <sign>5719077142869d74a2ef153e164c4d12517df358</sign>
   </file>
   <file>
     <path>controller/admin/control.inc.php</path>
-    <sign>221d81d2ff40f59d9231d29dd49c01661c0e34e6</sign>
+    <sign>7702b31f4e813fa9bec87cd8be05aeea52c49a19</sign>
   </file>
   <file>
     <path>controller/admin/options.inc.php</path>
@@ -58,27 +58,35 @@
   </file>
   <file>
     <path>model/api.inc.php</path>
-    <sign>acbc05c5732010056b539f973e9789a134ec3cb3</sign>
+    <sign>52fae1a0e8e87ab45ae38f296f6d809defe86a5b</sign>
   </file>
   <file>
     <path>model/commenttype/site.inc.php</path>
-    <sign>26de262a52fa1f2dc9f2b5d6d6a0a4fd55c651aa</sign>
+    <sign>4050d6c52237a03774b6d5ba286859980ce5f36e</sign>
   </file>
   <file>
     <path>model/orm/config.inc.php</path>
-    <sign>dfd6279cba3c4d04e30cd31a975775de41d72ba7</sign>
+    <sign>899a52e39f6e6eaffc354675b52507900ed272f9</sign>
   </file>
   <file>
     <path>model/orm/site.inc.php</path>
-    <sign>000b84a20af3a76aec65f4c4ecb5f07aa8af6d5b</sign>
+    <sign>5e3caf5f17f3ae2eb6e1d269166c84359733a0f3</sign>
   </file>
   <file>
     <path>model/robotstxtapi.inc.php</path>
     <sign>cb3cb10d19df20f36c206aef97c2b9b2cb76dedf</sign>
   </file>
   <file>
-    <path>view/block_select_site.tpl</path>
-    <sign>d9b7555e1f13c9bfaab7accc6366a917757c7b7f</sign>
+    <path>view/admin/site_limit.tpl</path>
+    <sign>b985bafaecffb2a13a48290e85caf01e23dfa9ef</sign>
+  </file>
+  <file>
+    <path>view/admin/top_help.tpl</path>
+    <sign>a4f8a894b49848f843d9afbe50ede73e6abfacbc</sign>
+  </file>
+  <file>
+    <path>view/adminblocks/blockselectsite/block_select_site.tpl</path>
+    <sign>39ea62d65e71d941f1cd57bbd74d02eff972929d</sign>
   </file>
   <file>
     <path>view/blocks/selector/foot_sitelist.tpl</path>
@@ -102,7 +110,7 @@
   </file>
   <file>
     <path>view/form/site/policy.tpl</path>
-    <sign>314edfd6e1c262826d7bb2c31dc5d7988ff74a4d</sign>
+    <sign>55473c609b171c0e486eedb577757b848a6d79e5</sign>
   </file>
   <file>
     <path>view/form/site/robots.tpl</path>
@@ -133,16 +141,8 @@
     <sign>f797cce868dbec776b224750e2b8267f57f4b4f8</sign>
   </file>
   <file>
-    <path>view/site_limit.tpl</path>
-    <sign>af511e39053efdf617012852391f058b84981378</sign>
-  </file>
-  <file>
     <path>view/siteclosed/closed.tpl</path>
     <sign>bdbaa31a6890aa9fc77a64d32228c7eb025f6957</sign>
   </file>
-  <file>
-    <path>view/top_help.tpl</path>
-    <sign>a4f8a894b49848f843d9afbe50ede73e6abfacbc</sign>
-  </file>
-  <masterSign>65eefc8a4ded3a5887466b5ba44c4e1c713560d7efc2582d4b1725f387763362fafed9042266643ded31d28f4741d32acfbaf6de97f749bc2063f959bf942818b1e6f45fec1f373b7e5144903b43837f48c8164f3107d935eff64f44d7f359fd7fc8281c2a4cd391561d38fa441015c3c5964bfed9d73d4f7443b6d4b1cb777d</masterSign>
+  <masterSign>0b8b31f2bbe63475b5a21652969888dc06ec8d9dec7b8f3ea5566e3db2be2a709f8e815c1ecfbdd1153ae25b2af80817805d72e77b78e60843f8d95e7d8743ca682c631e39b5e47d1f331b5e2e9d1a8164b8c5f9488fba478f275b7f5ddb07b226d902b29fd1c558f2f4aeaca84f2f0340c46973cc5705dc5b3902d24d9b723e</masterSign>
 </signatures>

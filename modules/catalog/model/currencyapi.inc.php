@@ -212,56 +212,61 @@ class CurrencyApi extends \RS\Module\AbstractModel\EntityList
     * 
     * @return boolean
     */
-    function getCBRFCourseWithUpdate($cur_site = true){
-       $config = \RS\Config\Loader::byModule($this); 
-        
-       //Получим наши валюты за исключением базовой.
-       $q = \RS\Orm\Request::make()
-                ->from(new \Catalog\Model\Orm\Currency())
-                ->where([
-                      'is_base' => 0
-                ]);
-       if ($cur_site === true){ //Если для текущего сайта
-          $q->where([
-             'site_id' => \RS\Site\Manager::getSiteId()
-          ]);
-       }
-       if ($cur_site>0 && !is_bool($cur_site)){ //Если для конкретного сайта
-          $q->where([
-             'site_id' => $cur_site
-          ]);
-       }
-                    
-       $currencies = $q->objects(null,'title');
-       $curr_keys = array_keys($currencies); //Имена валют
-        
-       //Получим xml от ЦБ c валютами
-       $cbr_xml =  $this->getCBRFCourse();
-       if ($cbr_xml){
-          foreach($cbr_xml->Valute as $currency){
-              $code = (string)$currency->CharCode;
-              if (in_array($code, $curr_keys)) { //Если интересущая валюта у нас есть, по получим значение и обновим
-                 $old_ratio = $currencies[$code]['ratio'];//Старый коэфициент
-                 $currencies[$code]['ratio']     = str_replace(",",".",$currency->Value); //Значение
-                 $currencies[$code]['ratio'] = (double)$currencies[$code]['ratio']/(double)$currency->Nominal;
-                 $currencies[$code]['reconvert'] = 1;                                     //Переконвертировать цены с учётом новой цены
-                 //Увеличим или уменьшим на определнённый процент
-                 $percent = (str_replace(",",".",$currencies[$code]['percent'])/100)*$currencies[$code]['ratio'];
-                 $currencies[$code]['ratio'] = $currencies[$code]['ratio']+$percent;
-                 
-                 if ($config['cbr_percent_update']){ //Если нужно проверить на разницу c прошлым значением коэфициента
-                    $delta = abs($currencies[$code]['ratio']-$old_ratio); 
-                    $delta_percent = floor(($delta/$currencies[$code]['ratio'])*100);
-                    if ($delta_percent<(int)$config['cbr_percent_update']){ //Если процент установленный для проверки отличается в меньшую сторону
-                        continue; //Пропустим обновление
+    function getCBRFCourseWithUpdate($cur_site = true)
+    {
+        $config = \RS\Config\Loader::byModule($this);
+
+        //Получим наши валюты за исключением базовой.
+        $q = \RS\Orm\Request::make()
+            ->from(new \Catalog\Model\Orm\Currency())
+            ->where([
+                'is_base' => 0
+            ]);
+        if ($cur_site === true){ //Если для текущего сайта
+            $q->where([
+                'site_id' => \RS\Site\Manager::getSiteId()
+            ]);
+        }
+        if ($cur_site>0 && !is_bool($cur_site)){ //Если для конкретного сайта
+            $q->where([
+                'site_id' => $cur_site
+            ]);
+        }
+
+        $currencies = $q->objects(null,'title', true);
+        $curr_keys = array_keys($currencies); //Имена валют
+
+        //Получим xml от ЦБ c валютами
+        $cbr_xml =  $this->getCBRFCourse();
+
+        if ($cbr_xml){
+            foreach($cbr_xml->Valute as $currency){
+                $code = (string)$currency->CharCode;
+                if (isset($currencies[$code])) { //Если интересущая валюта у нас есть, по получим значение и обновим на всех сайтах
+                    foreach($currencies[$code] as $currency_on_site) {
+                        $old_ratio = $currency_on_site['ratio'];//Старый коэфициент
+                        $currency_on_site['ratio'] = str_replace(",", ".", $currency->Value); //Значение
+                        $currency_on_site['ratio'] = (double)$currency_on_site['ratio'] / (double)$currency->Nominal;
+                        $currency_on_site['reconvert'] = 1;                                     //Переконвертировать цены с учётом новой цены
+                        //Увеличим или уменьшим на определнённый процент
+                        $percent = (str_replace(",", ".", $currency_on_site['percent']) / 100) * $currency_on_site['ratio'];
+                        $currency_on_site['ratio'] = $currency_on_site['ratio'] + $percent;
+
+                        if ($config['cbr_percent_update']) { //Если нужно проверить на разницу c прошлым значением коэфициента
+                            $delta = abs($currency_on_site['ratio'] - $old_ratio);
+                            $delta_percent = floor(($delta / $currency_on_site['ratio']) * 100);
+                            if ($delta_percent < (int)$config['cbr_percent_update']) { //Если процент установленный для проверки отличается в меньшую сторону
+                                continue; //Пропустим обновление
+                            }
+                        }
+
+                        $currency_on_site->update();
                     }
-                 }
-                 $currencies[$code]->update();
-              }
-          }
-          return true; 
-       }
-       return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }
 

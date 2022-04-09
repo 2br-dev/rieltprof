@@ -343,9 +343,9 @@ class csstidy_optimise {
 			$color = '#';
 			for ($i = 0; $i < 3; $i++) {
 				if ($color_tmp[$i] < 16) {
-					$color .= '0' . dechex($color_tmp[$i]);
+					$color .= '0' . dechex((int)$color_tmp[$i]);
 				} else {
-					$color .= dechex($color_tmp[$i]);
+					$color .= dechex((int)$color_tmp[$i]);
 				}
 			}
 		}

@@ -125,6 +125,9 @@ class VerificationEngine extends BaseModel
 
         $session['send_counter'] = $old_session['send_counter'];
         $session['send_last_time'] = $old_session['send_last_time'];
+        $session['code_hash'] = $old_session['code_hash'];
+        $session['code_debug'] = $old_session['code_debug'];
+        $session['code_expire'] = $old_session['code_expire'];
 
         $session['uniq'] = $uniq;
         $session['user_session_id'] = session_id();

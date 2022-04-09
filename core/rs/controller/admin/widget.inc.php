@@ -85,7 +85,7 @@ abstract class Widget extends Block
             'self' => $this
         ]);
         $tpl->assign('app', $this->app);
-        return $tpl->fetch('widget_wrapper.tpl');
+        return $tpl->fetch('admin/widget/widget_wrapper.tpl');
     }
 
     /**

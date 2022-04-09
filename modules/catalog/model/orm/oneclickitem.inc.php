@@ -14,10 +14,14 @@ use Catalog\Model\Notice as CatalogNotice;
 use Catalog\Model\OneClickItemApi;
 use Feedback\Model\Orm\FormItem;
 use RS\Application\Auth;
+use RS\Config\Loader;
+use RS\Config\UserFieldsManager;
+use RS\Helper\Tools;
 use RS\Orm\OrmObject;
 use RS\Orm\Type;
 use Users\Model\Api as UserApi;
 use Users\Model\Orm\User;
+use RS\Config\Loader as ConfigLoader;
 
 /**
  * Класс ORM-объектов "Добавить в 1 клик". Объект добавить в 1 клик
@@ -26,6 +30,7 @@ use Users\Model\Orm\User;
  * @property integer $id Уникальный идентификатор (ID)
  * @property integer $site_id ID сайта
  * @property integer $user_id Пользователь
+ * @property string $number Номер
  * @property string $user_fio Ф.И.О. пользователя
  * @property string $user_phone Телефон пользователя
  * @property string $title Номер сообщения
@@ -33,7 +38,9 @@ use Users\Model\Orm\User;
  * @property string $status Статус
  * @property string $ip IP Пользователя
  * @property string $currency Трехсимвольный идентификатор валюты на момент покупки
+ * @property array $clickfields Дополнительные сведения
  * @property string $sext_fields Дополнительными сведения
+ * @property array $products Массив со сведениями о товарах
  * @property string $stext Cведения о товарах
  * --\--
  */
@@ -55,19 +62,33 @@ class OneClickItem extends OrmObject
      */
     function _init()
     {
+        $config = Loader::byModule($this);
+
         parent::_init()->append([
             'site_id' => new Type\CurrentSite(), //Создаем поле, которое будет содержать id текущего сайта
             'user_id' => new Type\Bigint([
                 'description' => t('Пользователь'),
                 'visible' => false
             ]),
+            'number' => new Type\Varchar([
+                'description' => t('Номер'),
+                'maxLength' => 50,
+                'unique' => true
+            ]),
             'user_fio' => new Type\Varchar([
                 'maxLength' => '255',
-                'description' => t('Ф.И.О. пользователя')
+                'description' => t('Ф.И.О. пользователя'),
+                'checker' => [function($_this, $value) use ($config) {
+                    if ($config['oneclick_name_required'] && $value == '') {
+                        return t("Поле 'Имя' является обязательным");
+                    }
+                    return true;
+                }]
             ]),
             'user_phone' => new Type\Varchar([
                 'maxLength' => '50',
-                'description' => t('Телефон пользователя')
+                'description' => t('Телефон пользователя'),
+                'checker' => ['chkPhone', t('Некорректно указан телефон')]
             ]),
             'title' => new Type\Varchar([
                 'maxLength' => '150',
@@ -100,19 +121,71 @@ class OneClickItem extends OrmObject
                 'maxLength' => '5',
                 'description' => t('Трехсимвольный идентификатор валюты на момент покупки')
             ]),
+            'clickfields' => new Type\ArrayList([
+                'description' => t('Дополнительные сведения'),
+                'checker' => [[__CLASS__, 'checkCustomFields']],
+                'visible' => false,
+            ]),
             'sext_fields' => new Type\Text([
                 'description' => t('Дополнительными сведения'),
-                'Template' => 'form/field/sext_fields.tpl'
+                'Template' => 'form/field/sext_fields.tpl',
+                'listenPost' => false
+            ]),
+            'products' => new Type\ArrayList([
+                'description' => t('Массив со сведениями о товарах'),
+                'listenPost' => false
             ]),
             'stext' => new Type\Text([
                 'description' => t('Cведения о товарах'),
-                'Template' => 'form/field/stext.tpl'
+                'Template' => 'form/field/stext.tpl',
+                'listenPost' => false
             ]),
             'kaptcha' => new Type\Captcha([
                 'enable' => false,
                 'context' => '',
             ]),
         ]);
+    }
+
+    /**
+     * Проверяет валидность произвольных полей
+     *
+     * @param $_this
+     * @param $value
+     * @return bool|null
+     */
+    public static function checkCustomFields($_this, $value)
+    {
+        //Сохраняем дополнительные сведения о пользователе
+        $fields = $_this->getFieldsManager();
+        $ok = $fields->check($value);
+
+        if (!$ok) {
+            foreach ($fields->getErrors() as $form => $error_text) {
+                $_this->addError($error_text, $form);
+            }
+            return null; //Не устанавливать ошибку полю data
+        }
+
+        return true;
+    }
+
+    /**
+     * Возвращает объект - менеджер произвольных полей
+     *
+     * @return UserFieldsManager
+     */
+    public function getFieldsManager()
+    {
+        if (!$this->field_manager) {
+            $config = ConfigLoader::byModule($this);
+            $this->field_manager = $config->getClickFieldsManager()
+                ->setErrorPrefix('clickfield_')
+                ->setArrayWrapper('clickfields');
+        }
+
+        $this->field_manager->setValues((array)$this['clickfields']);
+        return $this->field_manager;
     }
 
     /**
@@ -173,7 +246,26 @@ class OneClickItem extends OrmObject
             $this['currency'] = $default_currency['title'];
         }
 
+        $this['number'] = $this->generateNumber();
         $this['user_phone'] = UserApi::normalizePhoneNumber($this['user_phone']);
+        $this['title'] = t("Покупка №") . $this['number'] . " " . $this['user_fio'] . " (" . $this['user_phone'] . ")"; //Обновим название
+        $this['ip'] = $_SERVER['REMOTE_ADDR'] ? $_SERVER['REMOTE_ADDR'] : $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $this['dateof'] = date("Y.m.d H:i:s");
+
+        if ($this->isModified('clickfields')) {
+            $this['sext_fields'] = serialize($this->getFieldsManager()->getStructure());
+        }
+    }
+
+    /**
+     * возвращает уникальный номер покупки
+     *
+     * @param int $length
+     * @return string
+     */
+    function generateNumber($length = 6)
+    {
+        return Tools::generatePassword($length, range(0,9));
     }
 
     /**
@@ -186,13 +278,29 @@ class OneClickItem extends OrmObject
     {
         if ($flag == self::INSERT_FLAG) { //Флаг вставки
 
+            $notice = new CatalogNotice\OneClickUser();
+            $notice->init($this);
+            //Отсылаем sms пользователю
+            AlertsManager::send($notice);
+
             $notice = new CatalogNotice\OneClickAdmin();
             $notice->init($this);
             //Отсылаем письмо администратору
             AlertsManager::send($notice);
+        }
+    }
 
-            $this['title'] = t("Покупка №") . $this['id'] . " " . $this['user_fio'] . " (" . $this['user_phone'] . ")"; //Обновим название
-            $this->update();
+    /**
+     * Возращает идентификатор цвета текущего статуса
+     *
+     * @return string
+     */
+    function getStatusColor()
+    {
+        switch($this['status']) {
+            case self::STATUS_NEW: return '#d70fac';
+            case self::STATUS_VIEWED: return '#0fd71e';
+            case self::STATUS_CANCELLED: return '#d70f0f';
         }
     }
 }

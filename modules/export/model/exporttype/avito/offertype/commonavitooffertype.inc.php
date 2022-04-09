@@ -5,20 +5,25 @@
 * @copyright Copyright (c) ReadyScript lab. (http://readyscript.ru)
 * @license http://readyscript.ru/licenseAgreement/
 */
+
 namespace Export\Model\ExportType\Avito\OfferType;
 
-use \Export\Model\ExportType\AbstractOfferType as AbstractOfferType;
-use \Export\Model\ExportType\Field as Field;
-use \Export\Model\Orm\ExportProfile as ExportProfile;
-use \Catalog\Model\Orm\Product as Product;
+use Catalog\Model\CostApi;
+use Catalog\Model\Orm\Offer;
+use Export\Model\ExportType\AbstractOfferType as AbstractOfferType;
+use Export\Model\ExportType\Field as Field;
+use Export\Model\Orm\ExportProfile as ExportProfile;
+use Catalog\Model\Orm\Product as Product;
+use RS\Exception as RSException;
+use RS\Http\Request as HttpRequest;
 
 abstract class CommonAvitoOfferType extends AbstractOfferType
 {
     /**
     * Дополняет список "особенных" полей, общими для всех типов описания данного типа экспорта
     * 
-    * @param $ret - массив "особенных" полей
-    * @return Filed[]
+    * @param $fields - массив "особенных" полей
+    * @return Field[]
     */
     protected function addCommonEspecialTags($fields)
     {
@@ -70,69 +75,70 @@ abstract class CommonAvitoOfferType extends AbstractOfferType
 
         return $fields;
     }
-    
+
     /**
-    * Запись товарного предложения
-    * 
-    * @param \Export\Model\Orm\ExportProfile $profile - объект профиля экспорта
-    * @param \XMLWriter $writer - объект библиотеки для записи XML
-    * @param \Catalog\Model\Orm\Product $product - объект товара
-    * @param integer $offer_index - индекс комплектации для отображения
-    */
-    public function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_index)
+     * Запись товарного предложения
+     *
+     * @param ExportProfile $profile - объект профиля экспорта
+     * @param \XMLWriter $writer - объект библиотеки для записи XML
+     * @param Product $product - объект товара
+     * @param integer $offer_id - индекс комплектации для отображения
+     * @throws RSException
+     */
+    public function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_id)
     {
         $writer->startElement("Ad");
-            $this->fireOfferEvent('beforewriteoffer', $profile, $writer, $product, $offer_index);
-        
-            $writer->writeElement('Id', $product->id.'x'.$offer_index);
-            $this->writeEspecialOfferTags($profile, $writer, $product, $offer_index);
-            $prices = $product->getOfferCost($offer_index, $product['xcost']);
-        if (!empty($profile['export_cost_id'])){
-            $price = ceil($prices[ $profile['export_cost_id'] ]);
-        }else{
-            $price = ceil($prices[\Catalog\Model\Costapi::getDefaultCostId()]);
+            $this->fireOfferEvent('beforewriteoffer', $profile, $writer, $product, $offer_id);
+
+            $writer->writeElement('Id', $product->id.'x'.$offer_id);
+            $this->writeEspecialOfferTags($profile, $writer, $product, $offer_id);
+            $prices = $product->getOfferCost($offer_id, $product['xcost']);
+        if (!empty($profile['export_cost_id'])) {
+            $price = ceil($prices[$profile['export_cost_id']]);
+        } else {
+            $price = ceil($prices[CostApi::getDefaultCostId()]);
         }
             $writer->writeElement('Price', $price);
             if ($product->hasImage()) {
-                $this->writeOfferImages($profile, $writer, $product, $offer_index);
+                $this->writeOfferImages($profile, $writer, $product, $offer_id);
             }
-            
-            $this->fireOfferEvent('writeoffer', $profile, $writer, $product, $offer_index);
+
+            $this->fireOfferEvent('writeoffer', $profile, $writer, $product, $offer_id);
         $writer->endElement();
     }
-    
+
     /**
     * Добавляет в XML сведения с фото для товара или комплектации
     * 
-    * @param \Export\Model\Orm\ExportProfile $profile - объект профиля экспорта
+    * @param ExportProfile $profile - объект профиля экспорта
     * @param \XMLWriter $writer - объект библиотеки для записи XML
-    * @param \Catalog\Model\Orm\Product $product - объект товара
-    * @param \Catalog\Model\Orm\Offer|false $current_offer - текущая комплектация, объект или false
+    * @param Product $product - объект товара
+    * @param Offer|false $current_offer - текущая комплектация, объект или false
     */
     protected function writeOfferImages(ExportProfile $profile, \XMLWriter $writer, Product $product, $current_offer)
     {
         $writer->startElement('Images');
         $images = $product->getImages();
         $offer_images = [];
-        if ($current_offer){ //Если есть комплектации, посмотим привязани ли фото к конкретной комплектации
+        if ($current_offer) { //Если есть комплектации, посмотрим привязаны ли фото к конкретной комплектации
             $offer_images = $current_offer['photos_arr'];
-            if (!empty($offer_images)){
-                foreach ($images as $k=>$image){
-                    if (in_array($image['id'], $offer_images)){
+            if (!empty($offer_images)) {
+                foreach ($images as $k => $image) {
+                    if (in_array($image['id'], $offer_images)) {
                         $image_url = ($profile['export_photo_originals']) ? $image->getOriginalUrl() : $image->getUrl(800, 800, 'axy');
                         $writer->startElement('Image');
-                            $writer->writeAttribute('url', \RS\Http\Request::commonInstance()->getDomain(true) . $image_url);
+                            $writer->writeAttribute('url', HttpRequest::commonInstance()->getDomain(true) . $image_url);
                         $writer->endElement();
                     }
                 }
             }
         }
         //Если просто товар или фото комплектаций не привязано
-        if (!$current_offer || ($current_offer && empty($offer_images))){
-            foreach ($images as $k=>$image){
+        if (!$current_offer || ($current_offer && empty($offer_images))) {
+            foreach ($images as $k => $image) {
                 $image_url = ($profile['export_photo_originals']) ? $image->getOriginalUrl() : $image->getUrl(800, 800, 'axy');
                 $writer->startElement('Image');
-                    $writer->writeAttribute('url', \RS\Http\Request::commonInstance()->getDomain(true) . $image_url);
+                    $writer->writeAttribute('url', HttpRequest::commonInstance()->getDomain(true) . $image_url);
                 $writer->endElement();
             }
         }

@@ -24,7 +24,7 @@ class loca extends Table {
 
     $font->seek($offset);
 
-    $data = [];
+    $data = array();
 
     // 2 bytes
     if ($indexToLocFormat == 0) {

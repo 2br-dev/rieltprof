@@ -81,7 +81,7 @@ class Auth
      * @param boolean $remember - если true, значит будет задействован функция "запомнить меня"
      * @param bool $pass_encrypted - если true, значит аргументом $pass передан hash пароля, иначе ожидается пароль в открытом виде
      * @param bool $no_set_current_user - если установлено true, то метод просто возвращает true или false, при этом не устанавливает пользователя в сессию
-     * @return bool - Возвращает true если авторизация пршла успешно
+     * @return bool|User - Возвращает true если авторизация прошла успешно. Если $no_set_current_user = true, возвращается объект пользователя в случае успеха.
      *
      * @throws \RS\Event\Exception
      * @throws \RS\Orm\Exception

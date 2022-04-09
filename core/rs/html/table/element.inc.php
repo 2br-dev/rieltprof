@@ -9,6 +9,7 @@
 namespace RS\Html\Table;
 
 use RS\Html\AbstractHtml;
+use RS\Html\Table\Type\Checkbox;
 use RS\Orm\AbstractObject;
 use RS\View\Engine;
 
@@ -21,6 +22,7 @@ class Element extends AbstractHtml
         $tr_param = [],
         
         $columns = [],
+        $columns_order = [],
         $rows = [],
         $anyrows = [];
     
@@ -64,15 +66,50 @@ class Element extends AbstractHtml
         }
         return $this;
     }
-    
+
     /**
-    * Возвращает список колонок таблицы
-    * 
-    * @return Type\AbstractType[]
-    */
-    function getColumns() 
+     * Возвращает список колонок таблицы
+     *
+     * @param bool $apply_custom_order Если true, то порядок колонок будет модифицирован
+     * @return Type\AbstractType[]
+     */
+    function getColumns($apply_custom_order = true)
     {
-        return $this->columns;
+        $columns = $this->columns;
+        if ($apply_custom_order) {
+            $columns = $this->applyCustomOrder($columns);
+        }
+        return $columns;
+    }
+
+    /**
+     * Применяет произвольную сортировку колонок к списку колонок
+     *
+     * @param array $columns массив с колонками в оригинальном порядке
+     * @return mixed
+     */
+    protected function applyCustomOrder($columns)
+    {
+        if ($this->getColumnsOrder()) {
+            $new_columns_list = [];
+            foreach($this->getColumnsOrder() as $original_index) {
+                if (isset($columns[$original_index]) && $columns[$original_index]->isCustomizable()) {
+                    $new_columns_list[$original_index] = $columns[$original_index];
+                    unset($columns[$original_index]);
+                }
+            }
+
+            $before = [];
+            foreach($columns as $n => $column) {
+                if ($column->isStayBefore()) {
+                    $before[$n] = $column;
+                    unset($columns[$n]);
+                }
+            }
+
+            return $before + $new_columns_list + $columns;
+        }
+        return $columns;
     }
     
     /**
@@ -194,7 +231,29 @@ class Element extends AbstractHtml
                 $str .= " $key=\"$val\"";
             }
         return $str;
-    }    
+    }
+
+    /**
+     * Устанавливает произольный порядок колонок в таблице
+     * @param array $index_field Массив, состоящий из нового порядкоого номера колонки в ключе
+     * и оригинального порядкового номера колонки в значении.
+     *
+     * Пример: [4, 5, 6]. Означает, что колонки 4,5,6 будут идти вначале таблицы.
+     */
+    function setColumnsOrder($index_field)
+    {
+        $this->columns_order = $index_field;
+    }
+
+    /**
+     * Возвращает произвольный порядок колонок, если таковой установлен
+     *
+     * @return array
+     */
+    function getColumnsOrder()
+    {
+        return $this->columns_order;
+    }
     
     
     /**
@@ -265,7 +324,7 @@ class Element extends AbstractHtml
         $this->rows = [];
         if (is_array($data)) {
             foreach($data as $row => $val)  {
-                foreach ($this->columns as $col => $coltype_obj) {
+                foreach ($this->getColumns() as $col => $coltype_obj) {
                     if (empty($coltype_obj->property['hidden'])) {
                         $value = null;
                         $property = null;

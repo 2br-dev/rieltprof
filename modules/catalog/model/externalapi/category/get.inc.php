@@ -12,11 +12,9 @@ namespace Catalog\Model\ExternalApi\Category;
 */
 class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
         
-    protected
-        $token_require = false;
+    protected $token_require = false;
     
     /**
     * Возвращает комментарии к кодам прав доступа
@@ -98,7 +96,7 @@ class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
     * }
     * </pre>
     */
-    function process($token = null, $category_id, $sections = ['image'])
+    function process($category_id, $token = null, $sections = ['image'])
     {
         $response = parent::process($token, $category_id);
         

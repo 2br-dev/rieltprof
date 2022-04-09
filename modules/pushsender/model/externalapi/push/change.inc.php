@@ -13,13 +13,11 @@ use \ExternalApi\Model\Exception as ApiException;
 */
 class Change extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
 {
-    const
-        RIGHT_CHANGE = 1,
-        ERROR_NO_UUID = 3;
-        
-    protected
-        $token_require = false;
-    
+    const RIGHT_CHANGE = 1;
+    const ERROR_NO_UUID = 3;
+
+    protected $token_require = false;
+
     /**
     * Возвращает комментарии к кодам прав доступа
     * 
@@ -75,7 +73,7 @@ class Change extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
     * </pre>
     * 
     */
-    protected function process($token = null, $push_ids)
+    protected function process($push_ids, $token = null)
     {
         $app = \RS\RemoteApp\Manager::getAppByType($this->token->app_type);
         

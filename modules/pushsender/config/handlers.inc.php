@@ -110,7 +110,7 @@ class Handlers extends \RS\Event\HandlerAbstract
             t('Push-уведомления'),
                 'push_lock' => new Type\ArrayList([
                     'description' => t('Запретить получение следующих push уведомлений'),
-                    'template' => '%pushsender%/user_push_lock.tpl',
+                    'template' => '%pushsender%/admin/user_push_lock.tpl',
                     'lockApi' => new Model\PushLockApi(),
                     'sites' => \RS\Site\Manager::getSiteList(),
                     'meVisible' => false,

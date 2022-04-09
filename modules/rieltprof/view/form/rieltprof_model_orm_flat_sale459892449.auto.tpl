@@ -1,22 +1,18 @@
-
 <div class="formbox" >
-            
-    <div class="rs-tabs" role="tabpanel">
+                <div class="rs-tabs" role="tabpanel">
         <ul class="tab-nav" role="tablist">
                     <li class=" active"><a data-target="#rieltprof-flat-tab0" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(0)}</a></li>
                     <li class=""><a data-target="#rieltprof-flat-tab6" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(6)}</a></li>
                     <li class=""><a data-target="#rieltprof-flat-tab7" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(7)}</a></li>
                     <li class=""><a data-target="#rieltprof-flat-tab8" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(8)}</a></li>
                     <li class=""><a data-target="#rieltprof-flat-tab9" data-toggle="tab" role="tab">{$elem->getPropertyIterator()->getGroupName(9)}</a></li>
-        
-        </ul>
+                </ul>
         <form method="POST" action="{urlmake}" enctype="multipart/form-data" class="tab-content crud-form">
             <input type="submit" value="" style="display:none"/>
                         <div class="tab-pane active" id="rieltprof-flat-tab0" role="tabpanel">
                                                                                                                                     {include file=$elem.__id->getRenderTemplate() field=$elem.__id}
                                                                                                                         {include file=$elem.___tmpid->getRenderTemplate() field=$elem.___tmpid}
-                                                                                                                                                                                                                                                        
-                                            <table class="otable">
+                                                                                                                                                                                                                                                                                                    <table class="otable">
                                                                                                                                                                                                                     
                                 <tr>
                                     <td class="otitle">{$elem.__cost_product->getTitle()}&nbsp;&nbsp;{if $elem.__cost_product->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__cost_product->getHint()|escape}">?</a>{/if}
@@ -38,16 +34,13 @@
                                     <td>{include file=$elem.__personal_note->getRenderTemplate() field=$elem.__personal_note}</td>
                                 </tr>
                                 
-                                                            
-                        </table>
+                                                                                    </table>
                                                 </div>
                         <div class="tab-pane" id="rieltprof-flat-tab6" role="tabpanel">
                                                                                                             {include file=$elem.___photo_->getRenderTemplate() field=$elem.___photo_}
-                                                                                                
-                                                </div>
+                                                                                                                                                </div>
                         <div class="tab-pane" id="rieltprof-flat-tab7" role="tabpanel">
-                                                                                                                                                                                                                                                                                                                                                                                                            
-                                            <table class="otable">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        <table class="otable">
                                                                                             
                                 <tr>
                                     <td class="otitle">{$elem.__county->getTitle()}&nbsp;&nbsp;{if $elem.__county->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__county->getHint()|escape}">?</a>{/if}
@@ -83,12 +76,10 @@
                                     <td>{include file=$elem.__liter->getRenderTemplate() field=$elem.__liter}</td>
                                 </tr>
                                 
-                                                            
-                        </table>
+                                                                                    </table>
                                                 </div>
                         <div class="tab-pane" id="rieltprof-flat-tab8" role="tabpanel">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                            <table class="otable">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <table class="otable">
                                                                                             
                                 <tr>
                                     <td class="otitle">{$elem.__rooms_list->getTitle()}&nbsp;&nbsp;{if $elem.__rooms_list->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__rooms_list->getHint()|escape}">?</a>{/if}
@@ -166,12 +157,10 @@
                                     <td>{include file=$elem.__flat_house->getRenderTemplate() field=$elem.__flat_house}</td>
                                 </tr>
                                 
-                                                            
-                        </table>
+                                                                                    </table>
                                                 </div>
                         <div class="tab-pane" id="rieltprof-flat-tab9" role="tabpanel">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                            <table class="otable">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <table class="otable">
                                                                                             
                                 <tr>
                                     <td class="otitle">{$elem.__quickly->getTitle()}&nbsp;&nbsp;{if $elem.__quickly->getHint() != ''}<a class="help-icon" data-placement="right" title="{$elem.__quickly->getHint()|escape}">?</a>{/if}
@@ -228,10 +217,8 @@
                                     <td>{include file=$elem.__exclusive->getRenderTemplate() field=$elem.__exclusive}</td>
                                 </tr>
                                 
-                                                            
-                        </table>
+                                                                                    </table>
                                                 </div>
-            
-        </form>
+                    </form>
     </div>
     </div>

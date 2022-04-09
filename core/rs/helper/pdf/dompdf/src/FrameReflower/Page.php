@@ -8,7 +8,6 @@
  */
 namespace Dompdf\FrameReflower;
 
-use Dompdf\Canvas;
 use Dompdf\Frame;
 use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
 use Dompdf\FrameDecorator\Page as PageFrameDecorator;
@@ -31,7 +30,7 @@ class Page extends AbstractFrameReflower
     /**
      * Cache of the canvas
      *
-     * @var Canvas
+     * @var \Dompdf\Canvas
      */
     private $_canvas;
 
@@ -60,6 +59,7 @@ class Page extends AbstractFrameReflower
 
             $style = clone $page_styles["base"];
 
+            // FIXME RTL
             if ($odd && isset($page_styles[":right"])) {
                 $style->merge($page_styles[":right"]);
             }
@@ -68,6 +68,7 @@ class Page extends AbstractFrameReflower
                 $style->merge($page_styles[":odd"]);
             }
 
+            // FIXME RTL
             if (!$odd && isset($page_styles[":left"])) {
                 $style->merge($page_styles[":left"]);
             }

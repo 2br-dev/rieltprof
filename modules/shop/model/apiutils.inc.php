@@ -214,6 +214,7 @@ class ApiUtils
                 $item['entity_id']    = $cartitem['entity_id'];
                 $item['amount']       = $cartitem['amount'];
                 $item['amount_error'] = isset($item['amount_error']) ? $item['amount_error'] : "";
+                $item['amount_step']  = $product->getAmountStep($cartitem['offer']);
                 $item['offer']        = $cartitem['offer'];
                 $item['model']        = null;
                 

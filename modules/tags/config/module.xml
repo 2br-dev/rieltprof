@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Тэги</name>
         <description multilanguage="true">Подключение к различным объектам описания в виде тэгов</description>
-        <version>3.0.2</version>
+        <version>6.0.1</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>        
     </defaultValues>

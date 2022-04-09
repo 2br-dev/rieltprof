@@ -350,7 +350,7 @@ abstract class AbstractType
     {}
 
     /**
-     * Возвращает ID заказа исходя из REQUEST-параметров соотвествующего типа оплаты
+     * Возвращает ID заказа исходя из REQUEST-параметров соответствующего типа оплаты
      * Используется только для Online-платежей
      *
      * @param HttpRequest $request - входящий запрос
@@ -383,6 +383,17 @@ abstract class AbstractType
      */
     public function wrapOnResultArray($result_array)
     {}
+
+    /**
+     * Оборачивает ошибку исключения, возникшего при вызове метода onResult
+     *
+     * @param \Exception $e - исключение
+     * @return string
+     */
+    public function wrapOnResultError($e)
+    {
+        return $e->getMessage();
+    }
 
     /**
      * Вызывается при открытии страницы успеха, после совершения платежа

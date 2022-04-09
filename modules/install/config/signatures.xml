@@ -6,15 +6,15 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>4f064af5f183307796619753927bf72c70f908e9</sign>
+    <sign>bccc837ec13fd71e12694b01a19f7e31276168c1</sign>
   </file>
   <file>
     <path>controller/wizard.inc.php</path>
-    <sign>233f3d17afa4f4ffa558458078ae7051a1ea991d</sign>
+    <sign>e85298d3b0a733af45660d7bd456f058e8796015</sign>
   </file>
   <file>
     <path>model/api.inc.php</path>
-    <sign>3d52cf20a2a6bfd3f4ebf3548e477c9f7efc398d</sign>
+    <sign>3eaff385d8704e30b9eed937131be8769c8dc320</sign>
   </file>
   <file>
     <path>model/notice/installsuccess.inc.php</path>
@@ -22,7 +22,7 @@
   </file>
   <file>
     <path>view/css/install.css</path>
-    <sign>0998332b087a05387a20591ef12407dee35bbf3e</sign>
+    <sign>8f3d004515732518a9bd17e5117b9575c7b89719</sign>
   </file>
   <file>
     <path>view/eula/ru/license.htm</path>
@@ -130,7 +130,7 @@
   </file>
   <file>
     <path>view/step3.tpl</path>
-    <sign>200068c2932810550b87bd05c0efe1083c8cd6d1</sign>
+    <sign>7756b89388043f11d36715328b81e9994d2d7246</sign>
   </file>
   <file>
     <path>view/step4.tpl</path>
@@ -148,5 +148,5 @@
     <path>view/wrap.tpl</path>
     <sign>5b3de75cb6e9c5a4ed4f108ed5dc6de3ea4eef97</sign>
   </file>
-  <masterSign>61caca984654ad5a705da17f2f7851810ef4dfdf168f6a740c5f8be3a4992f2471b7ee980af6f3c6ce75e5909c1a5579a8bf420ee07f799f477ddb227c283adb56426dfca2bbf39b3220c3c76254000eab6daf263df85e4e3ba5d1fe8f623d0e3ebeeab89fce6ab36128e9dd6df77fdd814d747aef286698eb45cf1d43eb0fde</masterSign>
+  <masterSign>8aae7aa132b230b134aa8a159f90b6524ed570852fd8ca126faa21ddb7228b71b9fbbdfbf372d73f13c571a78fe186b161f29c2851db347d0d023668f73cb0fa326e7be550cefbcdc84bb9c4e1dd252bf3d87a148126f639c5a8e2a6eb58e7027513f706306ebc625276c4e52b19eeb41027a5a4771eb2f318ec854b6d3bb1a1</masterSign>
 </signatures>

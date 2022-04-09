@@ -106,6 +106,9 @@ class SectionModule extends OrmObject
     function getParams($grid = true)
     {
         $params = unserialize($this['params']);
+        unset($params['_block_id']);
+        unset($params['generate_by_grid']);
+
         if ($grid) {
             $default = [
                 \RS\Controller\Block::BLOCK_ID_PARAM => $this['id'],

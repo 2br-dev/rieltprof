@@ -16,13 +16,18 @@ class Banner extends \RS\Csv\AbstractSchema
         parent::__construct(new Preset\Base([
             'ormObject' => new Orm\Banner(),
             'excludeFields' => [
-                'file', 'xzone', 'id', 'site_id'
+                'mobile_file', 'file', 'xzone', 'id', 'site_id'
             ],
             'multisite' => true,
             'searchFields' => ['title']
         ]), [
             new Preset\SinglePhoto([
-                'title' => t('Файл'),
+                'title' => t('Баннер для мобильных разрешений'),
+                'linkForeignField' => 'mobile_file',
+                'linkPresetId' => 0
+            ]),
+            new Preset\SinglePhoto([
+                'title' => t('Баннер'),
                 'linkForeignField' => 'file',
                 'linkPresetId' => 0
             ]),

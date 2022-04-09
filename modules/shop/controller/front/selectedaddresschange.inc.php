@@ -11,6 +11,7 @@ namespace Shop\Controller\Front;
 use RS\Application\Application;
 use RS\Config\Loader as ConfigLoader;
 use RS\Controller\Front;
+use RS\Module\Manager as ModuleManager;
 use RS\View\Engine as ViewEngine;
 use Shop\Model\Orm\Address;
 use Shop\Model\Orm\Region;
@@ -38,7 +39,7 @@ class SelectedAddressChange extends Front
     public $region_api;
 
     /**
-     * Функция, вызывающяся сразу после конструктора
+     * Функция, вызывающаяся сразу после конструктора
      * в случае успешной инициализации ничего не должна возвращать (null),
      * в случае ошибки должна вернуть текст ошибки, который будет возвращен при вызове _exec();
      */
@@ -101,7 +102,7 @@ class SelectedAddressChange extends Front
             'title:%like%' => $query,
             'is_city' => 1,
         ]);
-        $region_api->setOrder('INSTR(title, "#0")', [$query]);
+        $region_api->setOrder('INSTR(title, "#0"), LENGTH(title)', [$query]);
 
         /** @var Region[] $region_list */
         $region_list = $region_api->getList(1, 5);
@@ -277,5 +278,38 @@ class SelectedAddressChange extends Front
             }
         }
         return $this->marked;
+    }
+
+    /**
+     * Устанавливает переданный адрес в качестве текущего
+     *
+     * @return \RS\Controller\Result\Standard
+     * @throws \RS\Exception
+     */
+    public function actionSetSelectedAddress()
+    {
+        $address = new Address();
+        if ($address->checkData()) {
+            $selected_address = SelectedAddress::getInstance();
+            $selected_address->setAddress($address);
+
+            //Если есть модуль филиалы, то сопоставим филиал и если он есть
+            if ($address['city_id'] && ModuleManager::staticModuleEnabled('affiliate')) {
+                $affiliate_api = new \Affiliate\Model\AffiliateApi();
+                $affiliate = $affiliate_api->setFilter('linked_region_id', $address['city_id'])
+                    ->setFilter('public', 1)
+                    ->getFirst();
+
+                if ($affiliate){
+                    $affiliate_api->setCurrentAffiliate($affiliate, true);
+                }
+            }
+
+            return $this->result->setSuccess(true);
+        }
+
+        return $this->result
+            ->setSuccess(false)
+            ->setErrors($address->getErrorsStr());
     }
 }

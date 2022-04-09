@@ -23,27 +23,37 @@ class DbMap
         $db = null,
         $table = null,
         $engine = null,
-        $charset = null;
-        
+        $charset = null,
+        $collate = null;
+
     /**
-    * Конструктор
-    * 
-    * @param PropertyIterator $properties - свойства ORM Объекта
-    * @param array $indexes - индексы ORM объекта
-    * @param string $db - имя базы данных
-    * @param string $table - имя таблицы
-    * @param string $engine - тип таблицы
-    * @param string $charset - кодировка таблицы
-    * @return DbMap
-    */
-    public function __construct(PropertyIterator $properties, array $indexes, $db, $table, $engine="MyISAM", $charset="utf8")
+     * Конструктор
+     *
+     * @param PropertyIterator $properties - свойства ORM Объекта
+     * @param array $indexes - индексы ORM объекта
+     * @param string $db - имя базы данных
+     * @param string $table - имя таблицы
+     * @param string|null $engine - тип таблицы
+     * @param string|null $charset - кодировка таблицы
+     * @param string|null $collate - тип сравнения
+     * @throws \RS\Db\Exception
+     */
+    public function __construct(PropertyIterator $properties, array $indexes, $db,
+                                $table, $engine = null, $charset = null, $collate = null)
     {
         $this->properties = $properties;
         $this->indexes = $indexes;
         $this->table = $table;
         $this->db = $db;
-        $this->engine = $engine;
-        $this->charset = $charset;
+
+        //property_exists необходимо для корректного обновления с версий RS до 6.0.8
+        $default_engine = property_exists('Setup', 'DB_TABLE_ENGINE') ? \Setup::$DB_TABLE_ENGINE : 'MyISAM';
+        $default_charset = property_exists('Setup', 'DB_TABLE_CHARSET') ? \Setup::$DB_TABLE_CHARSET : 'utf8mb4';
+        $default_collate = property_exists('Setup', 'DB_TABLE_COLLATE') ? \Setup::$DB_TABLE_COLLATE : 'utf8mb4_general_ci';
+
+        $this->engine = $engine ?? $default_engine;
+        $this->charset = $charset ?? $default_charset;
+        $this->collate = $collate ?? $default_collate;
         $dbresult = \RS\Db\Adapter::sqlExec("show tables from `$db` like '$table'");
         if ($dbresult -> rowCount() == 0) {
             $this->no_table = true;
@@ -127,7 +137,7 @@ class DbMap
             }
         }
         
-        $queries[] = "CREATE TABLE `{$this->db}`.`{$this->table}` (".implode(",", $fields).") ENGINE={$this->engine} DEFAULT CHARSET={$this->charset}";
+        $queries[] = "CREATE TABLE `{$this->db}`.`{$this->table}` (".implode(",", $fields).") ENGINE={$this->engine} DEFAULT CHARSET={$this->charset} COLLATE={$this->collate}";
         
         $queries = array_merge($queries, $this->updateIndexes());
         return $queries;

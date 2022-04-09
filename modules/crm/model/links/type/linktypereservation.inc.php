@@ -12,6 +12,7 @@ use RS\Orm\FormObject;
 use RS\Orm\PropertyIterator;
 use RS\Router\Manager;
 use Shop\Model\OrmType\SelectReservation;
+use Shop\Model\ReservationApi;
 
 /**
  * Связь объекта с заказом
@@ -23,6 +24,8 @@ class LinkTypeReservation extends AbstractType
      * @var OneClickItem
      */
     public $linked_object;
+
+    protected $last_objects_template = '%crm%/admin/links/lastobjects/reservation.tpl';
 
     /**
      * Возвращает имя закладки, характеризующей данную связь
@@ -123,5 +126,20 @@ class LinkTypeReservation extends AbstractType
     {
         $current_site_id = \RS\Site\Manager::getSiteId();
         return $this->linked_object['id'] && ($this->linked_object['site_id'] != $current_site_id);
+    }
+
+    /**
+     * Возвращает последние $limit объектов, с которыми возможно установить связь
+     *
+     * @param integer $limit
+     * @return []
+     */
+    public function getLastObjects($limit = null)
+    {
+        if (!$limit) {
+            $limit = 10;
+        }
+        $api = new ReservationApi();
+        return $api->getList(1, $limit, 'id DESC');
     }
 }

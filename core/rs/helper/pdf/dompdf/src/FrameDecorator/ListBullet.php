@@ -22,7 +22,7 @@ class ListBullet extends AbstractFrameDecorator
     const BULLET_PADDING = 1; // Distance from bullet to text in pt
     // As fraction of font size (including descent). See also DECO_THICKNESS.
     const BULLET_THICKNESS = 0.04; // Thickness of bullet outline. Screen: 0.08, print: better less, e.g. 0.04
-    const BULLET_DESCENT = 0.3; //descent of font below baseline.
+    const BULLET_DESCENT = 0.3; //descent of font below baseline. Todo: Guessed for now.
     const BULLET_SIZE = 0.35; // bullet diameter. For now 0.5 of font_size without descent.
 
     static $BULLET_TYPES = ["disc", "circle", "square"];

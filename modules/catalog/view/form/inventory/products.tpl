@@ -84,8 +84,8 @@
     <input type="hidden" class="item-id" value="{$elem.id}">
     <input type="hidden" name="type" value="{$type}">
     {$products_to_add = $api->getProductsToAdd()}
-    {foreach $products_to_add as $id}
-        <input type="hidden" class="hidden_id_to_add" value="{$id}">
+    {foreach $products_to_add as $data}
+        <input type="hidden" class="hidden_id_to_add" value="{$data.product_id}" data-offer-id="{$data.offer_id}">
     {/foreach}
 </div>
 

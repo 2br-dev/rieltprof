@@ -17,7 +17,7 @@
                         <i class="zmdi zmdi-plus m-r-5"></i>
                         <span>{t}Добавить характеристику{/t}</span>
                     </a>
-                    {include file="meproperty_form.tpl" value_types=$field->callPropertyFunction('getPropertyItemAllowTypeData')}
+                    {include file="%catalog%/form/product/meproperty_form.tpl" value_types=$field->callPropertyFunction('getPropertyItemAllowTypeData')}
                 </div>
             </div>
         </td>

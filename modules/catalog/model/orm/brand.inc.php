@@ -50,6 +50,7 @@ class Brand extends \RS\Orm\OrmObject
             ]),
             'alias' => new Type\Varchar([
                 'description' => t('URL имя'),
+                'maxLength' => 150,
                 'checker' => ['chkalias', t('Могут использоваться только английские буквы, цифры, знак подчеркивания, запятая, точка и минус')],
                 'meVisible' => false
             ]),

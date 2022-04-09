@@ -46,6 +46,7 @@ class Api extends TreeCookieList
             'nameField' => 'title',
             'aliasField' => 'alias',
             'sortField' => 'sortn',
+            'loadOnDelete' => true,
             'defaultOrder' => 'parent, sortn',
         ]);
     }

@@ -1,168 +1,136 @@
-{addjs file="jquery.activetabs.js"}
-{$user_config=$this_controller->getModuleConfig()}
+{* Регистрация пользователя *}
+{extends "%THEME%/helper/wrapper/dialog/standard.tpl"}
 
-{if $url->request('dialogWrap', $smarty.const.TYPE_INTEGER)}
-    <h2 data-dialog-options='{ "width": "755" }'>{t}Регистрация пользователя{/t}</h2>
-{/if}
+{block "title"}{t}Регистрация{/t}{/block}
+{block "body"}
+    {$user_config = $this_controller->getModuleConfig()}
+    {$is_dialog_wrap = $url->request('dialogWrap', $smarty.const.TYPE_INTEGER)}
+    <form method="POST" action="{$router->getUrl('users-front-register')}">
+        {csrf}
+        {$this_controller->myBlockIdInput()}
+        <input type="hidden" name="referer" value="{$referer}">
 
-{if count($user->getNonFormErrors())>0}
-    <div class="pageError">
-        {foreach from=$user->getNonFormErrors() item=item}
-        <p>{$item}</p>
-        {/foreach}
-    </div>
-{/if}    
-
-<form method="POST" action="{$router->getUrl('users-front-register')}">
-    {$this_controller->myBlockIdInput()}
-    <input type="hidden" name="referer" value="{$referer}">
-    <input type="hidden" name="is_company" value="{$user.is_company}">
-    
-    {hook name="users-registers:form" title="{t}Регистрация:форма{/t}"}    
-        <div class="userProfile activeTabs" data-input-name="is_company">
-            <div class="formSection">
-                <div class="sectionListBlock">
-                    <ul class="lineList tabList">
-                        <li><a class="item {if !$user.is_company}act{/if}" data-input-val="0" data-tab="#profile"><i>{t}частное лицо{/t}</i></a></li>
-                        <li><a class="item {if $user.is_company}act{/if}" data-class="thiscompany" data-input-val="1" data-tab="#profile"><i>{t}компания{/t}</i></a></li>
-                    </ul>
+        <div class="g-4 row row-cols-1">
+            {hook name="users-registers:form" title="{t}Регистрация:форма{/t}"}
+            <div>
+                <div class="radio check">
+                    <input type="radio" name="is_company" value="0" id="is_company_no" {if !$user.is_company}checked{/if}>
+                    <label for="is_company_no">
+                        <span class="radio-attr">
+                            {include file="%THEME%/helper/svg/radio.tpl"}
+                        </span>
+                        <span>{t}Частное лицо{/t}</span>
+                    </label>
+                </div>
+                <div class="radio check">
+                    <input type="radio" name="is_company" value="1" id="is_company_yes" {if $user.is_company}checked{/if}>
+                    <label for="is_company_yes">
+                        <span class="radio-attr">
+                            {include file="%THEME%/helper/svg/radio.tpl"}
+                        </span>
+                        <span>{t}Юридическое лицо или ИП{/t}</span>
+                    </label>
                 </div>
             </div>
-            
-            <table class="formTable tabFrame{if $user.is_company} thiscompany{/if}" id="profile">
-                {hook name="users-registers:form-fields" title="{t}Регистрация:поля формы{/t}"}
-                <tbody class="organization">
-                    <tr>
-                        <td class="key">{t}Название организации{/t}:</td>
-                        <td class="value">
-                            {$user->getPropertyView('company')}
-                            <div class="help">{t}Например: ООО "Аудитор"{/t}</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="key">{t}ИНН{/t}:</td>
-                        <td class="value">
-                            {$user->getPropertyView('company_inn')}
-                            <div class="help">{t}10 или 12 цифр{/t}</div>
-                        </td>
-                    </tr>                
-                </tbody>                  
-                <tbody>
-                {if $user_config.user_one_fio_field}
-                    <tr>
-                        <td class="key">{t}Ф.И.О.{/t}</td>
-                        <td class="value">
-                            {$user->getPropertyView('fio')}
-                            <div class="help">{t}Например, Иванов Иван Иванович{/t}</div>
-                        </td>
-                    </tr>
-                {else}
-                    {if $user_config->canShowField('name')}
-                        <tr>
-                            <td class="key">{t}Имя{/t}</td>
-                            <td class="value">
-                                {$user->getPropertyView('name')}
-                                <div class="help">{t}Может состоять только из букв, знака тире. Например: Иван{/t}</div>
-                            </td>
-                        </tr>
-                    {/if}
-                    {if $user_config->canShowField('surname')}
-                        <tr>
-                            <td class="key">{t}Фамилия{/t}</td>
-                            <td class="value">
-                                {$user->getPropertyView('surname')}
-                                <div class="help">{t}Может состоять только из букв, знака тире. Например: Петров{/t}</div>
-                            </td>
-                        </tr>
-                    {/if}
-                    {if $user_config->canShowField('midname')}
-                        <tr>
-                            <td class="key">{t}Отчество{/t}</td>
-                            <td class="value">
-                                {$user->getPropertyView('midname')}
-                                <div class="help">{t}Может состоять только из букв, знака тире. Например: Иванович{/t}</div>
-                            </td>
-                        </tr>
-                    {/if}
+            <div class="company-fields collapse{if $user.is_company} show{/if}">
+                <div>
+                    <label class="form-label">{t}Наименование компании{/t}</label>
+                    {$user->getPropertyView('company', ['placeholder' => "{t}Например, ООО Ромашка{/t}"])}
+                </div>
+                <div class="mt-4">
+                    <label class="form-label">{t}ИНН{/t}</label>
+                    {$user->getPropertyView('company_inn', ['placeholder' => "{t}10 или 12 цифр{/t}"])}
+                </div>
+            </div>
+
+            {if $user_config.user_one_fio_field}
+                <div>
+                    <label class="form-label">{t}Ф.И.О.{/t}</label>
+                    {$user->getPropertyView('fio', ['placeholder' => "{t}Например, Иванов Иван Иванович{/t}"])}
+                </div>
+            {else}
+                {if $user_config->canShowField('name')}
+                    <div>
+                        <label class="form-label">{t}Имя{/t}</label>
+                        {$user->getPropertyView('name', ['placeholder' => "{t}Например, Иван{/t}"])}
+                    </div>
                 {/if}
 
-                {if $user_config->canShowField('phone')}
-                    <tr>
-                        <td class="key">{t}Телефон{/t}</td>
-                        <td class="value">
-                            {$user->getPropertyView('phone')}
-                            <div class="help">{t}Например: +7 918 00011222{/t}</div>
-                        </td>
-                    </tr>
+                {if $user_config->canShowField('surname')}
+                    <div>
+                        <label class="form-label">{t}Фамилия{/t}</label>
+                        {$user->getPropertyView('surname', ['placeholder' => "{t}Например, Иванов{/t}"])}
+                    </div>
                 {/if}
 
-                {if $user_config->canShowField('login')}
-                    <tr>
-                        <td class="key">{t}Логин{/t}</td>
-                        <td class="value">
-                            {$user->getPropertyView('login')}
-                        </td>
-                    </tr>
+                {if $user_config->canShowField('midname')}
+                    <div>
+                        <label class="form-label">{t}Отчество{/t}</label>
+                        {$user->getPropertyView('midname', ['placeholder' => "{t}Например, Иванович{/t}"])}
+                    </div>
                 {/if}
+            {/if}
 
-                {if $user_config->canShowField('e_mail')}
-                    <tr>
-                        <td class="key">E-mail</td>
-                        <td class="value">
-                            {$user->getPropertyView('e_mail')}
-                        </td>
-                    </tr>
-                {/if}
+            {if $user_config->canShowField('phone')}
+                <div>
+                    <label class="form-label">{t}Телефон{/t}</label>
+                    {$user->getPropertyView('phone', ['placeholder' => "{t}Например, +7(XXX)-XXX-XX-XX{/t}"])}
+                </div>
+            {/if}
 
-                <tr>
-                    <td class="key">{t}Пароль{/t}</td>
-                    <td class="value">
-                        <div class="ib">
-                            <input type="password" name="openpass" {if count($user->getErrorsByForm('openpass'))}class="has-error"{/if}>
-                            <div class="help">{t}Пароль{/t}</div>
-                        </div>
-                        <div class="ib ml10">
-                            <input type="password" name="openpass_confirm">
-                            <div class="help">{t}Повтор пароля{/t}</div>
-                        </div>
-                        <div class="formFieldError">
-                            {$user->getErrorsByForm('openpass', ',')}
-                        </div>
-                    </td>
-                </tr>
-                
-                {if $conf_userfields->notEmpty()}
-                    {foreach from=$conf_userfields->getStructure() item=fld}
-                    <tr>
-                        <td class="key">{$fld.title}</td>
-                        <td class="value">
-                            {$conf_userfields->getForm($fld.alias)}
-                            {assign var=errname value=$conf_userfields->getErrorForm($fld.alias)}
-                            {assign var=error value=$user->getErrorsByForm($errname, ', ')}
-                            {if !empty($error)}
-                                <span class="formFieldError">{$error}</span>
-                            {/if}
-                        </td>
-                    </tr>
-                    {/foreach}
-                {/if}
+            {if $user_config->canShowField('login')}
+                <div>
+                    <label class="form-label">{t}Логин{/t}</label>
+                    {$user->getPropertyView('login', ['placeholder' => "{t}Придумайте логин для входа{/t}"])}
+                </div>
+            {/if}
 
-                {if $user->__captcha->isEnabled()}
-                    <tr class="captcha">
-                        <td class="key">{$user->__captcha->getTypeObject()->getFieldTitle()}</td>
-                        <td class="value">{$user->getPropertyView('captcha')}</td>
-                    </tr>
-                {/if}
+            {if $user_config->canShowField('e_mail')}
+                <div>
+                    <label class="form-label">{t}E-mail{/t}</label>
+                    {$user->getPropertyView('e_mail', ['placeholder' => "{t}Например, demo@example.com{/t}"])}
+                </div>
+            {/if}
 
-                </tbody>
-                {/hook}
-            </table>
+            {if $conf_userfields->notEmpty()}
+                {foreach $conf_userfields->getStructure() as $fld}
+                    <div>
+                        <label class="form-label">{$fld.title}</label>
+                        {$conf_userfields->getForm($fld.alias, '%THEME%/helper/forms/userfields_forms.tpl')}
+
+                        {$errname = $conf_userfields->getErrorForm($fld.alias)}
+                        {$error = $user->getErrorsByForm($errname, ', ')}
+                        {if !empty($error)}
+                            <span class="invalid-feedback">{$error}</span>
+                        {/if}
+                    </div>
+
+                {/foreach}
+            {/if}
+
+            {if $user->__captcha->isEnabled()}
+                <div>
+                    <label class="form-label">{$user->__captcha->getTypeObject()->getFieldTitle()}</label>
+                    {$user->getPropertyView('captcha')}
+                </div>
+            {/if}
+
+            <div>
+                <label class="form-label">{t}Пароль{/t}</label>
+                {$user->getPropertyView('openpass')}
+            </div>
+            <div>
+                <label class="form-label">{t}Повтор пароля{/t}</label>
+                {$user->getPropertyView('openpass_confirm')}
+            </div>
+
+            {if $CONFIG.enable_agreement_personal_data}
+                {include file="%site%/policy/agreement_phrase.tpl" button_title="{t}Зарегистрироваться{/t}"}
+            {/if}
+            <div>
+                <button type="submit" class="btn btn-primary w-100">{t}Зарегистрироваться{/t}</button>
+            </div>
+            {/hook}
         </div>
-
-        {if $CONFIG.enable_agreement_personal_data}
-            {include file="%site%/policy/agreement_phrase.tpl" button_title="{t}Зарегистрироваться{/t}"}
-        {/if}
-
-        <button type="submit" class="formSave">{t}Зарегистрироваться{/t}</button>
-    {/hook}
-</form>
+    </form>
+{/block}

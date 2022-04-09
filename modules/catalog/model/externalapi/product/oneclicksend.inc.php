@@ -42,6 +42,7 @@ class OneClickSend extends \ExternalApi\Model\AbstractMethods\AbstractMethod
     * @param integer $offer_id id комплектации
     * @param array $multioffers телефон пользователя. Например +79XX234XX00
     * @param array $clickfields массив дополнительных полей с данными
+    * @param string $token Авторизационный токен, если есть
     * 
     * @example GET /api/methods/product.oneclicksend?name=Алексей&phone=+79628678430&product_id=1&offer_id=1
     * 
@@ -61,7 +62,7 @@ class OneClickSend extends \ExternalApi\Model\AbstractMethods\AbstractMethod
     * 
     * @return array Возращает, либо пустой массив ошибок, если заказ успешно создан
     */
-    protected function process($token = null, $name, $phone, $product_id, $offer_id, $multioffers = [], $clickfields = [])
+    protected function process($name, $phone, $product_id, $offer_id, $multioffers = [], $clickfields = [], $token = null)
     {  
         $product_api  = new \Catalog\Model\Api();
         $oneclick_api = new \Catalog\Model\OneClickApi();

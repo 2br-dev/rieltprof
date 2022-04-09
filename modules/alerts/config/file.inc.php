@@ -59,18 +59,7 @@ class File extends \RS\Orm\ConfigObject
                         'title' => t('Отправить тестовое SMS-сообщение'),
                         'description' => t('Отправляет SMS-сообщение, на номер администратора, указанный в настройках сайта'),
                         'confirm' => t('Вы действительно хотите отправить тестовое SMS-сообщение')
-                    ],
-                    [
-                        'url' => \RS\Router\Manager::obj()->getAdminUrl('showSmsLog', [], 'alerts-tools'),
-                        'title' => t('Открыть журнал отправки SMS'),
-                        'description' => t('Отображает все попытки и результаты отправки SMS, если включено логирование'),
-                        'class' => ' '
-                    ],
-                    [
-                        'url' => \RS\Router\Manager::obj()->getAdminUrl('deleteSmsLog', [], 'alerts-tools'),
-                        'title' => t('Очистить журнал отправки SMS'),
-                        'description' => t('Очистить журнал запросов к API?'),
-                    ],
+                    ]
                 ]
             ];
     }

@@ -60,6 +60,18 @@ class Index extends \RS\Orm\AbstractObject
     public function getPrimaryKeyProperty()
     {
         return ['result_class', 'entity_id'];
-    }    
+    }
+
+    /**
+     * Возвращает тип движка таблицы БД.
+     * Данная таблица будет всегда иметь такой тип, так как здесь используется FULLTEXT index
+     *
+     * @return string
+     */
+    protected function getTableEngine()
+    {
+        $engine = \Setup::$DB_TABLE_ENGINE;
+        return in_array($engine, ['MyISAM', 'Aria']) ? $engine : 'MyISAM';
+    }
 }
 

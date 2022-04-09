@@ -1,0 +1,1 @@
+<p class="policy-agreement">{t alias = "Кнопка соглашения" send = {$button_title|default:"Отправить"} policy_agreement = $router->getUrl('site-front-policy-agreement')}Нажимая кнопку "%send" я даю согласие на <a href="%policy_agreement" target="_blank">обработку персональных данных</a>.{/t}</p>

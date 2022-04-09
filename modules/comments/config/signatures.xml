@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>3fde770769db32c92c5e6a81e2d1f5079211c963</sign>
+    <sign>33ca63c93cc4d08c279e8bfdedd46f1089eb33d9</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -14,7 +14,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>bd3b8daa49833e082af98f8dd153b66cccd3d0ea</sign>
+    <sign>c315a7932c5b8f0317f0b5b05246cd164f1ea82e</sign>
   </file>
   <file>
     <path>controller/admin/ctrl.inc.php</path>
@@ -26,11 +26,11 @@
   </file>
   <file>
     <path>controller/block/comments.inc.php</path>
-    <sign>915b30602ab74ffc751aa90e0588d81513db012e</sign>
+    <sign>a193d9823c628dfed6bc9cdb36681b0022342b63</sign>
   </file>
   <file>
     <path>model/abstracttype.inc.php</path>
-    <sign>188e47355426e6267568255eb2283305b078af07</sign>
+    <sign>a164d505c70afeed6addb58079435881d80a2e47</sign>
   </file>
   <file>
     <path>model/api.inc.php</path>
@@ -50,15 +50,19 @@
   </file>
   <file>
     <path>model/orm/vote.inc.php</path>
-    <sign>4b811178e1145871179d31c27096be061f96dd71</sign>
+    <sign>962bd9934deb81bf3984b8275f2c6e48692a1fff</sign>
   </file>
   <file>
     <path>view/blocks/comments/comment_block.tpl</path>
-    <sign>12f5a340eb42a57adaaeb82426c88277f06abcd3</sign>
+    <sign>b36f0e3c0db22a8859b055f988fb1b63eb12e58b</sign>
+  </file>
+  <file>
+    <path>view/blocks/comments/form.tpl</path>
+    <sign>d558c839d5e7724225f07d09c0cac7ffe49c5a9f</sign>
   </file>
   <file>
     <path>view/blocks/comments/list.tpl</path>
-    <sign>34fec58e8ce2301db4938f983edcaafca2f7b0e7</sign>
+    <sign>ec2a3c7984d6f49e57e89d4fa59d7380da9ca8c8</sign>
   </file>
   <file>
     <path>view/form/comment/url.tpl</path>
@@ -81,8 +85,8 @@
     <sign>6ce7e178900bb5dcc2f3aaf29c48d764c23529a2</sign>
   </file>
   <file>
-    <path>view/js/comments.js</path>
-    <sign>d43a8f4dc7009159c8c699ac28d799c3a5feb015</sign>
+    <path>view/js/rscomponent/comments.js</path>
+    <sign>e9829231961cc5abc8800f26573f2d7ef4608a57</sign>
   </file>
   <file>
     <path>view/notice/desktop_newcomment.tpl</path>
@@ -96,5 +100,5 @@
     <path>view/widget/newlist.tpl</path>
     <sign>3e4b21b08ab8273b7716acd39c3e22e896560ec9</sign>
   </file>
-  <masterSign>4aeafe41c54160295eddc342d9ebb2ddcc54db8332d98a30b95342b152714f70cf50f32220cc79b67d2c9dd81d9c86e0ee6dff42f4519154030bd6f2f8c242ce31d35062a212a2ad7b59e13e9ee18931bc6a8ae46eb94356270a2a8406667f04abbdac5c540498690849a838d712e0f543798ed68cb983e46b8f9462f373b2a8</masterSign>
+  <masterSign>997ef37b467cba94ed6cb595d15cc8d4162a29fa0df008c282c9f35fabc10d5196d21d95df2af431270ece7ae8452ea12b3136a220720e8876a32497bf364bd3bcdd42a8ae33941f4bf870b5751d9d476ee49b1bda11ce0a4337467d6261d600d20ada9dcf22d06266dc74fb98e482dcc05d528c14f3ee06e14137dcdbf7b033</masterSign>
 </signatures>

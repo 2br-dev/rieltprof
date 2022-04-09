@@ -1,101 +1,132 @@
-{if count($order_list)}
-<table class="orderList">
-    {foreach $order_list as $order}
-    <tr>
-        <td class="date">№ {$order.order_num}<br>{$order.dateof|date_format:"d.m.Y"}</td>
-        <td class="products">
-            {$cart=$order->getCart()}
-            {$products=$cart->getProductItems()}
-            {$order_data=$cart->getOrderData()}
-            
-            {$products_first=array_slice($products, 0, 5)}
-            {$products_more=array_slice($products, 5)}
-            
-            {hook name="shop-myorders:products" title="{t}Мои заказы:список товаров одного заказа{/t}"}
-                <ul>
-                    {foreach $products_first as $item}
-                        {$multioffer_titles=$item.cartitem->getMultiOfferTitles()}
-                        <li>
-                            {$main_image=$item.product->getMainImage()}
-                            {if $item.product.id>0}
-                                <a href="{$item.product->getUrl()}" class="image"><img src="{$main_image->getUrl(36, 36, 'xy')}" alt="{$main_image.title|default:"{$item.cartitem.title}"}"/></a>
-                                <a href="{$item.product->getUrl()}" class="title">{$item.cartitem.title}</a>
-                            {else}
-                                <span class="image"><img src="{$main_image->getUrl(36, 36, 'xy')}" alt="{$main_image.title|default:"{$item.cartitem.title}"}"/></span>
-                                <span class="title">{$item.cartitem.title}</span>
-                            {/if}
-                            {if $multioffer_titles || $item.cartitem.model}
-                                <div class="multioffersWrap">
-                                    {foreach $multioffer_titles as $multioffer}
-                                    {$multioffer.value}{if !$multioffer@last}, {/if}
-                                    {/foreach}
-                                    {if !$multioffer_titles}
-                                        {$item.cartitem.model}
+{* Личный кабинет - список моих заказов *}
+{extends file="%THEME%/helper/wrapper/my-cabinet.tpl"}
+{block name="content"}
+    {$paginator = $paginator_with_archive}
+
+    <div class="col">
+        <h1 class="mb-lg-5 mb-4">{t}Мои Заказы{/t}</h1>
+        {if count($order_list_with_archive)}
+            <div>
+                {foreach $order_list_with_archive as $order}
+                    {if !($order instanceof Shop\Model\Orm\ArchiveOrder)}
+                        {$cart = $order->getCart()}
+                        {$products = $cart->getProductItems()}
+                        {$order_data = $cart->getOrderData()}
+                    {/if}
+
+                    <div class="lk-orders-item">
+                        <div class="lk-orders-item__head">
+                            <div class="lk-orders-item__title">{t num=$order.order_num date="{$order.dateof|dateformat:"@date"}"}Заказ № %num от %date{/t}</div>
+                            <div class="lk-orders-item__head-products">
+                                {if $order instanceof Shop\Model\Orm\ArchiveOrder}
+                                    {$products_count = $order->getProductsCount()}
+                                {else}
+                                    {$products_count = count($products)}
+                                {/if}
+                                <div class="fs-5">{t n=$products_count}%n [plural:%n:товар|товара|товаров] на сумму:{/t}</div>
+                                <div class="lk-orders-item__price">
+                                    {if $order instanceof Shop\Model\Orm\ArchiveOrder}
+                                        {$order.totalcost|format_price} {$order.currency_stitle}
+                                    {else}
+                                        {$order_data.total_cost}
                                     {/if}
                                 </div>
-                            {/if}
-                        </li>
-                    {/foreach}
-                </ul>
-                {if !empty($products_more)}
-                <div class="moreItems">
-                    <a class="expand rs-parent-switcher">{t}показать все...{/t}</a>
-                    <ul class="items">
-                        {foreach $products_more as $item}
-                            {$multioffer_titles=$item.cartitem->getMultiOfferTitles()}
-                            <li>
-                                {if $item.product.id>0}
-                                    <a href="{$item.product->getUrl()}" class="image"><img src="{$item.product->getMainImage(36, 36, 'xy')}"></a>
-                                    <a href="{$item.product->getUrl()}" class="title">{$item.cartitem.title}</a>
-                                    {if $multioffer_titles || $item.cartitem.model}
-                                        <div class="multioffersWrap">
-                                            {foreach $multioffer_titles as $multioffer}
-                                            {$multioffer.value}{if !$multioffer@last}, {/if}
-                                            {/foreach}
-                                            {if !$multioffer_titles}
-                                                {$item.cartitem.model}
+                            </div>
+                        </div>
+                        <div class="lk-orders-item__body">
+                            <div class="row row-cols-md-2 row-cols-1 g-4">
+                                <div class="d-none d-md-block">
+                                    <div class="row row-cols-2 g-4 fs-5 ">
+                                        {if $delivery_title = $order->getDelivery()->title}
+                                            <div>
+                                                <div class="fw-bold mb-2">{t}Доставка{/t}</div>
+                                                <div>{$delivery_title}</div>
+                                            </div>
+                                        {/if}
+                                        {if $order_title = $order->getPayment()->title}
+                                            <div>
+                                                <div class="fw-bold mb-2">{t}Оплата{/t}</div>
+                                                <div>{$order_title}</div>
+                                            </div>
+                                        {/if}
+
+                                        {if !($order instanceof Shop\Model\Orm\ArchiveOrder)}
+                                            {$pvz = $order->getSelectedPvz()}
+                                            {if $pvz}
+                                                <div>
+                                                    <div class="fw-bold mb-2">{t}Пункт самовывоза{/t}</div>
+                                                    <div>{$pvz->getFullAddress()}</div>
+                                                </div>
+                                            {elseif $order.use_addr || $order.warehouse}
+                                                <div>
+                                                    <div class="fw-bold mb-2">{t}Адрес получения{/t}</div>
+                                                    <div>{if $order.use_addr}
+                                                            {$order->getAddress()->getLineView()}
+                                                        {elseif $order.warehouse}
+                                                            {$order->getWarehouse()->adress}
+                                                        {/if}</div>
+                                                </div>
                                             {/if}
+                                        {/if}
+
+                                        {if $order.track_number}
+                                            <div>
+                                                <div class="fw-bold mb-2">{t}Трек-номер заказа{/t}</div>
+                                                <div>{$order.track_number}</div>
+                                            </div>
+                                        {/if}
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column align-items-md-end justify-content-between">
+                                    <div class="row row-cols-md-auto g-3 justify-content-md-end align-items-center mb-4">
+                                        <div>
+                                            {$status = $order->getStatus()}
+                                            <div class="lk-order-status"
+                                                 style="color: white; background: {$status.bgcolor}">
+                                                {$status.title}</div>
                                         </div>
-                                    {/if}
-                                {else}
-                                    <span class="image"><img src="{$item.product->getMainImage(36, 36, 'xy')}"></span>
-                                    <span class="title">{$item.cartitem.title}</span>
-                                {/if}
-                            </li>
-                        {/foreach}
-                    </ul>
-                    <a class="collapse rs-parent-switcher">{t}показать кратко{/t}</a>
-                </div>            
-                {/if}
-            {/hook}
-        </td>
-        <td class="price">
-            {$order_data.total_cost}
-        </td>
-        <td class="status">
-            <span class="statusItem" style="background: {$order->getStatus()->bgcolor}">{$order->getStatus()->title}</span>
-        </td>
-        <td class="actions">
-            {hook name="shop-myorders:actions" title="{t}Мои заказы:действия над одним заказом{/t}"}
-                {if $order->getPayment()->hasDocs()}
-                    {$type_object=$order->getPayment()->getTypeObject()}
-                    {foreach $type_object->getDocsName() as $key => $doc}
-                    <a href="{$type_object->getDocUrl($key)}" target="_blank">{$doc.title}</a><br>
-                    {/foreach}
-                {/if}
-                {if $order->canOnlinePay()}
-                    <a href="{$order->getOnlinePayUrl()}">{t}оплатить{/t}</a><br>
-                {/if}
-            {/hook}
-            <a href="{$router->getUrl('shop-front-myorderview', ["order_id" => $order.order_num])}" class="more">{t}подробнее{/t}</a>
-        </td>
-    </tr>
-    {/foreach}
-</table>
-{else}
-<div class="noData">
-    {t}Еще не оформлено ни одного заказа{/t}
-</div>
-{/if}
-<br>
-{include file="%THEME%/paginator.tpl"}
+                                        {if !($order instanceof Shop\Model\Orm\ArchiveOrder)}
+                                            {if $order->getPayment()->hasDocs()}
+                                                {$type_object = $order->getPayment()->getTypeObject()}
+                                                {foreach $type_object->getDocsName() as $key=>$doc}
+                                                    <div class="order-md-first"><a href="{$type_object->getDocUrl($key)}" target="_blank">{$doc.title}</a></div>
+                                                {/foreach}
+                                            {/if}
+                                        {/if}
+                                    </div>
+                                    <div class="row row-cols-md-auto row-cols-1 g-3 justify-content-md-end align-items-center">
+                                        {if $order instanceof Shop\Model\Orm\ArchiveOrder}
+                                            <div>
+                                                <button class="btn btn-warning btn-sm col-12 col-sm-auto" disabled>{t}Заказ перенесён в архив{/t}</button>
+                                            </div>
+                                        {else}
+                                            {hook name="shop-myorders:actions" title="{t}Мои заказы:действия над одним заказом{/t}"}
+                                            {if $order->canOnlinePay()}
+                                                <div>
+                                                    <a href="{$order->getOnlinePayUrl()}" class="btn btn-primary col-12 col-sm-auto">
+                                                        {if $status.type == 'payment_method_selected' || $status.copy_type == 'payment_method_selected'}
+                                                            {t}выбрать другую карту{/t}
+                                                        {else}
+                                                            {t}оплатить{/t}
+                                                        {/if}
+                                                    </a>
+                                                </div>
+                                            {/if}
+                                            {/hook}
+                                            <div>
+                                                <a href="{$router->getUrl('shop-front-myorderview', ["order_id" => $order.order_num])}" class="btn btn-outline-primary col-12 col-sm-auto">{t}Подробнее о заказе{/t}</a>
+                                            </div>
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {/foreach}
+            </div>
+            {include file="%THEME%/paginator.tpl"}
+        {else}
+            {include file="%THEME%/helper/usertemplate/include/empty_list.tpl" reason="{t}Еще не оформлено ни одного заказа{/t}"}
+        {/if}
+    </div>
+{/block}

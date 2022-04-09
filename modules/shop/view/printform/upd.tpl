@@ -313,10 +313,10 @@
         <TR>
             <TD colspan=5 class="tr0 td0"><P class="p0 ft0"><A>Универсальный</A></P></TD>
             <TD class="tr0 td1"><P class="p1 ft0"><NOBR>Счет-фактура</NOBR> N</P></TD>
-            <TD colspan="2" class="tr0 td2"><P contenteditable="true" class="p2 center">&nbsp;</P></TD>
+            <TD colspan="2" class="tr0 td2"><P contenteditable="true" class="p2 center">{$order.order_num}</P></TD>
             <TD class="tr0 td4"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr0 td5"><P class="p2 ft0">от</P></TD>
-            <TD colspan="3" class="tr0 td22" style="border: none"><P class="p2 center" contenteditable="true">{date("Y.m.d" , strtotime($order.dateof))}</P></TD>
+            <TD colspan="3" class="tr0 td22" style="border: none"><P class="p2 center" contenteditable="true">{$order.dateof|dateformat:"@date"}</P></TD>
             <TD class="tr0 td6"><P class="p3 ft0">(1)</P></TD>
             <TD class="tr0 td7"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr0 td8"><P class="p2 ft1">&nbsp;</P></TD>
@@ -422,7 +422,9 @@
             <TD class="tr9 td2"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr9 td3"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr9 td4"><P class="p2 ft1">&nbsp;</P></TD>
-            <TD colspan="14" class="tr10 td33"><P class="p2">{$CONFIG.firm_name}</P></TD>
+            <TD colspan="14" class="tr10 td33"><P class="p2">
+                    {$CONFIG.firm_name}, {$CONFIG.firm_legal_address}, {if !empty($CONFIG.admin_phone)}т. {$CONFIG.admin_phone}, {/if}р/с {$CONFIG.firm_rs}, в {$CONFIG.firm_bank}, к/с {$CONFIG.firm_ks}, БИК {$CONFIG.firm_bik}
+                </P></TD>
             <TD colspan=2 class="tr9 td44"><P class="p5 ft13">(2)</P></TD>
             <TD class="tr9 td8"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr9 td12"><P class="p2 ft1">&nbsp;</P></TD>
@@ -453,7 +455,9 @@
             <TD class="tr12 td2"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr12 td3"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr12 td4"><P class="p2 ft1">&nbsp;</P></TD>
-            <TD colspan="15" class="tr1 td33"><P class="p2">{$CONFIG.firm_inn} / {$CONFIG.firm_kpp}</P></TD>
+            <TD colspan="15" class="tr1 td33"><P class="p2">
+                    {$CONFIG.firm_inn} / {$CONFIG.firm_kpp}
+                </P></TD>
 
             <TD class="tr12 td17"><P class="p6 ft13">(2б)</P></TD>
             <TD class="tr12 td8"><P class="p2 ft1">&nbsp;</P></TD>
@@ -467,7 +471,10 @@
             <TD class="tr11 td10"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr11 td28"><P class="p2 ft1">&nbsp;</P></TD>
             <TD colspan=4 class="tr11 td48"><P class="p1 ft3">Грузоотправитель и его адрес</P></TD>
-            <TD colspan="14" class="tr0 td33"><P class="p2" contenteditable="true">&nbsp;</P></TD>
+            <TD colspan="14" class="tr0 td33"><P class="p2" contenteditable="true">
+                    {$CONFIG.firm_name}, {$CONFIG.firm_address}, {if !empty($CONFIG.admin_phone)}т. {$CONFIG.admin_phone}{/if}
+                </P>
+            </TD>
             <TD colspan=2 class="tr11 td44"><P class="p7 ft13">(3)</P></TD>
             <TD class="tr11 td8"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr11 td12"><P class="p2 ft1">&nbsp;</P></TD>
@@ -477,7 +484,13 @@
             <TD colspan=5 class="tr7 td0"><P class="p0 ft10">1 - <NOBR>счет-фактура</NOBR> и</P></TD>
             <TD colspan=3 class="tr7 td49"><P class="p1 ft14">Грузополучатель и его адрес</P></TD>
             <TD class="tr7 td4"><P class="p2 ft1">&nbsp;</P></TD>
-            <TD colspan="14" class="tr7 td21"><P class="p2" contenteditable="true">&nbsp;</P></TD>
+            <TD colspan="14" class="tr7 td21"><P class="p2" contenteditable="true">
+                    {if $user.is_company}
+                        {$user.company}{if !empty($user.company_address)}, {$user.company_address}{/if}{if !empty($user.phone)}, т. {$user.phone}{/if}
+                    {else}
+                        {$user->getFio()}
+                    {/if}
+                </P></TD>
             <TD colspan=2 class="tr7 td44"><P class="p7 ft15">(4)</P></TD>
             <TD class="tr7 td8"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr7 td12"><P class="p2 ft1">&nbsp;</P></TD>
@@ -532,7 +545,13 @@
             <TD class="tr11 td2"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr11 td3"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr11 td4"><P class="p2 ft1">&nbsp;</P></TD>
-            <TD colspan="14" class="tr0 td33"><P class="p2" contenteditable="true">{$user.surname} {$user.name} {$user.midname}</P></TD>
+            <TD colspan="14" class="tr0 td33"><P class="p2" contenteditable="true">
+                    {if $user.is_company}
+                        {$user.company}{if !empty($user.company_inn)}, ИНН {$user.company_inn}{/if}{if !empty($user.phone)}, т. {$user.phone}{/if}{if !empty($user.company_rs)}, р/с {$user.company_rs}, в {$user.company_bank}{/if}{if !empty($user.company_bank_ks)}, к/с {$user.company_bank_ks}{/if}{if !empty($user.company_bank_bik)}, БИК {$user.company_bank_bik}{/if}
+                    {else}
+                        {$user->getFio()}
+                    {/if}
+                </P></TD>
             <TD colspan=2 class="tr11 td44"><P class="p7 ft13">(6)</P></TD>
             <TD class="tr11 td8"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr11 td12"><P class="p2 ft1">&nbsp;</P></TD>
@@ -564,7 +583,10 @@
             <TD class="tr11 td28"><P class="p2 ft1">&nbsp;</P></TD>
             <TD colspan=3 class="tr11 td49"><P class="p1 ft3">ИНН/КПП покупателя</P></TD>
             <TD class="tr11 td4"><P class="p2 ft1">&nbsp;</P></TD>
-            <TD colspan="14" class="tr0 td33"><P class="p2" contenteditable="true"></P></TD>
+            <TD colspan="14" class="tr0 td33"><P class="p2" contenteditable="true">
+                    {if !empty($user.company_inn)}{$user.company_inn}{/if}
+                    {if !empty($user.company_kpp)}/{$user.company_kpp}{/if}
+                </P></TD>
             <TD class="tr11 td16"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr11 td17"><P class="p6 ft13">(6б)</P></TD>
             <TD class="tr11 td8"><P class="p2 ft1">&nbsp;</P></TD>
@@ -579,7 +601,9 @@
             <TD class="tr15 td28"><P class="p2 ft1">&nbsp;</P></TD>
             <TD colspan=3 class="tr15 td49"><P class="p1 ft0">Валюта: наименование, код</P></TD>
             <TD class="tr15 td4"><P class="p2 ft1">&nbsp;</P></TD>
-            <TD class="tr15 td21"><P class="p2 ft1">&nbsp;</P></TD>
+            <TD class="tr15 td21"><P class="p2" contenteditable="true">&nbsp;
+                    Российский рубль, 643
+                </P></TD>
             <TD class="tr15 td50"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr15 td3"><P class="p2 ft1">&nbsp;</P></TD>
             <TD class="tr15 td4"><P class="p2 ft1">&nbsp;</P></TD>

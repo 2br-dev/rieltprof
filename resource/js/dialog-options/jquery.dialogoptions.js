@@ -74,9 +74,14 @@ $.ui.dialog.prototype.open = function () {
     self.optionWidth = self.element.dialog('option', 'width') + "";
     self.oParentWidth = self.element.parent().outerWidth();
     self.isPercentWidth = self.optionWidth.indexOf('%') > -1;
-
     // get dialog original size on open
-    self.oHeight = Math.max(parseInt(self.element.dialog('option', 'height')), self.element.parent().outerHeight());
+    let optionHeight = self.element.dialog('option', 'height');
+    if (typeof optionHeight != 'string' || optionHeight.indexOf('%') == -1) {
+        optionHeight = parseInt(optionHeight);
+    } else {
+        optionHeight = Math.round(document.documentElement.clientHeight * parseInt(optionHeight) / 100);
+    }
+    self.oHeight = Math.max(optionHeight, self.element.parent().outerHeight());
     self.isTouch = $("html").hasClass("touch");
 
     // responsive width & height
@@ -228,10 +233,18 @@ $.ui.dialog.prototype._destroy = function () {
 var _setOption = $.ui.dialog.prototype._setOption;
 $.ui.dialog.prototype._setOption = function (key, value) {
     if (key == 'originalWidth') {
-        this.oWidth = parseInt(value);
+        if (value.toString().indexOf('%') == -1) {
+            this.oWidth = parseInt(value);
+        } else {
+            this.oWidth = Math.round(document.documentElement.clientWidth * parseInt(value) / 100);
+        }
     }
     if (key == 'originalHeight') {
-        this.oHeight = parseInt(value);
+        if (value.toString().indexOf('%') == -1) {
+            this.oHeight = parseInt(value);
+        } else {
+            this.oHeight = Math.round(document.documentElement.clientHeight * parseInt(value) / 100);
+        }
     }
     _setOption.apply(this, arguments);
 };

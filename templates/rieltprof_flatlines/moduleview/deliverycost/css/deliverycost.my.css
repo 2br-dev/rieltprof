@@ -1,0 +1,183 @@
+.deliveryCostWrapper .row{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.deliveryCostWrapper .cityautocomplete{
+    height: 33px;
+    line-height: 33px;
+    margin-left:0px;
+    margin-right:0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border:1px solid silver;
+    display: block;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.deliveryCostWrapper .yourCity{
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+}
+
+
+.deliveryCostWrapper .bottomButtons{
+    text-align: center;
+    padding-bottom: 20px;    
+}
+
+.default .colorButton{
+    background: #2bbfbd none repeat scroll 0 0;
+    border: medium none;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 0;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.deliveryCostWrapper .bottomButtons .first{
+    margin-right: 20px;
+}    
+
+.deliverySearchItems {
+    background: white;
+    position:absolute;
+    z-index:10000;
+    -moz-box-shadow:0 2px 4px #999;
+    -webkit-box-shadow:0 2px 4px #999;    
+    box-shadow:0 2px 3px #aaa;
+    font-size:14px;
+}
+
+.deliverySearchItems li {
+    line-height:30px;
+}
+
+.deliverySearchItems li.other:first-child {
+    border-top:none;
+}
+
+.deliverySearchItems li .ui-corner-all {
+    display:block;
+    padding:2px 5px;
+}
+
+.deliverySearchItems li:hover {
+    cursor: pointer;
+}
+
+.deliverySearchItems li .ui-corner-all.ui-state-focus{    
+    display: block;      
+    background-color: #EBEBE5;
+    color:black;
+}
+          
+
+.deliveryCostWrapper .inputBlock{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.deliveryCostWrapper .deliveryCostShowButton{
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.deliveryCostBlock{
+    box-sizing: border-box;
+    margin-top: 10px;
+    background-color: white;
+    padding: 10px;
+    min-height: 110px;
+}
+
+.bodyWrap .deliveryCostBlock{
+    background-color: #e7e7e7;
+}
+
+.deliveryCostBlock .deliveryLoadScreen{
+    height: 100px;
+    line-height: 100px;
+    font-size: 12px;
+    text-align: center;
+    display: none;
+}
+
+.deliveryCostBlock .deliveryCostListTitle{
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.deliveryCostBlock .deliveryCostListTitle a{
+    font-size: 13px;
+    text-decoration:underline;
+}
+
+.deliveryCostBlock .deliveryCostListTitle a{
+    text-decoration:none;
+}
+
+.deliveryCostBlock .deliveryCostListRows{
+    display: block;
+    padding: 0px;
+    margin: 10px 0px;
+}
+
+.deliveryCostBlock .deliveryCostListRow{
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.deliveryCostBlock .deliveryCostListRow .key{
+    float: left;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 50%;
+    padding-right: 2%;
+    vertical-align: middle;
+}
+
+.deliveryCostBlock .deliveryCostListRow .val{
+    float: right;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 50%;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.deliveryCostBlock .deliveryCostListRow .help{
+    color: gray;
+    font-size: 11px;
+}
+
+.noDeliveryService {
+    height: 100px;
+    line-height: 100px;
+    font-size: 12px;
+    text-align: center;    
+}
+
+.deliveryCostBlock .deliveryCostCalculateButton {
+    background-color: #ffac00;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    font-family: "UbuntuLight";
+    padding: 7px 11px;
+    display: table;
+    float: left;
+    font-size: 14px;
+    text-align: center;
+    width: 110px;
+}

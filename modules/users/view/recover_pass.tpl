@@ -1,33 +1,33 @@
-<form method="POST" action="{$router->getUrl('users-front-auth', ["Act" => "recover"])}" class="authorization">
-    <div class="authorizationWrapper">
-        {$this_controller->myBlockIdInput()}
-        {if $url->request('dialogWrap', $smarty.const.TYPE_INTEGER)}
-            <h2 data-dialog-options='{ "width": "360" }'>{t}Восстановление пароля{/t}</h2>
-        {/if}
+{* Восстановление пароля по одному из полей авторизации *}
+{extends "%THEME%/helper/wrapper/dialog/standard.tpl"}
 
-        <div class="dialogForm">
-            {if !empty($error)}<div class="error">{$error}</div>{/if}
-            <input type="text" name="login" value="{$data.login}" placeholder="{$login_placeholder}" class="login" value="{$data.login}" {if $send_success}readonly{/if}>
-
-            {if $send_success}
-                <div class="recoverText success">
-                    <i></i>
-                    {t}Письмо успешно отправлено. Следуйте инструкциям в письме{/t}
-                </div>            
-            {else}
-                <div class="recoverText">
-                    <i></i>
-                    {t}На указанный контакт будет отправлено письмо с дальнейшими инструкциями по восстановлению пароля{/t}
-                </div>
-                <div class="floatWrap">
-                    <button type="submit">{t}Отправить{/t}</button>
-                </div>
-            {/if}
-            
-            <div class="noAccount">
-                {t}Нет аккаунта?{/t} &nbsp;&nbsp;&nbsp;<a href="{$router->getUrl('users-front-register')}" class="inDialog">{t}Зарегистрируйтесь{/t}</a><br>
-                {t}Вспомнили пароль?{/t} &nbsp;&nbsp;&nbsp;<a href="{$router->getUrl('users-front-auth')}" class="inDialog">{t}Авторизуйтесь{/t}</a>
+{block "title"}{t}Восстановление пароля{/t}{/block}
+{block "body"}
+    {$is_dialog_wrap=$url->request('dialogWrap', $smarty.const.TYPE_INTEGER)}
+    {if $send_success}
+        {t}Письмо успешно отправлено. Следуйте инструкциям в письме{/t}
+    {else}
+        <form method="POST" action="{$router->getUrl('users-front-auth', ["Act" => "recover"])}">
+            {$this_controller->myBlockIdInput()}
+            <div class="g-4 row row-cols-1">
+                {hook name="users-recover-pass:form" title="{t}Авторизация:восстановление пароля{/t}"}
+                    <div>
+                        {t}На указанный контакт будет отправлено письмо с дальнейшими инструкциями по восстановлению пароля{/t}
+                    </div>
+                    <div>
+                        <label for="input-restore-pass1" class="form-label">{$login_placeholder}</label>
+                        <input type="text" name="login" value="{$data.login}" class="form-control{if !empty($error)} is-invalid{/if}" value="{$data.login}" {if $send_success}readonly{/if} id="input-restore-pass1">
+                        {if !empty($error)}<div class="invalid-feedback">{$error}</div>{/if}
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary w-100">{t}Отправить{/t}</button>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between fs-5">
+                        <a href="{$router->getUrl('users-front-auth')}" {if $is_dialog_wrap}class="rs-in-dialog"{/if}>{t}Вспомнили пароль?{/t}</a>
+                        <a href="{$router->getUrl('users-front-register')}" {if $is_dialog_wrap}class="rs-in-dialog"{/if}>{t}У меня нет аккаунта{/t}</a>
+                    </div>
+                {/hook}
             </div>
-        </div>
-    </div>
-</form>
+        </form>
+    {/if}
+{/block}

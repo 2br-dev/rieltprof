@@ -21,7 +21,7 @@ class Table extends BinaryStream {
    * @var DirectoryEntry
    */
   protected $entry;
-  protected $def = [];
+  protected $def = array();
 
   public $data;
 

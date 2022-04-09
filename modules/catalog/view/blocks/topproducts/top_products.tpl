@@ -1,48 +1,58 @@
 {if $products}
-<section class="topProducts pl{$_block_id}">
-        <h2 class="mbot10"><span>{if $block_title}{$block_title}{else}{$dir.name}{/if}</span></h2>
-        <div class="productWrap">
-                <ul class="productList">
-                    {foreach from=$products item=product}
-                    <li {$product->getDebugAttributes()}>
-                        <a href="{$product->getUrl()}" class="pic">
-                        <span class="labels">
-                            {foreach from=$product->getMySpecDir() item=spec}
-                            {if $spec.image && $spec.is_label}
-                                <img src="{$spec->__image->getUrl(62,62, 'xy')}" alt="{$spec.name}"/>
-                            {/if}
-                            {/foreach}
-                        </span>
-                        {$main_image=$product->getMainImage()}
-                        <img src="{$main_image->getUrl(141,185,'xy')}" alt="{$main_image.title|default:"{$product.title}"}"/></a>
-                        <a href="{$product->getUrl()}" class="info">
-                            <h3>{$product.title}</h3>
-                            <div class="group">
-                                <div class="scost">
-                                    {$last_price = $product->getOldCost()}
-                                    {if $last_price>0}<div class="lastPrice">{$last_price}</div>{/if}
-                                    <span>{$product->getCost()} {$product->getCurrency()}</span>
-                                </div>
-                                <span class="name">{$product->getMainDir()->name}</span>
-                            </div>
-                        </a>
-                    </li>
+    {nocache}
+        {addjs file="%catalog%/rscomponent/productslider.js"}
+    {/nocache}
+    <div class="h1 mb-4">{if $block_title}{$block_title}{else}<a href="{$dir->getUrl()}" class="text-decoration-none text-dark">{$dir.name}</a>{/if}</div>
+    <div class="product-slider">
+        <div class="product-slider__container">
+            <div class="swiper-container swiper-products">
+                <div class="swiper-wrapper" >
+                    {foreach $products as $product}
+                        <div class="swiper-slide">
+                            {include file="%catalog%/one_product.tpl"}
+                        </div>
                     {/foreach}
-                </ul>
-                <div class="clearLeft"></div>
-                {if $paginator->total_pages > $paginator->page}
-                    <a data-pagination-options='{ "appendElement":".productList", "context":".pl{$_block_id}" }' data-href="{$router->getUrl('catalog-block-topproducts', ['_block_id' => $_block_id, 'page' => $paginator->page+1])}" class="onemoreEmpty ajaxPaginator">{t}посмотреть еще{/t}</a>
-                {/if}
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
         </div>
-</section>
+    </div>
 {else}
-    {include file="theme:default/block_stub.tpl"  class="blockTopProducts" do=[
+    <div class="h1 mb-4">{t}Товары{/t}</div>
+
+    {capture assign = "skeleton_html"}
+        <div class="item-card-container">
+            <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-md-3 row-cols-2 g-0">
+                <div>
+                    <img class="w-100" width="300" height="509" src="{$THEME_IMG}/skeleton/skeleton-card.svg" alt="">
+                </div>
+                <div>
+                    <img class="w-100" width="300" height="509" src="{$THEME_IMG}/skeleton/skeleton-card.svg" alt="">
+                </div>
+                <div class="d-md-block d-none">
+                    <img class="w-100" width="300" height="509" src="{$THEME_IMG}/skeleton/skeleton-card.svg" alt="">
+                </div>
+                <div class="d-xl-block d-none">
+                    <img class="w-100" width="300" height="509" src="{$THEME_IMG}/skeleton/skeleton-card.svg" alt="">
+                </div>
+                <div class="d-xxl-block d-none">
+                    <img class="w-100" width="300" height="509" src="{$THEME_IMG}/skeleton/skeleton-card.svg" alt="">
+                </div>
+            </div>
+        </div>
+    {/capture}
+
+    {include "%THEME%/helper/usertemplate/include/block_stub.tpl"
+    name = "{t}Товары{/t}"
+    skeleton_html = $skeleton_html
+    do = [
         [
-            'title' => t("Добавьте категорию с товарами"),
-            'href' => {adminUrl do=false mod_controller="catalog-ctrl"}
+            'title' => "{t}Добавить категорию с товарами{/t}",
+            'href' => "{adminUrl do=false mod_controller="catalog-ctrl"}"
         ],
         [
-            'title' => t("Настройте блок"),
+            'title' => "{t}Настроить блок{/t}",
             'href' => {$this_controller->getSettingUrl()},
             'class' => 'crud-add'
         ]

@@ -8,7 +8,7 @@
 namespace Article\Model\CommentType;
 
 /**
-* Тип комментария - коментарий к статье
+* Тип комментария - комментарий к статье
 */
 class Article extends \Comments\Model\Abstracttype
 {

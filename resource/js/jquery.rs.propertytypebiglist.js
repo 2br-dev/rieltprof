@@ -144,7 +144,7 @@
             let html = '<span class="property-type-big-list_selected-item" data-id="' + id + '"><label>';
             html += '<input type="hidden" name="prop[' + prop_id + '][value][]" class="property-type-big-list_selected-item-checkbox" data-id="' + id + '" ' + disabled + ' value="' + id + '" checked>';
             html += '<span >' + value + '</span>';
-            html += '<i class="property-type-big-list_selected-item-remove zmdi zmdi-close"></i>';
+            html += '<i class="property-type-big-list_selected-item-remove zmdi zmdi-close"><!----></i>';
             html += '</label></span>';
 
             $($this.options.selected, $this).append(html);

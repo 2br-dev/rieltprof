@@ -22,10 +22,10 @@ class Control extends \RS\Controller\Admin\Crud
     function helperIndex()
     {
         $helper = parent::helperIndex();
-        $helper['beforeTableContent'] = $this->view->fetch('site_limit.tpl');
+        $helper['beforeTableContent'] = $this->view->fetch('admin/site_limit.tpl');
         $helper['bottomToolbar']->removeItem('multiedit');
         $helper->setTopTitle(t('Сайты'));
-        $helper->setTopHelp($this->view->fetch('top_help.tpl'));
+        $helper->setTopHelp($this->view->fetch('admin/top_help.tpl'));
         
         $helper->setTable(new Table\Element([
             'Columns' => [

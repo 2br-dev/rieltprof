@@ -2,7 +2,7 @@
 /**
  * @package php-font-lib
  * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
+ * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
@@ -20,7 +20,7 @@ class Autoloader {
    * Register the autoloader
    */
   public static function register() {
-    spl_autoload_register([new self, 'autoload']);
+    spl_autoload_register(array(new self, 'autoload'));
   }
 
   /**

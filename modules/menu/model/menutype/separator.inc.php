@@ -48,6 +48,16 @@ class Separator extends AbstractType
     {
         return '';
     }
+
+    /**
+     * Возвраает класс иконки из коллекции zmdi
+     *
+     * @return string
+     */
+    public function getIconClass()
+    {
+        return 'zmdi-space-bar';
+    }
     
     /**
     * Возвращает маршрут, если пункт меню должен добавлять его, 

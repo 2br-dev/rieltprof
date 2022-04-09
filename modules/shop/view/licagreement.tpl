@@ -1,4 +1,7 @@
-<h2 data-dialog-options='{ "width":"800px" }'><span>{t}Условия предоставления услуг{/t}</span></h2>
-<article class="licenseAgreementViewport">
+{extends "%THEME%/helper/wrapper/dialog/standard.tpl"}
+
+{block "title"}{t}Условия предоставления услуг{/t}{/block}
+{block "class"}modal-xl{/block}
+{block "body"}
     {$shop_config.license_agreement}
-</article>
+{/block}

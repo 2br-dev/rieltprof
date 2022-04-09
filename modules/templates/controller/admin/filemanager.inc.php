@@ -83,7 +83,7 @@ class FileManager extends \RS\Controller\Admin\Front
         $this->view->assign('elements', $helper);
 
         $this->helper->viewAsAny();
-        $this->helper['form'] = $this->view->fetch('file_manager.tpl');
+        $this->helper['form'] = $this->view->fetch('admin/file_manager.tpl');
 
         return $this->result->setTemplate( $this->helper['template'] );
     }
@@ -138,7 +138,7 @@ class FileManager extends \RS\Controller\Admin\Front
             ->viewAsForm()
             ->setBottomToolbar(new Toolbar\Element( [
                 'Items' => [
-                    'save' => new ToolbarButton\SaveForm(),
+                    'save' => new ToolbarButton\SaveForm(null, null, null, true),
                     'cancel' => new ToolbarButton\Cancel($this->url->getSavedUrl($this->controller_name.'index')),
                 ]
             ]));

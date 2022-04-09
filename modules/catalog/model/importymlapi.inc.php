@@ -8,7 +8,10 @@
 namespace Catalog\Model;
 
 use Catalog\Model\Log\LogImportYml;
+use Catalog\Model\Orm\Offer;
 use Catalog\Model\Orm\Product;
+use Catalog\Model\Orm\Property\Link as PropertyLink;
+use Catalog\Model\Orm\Xstock;
 use Photo\Model\Orm\Image;
 use Photo\Model\PhotoApi;
 use RS\AccessControl\Rights;
@@ -19,7 +22,6 @@ use RS\Event\Manager as EventManager;
 use RS\Exception;
 use RS\File\Tools as FileTools;
 use RS\File\Uploader as FileUploader;
-use RS\Helper\Log as RSLog;
 use RS\Helper\Transliteration;
 use RS\Module\AbstractModel\BaseModel;
 use RS\Orm\Request as OrmRequest;
@@ -30,16 +32,13 @@ use RS\Site\Manager as SiteManager;
  */
 class ImportYmlApi extends BaseModel
 {
-    const LOG_FILE = '/logs/import_yml.log';
     const YML_ID_PREFIX = "yml_";
     const DELETE_LIMIT = 100;
-    const OFFER_ID = "offer_id";
     const VENDOR_CODE = "vendor_code";
 
     protected $site_id;
     protected $cost_id = 0;
     protected $old_cost_id = 0;
-    protected $yml_api;
     protected $timeout;
     protected $config;
     protected $allow_ext = ['yml', 'xml'];
@@ -169,7 +168,7 @@ class ImportYmlApi extends BaseModel
     /**
      * Устанавливает время работы одного шага импорта
      *
-     * @param integer $sec - количество секунд. Если 0 - то время шага не контроллируется
+     * @param integer $sec - количество секунд. Если 0 - то время шага не контролируется
      * @return void
      */
     public function setTimeout($sec)
@@ -197,7 +196,7 @@ class ImportYmlApi extends BaseModel
     }
 
     /**
-     * Сохраняет подготовленную информацию $value под ключем $key
+     * Сохраняет подготовленную информацию $value под ключом $key
      *
      * @param mixed $key
      * @param mixed $value
@@ -293,8 +292,8 @@ class ImportYmlApi extends BaseModel
                 $result += call_user_func($current_step_data['make_callback']);
             }
             return $result + [
-                'upload_images' => $step_data['upload_images'],
-                'step' => $step_data['step']
+                    'upload_images' => $step_data['upload_images'],
+                    'step' => $step_data['step']
                 ];
 
         } elseif ($result) {
@@ -388,7 +387,7 @@ class ImportYmlApi extends BaseModel
 
         if (in_array($this->config['catalog_element_action'], [CatalogConfig::ACTION_REMOVE, CatalogConfig::ACTION_DEACTIVATE, CatalogConfig::ACTION_CLEAR_STOCKS])) {
             $after_import_products_step = [
-                'method' => 'afterimportproducts',
+                'method' => 'afterImportProducts',
             ];
             switch ($this->config['catalog_element_action']) {
                 case CatalogConfig::ACTION_REMOVE:
@@ -409,7 +408,7 @@ class ImportYmlApi extends BaseModel
 
         if (in_array($this->config['catalog_section_action'], [CatalogConfig::ACTION_REMOVE, CatalogConfig::ACTION_DEACTIVATE])) {
             $after_import_dirs_step = [
-                'method' => 'afterimportdirs',
+                'method' => 'afterImportDirs',
             ];
             switch ($this->config['catalog_section_action']) {
                 case CatalogConfig::ACTION_REMOVE:
@@ -528,7 +527,7 @@ class ImportYmlApi extends BaseModel
             ->where(['site_id' => $this->site_id])
             ->where('xml_id LIKE \'' . self::YML_ID_PREFIX . '%\'')
             ->exec()->fetchSelected('xml_id', 'id');
-        //config с id родительвкой категории для импорта         
+        //config с id родительвкой категории для импорта
         $config = $this->config;
 
         $reader = $this->loadReader('category');
@@ -738,8 +737,6 @@ class ImportYmlApi extends BaseModel
         static $cacheid = [];
 
         if (!isset($cacheid[$xml_id])) {
-
-
             $res = OrmRequest::make()
                 ->select('id')
                 ->from(new Orm\Product)
@@ -830,7 +827,7 @@ class ImportYmlApi extends BaseModel
     {
         $list = [];
         $common_where = ['site_id' => $this->site_id];
-        //Загружаем категории        
+        //Загружаем категории
         $list['categories'] = OrmRequest::make()
             ->from(new Orm\Dir())
             ->where($common_where)
@@ -970,13 +967,39 @@ class ImportYmlApi extends BaseModel
     public function getProductIdentificationId($reader)
     {
         $offer_xml = new \SimpleXMLElement($reader->readOuterXml());
-        $field = self::YML_ID_PREFIX . strval($offer_xml->attributes()->id);
 
         if ($this->config['use_vendorcode'] == self::VENDOR_CODE) {
-            $field = (string)$offer_xml->vendorCode;
+            return (string)$offer_xml->vendorCode;
         }
 
-        return $field;
+        if ($this->config['yml_product_group_identifier'] == 'group_id') {
+            if (strval($offer_xml->attributes()->group_id)) {
+                $id = strval($offer_xml->attributes()->group_id);
+            } else {
+                $id = strval($offer_xml->attributes()->id);
+            }
+        } else {
+            if (preg_match_all('/\/([^?\/]+)/', (string)$offer_xml->url, $matches)) {
+                $id = end($matches[1]);
+            } else {
+                $id = strval($offer_xml->attributes()->id);
+            }
+        }
+
+        return self::YML_ID_PREFIX . $id;
+    }
+
+    /**
+     * Возвращает поле, по которому происходит идентификация продукта при импорте из YML
+     *
+     * @param \XMLReader $reader
+     * @return string
+     */
+    public function getOfferIdentificationId($reader)
+    {
+        $offer_xml = new \SimpleXMLElement($reader->readOuterXml());
+
+        return self::YML_ID_PREFIX . strval($offer_xml->attributes()->id);
     }
 
     /**
@@ -987,12 +1010,18 @@ class ImportYmlApi extends BaseModel
      */
     private function importProduct($reader)
     {
-        $offer_xml = new \SimpleXMLElement($reader->readOuterXml());
-        $product = new Orm\Product();
-        $product->setFlag(Product::FLAG_DONT_UPDATE_SEARCH_INDEX);
-        $product->setFlag(Product::FLAG_DONT_UPDATE_DIR_COUNTER);
+        $dont_update_fields = (array)ConfigLoader::byModule('catalog')->dont_update_fields;
 
-        $xml_id = $this->getProductIdentificationId($reader);
+        $offer_xml = new \SimpleXMLElement($reader->readOuterXml());
+
+        $product_xml_id = $this->getProductIdentificationId($reader);
+        $offer_xml_id = $this->getOfferIdentificationId($reader);
+
+        $offer = Offer::loadByWhere([
+            'site_id' => SiteManager::getSiteId(),
+            'xml_id' => $offer_xml_id,
+        ]);
+
         $title = '';
         if ((string)$offer_xml->name) {
             $title = (string)$offer_xml->name;
@@ -1000,45 +1029,12 @@ class ImportYmlApi extends BaseModel
             $title = (string)$offer_xml->model;
         }
         $original_title = $title;
-
         if ($this->config['use_htmlentity']) {
             $title = htmlspecialchars($title);
         }
 
-        $this->log->write(t('Импорт товара') . " $xml_id \"$title\"", LogImportYml::LEVEL_OBJECT);
+        $this->log->write(t('Импорт предложения') . " $offer_xml_id \"$title\"", LogImportYml::LEVEL_OBJECT);
 
-        $strr = ["\n", " "];
-        // Импортируем цены в таблицу product_x_cost
-        $excost_array = [];
-        if (isset($offer_xml->price)) {
-            if ($offer_xml->currencyId) {
-                $coc = $this->storage['list']['currencies'][str_replace($strr, "", (string)$offer_xml->currencyId)];
-            } else {
-                static $currencyCache;
-                if (empty($currencyCache)) {
-                    $curapi = new CurrencyApi();
-                    $DC = $curapi->getDefaultCurrency();
-                    $currencyCache = $DC->id;
-                    $coc = $currencyCache;       //cost_original_currency
-                } else {
-                    $coc = $currencyCache;
-                }
-            }
-
-            $price = $this->config['increase_cost'] ? (string)$offer_xml->price * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->price;
-            $excost_array[$this->getCostId()] = [
-                'cost_original_val' => CostApi::roundCost($price),
-                'cost_original_currency' => $coc
-            ];
-            if ($offer_xml->oldprice && $this->getOldCostId()) {
-                $old_price = $this->config['increase_cost'] ? (string)$offer_xml->oldprice * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->oldprice;
-                $excost_array[$this->getOldCostId()] = [
-                    'cost_original_val' => CostApi::roundCost($old_price),
-                    'cost_original_currency' => $coc
-                ];
-            }
-            $product['excost'] = $excost_array;
-        }
 
         $dir_xml_id = self::YML_ID_PREFIX . (int)$offer_xml->categoryId;
 
@@ -1056,6 +1052,13 @@ class ImportYmlApi extends BaseModel
         } else {
             $dir_id = $this->config['yuml_import_setting'];
         }
+
+
+        $brand_id = null;
+        //количество остатков
+        $x_count = (float)($offer_xml->count ? : $offer_xml->quantity ?: null);
+        //склад по умолчанию
+        $current_warehouse_id = WareHouseApi::getDefaultWareHouse()->id;
         //Добавление бренда
         if ((string)$offer_xml->vendor) {
             //Создается бренд, если его не существует
@@ -1069,38 +1072,229 @@ class ImportYmlApi extends BaseModel
 
                 $this->storage['list']['brands'][$vendor_title] = $vendor['id'];
             }
-            $product['brand_id'] = $this->storage['list']['brands'][$vendor_title];
-
+            $brand_id = $this->storage['list']['brands'][$vendor_title];
         }
 
-        $product['xml_id'] = $xml_id;
+        if (isset($x_count)) {
+            $offer['stock_num'] = [
+                $current_warehouse_id => $x_count
+            ];
+        }
 
-        //запоминание публичности
-        $product['public'] = (string)$offer_xml->attributes()->available == 'false' ? 0 : 1;
-        if($this->config->save_product_public) {
-            $product_new = Product::loadByWhere(['xml_id' => $xml_id, 'site_id' => $this->site_id]);
-            if($product_new['id']){
-                $product['public'] = $product_new->public;
+        if ($offer['id']) {
+            $product = new Product($offer['product_id']);
+            $main_offer_id = $product->getMainOffer()['id'];
+
+            if ($offer['id'] == $main_offer_id) {
+                $strr = ["\n", " "];
+                // Импортируем цены в таблицу product_x_cost
+                $excost_array = [];
+                if (isset($offer_xml->price)) {
+                    if ($offer_xml->currencyId) {
+                        $coc = $this->storage['list']['currencies'][str_replace($strr, "", (string)$offer_xml->currencyId)];
+                    } else {
+                        static $currencyCache;
+                        if (empty($currencyCache)) {
+                            $curapi = new CurrencyApi();
+                            $DC = $curapi->getDefaultCurrency();
+                            $currencyCache = $DC->id;
+                            $coc = $currencyCache;       //cost_original_currency
+                        } else {
+                            $coc = $currencyCache;
+                        }
+                    }
+
+                    $price = $this->config['increase_cost'] ? (string)$offer_xml->price * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->price;
+                    $excost_array[$this->getCostId()] = [
+                        'cost_original_val' => CostApi::roundCost($price),
+                        'cost_original_currency' => $coc
+                    ];
+                    if ($offer_xml->oldprice && $this->getOldCostId()) {
+                        $old_price = $this->config['increase_cost'] ? (string)$offer_xml->oldprice * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->oldprice;
+                        $excost_array[$this->getOldCostId()] = [
+                            'cost_original_val' => CostApi::roundCost($old_price),
+                            'cost_original_currency' => $coc
+                        ];
+                    }
+                    $product['excost'] = $excost_array;
+                }
+
+                if ($brand_id) {
+                    $product['brand_id'] = $brand_id;
+                }
+            } else {
+                if (isset($offer_xml->price)) {
+                    $price = $this->config['increase_cost'] ? (string)$offer_xml->price * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->price;
+                    $pricedata_arr = [
+                        'price' => [
+                            CostApi::getDefaultCostId() => [
+                                'znak' => '=',
+                                'original_value' => CostApi::roundCost($price),
+                            ],
+                        ],
+                    ];
+                    if ($offer_xml->oldprice && $this->getOldCostId()) {
+                        $old_price = $this->config['increase_cost'] ? (string)$offer_xml->oldprice * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->oldprice;
+                        $pricedata_arr['price'][$this->getOldCostId()] = [
+                            'znak' => '=',
+                            'original_value' => CostApi::roundCost($old_price),
+                        ];
+                    }
+                    $offer['pricedata_arr'] = $pricedata_arr;
+                }
+
+                $offer->update();
+            }
+        } else {
+            $product = Product::loadByWhere([
+                'site_id' => SiteManager::getSiteId(),
+                'xml_id' => $product_xml_id,
+            ]);
+
+            if ($product['id']) {
+                $offer['title'] = $title;
+                $offer['xml_id'] = $offer_xml_id;
+                $offer['product_id'] = $product['id'];
+                $offer['barcode'] = !$this->config['use_htmlentity'] ? (string)$offer_xml->vendorCode : htmlspecialchars((string)$offer_xml->vendorCode);
+                $offer['site_id'] = $this->site_id;
+                $offer['processed'] = 1;
+
+                if (isset($offer_xml->price)) {
+                    $price = $this->config['increase_cost'] ? (string)$offer_xml->price * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->price;
+                    $pricedata_arr = [
+                        'price' => [
+                            CostApi::getDefaultCostId() => [
+                                'znak' => '=',
+                                'original_value' => CostApi::roundCost($price),
+                            ],
+                        ],
+                    ];
+                    if ($offer_xml->oldprice && $this->getOldCostId()) {
+                        $old_price = $this->config['increase_cost'] ? (string)$offer_xml->oldprice * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->oldprice;
+                        $pricedata_arr['price'][$this->getOldCostId()] = [
+                            'znak' => '=',
+                            'original_value' => CostApi::roundCost($old_price),
+                        ];
+                    }
+                    $offer['pricedata_arr'] = $pricedata_arr;
+                }
+
+                if (isset($offer_xml->param)) {
+                    $offer_properties = (array)$this->config['yml_offer_properties'];
+                    $offer_properties_titles = [];
+                    if ($offer_properties) {
+                        $offer_properties_titles = (new OrmRequest())
+                            ->from(Orm\Property\Item::_getTable())
+                            ->whereIn('id', $offer_properties)
+                            ->exec()->fetchSelected(null, 'title');
+                    }
+                    $propsdata_arr = [];
+                    foreach ($offer_xml->param as $param) {
+                        if (in_array((string)$param->attributes()->name, $offer_properties_titles)) {
+                            $propsdata_arr[(string)$param->attributes()->name] = (string)$param;
+                        }
+                    }
+                    $offer['propsdata_arr'] = $propsdata_arr;
+                }
+
+                $max_sortn = (new OrmRequest())
+                    ->select('max(sortn)')
+                    ->from(Offer::_getTable())
+                    ->where([
+                        'product_id' => $offer['product_id'],
+                    ])
+                    ->exec()->getOneField('max(sortn)');
+                $offer['sortn'] = ++$max_sortn;
+
+                $offer->insert();
+            } else {
+                $product['xml_id'] = $product_xml_id;
+//                $product['public'] = (string)$offer_xml->attributes()->available == 'false' ? 0 : 1;
+
+                $strr = ["\n", " "];
+                // Импортируем цены в таблицу product_x_cost
+                $excost_array = [];
+                if (isset($offer_xml->price)) {
+                    if ($offer_xml->currencyId) {
+                        $coc = $this->storage['list']['currencies'][str_replace($strr, "", (string)$offer_xml->currencyId)];
+                    } else {
+                        static $currencyCache;
+                        if (empty($currencyCache)) {
+                            $curapi = new CurrencyApi();
+                            $DC = $curapi->getDefaultCurrency();
+                            $currencyCache = $DC->id;
+                            $coc = $currencyCache;       //cost_original_currency
+                        } else {
+                            $coc = $currencyCache;
+                        }
+                    }
+
+                    $price = $this->config['increase_cost'] ? (string)$offer_xml->price * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->price;
+                    $excost_array[$this->getCostId()] = [
+                        'cost_original_val' => CostApi::roundCost($price),
+                        'cost_original_currency' => $coc
+                    ];
+                    if ($offer_xml->oldprice && $this->getOldCostId()) {
+                        $old_price = $this->config['increase_cost'] ? (string)$offer_xml->oldprice * (1 + ($this->config['increase_cost'] / 100)) : (string)$offer_xml->oldprice;
+                        $excost_array[$this->getOldCostId()] = [
+                            'cost_original_val' => CostApi::roundCost($old_price),
+                            'cost_original_currency' => $coc
+                        ];
+                    }
+                    $product['excost'] = $excost_array;
+                }
+
+
+                if ($brand_id) {
+                    $product['brand_id'] = $brand_id;
+                }
+
+                $offer['title'] = $title;
+                $offer['xml_id'] = $offer_xml_id;
+
+                if (isset($offer_xml->param)) {
+                    $offer_properties = (array)$this->config['yml_offer_properties'];
+                    $offer_properties_titles = [];
+                    if ($offer_properties) {
+                        $offer_properties_titles = (new OrmRequest())
+                            ->from(Orm\Property\Item::_getTable())
+                            ->whereIn('id', $offer_properties)
+                            ->exec()->fetchSelected(null, 'title');
+                    }
+                    $propsdata_arr = [];
+                    foreach ($offer_xml->param as $param) {
+                        if (in_array((string)$param->attributes()->name, $offer_properties_titles)) {
+                            $propsdata_arr[(string)$param->attributes()->name] = (string)$param;
+                        }
+                    }
+                    $offer['propsdata_arr'] = $propsdata_arr;
+                }
+
+                $product['offers'] = [
+                    'main_offer' => $offer,
+                ];
             }
         }
 
-        $product['title'] = $title;
-        $product['description'] = !$this->config['use_htmlentity'] ? (string)$offer_xml->description : htmlspecialchars((string)$offer_xml->description);
+        if (!$product['id'] || !in_array('title', $dont_update_fields)) {
+            $product['title'] = $title;
+        }
+        if (!$product['id'] || !in_array('description', $dont_update_fields)) {
+            $product['description'] = !$this->config['use_htmlentity'] ? (string)$offer_xml->description : htmlspecialchars((string)$offer_xml->description);
+        }
+        if (!$product['id'] || !in_array('barcode', $dont_update_fields)) {
+            $product['barcode'] = !$this->config['use_htmlentity'] ? (string)$offer_xml->vendorCode : htmlspecialchars((string)$offer_xml->vendorCode);
+        }
+
         //Запоминание категорий
-        $product['xdir'] = [$dir_id];
-        $product['maindir'] = (int)$dir_id;
-        if($this->config->save_product_dir)
-        {
-            $product_new = Product::loadByWhere(['xml_id' => $xml_id, 'site_id' => $this->site_id]);
-            if($product_new['id']){
-                $product['xdir'] = $product_new->xdir;
-                $product['maindir'] = $product_new->maindir;
-            }
+        if (!$this->config->save_product_dir || !$product['maindir']) {
+            $product['xdir'] = [$dir_id];
+            $product['maindir'] = (int)$dir_id;
         }
-        $product['barcode'] = !$this->config['use_htmlentity'] ? (string)$offer_xml->vendorCode : htmlspecialchars((string)$offer_xml->vendorCode);
+
         $product['site_id'] = $this->site_id;
         $product['processed'] = 1;
-        $uniq_postfix = hexdec(substr(md5($xml_id), 0, 4));
+        $uniq_postfix = hexdec(substr(md5($product_xml_id), 0, 4));
         $product['alias'] = Transliteration::str2url($original_title, true, 140) . "-" . $uniq_postfix;
 
         EventManager::fire('importyml.product.after', [
@@ -1109,9 +1303,15 @@ class ImportYmlApi extends BaseModel
             'api' => $this,
         ]);
 
-        $on_duplicate_update_fields = ['xml_id', 'title', 'description', 'public', 'maindir', 'barcode', 'processed', 'brand_id'];
-        $on_duplicate_update_fields = array_diff($on_duplicate_update_fields, (array)$this->config->dont_update_fields);
-        $product->insert(false, $on_duplicate_update_fields, ['site_id', 'xml_id']);
+        $product->setFlag(Product::FLAG_DONT_UPDATE_SEARCH_INDEX);
+        $product->setFlag(Product::FLAG_DONT_UPDATE_DIR_COUNTER);
+        if ($product['id']) {
+            $product->update();
+        } else {
+            $product['public'] = 1;
+            $product->insert();
+        }
+
         $this->updateProductParams($offer_xml, $product['id']);
 
         return $product;
@@ -1126,16 +1326,25 @@ class ImportYmlApi extends BaseModel
      */
     private function updateProductParams(\SimpleXMLElement $offer_xml, $product_id)
     {
+        $offer_properties = (array)$this->config['yml_offer_properties'];
+
         //Удаляем свойства продукта
-        OrmRequest::make()
+        $q = OrmRequest::make()
             ->delete()
             ->from(new Orm\Property\Link)
             ->where([
                 'site_id' => $this->site_id,
                 'product_id' => $product_id,
             ])
-            ->where('xml_id LIKE \'' . self::YML_ID_PREFIX . '%\'')
-            ->exec();
+            ->where('xml_id LIKE \'' . self::YML_ID_PREFIX . '%\'');
+
+        if ($offer_properties) {
+            $q->whereIn('prop_id', $offer_properties, 'and', true);
+        }
+
+        $q->exec();
+
+        $product_offer_properties = [];
 
         foreach ($offer_xml->param as $param) {
             $xml_id = $this->genXmlId((string)$param->attributes()->name);
@@ -1144,12 +1353,23 @@ class ImportYmlApi extends BaseModel
                 'site_id' => SiteManager::getSiteId()])
             ) {
                 if ($checkproperty->type == 'list') {
-                    if ($itemvalue = Orm\Property\ItemValue::loadByWhere([
+                    $itemvalue = Orm\Property\ItemValue::loadByWhere([
                         'prop_id' => $checkproperty->id,
                         'site_id' => $this->site_id,
-                        'value' => (string)$param[0]])
-                    ) {
-                        $this->newPLink($checkproperty['id'], 'val_list_id', $itemvalue['id'], $product_id, $this->genXmlId($xml_id . (string)$param[0]));
+                        'value' => (string)$param[0]
+                    ]);
+
+                    if ($itemvalue['id']) {
+                        $prop_link = PropertyLink::loadByWhere([
+                            'prop_id' => $checkproperty['id'],
+                            'product_id' => $product_id,
+                            'val_list_id' => $itemvalue['id'],
+                            'xml_id' => $this->genXmlId($xml_id . (string)$param[0]),
+                        ]);
+
+                        if (!$prop_link['xml_id']) {
+                            $this->newPLink($checkproperty['id'], 'val_list_id', $itemvalue['id'], $product_id, $this->genXmlId($xml_id . (string)$param[0]));
+                        }
                     } else {
                         $itemvalue = new Orm\Property\ItemValue();
                         $itemvalue['prop_id'] = $checkproperty->id;
@@ -1166,6 +1386,14 @@ class ImportYmlApi extends BaseModel
                 $product_property = $this->newPItem('string', (string)$param->attributes()->name, $xml_id);
                 $this->newPLink($product_property['id'], 'val_str', (string)$param[0], $product_id, $this->genXmlId($xml_id . (string)$param[0]));
             }
+
+            if (isset($checkproperty)) {
+                if (in_array($checkproperty['id'], $offer_properties)) {
+                    $product_offer_properties[$checkproperty['id']] = $checkproperty['title'];
+                }
+            } elseif (in_array($checkproperty['id'], $offer_properties)) {
+                $product_offer_properties[$product_property['id']] = $product_property['title'];
+            }
         }
         //Сохраняются свойства из тегов не в property
         foreach ($offer_xml as $node) {
@@ -1179,6 +1407,29 @@ class ImportYmlApi extends BaseModel
             }
             $product_property = $this->newPItem('string', $node_name, $xml_id);
             $this->newPLink($product_property['id'], 'val_str', $node_val, $product_id, $this->genXmlId($xml_id . $node_val));
+
+            if (in_array($product_property['id'], $offer_properties)) {
+                $product_offer_properties[$product_property['id']] = $product_property['title'];
+            }
+        }
+
+        if ($product_offer_properties && $this->config['yml_import_multioffers']) {
+            $product = new Product($product_id);
+            $multioffers = [
+                'use' => 1,
+            ];
+            foreach ($product_offer_properties as $property_id => $property_name) {
+                $multioffers['levels'][] = [
+                    'title' => $property_name,
+                    'prop' => $property_id,
+                ];
+            }
+            $product['multioffers'] = $multioffers;
+//var_dump($product->isModified('multioffers'));
+            $product->setFlag(Product::FLAG_DONT_UPDATE_SEARCH_INDEX);
+            $product->setFlag(Product::FLAG_DONT_UPDATE_DIR_COUNTER);
+            $product->setFlag(Product::FLAG_DONT_RESET_IMPORT_HASH);
+            $product->update();
         }
     }
 
@@ -1224,29 +1475,6 @@ class ImportYmlApi extends BaseModel
         return $product_property_link;
     }
 
-
-    /**
-     * Возвращает список полей товара, обновление которых можно отключить из настроек модуля
-     *
-     * @param bool $exclude_exceptions - Исключая поля, указанные как "не обновлять" в настройках модуля
-     * @return string[]
-     */
-    public static function getUpdatableProductFields($exclude_exceptions = false)
-    {
-        $fields = [];
-        $fields['title'] = t('Наименование');
-        $fields['barcode'] = t('Артикул');
-        $fields['description'] = t('Описание');
-        $fields['maindir'] = t('Связь с категорией');
-
-        if ($exclude_exceptions) {
-            $dont_update_fields = (array)ConfigLoader::byModule('catalog')->dont_update_fields;
-            return array_diff_key($fields, array_flip($dont_update_fields));
-        }
-
-        return $fields;
-    }
-
     /**
      * Генерирует xml_id
      *
@@ -1282,6 +1510,7 @@ class ImportYmlApi extends BaseModel
 
     /**
      * Возвращает массив со статистическими данными об импорте
+     *
      * @return array
      */
     public function getStatistic()
@@ -1289,6 +1518,11 @@ class ImportYmlApi extends BaseModel
         return $this->storage['statistic'];
     }
 
+    /**
+     * Возвращает массив, в котором в ключе находится внешний xml_id товара, а в значении id товара в ReadyScript
+     *
+     * @return array
+     */
     public function getXmlIds()
     {
         $this->xmlIds = OrmRequest::make()
@@ -1298,7 +1532,12 @@ class ImportYmlApi extends BaseModel
             ])->exec()->fetchSelected('xml_id', 'id');
     }
 
-    public function afterimportproducts()
+    /**
+     * Выполняет дествия с товарами, которых не было в YML файле в зависимости от настроек
+     *
+     * @return bool
+     */
+    public function afterImportProducts()
     {
         $config = $this->config;
 
@@ -1398,7 +1637,12 @@ class ImportYmlApi extends BaseModel
         return true;
     }
 
-    public function afterimportdirs()
+    /**
+     * Выполняет дествия с категориями, которых не было в YML файле в зависимости от настроек
+     *
+     * @return bool
+     */
+    public function afterImportDirs()
     {
         $config = $this->config;
         switch ($config['catalog_section_action']) {

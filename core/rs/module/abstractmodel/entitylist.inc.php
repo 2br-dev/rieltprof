@@ -14,6 +14,7 @@ use RS\Db\Adapter as DbAdapter;
 use RS\Db\Exception as DbException;
 use RS\Orm\AbstractObject;
 use RS\Orm\Exception as OrmException;
+use RS\Orm\Request;
 
 /**
  * Класс модели. Содержит стандартное API для работы с плоским (не древовидным) списком.
@@ -661,27 +662,30 @@ class EntityList extends BaseModel
      * Возвращает элемент по id или псевдониму
      *
      * @param mixed $id - id элемента или псевдоним (псевдоним имеет больший приоритет)
+     * @param Request $request - произвольный объект для запроса
      * @return AbstractObject|false
      */
-    function getById($id)
+    function getById($id, $request = null)
     {
-        $q = $this->getCleanQueryObject();
+        if (!$request) {
+            $request = $this->getCleanQueryObject();
+        }
 
-        $q->openWGroup();
+        $request->openWGroup();
 
         if (!$this->alias_field || is_numeric($id)) {
             //Для оптимизации работы с БД исключаем поиск по ID строковых значений.
             //Считаем, что строковые значения хранятся только в alias поле
-            $q->where("`$this->id_field` = '#alias_or_id'", ['alias_or_id' => $id]);
+            $request->where("`$this->id_field` = '#alias_or_id'", ['alias_or_id' => $id]);
         }
 
         if ($this->alias_field) {
-            $q->where("`{$this->alias_field}` = '#alias_or_id'", ['alias_or_id' => $id], 'OR')
+            $request->where("`{$this->alias_field}` = '#alias_or_id'", ['alias_or_id' => $id], 'OR')
                 ->orderby("{$this->alias_field} = '#alias_or_id' desc", ['alias_or_id' => $id]);
         }
-        $q->closeWGroup();
+        $request->closeWGroup();
 
-        return $q->object($this->obj);
+        return $request->object($this->obj);
     }
 
     /**
@@ -841,7 +845,7 @@ class EntityList extends BaseModel
     }
 
     /**
-     * Аналог getSelectList, только для статичского вызова
+     * Аналог getSelectList, только для статического вызова
      *
      * @param array $first - значения, которые нужно добавить в начало списка
      * @return array

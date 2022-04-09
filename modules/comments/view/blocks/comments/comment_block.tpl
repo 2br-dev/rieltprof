@@ -1,72 +1,56 @@
-{addjs file="{$mod_js}comments.js" basepath="root"}
-<section class="comments">
-    <div class="head">
-        <span class="text">{t}Отзывы{/t}({$total})</span>
-    </div>
-    <div class="writeComment{if !empty($error)} on{/if}">
-    <a name="comments"></a>
-        {if $mod_config.need_authorize == 'Y' && !$is_auth}
-        <span class="needAuth">{t}Чтобы оставить отзыв необходимо авторизоваться{/t}</span>
-        {else}
-        <a class="title rs-parent-switcher">{t}написать отзыв{/t}</a>
-        <form method="POST">
-            {$this_controller->myBlockIdInput()}
-            <i class="corner"></i>
-            <ul class="adaptForm">
-                {if !empty($error)}
-                    <li class="error">
-                        {foreach from=$error item=one}
-                        <p>{$one}</p>
-                        {/foreach}
-                    </li>
-                {/if}
-                {if $already_write}<li>{t}Разрешен один отзыв на товар, предыдущий отзыв будет заменен{/t}</li>{/if}
-                <li>
+{addjs file="core6/rsplugins/ajaxpaginator.js" basepath="common"}
+{addjs file="%comments%/rscomponent/comments.js"}
 
-                    <div class="name">
-                        <div class="caption">{t}Имя{/t}</div>
-                        <div class="field"><input type="text" name="user_name" value="{$comment.user_name}"></div>
-                    </div>
-                    <div class="ball">
-                        <div class="rate">
-                            <input class="inp_rate" type="hidden" name="rate" value="{$comment.rate}">
-                            <div class="stars">
-                                <i></i>
-                                <i></i>
-                                <i></i>
-                                <i></i>
-                                <i></i>
-                            </div>
-                            <div class="descr">{$comment->getRateText()}</div>
+{$users_config = ConfigLoader::byModule('users')}
+<div class="col-md-5 order-md-last">
+    <div class="product-rating">
+        <div class="fw-bold text-gray mb-3">{verb item=$total values="{t}оценка,оценки,оценок{/t}"}</div>
+        <div class="mb-4 d-flex align-items-center">
+            <div class=" col-6">
+                {$matrix = $comment_type->getMarkMatrix()}
+                {foreach $matrix as $rate => $count}
+                    <div class="d-flex align-items-center">
+                        <div class="product-rating__stars">
+                            <div class="product-rating__stars-act product-rating__stars_{$rate}"></div>
                         </div>
-                        <div class="caption">{t}Ваша оценка{/t}</div>
-                    </div> 
-                </li>
-                <li>
-                    <div class="text">
-                        <div class="caption">{t}Отзыв{/t}</div>
-                        <div class="field"><textarea name="message" rows="5">{$comment.message}</textarea></div>
+                        <div class="fs-5 ms-2">{$count}</div>
                     </div>
-                </li>
-                {if !$is_auth}
-                    <li class="caption">
-                        {$comment->__captcha->getTypeObject()->getFieldTitle()}
-                        {$comment->getPropertyView('captcha')}
-                    </li>
-                {/if}
-                <li>
-                    <div class="submit">
-                        <input type="submit" value="{t}Отправить{/t}">
-                    </div>
-                </li>
-            </ul>
-        </form>
+                {/foreach}
+            </div>
+            <div class="text-center col-6">
+                <div class="product-rating__score">
+                    {if $comment_type->getTypeId() == '\Catalog\Model\CommentType\Product'}
+                        {$product = $comment_type->getLinkedObject()}
+                        {$product->getRatingBall()}
+                    {else}
+                        {$comment_type->getRatingBall()}
+                    {/if}
+                </div>
+                <div class="text-gray mt-2">{t}Рейтинг{/t}</div>
+            </div>
+        </div>
+        <div>
+            {if $mod_config.need_authorize == 'Y' && $current_user.id <= 0}
+                <a data-href="{$users_config->getAuthorizationUrl(['referer' => $referer])}" class="btn btn-primary w-100 rs-in-dialog">{t}Авторизуйтесь,<br><small>чтобы оставить отзыв</small>{/t}</a>
+            {else}
+                <a data-href="{$router->getUrl('comments-block-comments', ['_block_id' => $_block_id, 'aid' => $aid, 'cmdo' => 'commentFormDialog'])}" class="btn btn-primary w-100 rs-in-dialog">{t}Оставить отзыв{/t}</a>
+            {/if}
+        </div>
+    </div>
+</div>
+
+{if $total}
+    <div class="col-md-7">
+        <div class="rs-comment-list">
+            {$list_html}
+        </div>
+
+        {if $paginator->total_pages > $paginator->page}
+            <div class="mt-5">
+                <a data-pagination-options='{ "appendElement":".rs-comment-list" }'
+                   data-url="{$router->getUrl('comments-block-comments', ['_block_id' => $_block_id, 'cp' => $paginator->page+1, 'aid' => $aid])}"
+                   class="btn btn-outline-primary col-12 rs-ajax-paginator">{t}еще комментарии...{/t}</a>
+            </div>
         {/if}
     </div>
-    <ul class="commentList">
-        {$list_html}
-    </ul>  
-    {if $paginator->total_pages > $paginator->page}
-        <a data-pagination-options='{ "appendElement":".commentList" }' data-href="{$router->getUrl('comments-block-comments', ['_block_id' => $_block_id, 'cp' => $paginator->page+1, 'aid' => $aid])}" class="onemoreEmpty ajaxPaginator">{t}еще комментарии{/t}</a>
-    {/if}
-</section>
+{/if}

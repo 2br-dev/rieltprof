@@ -1,8 +1,8 @@
-{$shop_config = ConfigLoader::byModule('shop')}
+{extends "%THEME%/helper/wrapper/dialog/standard.tpl"}
 
-<div class="returnRulesWrapper dialogPadding">
-    <h1>{t}Правила возврата товаров{/t}</h1>
-    <article>
-        {$shop_config.return_rules}
-    </article>
-</div>
+{block "class"}modal-xl{/block}
+{block "title"}{t}Правила возврата товаров{/t}{/block}
+{block "body"}
+    {$shop_config = ConfigLoader::byModule('shop')}
+    {$shop_config.return_rules}
+{/block}

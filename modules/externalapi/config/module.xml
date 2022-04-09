@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Внешнее API</name>
         <description multilanguage="true">Позволяет взаимодействовать с сайтом извне по API</description>
-        <version>3.0.31</version>
+        <version>6.0.4</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         <enable_api_help>0</enable_api_help>

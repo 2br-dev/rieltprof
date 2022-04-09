@@ -13,9 +13,13 @@ use Catalog\Model\BrandApi;
 use Catalog\Model\CostApi;
 use Catalog\Model\DirApi;
 use Catalog\Model\Filter\PropertyFilter;
+use Catalog\Model\Filter\BarcodeFilter;
 use Catalog\Model\Inventory\InventoryTools;
+use Catalog\Model\OfferApi;
 use Catalog\Model\Orm\Dir;
 use Catalog\Model\Orm\Inventory;
+use Catalog\Model\Orm\Offer;
+use Catalog\Model\Orm\Product;
 use Catalog\Model\Orm\Property\ItemValue as PropertyItemValue;
 use Catalog\Model\PropertyApi;
 use Catalog\Model\SeoReplace;
@@ -48,6 +52,7 @@ class Ctrl extends Crud
     public $brandapi;
     /** @var \Catalog\Model\Api $api */
     public $api;
+    public $offer_api;
     public $showchilds;
     public $me_form_tpl;
     public $me_form_tpl_dir = 'me_form_dir.tpl';
@@ -55,6 +60,7 @@ class Ctrl extends Crud
     public function __construct()
     {
         parent::__construct(new ProductApi());
+        $this->offer_api = new OfferApi();
         $this->setTreeApi(new Dirapi(), t('категорию'));
     }
 
@@ -73,6 +79,7 @@ class Ctrl extends Crud
             }
         }
         $this->getHelper()->setTopHelp($this->view->fetch('help/ctrl_index.tpl'));
+        $this->app->addJs('%catalog%/admin/catalogcontrol.js');
 
         return parent::actionIndex();
     }
@@ -129,6 +136,10 @@ class Ctrl extends Crud
         ];
         $columns = [
             new TableType\Checkbox('id', ['showSelectAll' => true]),
+            new TableType\Usertpl('id', '', '%catalog%/form/product/table_field_offers_toggle.tpl', [
+                'customizable' => false,
+                'stayBefore' => true,
+            ]),
             new TableType\Text('title', t('Название'), [
                 'LinkAttr' => [
                     'class' => 'crud-edit'
@@ -169,7 +180,7 @@ class Ctrl extends Crud
                 'title' => t('показать товар на сайте'),
                 'attr' => [
                     'target' => '_blank',
-                    '@href' => $this->router->getUrlPattern('catalog-front-product', [':id' => '@_alias'], false),
+                    '@href' => $this->router->getUrlPattern('catalog-front-product', [':id' => '@_alias']),
                 ]
             ],
             [
@@ -203,7 +214,10 @@ class Ctrl extends Crud
                         new TableType\Action\DropDown($config['inventory_control_enable'] ? array_merge($product_actions, $inventory_product_actions) : $product_actions)],
                         ['SettingsUrl' => $this->router->getAdminUrl('tableOptions')]
                     ),
-                ])
+                ]),
+            'TableAttr' => [
+                'data-forbid-multiedit-alert' => t('Массовое редактирование доступно только для товаров, и недоступно для комплектаций.'),
+            ],
         ]));
 
         //Добавляем условия для выборки цен, если колонки отображаются
@@ -232,7 +246,7 @@ class Ctrl extends Crud
                     new Filter\Line(['Items' => [
                         new Filter\Type\Text('id', '№'),
                         new Filter\Type\Text('title', t('Название'), ['SearchType' => '%like%']),
-                        new Filter\Type\Text('barcode', t('Артикул'), ['SearchType' => '%like%']),
+                        new BarcodeFilter('barcode', t('Артикул'), ['SearchType' => '%like%']),
                         new Filter\Type\Text('num', t('Общий остаток'), ['Attr' => ['class' => 'w60'], 'showType' => true]),
                         new Filter\Type\Select('public', t('Публичный'), ['' => t('Неважно'), '1' => t('Да'), '0' => t('Нет')])
                     ]
@@ -468,6 +482,7 @@ class Ctrl extends Crud
         $helper->setBottomToolbar(new Toolbar\Element([
             'Items' => $config['inventory_control_enable'] ? array_merge($bottom_toolbar_items, $add_to_document) : $bottom_toolbar_items,
         ]));
+
         return $helper;
     }
 
@@ -499,7 +514,7 @@ class Ctrl extends Crud
             ],
             'sortable' => true,
             'sortUrl' => $this->router->getAdminUrl('treeMove'),
-            'mainColumn' => new TableType\Usertpl('name', t('Название'), '%catalog%/tree_item_cell.tpl', [
+            'mainColumn' => new TableType\Usertpl('name', t('Название'), '%catalog%/admin/tree_item_cell.tpl', [
                 'linkAttr' => ['class' => 'call-update'],
                 'href' => $this->router->getAdminPattern(false, [':dir' => '@id', 'c' => $this->url->get('c', TYPE_ARRAY)])
             ]),
@@ -660,7 +675,7 @@ class Ctrl extends Crud
             'count_pages' => $count_pages,
             'disabled' => $disabled,
         ]);
-        $html = $view->fetch('%catalog%/property_val_big_list_items.tpl');
+        $html = $view->fetch('%catalog%/form/product/property_val_big_list_items.tpl');
 
         return $this->result->setSuccess(true)->addSection('html', $html);
     }
@@ -675,14 +690,42 @@ class Ctrl extends Crud
         $ids = $this->modifySelectAll($this->url->request('chk', TYPE_ARRAY, [], false));
         $dir = $this->url->request('dir', TYPE_INTEGER, 0);
 
-        $success = $this->api->multiDelete($ids, $dir);
+        $success = $this->deleteCheckedOffers($ids);
+        if (!$success) {
+            foreach ($this->offer_api->getErrors() as $error) {
+                $this->result->addEMessage($error);
+            }
+        }
 
+        $success = $this->api->multiDelete($ids, $dir);
         if (!$success) {
             foreach ($this->api->getErrors() as $error) {
                 $this->result->addEMessage($error);
             }
         }
+
         return $this->result->setSuccess($success)->getOutput();
+    }
+
+    /**
+     * Удаление комплектаций по параметру chk
+     * Возвращает успешность удаления
+     *
+     * @param string[] $ids
+     * @return bool
+     */
+    protected function deleteCheckedOffers($ids)
+    {
+        $offer_ids = [];
+        foreach ($ids as $id) {
+            if (strpos($id, 'offer_') !== false) {
+                $offer_ids[] = substr($id, 6);
+            }
+        }
+        if ($offer_ids) {
+            return $this->offer_api->multiDelete($offer_ids);
+        }
+        return true;
     }
 
     /**
@@ -693,7 +736,7 @@ class Ctrl extends Crud
         $propapi = new Propertyapi();
         $list = $propapi->getList();
         $this->view->assign('list', $list);
-        return $this->view->fetch('property_full_list.tpl');
+        return $this->view->fetch('form/product/property_full_list.tpl');
     }
 
     /**
@@ -996,10 +1039,9 @@ class Ctrl extends Crud
 
     /**
      * Ищет товар/комплектацию по штрихкоду
-     * Передаёт id товара, если нйден товар
+     * Передаёт id товара, если найден товар
      * Передаёт id товара, порядковый номер и id комплектации, если найдена комплектация
      * @return \RS\Controller\Result\Standard
-     * @throws \RS\Orm\Exception
      * @throws \RS\Exception
      */
     function actionGetProductBySku()
@@ -1018,5 +1060,69 @@ class Ctrl extends Crud
             }
         } // Если пустой запрос, то ничего не делаем
         return $this->result;
+    }
+
+    public function actionGetOffersTableData()
+    {
+        $product_id = $this->url->request('product_id', TYPE_INTEGER);
+        $product = new Product($product_id);
+        $product->fillOffers();
+        $offers = $product->getOffers();
+        $helper = $this->helperTableOptions();
+        $columns = $helper['tableOptionControl']->getTable()->getCustomizableColumns();
+
+        $data = [];
+        foreach ($offers as $offer) {
+            foreach ($columns as $key => $column) {
+                if (empty($column->property['hidden'])) {
+                    $field = $column->getField();
+
+                    if (preg_match('/^cost_(.*)/', $column->getField(), $matches)) {
+                        $cost_id = (int)$matches[1];
+                        $value = $product->getCost($cost_id, $offer['id'], false, true);
+                    } else {
+                        $value = '';
+                        switch ($field) {
+                            case 'title':
+                                $value = $offer['title'];
+                                break;
+                            case 'images':
+                                $images = $product->getImages();
+                                /** @var Offer $offer */
+                                $image_id = $offer->getMainPhotoId();
+                                $url = ($image_id && isset($images[$image_id])) ? $images[$image_id]->getUrl(30, 30) : $product->getMainImage(30, 30);
+                                $url_preview = ($image_id && isset($images[$image_id])) ? $images[$image_id]->getUrl(200, 200) : $product->getMainImage(200, 200);
+                                $value = "<span class=\"cell-image\" data-preview-url=\"$url_preview\"><img src=\"$url\"></span>";
+                                break;
+                            case 'barcode':
+                                $value = $product->getBarCode($offer['id']);
+                                break;
+                            case 'weight':
+                                $value = $product->getWeight($offer['id']);
+                                break;
+                            case 'num':
+                                $value = $product->getNum($offer['id']);
+                                break;
+                            case 'remains':
+                                $value = (float)$offer['remains'];
+                                break;
+                            case 'reserve':
+                                $value = (float)$offer['reserve'];
+                                break;
+                            case 'waiting':
+                                $value = (float)$offer['waiting'];
+                                break;
+                        }
+                    }
+
+                    $data[$offer['id']][$key] = $value;
+                }
+            }
+        }
+
+        $this->view->assign([
+            'table_data' => $data,
+        ]);
+        return $this->result->setSuccess(true)->setTemplate('form/product/product_offers_table_data.tpl');
     }
 }

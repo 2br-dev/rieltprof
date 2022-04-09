@@ -342,8 +342,11 @@ class Base extends AbstractPreset
             if ($this->load_expression) {
                 $q->where($this->load_expression);
             }
-            $object = $q->object();
-            if ($object) {
+            $row = $q->exec()->fetchRow();
+            if ($row) {
+                $object = clone $this->getOrmObject();
+                $object->getFromArray($row,null, false, true);
+
                 if ($this->use_cache) {
                     $this->cache[$cache_key] = $object;
                 }

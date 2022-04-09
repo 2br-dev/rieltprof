@@ -37,7 +37,8 @@ class ShipmentItem extends AbstractObject
             'shipment_id' => (new Type\Integer())
                 ->setDescription(t('id отгрузки')),
             'order_item_uniq' => (new Type\Varchar())
-                ->setDescription(t('Идентификатор товарной позиции')),
+                ->setDescription(t('Идентификатор товарной позиции'))
+                ->setMaxLength(100),
             'amount' => (new Type\Decimal())
                 ->setDescription(t('Количество'))
                 ->setDecimal(3),

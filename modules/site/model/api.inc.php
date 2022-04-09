@@ -130,7 +130,7 @@ class Api extends EntityList
      * @param array $where - дополнительные условия во where
      * @return void
      */
-    protected function copyRights(Site $site_to, Site $site_from, AbstractObject $orm, $where = [])
+    protected static function copyRights(Site $site_to, Site $site_from, AbstractObject $orm, $where = [])
     {
         OrmRequest::make()
             ->delete()

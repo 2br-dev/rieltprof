@@ -246,7 +246,7 @@
                     <td>{$item.cartitem.amount}</td>
                     <td>
                         <span class="cost">{$item.total}</span>
-                        {if $item.discount>0}<div class="discount">{t}скидка{/t} {$item.discount}</div>{/if}
+                        {if $item.discount_unformated > 0}<div class="discount">{t}скидка{/t} {$item.discount}</div>{/if}
                     </td>
                 </tr>
             {/foreach}

@@ -49,6 +49,10 @@ class Auth extends Front
     public function actionIndex()
     {
         $this->app->breadcrumbs->addBreadCrumb(t('Авторизация'));
+
+        $this->app->title->addSection(t('Авторизация'));
+        $this->app->meta->addDescriptions(t('На этой странице можно авторизоваться'));
+
         $referer = $this->url->request('referer', TYPE_STRING, \RS\Site\Manager::getSite()->getRootUrl());
         $referer = \RS\Helper\Tools::cleanOpenRedirect( urldecode($referer) );
         $error = '';
@@ -80,7 +84,6 @@ class Auth extends Front
                     $verification_engine->initializeSession();
 
                     if (!$verification_engine->getSession()->isResolved()) {
-
                         $token = $verification_engine->getSession()->getToken();
                         return $this->result->setRedirect($this->router->getUrl('users-front-auth', [
                             'Act' => 'verify',
@@ -125,6 +128,9 @@ class Auth extends Front
     {
         $this->app->breadcrumbs->addBreadCrumb(t('Авторизация'));
 
+        $this->app->title->addSection(t('Авторизация'));
+        $this->app->meta->addDescriptions(t('Верификация авторизации'));
+
         if ($this->getModuleConfig()->type_auth == File::TYPE_AUTH_STANDARD) {
             $this->e404(t('Данный тип авторизации отключен в настройках'));
         }
@@ -140,7 +146,6 @@ class Auth extends Front
         $session = $verification_engine->getSession();
 
         if ($this->isMyPost()) {
-
             $code = $this->url->post('code', TYPE_STRING);
             $result = $verification_engine->checkCode($code);
             if ($result !== false) {
@@ -176,6 +181,9 @@ class Auth extends Front
     protected function actionByPhone()
     {
         $this->app->breadcrumbs->addBreadCrumb(t('Авторизация'));
+
+        $this->app->title->addSection(t('Авторизация'));
+        $this->app->meta->addDescriptions(t('Авторизация по номеру телефона'));
 
         if ($this->getModuleConfig()->type_auth != File::TYPE_AUTH_PHONE) {
             $this->e404(t('Данный тип авторизации отключен в настройках'));
@@ -228,6 +236,7 @@ class Auth extends Front
                     $verification_engine->initializeSession();
 
                     $token = $verification_engine->getSession()->getToken();
+
                     return $this->result->setRedirect($this->router->getUrl('users-front-auth', [
                         'Act' => 'verify',
                         'token' => $token
@@ -259,6 +268,9 @@ class Auth extends Front
         $this->app->breadcrumbs
             ->addBreadCrumb(t('Авторизация'), $this->router->getUrl('users-front-auth'))
             ->addBreadCrumb(t('Восстановление пароля'));
+
+        $this->app->title->addSection(t('Восстановление пароля'));
+        $this->app->meta->addDescriptions(t('На этой странице вы можете отправить заявку на восстановление пароля'));
         
         $data = [
             'login' => $this->url->request('login', TYPE_STRING)
@@ -325,6 +337,9 @@ class Auth extends Front
         $this->app->breadcrumbs
             ->addBreadCrumb(t('Авторизация'), $this->router->getUrl('users-front-auth'))
             ->addBreadCrumb(t('Восстановление пароля'));
+
+        $this->app->title->addSection(t('Восстановление пароля'));
+        $this->app->meta->addDescriptions(t('На этой странице вы можете заменить пароль'));
                     
         $hash = $this->url->get('uniq', TYPE_STRING);
         $user = $this->user_api->getByHash($hash);
@@ -339,7 +354,15 @@ class Auth extends Front
             
             if ($this->user_api->changeUserPassword($user, $new_pass, $new_pass_confirm)) {
                 //Авторизовываем пользователя
-                AppAuth::login($user['login'], $new_pass);
+                $config = $this->getModuleConfig();
+                if ($config->fieldIsLogin('login') && $user['login'] !== '') {
+                    $login = $user['login'];
+                } elseif ($config->fieldIsLogin('e_mail') && $user['e_mail'] !== '') {
+                    $login = $user['e_mail'];
+                } else {
+                    $login = $user['phone'];
+                }
+                AppAuth::login($login, $new_pass);
                 $this->app->redirect();
             } else {
                 $error = $this->user_api->getErrorsStr();

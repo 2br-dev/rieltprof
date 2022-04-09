@@ -47,6 +47,7 @@ class TableCell extends Block
             $w += $col["used-width"];
         }
 
+        //FIXME?
         $h = $this->_frame->get_containing_block("h");
 
         $left_space = (float)$style->length_in_pt([$style->margin_left,

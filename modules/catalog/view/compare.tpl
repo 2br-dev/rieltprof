@@ -1,117 +1,93 @@
-{$app->setBodyClass('comparePageBody')}
-{addjs file="{$mod_js}jquery.compareshow.js" basepath="root"}
-{addjs file="jquery.changeoffer.js"}
-{addjs file="{$mod_js}jquery.favorite.js" basepath="root"}
-{$shop_config=ConfigLoader::byModule('shop')}
-{$check_quantity=$shop_config->check_quantity}
+{addjs file="%catalog%/rscomponent/compareshow.js"}
+{addjs file="%catalog%/rscomponent/favorite.js"}
 
-{if count($comp_data.items)}
-<div class="centerWrap">
-    <div class="center" id="compareShow" data-compare-url='{ "remove":"{$router->getUrl('catalog-front-compare', ["Act" => "remove"])}" }' data-favorite-url="{$router->getUrl('catalog-front-favorite')}">
-        <ul class="compareHead">
-            <li class="logoZone">
-                <div class="back">       
-                {if $CONFIG.logo}
-                    <img src="{$CONFIG.__logo->getUrl(206, 46)}" alt=""/>
-                {/if}                
-                </div>
-                <a class="print">{t}Распечатать{/t}</a>
-            </li>
-            {foreach from=$comp_data.items item=product}
-            <li class="item productItem{if !$product->isAvailable()} notAvaliable{/if}" data-id="{$product.id}">
-                <div class="topline">
-                    <a class="remove" title="{t}исключить из сравнения{/t}"></a>
-                </div>
-                {assign var=imglist value=$product->getImages(false)}
-                
-                <div class="image{if count($imglist)>1} activelist{/if}">
-                    {foreach from=$imglist item=image name=photos}
-                    <img src="{$image->getUrl(201,183)}" {if !$smarty.foreach.photos.first}class="hidden"{/if} alt="{$image.title}"/>
+{* Страница со списком сравниваемых товаров *}
+<div class="rs-compare-page">
+    {if $comp_data.items}
+        {* Трансформируем данные для удобного перебора дальше *}
+        {$comp_by_products = []}
+        {$identically = []}
+        {$identically_group = []}
+        {foreach $comp_data.values as $group_id=>$values}
+            {foreach $values as $prop_id=>$product_values}
+                {if !$comp_data.props[$prop_id].hidden}
+                    {$before_value = null}
+                    {$group_identical = true}
+                    {$identically[$group_id][$prop_id] = true}
+                    {foreach $product_values as $product_id => $prop}
+                        {$value = "{if $prop}{$prop->textView()}{else}-{/if}"}
+                        {$identically[$group_id][$prop_id] = $identically[$group_id][$prop_id]
+                                                                && ($before_value === null || $before_value == $value)}
+                        {$group_identical = $group_identical && $identically[$group_id][$prop_id]}
+                        {$comp_by_products[$product_id][$group_id][$prop_id] = $value}
+                        {$before_value = $value}
                     {/foreach}
-                    {if !count($imglist)}
-                    <img src="{$product->getImageStub()->getUrl(201,183)}" alt=""/>
-                    {/if}
-                </div>
-                <div class="title">{$product.title}</div>
-                {if $product.multioffers.use}
-                    <div class="pname">{$product.offer_caption|default:t('Комплектация')}</div>
-                    {* Многомерные комплектации *}
-                    <div class="multiOffers">
-                        {foreach $product.multioffers.levels as $level}
-                            {if !empty($level.values)}
-                                <div class="title">{if $level.title}{$level.title}{else}{$level.prop_title}{/if}</div>
-                                <select name="multioffers[{$level.prop_id}]" data-prop-title="{if $level.title}{$level.title}{else}{$level.prop_title}{/if}">
-                                    {foreach $level.values as $value}
-                                        <option value="{$value.val_str}">{$value.val_str}</option>   
+                    {$identically_group[$group_id] = $group_identical} {* true, если все хар-ки в группе идентичны *}
+                {/if}
+            {/foreach}
+        {/foreach}
+
+        <div class="compare-products"
+             data-compare-url='{ "remove":"{$router->getUrl('catalog-front-compare', ["Act" => "remove"])}" }'
+             data-favorite-url="{$router->getUrl('catalog-front-favorite')}">
+            <div class="compare-products__inner">
+                <div class="container">
+                    <div class="product-slider">
+                        <div class="product-slider__container">
+                            <div class="swiper-container swiper-compare-products">
+                                <div class="swiper-wrapper" >
+                                    {foreach $comp_data.items as $product}
+                                        <div class="swiper-slide">
+                                            {include file="%catalog%/one_product.tpl"}
+                                        </div>
                                     {/foreach}
-                                </select>
+                                </div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-sm-6 mt-4">
+            {if count($comp_data.items) > 1}
+            <div class="compare-checkbox mb-5">
+                <input id="compare-different" type="checkbox" {if $smarty.cookies.compareShowOnlyDifferent}checked{/if}>
+                <label for="compare-different">
+                    <span class="me-4">{t}Показать только отличия{/t}</span>
+                    <span class="compare-checkbox__toggle"></span>
+                </label>
+            </div>
+            {/if}
+            <div class="swiper-container swiper-compare-table {if $smarty.cookies.compareShowOnlyDifferent && count($comp_data.items) > 1}hide-identical{/if}">
+                <div class="compare-columns-titles">
+                    {foreach $comp_data.values as $group_id => $values}
+                        <div class="compare-columns-header {if $identically_group[$group_id]}param-identically{/if}">{$comp_data.groups[$group_id].title|default:t('Общие')}</div>
+                        {foreach $values as $prop_id => $product_values}
+                            {if !$comp_data.props[$prop_id].hidden}
+                                <div class="compare-columns-title {if $identically[$group_id][$prop_id]}param-identically{/if}">{$comp_data.props[$prop_id].title}{if $comp_data.props[$prop_id].unit}, {$comp_data.props[$prop_id].unit}{/if}</div>
                             {/if}
                         {/foreach}
-                    </div>
-                    {if $product->isOffersUse()}
-                        {foreach from=$product.offers.items key=key item=offer name=offers}
-                            <input value="{$key}" type="hidden" name="hidden_offers" class="hidden_offers" {if $smarty.foreach.offers.first}checked{/if} id="offer_{$key}" data-info='{$offer->getPropertiesJson()}' {if $check_quantity}data-num="{$product->getNum($key)}"{/if} data-change-cost='{ ".offerBarcode": "{$offer.barcode|default:$product.barcode}", ".myCost": "{$product->getCost(null, $key)}", ".lastPrice": "{$product->getOldCost($key)}"}'/>
-                        {/foreach}                        
-                        <input type="hidden" name="offer" value="0"/>                                            
-                    {/if}                    
-                {elseif $product->isOffersUse()}
-                    {* Простые комплектации *}
-                    <div class="offer">
-                        <div class="pname">{$product.offer_caption|default:t('Комплектация')}</div>
-                        <select name="offer">
-                            {foreach from=$product.offers.items key=key item=offer name=offers}
-                                <option value="{$key}" data-change-cost='{ ".myCost": "{$product->getCost(null, $key)}", ".lastPrice": "{$product->getOldCost($key)}"}'>{$offer.title}</option>
-                            {/foreach}
-                        </select>
-                    </div>
-                {/if}
-                <div class="cost">
-                    {$last_price = $product->getOldCost()}
-                    {if $last_price>0}<div class="lastPrice">{$last_price}</div>{/if}
-                    <span>{$product->getCost()} {$product->getCurrency()}</span>
+                    {/foreach}
                 </div>
-
-                {if $shop_config}
-                <div class="basketwrap">
-                    <a class="toBasket addToCart noShowCart" data-href="{$router->getUrl('shop-front-cartpage', ["add" => $product.id])}">{t}в корзину{/t}</a>
-                    <span class="unobtainable hidden">{t}Нет в наличии{/t}</span>
-                </div>
-                {/if}
-                {if $THEME_SETTINGS.enable_favorite}
-                <br class="clearBoth"><a class="favorite inline{if $product->inFavorite()} inFavorite{/if}" data-favorite-url="{$router->getUrl('catalog-front-favorite')}">
-                    <span class="">{t}В избранное{/t}</span>
-                    <span class="already">{t}В избранном{/t}</span>
-                </a>                
-                {/if}
-            </li>
-            {/foreach}
-        </ul>
-
-        <div class="compareBody">
-            {foreach from=$comp_data.values key=group_id item=values}
-            <h3><span>{$comp_data.groups[$group_id].title|default:t('Общие')}</span></h3>
-
-            <ul class="table">
-                {foreach from=$values key=prop_id item=product_values}    
-                    {if !$comp_data.props[$prop_id].hidden}
-                    <li>
-                        <div class="key">{$comp_data.props[$prop_id].title}{if $comp_data.props[$prop_id].unit}, {$comp_data.props[$prop_id].unit}{/if}</div>
-                        {foreach from=$product_values key=product_id item=prop}
-                        <div class="value" data-id="{$product_id}">
-                            <span class="product">{$comp_data.items[$product_id].title}</span>
-                            <span class="viewValue">{if $prop}{$prop->textView()}{else}-{/if}</span>
+                <div class="swiper-wrapper">
+                    {foreach $comp_by_products as $product_id=>$groups}
+                        <div class="swiper-slide">
+                            <div class="compare-columns">
+                                {foreach $groups as $group_id => $props}
+                                    <div class="compare-product-header {if $identically_group[$group_id]}param-identically{/if}"></div>
+                                    {foreach $props as $prop_id => $value}
+                                        <div class="compare-product-param {if $identically[$group_id][$prop_id]}param-identically{else}param-different{/if}">{$value}</div>
+                                    {/foreach}
+                                {/foreach}
+                            </div>
                         </div>
-                        {/foreach}
-                    </li>
-                    {/if}
-                {/foreach}            
-            </ul>
-            {/foreach}
+                    {/foreach}
+                </div>
+            </div>
         </div>
-    </div>
+    {else}
+        {include file="%THEME%/helper/usertemplate/include/empty_product_list.tpl" reason="{t}Добавьте товары для сравнения{/t}"}
+    {/if}
 </div>
-{else}
-<div class="noCompare">
-    {t}Добавьте товары для сравнения{/t}
-</div>
-{/if}

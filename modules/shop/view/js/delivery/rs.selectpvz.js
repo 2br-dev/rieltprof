@@ -7,7 +7,6 @@ class SelectPvz {
         };
         this.class = {
             pvzMapButton: 'selectPvz_pvzMapButton',
-            hidden: 'rs-hidden',
         };
         this.options = {
             adminMode: false,
@@ -21,7 +20,7 @@ class SelectPvz {
             this.options = Object.assign(this.options, JSON.parse(this.owner.dataset.SelectPvzOptions));
         }
 
-        this.owner.addEventListener('yandexMap.buttonClick', (event) => {
+        this.owner.addEventListener('map.buttonClick', (event) => {
             this.pvzSelected(event.detail);
         });
 
@@ -31,11 +30,13 @@ class SelectPvz {
 
         this.owner.querySelectorAll(this.selector.pvzListItem).forEach((element) => {
             element.addEventListener('click', () => {
-                this.pvzPoints[element.dataset.deliveryId][element.dataset.pvzCode].balloon.open();
+                this.map.pointOpenBalloon(this.pvzPoints[element.dataset.deliveryId][element.dataset.pvzCode]);
             });
         });
 
-        YandexMap.init(this.selector.yandexMap, (map) => {
+        let mapElement = this.owner.querySelector(this.selector.yandexMap);
+        RsJsCore.plugins.mapManager.map.init(mapElement, (map) => {
+            this.map = map;
             map.setDispatchEventTarget(this.owner);
 
             let pvz_list = JSON.parse(this.owner.dataset.pvzJson);
@@ -44,18 +45,36 @@ class SelectPvz {
 
             for (let deliveryId in pvz_list) {
                 pvz_list[deliveryId].forEach((item) => {
+                    if (this.pvzPoints[deliveryId] == undefined) {
+                        this.pvzPoints[deliveryId] = {};
+                    }
+
+                    let balloonBody = lang.t('Адрес: ') + item.address;
+                    if (item.phone) {
+                        balloonBody = balloonBody + '<br>' + lang.t('Телефон: ') + item.phone;
+                    }
+                    if (item.worktime) {
+                        balloonBody = balloonBody + '<br>' + lang.t('Время работы: ') + item.worktime;
+                    }
+                    balloonBody = balloonBody + '<br>' + lang.t('Возможность оплаты картой: ');
+                    if (item.payment_by_cards) {
+                        balloonBody = balloonBody + lang.t('есть');
+                    } else {
+                        balloonBody = balloonBody + lang.t('нет');
+                    }
+                    if (item.note) {
+                        balloonBody = balloonBody + '<br>' + lang.t('Заметки: ') + item.note;
+                    }
+
                     let button_data = {
                         delivery: deliveryId,
                         pvz: item,
                     };
-                    if (this.pvzPoints[deliveryId] == undefined) {
-                        this.pvzPoints[deliveryId] = {};
-                    }
-                    this.pvzPoints[deliveryId][item.code] = map.addPoint(item.coord_y, item.coord_x, {
-                        balloonContentHeader: item.title,
-                        balloonContentBody: item.address,
-                        balloonContentFooter: map.htmlButton(button_data, lang.t('Выбрать этот ПВЗ'), this.class.pvzMapButton),
-                    });
+
+                    this.pvzPoints[deliveryId][item.code] = map.createPoint(item.coord_y, item.coord_x);
+                    this.map.pointSetBalloon(this.pvzPoints[deliveryId][item.code], item.title, balloonBody, map.htmlButton(button_data, lang.t('Выбрать этот ПВЗ'), this.class.pvzMapButton));
+                    this.map.addPoint(this.pvzPoints[deliveryId][item.code]);
+
                     coords_x.push(parseFloat(item.coord_x));
                     coords_y.push(parseFloat(item.coord_y));
                 });
@@ -74,11 +93,15 @@ class SelectPvz {
         let search = searchQuery.toLowerCase();
         this.owner.querySelectorAll(this.selector.pvzListItem).forEach((element) => {
             if (search != '' && element.dataset.searchString.toLowerCase().indexOf(search) == -1) {
-                element.classList.add(this.class.hidden);
-                this.pvzPoints[element.dataset.deliveryId][element.dataset.pvzCode].options.set({visible: false});
+                if (!element.hidden) {
+                    element.hidden = true;
+                    this.map.removePoint(this.pvzPoints[element.dataset.deliveryId][element.dataset.pvzCode]);
+                }
             } else {
-                element.classList.remove(this.class.hidden);
-                this.pvzPoints[element.dataset.deliveryId][element.dataset.pvzCode].options.set({visible: true});
+                if (element.hidden) {
+                    element.hidden = false;
+                    this.map.addPoint(this.pvzPoints[element.dataset.deliveryId][element.dataset.pvzCode]);
+                }
             }
         });
     }
@@ -139,8 +162,10 @@ class SelectPvz {
     static init(selector)
     {
         document.querySelectorAll(selector).forEach((element) => {
-            if (!element.selectPvz) {
-                element.selectPvz = new SelectPvz(element);
+            if (element.clientWidth) {
+                if (!element.selectPvz) {
+                    element.selectPvz = new SelectPvz(element);
+                }
             }
         });
     }
@@ -167,19 +192,4 @@ class SelectPvz {
     }
 }
 
-if (!document.querySelector('script[src="' + global.folder +'/modules/main/view/js/yandexmap/rs.yandexmap.js"]')) {
-    let scriptCss = document.createElement('link');
-    scriptCss.href = global.folder + '/modules/shop/view/css/delivery/selectpvz.css';
-    scriptCss.type = 'text/css';
-    scriptCss.rel = 'stylesheet';
-    document.body.appendChild(scriptCss);
-
-    let script = document.createElement('script');
-    script.src = global.folder + '/modules/main/view/js/yandexmap/rs.yandexmap.js';
-    document.body.appendChild(script);
-    script.onload = () => {
-        SelectPvz.initListeners();
-    };
-} else {
-    SelectPvz.initListeners();
-}
+SelectPvz.initListeners();

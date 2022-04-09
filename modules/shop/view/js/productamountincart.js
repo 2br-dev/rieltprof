@@ -32,7 +32,11 @@
 
         if ($this.options.isCached) {
             let productId = $this.data('productId');
-            let numList = global.cartProducts[productId];
+            let numList;
+            if (global.cartProducts && global.cartProducts[productId]) {
+                numList = global.cartProducts[productId];
+            }
+
             if (numList) {
                 let total = 0;
                 for (let num in numList) {
@@ -40,7 +44,6 @@
                 }
                 $this[0].querySelector('.rs-cartAmount_input').value = total;
                 $this[0].classList.add('rs-inCart');
-                console.log(productId, total);
             } else {
                 $this[0].querySelector('.rs-cartAmount_input').value = 0;
                 $this[0].classList.remove('rs-inCart');

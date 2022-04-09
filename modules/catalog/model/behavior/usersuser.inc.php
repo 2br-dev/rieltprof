@@ -72,7 +72,7 @@ class UsersUser extends BehaviorAbstract
 
                 foreach ($sorted_groups as $group) {
                     $user_cost = @unserialize($group['cost_id']);
-                    if (isset($user_cost[$site_id])) {
+                    if (!empty($user_cost[$site_id])) {
                         $cost_id = $user_cost[$site_id];
                         break;
                     }

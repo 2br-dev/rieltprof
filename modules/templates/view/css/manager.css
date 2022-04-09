@@ -115,17 +115,17 @@
     min-height:150px;
 }
 
-.gs-manager .workarea:before,
-.gs-manager .workarea:after {
+.clearfix-workarea .workarea:before,
+.clearfix-workarea .workarea:after {
     content:"";
     display:table;
 }
 
-.gs-manager .workarea:after {
+.clearfix-workarea .workarea:after {
   clear:both;
 }
 
-.gs-manager .workarea {
+.container.gs-manager .workarea {
   zoom:1; /* For IE 6/7 (trigger hasLayout) */
 }
 
@@ -450,55 +450,28 @@
 }
 
 .device-selector li .device-md {
-    background-position:-42px 0;
-    width:30px;
-    height:30px;
-}
-
-.device-selector li .device-lg {
-    background-position:-75px 0;
-    width:32px;
-    height:32px;
-}
-
-.device-selector.bootstrap4 li i {
-    background:url(../img/devices_bootstrap4.png) no-repeat;
-    display:inline-block;
-    vertical-align:middle;
-    margin-right:7px;
-}
-
-.device-selector.bootstrap4 li .device-xs {
-    width:15px;
-    height:26px;
-}
-
-.device-selector.bootstrap4 li .device-sm {
-    background-position:-18px 0;
-    width:21px;
-    height:28px;
-}
-
-.device-selector.bootstrap4 li .device-md {
     background-position:-41px 0;
     width:28px;
     height:21px;
 }
 
-.device-selector.bootstrap4 li .device-lg {
+.device-selector li .device-lg {
     background-position:-71px 0;
     width:30px;
     height:30px;
 }
 
-.device-selector.bootstrap4 li .device-xl {
+.device-selector li .device-xl {
     background-position:-104px 0;
     width:32px;
     height:32px;
 }
 
-
-
+.device-selector li .device-xxl {
+    background-position:-139px 0;
+    width:38px;
+    height:32px;
+}
 
 .admin-style .otable .bootstrap-multi-values input {
     width:40px;
@@ -521,7 +494,15 @@
 .admin-style .bootstrap-multi-values .act select,
 .admin-style .bootstrap-multi-values .act input {
     border-color: black;
-    
+}
+
+.admin-style .bootstrap-multi-values td {
+    width:150px;
+}
+
+.admin-style .otable .bootstrap-multi-values td select,
+.admin-style .otable .bootstrap-multi-values td input {
+    width:95%;
 }
 
 .gs-manager .visible-switcher,

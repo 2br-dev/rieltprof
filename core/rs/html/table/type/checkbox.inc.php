@@ -23,6 +23,7 @@ class Checkbox extends AbstractType
     
     protected
         $name,
+        $stay_before = true,
         $head_template = 'system/admin/html_elements/table/coltype/checkbox_head.tpl',
         $body_template = 'system/admin/html_elements/table/coltype/checkbox.tpl';
         

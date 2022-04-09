@@ -8,6 +8,8 @@
 
 namespace RS\Application;
 
+use RS\Config\Loader;
+
 /**
 * Класс, отвечающий за мета теги в head части страницы
 */
@@ -106,19 +108,8 @@ class Meta
     function get()
     {
         $view = new \RS\View\Engine();
-        $view->assign('meta_vars', $this->meta_vars);
+        $view->assign('meta_vars', $this->getMetaVars());
         return $view->fetch('%system%/meta.tpl');
-    }
-    
-    /**
-    * Возвращает мета данные по ключу, или весь массив
-    * @param string $key - ключ
-    * @return array
-    */
-    function getData($key = null)
-    {
-        $view = new \RS\View\Engine();
-        return ($key) ? $this->meta_vars[$key] : $this->meta_vars;
     }
 
     /**
@@ -130,10 +121,22 @@ class Meta
      */
     function getMetaVars($key = null, $default = null)
     {
+        $meta_vars = $this->meta_vars;
+
+        $site_config = Loader::getSiteConfig();
+        if ($site_config && $site_config->make_default_description_from_title) {
+            if (!isset($meta_vars['description']) || empty($meta_vars['description']['content'])) {
+                $meta_vars['description'] = [
+                    'name' => 'description',
+                    'content' => Application::getInstance()->title->get()
+                ];
+            }
+        }
+
         if ($key !== null) {
-            return isset($this->meta_vars[$key]) ? $this->meta_vars[$key] : $default;
+            return isset($meta_vars[$key]) ? $meta_vars[$key] : $default;
         } else {
-            return $this->meta_vars;
+            return $meta_vars;
         }
     }
 }

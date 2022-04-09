@@ -1,0 +1,64 @@
+.returnsTable.myReturns{
+    margin-top: 50px;
+}
+
+.returnsTable a{
+    text-decoration: underline;
+}
+
+
+.returnsTable a.formSave,
+.returnsTable a:hover{
+    text-decoration: none;
+}
+
+.returnsTable table{
+    width: 100%;
+}
+
+.returnsTable th,
+.returnsTable td{
+    padding: 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+.returnsTable td{
+    font-size: 14px;
+}
+
+.returnsTable .status {
+    color: #939384;
+}
+
+.returnsTable .summ {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.returnsTable .buttonLine{
+    margin: 20px 0 30px;
+}
+
+.productsReturnStatus {
+    margin-bottom: 20px;
+}
+
+.productsReturnTable th {
+    padding-bottom: 20px;
+}
+.productsReturnTable td {
+    vertical-align: middle;
+}
+
+.productsReturnTable .table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.form-style .productsReturnAmount {
+    margin: 0;
+}
+
+#colorbox .returnRulesWrapper,
+.rs-dialog .returnRulesWrapper {
+    max-width:800px;
+}

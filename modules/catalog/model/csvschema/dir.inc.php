@@ -29,7 +29,7 @@ class Dir extends AbstractSchema
     {
         parent::__construct(new Preset\Base([
             'ormObject' => new \Catalog\Model\Orm\Dir(),
-            'excludeFields' => ['id', 'site_id', 'parent', 'processed', 'level', 'itemcount', 'image', 'tax_ids'],
+            'excludeFields' => ['id', 'site_id', 'parent', 'processed', 'level', 'itemcount', 'image', 'tax_ids', 'in_list_properties'],
             'multisite' => true,
             'searchFields' => ['name', 'parent'],
             'nullFields' => ['sortn'],
@@ -58,6 +58,11 @@ class Dir extends AbstractSchema
                 ]),
                 new CatalogPreset\DirProperty([
                     'title' => t('Характеристики'),
+                    'linkPresetId' => 0,
+                ]),
+                new CatalogPreset\DirPropertyList([
+                    'title' => t('Характеристики списка'),
+                    'linkForeignField' => 'in_list_properties_arr',
                     'linkPresetId' => 0,
                 ]),
             ],

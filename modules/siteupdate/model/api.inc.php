@@ -409,6 +409,11 @@ class Api extends BaseModel
                 ];
             }
         }
+
+        $install_map[] = [
+            'callback' => 'updateDataStructure',
+            'status' => t("Обновление структуры данных")
+        ];
         
         $this->setData([
             'selectedModules' => $modules,
@@ -436,6 +441,29 @@ class Api extends BaseModel
         }
 
         return $this->getNextStepInfo();
+    }
+
+    /**
+     * Выполняется после установки обновлений для всех модулей.
+     * Здесь может быть длительная операция для выполнения патча
+     */
+    function updateDataStructure()
+    {
+        if (class_exists('\RS\Config\Migration')) {
+            $state = isset($this->data['migration_state']) ? $this->data['migration_state'] : array();
+
+            $migration = new \RS\Config\Migration();
+            $result = $migration->run($this->data['updateData'], $state);
+
+            if (is_array($result)) { //Данная операция не завершилась полностью, необходимо вызвать ее повторно
+                $this->setData('migration_state', $result);
+                return $this->getNextStepInfo();
+            }
+
+            return $result;
+        }
+
+        return true;
     }
     
     /**

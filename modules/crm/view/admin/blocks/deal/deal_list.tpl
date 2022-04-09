@@ -86,7 +86,7 @@
     </div>
 </div>
 
-<script type=" text/javascript">
+<script>
     $.allReady(function() {
         $('.crm-block-deal').blockCrm({
             addLink: '.add-deal',

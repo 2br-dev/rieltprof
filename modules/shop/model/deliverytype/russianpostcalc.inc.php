@@ -178,7 +178,7 @@ class RussianPostCalc extends AbstractType
      * @return mixed
      * @throws RSException
      */
-    function getDeliveryCost(Order $order, Address $address = null, Delivery $delivery, $use_currency = true)
+    function getDeliveryCost(Order $order, Address $address, Delivery $delivery, $use_currency = true)
     {
         if ($address === null) {
             $address = $order->getAddress();

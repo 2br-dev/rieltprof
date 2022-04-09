@@ -30,7 +30,21 @@ class Patches extends \RS\Module\AbstractPatches
             '3015',
             '409',
             '4010',
+            '601',
         ];
+    }
+
+    function afterUpdate601()
+    {
+        $site_config = new \Site\Model\Orm\Config();
+        $site_config->getPropertyIterator()->append([
+            t('Мета-теги'),
+            'make_default_description_from_title' => new Type\Integer([
+                'description' => t('Заполнять мета-тег description (если он пустой) из title'),
+                'checkboxView' => [1, 0]
+            ])
+        ]);
+        $site_config->dbUpdate();
     }
 
     function afterUpdate3012()
@@ -139,7 +153,7 @@ class Patches extends \RS\Module\AbstractPatches
                 'description' => t('Перенаправлять на основной домен'),
                 'allowEmpty' => false,
                 'checkboxView' => [1,0],
-                'hint' => t('Если включено, то при обращении к НЕ основному домену будт происходить 301 редирект на основной домен')
+                'hint' => t('Если включено, то при обращении к НЕ основному домену будет происходить 301 редирект на основной домен')
             ]),
         ]);
         $site->dbUpdate();

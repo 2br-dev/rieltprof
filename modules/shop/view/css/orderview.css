@@ -512,5 +512,12 @@
         display:block;
         width:100%;
     }
-
 }
+
+.admin-style .product-in-cargo-status {
+    font-size:16px;
+}
+
+.admin-style .product-in-cargo-status.none { color:gray; }
+.admin-style .product-in-cargo-status.partially { color:orange; }
+.admin-style .product-in-cargo-status.fully { color: #489c3c; }

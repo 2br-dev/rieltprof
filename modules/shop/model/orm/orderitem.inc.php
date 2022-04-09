@@ -9,6 +9,7 @@
 namespace Shop\Model\Orm;
 
 use Catalog\Model\Orm\Product;
+use Catalog\Model\Orm\Unit;
 use RS\Config\Loader as ConfigLoader;
 use RS\Exception as RSException;
 use RS\Orm\AbstractObject;
@@ -37,6 +38,7 @@ use Shop\Model\Marking\MarkingException;
  * @property float $price Стоимость
  * @property float $profit Доход
  * @property float $discount Скидка
+ * @property integer $unit_id Единица измерения
  * @property integer $sortn Порядок
  * --\--
  */
@@ -109,6 +111,9 @@ class OrderItem extends AbstractCartItem
                 'decimal' => 2,
                 'default' => 0
             ]),
+            'unit_id' => new Type\Integer([
+                'description' => t('Единица измерения')
+            ]),
             'sortn' => new Type\Integer([
                 'description' => t('Порядок')
             ]),
@@ -116,6 +121,24 @@ class OrderItem extends AbstractCartItem
 
         $this->addIndex(['order_id', 'uniq'], self::INDEX_PRIMARY);
         $this->addIndex(['type', 'entity_id'], self::INDEX_KEY);
+    }
+
+    /**
+     * Возвращает единицу измерения
+     *
+     * @return Unit
+     */
+    function getUnit()
+    {
+        if ($this['unit_id']) {
+            $unit = new Unit($this['unit_id']);
+        } else {
+            //Для совместимости с заказами, оформленными до добавления unit_id
+            $unit = new Unit();
+            $unit['stitle'] = $this['extra_arr']['unit'] ?? '';
+        }
+
+        return $unit;
     }
 
     /**
@@ -325,5 +348,17 @@ class OrderItem extends AbstractCartItem
     function getOrder()
     {
         return new Order($this['order_id']);
+    }
+
+    /**
+     * Приводит базу данных в соответствие со структурой объекта
+     *
+     * @return bool
+     */
+    function dbUpdate()
+    {
+        $result = parent::dbUpdate();
+        //(new ArchiveOrderItem())->dbUpdate();
+        return $result;
     }
 }

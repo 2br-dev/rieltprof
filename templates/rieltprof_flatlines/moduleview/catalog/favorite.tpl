@@ -9,22 +9,7 @@
             {moduleinsert name="\Rieltprof\Controller\Block\SearchLine" indexTemplate='%catalog%/blocks/searchline/searchform.tpl'}
         </div>
         <div class="separator"></div>
-{*        <div class="segmented-radio">*}
-{*            {if $category->getMainParent()->name == "Продажа"}*}
-{*                <p class="sale-category-link active">Продажа</p>*}
-{*            {else}*}
-{*                {if $category->getOtherCategory()}*}
-{*                    <a href="{$category->getOtherCategory()->getUrl()}" class="sale-category-link trigger-action-link" data-action="rent">Продажа</a>*}
-{*                {/if}*}
-{*            {/if}*}
-{*            {if $category->getMainParent()->name == "Аренда"}*}
-{*                <p class="rent-category-link active">Аренда</p>*}
-{*            {else}*}
-{*                {if $category->getOtherCategory()}*}
-{*                    <a href="{$category->getOtherCategory()->getUrl()}" class="rent-category-link trigger-action-link" data-action="sale">Аренда</a>*}
-{*                {/if}*}
-{*            {/if}*}
-{*        </div>*}
+
         <div class="icons">
             {$countFavorite = \Catalog\Model\FavoriteApi::getInstance()->getFavoriteCount()}
             <a

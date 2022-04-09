@@ -96,4 +96,21 @@ class MyOrderView extends \RS\Controller\AuthorizedFront
 
         return $this->result->setTemplate('myorder_change_payment.tpl');
     }
+
+    /**
+     * Удаляет заказ и перенапраляет пользователя на страницу со списком заказов
+     */
+    function actionDelete()
+    {
+        $default_referer = $this->router->getUrl('shop-front-myorders');
+        $referer = $this->url->get('referer', TYPE_STRING, $default_referer);
+
+        if ($this->order->canDelete()) {
+            if (!$this->order->delete()) {
+                throw new \RS\Exception($this->order->getErrorsStr());
+            }
+        }
+
+        return $this->result->setRedirect($referer);
+    }
 }

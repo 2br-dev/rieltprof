@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <defaultValues>
+        <name multilanguage="true">Оптимизация фото</name>
+        <description multilanguage="true">Позволяет по планировщику заданий(cron) сжимать изображения (PNG, GIF и JPEG) для их оптимизации практически без потери качества.</description>        
+        <version>1.0.0.0</version>
+        <author>Alexander Zakusilo</author>
+        <portion_count>10</portion_count>
+        <quality>92</quality>
+    </defaultValues>
+</config>

@@ -14,6 +14,8 @@ use RS\Html\Toolbar\Element;
 use RS\Module\AbstractModel\TreeList\AbstractTreeListIterator;
 use RS\Orm\FormObject;
 use RS\Orm\PropertyIterator;
+use RS\Orm\Request;
+use RS\Site\Manager;
 use Shop\Model\DeliveryApi;
 use Shop\Model\DeliveryType\Cdek;
 use Shop\Model\DeliveryType\Cdek\CdekApi;
@@ -22,6 +24,7 @@ use Shop\Model\DeliveryType\Cdek2;
 use Shop\Model\Exception as ShopException;
 use Shop\Model\OrderApi;
 use Shop\Model\Orm\Address;
+use Shop\Model\Orm\CartItem;
 use Shop\Model\Orm\Delivery;
 use Shop\Model\Orm\Region;
 use Shop\Model\ReservationApi;
@@ -345,7 +348,7 @@ class Tools extends \RS\Controller\Admin\Front
             'countries' => \Shop\Model\DeliveryType\Cdek::getCountries()
         ]);
 
-        $helper['form'] = $this->view->fetch('%shop%/cdek_rebase.tpl');
+        $helper['form'] = $this->view->fetch('%shop%/admin/cdek_rebase.tpl');
         $helper->viewAsForm();
 
         return $this->result->setTemplate( $helper['template'] );
@@ -392,7 +395,7 @@ class Tools extends \RS\Controller\Admin\Front
             'countries' => \Shop\Model\DeliveryType\Cdek::getCountries()
         ]);
 
-        $helper['form'] = $this->view->fetch('%shop%/cdek_rebase.tpl');
+        $helper['form'] = $this->view->fetch('%shop%/admin/cdek_rebase.tpl');
         $helper->viewAsForm();
 
         return $this->result->setTemplate( $helper['template'] );
@@ -441,5 +444,23 @@ class Tools extends \RS\Controller\Admin\Front
         $helper->setHeaderHtml($this->view->fetch('%shop%/delivery/cdek/city_check.tpl'));
 
         return $this->result->setTemplate($helper->getTemplate());
+    }
+
+    /**
+     * Очищает корзины всех пользователей на текущем сайте
+     *
+     * @return \RS\Controller\Result\Standard
+     */
+    function actionCleanUserCarts()
+    {
+        $result = Request::make()
+            ->delete()
+            ->from(new CartItem())
+            ->where([
+                'site_id' => Manager::getSiteId()
+            ])->exec();
+
+        return $this->result->setSuccess(true)->addMessage(t('Удалено %0 товаров из корзин пользователей', [$result->affectedRows()]));
+
     }
 }

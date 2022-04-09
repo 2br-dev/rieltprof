@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>99356c36b45b4bb5b1d8e75e6c5970e44ddb3986</sign>
+    <sign>d23cebc250784ec6462a30bfde82663072f722d3</sign>
   </file>
   <file>
     <path>config/demo/banners-banner.csv</path>
@@ -42,7 +42,7 @@
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>f787c06b981a248a6f8707df6015e498994b553b</sign>
+    <sign>2d5a38eae587c80e1ef9c7299a2bbaf3a4f7053e</sign>
   </file>
   <file>
     <path>config/install.inc.php</path>
@@ -50,7 +50,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>63683d9aaa10d0a4d692a81b3753257338406a83</sign>
+    <sign>52251e2459ddbd4472a7a3db40f279216996c519</sign>
   </file>
   <file>
     <path>controller/admin/atombannerctrl.inc.php</path>
@@ -94,7 +94,7 @@
   </file>
   <file>
     <path>controller/block/designer.inc.php</path>
-    <sign>f03041db38d28b0840f595c3fc414a92d4b840d3</sign>
+    <sign>d4f5fb6715dfd034e04a2590eecce2ac04279384</sign>
   </file>
   <file>
     <path>controller/front/form.inc.php</path>
@@ -142,7 +142,7 @@
   </file>
   <file>
     <path>model/designatoms/abstractatom.inc.php</path>
-    <sign>af5533af721237cdb970a3eabcd8c5de63eef794</sign>
+    <sign>19ad6c6d5a222406306613fd6835b22590304ca2</sign>
   </file>
   <file>
     <path>model/designatoms/attrs/abstractattr.inc.php</path>
@@ -314,7 +314,7 @@
   </file>
   <file>
     <path>model/designatoms/items/dlist.inc.php</path>
-    <sign>662ca87e1c711e570676eae14cef82613c7e73c3</sign>
+    <sign>4711b805f17c4bb0db854b69667090f12627e00f</sign>
   </file>
   <file>
     <path>model/designatoms/items/emptyline.inc.php</path>
@@ -322,7 +322,7 @@
   </file>
   <file>
     <path>model/designatoms/items/form.inc.php</path>
-    <sign>5f30608b09f799368c6efe61ed410a59980012b2</sign>
+    <sign>b68e6aa60116af2b13d1ca53efce6324fef572c0</sign>
   </file>
   <file>
     <path>model/designatoms/items/gallery.inc.php</path>
@@ -385,12 +385,16 @@
     <sign>0d086b646d0b9e5b60e9e13f51d50f3596862a27</sign>
   </file>
   <file>
+    <path>model/menutype/designer.inc.php</path>
+    <sign>bf0f14948baafe6235bd1414cd0ff8eb75354381</sign>
+  </file>
+  <file>
     <path>model/pixabaysearchapi.inc.php</path>
     <sign>69405b04a2d50c58d571ffb8cf107917301dba29</sign>
   </file>
   <file>
     <path>model/presetapi.inc.php</path>
-    <sign>bc387cd5c6903057de3d6bc302d0765be9544fed</sign>
+    <sign>8f351e4bb3b9754f20beaa2af5ad09627f5992f0</sign>
   </file>
   <file>
     <path>model/renderapi.inc.php</path>
@@ -401,16 +405,12 @@
     <sign>9b5b3c2e5cacbdf654150b46477c99b3d1f38327</sign>
   </file>
   <file>
-    <path>view/blockinfo.tpl</path>
-    <sign>9a2a8739206b7b563fd4ebcfd33648af3c2b2963</sign>
-  </file>
-  <file>
     <path>view/blocks/designer/designer.tpl</path>
-    <sign>3d39f7cc6285a1ffb08f0ee25bc23e3e3600a4b3</sign>
+    <sign>ce7015ae07ac8d08d8e992e72a6156bbc1e8223f</sign>
   </file>
   <file>
     <path>view/blocks/designer/designer_debug.tpl</path>
-    <sign>ced296f53c39e052b171b91eb6684f0ae6c2ad82</sign>
+    <sign>d30740c22d67f07412d6e31df11e7f65efc97935</sign>
   </file>
   <file>
     <path>view/blocks/designer/designer_info.tpl</path>
@@ -422,7 +422,7 @@
   </file>
   <file>
     <path>view/css/app/designer.css</path>
-    <sign>70cc3145d7842d1a72f4950de2ca8924acbc3000</sign>
+    <sign>352f0ad2d4fdd48cf81f9fa79c2959efb771937b</sign>
   </file>
   <file>
     <path>view/css/app/designer_front.css</path>
@@ -498,7 +498,7 @@
   </file>
   <file>
     <path>view/css/app/less/designer/debug/left-menu.less</path>
-    <sign>16ad79ea91cf825e7bb9b4f3f5618edaf0abc489</sign>
+    <sign>4e02949c3da6b4c3c41ee2f66bb9b246d0dfd5cb</sign>
   </file>
   <file>
     <path>view/css/app/less/designer/debug/margin-padding-resize.less</path>
@@ -4822,7 +4822,7 @@
   </file>
   <file>
     <path>view/js/app/dist/atomForm.bundle.js</path>
-    <sign>7bad0b18a00f0a67d18f936448434f03e121a216</sign>
+    <sign>44758f9f77e99cd311cc7adb8f2f0beedbda3eda</sign>
   </file>
   <file>
     <path>view/js/app/dist/atomGallery.bundle.js</path>
@@ -5154,7 +5154,7 @@
   </file>
   <file>
     <path>view/sidebar/leftmenu.tpl</path>
-    <sign>8215c7f15a43c6da5450c0c7ae52930fe156e23f</sign>
+    <sign>b4ac12aa29cfc0db297cd1878c3004b4b76e24f3</sign>
   </file>
-  <masterSign>56313af2868c6f80fce6a478423eec25b9b7e68f65fa7e2687f5a754a2510efddd2f0b61863ae448eb3f1a7de69d9ec5c83ca5bd17c0900f8925e2f6b58fa1dac026bd35b2a4fbf593a0ce328766feb9131cdcd4415ecaab2ef411ea0f404b80b217308e8d703402539ff8b86e56b578410d8d35f1e4ec4578ff6e47ad2c9d55</masterSign>
+  <masterSign>8e0b42b7dd9088d7b9f543387e42192d11806c73bff9602c754bbff258238ff34bc2db6e0bdc0813d05207eb581baa4ef3389afc11bba76a6a280e538d1e6731f77ea8f39005b6951b408841c865fed50a417aedc745b8a5e16dc7a1d0558816f9375999218195382f8cc021fc78fb3acd78a4fc26bfdeb2827fdbff8a2ec957</masterSign>
 </signatures>

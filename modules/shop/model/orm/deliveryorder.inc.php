@@ -16,10 +16,24 @@ use Shop\Model\DeliveryType\InterfaceDeliveryOrder;
 
 /**
  * Заказ на доставку
+ * --/--
+ * @property integer $id Уникальный идентификатор (ID)
+ * @property string $external_id Внешний идентификатор
+ * @property integer $order_id id заказа
+ * @property string $delivery_type Расчётный клас доставки
+ * @property string $number Номер заказа на доставку
+ * @property array $data Сохранённые данные
+ * @property string $_data Сохранённые данные (сериализованные)
+ * @property array $extra Дополнительные данные
+ * @property string $_extra Дополнительные данные (сериализованные)
+ * @property string $creation_date Дата создания
+ * @property string $address Адрес на который создан заказ
+ * --\--
  */
 class DeliveryOrder extends OrmObject
 {
     protected static $table = 'delivery_order';
+    public $before_delivery_order;
 
     function _init()
     {
@@ -30,7 +44,13 @@ class DeliveryOrder extends OrmObject
                 ->setDescription(t('id заказа')),
             'delivery_type' => (new Type\Varchar())
                 ->setDescription(t('Расчётный клас доставки'))
+                ->setMaxLength(100)
                 ->setList('Shop\Model\DeliveryApi::getTypesAssoc'),
+            'status' => (new Type\Varchar())
+                ->setDescription(t('Статус'))
+                ->setHint(t('Идентификатор статуса во внешней системе'))
+                ->setMaxLength(50)
+                ->setIndex(true),
             'number' => (new Type\Varchar())
                 ->setDescription(t('Номер заказа на доставку')),
             'data' => (new Type\ArrayList())
@@ -48,6 +68,8 @@ class DeliveryOrder extends OrmObject
             'address' => (new Type\Varchar())
                 ->setDescription(t('Адрес на который создан заказ')),
         ]);
+
+        $this->addIndex(['delivery_type', 'status']);
     }
 
     /**
@@ -142,6 +164,11 @@ class DeliveryOrder extends OrmObject
         if ($save_flag === self::INSERT_FLAG) {
             $this['creation_date'] = date('Y-m-d H:i:s');
         }
+
+        if ($save_flag == self::UPDATE_FLAG) {
+            //Сохраняем пердыдущее состояние объекта
+            $this->before_delivery_order = new self($this['id']);
+        }
     }
 
     /**
@@ -183,5 +210,15 @@ class DeliveryOrder extends OrmObject
             unset($extra[$key]);
             $this['extra'] = $extra;
         }
+    }
+
+    /**
+     * Возращает объект заказа
+     *
+     * @return Order
+     */
+    public function getOrder()
+    {
+        return new Order($this['order_id']);
     }
 }

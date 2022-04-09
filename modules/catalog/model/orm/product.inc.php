@@ -40,6 +40,7 @@ use RS\Event\Exception as EventException;
 use RS\Event\Manager as EventManager;
 use RS\Exception as RSException;
 use RS\Helper\CustomView;
+use RS\Helper\Tools;
 use RS\Helper\Tools as HelperTools;
 use RS\Module\AbstractModel\TreeList\AbstractTreeListIterator;
 use RS\Orm\OrmObject;
@@ -78,7 +79,6 @@ use RS\Module\Manager as ModuleManager;
  * @property array $offers Комплектация
  * @property integer $maindir Основная категория
  * @property array $xspec Спец. категория
- * @property string $reservation Предварительный заказ
  * @property integer $brand_id Бренд товара
  * @property string $format Загружен из
  * @property float $rating Средний балл(рейтинг)
@@ -97,11 +97,13 @@ use RS\Module\Manager as ModuleManager;
  * @property array $concomitant_arr 
  * @property array $prop Характеристики товара, используется для сохранения значений
  * @property string $offer_caption Подпись к комплектациям
- * @property array $multioffers Многомерные комрлектации
+ * @property string $offers_json Готовая для быстрого чтения кэш-информация о многомерных и простых комплектациях в формате json
+ * @property array $multioffers Многомерные комплектации
  * @property array $virtual_multioffers Виртуальные многомерные комрлектации
  * @property string $meta_title SEO Заголовок
  * @property string $meta_keywords SEO Ключевые слова(keywords)
  * @property string $meta_description SEO Описание(description)
+ * @property string $video_link Ссылка на youtube видео
  * --\--
  */
 class Product extends OrmObject
@@ -119,6 +121,10 @@ class Product extends OrmObject
     const FLAG_DONT_UPDATE_SEARCH_INDEX = 'dont_update_search_index'; // флаг "не обновлять поисковый индекс" - включать при массовых операциях если поисковые данные не изменяются
     const FLAG_DONT_UPDATE_DIR_COUNTER = 'dont_update_dir_counter'; // флаг "на пересчитывать счётчики товаров у категорий" - включать при массовых операциях для экономии времени
 
+    const DP_NUM_HASH = 'dynamic_num_hash';
+    const DP_COST_ID = 'cost_id';
+    const DP_OLD_COST_ID = 'old_cost_id';
+
     protected static $table = 'product';
     protected static $property_name_id = [];
     protected static $cost_title_id = [];
@@ -132,7 +138,7 @@ class Product extends OrmObject
     protected $keep_update_prod_cat = true; // флаг отвечает за обновление категорий у товара при обновлении товара
     protected $keep_spec_dirs = false; // флаг отвечает за сохранение связей с категориями
     protected $cache_visible_property;
-    protected $cache_amount_step;
+    protected $cache_amount_step = [];
     protected $cache_min_order_quantity;
     protected $cache_max_order_quantity;
     protected $cache_warehouse_stick;
@@ -309,17 +315,6 @@ class Product extends OrmObject
                     'template' => '%catalog%/form/product/specdir.tpl',
                     'meTemplate' => '%catalog%/form/product/mespecdir.tpl'
                 ]),
-                'reservation' => new Type\Enum(['default', 'throughout', 'forced'], [
-                    'allowEmpty' => false,
-                    'default' => 'default',
-                    'description' => t('Предварительный заказ'),
-                    'hint' => t('По-умолчанию означает: как в настройках модуля Магазин'),
-                    'ListFromArray' => [[
-                        'default' => t('По умолчанию'),
-                        'throughout' => t('Запрещено'),
-                        'forced' => t('Только предзаказ')
-                    ]],
-                ]),
                 'brand_id' => new Type\Integer([
                     'maxLength' => '11',
                     'default' => 0,
@@ -370,12 +365,12 @@ class Product extends OrmObject
                     'visible' => false,
                 ]),
                 'group_id' => new Type\Varchar([
-                    'maxLength' => '255',
+                    'maxLength' => '150',
                     'description' => t('Идентификатор группы товаров'),
                     'hint' => t('Вы можете объединять схожие товары в группы, в этом случае другие товары группы будут выступать в качестве комплектаций.<br> Укажите у нескольких товаров один и тот же идентификатор и задайте характеристики у основной комплектации каждого товара группы.', [], 'Описание поля `Идентификатор группы товаров`')
                 ]),
                 'xml_id' => new Type\Varchar([
-                    'maxLength' => '255',
+                    'maxLength' => '150',
                     'description' => t('Идентификатор в системе 1C'),
                     'meVisible' => false
                 ]),
@@ -396,16 +391,14 @@ class Product extends OrmObject
                     'description' => t('Стоимость'),
                     'visible' => false
                 ]),
-                'recommended' => new Type\Varchar([
-                    'maxLength' => 4000,
+                'recommended' => new Type\Text([
                     'description' => t('Рекомендуемые товары'),
                     'visible' => false,
                 ]),
                 'recommended_arr' => new Type\ArrayList([
                     'visible' => false
                 ]),
-                'concomitant' => new Type\Varchar([
-                    'maxLength' => 4000,
+                'concomitant' => new Type\Text([
                     'description' => t('Сопутствующие товары'),
                     'visible' => false,
                 ]),
@@ -448,8 +441,13 @@ class Product extends OrmObject
                     'maxLength' => '200',
                     'hint' => t('Будет отображатся над полями с комплектациями')
                 ]),
+                'offers_json' => new Type\Varchar([
+                    'maxLength' => 32767,
+                    'description' => t('Готовая для быстрого чтения кэш-информация о многомерных и простых комплектациях в формате json'),
+                    'visible' => false,
+                ]),
                 'multioffers' => new Type\ArrayList([
-                    'description' => t('Многомерные комрлектации'),
+                    'description' => t('Многомерные комплектации'),
                     'visible' => false
                 ]),
                 'virtual_multioffers' => new Type\ArrayList([
@@ -480,6 +478,11 @@ class Product extends OrmObject
                 ]),
             t('Фото'),
                 '_photo_' => new Type\UserTemplate('%catalog%/form/product/photos.tpl'),
+            t('Видео'),
+                'video_link' => new Type\Varchar([
+                    'description' => t('Ссылка на youtube видео'),
+                    'hint' => t('Ссылка должна иметь вид https://www.youtube.com/watch?v=ID видеоролика')
+                ]),
         ]);
 
         $config = ConfigLoader::byModule('catalog');
@@ -631,6 +634,9 @@ class Product extends OrmObject
             }
         }
 
+        //При любой записи товара, сбрасываем json кэш. Он будет сформирован при следующем вызове getOffersJson()
+        $this['offers_json'] = null;
+
         return null;
     }
 
@@ -739,7 +745,7 @@ class Product extends OrmObject
         //Многомерные комплектации
         if ($this->isModified('multioffers')) {
             $moffer_api = new MultiOfferLevelApi();
-            if (isset($this['multioffers']['use'])) {
+            if (!empty($this['multioffers']['use'])) {
                 if (!empty($this['multioffers']['is_photo'])) { //Флаг "С фото" У многомерных комплектаций
                     $multioffers = $this['multioffers'];
                     $multioffers['levels'][$this['multioffers']['is_photo'] - 1]['is_photo'] = 1;
@@ -758,7 +764,7 @@ class Product extends OrmObject
         }
 
         //Обновляем поисковый индекс
-        if (!$this->getFlag(self::FLAG_DONT_UPDATE_SEARCH_INDEX)) {
+        if (!$this->getFlag(self::FLAG_DONT_UPDATE_SEARCH_INDEX) && !$this->getLocalParameter('duplicate_updated')) {
             $this->updateSearchIndex();
         }
 
@@ -829,6 +835,16 @@ class Product extends OrmObject
             $this->fillOffersStock();
         }
 
+        $this->buildOffersStockStars($this['offers']['items']);
+    }
+
+    /**
+     * Заполняет поле sticks у каждой комплектации
+     *
+     * @param array $offer_items
+     * @return mixed
+     */
+    protected function buildOffersStockStars($offer_items) {
         $config = ConfigLoader::byModule($this);
         $warehouse_stars = explode(",", $config['warehouse_sticks']);
 
@@ -839,8 +855,9 @@ class Product extends OrmObject
             $warehouses_ids[] = $item['id'];
         }
 
-        foreach ($this['offers']['items'] as $offer) {
+        foreach ($offer_items as $key => $offer) {
             $sticks = [];
+            $available = 0;
             foreach ($offer['stock_num'] as $warehouse_id => $stock_num) {
                 if (in_array($warehouse_id, $warehouses_ids)) {
                     $sticks[$warehouse_id] = 0;
@@ -849,10 +866,14 @@ class Product extends OrmObject
                             $sticks[$warehouse_id] = $sticks[$warehouse_id] + 1;
                         }
                     }
-                    $offer['sticks'] = $sticks;
+                    $offer_items[$key]['sticks'] = $sticks;
+                    if ($stock_num > 0) $available++;
                 }
             }
+            $offer_items[$key]['availableOn'] = $available;
         }
+
+        return $offer_items;
     }
 
     /**
@@ -1401,6 +1422,9 @@ class Product extends OrmObject
         if ($this->calculate_user_cost === null) {
             //Пересчитываем автоматические цены
             $costapi = CostApi::getInstance();
+            $costapi->setSiteContext($this['site_id'])
+                ->resetQueryObject();
+
             $this['xcost'] = $costapi->getCalculatedCostList($this['xcost']);
 
             //Сохраним объект текущей валюты
@@ -1612,60 +1636,59 @@ class Product extends OrmObject
         if (empty($this['id']))
             return false;
 
-        //Удаляем фотографии, при удалении товара
-        $photoapi = new PhotoApi();
-        $photoapi->setFilter('linkid', $this['id']);
-        $photoapi->setFilter('type', 'catalog');
-        /** @var PhotoImage[] $photo_list */
-        $photo_list = $photoapi->getList();
-        foreach ($photo_list as $photo) {
-            $photo->delete();
+        if ($result = parent::delete()) {
+            //Удаляем фотографии, при удалении товара
+            $photoapi = new PhotoApi();
+            $photoapi->setFilter('linkid', $this['id']);
+            $photoapi->setFilter('type', 'catalog');
+            /** @var PhotoImage[] $photo_list */
+            $photo_list = $photoapi->getList();
+            foreach ($photo_list as $photo) {
+                $photo->delete();
+            }
+
+            //Удляем связи с директориями
+            OrmRequest::make()->delete()
+                ->from(new Xdir())
+                ->where(['product_id' => $this['id']])
+                ->exec();
+
+            //Удаляем цены
+            OrmRequest::make()->delete()
+                ->from(new Xcost())
+                ->where(['product_id' => $this['id']])
+                ->exec();
+
+            //Удаляем комплектации
+            OrmRequest::make()->delete()
+                ->from(new Offer())
+                ->where(['product_id' => $this['id']])
+                ->exec();
+
+            //Удаляем многомерные комплектации
+            OrmRequest::make()->delete()
+                ->from(new MultiOfferLevel())
+                ->where(['product_id' => $this['id']])
+                ->exec();
+
+            //Удаляем характеристики
+            OrmRequest::make()->delete()
+                ->from(new Property\Link())
+                ->where(['product_id' => $this['id']])
+                ->exec();
+
+            //Удаляем остатки на складах
+            OrmRequest::make()->delete()
+                ->from(new Xstock())
+                ->where(['product_id' => $this['id']])
+                ->exec();
+
+            //Удаляем из поискового индекса
+            IndexApi::removeFromSearch($this, $this['id']);
+            DirApi::updateCounts(); //Обновляем счетчики у категорий
         }
 
-        //Удляем связи с директориями
-        OrmRequest::make()->delete()
-            ->from(new Xdir())
-            ->where(['product_id' => $this['id']])
-            ->exec();
-
-        //Удаляем цены
-        OrmRequest::make()->delete()
-            ->from(new Xcost())
-            ->where(['product_id' => $this['id']])
-            ->exec();
-
-        //Удаляем комплектации
-        OrmRequest::make()->delete()
-            ->from(new Offer())
-            ->where(['product_id' => $this['id']])
-            ->exec();
-
-        //Удаляем многомерные комплектации
-        OrmRequest::make()->delete()
-            ->from(new MultiOfferLevel())
-            ->where(['product_id' => $this['id']])
-            ->exec();
-
-        //Удаляем характеристики
-        OrmRequest::make()->delete()
-            ->from(new Property\Link())
-            ->where(['product_id' => $this['id']])
-            ->exec();
-
-        //Удаляем остатки на складах
-        OrmRequest::make()->delete()
-            ->from(new Xstock())
-            ->where(['product_id' => $this['id']])
-            ->exec();
-
-        //Удаляем из поискового индекса
-        IndexApi::removeFromSearch($this, $this['id']);
-
-        $ret = parent::delete();
-
-        DirApi::updateCounts(); //Обновляем счетчики у категорий
-
-        return $ret;
+        return $result;
     }
 
     /**
@@ -1708,7 +1731,7 @@ class Product extends OrmObject
     public function getBaseCost($cost_id = null, $offer_id = null)
     {
         if ( $this->getUserCost() !== null ) {
-            $cost = $this->user_cost;
+            $cost = $this->getUserCost();
         } else {
             $this->fillCost();
 
@@ -1835,6 +1858,9 @@ class Product extends OrmObject
                 }
 
                 $cost_api = new CostApi();
+                $cost_api
+                    ->setSiteContext($this['site_id'])
+                    ->resetQueryObject();
                 $xcost = $cost_api->getCalculatedCostList($xcost);
             }
             $this->offer_xcost[$offer_key] = $xcost;
@@ -2079,6 +2105,7 @@ class Product extends OrmObject
 
             $api = new Api();
             $api->setFilter('id', (array)$this['concomitant_arr']['product'], 'in');
+            $api->setOrder('FIELD(id, '.implode(',', \RS\Helper\Tools::arrayQuote((array)$this['concomitant_arr']['product'])).')');
             $list = $api->getAssocList('id');
 
             foreach($list as $id => $product) {
@@ -2391,7 +2418,7 @@ class Product extends OrmObject
                 return false;
             default: {
                 $shop_config = ConfigLoader::byModule('shop');
-                return ($this->getNum() < 1 && $shop_config['reservation'] && $shop_config['check_quantity']);
+                return ($this->getNum() <= 0 && $shop_config['reservation'] && $shop_config['check_quantity']);
             }
         }
     }
@@ -2614,7 +2641,7 @@ class Product extends OrmObject
      */
     private function fillMultiOffersPhotoValuesByLevel($level_position, $level)
     {
-        static $offers_prop_vals = []; //Массив для хранения уникальных значений характеристик комплектаций
+        $offers_prop_vals = []; //Массив для хранения уникальных значений характеристик комплектаций
         $level_title = !empty($level['title']) ? $level['title'] : $level['prop_title'];
 
         if ($this['images'] === null) { //Если фотографии ещё не подгруженны
@@ -2642,9 +2669,11 @@ class Product extends OrmObject
      * Если включен контроль остатков - общее количество товара и остаток выбранной комплектации больше нуля - возвращает true
      * В остальных случаях - false
      *
+     * @param bool $only_main_offer - Если true, то информация предоставляется только по основной комплектации.
+     * Если false, то по всему товару, т.е. если общий остаток > 0, значит вернется true
      * @return false
      */
-    function isAvailable()
+    function isAvailable($only_main_offer = true)
     {
         $shop_config = ConfigLoader::byModule('shop');
         if (!$shop_config || !$shop_config['check_quantity']) {
@@ -2654,7 +2683,20 @@ class Product extends OrmObject
         if ($this->getNum() <= 0) {
             return false;
         }
-        return !$this->isOffersUse() || $this->getNum(0) > 0;
+
+        //Если мы находимся тут, то общий остаток товара > 0
+
+        if ($only_main_offer) {
+            //Проверяем остаток у основной комплектации, если простых комплектаций больше одной
+            if ($this->fast_mark_offers_use === false) {
+                return true;
+            }
+
+            $offers_data = $this->getOffersJson(['images' => []], true);
+            return !$offers_data || (!empty($offers_data['offers']) && $offers_data['offers'][0]['num'] > 0);
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -2959,30 +3001,42 @@ class Product extends OrmObject
     /**
      * Возвращает шаг количества товара
      *
+     * @param int $offer_id ID комплектации, если необходимо узнать ее шаг изменения количества
      * @param bool $cache - использовать кеш
      * @return float
      */
-    function getAmountStep($cache = true)
+    function getAmountStep($offer_id = 0, $cache = true)
     {
-        if (!$this->cache_amount_step || !$cache) {
-            $amount_step = 1;
+        if (!isset($this->cache_amount_step[$offer_id]) || !$cache) {
+            //Находим шаг товара
             if ((float)$this['amount_step']) {
                 $amount_step = (float)$this['amount_step'];
-            } elseif ((float)$this->getUnit('amount_step')) {
+            } else {
                 $amount_step = (float)$this->getUnit('amount_step');
             }
 
-            // todo описать событие в документации
+            //Находим шаг необходимой комплектации
+            if ($offer_id && !$this->isMainOffer($offer_id)) {
+                $offers = $this->fillOffers();
+                if (isset($offers['items'][$offer_id])) {
+                    if ($tmp_amount_step = (float)$offers['items'][$offer_id]->getUnit('amount_step')) {
+                        $amount_step = $tmp_amount_step;
+                    }
+                }
+            }
+            $amount_step = $amount_step ?: 1;
+
             $event_result = EventManager::fire('product.amountstep', [
                 'product' => $this,
+                'offer_id' => $offer_id,
                 'amount_step' => $amount_step,
             ]);
             $result_data = $event_result->getResult();
             $amount_step = $result_data['amount_step'];
 
-            $this->cache_amount_step = $amount_step;
+            $this->cache_amount_step[$offer_id] = $amount_step;
         }
-        return $this->cache_amount_step;
+        return $this->cache_amount_step[$offer_id];
     }
 
     /**
@@ -2997,8 +3051,8 @@ class Product extends OrmObject
             $min_order_quantity = 0;
             if ((float)$this['min_order']) {
                 $min_order_quantity = (float)$this['min_order'];
-            } elseif ((float)$this->getUnit()['min_order_quantity']) {
-                $min_order_quantity = (float)$this->getUnit()['min_order_quantity'];
+            } elseif ((float)$this->getUnit('min_order_quantity')) {
+                $min_order_quantity = (float)$this->getUnit('min_order_quantity');
             }
 
             // todo описать событие в документации
@@ -3025,8 +3079,8 @@ class Product extends OrmObject
             $max_order_quantity = 0;
             if ((float)$this['max_order']) {
                 $max_order_quantity = (float)$this['max_order'];
-            } elseif ((float)$this->getUnit()['max_order_quantity']) {
-                $max_order_quantity = (float)$this->getUnit()['max_order_quantity'];
+            } elseif ((float)$this->getUnit('max_order_quantity')) {
+                $max_order_quantity = (float)$this->getUnit('max_order_quantity');
             }
 
             // todo описать событие в документации
@@ -3090,5 +3144,390 @@ class Product extends OrmObject
     public function setFlag(string $flag, $value = true): void
     {
         $this->flags[$flag] = $value;
+    }
+
+    /**
+     * Возвращает ID ыидео, полученный из ссылки
+     *
+     * @return string
+     */
+    public function getYoutubeVideoId()
+    {
+        if ($this['video_link'] && preg_match('/watch\?v=([^&]+)/', $this['video_link'], $match)) {
+            return $match[1];
+        }
+    }
+
+    /**
+     * Возвращает специально подготовленный JSON о комплектациях товара.
+     * Данный json будет использоваться в теме оформления для вывода комплектаций в списках,
+     * а также в карточке товара.
+     *
+     * Данный JSON кэшируется у товара в базе, в случае если поле offers_json пустое, оно формируется налету
+     * и записывается в базу.
+     *
+     * Данный JSON учитывает настройки ReadyScript и возвращает актуальную информацию даже с учетом текущего
+     * выбранного филиала (на Мегамаркете)
+     *
+     * @param array $options Массив, с помощью которого можно указывать размер и масштабирование фото товара,
+     * ссылки на которые будут представлены в json. Пример:
+     * [
+     *   'noVirtual' => false, // Если true, то не возвращать json, если товар содержит виртуальные многомерные
+     *   'disableCheckOffers' => false, //Если true, то будет возвращен массив с информацией даже об одной основной комплектации
+     *   'images' => [
+     *       'url' => [
+     *           'width' => 268,
+     *           'height' => 268,
+     *           'scale' => 'xy'
+     *        ],
+     *       'url2x' => [
+     *           'width' => 536,
+     *           'height' => 536,
+     *           'scale' => 'xy'
+     *       ]
+     *   ]
+     *];
+     *
+     * @param bool $as_array
+     * @param bool $cache Если true, то данные первично будут браться из кэша в базе.
+     * @param bool $update_db Если true, каждый раз, когда кэш в базе не найден, он будет там создан
+     * @return null|string
+     */
+    public function getOffersJson(array $options = [], $as_array = false, $cache = true, $update_db = true)
+    {
+        if (!empty($options['noVirtual']) && $this['group_id']) {
+            return;
+        }
+
+        $dynamic_params = [
+            self::DP_NUM_HASH => $this->dynamic_num_warehouses_id ? implode(',', $this->dynamic_num_warehouses_id) : '',
+            self::DP_COST_ID => (string)CostApi::getUserCost(),
+            self::DP_OLD_COST_ID => (string)CostApi::getOldCostId(),
+        ];
+
+        if (!empty($options['disableCheckOffers']) || ($this->isMultiOffersUse()
+            || $this->isVirtualMultiOffersUse() || $this->isOffersUse()) ) {
+
+            if ($cache && $this['offers_json']) {
+                $data = json_decode( $this['offers_json'], true);
+            } else {
+                $this->fillOffers();
+                $this->fillOffersStock();
+                $this->fillMultiOffers();
+                $this->fillMultiOffersPhotos();
+                $this->fillVirtualMultiOffers();
+                $data = [];
+                $data = $this->getOffersJsonMultioffersSection($data);
+                $data = $this->getOffersJsonOffersSection($data, $dynamic_params);
+                $data = $this->getOffersJsonVirtualSection($data);
+
+                $this->updateOffersJson($data, $update_db);
+            }
+
+            $data = $this->fixDynamicBefore($data, $dynamic_params);
+            $this->updateOffersJson($data, $update_db);
+            $data = $this->fixDynamicAfter($data, $dynamic_params);
+            $data = $this->prepareOffersImagesUrl($data, $options);
+
+            if ($data) {
+                return $as_array ? $data : json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            }
+        }
+    }
+
+    /**
+     * Заполняет корректно поле num (остаток товара),
+     * в случае, если в JSON нет данных об остатках с учетом связанных с текущим филиалом складов,
+     * то остаток высчитывается и происходит частичная коррекция данных в offers_json в базе.
+     *
+     * Заполняет корректно поля price, oldPrice.
+     *
+     * @param array $data
+     * @param array $dynamic_params Динамические данные
+     * @return array
+     */
+    protected function fixDynamicBefore($data, $dynamic_params)
+    {
+        //Дополняем данные, которые пойдут в БД в offers_json
+        foreach($data['offers'] as &$offer_data) {
+            //Остатки
+            if ($dynamic_params[self::DP_NUM_HASH]) {
+                if (!isset($offer_data['dynamic_num'][$dynamic_params[self::DP_NUM_HASH]])) {
+                    $offer_data['dynamic_num'][$dynamic_params[self::DP_NUM_HASH]] = $this->getNum($offer_data['id']);
+                }
+            } else {
+                if (!isset($offer_data['num'])) {
+                    $offer_data['num'] = $this->getNum($offer_data['id']);
+                }
+            }
+
+            //Цены
+            if (!isset($offer_data['prices'][$dynamic_params[self::DP_COST_ID]])) {
+                $offer_data['prices'][$dynamic_params[self::DP_COST_ID]]
+                        = $this->getCost($dynamic_params[self::DP_COST_ID], $offer_data['id']);
+            }
+            if (!isset($offer_data['oldPrices'][$dynamic_params[self::DP_OLD_COST_ID]])) {
+                $offer_data['oldPrices'][$dynamic_params[self::DP_OLD_COST_ID]]
+                        = $this->getCost($dynamic_params[self::DP_OLD_COST_ID], $offer_data['id']);
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * Заполняет корректно поля price, oldPrice.
+     * В случае необходимости догружает данные в БД по новым cost_id, old_cost_id
+     *
+     * @param array $data
+     * @param array $dynamic_params динамические параметры
+     * @return array
+     */
+    protected function fixDynamicAfter($data, $dynamic_params)
+    {
+        //Дополняем секцию sticks у комплектаций
+        $data['offers'] = $this->buildOffersStockStars($data['offers']);
+
+        //Дополняем runtime данные корректным num
+        foreach($data['offers'] as &$offer_data) {
+            if ($dynamic_params[self::DP_NUM_HASH]) {
+                $offer_data['num'] = $offer_data['dynamic_num'][$dynamic_params[self::DP_NUM_HASH]];
+            }
+
+            unset($offer_data['dynamic_num']); //В публичной зоне dynamic_num нам никогда не понадобится
+            unset($offer_data['stock_num']);
+
+            $offer_data['price'] = $offer_data['prices'][$dynamic_params[self::DP_COST_ID]];
+            $offer_data['oldPrice'] = $offer_data['oldPrices'][$dynamic_params[self::DP_OLD_COST_ID]];
+
+            //В публичной зоне не показываем все цены
+            unset($offer_data['prices']);
+            unset($offer_data['oldPrices']);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Обновляет поле offers_json в БД
+     *
+     * @param $data
+     * @param $update_db
+     */
+    protected function updateOffersJson($data, $update_db)
+    {
+        $new_json = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        if ($update_db && $this['offers_json'] != $new_json) {
+            Request::make()
+                ->update($this)
+                ->set(['offers_json' => $new_json])
+                ->where(['id' => $this['id']])
+                ->exec(); //Обновим кэш
+        }
+        $this['offers_json'] = $new_json;
+    }
+
+
+    /**
+     * Подготавиливает секцию levels со сведениями об уровнях многомерной комплектации
+     *
+     * @param array $data Начальный массив с данными о комплектациях
+     * @return array
+     */
+    protected function getOffersJsonMultioffersSection(array $data)
+    {
+        //Добавляем сведения об уровнях многомерных комплектаций
+        if ($this['multioffers']['use']) {
+
+            $data += [
+                'levels' => []
+            ];
+            foreach($this['multioffers']['levels'] as $prop_id => $level) {
+
+                $level_arr = [
+                    'id'   => $prop_id,
+                    'title' => $level['title'] ?: ['prop_title'],
+                    'type' => $level['prop_type'],
+                    'isPhoto' => (int)($level['is_photo'] ?? 0),
+                    'isVirtual' => (int)($level['is_virtual'] ?? 0),
+                    'values' => []
+                ];
+                foreach($level['values'] as $value) {
+                    $value_arr = [
+                        'text' => $value['val_str'],
+                        'color' => $value['color'],
+                    ];
+
+                    if ($value['image']) {
+                        $value_arr['image'] = [
+                            'url' => $value['__image']->getUrl(32, 32, 'cxy'),
+                            'url2x' => $value['__image']->getUrl(64, 64, 'cxy')
+                        ];
+                    }
+                    if (isset($level['values_photos'][$value['val_str']])) {
+                        $value_arr['image'] = [
+                            'url' => $level['values_photos'][$value['val_str']]->getUrl(32,32, 'axy'),
+                            'url2x' => $level['values_photos'][$value['val_str']]->getUrl(64,64, 'axy'),
+                        ];
+                    }
+
+                    $level_arr['values'][] = $value_arr;
+                }
+                $data['levels'][] = $level_arr;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Подготавливает секции offers, со сведениями о комплектациях
+     *
+     * @param array $data Начальный массив с данными о комплектациях
+     * @param array $dynamic_params Уникальные параметры для пользователя
+     * @return array
+     */
+    protected function getOffersJsonOffersSection(array $data, $dynamic_params)
+    {
+        $data += [
+            'offers' => [],
+            'images' => [],
+        ];
+
+        $data['mainOfferId'] = (int)$this->getMainOffer()->id;
+        if ($data['levels'] || count($this['offers']['items'])) {
+            $data['offersCaption'] = $this['offer_caption'] ?: t('Комплектация');
+
+            //Добавляем сведения об изображениях
+            foreach ($this->getImages() as $image_id => $image) {
+                $data['images'][(string)$image['id']] = $image->getValues();
+            }
+
+            //Добавляем сведения о простых комплектациях
+            foreach ($this['offers']['items'] as $offer_id => $offer) {
+                $offer_data = [
+                    'id' => $offer_id,
+                    'title' => $offer['title'],
+                    'barcode' => $data['mainOfferId'] == $offer['id'] ? $this['barcode'] : $offer['barcode'],
+                    'prices' => [
+                        $dynamic_params[self::DP_COST_ID] = $this->getCost(null, $offer_id),
+                    ],
+                    'oldPrices' => [
+                        $dynamic_params[self::DP_OLD_COST_ID] = $this->getOldCost($offer_id),
+                    ],
+                    'stock_num' => $offer['stock_num'],
+                    'unit' => $offer->getUnit()->stitle,
+                    'info' => []
+                ];
+
+                if ($dynamic_params[self::DP_NUM_HASH]) {
+                    $offer_data['dynamic_num'][$dynamic_params[self::DP_NUM_HASH]] = $this->getNum($offer_id);
+                } else {
+                    $offer_data['num'] = $this->getNum($offer_id);
+                }
+
+                if (is_array($offer['propsdata_arr'])) {
+                    foreach ($offer['propsdata_arr'] as $key => $value) {
+                        $offer_data['info'][] = [$key, $value];
+                    }
+                }
+
+                if (is_array($offer['photos_arr'])) {
+                    $offer_data['photos'] = $offer['photos_arr'];
+                }
+
+                $data['offers'][] = $offer_data;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Формирует массив данных по виртуальным многомерным комплектациям
+     *
+     * @param $data
+     * @return array
+     */
+    protected function getOffersJsonVirtualSection($data)
+    {
+        if ($this->isVirtualMultiOffersUse()) {
+            $data['virtual'] = [];
+            foreach($this['virtual_multioffers']['items'] as $product_id => $offer) {
+
+                $item = [
+                    'product_id' => $product_id,
+                    'url' => $offer['url'],
+                    'info' => []
+                ];
+                foreach($offer['values'] as $key => $value) {
+                    $item['info'][] = [$key, $value];
+                }
+
+                $data['virtual'][] = $item;
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * Заменяет изображеия на конкретные ссылки на эти изображения
+     *
+     * @param array $data Начальный массив с данными о комплектациях
+     * @param array $options
+     * @return array
+     */
+    protected function prepareOffersImagesUrl($data, array $options)
+    {
+        $options += [
+            'images' => [
+                'url' => [
+                    'width' => 268,
+                    'height' => 268,
+                    'scale' => 'xy'
+                ],
+                'url2x' => [
+                    'width' => 536,
+                    'height' => 536,
+                    'scale' => 'xy'
+                ]
+            ]
+        ];
+
+        //Пост-обработка
+        if (isset($data['images']) && $options['images']) {
+            foreach ($data['images'] as $id => $image_array) {
+                if ($image_array['id']) {
+                    $img_object = new PhotoImage();
+                } else {
+                    $img_object = new PhotoStub();
+                }
+                $img_object->getFromArray($image_array);
+                $data['images'][$id] = [];
+                if (!isset($data['mainImageId'])) {
+                    $data['mainImageId'] = $id;
+                }
+                foreach ($options['images'] as $key => $size_pack) {
+                    $data['images'][$id][$key] = $img_object->getUrl($size_pack['width'], $size_pack['height'], $size_pack['scale']);
+                }
+            }
+        } else {
+            unset($data['images']);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Очищает кэш сведения по комплектациям товара.
+     * Они будут восстановлены при следующем обращении к getOffersJson
+     *
+     * @param $id
+     */
+    public static function resetOffersJsonCache($id) {
+        Request::make()
+            ->update(self::_getTable())
+            ->set(['offers_json' => null])
+            ->where(['id' => $id])
+            ->exec();
     }
 }

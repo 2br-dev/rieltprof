@@ -3,7 +3,7 @@
     <textarea name="xml_request" style="display:none">{$xml}</textarea>
     <input type="submit" value="{t}Отправить{/t}" style="display:none"/>
 </form>
-<script type="text/javascript">
+<script>
     $("#printFormCdek").submit();
     setTimeout('$(".ui-dialog-titlebar-close").click()',3000);
 </script>

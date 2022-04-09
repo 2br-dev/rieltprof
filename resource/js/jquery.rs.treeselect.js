@@ -191,7 +191,7 @@
                     });
                     html += '</span>';
                     html += '<span class="tree-select_selected-value-item_title-end-part">' + path_name.slice(-1)[0] + '</span>';
-                    html += '<i class="tree-select_selected-value-item_remove zmdi zmdi-close"></i>';
+                    html += '<i class="tree-select_selected-value-item_remove zmdi zmdi-close"><!----></i>';
                     html += '</li>';
 
                     $($this.options.selectedValues, $this).append(html);

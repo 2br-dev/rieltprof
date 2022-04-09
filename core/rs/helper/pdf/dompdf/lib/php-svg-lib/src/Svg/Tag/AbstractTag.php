@@ -2,7 +2,7 @@
 /**
  * @package php-svg-lib
  * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
+ * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license GNU LGPLv3+ http://www.gnu.org/copyleft/lesser.html
  */
 
@@ -21,12 +21,12 @@ abstract class AbstractTag
     /** @var Style */
     protected $style;
 
-    protected $attributes = [];
+    protected $attributes = array();
 
     protected $hasShape = true;
 
     /** @var self[] */
-    protected $children = [];
+    protected $children = array();
 
     public function __construct(Document $document, $tagName)
     {
@@ -134,7 +134,7 @@ abstract class AbstractTag
 
             $transform = $attributes["transform"];
 
-            $match = [];
+            $match = array();
             preg_match_all(
                 '/(matrix|translate|scale|rotate|skewX|skewY)\((.*?)\)/is',
                 $transform,
@@ -142,7 +142,7 @@ abstract class AbstractTag
                 PREG_SET_ORDER
             );
 
-            $transformations = [];
+            $transformations = array();
             if (count($match[0])) {
                 foreach ($match as $_match) {
                     $arguments = preg_split('/[ ,]+/', $_match[2]);
@@ -166,7 +166,14 @@ abstract class AbstractTag
                         break;
 
                     case "rotate":
-                        $surface->rotate($t[1]);
+                        if (isset($t[2])) {
+                            $t[3] = isset($t[3]) ? $t[3] : 0;
+                            $surface->translate($t[2], $t[3]);
+                            $surface->rotate($t[1]);
+                            $surface->translate(-$t[2], -$t[3]);
+                        } else {
+                            $surface->rotate($t[1]);
+                        }
                         break;
 
                     case "skewX":

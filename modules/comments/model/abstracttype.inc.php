@@ -8,6 +8,9 @@
 
 namespace Comments\Model;
 
+use Comments\Model\Orm\Comment;
+use RS\Orm\Request;
+
 /**
 * Абстрактный класс типов комментариев
 */
@@ -52,5 +55,32 @@ abstract class Abstracttype implements IType
     */    
     function onAdd()
     {}
+
+    /**
+     * Возвращает количество различных оценок
+     *
+     * @return array
+     */
+    function getMarkMatrix()
+    {
+        $api = new \Comments\Model\Api();
+        return $api->getMarkMatrix($this->getLinkId(), $this->getTypeId(), 5);
+    }
+
+    /**
+     * Возвращает среднюю оценку комментариев
+     *
+     * @return float
+     */
+    function getRatingBall()
+    {
+        $rate = Request::make()
+            ->select('AVG(rate)')
+            ->from(new Comment())
+            ->where([
+                'type' => $this->getTypeId()
+            ])->exec()->fetchSelected(null, 'AVG(rate)');
+        return round($rate[0], 2);
+    }
 }
 

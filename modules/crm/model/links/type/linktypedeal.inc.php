@@ -7,6 +7,7 @@
 */
 namespace Crm\Model\Links\Type;
 
+use Crm\Model\DealApi;
 use Crm\Model\Orm\Deal;
 use Crm\Model\OrmType\SelectDeal;
 use RS\Orm\FormObject;
@@ -24,6 +25,8 @@ class LinkTypeDeal extends AbstractType
      * @var Order
      */
     public $linked_object;
+
+    protected $last_objects_template = '%crm%/admin/links/lastobjects/deal.tpl';
 
     /**
      * Возвращает имя закладки, характеризующей данную связь
@@ -113,5 +116,20 @@ class LinkTypeDeal extends AbstractType
             $url = Manager::obj()->getAdminUrl('edit', ['id' => $this->linked_object->id], 'crm-dealctrl');
             return $url;
         }
+    }
+
+    /**
+     * Возвращает последние $limit объектов, с которыми возможно установить связь
+     *
+     * @param integer $limit
+     * @return []
+     */
+    public function getLastObjects($limit = null)
+    {
+        if (!$limit) {
+            $limit = 10;
+        }
+        $api = new DealApi();
+        return $api->getList(1, $limit, 'id DESC');
     }
 }

@@ -15,13 +15,13 @@
             <a class="add-some-property underline text-nowrap"><i class="zmdi zmdi-plus-circle-o-duplicate m-r-5"></i> <span>{t}Вставить несколько характеристик{/t}</span></a>
             <span class="success-text">{t}Характеристика успешно добавлена{/t}</span>
         </div>
-        {include file="property_form.tpl" value_types=$field->callPropertyFunction('getPropertyItemAllowTypeData')}
+        {include file="%catalog%/form/product/property_form.tpl" value_types=$field->callPropertyFunction('getPropertyItemAllowTypeData')}
     </div>
 
     <table class="property-container">
         <tbody class="overable">
         {foreach from=$elem->getPropObjects() item=group key=key}
-            {include file="property_group_product.tpl" group=$group owner_type="group"}
+            {include file="%catalog%/form/product/property_group_product.tpl" group=$group owner_type="group"}
         {/foreach}
         </tbody>
     </table>

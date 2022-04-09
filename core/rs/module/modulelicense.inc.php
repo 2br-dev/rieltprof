@@ -22,6 +22,7 @@ class ModuleLicense extends AbstractObject
     {
         $this->getPropertyIterator()->append([
             'module' => (new Type\Varchar())
+                ->setMaxLength(64)
                 ->setDescription(t('Имя модуля')),
             'data' => (new Type\Blob())
                 ->setDescription(t('Данные лицензии')),

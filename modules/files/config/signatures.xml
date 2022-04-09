@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>17830b8beb6ff75f6a0e1c7decc1a7bc0efc1b60</sign>
+    <sign>687b493e7d14ca9816a6f2c22bb2bbaf6b8691c0</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -22,11 +22,11 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>a75702b5cab6902e8c4b48addadab542be17cc6f</sign>
+    <sign>03c8b6c6f4f8fe9456a6a82d6239ac38388e83c4</sign>
   </file>
   <file>
     <path>controller/admin/block/files.inc.php</path>
-    <sign>451a327e28cf0cb6a276fbce8cdc4b5660cf898c</sign>
+    <sign>d98b0e3ddeb36e2d86996162a54b765d3f625f9f</sign>
   </file>
   <file>
     <path>controller/admin/download.inc.php</path>
@@ -62,11 +62,23 @@
   </file>
   <file>
     <path>model/orm/file.inc.php</path>
-    <sign>eaff12475de60e779917583a02cde52af4c1133c</sign>
+    <sign>f274b7d105a6f83fb4049ad6f93b1d2e5bde6860</sign>
   </file>
   <file>
     <path>model/ormtype/files.inc.php</path>
     <sign>c8aab7df17fa41d58d6d4b6d8b3091c6d2d84af7</sign>
+  </file>
+  <file>
+    <path>view/adminblocks/files/filesblock.tpl</path>
+    <sign>1d337357cec14d58d68c43c86442d7f25d975453</sign>
+  </file>
+  <file>
+    <path>view/adminblocks/files/form_maker.tpl</path>
+    <sign>e9b0223b0fae724c3738ca1c2cab091e6f45ec77</sign>
+  </file>
+  <file>
+    <path>view/adminblocks/files/one_file.tpl</path>
+    <sign>fb290ad22527439a916d7af43661a858cdf357da</sign>
   </file>
   <file>
     <path>view/catalog/product_files.tpl</path>
@@ -77,24 +89,12 @@
     <sign>40366edd93c5a4568ac2050481a3f1b9b3d85a8d</sign>
   </file>
   <file>
-    <path>view/filesblock.tpl</path>
-    <sign>c773dfb104cceacf15d8eda2e98ff3c8191bc275</sign>
-  </file>
-  <file>
-    <path>view/form_maker.tpl</path>
-    <sign>e9b0223b0fae724c3738ca1c2cab091e6f45ec77</sign>
-  </file>
-  <file>
     <path>view/js/files.js</path>
     <sign>56c71cdac7dedd8bd16080c362d729fbf0ddb672</sign>
   </file>
   <file>
     <path>view/notice/purchasefilestouser.tpl</path>
     <sign>0b1e11f231af599db85064803f168193ed53004b</sign>
-  </file>
-  <file>
-    <path>view/one_file.tpl</path>
-    <sign>fb290ad22527439a916d7af43661a858cdf357da</sign>
   </file>
   <file>
     <path>view/ormtype/files.tpl</path>
@@ -104,5 +104,5 @@
     <path>view/shop/order_files.tpl</path>
     <sign>07022e570d5a0229b98040589c2aba22e907492b</sign>
   </file>
-  <masterSign>8fe8a186cfb605f93b2910f14132102558e28efe7dc7f3eeefefdd26eb2536d83d48d59d63e9646da763fd3bb1a5c7d89588fc2fbbd234d26e521722bcdd56b0f51bd6c2fdbf79b06667be371fc22dee95686954a42e3a4b5ebafa4e11cab5ec26c3921b316d96ed544c550ed9478db1260333786591a679b41df1a404af557a</masterSign>
+  <masterSign>4911dad61ff39d25f47ca60e662403467df23b907a73084cfc8b2b9044da667522ac609fe770eb4ebd32ffcb4179d8b21d5ab6bc228289045b1cd429e5fca5c66e0bd3243bbdbf2b061d6152ce7280fa52eec782b10500d9c0147a2db2e89d995f9e0bcac0d8474049c1dacbf0cc1787b632973418db0f8e3fce92455b5cc2a4</masterSign>
 </signatures>

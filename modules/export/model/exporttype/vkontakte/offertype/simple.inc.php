@@ -42,8 +42,8 @@ class Simple extends AbstractOfferType
      * @param ExportProfile $profile
      * @param \XMLWriter $writer
      * @param mixed $product
-     * @param mixed $offer_index
+     * @param mixed $offer_id
      */
-    public function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_index)
+    public function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_id)
     {}
 }

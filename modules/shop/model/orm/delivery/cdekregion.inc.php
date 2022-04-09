@@ -15,6 +15,16 @@ use RS\Orm\Type;
  * ORM объект описывает один регион из справочника СДЭК.
  * Справочник регионов доставки СДЭК теперь находится в БД, он будет обновляться либо
  * по кнопке в настройках модуля Магазин, либо по крону
+ * --/--
+ * @property integer $code Код населенного пункта СДЭК
+ * @property string $city Название населенного пункта
+ * @property string $fias_guid Уникальный идентификатор ФИАС населенного пункта
+ * @property string $kladr_code Код КЛАДР населенного пункта
+ * @property string $country Название страны населенного пункта
+ * @property string $region Название региона населенного пункта
+ * @property string $sub_region Название района региона населенного пункта
+ * @property integer $processed Флаг "обработан"
+ * --\--
  */
 class CdekRegion extends AbstractObject
 {
@@ -38,7 +48,7 @@ class CdekRegion extends AbstractObject
                 ->setMaxLength(50),
             'region' => (new Type\Varchar())
                 ->setDescription(t('Название региона населенного пункта'))
-                ->setMaxLength(100),
+                ->setMaxLength(50),
             'sub_region' => (new Type\Varchar())
                 ->setDescription(t('Название района региона населенного пункта'))
                 ->setMaxLength(50),

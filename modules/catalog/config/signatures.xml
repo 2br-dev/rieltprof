@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>a55ab095d9491cc0b81e36ffa7eafcc077978d78</sign>
+    <sign>7360d23c8b93896dd6b353df21c521c0cf9c9e04</sign>
   </file>
   <file>
     <path>config/demo/brand.csv</path>
@@ -10,7 +10,7 @@
   </file>
   <file>
     <path>config/demo/dir.csv</path>
-    <sign>9f1c838a6e37ac4d46fae474417185868d826a30</sign>
+    <sign>72b8f524b27659316f2434fad1a6176a82a75557</sign>
   </file>
   <file>
     <path>config/demo/dirproperty.csv</path>
@@ -2962,15 +2962,19 @@
   </file>
   <file>
     <path>config/demo/offer.csv</path>
-    <sign>eba0adb58273b22d3b7c2680b4cc4b0f39c6e52e</sign>
+    <sign>1d0aa257ab50bdc7571c564ed87c93ea5193a5da</sign>
   </file>
   <file>
     <path>config/demo/product.csv</path>
-    <sign>c4fa68d4d882431b98c08637c689ee6996f4f91f</sign>
+    <sign>ec9a8df5c953ef193d15afdf9297e842d5255a2a</sign>
   </file>
   <file>
     <path>config/demo/property.csv</path>
-    <sign>1b6394106930dff2ae1035e9c55cde5b1712daab</sign>
+    <sign>6fd1565053df28615c5b0cb9bc5a9e2d03ec5166</sign>
+  </file>
+  <file>
+    <path>config/demo/propertyvalue.csv</path>
+    <sign>8622cd161f609d477adc5ccc3096b511920758c4</sign>
   </file>
   <file>
     <path>config/demo/typecost.csv</path>
@@ -2986,23 +2990,23 @@
   </file>
   <file>
     <path>config/file.inc.php</path>
-    <sign>c3c9c9d3fa8b57331258dd541fb855e1df7e4fdf</sign>
+    <sign>2baadee48868b6bd9e04878b2fdba163b9c8267b</sign>
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>2654f878d980c40c72e91022a08d4d89fe6b2912</sign>
+    <sign>a389f3e38dd9fd16bfde55a415c9cf63271a589f</sign>
   </file>
   <file>
     <path>config/install.inc.php</path>
-    <sign>0bd7f36cd66beb1a58f105be091197bb41dc2a1a</sign>
+    <sign>45d06d18b6007daba31f9cee1e05132f5dd24c25</sign>
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>de1d9feafbce0a3fa9e07e4d4d265ebafd2753ad</sign>
+    <sign>bcd982c914cd959f368d8c31899833799d76ac1e</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
-    <sign>e800470b993f44ed44726be970a67786b2f94f3c</sign>
+    <sign>705b72f2f87bd7c11408b8a2c866e768622a32df</sign>
   </file>
   <file>
     <path>controller/admin/abstractdocument.inc.php</path>
@@ -3014,7 +3018,7 @@
   </file>
   <file>
     <path>controller/admin/block/offerblock.inc.php</path>
-    <sign>3f59b32a1ae36e25c169ef522f794a34df06156a</sign>
+    <sign>512dff82f69c7e1b55c2912d0fbef69230c122c4</sign>
   </file>
   <file>
     <path>controller/admin/block/propertyvaluesblock.inc.php</path>
@@ -3030,7 +3034,7 @@
   </file>
   <file>
     <path>controller/admin/ctrl.inc.php</path>
-    <sign>b4a38029b20350c6d0b26ea08d1e312e158dbba4</sign>
+    <sign>d27f980ca7c447b3607b21761c8548cf8dceda92</sign>
   </file>
   <file>
     <path>controller/admin/currencyctrl.inc.php</path>
@@ -3038,7 +3042,7 @@
   </file>
   <file>
     <path>controller/admin/dialog.inc.php</path>
-    <sign>d7c76fe037311ed6ecd2f39a9d49b5eb0a3fefa2</sign>
+    <sign>91135af007a0dfee9e47e0aca111153e38de564a</sign>
   </file>
   <file>
     <path>controller/admin/importphotos.inc.php</path>
@@ -3058,7 +3062,7 @@
   </file>
   <file>
     <path>controller/admin/inventoryctrl.inc.php</path>
-    <sign>b1883da2c022d9c4ab079ec146b8faee59bd1e26</sign>
+    <sign>a4a5ce0ba38be14226178d0ef6c970a979e83788</sign>
   </file>
   <file>
     <path>controller/admin/inventorymovementctrl.inc.php</path>
@@ -3086,11 +3090,11 @@
   </file>
   <file>
     <path>controller/admin/propctrl.inc.php</path>
-    <sign>12386f97601b078bd25a588388dc17865990f62b</sign>
+    <sign>8bd2c9f3727679fcac3d1c586b54d71aefe541a0</sign>
   </file>
   <file>
     <path>controller/admin/tools.inc.php</path>
-    <sign>6d29d35a88d42b4b96890a8ec6160f030ce9f280</sign>
+    <sign>d28af870bbc55bde81f39f034fb91e26c74b0c49</sign>
   </file>
   <file>
     <path>controller/admin/unitctrl.inc.php</path>
@@ -3118,7 +3122,7 @@
   </file>
   <file>
     <path>controller/block/category.inc.php</path>
-    <sign>72cdd86abe336a5892a02b45c9611f2639105136</sign>
+    <sign>ad4a5f9e3db1ff540ef56d7306840fef087dcec2</sign>
   </file>
   <file>
     <path>controller/block/compare.inc.php</path>
@@ -3129,12 +3133,16 @@
     <sign>4f9cccdbab1dc5d43da3d928ed4ed4c862e704c4</sign>
   </file>
   <file>
+    <path>controller/block/headlistproducts.inc.php</path>
+    <sign>6de05c0f7cd2896afddd19c97a4de3d82b55173b</sign>
+  </file>
+  <file>
     <path>controller/block/lastviewed.inc.php</path>
     <sign>f274654e0350c5fe15c1f4ae50c93585254b4643</sign>
   </file>
   <file>
     <path>controller/block/producttabs.inc.php</path>
-    <sign>e903d994fa2a896d28c5d796d05a635d466dab9b</sign>
+    <sign>f7ee0791ec3e9c1ece07f5737ea6084062acb1dc</sign>
   </file>
   <file>
     <path>controller/block/recommended.inc.php</path>
@@ -3146,7 +3154,7 @@
   </file>
   <file>
     <path>controller/block/searchline.inc.php</path>
-    <sign>5a398c5eca7d99eb388995edbfdc7638257d4f3e</sign>
+    <sign>969b03a9702c0f9e206ae963b2a2b5aca6d3c2a8</sign>
   </file>
   <file>
     <path>controller/block/sidefilters.inc.php</path>
@@ -3162,11 +3170,15 @@
   </file>
   <file>
     <path>controller/front/allbrands.inc.php</path>
-    <sign>ab27c52e3cf49089eeffdd135a5c7d4f2de2e5c5</sign>
+    <sign>20b5cd79dffdfd10d87dd16708473cda17651d59</sign>
   </file>
   <file>
     <path>controller/front/brand.inc.php</path>
-    <sign>90597b34404fd292cfac4fd9c9403d04c0bac6eb</sign>
+    <sign>c49c15434092689c5a158d14330c36b52d17899e</sign>
+  </file>
+  <file>
+    <path>controller/front/category.inc.php</path>
+    <sign>e08b16cc8e9f4fdc242c0ce81f23838b75087da5</sign>
   </file>
   <file>
     <path>controller/front/compare.inc.php</path>
@@ -3178,23 +3190,23 @@
   </file>
   <file>
     <path>controller/front/listproducts.inc.php</path>
-    <sign>36bdc199930ca708497e86b6acf46a74a0bfff2a</sign>
+    <sign>34d16841cd57eedc2a0334250010153643841f5d</sign>
   </file>
   <file>
     <path>controller/front/oneclick.inc.php</path>
-    <sign>25137c5c27dcf4be96f7a22c629a2c8807d0a442</sign>
+    <sign>98021fbb4deabdce42ce39c88331068579f3579b</sign>
   </file>
   <file>
     <path>controller/front/product.inc.php</path>
-    <sign>ed081234c55addfb99c73971e2d0167defa76100</sign>
+    <sign>c470fa87d487006ee07f7155c7d31956ea3f8ce4</sign>
   </file>
   <file>
     <path>controller/front/warehouse.inc.php</path>
-    <sign>848d4514df8e07594a5697cd3ce905fe2995b7c9</sign>
+    <sign>3f7090a0ff37dd50fe1b598b28776c0ba156620e</sign>
   </file>
   <file>
     <path>model/api.inc.php</path>
-    <sign>60d50816ae50e7d0883459b59e057aac89e22bb6</sign>
+    <sign>8ea23344a47e17cc1233e854b77842dfed9f5ea1</sign>
   </file>
   <file>
     <path>model/apiutils.inc.php</path>
@@ -3202,15 +3214,15 @@
   </file>
   <file>
     <path>model/behavior/usersuser.inc.php</path>
-    <sign>77f69e2c886da4c36ad465b264a3732c796f9b42</sign>
+    <sign>97fd2380fac8f49aae894a2d79267406f10408e7</sign>
   </file>
   <file>
     <path>model/brandapi.inc.php</path>
-    <sign>5ac9afa6b750a8bce962d397d45c272e80e549a1</sign>
+    <sign>bce912860d06c0950f50afeea415014f05ed9325</sign>
   </file>
   <file>
     <path>model/commenttype/product.inc.php</path>
-    <sign>a39ec9e75e17973f7175ede104e48e9014c97a5d</sign>
+    <sign>f9bb6fdbfe20d40dd3cc6112dfbf0dbdcc8f2522</sign>
   </file>
   <file>
     <path>model/compare.inc.php</path>
@@ -3218,7 +3230,7 @@
   </file>
   <file>
     <path>model/costapi.inc.php</path>
-    <sign>af165ce7d280c329280269cfd0ff3dabbb8aca41</sign>
+    <sign>c170527b7fb07b9e55eb8fb3ddfad812965239e5</sign>
   </file>
   <file>
     <path>model/csvpreset/cost.inc.php</path>
@@ -3227,6 +3239,10 @@
   <file>
     <path>model/csvpreset/dirproperty.inc.php</path>
     <sign>8cded7f9d46e389c66cd67b4b11e44377a86dfd8</sign>
+  </file>
+  <file>
+    <path>model/csvpreset/dirpropertylist.inc.php</path>
+    <sign>0b98dea2b8f21452447a9f96d694b1a2280de074</sign>
   </file>
   <file>
     <path>model/csvpreset/dirurl.inc.php</path>
@@ -3266,7 +3282,7 @@
   </file>
   <file>
     <path>model/csvpreset/property.inc.php</path>
-    <sign>d1a325de9f1fc856c17a707519d76bc068ba33be</sign>
+    <sign>a6db8642f0361a0085a33cd1add2253743314d27</sign>
   </file>
   <file>
     <path>model/csvpreset/propertyid.inc.php</path>
@@ -3290,7 +3306,7 @@
   </file>
   <file>
     <path>model/csvschema/dir.inc.php</path>
-    <sign>d165d5b79b54441fce72715c6d182166143aaf83</sign>
+    <sign>d62804cb2b152701168524810ededbb7d311da83</sign>
   </file>
   <file>
     <path>model/csvschema/dirproperty.inc.php</path>
@@ -3306,7 +3322,7 @@
   </file>
   <file>
     <path>model/csvschema/product.inc.php</path>
-    <sign>1c9b915a0dbd7fff1ceca65530bbf0cf64fffc1f</sign>
+    <sign>9c39287dd45112f988b49fb9b6c65f71ee02dbd3</sign>
   </file>
   <file>
     <path>model/csvschema/property.inc.php</path>
@@ -3334,7 +3350,7 @@
   </file>
   <file>
     <path>model/currencyapi.inc.php</path>
-    <sign>b1c0e0faf7ce7a9912beb6611d988d09743e6294</sign>
+    <sign>fb5afcb07954afcc4de405694e5882aabeddcc59</sign>
   </file>
   <file>
     <path>model/customroute.inc.php</path>
@@ -3350,59 +3366,59 @@
   </file>
   <file>
     <path>model/externalapi/brand/get.inc.php</path>
-    <sign>d70c4f9d4f664f4f5adf32112d5b645b5783c3f0</sign>
+    <sign>7d40cd69e29bbc1f80a454135924ec38bccb520a</sign>
   </file>
   <file>
     <path>model/externalapi/brand/getlist.inc.php</path>
-    <sign>60a6285432806e395081c78f7c8119e59a4e7203</sign>
+    <sign>f83dde1196a64e40a50dd19ad5b97f74eeeee9b3</sign>
   </file>
   <file>
     <path>model/externalapi/category/get.inc.php</path>
-    <sign>2a8750400806dca278dd24a770d90acce9245898</sign>
+    <sign>e9cbe74b88c5b4d3e71428dbb7cfd40caf200b9f</sign>
   </file>
   <file>
     <path>model/externalapi/category/getlist.inc.php</path>
-    <sign>e6bb8b65e697a856521cdc60e1bdd771599c9992</sign>
+    <sign>fd5cd0058e97f2575c740d0f37eff75c60f3a5db</sign>
   </file>
   <file>
     <path>model/externalapi/favorite/add.inc.php</path>
-    <sign>47602d51d1b47800e0a327d7014ab33e18f59533</sign>
+    <sign>ba6d621be8600686a4d84cdd3f72b281dab60266</sign>
   </file>
   <file>
     <path>model/externalapi/favorite/getlist.inc.php</path>
-    <sign>f58230f47b104ccebf9c9173d214015b35b52fae</sign>
+    <sign>48a2848d4015bc579a54f0369932491259da65be</sign>
   </file>
   <file>
     <path>model/externalapi/favorite/remove.inc.php</path>
-    <sign>168187909b93b614cfb19178134a7f7c4c5cf008</sign>
+    <sign>aeedb30d4efc346c7a086b444250870af76aeb33</sign>
   </file>
   <file>
     <path>model/externalapi/oneclick/get.inc.php</path>
-    <sign>3830f9e717b09c1289961a6abef3fd3ec8160a74</sign>
+    <sign>61faefe6c32aa3abbdf7b5fbc2127b19a266c63d</sign>
   </file>
   <file>
     <path>model/externalapi/oneclick/getlist.inc.php</path>
-    <sign>97a614b16d0ba982853312c46d9b76dae61d7c1c</sign>
+    <sign>718880c5836f06b6cd3299f5ee055640655e3d39</sign>
   </file>
   <file>
     <path>model/externalapi/product/get.inc.php</path>
-    <sign>ca516e83e10e6497c316f7e031fefd2b67cebb33</sign>
+    <sign>cd9cd7289cce4f67489e97227298fe4556a25f4f</sign>
   </file>
   <file>
     <path>model/externalapi/product/getlist.inc.php</path>
-    <sign>f6c043c2b87373e34df7643808f3cfd523574b7a</sign>
+    <sign>62ba041fc9f41990c16ab8f1b0ec1868df63c673</sign>
   </file>
   <file>
     <path>model/externalapi/product/getofferslist.inc.php</path>
-    <sign>a21b06838ecc9b9b07d9c70c164ee5608967f169</sign>
+    <sign>17d53905138f6aff314a6d66ee1a7bb5a3b4e0e6</sign>
   </file>
   <file>
     <path>model/externalapi/product/getrecommendedlist.inc.php</path>
-    <sign>44f247dd3781275e4ac362f221fba7e026246b50</sign>
+    <sign>c2c13b34034e5a77a2da785ab49aca29b5d278c3</sign>
   </file>
   <file>
     <path>model/externalapi/product/oneclicksend.inc.php</path>
-    <sign>f9d889f7ce370e6ee833c86a97ede4dc8ae5bb71</sign>
+    <sign>3154d7339090970ce411c11a6f01b841e3a8059e</sign>
   </file>
   <file>
     <path>model/externalapi/product/setcost.inc.php</path>
@@ -3418,15 +3434,19 @@
   </file>
   <file>
     <path>model/externalapi/warehouse/get.inc.php</path>
-    <sign>270cb9d8a5e8ee25489d5a8e0fabcfcb50f659df</sign>
+    <sign>d51ef6de6dd487aec26c7a32654db5dab991eaea</sign>
   </file>
   <file>
     <path>model/externalapi/warehouse/getlist.inc.php</path>
-    <sign>757ca60f933d543a154d805018545c2a775aa142</sign>
+    <sign>13ac412f7469a5465578bf6aea91d37b6fc7ef8c</sign>
   </file>
   <file>
     <path>model/favoriteapi.inc.php</path>
     <sign>48ca2abfa78702cae633e98f2dab4c8dd9661f30</sign>
+  </file>
+  <file>
+    <path>model/filter/barcodefilter.inc.php</path>
+    <sign>0317434f3500ef096066490072ec00a48cfc2e85</sign>
   </file>
   <file>
     <path>model/filter/propertyfilter.inc.php</path>
@@ -3434,19 +3454,19 @@
   </file>
   <file>
     <path>model/importphotosapi.inc.php</path>
-    <sign>7be352ef786a37202be4bc06c8dfec1be459af75</sign>
+    <sign>44aa0eaa71db613d96dbc64403e0225b1c6806d4</sign>
   </file>
   <file>
     <path>model/importymlapi.inc.php</path>
-    <sign>c44fffdbcb8e17365187ef8ed9e5058b2771e9ae</sign>
+    <sign>048ae025143bc3f5151436ba25fdf8fc011b7051</sign>
   </file>
   <file>
     <path>model/inventory/documentapi.inc.php</path>
-    <sign>4474109c4dbba8158842e9e3807e5c6004406c5c</sign>
+    <sign>5e1bad5658948e40c457ea649602d2de2d8f2aad</sign>
   </file>
   <file>
     <path>model/inventory/inventorizationapi.inc.php</path>
-    <sign>6e78b2946413dc4451bfa8957ecf8dfa73c84851</sign>
+    <sign>c3ec67f0d401399749dca18ac4e19ca4f07cda81</sign>
   </file>
   <file>
     <path>model/inventory/inventorytools.inc.php</path>
@@ -3462,7 +3482,7 @@
   </file>
   <file>
     <path>model/inventorymanager.inc.php</path>
-    <sign>fe4cf7658459edfc57fe1c2af9518632334f66f3</sign>
+    <sign>42c9b3c18fc36c15c77cf3bd8de25ad3da57c0f7</sign>
   </file>
   <file>
     <path>model/log/logimportyml.inc.php</path>
@@ -3473,8 +3493,16 @@
     <sign>d05390891a7cb2c003aea1fc529d033f51ee62dd</sign>
   </file>
   <file>
+    <path>model/microdata/microdataproduct.inc.php</path>
+    <sign>4fb11a8a7dbcc45afb0432cca54f1141025a26f3</sign>
+  </file>
+  <file>
+    <path>model/microdata/microdatawarehouse.inc.php</path>
+    <sign>5ec031039ef1fa01800563213bb6558f9af70590</sign>
+  </file>
+  <file>
     <path>model/multiofferlevelapi.inc.php</path>
-    <sign>f8990668920ad701a7915c0fc75d71cbfff4a744</sign>
+    <sign>623e14fc498b4f3b698b24a4639daea7ec4daa3e</sign>
   </file>
   <file>
     <path>model/notice/oneclickadmin.inc.php</path>
@@ -3486,27 +3514,27 @@
   </file>
   <file>
     <path>model/offerapi.inc.php</path>
-    <sign>6410d3464fc93ce39621c0390fc325a9ae6fb189</sign>
+    <sign>86f3b9e8562f6698cdea6627dee1d98c885fa7da</sign>
   </file>
   <file>
     <path>model/oneclickapi.inc.php</path>
-    <sign>877680a4b8315aef4bbf0ca69553ae3fce6c10c0</sign>
+    <sign>7018233e7e0f66e60cc6a108b097a5b04f7602c2</sign>
   </file>
   <file>
     <path>model/oneclickitemapi.inc.php</path>
-    <sign>3197e889aed5a920adcfcc63ed28bd1a8782bc8e</sign>
+    <sign>2e6e629688f26680e587e99ca1c4ceb13250b52e</sign>
   </file>
   <file>
     <path>model/orm/brand.inc.php</path>
-    <sign>433d4afb66b35c60dd0ad364cd5a83a99622febc</sign>
+    <sign>4351363bf1cf22c34481de7c75aa57ab347e4af8</sign>
   </file>
   <file>
     <path>model/orm/currency.inc.php</path>
-    <sign>3cc272bd9985f4ed2f5f74c90cd5fb67de5fead4</sign>
+    <sign>8da990420c7bf27b154f67c200794a09c910f027</sign>
   </file>
   <file>
     <path>model/orm/dir.inc.php</path>
-    <sign>978fc65a13de7fbed79431e2c52a8ee0aa2816ec</sign>
+    <sign>7dadaefa1b338ef97781b082be8674fc67416738</sign>
   </file>
   <file>
     <path>model/orm/favorite.inc.php</path>
@@ -3554,15 +3582,15 @@
   </file>
   <file>
     <path>model/orm/offer.inc.php</path>
-    <sign>621a52e91be9ecfe53bcb4b4c87d9240e0bfaab0</sign>
+    <sign>7513a29f54f20a4720c958a8d60f8c3afb4ca5bc</sign>
   </file>
   <file>
     <path>model/orm/oneclickitem.inc.php</path>
-    <sign>50fedef21f85f70ca4b5be0232b01c03ab1a550c</sign>
+    <sign>7826507540cd3c62293ae0305567ab726d70a4c9</sign>
   </file>
   <file>
     <path>model/orm/product.inc.php</path>
-    <sign>b873329ce6dc392efee23334854f3c0240bdbfce</sign>
+    <sign>48e25cde265e61d0383d3bb8c0934c197a9b9c1f</sign>
   </file>
   <file>
     <path>model/orm/property/dir.inc.php</path>
@@ -3570,19 +3598,19 @@
   </file>
   <file>
     <path>model/orm/property/item.inc.php</path>
-    <sign>91f3229549f7a9f6086c0468aa4a2f7e3cd19a82</sign>
+    <sign>af2de1de038bd0085c14ed12b56d6faf2092a20b</sign>
   </file>
   <file>
     <path>model/orm/property/itemvalue.inc.php</path>
-    <sign>fe2791dbaee9f120ec804fc5d88d0f2a591afeed</sign>
+    <sign>6415133cbc149bf59a9789f6cb86f488d3f38107</sign>
   </file>
   <file>
     <path>model/orm/property/link.inc.php</path>
-    <sign>b2b908a51c2924e597519f43f1972455504b4c8a</sign>
+    <sign>ce489afa67f6325ff3d6d381872f84b45124cd89</sign>
   </file>
   <file>
     <path>model/orm/typecost.inc.php</path>
-    <sign>cc2bd45d201f86fe3eecc05b1583c197a0853957</sign>
+    <sign>3721bfe2f074abe78bbc84e28db77f6eeb8c09d2</sign>
   </file>
   <file>
     <path>model/orm/unit.inc.php</path>
@@ -3590,7 +3618,7 @@
   </file>
   <file>
     <path>model/orm/warehouse.inc.php</path>
-    <sign>a230a7ca222ec8d97972022c9d09c87531092b7d</sign>
+    <sign>93f89d81953d0e4f384e8ec53648ff1ba2da1aa7</sign>
   </file>
   <file>
     <path>model/orm/warehousegroup.inc.php</path>
@@ -3598,7 +3626,7 @@
   </file>
   <file>
     <path>model/orm/xcost.inc.php</path>
-    <sign>25f34266304c2f0bd5b9a10938ddb1e057e7d657</sign>
+    <sign>3e5451cf3e9253c0ffda25bd4f54cdcd64d32652</sign>
   </file>
   <file>
     <path>model/orm/xdir.inc.php</path>
@@ -3630,19 +3658,19 @@
   </file>
   <file>
     <path>model/productdimensions.inc.php</path>
-    <sign>26440b8171ecc4e065d26793c5b37822f2b18d4b</sign>
+    <sign>5087743c425504be89860048c1f6094425354166</sign>
   </file>
   <file>
     <path>model/propertyapi.inc.php</path>
-    <sign>0f45f013dcef49fd5714fd23c94d21be48cb9c49</sign>
+    <sign>75b774fd5f5d5ca7be7890b9d7dcb20c6c0b1f1d</sign>
   </file>
   <file>
     <path>model/propertydirapi.inc.php</path>
-    <sign>a3f2968830cd62c88bade6568674ce091cd21944</sign>
+    <sign>35031593d389d06c4ebf7598d48e71e3d9fa3215</sign>
   </file>
   <file>
     <path>model/propertyvalueapi.inc.php</path>
-    <sign>07d5e46a43acb941750a25c80b178e9e798addc1</sign>
+    <sign>f6344955f506b3ca38e634fc45aa488504dd79e2</sign>
   </file>
   <file>
     <path>model/searchlineapi.inc.php</path>
@@ -3678,7 +3706,7 @@
   </file>
   <file>
     <path>model/virtualmultioffersapi.inc.php</path>
-    <sign>b8e4bee638ef1ca2ec897dadf8f50740bdbf2d8f</sign>
+    <sign>0100d0da7bc9ffc2e91206ea6358246216edde09</sign>
   </file>
   <file>
     <path>model/warehouseapi.inc.php</path>
@@ -3687,6 +3715,10 @@
   <file>
     <path>model/warehousegroupapi.inc.php</path>
     <sign>189bf314cff15c179dc530af7ca7bea1b1d85fa7</sign>
+  </file>
+  <file>
+    <path>view/admin/tree_item_cell.tpl</path>
+    <sign>3f58882f1e3edd76451411c826fb478bddfd3d60</sign>
   </file>
   <file>
     <path>view/adminblocks/offerblock/multioffers.tpl</path>
@@ -3722,7 +3754,7 @@
   </file>
   <file>
     <path>view/adminblocks/offerblock/offerblock.tpl</path>
-    <sign>0f47a25e1e2f3264cc267e05bc1aecfc9a20539d</sign>
+    <sign>e1cbb64ccb020ff22621d44f917f46b3365532aa</sign>
   </file>
   <file>
     <path>view/adminblocks/propertyvaluesblock/pvl_block.tpl</path>
@@ -3734,15 +3766,11 @@
   </file>
   <file>
     <path>view/allbrands.tpl</path>
-    <sign>b6daa1cdbadccc258707ec0d92db1d6278dafb9f</sign>
-  </file>
-  <file>
-    <path>view/allbrands_byliter.tpl</path>
-    <sign>73720e11938940bd522c3355988a662829eeedcb</sign>
+    <sign>dfdf9f262bd196c021056f22143457eb08fccefd</sign>
   </file>
   <file>
     <path>view/blocks/bannerview/bannerview.tpl</path>
-    <sign>ab3185b10d74c512924c7f6d671c60141ba4aed7</sign>
+    <sign>d957c6b56aba278a6cd499e2c43dcc2ec99ae141</sign>
   </file>
   <file>
     <path>view/blocks/bannerview/slide.tpl</path>
@@ -3750,55 +3778,63 @@
   </file>
   <file>
     <path>view/blocks/brands/brands.tpl</path>
-    <sign>35cb86ea850a5e8477de7e59977d89867672aee0</sign>
+    <sign>087969fb8211485ead8150db61d82e262a690392</sign>
   </file>
   <file>
     <path>view/blocks/category/category.tpl</path>
-    <sign>a21c80d545b368e5b52fb0d6c907e25c73a75a9e</sign>
+    <sign>c2b696f5d5204472b1052780f34e39169cccc66e</sign>
   </file>
   <file>
-    <path>view/blocks/category/collapse_category.tpl</path>
-    <sign>75194779f4508300690af927c31c8db05eb41d2c</sign>
+    <path>view/blocks/category/category_head.tpl</path>
+    <sign>fc9f88807dc95c540f8dd70c69436937dffb365e</sign>
   </file>
   <file>
-    <path>view/blocks/category/foot_category.tpl</path>
-    <sign>9d11b2baf708cd90b183292da6085def6393bb45</sign>
+    <path>view/blocks/category/category_mobile.tpl</path>
+    <sign>459e645761cf6d481856d35585e76113563a3b1e</sign>
+  </file>
+  <file>
+    <path>view/blocks/category/category_sub_variant1.tpl</path>
+    <sign>3e6c3c97bcff7790ea8ee47a4ac5aa690241cd79</sign>
+  </file>
+  <file>
+    <path>view/blocks/category/category_sub_variant2.tpl</path>
+    <sign>55d4f286293e63a17cd14439f63e91a6a5652431</sign>
   </file>
   <file>
     <path>view/blocks/compare/compare.tpl</path>
-    <sign>0c303c9eed26379e46b5fd69d5fbc6189f2101b8</sign>
+    <sign>9b7f39d140044804bd557993093f810838016205</sign>
   </file>
   <file>
     <path>view/blocks/compare/items.tpl</path>
-    <sign>fd5603ca0eec4dc824de094f762d7c7a1ea79aac</sign>
-  </file>
-  <file>
-    <path>view/blocks/compare/topblock.tpl</path>
-    <sign>2876c5501d03b566acc65625e91715a0dcb9d419</sign>
+    <sign>0868350fd8efeb75912cfbfeb7182d2388344783</sign>
   </file>
   <file>
     <path>view/blocks/favorite/favorite.tpl</path>
-    <sign>f8d23915e51c5200e4fd83747c924d0d5cfadd0d</sign>
+    <sign>6df8751dcbe90cdb01172a18bc70685ea43e2013</sign>
+  </file>
+  <file>
+    <path>view/blocks/headlistproducts/head_list_products.tpl</path>
+    <sign>eb1e31c4135bf797c1d9daa35fcd9d07ce01fc64</sign>
   </file>
   <file>
     <path>view/blocks/lastviewed/products.tpl</path>
-    <sign>9ad9a187a52b0d6d7dc8e5ed0d47b80e221f021f</sign>
+    <sign>2d7f51cf75a722880f38b5fa5dfba39049c879c3</sign>
   </file>
   <file>
     <path>view/blocks/producttabs/producttabs.tpl</path>
-    <sign>3520883ddf49fad2ed664105e8a6b6ccf05e193b</sign>
+    <sign>9f5c001f2cfb68fb590f8dfc1d5491a182462236</sign>
   </file>
   <file>
     <path>view/blocks/recommended/recommended.tpl</path>
-    <sign>eec2ebca063388dd34b50d79294d60cb9f2b83c3</sign>
+    <sign>c0bc07606c0f4d7809027139c4f4e1b488fdda7b</sign>
   </file>
   <file>
     <path>view/blocks/sameproducts/same_products.tpl</path>
-    <sign>7b8ea461ea31aec5d99550da3cc3eed863c45a62</sign>
+    <sign>5a1e9a57fe9f6d72f894ed5fb4c23fa4945f302f</sign>
   </file>
   <file>
     <path>view/blocks/searchline/searchform.tpl</path>
-    <sign>5497ebf261053c6fc85c45977fbc1ab7825ebf92</sign>
+    <sign>33e4790729fa1448dcf721e89b1545e81f2f2d85</sign>
   </file>
   <file>
     <path>view/blocks/selectcurrency/selcurrency.tpl</path>
@@ -3806,55 +3842,51 @@
   </file>
   <file>
     <path>view/blocks/sidefilters/filters.tpl</path>
-    <sign>5e2ab2b671fb9a992e828753dba17f35ee6758f2</sign>
+    <sign>30d65e84bd9c98c7d1254681944fa3bc4506bb01</sign>
   </file>
   <file>
     <path>view/blocks/sidefilters/type/bool.tpl</path>
-    <sign>ea8bdf0705761cd21c13723c2486dc5595b85b11</sign>
+    <sign>be0c05ab6a8400ab76c3c7e1e33c0ff259df09bc</sign>
   </file>
   <file>
     <path>view/blocks/sidefilters/type/color.tpl</path>
-    <sign>607c6688a6863d29b205f572f85024d64c694fcd</sign>
+    <sign>42391d20addb8d9420288ea5b2034caeda83b419</sign>
   </file>
   <file>
     <path>view/blocks/sidefilters/type/image.tpl</path>
-    <sign>b4abee72d42f429bb128e33f36b91606b7f2c99e</sign>
+    <sign>04f889a3dac34503e6027c2a2eaeb99fb47e1a45</sign>
   </file>
   <file>
     <path>view/blocks/sidefilters/type/int.tpl</path>
-    <sign>11c811664fab947bedda748932f0755f66ca7ba7</sign>
+    <sign>f173e94ccfe5261d8b999adc7c06fc8077713e6f</sign>
   </file>
   <file>
     <path>view/blocks/sidefilters/type/list.tpl</path>
-    <sign>564eac17ee06db9fed1e29135467ceaf4ea98a3f</sign>
+    <sign>854abb3c364303121a38232c7742730ebc183d77</sign>
   </file>
   <file>
     <path>view/blocks/sidefilters/type/radio.tpl</path>
-    <sign>bd9de0d1138bf7992c6a87596059aade88d54ba6</sign>
+    <sign>b9b958846554343b7b6756ff95f796af70234a06</sign>
   </file>
   <file>
     <path>view/blocks/sidefilters/type/string.tpl</path>
-    <sign>8ecf451fb7e19544f2e0066da795fc316d64e142</sign>
+    <sign>0b73869c5046487c84e414cddb889e765b3db53c</sign>
   </file>
   <file>
-    <path>view/blocks/smallcatalog/category_sblock.tpl</path>
-    <sign>fef96b1aa06d06cac5db3f4dd5deb17355187589</sign>
+    <path>view/blocks/topcategories/top_categories.tpl</path>
+    <sign>13ef89ebe3181507cdee62d0cca50dc0c3641613</sign>
   </file>
   <file>
     <path>view/blocks/topproducts/top_products.tpl</path>
-    <sign>5e4c6331db65697b9cfd85570ae25571155e0ba2</sign>
+    <sign>b4aa00f1902ad06b110ff2cc6157af4f0d0d6530</sign>
   </file>
   <file>
     <path>view/brand.tpl</path>
-    <sign>1981f0f5b994076923cd11a2cf6d65d827f6a1e5</sign>
+    <sign>28149382b9d53430e383f7fa3ff91065c96b49ba</sign>
   </file>
   <file>
     <path>view/compare.tpl</path>
-    <sign>a9ec9b88a1f6755a39c0daa78352f86a15273e72</sign>
-  </file>
-  <file>
-    <path>view/css/catalog.css</path>
-    <sign>3697748e792f4c9c7639798d7612c7c08d7bba79</sign>
+    <sign>6c6c3414cb0eafff2723e340d4a3ff2762ed3b05</sign>
   </file>
   <file>
     <path>view/css/offer.css</path>
@@ -3881,8 +3913,12 @@
     <sign>440d78244781ae5b305bd6e58409c5fa3598d84b</sign>
   </file>
   <file>
+    <path>view/dialog/product_offers.tpl</path>
+    <sign>9cc9005fc998c8f4dfc4e3e8fb023731717408eb</sign>
+  </file>
+  <file>
     <path>view/dialog/products.tpl</path>
-    <sign>dbd7dbdb2afec570ee0438c7be4a3e0b47a455cf</sign>
+    <sign>410225b9cf74b37ae69652d2b67ef20165ef518f</sign>
   </file>
   <file>
     <path>view/dialog/tree_branch.tpl</path>
@@ -3902,7 +3938,7 @@
   </file>
   <file>
     <path>view/favorite.tpl</path>
-    <sign>d0da73a3c785ae72380ef60b8db4a092cf2d7492</sign>
+    <sign>779b5481d2a0ddab575ee6a9e82bb2c14e4ca4e3</sign>
   </file>
   <file>
     <path>view/filter/property_filter.tpl</path>
@@ -3914,7 +3950,7 @@
   </file>
   <file>
     <path>view/form/config/round_value.tpl</path>
-    <sign>f54cf264f6532bf0004b0449d3bcccc975dc4e15</sign>
+    <sign>f9e481124d57ef69282bdb93c5e969a5be2eeea5</sign>
   </file>
   <file>
     <path>view/form/config/userfield.tpl</path>
@@ -3922,7 +3958,7 @@
   </file>
   <file>
     <path>view/form/dir/property.tpl</path>
-    <sign>ab156410999948831530ea848f6ee56625ba721e</sign>
+    <sign>5ffd823fb932d26b58d661af31a15f9f44145b78</sign>
   </file>
   <file>
     <path>view/form/dir/virtual.tpl</path>
@@ -3938,7 +3974,7 @@
   </file>
   <file>
     <path>view/form/field/sext_fields.tpl</path>
-    <sign>483a686dda68398647362ea68309275228719b95</sign>
+    <sign>58677b2deaedec9884019bb29a6c695214c96cd3</sign>
   </file>
   <file>
     <path>view/form/field/stext.tpl</path>
@@ -4006,11 +4042,11 @@
   </file>
   <file>
     <path>view/form/inventory/products.tpl</path>
-    <sign>d486de54a982db97c425dd3cca6ec0843268ae69</sign>
+    <sign>746a56b588f81bb337391644542194adb60c2105</sign>
   </file>
   <file>
     <path>view/form/inventory/products_in_table.tpl</path>
-    <sign>30715644fe07df0e419822582ef43c64f1f51c00</sign>
+    <sign>e2bb930758182ccd6b25c0ae4667cb214ed66fb1</sign>
   </file>
   <file>
     <path>view/form/offer/photos.tpl</path>
@@ -4050,7 +4086,7 @@
   </file>
   <file>
     <path>view/form/product/mecost.tpl</path>
-    <sign>176281601d93ddb790bd72c03cc4db8f331459fa</sign>
+    <sign>049faec3168cc9dbe812720a919fc9bed2e914c1</sign>
   </file>
   <file>
     <path>view/form/product/menum.tpl</path>
@@ -4058,11 +4094,15 @@
   </file>
   <file>
     <path>view/form/product/meoffers.tpl</path>
-    <sign>c0f0dccf4f862c2467cc00ee07667aaa8bdef5ca</sign>
+    <sign>b57f853a4c662840472ca7ccc5892aa6471990ef</sign>
   </file>
   <file>
     <path>view/form/product/meproperties.tpl</path>
-    <sign>bc6341eff4d009ce07e43524b417b4f8df4be603</sign>
+    <sign>2d7ba59dcd1d6d521239c51678de003d738fe1fc</sign>
+  </file>
+  <file>
+    <path>view/form/product/meproperty_form.tpl</path>
+    <sign>73bb482e2155e8d257110b5f0844d23bca310388</sign>
   </file>
   <file>
     <path>view/form/product/merecomended.tpl</path>
@@ -4075,6 +4115,10 @@
   <file>
     <path>view/form/product/mexdir.tpl</path>
     <sign>cdffc4cf2a0dad79c37422cc06023a3297d906d9</sign>
+  </file>
+  <file>
+    <path>view/form/product/multioffers_form.tpl</path>
+    <sign>d44b11b5d0ee4d9a5a20708f8a2810d7114f678e</sign>
   </file>
   <file>
     <path>view/form/product/offers.tpl</path>
@@ -4093,8 +4137,40 @@
     <sign>d64256572bbf27abd4c3519fb1f03adb96f5a071</sign>
   </file>
   <file>
+    <path>view/form/product/product_offers_table_data.tpl</path>
+    <sign>023408a95276d2056a4e0225a2c715c1311e23bd</sign>
+  </file>
+  <file>
     <path>view/form/product/properties.tpl</path>
-    <sign>444357977a2e22f0936bef9c47df34db4358b85c</sign>
+    <sign>9ce4e8c157cf3b0e763284395443d9bc1ee59cd0</sign>
+  </file>
+  <file>
+    <path>view/form/product/property_form.tpl</path>
+    <sign>8de9a6e14252c362cf417c06a39d091f8d148009</sign>
+  </file>
+  <file>
+    <path>view/form/product/property_full_list.tpl</path>
+    <sign>15599cb722576d6f6418be79f53e6216dfc440e8</sign>
+  </file>
+  <file>
+    <path>view/form/product/property_group_product.tpl</path>
+    <sign>88c5ecbe2467fd6946585249c4a2d1b89c07b030</sign>
+  </file>
+  <file>
+    <path>view/form/product/property_product.tpl</path>
+    <sign>12ce1de02484f1963465a345367547d9f9f13525</sign>
+  </file>
+  <file>
+    <path>view/form/product/property_val.tpl</path>
+    <sign>e1caabc78666ac5b6d385ad5fde442208a6e9a1e</sign>
+  </file>
+  <file>
+    <path>view/form/product/property_val_big_list.tpl</path>
+    <sign>2d5f6a4bfcab1dcad9b9aa19598959dc11110766</sign>
+  </file>
+  <file>
+    <path>view/form/product/property_val_big_list_items.tpl</path>
+    <sign>dcee409dbc4ee14313fa008c8a15992cf0a97a8d</sign>
   </file>
   <file>
     <path>view/form/product/recomended.tpl</path>
@@ -4107,6 +4183,10 @@
   <file>
     <path>view/form/product/specdir.tpl</path>
     <sign>b3ed54ac6f1ffcec5a932cc38032b605e7171d27</sign>
+  </file>
+  <file>
+    <path>view/form/product/table_field_offers_toggle.tpl</path>
+    <sign>54addf211b143d413a09a88335ab68890cc2bd5f</sign>
   </file>
   <file>
     <path>view/form/product/weight.tpl</path>
@@ -4146,7 +4226,7 @@
   </file>
   <file>
     <path>view/form/warehouse/address.tpl</path>
-    <sign>c05687f1f1cc5f6054b1fe551ac0e9c111566de7</sign>
+    <sign>978b4ce6601c0538f353dec27a5d2a76eaced673</sign>
   </file>
   <file>
     <path>view/help/costctrl_index.tpl</path>
@@ -4221,24 +4301,12 @@
     <sign>eddb8cb2c6bbbc68a255e3015c1b0ed790ca416d</sign>
   </file>
   <file>
-    <path>view/js/jquery.compare.js</path>
-    <sign>4e00f217ad01d9e88222f5399fe6a6fbac900afb</sign>
-  </file>
-  <file>
-    <path>view/js/jquery.compareshow.js</path>
-    <sign>4fb8707475572208906563cff94c7a019caef157</sign>
-  </file>
-  <file>
-    <path>view/js/jquery.favorite.js</path>
-    <sign>2248ee87e100f4d5da1136d0a08bf609c3256045</sign>
-  </file>
-  <file>
-    <path>view/js/jquery.filter.js</path>
-    <sign>a93809bd64327252f43d0d0ad30f94ab762330a3</sign>
+    <path>view/js/admin/catalogcontrol.js</path>
+    <sign>15db3d7a965f07a6ba041b69a3a6af19cd87fcf4</sign>
   </file>
   <file>
     <path>view/js/jquery.inventory.js</path>
-    <sign>3a7a549acfaba651a259b2cb2d43e15ffe1de5e4</sign>
+    <sign>8af25c00491a6588fb8789a1469c70f513f3d701</sign>
   </file>
   <file>
     <path>view/js/meoffer.js</path>
@@ -4253,10 +4321,6 @@
     <sign>6f3b1c101f3faf6b0a26eda541e205eef5bc4763</sign>
   </file>
   <file>
-    <path>view/js/productasbanner.js</path>
-    <sign>b9773cb77e33d2739762978fd922e95abab91d41</sign>
-  </file>
-  <file>
     <path>view/js/property.js</path>
     <sign>a390ce1df8d1cddb5198bc100a731c89da776c4a</sign>
   </file>
@@ -4265,8 +4329,56 @@
     <sign>1752680801ba64af2e0b5166e9483044ddd2655c</sign>
   </file>
   <file>
+    <path>view/js/rscomponent/category.js</path>
+    <sign>38634d4701f1d3fed52d328b70e3d9e3d4587335</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/changeoffer.js</path>
+    <sign>06bbe9dc44de8ba5c4bcf9919055d42c517e68c5</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/compare.js</path>
+    <sign>25ad2c484dfc797b495f95a9664d2ed1d6e67d5e</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/compareshow.js</path>
+    <sign>03e7d15ccce163b55c31d5d8fb521f630bd99d62</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/favorite.js</path>
+    <sign>94fe19302ca8bc968238d654945d9cedf708d74d</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/listproducts.js</path>
+    <sign>54ceea629845b5113818d37be637ae0229b82fb9</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/offerspreview.js</path>
+    <sign>3460e791ed48f2c4ab1e34b4740ad652a1407d26</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/product.js</path>
+    <sign>049ad7e1085b07a3301e04c46ceef524f941f2b0</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/productslider.js</path>
+    <sign>35e3c0a1cd6a0f770f1a69914c8a505d806b3c1c</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/searchline.js</path>
+    <sign>a94a91dfee75aa4a61fee82be8fe9c0fa33603f8</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/sidefilters.js</path>
+    <sign>a7d67cb8396fc24789ea6a3c788580155781130b</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/warehouse.js</path>
+    <sign>d2d26593d9426792e83fd254f47dadc016ff0121</sign>
+  </file>
+  <file>
     <path>view/js/selectproduct.js</path>
-    <sign>02f12f98399c81b3931e770c4439ef7176edf0ae</sign>
+    <sign>adf1c6cbc3191c0594b2099b89684fb5c67a10ad</sign>
   </file>
   <file>
     <path>view/js/virtual_dir.js</path>
@@ -4274,19 +4386,11 @@
   </file>
   <file>
     <path>view/list_products.tpl</path>
-    <sign>62510114e535aca1887a91a7813458e8dc75bc76</sign>
+    <sign>fd235055eb946e4cf2b092e84d7b21858a0bf025</sign>
   </file>
   <file>
-    <path>view/list_products_items.tpl</path>
-    <sign>fdb9a9d013e16da647f7723820dce86bf301175e</sign>
-  </file>
-  <file>
-    <path>view/meproperty_form.tpl</path>
-    <sign>73bb482e2155e8d257110b5f0844d23bca310388</sign>
-  </file>
-  <file>
-    <path>view/multioffers_form.tpl</path>
-    <sign>d44b11b5d0ee4d9a5a20708f8a2810d7114f678e</sign>
+    <path>view/list_products_paginator.tpl</path>
+    <sign>15f8c7a35c0a293a3fa3228e8d34f05943f2da57</sign>
   </file>
   <file>
     <path>view/notice/desktop_oneclick.tpl</path>
@@ -4309,60 +4413,32 @@
     <sign>1918e3bf5bd3330713aaa399720e5bedca955c95</sign>
   </file>
   <file>
-    <path>view/oneclick.tpl</path>
-    <sign>0259db28567da21b4edae384a766e26205cb21de</sign>
+    <path>view/one_product.tpl</path>
+    <sign>83f96cc3e4a42d3139ebf55c922d566d57bd767d</sign>
   </file>
   <file>
-    <path>view/package_product.tpl</path>
-    <sign>6bec01281237574898b549c5fe8a25ba1eaf16ce</sign>
+    <path>view/one_table_product.tpl</path>
+    <sign>8392a712a8b1378452f21980109cbde361fb098d</sign>
+  </file>
+  <file>
+    <path>view/oneclick.tpl</path>
+    <sign>c903e5a301e815828903e4d800a959e39bc5f949</sign>
   </file>
   <file>
     <path>view/product.tpl</path>
-    <sign>90f30e89a76fc7ab0ad640230aabe1377df5c0a9</sign>
+    <sign>0c971e2215a6925d04316c1b79ba995e5028ac45</sign>
   </file>
   <file>
-    <path>view/product_images.tpl</path>
-    <sign>4a8c8c54b13569d3553cabce906dcaf22ae366a5</sign>
+    <path>view/product_cart_button.tpl</path>
+    <sign>b923914590e2f9cc1bafe0ecfbc8661bc5a6ed5f</sign>
   </file>
   <file>
     <path>view/product_offers.tpl</path>
-    <sign>5c275b40aad663730f66cfcc8c2fb5c63ae3c61d</sign>
-  </file>
-  <file>
-    <path>view/property_form.tpl</path>
-    <sign>8de9a6e14252c362cf417c06a39d091f8d148009</sign>
-  </file>
-  <file>
-    <path>view/property_full_list.tpl</path>
-    <sign>15599cb722576d6f6418be79f53e6216dfc440e8</sign>
-  </file>
-  <file>
-    <path>view/property_group_product.tpl</path>
-    <sign>119a235dbc583b8477450e4f201e43bb7c2266d4</sign>
-  </file>
-  <file>
-    <path>view/property_product.tpl</path>
-    <sign>734db6d7993235e0215397e04029e45125b69700</sign>
-  </file>
-  <file>
-    <path>view/property_val.tpl</path>
-    <sign>5eaa87730bd21ca25a7b9c59502afca62f4d5e11</sign>
-  </file>
-  <file>
-    <path>view/property_val_big_list.tpl</path>
-    <sign>477c79f27f8ed42a14f89066b456b518ba6e43df</sign>
-  </file>
-  <file>
-    <path>view/property_val_big_list_items.tpl</path>
-    <sign>dcee409dbc4ee14313fa008c8a15992cf0a97a8d</sign>
-  </file>
-  <file>
-    <path>view/tree_item_cell.tpl</path>
-    <sign>3f58882f1e3edd76451411c826fb478bddfd3d60</sign>
+    <sign>d57d2076a6c8c0615d377f21617f385a0c82211b</sign>
   </file>
   <file>
     <path>view/warehouse.tpl</path>
-    <sign>ed86225cf9021b07f37ce4e4dabeb9578302ad77</sign>
+    <sign>7c1370d04b68ec6efd30bd249e638adcdd867120</sign>
   </file>
   <file>
     <path>view/widget/oneclick.tpl</path>
@@ -4372,5 +4448,5 @@
     <path>view/widget/watchnow.tpl</path>
     <sign>44d4c0a6abf8d2f50f437fc6c9b21e6f98781228</sign>
   </file>
-  <masterSign>822560adbe05e5e1621535bc5f34b1beeb7647b9c613a4861b557198bd3cfdc427e1245e6e57f3ff573818e1a15cdb1758ad8d66ecc97f67befc947f89a5fb9c626307e3f703f89dc97cded8f013255a7f3eee4bad0bf8d37caf4da98b47148721f777e68a039dbb2c8a6c04b86a4aa9700b47531ea11379188a6e55f057d3e8</masterSign>
+  <masterSign>7b9542ab8c276f781798a0c54c20cd58259f632422ee9cb647dd7f5273e5978c770a717ad1164b14c724a0df90b9a843be553c96ec0d3a6aa24cef1819a7e04e6f97208c06ddd6d4f4472444e32c73ac4edafd3bd257a3b5c8848bccaf19380e083c90d0c3b896788ef23cde1266ddef80ccc8b60b72b16a26379cd1990aa575</masterSign>
 </signatures>

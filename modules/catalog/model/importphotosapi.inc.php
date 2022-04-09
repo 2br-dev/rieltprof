@@ -259,7 +259,7 @@ class ImportPhotosApi extends \RS\Module\AbstractModel\BaseModel
     * @param integer $start_pos - индекс файла, с которого начнется импорт
     * @return bool | integer - Возвращает true или порядковый номер последнего импортированного файла
     */
-    function importPhoto($start_pos = 0, $field, $separator)
+    function importPhoto($start_pos, $field, $separator)
     {
         if ($error = $this->checkWriteRights()) return $this->addError($error);
 
@@ -441,7 +441,10 @@ class ImportPhotosApi extends \RS\Module\AbstractModel\BaseModel
                         }, $csv_charset);
                 }
                 if (count($row)>=2) {
-                    @$this->names_replace[$row[0]][] = $row[1];
+                    if (!isset($this->names_replace[$row[0]])) {
+                        $this->names_replace[$row[0]] = [];
+                    }
+                    $this->names_replace[$row[0]][] = $row[1];
                 }
             }
             fclose($fp);

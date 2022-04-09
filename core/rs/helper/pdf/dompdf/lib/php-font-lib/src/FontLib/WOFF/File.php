@@ -75,7 +75,7 @@ class File extends \FontLib\TrueType\File {
 
     // Need to re-parse this, don't know why
     $this->header    = null;
-    $this->directory = [];
+    $this->directory = array();
     $this->parseTableEntries();
   }
 }

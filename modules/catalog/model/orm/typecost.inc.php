@@ -46,7 +46,7 @@ class Typecost extends OrmObject
         parent::_init()->append([
             'site_id' => new Type\CurrentSite(),
             'xml_id' => new Type\Varchar([
-                'maxLength' => '255',
+                'maxLength' => 150,
                 'description' => t('Идентификатор в системе 1C'),
                 'visible' => false,
             ]),
@@ -95,8 +95,8 @@ class Typecost extends OrmObject
                 'visible' => false,
             ]),
             'round' => new Type\Decimal([
-                'description' => t('Округление'),
-                'hint' => t('Дробная часть указывается через точку<br/>
+                'description' => t('Округление автоцены'),
+                'hint' => t('Актуально только, если тип цены Вычисляется автоматически. Дробная часть указывается через точку<br/>
                             Округление происходит <b>в большую сторону</b>,<br/>
                             результат округления кратен значению:<br/>
                             <b>1</b> - округлять до целых (13,5678 = 14)<br/>

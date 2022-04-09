@@ -29,6 +29,7 @@ class PageSeo extends \RS\Orm\OrmObject
             'site_id' => new Type\CurrentSite(),
             'route_id' => new Type\Varchar([
                 'description' => t('Маршрут'),
+                'maxLength' => 150,
                 'attr' => [['size' => 1]],
                 'list' => [[__CLASS__, 'getRouteList']],
                 'meVisible' => false

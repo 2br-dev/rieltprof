@@ -20,7 +20,7 @@ class Api
     const API_URL = "https://integration.cdek.ru/"; //Основной URL
     const API_URL_CALCULATE = "http://api.cdek.ru/calculator/calculate_price_by_json.php"; //URL для калькуляции доставки
     const API_CALCULATE_VERSION = "1.0"; //Версия API для подсчёта стоимости доставки
-    const DEVELOPER_KEY = "522d9ea0ad70744c58fd8d9ffae01fc1";// СДЭК попросил добавить дополнительный атрибут к запросу  28.09.2017
+    const DEVELOPER_KEY = 'r5$E7UPuZG:%X$r0j8N-5bUR~go$mKFr';// СДЭК попросил добавить дополнительный атрибут к запросу  28.09.2017
     const DEFAULT_TIMEOUT = 20;
 
     static protected $inst = null;
@@ -72,7 +72,12 @@ class Api
             $external_request->setLogOption(ExternalRequest::LOG_OPTION_DONT_WRITE_RESPONSE_BODY, true);
         }
 
-        return $external_request->executeRequest()->getRawResponse();
+        $response = $external_request->executeRequest();
+
+        if ($is_pvz_request && $response->getStatus() != 200) {
+            return [];
+        }
+        return $response->getRawResponse();
     }
 
     /**
@@ -110,8 +115,10 @@ class Api
 
         if (!file_exists($filename) || strtotime('-7 day') > filectime($filename)) {
             $result = $this->apiRequest('pvzlist/v1/xml', [], 'GET');
-            FileTools::makePath($filename, true);
-            file_put_contents($filename, serialize($result));
+            if ($result) {
+                FileTools::makePath($filename, true);
+                file_put_contents($filename, serialize($result));
+            }
         } else {
             $result = @unserialize(file_get_contents($filename)) ?? [];
         }

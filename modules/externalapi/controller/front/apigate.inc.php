@@ -94,7 +94,7 @@ class ApiGate extends \RS\Controller\Front
         }
 
         //Пишем запрос в лог
-        \ExternalApi\Model\LogApi::writeToLog($this->url, $this->method, $params, $result);          
+        \ExternalApi\Model\LogApi::writeToLog($this->url, $this->method, $params ?? [], $result);
         \ExternalApi\Model\Orm\Log::removeOldItems();
 
         $origin = \ExternalApi\Model\ApiRouter::getOriginForRequest($this->client_name, $this->client_version);

@@ -48,7 +48,7 @@ class DaDataApi
             'query' => $query,
         ]);
 
-        return $response['suggestions'];
+        return $response['suggestions'] ?? [];
     }
 
     /**

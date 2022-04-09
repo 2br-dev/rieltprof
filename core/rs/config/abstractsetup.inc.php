@@ -20,7 +20,7 @@ abstract class AbstractSetup
         $INSTALLED,
         
         //Общие параметры
-        $VERSION          = '5.2.67',  //Текущая версия ядра
+        $VERSION          = '6.0.32',  //Текущая версия ядра
         $CLASS_EXT        = 'inc.php',    //Расширение файлов с классами
         $CUSTOM_CLASS_EXT = 'my.inc.php', //Расширение файлов с перегруженными классами
         $PATH,   //Путь к корневому каталогу системы = DOCUMENT_ROOT + FOLDER
@@ -40,6 +40,9 @@ abstract class AbstractSetup
         $DB_AUTOINIT     = true,
         $DB_INSTALL_MODE = true,        
         $DB_TABLE_PREFIX = '',
+        $DB_TABLE_ENGINE = 'MyISAM', //MyISAM, InnoDB, Aria
+        $DB_TABLE_CHARSET = 'utf8mb4', //Кодировка таблиц
+        $DB_TABLE_COLLATE = 'utf8mb4_general_ci', //Тип сравнения таблиц CaseInsensitive
 
         $STUB_SCALE = 'axy', // Режим соотношения сторон для заглушек
 
@@ -99,7 +102,7 @@ abstract class AbstractSetup
         $AUTH_BAN_SECONDS = 14400, //Количество секунд, на которое блокировать попытки авторизации с IP злоумышленника
         
         $CREATE_DIR_RIGHTS = 0755, //Права на вновь создаваемые папки
-        $DEFAULT_THEME     = 'flatlines(blue)', //Тема, которая будет установлена сразу после инсталяции системы
+        $DEFAULT_THEME     = 'amazing', //Тема, которая будет установлена сразу после инсталяции системы
         
         //Параметры для шаблонов
         $SCRIPT_TYPE,
@@ -504,5 +507,15 @@ abstract class AbstractSetup
         $timing = Timing::getInstance();
         $timing->initializePageInfo();
         $timing->startMeasure( Timing::TYPE_INITIALIZE, '-', '', $start_time);
+    }
+
+    /**
+     * Возвращает имя текущей сессии
+     *
+     * @return string
+     */
+    public static function getSessionName()
+    {
+        return md5(\Setup::$SECRET_KEY.\Setup::$SECRET_SALT);
     }
 }

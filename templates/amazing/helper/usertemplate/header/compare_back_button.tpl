@@ -1,0 +1,1 @@
+<a class="btn btn-outline-primary rs-back-button" data-root-url="{$router->getRootUrl()}">{t}Вернуться к покупкам{/t}</a>

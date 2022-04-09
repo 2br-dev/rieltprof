@@ -47,6 +47,16 @@ class Link extends AbstractType
     }
 
     /**
+     * Возвраает класс иконки из коллекции zmdi
+     *
+     * @return string
+     */
+    public function getIconClass()
+    {
+        return 'zmdi-open-in-new';
+    }
+
+    /**
      * Возвращает маршрут, если пункт меню должен добавлять его,
      * в противном случае - false
      *

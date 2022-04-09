@@ -16,7 +16,7 @@ use Exception;
  * @package php-font-lib
  */
 class head extends Table {
-  protected $def = [
+  protected $def = array(
     "tableVersion"       => self::Fixed,
     "fontRevision"       => self::Fixed,
     "checkSumAdjustment" => self::uint32,
@@ -34,7 +34,7 @@ class head extends Table {
     "fontDirectionHint"  => self::int16,
     "indexToLocFormat"   => self::int16,
     "glyphDataFormat"    => self::int16,
-  ];
+  );
 
   protected function _parse() {
     parent::_parse();

@@ -314,6 +314,7 @@ class OnlinePay extends Front
         $this->wrapOutput(false);
         $payment_api = new PaymentApi();
         $payment_type = $this->url->get('PaymentType', TYPE_STRING);
+        $payment_types = $payment_api->getTypes();
         $transactionApi = new TransactionApi();
         $response = null;
         try {
@@ -323,13 +324,12 @@ class OnlinePay extends Front
                 foreach ($transaction as $one_transaction) {
                     $response_array[] = $one_transaction->onResult($this->url);
                 }
-                $payment_types = $payment_api->getTypes();
                 $response = $payment_types[$payment_type]->wrapOnResultArray($response_array);
             } else {
                 $response = $transaction->onResult($this->url);
             }
         } catch (\Exception $e) {
-            return $e->getMessage();       // Вывод ошибки
+            return $payment_types[$payment_type]->wrapOnResultError($e);       // Вывод ошибки
         }
         // Логируем ответ
         $this->log->write(t('Ответ: %0', [$response]), LogOnlinePay::LEVEL_IN);

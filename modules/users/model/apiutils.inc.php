@@ -163,6 +163,80 @@ class ApiUtils
     }
 
     /**
+     * Возвращает валидатор для регистрации пользователя
+     *
+     * @return \ExternalApi\Model\Validator\ValidateArray
+     */
+    public static function getUserRegistrationValidator()
+    {
+        return new \ExternalApi\Model\Validator\ValidateArray([
+            'fio' => [
+                '@title' => t('Фамилия Имя Отчество.'),
+                '@type' => 'string',
+                '@require' => true,
+            ],
+            'phone' => [
+                '@title' => t('Телефон.'),
+                '@type' => 'string',
+                '@require' => true,
+            ],
+            'e_mail' => [
+                '@title' => t('E-mail.'),
+                '@type' => 'string',
+                '@require' => true,
+            ],
+            'openpass' => [
+                '@title' => t('Открытый пароль.'),
+                '@type' => 'string',
+                '@validate_callback' => function($is_company, $full_data) {
+                    if (isset($full_data['changepass']) && $full_data['changepass']){
+                        return "Повтор открытого пароля обязательное поле.";
+                    }
+                    return true;
+                }
+            ],
+            'openpass_confirm' => [
+                '@title' => t('Повтор открытого пароля.'),
+                '@type' => 'string',
+                '@validate_callback' => function($is_company, $full_data) {
+                    if (isset($full_data['changepass']) && $full_data['changepass']){
+                        return "Повтор открытого пароля обязательное поле.";
+                    }
+                    return true;
+                }
+            ],
+            'is_company' => [
+                '@title' => t('Является ли клиент компанией?'),
+                '@type' => 'integer'
+            ],
+            'company' => [
+                '@title' => t('Название компании. Только если, стоит ключ is_company.'),
+                '@type' => 'string',
+                '@validate_callback' => function($is_company, $full_data) {
+                    if (isset($full_data['is_company']) && $full_data['is_company']){
+                        return "Название компании обязательное поле.";
+                    }
+                    return true;
+                }
+            ],
+            'company_inn' => [
+                '@title' => t('ИНН компании. Только если, ключ is_company.'),
+                '@type' => 'string',
+                '@validate_callback' => function($is_company, $full_data) {
+                    if (isset($full_data['is_company']) && $full_data['is_company']){
+                        return "ИНН компании обязательное поле.";
+                    }
+                    return true;
+                }
+            ],
+            'data' => [
+                '@title' => t('Дополнительные сведения'),
+                '@type' => 'array'
+            ],
+        ]);
+    }
+
+    /**
      * Возвращает массив данных ответа после проверки данных пользователя для создания и обновления пользователя
      *
      * @param array $data - массив данных пользователя

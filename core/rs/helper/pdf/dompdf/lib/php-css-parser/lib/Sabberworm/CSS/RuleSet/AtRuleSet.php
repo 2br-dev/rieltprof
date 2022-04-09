@@ -2,7 +2,6 @@
 
 namespace Sabberworm\CSS\RuleSet;
 
-use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Property\AtRule;
 
 /**
@@ -28,10 +27,10 @@ class AtRuleSet extends RuleSet implements AtRule {
 	}
 
 	public function __toString() {
-		return $this->render(new OutputFormat());
+		return $this->render(new \Sabberworm\CSS\OutputFormat());
 	}
 
-	public function render(OutputFormat $oOutputFormat) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
 		$sArgs = $this->sArgs;
 		if($sArgs) {
 			$sArgs = ' ' . $sArgs;

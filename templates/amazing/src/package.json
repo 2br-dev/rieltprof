@@ -1,0 +1,17 @@
+{
+  "name": "readyscript-amazing-theme",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "bootstrap": "5.0.0-beta2",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-cssmin": "*",
+    "gulp-plumber": "*",
+    "gulp-sass": "^4.1.0",
+    "gulp-watch": "*",
+    "loading-attribute-polyfill": "^2.0.0-rc.1",
+    "nouislider": "^14.6.3",
+    "swiper": "^6.5.0"
+  }
+}

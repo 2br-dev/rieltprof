@@ -16,7 +16,7 @@
                         <select name="props[{$n}][multioffers][{$level.prop_id}]" class="product-multioffer" data-url="{adminUrl do="getOfferPrice" product_id=$product.id}" data-prop-title="{if $level.title}{$level.title}{else}{$level.prop_title}{/if}">
                             <option value="-1">{t}Не выбрано{/t}</option>
                             {foreach $level.values as $value}
-                                <option value="{$value.val_str}" {if $value.val_str == $multioffers_values[$level.prop_id].value}selected="selected"{/if} >{$value.val_str}</option>
+                                <option value="{$value.val_str}" {if $value.val_str == $offers.items[$document_product.offer_id].propsdata_arr[$level.prop_title]}selected="selected"{/if}>{$value.val_str}</option>
                             {/foreach}
                         </select>
                     {/if}

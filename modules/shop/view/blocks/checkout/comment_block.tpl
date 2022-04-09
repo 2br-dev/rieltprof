@@ -1,22 +1,35 @@
-<div class="checkout_block">
-    <h3 class="h3">{t}Комментарий к заказу{/t}</h3>
-    <div class="form-group">
-        {$order->getPropertyView('comments')}
+<div class="checkout-block mb-lg-5 mb-4">
+    <div class="d-flex align-items-center mb-5">
+        <div class="checkout-block__num"></div>
+        <div class="checkout-block__title">{t}Дополнительные данные{/t}</div>
     </div>
+    <div class="row row-cols-1 g-3">
+        <div>
+            <label class="form-label">{t}Комментарий к заказу{/t}</label>
+            {$order->getPropertyView('comments')}
+        </div>
 
-    {if $is_agreement_require=$shop_config->require_license_agree}
-        <input type="checkbox" name="license_agree" class="rs-checkout_licenseAgreementCheckbox" value="1" id="iagree" {if $smarty.post.license_agree}checked{/if}><label for="iagree">{t alias="Заказ на одной странице - ссылка на условия предоставления услуг" agreement_url=$router->getUrl('shop-front-licenseagreement')}Я согласен с <a href="%agreement_url" class="rs-indialog" target="_blank">условиями предоставления услуг</a>{/t}</label>
-    {/if}
+        {if $order_user_fields->notEmpty()}
+            {foreach $order_user_fields->getStructure() as $field}
+                <div>
+                    <label class="form-label">{$field.title}</label>
+                    {$order_user_fields->getForm($field.alias, '%THEME%/helper/forms/userfields_forms.tpl')}
 
-    {if $CONFIG.enable_agreement_personal_data}
-        {include file="%site%/policy/agreement_phrase.tpl" button_title="{t}Подтвердить заказ{/t}"}
-    {/if}
+                    {$errname = $order_user_fields->getErrorForm($field.alias)}
+                    {$error = $order->getErrorsByForm($errname, ', ')}
+                    {if !empty($error)}
+                        <span class="invalid-feedback d-block">{$error}</span>
+                    {/if}
+                </div>
+            {/foreach}
+        {/if}
+    </div>
 </div>
 
 {if $cart_data.has_error}
-    <div class="checkout_block formFieldError rs-checkout_cartError">{t}В корзине есть ошибки, оформление заказа невозможно{/t}</div>
+    <div class="invalid-feedback d-block rs-checkout_cartError">{t}В корзине есть ошибки, оформление заказа невозможно{/t}</div>
 {/if}
 
 {if $order->getNonFormErrors()}
-    <div class="checkout_block formFieldError">{implode(', ', $order->getNonFormErrors())}</div>
+    <div class="invalid-feedback d-block">{implode(', ', $order->getNonFormErrors())}</div>
 {/if}

@@ -21,7 +21,7 @@
 <div id="map" class="yaMap"></div>
 {addJS file="//api-maps.yandex.ru/2.1/?lang=ru_RU" basepath="root"}
 {addJS file="jquery.ui/jquery.autocomplete.js" basepath="common"}
-<script type="text/javascript">
+<script>
     var ya_qt,                //Таймер
             ya_queryItemsCnt = 5, //Количество элементов для подгрузки
             ya_queryUrl      = 'https://geocode-maps.yandex.ru/1.x/', //Url куда стучатся за результами поиска

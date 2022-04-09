@@ -44,7 +44,7 @@ use Shop\Model\TransactionApi;
  * @property string $return_reason Причина возврата
  * @property string $bank_name Название банка
  * @property string $bik БИК
- * @property string $bank_account Рассчетный счет
+ * @property string $bank_account Расчетный счет
  * @property string $correspondent_account Корреспондентский счет
  * @property float $cost_total Сумма возврата
  * @property string $currency Id валюты
@@ -165,7 +165,7 @@ class ProductsReturn extends OrmObject
                         'maxLength' => '50',
                     ]),
                     'bank_account' => new Type\Varchar([
-                        'description' => t('Рассчетный счет'),
+                        'description' => t('Расчетный счет'),
                         'maxLength' => '100',
                     ]),
                     'correspondent_account' => new Type\Varchar([

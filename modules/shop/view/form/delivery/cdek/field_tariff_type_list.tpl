@@ -87,7 +87,7 @@
         </td>
     </tr>
 </table>
-<script type="text/javascript">
+<script>
     $(document).ready(function(){
         var cdekTable = $(".cdekTable");
         

@@ -77,7 +77,12 @@ class LogReader
             } while ($this->buffer !== false && !preg_match('/^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\] \[[^\]]+\] /', $this->buffer));
             $line = implode("", $line_data);
             $line = Tools::toEntityString($line);
-            preg_match('/^\[(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2})\] \[([^\]]+)\] (.*)/sm', $line, $matches);
+            $match = preg_match('/^\[(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2})\] \[([^\]]+)\] (.*)/sm', $line, $matches);
+
+            if (!$match) {
+                continue;
+            }
+
             $record = [
                 'date' => $matches[1],
                 'time' => $matches[2],
@@ -143,7 +148,7 @@ class LogReader
      */
     protected function isMatchesPagination(array $record)
     {
-        return $this->getRecordsCount() >= $this->record_from && $this->getRecordsCount() <= $this->record_to;
+        return $this->filtered_records_count >= $this->record_from && $this->filtered_records_count <= $this->record_to;
     }
 
     /**

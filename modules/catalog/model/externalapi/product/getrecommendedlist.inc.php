@@ -15,7 +15,6 @@ class GetRecommendedList extends \ExternalApi\Model\AbstractMethods\AbstractGet
 {
     const RIGHT_LOAD = 1;
 
-
     protected $token_require = false;
     protected $costs_loaded = false; //Цены были уже загружены?
     protected $current_currency; //Текущая валюта
@@ -483,12 +482,7 @@ class GetRecommendedList extends \ExternalApi\Model\AbstractMethods\AbstractGet
     * @throws \RS\Exception
     * @return array
     */
-    function process($token = null,
-                     $product_id,
-                     $return_hidden = 0,
-                     $add_dir_recommended = 1,
-                     $only_in_stock = 1,
-                     $sections = ['image', 'cost', 'property', 'concomitant', 'unit', 'current_currency'])
+    function process($product_id, $token = null, $return_hidden = 0, $add_dir_recommended = 1, $only_in_stock = 1, $sections = ['image', 'cost', 'property', 'concomitant', 'unit', 'current_currency'])
     {
         //Загруженный товар
         $product  = new \Catalog\Model\Orm\Product($product_id);

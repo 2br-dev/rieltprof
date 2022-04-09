@@ -12,11 +12,9 @@ namespace Shop\Model\ExternalApi\Product;
 */
 class Reserve extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
 {
-    protected
-        $token_require = false;
+    protected $token_require = false;
     
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
     
     /**
     * Возвращает комментарии к кодам прав доступа
@@ -40,9 +38,9 @@ class Reserve extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMetho
     * Отправляет заявку на заказ товара. Должен быть указан, либо телефон, либо E-mail. Если указан токен пользователя, то E-mail и телефон указывать не нужно.
     * 
     * @param string $token Авторизационный token
+    * @param integer $product_id id товара
     * @param string $phone телефон пользователя. Например +79XX234XX00
     * @param string $email E-mail пользователя
-    * @param integer $product_id id товара
     * @param integer $offer_id id комплектации
     * @param array $multioffers телефон пользователя. Например +79XX234XX00
     * @param integer $is_notify уведомлять ли пользователя о поступлении товара 1 - да, 0 - нет.
@@ -64,13 +62,7 @@ class Reserve extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMetho
     * 
     * @return array Возращает, либо пустой массив ошибок, если заказ успешно создан
     */
-    protected function process($token = null, 
-                               $phone = null, 
-                               $email = null, 
-                               $product_id, 
-                               $offer_id = null, 
-                               $multioffers = [],
-                               $is_notify = 1)
+    protected function process($product_id, $token = null, $phone = null, $email = null, $offer_id = null, $multioffers = [], $is_notify = 1)
     {  
         $errors      = [];
         $product_api = new \Catalog\Model\Api();

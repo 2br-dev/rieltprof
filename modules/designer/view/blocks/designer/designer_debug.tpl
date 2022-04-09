@@ -1,5 +1,5 @@
 {addcss file="%designer%/app/designer.css"}
-<script type="text/javascript">
+<script>
     if (!designer_blocks){
         var designer_blocks = window['global']['designer']['blocks'] || [];
     }

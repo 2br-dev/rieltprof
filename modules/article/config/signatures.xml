@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>0cf9cc9495ef91fc9d7ab7efc228e42e59961538</sign>
+    <sign>d367fe318100e7b956aca2119c70388bc8a4dfa9</sign>
   </file>
   <file>
     <path>config/demo/articles.csv</path>
@@ -42,7 +42,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>6f676e0cc7ad30e5f4b430f067a61e65c6084326</sign>
+    <sign>a906beb666d721eb27b3338fb64e3a331653cf27</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
@@ -86,7 +86,7 @@
   </file>
   <file>
     <path>controller/front/view.inc.php</path>
-    <sign>9137f6e38a2fe0fb7fe4071ec41b5691cb558fbc</sign>
+    <sign>e6079e95ae7f99e479872c4aa698ddc7f9efa52f</sign>
   </file>
   <file>
     <path>model/api.inc.php</path>
@@ -98,7 +98,7 @@
   </file>
   <file>
     <path>model/commenttype/article.inc.php</path>
-    <sign>73692613a236a488b868334b4e16ea2cd21e4750</sign>
+    <sign>bb6c998928988a0f85884e20f201b50e8f96d57b</sign>
   </file>
   <file>
     <path>model/csvschema/article.inc.php</path>
@@ -106,15 +106,15 @@
   </file>
   <file>
     <path>model/externalapi/article/get.inc.php</path>
-    <sign>4704525d8c9cd71daa889c98d0401bf4d28263a7</sign>
+    <sign>36312d588e71a367be2285e3e8f94a994003326a</sign>
   </file>
   <file>
     <path>model/externalapi/article/getcategorylist.inc.php</path>
-    <sign>d2e47bf5bbca90344c8e58860b9a8660bd04c005</sign>
+    <sign>ccac36415f0d3a901dd95c46208b63802e00a4d9</sign>
   </file>
   <file>
     <path>model/externalapi/article/getlist.inc.php</path>
-    <sign>09d766e52bc449e2e96965fba55081f345462088</sign>
+    <sign>81318930ce6294a8e58f7013602d0d6df0e1a534</sign>
   </file>
   <file>
     <path>model/orm/article.inc.php</path>
@@ -130,7 +130,7 @@
   </file>
   <file>
     <path>view/blocks/article/products.tpl</path>
-    <sign>d18daf51e7fcde71eb7042622054c4294d950292</sign>
+    <sign>7a852a496c9b74ba53be5f068d50973dc359594f</sign>
   </file>
   <file>
     <path>view/blocks/category/category.tpl</path>
@@ -138,7 +138,11 @@
   </file>
   <file>
     <path>view/blocks/lastnews/lastnews.tpl</path>
-    <sign>8bee56327ab34955e3e52c05a9915090c0753901</sign>
+    <sign>5152c4f8994673ecd821a7bf1e9e81b86faa052b</sign>
+  </file>
+  <file>
+    <path>view/blocks/lastnews/other_news.tpl</path>
+    <sign>4e45b13e4967014e2bdc1df9bbc578c373ffccc5</sign>
   </file>
   <file>
     <path>view/blocks/searchline/searchform.tpl</path>
@@ -154,11 +158,11 @@
   </file>
   <file>
     <path>view/preview_list.tpl</path>
-    <sign>8fbff1beed5280f811ba3d5bd1f8867cf66a3ece</sign>
+    <sign>bc0864696e2c611f2b1e3b1cdef601521868ded9</sign>
   </file>
   <file>
     <path>view/view_article.tpl</path>
-    <sign>e72a6125cd9244e396b2eec35dc0be95ab224393</sign>
+    <sign>6d14ee10b28cbb89afd3613375f3f9e1b2f6bad5</sign>
   </file>
-  <masterSign>4606d020c4ccead157b50df713e03a32c361591187cba34070c2c1d1b0d3a4b391e86e081871edb7a419b286c0f1daf0f4e520fce277980061450c56b79404196c22992ca6d4d3c319c5d0e507d3f90a57d09b5818f31c80d15f5c26778a0ff06786a67e38b07a5b7a05440c4c13b46834fb156f87441afb255fb77ac93a4397</masterSign>
+  <masterSign>b09fa07f2ff83f798115f0b72112fe436882113c41d4e19c25749b02f869fda6cacb082bd9f1824c9e820ee2f3d3dd1d38af8ed78441fb157c84c349057f23d3d6741613e1069a1f1af241a55a82278ea9c5e73783cb13be03a119e9ba7fabdd1cd34332909c1c56ca6d34f27e81f0e19b49761b457dc35b7b9bf62ba99c887e</masterSign>
 </signatures>

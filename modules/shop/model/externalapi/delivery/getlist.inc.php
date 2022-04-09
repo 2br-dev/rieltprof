@@ -13,10 +13,7 @@ use \ExternalApi\Model\Exception as ApiException;
 */
 class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetList
 {
-    
-    protected
-        $token_require = false;
-        
+    protected $token_require = false;
         
     public
         /**
@@ -251,18 +248,12 @@ class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetList
     * 
     * @return array Возвращает список публичных способов оплаты
     */
-    protected function process($token = null, 
-                               $filter_by_current_order = 0, 
-                               $filter = [],
-                               $sort = 'sortn',
-                               $page = "1", 
-                               $pageSize = "20")
+    protected function process($token = null, $filter_by_current_order = 0, $filter = [], $sort = 'sortn', $page = "1", $pageSize = "20")
     {
-        if ($filter_by_current_order){
-           return $this->getDeliveryListByCurrentOrder($sort); 
-        }else{
-           return parent::process($token, $filter, $sort, $page, $pageSize); 
+        if ($filter_by_current_order) {
+            return $this->getDeliveryListByCurrentOrder($sort);
+        } else {
+            return parent::process($token, $filter, $sort, $page, $pageSize);
         }
-        
     }
 }

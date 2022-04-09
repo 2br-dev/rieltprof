@@ -2,6 +2,7 @@
 {strip}
 {addmeta http-equiv="X-UA-Compatible" content="IE=Edge" unshift=true}
 {addmeta name="viewport" content="width=device-width, initial-scale=1.0"}
+{addmeta name="yandex-verification" content="0f1a5b1b2a424f41"}
 
 {if $THEME_SETTINGS.enable_page_fade}
     {$app->setBodyAttr(['style' => 'opacity:0', 'onload' => "setTimeout('document.body.style.opacity = &quot;1&quot;', 0)"])}

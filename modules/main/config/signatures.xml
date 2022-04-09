@@ -2,27 +2,39 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>41a929f7ae36f7f007e200ad5a8fb134f1b5fb00</sign>
+    <sign>a0fbecd593517fecac0859f7e4763fb7e70894f7</sign>
+  </file>
+  <file>
+    <path>config/demo/logo-sm.svg</path>
+    <sign>1fed6e3532258280099ba9acd25cf29740118cae</sign>
+  </file>
+  <file>
+    <path>config/demo/logo-xs.svg</path>
+    <sign>49ba5438d54c24b9f40b33e77085ac9676ca3c5f</sign>
   </file>
   <file>
     <path>config/demo/logo.png</path>
     <sign>2e2c8f09a4280d1cd21efb2add61e3d43efedde6</sign>
   </file>
   <file>
+    <path>config/demo/logo.svg</path>
+    <sign>7b22904cb4c36cb39bc0e961c3c5abf9de982da4</sign>
+  </file>
+  <file>
     <path>config/file.inc.php</path>
-    <sign>78b450c7eb97bbb4bc4d3f30762f2f4ab0cf0b12</sign>
+    <sign>a41dbaaa9381971b07015004421a27c2727ce5a9</sign>
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>f2e9de491f4b06677f431f3871a3b7205b1ee152</sign>
+    <sign>dbf00141d45f768b91b1749fbeaae2660f1fb3d5</sign>
   </file>
   <file>
     <path>config/install.inc.php</path>
-    <sign>8309ebd130136d3dd1ea430cbcf5be043091fa8c</sign>
+    <sign>cb41bbd5ddd52a8e5a7757160a65ed7ad80c2259</sign>
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>c6f947c91359bbcf29c47a892f2148b1f492431a</sign>
+    <sign>54bfa131e53c0ddee91071c142a294e421c7e5f3</sign>
   </file>
   <file>
     <path>config/modulerights.inc.php</path>
@@ -30,7 +42,7 @@
   </file>
   <file>
     <path>config/patches.inc.php</path>
-    <sign>e1aeda823b539cddd8e0ec78a780cec0e5be527a</sign>
+    <sign>81f33d8344b89523c0e71d049b35c4313ea973e4</sign>
   </file>
   <file>
     <path>controller/admin/block/headerpanel.inc.php</path>
@@ -82,7 +94,7 @@
   </file>
   <file>
     <path>controller/admin/license.inc.php</path>
-    <sign>799a891ba7f434db899efb11d8e6ee3d5256f85b</sign>
+    <sign>f908e023697b98942f8776148b3345d8752a3de1</sign>
   </file>
   <file>
     <path>controller/admin/logview.inc.php</path>
@@ -102,7 +114,7 @@
   </file>
   <file>
     <path>controller/admin/options.inc.php</path>
-    <sign>55da8c4f6fb69c5f584c9c9115974ef8c7bfe6aa</sign>
+    <sign>d67ba5f436c55e226e82d247b63fab5bb63d7226</sign>
   </file>
   <file>
     <path>controller/admin/ormfieldrequester.inc.php</path>
@@ -110,11 +122,11 @@
   </file>
   <file>
     <path>controller/admin/routes.inc.php</path>
-    <sign>a5a7717d21008b24da88889c1300b64064f41671</sign>
+    <sign>3c66203b3081d24a6ce4bb2be1a9ebec79fc2325</sign>
   </file>
   <file>
     <path>controller/admin/systemcheck.inc.php</path>
-    <sign>363cbab1ff461cb2ece57ac28532c307728cd6b8</sign>
+    <sign>4d68aece6efda53222bd811e33ccca2db35034f1</sign>
   </file>
   <file>
     <path>controller/admin/wallpost.inc.php</path>
@@ -134,11 +146,11 @@
   </file>
   <file>
     <path>controller/admin/widgets.inc.php</path>
-    <sign>6bdb81d5582ce885b03af152acb7ac332897df12</sign>
+    <sign>238ddd5f0dd8722a61ca3dab281c986b2181031e</sign>
   </file>
   <file>
     <path>controller/block/breadcrumbs.inc.php</path>
-    <sign>000a016ba98849fb25c08c4671268042a27b82e6</sign>
+    <sign>be72c796c92925cde606f4ee5ee4015117f86833</sign>
   </file>
   <file>
     <path>controller/block/logo.inc.php</path>
@@ -147,6 +159,10 @@
   <file>
     <path>controller/block/maincontent.inc.php</path>
     <sign>aa37e68ae382044314c6133d3e2efab57c5a261a</sign>
+  </file>
+  <file>
+    <path>controller/block/map.inc.php</path>
+    <sign>a43adb17aa68565616c32983a8e9eeb834cffc6b</sign>
   </file>
   <file>
     <path>controller/block/userhtml.inc.php</path>
@@ -190,7 +206,7 @@
   </file>
   <file>
     <path>model/bestsellersapi.inc.php</path>
-    <sign>943e72d73127dc5a4593877b69709fc5b4061d71</sign>
+    <sign>c00ff0db619911ba31f9c5e4f8672cc748a78010</sign>
   </file>
   <file>
     <path>model/blockedipapi.inc.php</path>
@@ -203,6 +219,10 @@
   <file>
     <path>model/comet/longpollingloop.inc.php</path>
     <sign>c842a4aae73f40b81ed46f92cf1d3680c824e039</sign>
+  </file>
+  <file>
+    <path>model/csvpreset/geopoint.inc.php</path>
+    <sign>184401d638395f9b3c0983afed931af7cdb78c02</sign>
   </file>
   <file>
     <path>model/csvschema/blockedip.inc.php</path>
@@ -218,7 +238,7 @@
   </file>
   <file>
     <path>model/dadataapi.inc.php</path>
-    <sign>3dcdadd7ef1bc36b309fcf54c9eef14570c97807</sign>
+    <sign>372dd273ea522cac88a4477fa5645cfc1eda442b</sign>
   </file>
   <file>
     <path>model/externalrequestcacheapi.inc.php</path>
@@ -242,11 +262,11 @@
   </file>
   <file>
     <path>model/geoip/ipgeobase.inc.php</path>
-    <sign>f87dc91c2c5d8283c8f15bac2ec8093c9fdb148a</sign>
+    <sign>95c94a8ffb2b5e3f9185a6eae9ccbba2de754c29</sign>
   </file>
   <file>
     <path>model/geoipapi.inc.php</path>
-    <sign>3ea1bb76ba30c4f16cb6fa69be542c91bf5c2a26</sign>
+    <sign>960521d54d5bb140713c999c7364f5495793269d</sign>
   </file>
   <file>
     <path>model/iconreference.inc.php</path>
@@ -271,6 +291,10 @@
   <file>
     <path>model/logapi.inc.php</path>
     <sign>2b4234ce8f768273dec4412f0df5872b791e6285</sign>
+  </file>
+  <file>
+    <path>model/microdata/microdatabreadcrumbs.inc.php</path>
+    <sign>24989061de0571d84d95a9ab96d98316a790d6cd</sign>
   </file>
   <file>
     <path>model/modulelicenseapi.inc.php</path>
@@ -314,7 +338,7 @@
   </file>
   <file>
     <path>model/orm/disableroute.inc.php</path>
-    <sign>0239ff0afe839c32ff12a189c6f4654f6b505acb</sign>
+    <sign>6645d22e89e7559aa1133db03a9fe765fb773471</sign>
   </file>
   <file>
     <path>model/orm/externalrequestcache.inc.php</path>
@@ -338,7 +362,23 @@
   </file>
   <file>
     <path>model/orm/widgets.inc.php</path>
-    <sign>7af17e8861bc48d39b609dc22c15f79080086991</sign>
+    <sign>32b85aba5e22d2a0c8a7be7d3f45b987fbd37eff</sign>
+  </file>
+  <file>
+    <path>model/ormtype/geopoint.inc.php</path>
+    <sign>65f990677a9c82f2d3804351c905b36e65541b91</sign>
+  </file>
+  <file>
+    <path>model/relcanonical/abstractrelcanonical.inc.php</path>
+    <sign>7852f578354138bec02e04b885e42783956787d6</sign>
+  </file>
+  <file>
+    <path>model/relcanonical/relcanonicalrs.inc.php</path>
+    <sign>f094cee491e47df960c54f8ac4e19e76b5a46f64</sign>
+  </file>
+  <file>
+    <path>model/relcanonical/relcanonicalstub.inc.php</path>
+    <sign>9365147db13f03d65153dc9f1924b2b2cfa02693</sign>
   </file>
   <file>
     <path>model/remotesupportapi.inc.php</path>
@@ -346,7 +386,7 @@
   </file>
   <file>
     <path>model/requester/externalrequest.inc.php</path>
-    <sign>f91551f619d6faaada6e7a3293e07c8a94a35750</sign>
+    <sign>a132a473663a75a4317e0bb52b5a84d8372a1899</sign>
   </file>
   <file>
     <path>model/requester/externalrequestexception.inc.php</path>
@@ -354,7 +394,7 @@
   </file>
   <file>
     <path>model/requester/externalresponse.inc.php</path>
-    <sign>e6c625e3e938aa08aa924dfdab6057382544f327</sign>
+    <sign>47b0c267877b03e2cc70dce41a6782420566cc54</sign>
   </file>
   <file>
     <path>model/rsnewsapi.inc.php</path>
@@ -379,6 +419,10 @@
   <file>
     <path>model/systemcheck/test/filter.inc.php</path>
     <sign>39029e2c9d90bc48e7fc1af302f7314765f6d542</sign>
+  </file>
+  <file>
+    <path>model/systemcheck/test/gdmodule.inc.php</path>
+    <sign>7b9b97e54521bb92906ae76d242675e62702b2d7</sign>
   </file>
   <file>
     <path>model/systemcheck/test/locale.inc.php</path>
@@ -430,7 +474,7 @@
   </file>
   <file>
     <path>model/systemcheck/test/ziparchive.inc.php</path>
-    <sign>97324130c9d84bf93b38c1d3696d6e2335b880ac</sign>
+    <sign>667cf008374d9179cb34662bbd32d5775bdbc0b7</sign>
   </file>
   <file>
     <path>model/wallpostapi.inc.php</path>
@@ -439,6 +483,10 @@
   <file>
     <path>model/widgets.inc.php</path>
     <sign>fc3de0c17b285c7afed4e1d859e861a2c991ea20</sign>
+  </file>
+  <file>
+    <path>view/admin/crud-options.tpl</path>
+    <sign>e6b33af2b5b1915e7f80077b84209250b1988b71</sign>
   </file>
   <file>
     <path>view/admin/lang/create_lang_help.tpl</path>
@@ -453,12 +501,56 @@
     <sign>785777a2a096199b1c4d3d74d8defc6d7cfd91d3</sign>
   </file>
   <file>
+    <path>view/admin/license_col_number.tpl</path>
+    <sign>077c7fda1ce887227b867c73ce4654d397383bd9</sign>
+  </file>
+  <file>
+    <path>view/admin/license_col_object.tpl</path>
+    <sign>06eb502f1e58ec90238f40c68d5f7a5404260fd5</sign>
+  </file>
+  <file>
+    <path>view/admin/license_notice.tpl</path>
+    <sign>277c1e7be4bef653bb97f4748aa29935d9dce3df</sign>
+  </file>
+  <file>
+    <path>view/admin/pageseo_column_route.tpl</path>
+    <sign>5b4d192ba9a0bd44aaf01c6d244ef197ee31d5f5</sign>
+  </file>
+  <file>
+    <path>view/admin/routes.tpl</path>
+    <sign>cb1d5c8a7beba53f83d2012598513d0b0ebd9d4b</sign>
+  </file>
+  <file>
+    <path>view/admin/show_changelog.tpl</path>
+    <sign>974f0f0efdea81d117e46b9fb5af9e9880a04dba</sign>
+  </file>
+  <file>
+    <path>view/admin/show_event_listeners.tpl</path>
+    <sign>19dd9f726739beb8a6beed95a121f00d26eb3974</sign>
+  </file>
+  <file>
+    <path>view/admin/systemcheck.tpl</path>
+    <sign>ad88245f18622ac6343eede32ce05d48e6eca559</sign>
+  </file>
+  <file>
+    <path>view/admin/widget/widget_list.tpl</path>
+    <sign>7b84362db4680c8973f88628a72f99233f363322</sign>
+  </file>
+  <file>
+    <path>view/admin/widget/widget_wrapper.tpl</path>
+    <sign>bfda785dbb731f6ff59aaf16ff09dd5182fc7804</sign>
+  </file>
+  <file>
+    <path>view/admin/widget/widgets.tpl</path>
+    <sign>793d25c59e17a6326cd52033c3754228cbfa0d60</sign>
+  </file>
+  <file>
     <path>view/adminblocks/headerpanel/header_panel_items.tpl</path>
     <sign>411148a12562b2b7c9cd169b8a4e463f1904a8ab</sign>
   </file>
   <file>
     <path>view/adminblocks/headerpanel/header_public_panel_items.tpl</path>
-    <sign>118e8ca9c55d29814e22ad4e885f59069094b1e9</sign>
+    <sign>5293092ea009ee80cd2e68be87de6cb6eebba0e0</sign>
   </file>
   <file>
     <path>view/adminblocks/rsalerts/alert_item.tpl</path>
@@ -486,7 +578,7 @@
   </file>
   <file>
     <path>view/blocks/breadcrumbs/breadcrumbs.tpl</path>
-    <sign>786dd953dadfe4722cb8ef50b7b4765e1732e595</sign>
+    <sign>c1ac1b4c642eacfceacbed319d373fd34cb2bf67</sign>
   </file>
   <file>
     <path>view/blocks/logo/foot_logo.tpl</path>
@@ -494,19 +586,31 @@
   </file>
   <file>
     <path>view/blocks/logo/logo.tpl</path>
-    <sign>0f0ed614a40bcf71eb8cfa17643a97431518f703</sign>
+    <sign>73834ba99a8705dcfa6f862ebea971c84eba0b41</sign>
+  </file>
+  <file>
+    <path>view/blocks/logo/logo_footer.tpl</path>
+    <sign>7cbaa3806cc250e1397484de43f6aa7e3de2f716</sign>
+  </file>
+  <file>
+    <path>view/blocks/logo/logo_lite.tpl</path>
+    <sign>bc9c195845a9d1c458f690c28acde09fcb1498f8</sign>
+  </file>
+  <file>
+    <path>view/blocks/logo/logo_lite_footer.tpl</path>
+    <sign>908d2b688f78a264ced998be5c0349916ecee766</sign>
+  </file>
+  <file>
+    <path>view/blocks/map/map.tpl</path>
+    <sign>2599850c4679ea98af5b5f8146e2fb97d2c5438a</sign>
   </file>
   <file>
     <path>view/blocks/yandexmap/points.tpl</path>
-    <sign>9bc49a9f5d73d36a67bedf8a84a08fb1893b9e76</sign>
+    <sign>4a17638d7f825d13de448516deb97b3e4ed31ab6</sign>
   </file>
   <file>
     <path>view/blocks/yandexmap/yandexmap.tpl</path>
-    <sign>de370c3648b98ae87ac66df2c056f657e77fb32c</sign>
-  </file>
-  <file>
-    <path>view/crud-options.tpl</path>
-    <sign>38b175819ab0f6dc4d96369b374545b667f78420</sign>
+    <sign>40bcc6d35411b457ee3c8c0fea53439c029f2a42</sign>
   </file>
   <file>
     <path>view/css/bestsellers.css</path>
@@ -573,6 +677,10 @@
     <sign>c1b9ec503a0ba5728f0e70c04623cfb8bbb6b0e9</sign>
   </file>
   <file>
+    <path>view/form/config/field_rel_canonical_class.tpl</path>
+    <sign>bffd5ed22fe2c327b8578ba610d0de7bfa502212</sign>
+  </file>
+  <file>
     <path>view/form/config/yandex_help.tpl</path>
     <sign>10b5d03624ae078abdce37efdf1501c21ad60860</sign>
   </file>
@@ -603,6 +711,10 @@
   <file>
     <path>view/form/log/site_column.tpl</path>
     <sign>2cf8a3142bd5f0f67eab722e191755815898b795</sign>
+  </file>
+  <file>
+    <path>view/form/ormtype/geo_point.tpl</path>
+    <sign>d9f25262c0684e734bd465b759152468ac847d09</sign>
   </file>
   <file>
     <path>view/form/sysoptions/cache.tpl</path>
@@ -657,8 +769,28 @@
     <sign>004bfb53388059850023c6457874a7db29ba044d</sign>
   </file>
   <file>
+    <path>view/js/ormtype/rs.fieldgeopoint.js</path>
+    <sign>4b3af7caa616969f267f8a57d74c91a3d6ef3333</sign>
+  </file>
+  <file>
     <path>view/js/rs.logview.js</path>
-    <sign>82e07c565f4a83b740085480a13c7ef5f065e406</sign>
+    <sign>eb3143a475601c736f97f4b561daea733dbcfaba</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/googlemap.js</path>
+    <sign>a8cec7bdea9ad731fb71ce9c0c4d37beba845cce</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/mapblock.js</path>
+    <sign>118cc0b3bad567f3b870a1ae8fdb342698bbc190</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/mapmanager.js</path>
+    <sign>806789d2b86eb40c181382a4450b2a9083ada40c</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/yandexmap.js</path>
+    <sign>de9a7a966fbe11b9327012df18f47e869abf9f98</sign>
   </file>
   <file>
     <path>view/js/widgetengine.js</path>
@@ -666,47 +798,15 @@
   </file>
   <file>
     <path>view/js/yandexmap/rs.yandexmap.js</path>
-    <sign>ade8f90e65f21754f5d91be47cda5e7da29f681e</sign>
+    <sign>f63586b00f44ac26136b63c55fde4b17e6a0e51a</sign>
   </file>
   <file>
     <path>view/js/yandexmap/yandexmap.js</path>
     <sign>cf9711da933a1e20c95406db090d1f800d9b039b</sign>
   </file>
   <file>
-    <path>view/license_col_number.tpl</path>
-    <sign>e47b4240eeef4f3321841fadc0c600941ceea331</sign>
-  </file>
-  <file>
-    <path>view/license_col_object.tpl</path>
-    <sign>37b91e8dd3be4a58e8490911b1314e4a94633166</sign>
-  </file>
-  <file>
-    <path>view/license_notice.tpl</path>
-    <sign>277c1e7be4bef653bb97f4748aa29935d9dce3df</sign>
-  </file>
-  <file>
-    <path>view/pageseo_column_route.tpl</path>
-    <sign>b0ef8351e2724d8cc5d4f371182ca8a4e7d862ec</sign>
-  </file>
-  <file>
     <path>view/post_form.tpl</path>
-    <sign>6dc1325817b7c0dc0523f1e15d1443d957553580</sign>
-  </file>
-  <file>
-    <path>view/routes.tpl</path>
-    <sign>cb1d5c8a7beba53f83d2012598513d0b0ebd9d4b</sign>
-  </file>
-  <file>
-    <path>view/show_changelog.tpl</path>
-    <sign>974f0f0efdea81d117e46b9fb5af9e9880a04dba</sign>
-  </file>
-  <file>
-    <path>view/show_event_listeners.tpl</path>
-    <sign>19dd9f726739beb8a6beed95a121f00d26eb3974</sign>
-  </file>
-  <file>
-    <path>view/systemcheck.tpl</path>
-    <sign>ad88245f18622ac6343eede32ce05d48e6eca559</sign>
+    <sign>20863ae5145306186ce5d7b9866a2bf6d1ee9419</sign>
   </file>
   <file>
     <path>view/widget/bestsellers.tpl</path>
@@ -736,21 +836,5 @@
     <path>view/widget/module_licenses.tpl</path>
     <sign>56f05432cb3b1aca5515d47354ad2b110127db34</sign>
   </file>
-  <file>
-    <path>view/widget_helper.tpl</path>
-    <sign>73ac56cf3b26a35d022652f1923ad24df3da53cf</sign>
-  </file>
-  <file>
-    <path>view/widget_list.tpl</path>
-    <sign>7b84362db4680c8973f88628a72f99233f363322</sign>
-  </file>
-  <file>
-    <path>view/widget_wrapper.tpl</path>
-    <sign>bfda785dbb731f6ff59aaf16ff09dd5182fc7804</sign>
-  </file>
-  <file>
-    <path>view/widgets.tpl</path>
-    <sign>793d25c59e17a6326cd52033c3754228cbfa0d60</sign>
-  </file>
-  <masterSign>8697a5e6f2a88254f038a48003dc0d358d1bdb8f420024bf67b295cbd01815313e2b6a5d6379b7da6f3288c860eeb3b53aa133e4371628845d44f9cbea74f527160d6bd19e5e0f1ebb8788325e8cdc9d13484968360bda364a36678ede8b945fe22d7ef6cca525acb5a59a8ef2486ae183cad1b4d93a291d5b3f9f147e1199c1</masterSign>
+  <masterSign>80ce562708d1f5fd845961b4afd9415ac20551b010788b96de40984938737d3d9b6ca9b168bbba495b3534e2b1c493394a224ed6891284b950e34a8ccd94d887b0afb3a49bcd2454d412d4e6df20cd7f04cfec4836093e835939bda447875b97497f4ae1b121ea53020b94d860db325b073757897ade12bf1420a1f06eeefb3e</masterSign>
 </signatures>

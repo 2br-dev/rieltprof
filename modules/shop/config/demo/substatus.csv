@@ -9,3 +9,4 @@
 "Покупателю не подошел товар";user_refused_product;8
 "Покупателя не устраивает качество товара";user_refused_quality;9
 "Не удалось связаться с покупателем";user_unreachable;10
+"Служба доставки не смогла доставить заказ";delivery_service_undelivered;11

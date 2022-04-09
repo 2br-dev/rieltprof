@@ -12,6 +12,9 @@ use Main\Model\GeoIp\IpGeoBase;
 use Main\Model\Log\LogExternalRequest;
 use Main\Model\NoticeSystem\InternalAlerts;
 use Main\Model\Orm\DisableRoute;
+use Main\Model\RelCanonical\AbstractRelCanonical;
+use Main\Model\RelCanonical\RelCanonicalRS;
+use Main\Model\RelCanonical\RelCanonicalStub;
 use Main\Model\RsNewsApi;
 use Main\Model\WallPostApi;
 use RS\Application\Application;
@@ -28,8 +31,10 @@ class Handlers extends HandlerAbstract
 {
     function init()
     {
+        $this->bind('controller.beforewrap');
         $this->bind('geoip.getservices');
         $this->bind('getlogs');
+        $this->bind('getrelcanonicallist');
         $this->bind('getmenus');
         $this->bind('getpages');
         $this->bind('getroute');
@@ -102,6 +107,19 @@ class Handlers extends HandlerAbstract
     }
 
     /**
+     * Возвращает классы канонических URL этого модуля
+     *
+     * @param AbstractRelCanonical[] $list
+     * @return AbstractRelCanonical[]
+     */
+    public static function getRelCanonicalList(array $list)
+    {
+        $list[] = new RelCanonicalStub();
+        $list[] = new RelCanonicalRS();
+        return $list;
+    }
+
+    /**
      * Возвращает классы логирования этого модуля
      *
      * @param AbstractLog[] $list - список классов логирования
@@ -123,7 +141,7 @@ class Handlers extends HandlerAbstract
      */
     public static function GeoIpGetservices($list)
     {
-        $list[] = new IpGeoBase();
+        //$list[] = new IpGeoBase();
         $list[] = new Dadata();
         return $list;
     }
@@ -177,6 +195,10 @@ class Handlers extends HandlerAbstract
         }
     }
 
+    static function controllerBeforeWrap($params)
+    {
+        AbstractRelCanonical::getRealCanonicalClass()->onControllerBeforeWrap();
+    }
 
     /**
      * Добавляет системные уведомления о возможности получить бонус за репост

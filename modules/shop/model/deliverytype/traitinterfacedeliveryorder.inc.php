@@ -127,6 +127,36 @@ trait TraitInterfaceDeliveryOrder
     }
 
     /**
+     * Возвращает true, если заказ на доставку можно удалять
+     *
+     * @return bool
+     */
+    public function canDeleteDeliveryOrder()
+    {
+        return true;
+    }
+
+    /**
+     * Возвращает true, если заказ на доставку можно обновлять
+     *
+     * @return bool
+     */
+    public function canRefreshDeliveryOrder()
+    {
+        return true;
+    }
+
+    /**
+     * Возвращает true, если заказ на доставку можно изменить
+     *
+     * @return bool
+     */
+    public function canChangeDeliveryOrder()
+    {
+        return true;
+    }
+
+    /**
      * Исполняет "общее" действие с заказом на доставку
      * При успехе - возвращает инструкции для вывода, при неудаче - бросает исключение
      *
@@ -137,7 +167,7 @@ trait TraitInterfaceDeliveryOrder
      * @throws ShopException
      * @throws \SmartyException
      */
-    final protected function executeCommonDeliveryOrderAction(HttpRequest $http_request, Order $order, string $action): array
+    protected function executeCommonDeliveryOrderAction(HttpRequest $http_request, Order $order, string $action): array
     {
         switch ($action) {
             case 'create':
@@ -148,43 +178,56 @@ trait TraitInterfaceDeliveryOrder
                 ];
             case 'view':
                 $delivery_order = $this->getDeliveryOrderFromRequest($http_request, $order);
-                $update_url = RouterManager::obj()->getAdminUrl('interfaceDeliveryOrderAction', [
-                    'action' => 'refresh',
-                    'order_id' => $order['id'],
-                    'delivery_order_id' => $delivery_order['id'],
-                ]);
-                $change_url = RouterManager::obj()->getAdminUrl('interfaceDeliveryOrderAction', [
-                    'action' => 'change',
-                    'order_id' => $order['id'],
-                    'delivery_order_id' => $delivery_order['id'],
-                ]);
-                $delete_url = RouterManager::obj()->getAdminUrl('interfaceDeliveryOrderAction', [
-                    'action' => 'delete',
-                    'order_id' => $order['id'],
-                    'delivery_order_id' => $delivery_order['id'],
-                ]);
+                $items = [];
+
+                if ($this->canRefreshDeliveryOrder()) {
+                    $update_url = RouterManager::obj()->getAdminUrl('interfaceDeliveryOrderAction', [
+                        'action' => 'refresh',
+                        'order_id' => $order['id'],
+                        'delivery_order_id' => $delivery_order['id'],
+                    ]);
+
+                    $items[] = new ToolbarButton\Button($update_url, t('Обновить данные'), [
+                        'attr' => [
+                            'class' => 'btn btn-sm btn-warning crud-get',
+                            'data-update-container' => '.delivery-order-view',
+                        ],
+                    ]);
+                }
+
+                if ($this->canChangeDeliveryOrder()) {
+                    $change_url = RouterManager::obj()->getAdminUrl('interfaceDeliveryOrderAction', [
+                        'action' => 'change',
+                        'order_id' => $order['id'],
+                        'delivery_order_id' => $delivery_order['id'],
+                    ]);
+
+                    $items[] = new ToolbarButton\Button($change_url, t('Изменить заказ на доставку'), [
+                        'attr' => [
+                            'class' => 'btn btn-sm btn-primary crud-get',
+                            'data-confirm-text' => t('Вы действительно хотите внести изменения в заказ на доставку, используя актуальные данные заказа?'),
+                            'data-update-container' => '.delivery-order-view',
+                        ],
+                    ]);
+                }
+
+                if ($this->canDeleteDeliveryOrder()) {
+                    $delete_url = RouterManager::obj()->getAdminUrl('interfaceDeliveryOrderAction', [
+                        'action' => 'delete',
+                        'order_id' => $order['id'],
+                        'delivery_order_id' => $delivery_order['id'],
+                    ]);
+
+                    $items[] = new ToolbarButton\Button($delete_url, t('Удалить заказ на доставку'), [
+                        'attr' => [
+                            'class' => 'btn btn-sm btn-danger crud-get',
+                            'data-confirm-text' => t('Вы действительно хотите удалить заказ на доставку?'),
+                        ],
+                    ]);
+                }
+
                 $bottom_toolbar = new ToolbarElement([
-                    'Items' => [
-                        new ToolbarButton\Button($update_url, t('Обновить данные'), [
-                            'attr' => [
-                                'class' => 'btn btn-sm btn-warning crud-get',
-                                'data-update-container' => '.delivery-order-view',
-                            ],
-                        ]),
-                        new ToolbarButton\Button($change_url, t('Изменить заказ на доставку'), [
-                            'attr' => [
-                                'class' => 'btn btn-sm btn-primary crud-get',
-                                'data-confirm-text' => t('Вы действительно хотите внести изменения в заказ на доставку, используя актуальные данные заказа?'),
-                                'data-update-container' => '.delivery-order-view',
-                            ],
-                        ]),
-                        new ToolbarButton\Button($delete_url, t('Удалить заказ на доставку'), [
-                            'attr' => [
-                                'class' => 'btn btn-sm btn-danger crud-get',
-                                'data-confirm-text' => t('Вы действительно хотите удалить заказ на доставку?'),
-                            ],
-                        ]),
-                    ],
+                    'Items' => $items,
                 ]);
                 return [
                     'view_type' => 'form',
@@ -198,22 +241,35 @@ trait TraitInterfaceDeliveryOrder
                     ],
                 ];
             case 'delete':
-                $delivery_order = $this->getDeliveryOrderFromRequest($http_request, $order);
-                $this->deleteDeliveryOrder($delivery_order);
+                if ($this->canDeleteDeliveryOrder()) {
+                    $delivery_order = $this->getDeliveryOrderFromRequest($http_request, $order);
+                    $this->deleteDeliveryOrder($delivery_order);
+                    $message = t('Заказ на доставку успешно удалён');
+                } else {
+                    $message = t('Удаление заказа не поддерживается');
+                }
+
                 return [
                     'view_type' => 'message',
-                    'message' => t('Заказ на доставку успешно удалён'),
+                    'message' => $message,
                 ];
             case 'change':
-                $delivery_order = $this->getDeliveryOrderFromRequest($http_request, $order);
-                $this->changeDeliveryOrder($delivery_order, $order);
+                if ($this->canChangeDeliveryOrder()) {
+                    $delivery_order = $this->getDeliveryOrderFromRequest($http_request, $order);
+                    $this->changeDeliveryOrder($delivery_order, $order);
+                    $message = t('Заказ на доставку успешно изменён');
+                } else {
+                    $message = t('Изменение заказа не поддерживается');
+                }
                 return [
                     'view_type' => 'message',
-                    'message' => t('Заказ на доставку успешно изменён'),
+                    'message' => $message,
                 ];
             case 'refresh':
                 $delivery_order = $this->getDeliveryOrderFromRequest($http_request, $order);
-                $this->refreshDeliveryOrder($delivery_order);
+                if ($this->canRefreshDeliveryOrder()) {
+                    $this->refreshDeliveryOrder($delivery_order);
+                }
                 $view = new ViewEngine();
                 $view->assign([
                     'delivery_order' => $delivery_order,

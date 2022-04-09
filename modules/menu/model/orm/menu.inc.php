@@ -35,6 +35,8 @@ class Menu extends OrmObject
     protected static $act_path; //Путь до корневого элемента активного пункта меню
         
     protected $cache_type;
+    /** @var Menu $this_before_write */
+    public $this_before_write;
 
     protected function _init()
     {
@@ -161,6 +163,29 @@ class Menu extends OrmObject
         if ($this['id'] && $this['parent'] == $this['id']) {
             return $this->addError(t('Неверно указан родительский элемент'), 'parent');
         }
+
+        if ($save_flag == self::INSERT_FLAG) {
+            if ($this->getTypeObject()->onBeforeCreate() === false) {
+                return false;
+            }
+        }
+        $this->this_before_write = new self($this['id'], false);
+    }
+
+    /**
+     * Обработчик, вызывается сразу после создания пункта меню
+     *
+     * @param string $save_flag
+     */
+    function afterWrite($save_flag) {
+        if ($save_flag == self::INSERT_FLAG) {
+            $this->getTypeObject(false)->onCreate();
+        }
+
+        if ($save_flag == self::UPDATE_FLAG) {
+            $this->getTypeObject(false)->onUpdate($this->this_before_write, $this);
+            $this->this_before_write->getTypeObject(false)->onUpdate($this->this_before_write, $this);
+        }
     }
     
     /**
@@ -209,6 +234,16 @@ class Menu extends OrmObject
     {
         return $this->getTypeObject()->isActive();
     }
+
+    /**
+     * Возвращает родительский элмент
+     *
+     * @return Menu
+     */
+    function getParent()
+    {
+        return new self($this['parent']);
+    }
     
     /**
     * Возвращает клонированный объект меню
@@ -220,5 +255,18 @@ class Menu extends OrmObject
         $clone = parent::cloneSelf();
         unset($clone['alias']);
         return $clone;
+    }
+
+    /**
+     * Удаляет текущий пункт меню
+     *
+     * @return bool
+     */
+    function delete()
+    {
+        if ($result = parent::delete()) {
+            $this->getTypeObject()->onDelete();
+        }
+        return $result;
     }
 }

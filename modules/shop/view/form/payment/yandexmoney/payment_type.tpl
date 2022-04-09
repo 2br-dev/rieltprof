@@ -17,7 +17,7 @@
     </div>
     {$elem.__category_code->formView()}
 </div>
-<script type="text/javascript">
+<script>
    $(document).ready(function(){
        /**
        * Смена списка Типа метода оплаты

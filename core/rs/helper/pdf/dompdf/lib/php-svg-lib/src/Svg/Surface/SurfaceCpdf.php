@@ -33,18 +33,18 @@ class SurfaceCpdf implements SurfaceInterface
         $h = $dimensions["height"];
 
         if (!$canvas) {
-            $canvas = new \CPdf\CPdf([0, 0, $w, $h]);
+            $canvas = new \CPdf\CPdf(array(0, 0, $w, $h));
             $refl = new \ReflectionClass($canvas);
             $canvas->fontcache = realpath(dirname($refl->getFileName()) . "/../../fonts/")."/";
         }
 
         // Flip PDF coordinate system so that the origin is in
         // the top left rather than the bottom left
-        $canvas->transform([
+        $canvas->transform(array(
             1,  0,
             0, -1,
             0, $h
-        ]);
+        ));
 
         $this->width  = $w;
         $this->height = $h;
@@ -107,12 +107,13 @@ class SurfaceCpdf implements SurfaceInterface
     {
         if (self::DEBUG) echo __FUNCTION__ . "\n";
 
-        $this->canvas->transform([$a, $b, $c, $d, $e, $f]);
+        $this->canvas->transform(array($a, $b, $c, $d, $e, $f));
     }
 
     public function beginPath()
     {
         if (self::DEBUG) echo __FUNCTION__ . "\n";
+        // TODO: Implement beginPath() method.
     }
 
     public function closePath()
@@ -183,7 +184,7 @@ class SurfaceCpdf implements SurfaceInterface
 
     public static function getimagesize($filename)
     {
-        static $cache = [];
+        static $cache = array();
 
         if (isset($cache[$filename])) {
             return $cache[$filename];
@@ -202,7 +203,7 @@ class SurfaceCpdf implements SurfaceInterface
             }
         }
 
-        return $cache[$filename] = [$width, $height, $type];
+        return $cache[$filename] = array($width, $height, $type);
     }
 
     function image($img, $x, $y, $w, $h, $resolution = "normal")
@@ -216,6 +217,7 @@ class SurfaceCpdf implements SurfaceInterface
 
             case IMAGETYPE_GIF:
             case IMAGETYPE_BMP:
+                // @todo use cache for BMP and GIF
                 $img = $this->_convert_gif_bmp_to_png($img, $type);
 
             case IMAGETYPE_PNG:
@@ -242,6 +244,7 @@ class SurfaceCpdf implements SurfaceInterface
     {
         if (self::DEBUG) echo __FUNCTION__ . "\n";
 
+        // FIXME not accurate
         $this->canvas->quadTo($cpx, $cpy, $x, $y);
     }
 
@@ -374,11 +377,11 @@ class SurfaceCpdf implements SurfaceInterface
         $canvas = $this->canvas;
 
         if (is_array($style->stroke) && $stroke = $style->stroke) {
-            $canvas->setStrokeColor([(float)$stroke[0]/255, (float)$stroke[1]/255, (float)$stroke[2]/255], true);
+            $canvas->setStrokeColor(array((float)$stroke[0]/255, (float)$stroke[1]/255, (float)$stroke[2]/255), true);
         }
 
         if (is_array($style->fill) && $fill = $style->fill) {
-            $canvas->setColor([(float)$fill[0]/255, (float)$fill[1]/255, (float)$fill[2]/255], true);
+            $canvas->setColor(array((float)$fill[0]/255, (float)$fill[1]/255, (float)$fill[2]/255), true);
         }
 
         if ($fillRule = strtolower($style->fillRule)) {
@@ -424,7 +427,7 @@ class SurfaceCpdf implements SurfaceInterface
 
     public function setFont($family, $style, $weight)
     {
-        $map = [
+        $map = array(
             "serif"      => "Times",
             "sans-serif" => "Helvetica",
             "fantasy"    => "Symbol",
@@ -433,26 +436,26 @@ class SurfaceCpdf implements SurfaceInterface
 
             "arial"      => "Helvetica",
             "verdana"    => "Helvetica",
-        ];
+        );
 
-        $styleMap = [
-            'Helvetica' => [
+        $styleMap = array(
+            'Helvetica' => array(
                 'b'  => 'Helvetica-Bold',
                 'i'  => 'Helvetica-Oblique',
                 'bi' => 'Helvetica-BoldOblique',
-            ],
-            'Courier' => [
+            ),
+            'Courier' => array(
                 'b'  => 'Courier-Bold',
                 'i'  => 'Courier-Oblique',
                 'bi' => 'Courier-BoldOblique',
-            ],
-            'Times' => [
+            ),
+            'Times' => array(
                 ''   => 'Times-Roman',
                 'b'  => 'Times-Bold',
                 'i'  => 'Times-Italic',
                 'bi' => 'Times-BoldItalic',
-            ],
-        ];
+            ),
+        );
 
         $family = strtolower($family);
         $style  = strtolower($style);

@@ -79,10 +79,10 @@ class BrandApi extends \RS\Module\AbstractModel\EntityList
           
           $letter = $item['title'];
           $letter = mb_substr($item['title'],0,1);
-          if (in_array($letter,$this->eng_letters)){
+          if (in_array(mb_strtoupper($letter),$this->eng_letters)){
               $all_brands['ENG'][$letter][] = $item; 
           }
-          if (in_array($letter,$this->rus_letters)){
+          if (in_array(mb_strtoupper($letter),$this->rus_letters)){
               $all_brands['RU'][$letter][]  = $item; 
           }
        }    

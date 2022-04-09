@@ -1,7 +1,7 @@
-<div class="reserveForm">
-    <h2 class="dialogTitle" data-dialog-options='{ "width": "400" }'>{t}Заказ принят{/t}</h2>
-    <p class="prodtitle">{$product.title} {$product.barcode}</p>
-    <p class="infotext">
+{extends "%THEME%/helper/wrapper/dialog/standard.tpl"}
+
+{block "class"}modal-lg{/block}
+{block "title"}{t}Заказ принят{/t}{/block}
+{block "body"}
         {t}Мы оповестим Вас как только товар будет в наличии{/t}
-    </p>
-</div>
+{/block}

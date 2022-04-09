@@ -2,7 +2,7 @@
 /**
  * @package php-svg-lib
  * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
+ * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license GNU LGPLv3+ http://www.gnu.org/copyleft/lesser.html
  */
 
@@ -20,7 +20,7 @@ class LinearGradient extends AbstractTag
     protected $y2;
 
     /** @var Gradient\Stop[] */
-    protected $stops = [];
+    protected $stops = array();
 
     public function start($attributes)
     {

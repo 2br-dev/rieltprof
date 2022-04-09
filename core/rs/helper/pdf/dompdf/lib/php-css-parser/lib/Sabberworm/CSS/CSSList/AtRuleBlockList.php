@@ -2,7 +2,6 @@
 
 namespace Sabberworm\CSS\CSSList;
 
-use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Property\AtRule;
 
 /**
@@ -28,17 +27,19 @@ class AtRuleBlockList extends CSSBlockList implements AtRule {
 	}
 
 	public function __toString() {
-		return $this->render(new OutputFormat());
+		return $this->render(new \Sabberworm\CSS\OutputFormat());
 	}
 
-	public function render(OutputFormat $oOutputFormat) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
 		$sArgs = $this->sArgs;
 		if($sArgs) {
 			$sArgs = ' ' . $sArgs;
 		}
-		$sResult = "@{$this->sType}$sArgs{$oOutputFormat->spaceBeforeOpeningBrace()}{";
+		$sResult  = $oOutputFormat->sBeforeAtRuleBlock;
+		$sResult .= "@{$this->sType}$sArgs{$oOutputFormat->spaceBeforeOpeningBrace()}{";
 		$sResult .= parent::render($oOutputFormat);
 		$sResult .= '}';
+		$sResult .= $oOutputFormat->sAfterAtRuleBlock;
 		return $sResult;
 	}
 

@@ -244,7 +244,7 @@ if(isset($_GET['action']))
 			  </div>
 			<?php if(in_array(strtolower($info['extension']), $ext_music)): ?>
 
-				<script type="text/javascript">
+				<script>
 				    $(document).ready(function(){
 
 				      $("#jquery_jplayer_1").jPlayer({
@@ -268,7 +268,7 @@ if(isset($_GET['action']))
 
 			<?php elseif(in_array(strtolower($info['extension']), $ext_video)):	?>
 
-			    <script type="text/javascript">
+			    <script>
 			    $(document).ready(function(){
 
 			      $("#jquery_jplayer_1").jPlayer({

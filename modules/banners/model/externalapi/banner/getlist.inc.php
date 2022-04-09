@@ -113,9 +113,7 @@ class GetList extends \ExternalApi\Model\AbstractMethods\AbstractFilteredList
     * 
     * @return array Возвращает список объектов и связанные с ним сведения.
     */
-    protected function process($token = null,
-                               $zone = ''
-    )
+    protected function process($token = null, $zone = '')
     {
         $api = new \Banners\Model\ZoneApi();
 

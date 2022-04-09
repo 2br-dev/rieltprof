@@ -66,7 +66,7 @@ class Users extends \RS\Csv\AbstractSchema
     public static function getPossibleIdFields()
     {
         $product = new \Users\Model\Orm\User();
-        $fields = array_flip(['name', 'surname', 'midname', 'e_mail', 'login', 'phone']);
+        $fields = array_flip(['name', 'surname', 'midname', 'e_mail', 'login', 'phone', 'company_inn']);
         foreach($fields as $k => $v) {
             $fields[$k] = $product['__'.$k]->getTitle();
         }

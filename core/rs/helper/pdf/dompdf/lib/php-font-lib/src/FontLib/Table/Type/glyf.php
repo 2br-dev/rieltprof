@@ -26,7 +26,7 @@ class glyf extends Table {
     $loca      = $font->getData("loca");
     $real_loca = array_slice($loca, 0, -1); // Not the last dummy loca entry
 
-    $data = [];
+    $data = array();
 
     foreach ($real_loca as $gid => $location) {
       $_offset    = $offset + $loca[$gid];
@@ -37,8 +37,8 @@ class glyf extends Table {
     $this->data = $data;
   }
 
-  public function getGlyphIDs($gids = []) {
-    $glyphIDs = [];
+  public function getGlyphIDs($gids = array()) {
+    $glyphIDs = array();
 
     foreach ($gids as $_gid) {
       $_glyph   = $this->data[$_gid];
@@ -97,13 +97,13 @@ class glyf extends Table {
 
       $glyph->parseData();
 
-      $shape      = [
+      $shape      = array(
         "SVGContours" => $glyph->getSVGContours(),
         "xMin"        => $glyph->xMin,
         "yMin"        => $glyph->yMin,
         "xMax"        => $glyph->xMax,
         "yMax"        => $glyph->yMax,
-      ];
+      );
       $shape_json = json_encode($shape);
 
       $type = ($glyph instanceof OutlineSimple ? "simple" : "composite");
@@ -126,7 +126,7 @@ class glyf extends Table {
       $s .= "<br />
             <canvas width='$width' height='$height' id='glyph-canvas-$g'></canvas>
             </div>
-            <script>Glyph.glyphs.push([$g,$shape_json])</script>";
+            <script>Glyph.glyphs.push([$g,$shape_json]);</script>";
     }
 
     return $s;
@@ -138,7 +138,7 @@ class glyf extends Table {
     $subset = $font->getSubset();
     $data   = $this->data;
 
-    $loca = [];
+    $loca = array();
 
     $length = 0;
     foreach ($subset as $gid) {

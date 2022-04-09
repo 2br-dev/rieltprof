@@ -7,8 +7,12 @@
 */
 namespace Shop\Model;
 
+use Affiliate\Model\Orm\Affiliate;
+use Catalog\Model\Orm\Xstock;
 use Main\Model\NoticeSystem\MeterApi;
 use Main\Model\NoticeSystem\ReadedItemApi;
+use RS\Config\Loader;
+use RS\Orm\Request;
 use Users\Model\Orm\User;
 
 class ReservationApi extends \RS\Module\AbstractModel\EntityList
@@ -72,6 +76,13 @@ class ReservationApi extends \RS\Module\AbstractModel\EntityList
             ])
             ->objects();
 
+        //Фильтруем по нужным складам, если есть связь с филиалами.
+        //Общий остаток товара при этом должен быть положительным
+        $catalog_config = Loader::byModule('catalog');
+        if ($catalog_config['affiliate_stock_restriction']) {
+            $reservations = self::filterReservationByAffiliateRestrictions($reservations, $site_id);
+        }
+
         $client_reservations = [];
         foreach ($reservations as $reservation) {
             $client_key = $reservation['email'] . '#' . $reservation['phone'];
@@ -91,6 +102,46 @@ class ReservationApi extends \RS\Module\AbstractModel\EntityList
             }
         }
         return count($reservations);
+    }
+
+    /**
+     * Возвращает только те объекты предварительных заказов, товары которых имеют положительный
+     * остаток на связанных складах с филиалом, который был выбран в момент оформления предварительного заказа
+     *
+     * @param array $reservations
+     * @return
+     */
+    protected static function filterReservationByAffiliateRestrictions($reservations, $site_id)
+    {
+        static $warehouses_by_affiliate = [];
+
+        foreach($reservations as $key => $reservation) {
+            $affiliate_id = $reservation['affiliate_id'];
+            if ($affiliate_id) {
+                if (!isset($warehouses_by_affiliate[$affiliate_id])) {
+                    $affiliate = new Affiliate($affiliate_id);
+                    $warehouses_by_affiliate[$affiliate_id] = $affiliate->getLinkedWarehouses();
+                }
+
+                $warehouse_ids = $warehouses_by_affiliate[$affiliate_id];
+                if ($warehouse_ids) {
+                    //Проверяем остатки на связанных складах
+                    $dynamic_num = Request::make()
+                        ->select('SUM(stock) as sum_stock')
+                        ->from(Xstock::_getTable())
+                        ->whereIn('warehouse_id', $warehouse_ids)
+                        ->where([
+                            'offer_id' => $reservation['offer_id']
+                        ])->exec()->getOneField('sum_stock', 0);
+
+                    if ($dynamic_num <= 0) {
+                        unset($reservations[$key]);
+                    }
+                }
+            }
+        }
+
+        return $reservations;
     }
 
     /**
@@ -148,7 +199,7 @@ class ReservationApi extends \RS\Module\AbstractModel\EntityList
               'barcode'       => $product->getBarCode($offer['sortn']),
               'single_weight' => $product->getWeight($offer['sortn']),
               'amount'        => $reservation['amount'],  
-              'offer'         => $offer['sortn'],
+              'offer'         => $offer['id'],
               'single_cost'   => $product->getCost(null, $offer['sortn'], false),
         ];
         $reservation['status'] = 'close';

@@ -2,7 +2,6 @@
 
 namespace Sabberworm\CSS\Property;
 
-use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Value\URL;
 
 /**
@@ -18,7 +17,7 @@ class Import implements AtRule {
 		$this->oLocation = $oLocation;
 		$this->sMediaQuery = $sMediaQuery;
 		$this->iLineNo = $iLineNo;
-		$this->aComments = [];
+		$this->aComments = array();
 	}
 
 	/**
@@ -37,10 +36,10 @@ class Import implements AtRule {
 	}
 	
 	public function __toString() {
-		return $this->render(new OutputFormat());
+		return $this->render(new \Sabberworm\CSS\OutputFormat());
 	}
 
-	public function render(OutputFormat $oOutputFormat) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
 		return "@import ".$this->oLocation->render($oOutputFormat).($this->sMediaQuery === null ? '' : ' '.$this->sMediaQuery).';';
 	}
 
@@ -49,7 +48,7 @@ class Import implements AtRule {
 	}
 
 	public function atRuleArgs() {
-		$aResult = [$this->oLocation];
+		$aResult = array($this->oLocation);
 		if($this->sMediaQuery) {
 			array_push($aResult, $this->sMediaQuery);
 		}

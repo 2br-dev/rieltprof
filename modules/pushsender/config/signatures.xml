@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>3bc259b7f50fe6d796a2f4d6b70543d411534000</sign>
+    <sign>e8d18d5aa8f29cef8aa043d2d54afe6dc29b8606</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -10,11 +10,11 @@
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>5de0784564555df3205fc46d0e3f8c615c522c2f</sign>
+    <sign>2e1624cf8c48e945526fd8ea5087c92cc39e7594</sign>
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>1a70ebd4ee3d9f2ad98db3098861c9292f75ff84</sign>
+    <sign>aced3a315d99718fe944bcb4aede29e7b5d9f074</sign>
   </file>
   <file>
     <path>controller/admin/pushtokenctrl.inc.php</path>
@@ -42,7 +42,7 @@
   </file>
   <file>
     <path>model/externalapi/push/change.inc.php</path>
-    <sign>b7be9f544b6a745d1fb858f6774158e9e7de09b4</sign>
+    <sign>7dc45cabbb89a2375d25d69e4566ef66fc455e17</sign>
   </file>
   <file>
     <path>model/externalapi/push/getlist.inc.php</path>
@@ -50,7 +50,7 @@
   </file>
   <file>
     <path>model/externalapi/push/registertoken.inc.php</path>
-    <sign>649ab317785091a502265bfc88f4921eabfaec12</sign>
+    <sign>20fe6354c0bdfd5e88fd210a32a5304487ceb0db</sign>
   </file>
   <file>
     <path>model/firebase/provider/googlefcm.inc.php</path>
@@ -78,7 +78,7 @@
   </file>
   <file>
     <path>model/orm/pushtoken.inc.php</path>
-    <sign>762913ae4097202188f7298a2f1a75a4e5dc1789</sign>
+    <sign>cffe0042407489b1535938bad69e211d877c5fed</sign>
   </file>
   <file>
     <path>model/orm/pushtokenmessage.inc.php</path>
@@ -95,6 +95,10 @@
   <file>
     <path>model/writelog.inc.php</path>
     <sign>bdfa276dadec1bf7aaa506f28d4dbd7e8be32b80</sign>
+  </file>
+  <file>
+    <path>view/admin/user_push_lock.tpl</path>
+    <sign>bf589790e5d5335d73d77fce72e45689a002047b</sign>
   </file>
   <file>
     <path>view/css/pushtokenmessage.css</path>
@@ -118,7 +122,7 @@
   </file>
   <file>
     <path>view/form/banner/type.tpl</path>
-    <sign>4fe980c56149d7fc1dad8cebe558758fcbca8cd8</sign>
+    <sign>8a9ab0f869cca7806228e4e5fc254a71d4e2cc5b</sign>
   </file>
   <file>
     <path>view/form/pushtokenmessage/category_id.tpl</path>
@@ -130,15 +134,11 @@
   </file>
   <file>
     <path>view/form/pushtokenmessage/type.tpl</path>
-    <sign>f208ad784bf876a7b50b4b289e360c1dd72082c0</sign>
+    <sign>d607647801a63bdc7e9e2e47942ee9d35fa604a5</sign>
   </file>
   <file>
     <path>view/js/pushtokenmessage.js</path>
     <sign>f2f0e677bf7081f524ec043309d38d7b1fc94443</sign>
   </file>
-  <file>
-    <path>view/user_push_lock.tpl</path>
-    <sign>bf589790e5d5335d73d77fce72e45689a002047b</sign>
-  </file>
-  <masterSign>89055c8552bd890ca76461993aa163d77a837eb7c1164e3cdd971e3ab55aee4bc6777aee83937720cc9f6b6ab620f2de49a139a28898be29124e61e5a86e791e859dcc1c0ccbff8da32208394954e5f90ff016394a2c9fa0f40c828b10d7efa68be63d5a4e0ac4bc8ba57a6c29feb28760b1559b38d296958f142276f52f151b</masterSign>
+  <masterSign>7529dfda3837495c0971a7604dbc3b3bdd96b6c5c6c343ca4f3b5265d9b37a8df522756c32bd10a52b712d33a7538f15d9890bd3b200f42194f0d92b348325a6cb38f6976c5a39d9f08a68a0ea76cc0236823c335b33411a9461768c05a4a3675d3e2429e599312289c73cfc00651a74837f59290900357a0f07edf23702e7b3</masterSign>
 </signatures>

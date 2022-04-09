@@ -85,7 +85,7 @@ class Delivery extends OrmObject
                     'description' => t('Категория'),
                     'default' => 0,
                     'allowEmpty' => false,
-                    'list' => [['\Shop\Model\DeliveryDirApi', 'staticSelectList'], 0, [0 => t('- Без группы -')]]
+                    'list' => ['\Shop\Model\DeliveryDirApi::staticSelectList', [0 => t('- Без группы -')]],
                 ]),
                 'xzone' => new Type\ArrayList([
                     'description' => t('Зоны'),
@@ -443,6 +443,9 @@ class Delivery extends OrmObject
      */
     public function getDeliveryCostText(Order $order, Address $address = null)
     {
+        if ($address === null) {
+            $address = $order->getAddress();
+        }
         return $this->getTypeObject()->getDeliveryCostText($order, $address, $this);
     }
 

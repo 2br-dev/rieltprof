@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>772eb6375c3f7eb9ff5d7b2d045dd7a0b70feed6</sign>
+    <sign>39e667d4449e337e147b48816e0bddded7a26833</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -10,11 +10,11 @@
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>454f094ec4d32d3e8dfaf4437f43dcc8238bafc0</sign>
+    <sign>e15063e1db30cf194440669fb63e19bc62990d80</sign>
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>41ce5f2c5a06e3d2ba01d88cd05a3ecbf19b411b</sign>
+    <sign>2bb6c6d30d29d77244064bcf80728c6e7ed8192f</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
@@ -22,7 +22,7 @@
   </file>
   <file>
     <path>controller/admin/blocktags.inc.php</path>
-    <sign>7c9f93a8c11890b2717e7bf7aa0a918a6d37391e</sign>
+    <sign>1ae614a4da14a02c69180d498f366a3cbad1ffc8</sign>
   </file>
   <file>
     <path>model/api.inc.php</path>
@@ -34,15 +34,23 @@
   </file>
   <file>
     <path>model/orm/word.inc.php</path>
-    <sign>efe31c65e17400e9744bf0c11d59aee685504d22</sign>
+    <sign>424d46b6644d7735324e47ec7df1a49fc7e1cfbd</sign>
+  </file>
+  <file>
+    <path>view/admin/form.tpl</path>
+    <sign>a087eb8c0b0f949c7200fe9c52485da4e39d26b1</sign>
+  </file>
+  <file>
+    <path>view/admin/tab_tags.tpl</path>
+    <sign>e210b09ccc2f45fde1c4ab9e046a4107164b569e</sign>
+  </file>
+  <file>
+    <path>view/admin/words.tpl</path>
+    <sign>1606d2b7a174212d639d6d00fedde82eca5db9ab</sign>
   </file>
   <file>
     <path>view/css/mtagsblock.css</path>
     <sign>58a610a55ab46200e7b21902b3b1461d59d8bd7a</sign>
-  </file>
-  <file>
-    <path>view/form.tpl</path>
-    <sign>a087eb8c0b0f949c7200fe9c52485da4e39d26b1</sign>
   </file>
   <file>
     <path>view/js/blocktags.jquery.js</path>
@@ -52,13 +60,5 @@
     <path>view/js/mtags.js</path>
     <sign>d15bda9bbab02ccb871d72c78a89343b2e1e0057</sign>
   </file>
-  <file>
-    <path>view/tab_tags.tpl</path>
-    <sign>e210b09ccc2f45fde1c4ab9e046a4107164b569e</sign>
-  </file>
-  <file>
-    <path>view/words.tpl</path>
-    <sign>1606d2b7a174212d639d6d00fedde82eca5db9ab</sign>
-  </file>
-  <masterSign>144a7aa9ade916d8ebfc09e7cb5072c0207a6d3c8c404d7aeb9adc3ad3cc0e0c56f3ba345bd8c3eaac3272f0e44cd9ce086ae4f1fd43bfe6be725f2f5638627a815187248e23538d467d1a190d11118709edaacffb2b5106205c172291cf011f27f205df699886e02d322a08f860ed2618f04835e2560907ec24d13a4753fa11</masterSign>
+  <masterSign>0c5aecff08e343dadfe193c545317df02e6053434f6b663e63a9e66096aa47f82278cc22301023eff4c654f182206aae521476af571af20c0d27f5951f31415c12e132072297aaf186e85318e1cacc809ae97b56ac804813ab4a95bd6de3a6ce75b04ea6c5bbade07d46a17e53dde7a7de7b757a51a7b90400b63b55f99911e0</masterSign>
 </signatures>

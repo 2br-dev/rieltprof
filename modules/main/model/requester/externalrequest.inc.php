@@ -19,6 +19,7 @@ class ExternalRequest
 {
     const METHOD_GET = 'GET';
     const METHOD_POST = 'POST';
+    const METHOD_PUT = 'PUT';
     const METHOD_PATCH = 'PATCH';
     const METHOD_DELETE = 'DELETE';
     const CONTENT_TYPE_FORM_DATA = 'application/x-www-form-urlencoded; charset=utf-8';
@@ -40,7 +41,7 @@ class ExternalRequest
     private $content_type = '';
     private $params = [];
     /** @var float */
-    private $timeout = 0;
+    private $timeout = 20;
     /** @var string */
     private $idempotence_key = '';
     /** @var bool */
@@ -53,6 +54,8 @@ class ExternalRequest
     private $log_level_request = LogExternalRequest::LEVEL_REQUEST;
     /** @var string */
     private $log_level_response = LogExternalRequest::LEVEL_RESPONSE;
+    /** @var bool */
+    private $ignore_errors = true;
 
     /**
      * @param string $source_id - идентификатор инициатора запроса
@@ -152,7 +155,7 @@ class ExternalRequest
     {
         $context_data = [
             'http' => [
-                'ignore_errors' => true,
+                'ignore_errors' => $this->getIgnoreErrors(),
                 'method' => $this->getMethod(),
                 'header' => $this->getPreparedHeaders(),
             ],
@@ -236,7 +239,8 @@ class ExternalRequest
     protected function logRequest()
     {
         if ($this->getLog()->isEnabled() && $this->getLog()->isEnabledLevel($this->log_level_request)) {
-            $text = t('Запрос') . ' - ' . $this->getMethod() . ' - ' . $this->getUrl() . "\n";
+            $text = "[{$this->getSourceId()}] ";
+            $text .= t('Запрос') . ' - ' . $this->getMethod() . ' - ' . $this->getUrl() . "\n";
             if ($prepared_headers = $this->getPreparedHeaders()) {
                 $text .= t('Заголовки запроса') . ' - ' . var_export($prepared_headers, true) . "\n";
             }
@@ -258,10 +262,11 @@ class ExternalRequest
     protected function logResponse(ExternalResponse $response, float $time_to_response = null, bool $from_cache = false)
     {
         if ($this->getLog()->isEnabled() && $this->getLog()->isEnabledLevel($this->log_level_response)) {
+            $text = "[{$this->getSourceId()}] ";
             if ($from_cache) {
-                $text = t('Ответ взят из кэша. Статус ответа - %0', [$response->getStatus()]) . "\n";
+                $text .= t('Ответ взят из кэша. Статус ответа - %0', [$response->getStatus()]) . "\n";
             } else {
-                $text = t('Статус ответа - %0 (ответ получен за %1 секунд)', [$response->getStatus(), $time_to_response]) . "\n";
+                $text .= t('Статус ответа - %0 (ответ получен за %1 секунд)', [$response->getStatus(), $time_to_response]) . "\n";
             }
             if ($response->getHeaders()) {
                 $text .= t('Заголовки ответа') . ' - ' . var_export($response->getHeaders(), true) . "\n";
@@ -335,6 +340,28 @@ class ExternalRequest
     public function getUrl(): string
     {
         return $this->url;
+    }
+
+    /**
+     * Устанавливает игнорировать ли не 2xx статус ответов на запросы.
+     *
+     * @param $bool
+     * @return ExternalRequest
+     */
+    public function setIgnoreErrors($bool): self
+    {
+        $this->ignore_errors = $bool;
+        return $this;
+    }
+
+    /**
+     * Возвращает игнорировать ли не 2xx статус ответов на запросы.
+     *
+     * @return bool
+     */
+    public function getIgnoreErrors()
+    {
+        return $this->ignore_errors;
     }
 
     /**
@@ -469,6 +496,19 @@ class ExternalRequest
     public function setParams($params): self
     {
         $this->params = $params;
+        return $this;
+    }
+
+    /**
+     * Устанавливает один параметр запроса
+     *
+     * @param string $key ключ параметра
+     * @param mixed $value значение параметра
+     * @return self
+     */
+    public function setParam($key, $value): self
+    {
+        $this->params[$key] = $value;
         return $this;
     }
 

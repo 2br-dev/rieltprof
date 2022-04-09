@@ -8,11 +8,13 @@
 
 namespace Shop\Controller\Front;
 
+use Affiliate\Model\AffiliateApi;
 use Catalog\Model\Orm\Offer;
 use Catalog\Model\Orm\Product;
 use RS\Application\Auth as AppAuth;
 use RS\Controller\Exception as ControllerException;
 use RS\Controller\Front;
+use RS\Module\Manager;
 use Shop\Model\ReservationApi;
 
 class Reservation extends Front
@@ -39,12 +41,17 @@ class Reservation extends Front
         /** @var \Shop\Model\Orm\Reservation $reserve */
         $reserve = $this->api->getElement();
         $reserve['amount'] = $this->url->request('amount', TYPE_INTEGER, $product->getAmountStep());
+        $reserve['is_notify'] = $this->url->request('is_notify', TYPE_INTEGER, 1);
         $reserve['phone'] = $this->user['phone'];
         $reserve['email'] = $this->user['e_mail'];
         $reserve['product_id'] = $product_id;
         $reserve['product_barcode'] = $product['barcode'];
         $reserve['offer_id'] = $this->url->request('offer_id', TYPE_INTEGER, false);
         $reserve['multioffers'] = $this->url->request('multioffers', TYPE_ARRAY, null);
+
+        if (Manager::staticModuleEnabled('affiliate')) {
+            $reserve['affiliate_id'] = AffiliateApi::getCurrentAffiliate()->id;
+        }
 
         if ($reserve['offer_id']) {
             $offer = new Offer($reserve['offer_id']);
@@ -71,7 +78,7 @@ class Reservation extends Front
 
         if ($this->url->isPost()) {
             //Сохраним предзаказ
-            if ($this->api->save(null, ['is_notify' => 1])) {
+            if ($this->api->save()) {
                 $template = 'reservation_success.tpl';
             }
         }

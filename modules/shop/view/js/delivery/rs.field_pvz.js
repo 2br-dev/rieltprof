@@ -1,3 +1,4 @@
+/* Скрипт используется после в ReadyScript 6 только в административной части. В клиентской части  */
 class FieldPvz {
     constructor(element) {
         this.selector = {
@@ -33,6 +34,7 @@ class FieldPvz {
                 }
                 url.searchParams.append('city_id', cityId);
                 url.searchParams.append('delivery', this.options.deliveryId);
+                url.searchParams.append('admin_zone', 1);
 
                 if ($.openDialog) {
                     $.openDialog({
@@ -95,6 +97,11 @@ class FieldPvz {
             if (label) {
                 label.textContent = event.detail.pvz.address;
             }
+
+            pvzInput.dispatchEvent(new Event('change', {
+                cancelable: true,
+                bubbles: true,
+            }))
         });
     }
 

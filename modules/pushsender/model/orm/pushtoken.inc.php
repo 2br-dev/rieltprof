@@ -39,7 +39,7 @@ class PushToken extends \RS\Orm\OrmObject
             ]),
             'push_token' => new Type\Varchar([
                 'description' => t('Токен пользователя в Firebase'),
-                'maxlength' => 300,
+                'maxlength' => 180,
             ]),
             'dateofcreate' => new Type\Datetime([
                 'description' => t('Дата создания')
@@ -50,7 +50,7 @@ class PushToken extends \RS\Orm\OrmObject
             ]),
             'uuid' => new Type\Varchar([
                 'description' => t('Уникальный идентификатор устройства'),
-                'maxLength' => 255,
+                'maxLength' => 100,
             ]),
             'model' => new Type\Varchar([
                 'maxLength' => 80,

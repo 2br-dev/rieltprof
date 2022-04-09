@@ -13,7 +13,8 @@ use RS\Orm\Type;
 use RS\Orm\PropertyIterator;
 use RS\Router\Manager as RouterManager;
 use RS\Router\Route;
-    
+use Templates\Model\Orm\SectionPage;
+
 
 class Page extends AbstractType
 {
@@ -46,14 +47,25 @@ class Page extends AbstractType
     {
         return t('Означает, что Вы можете сконструировать страницу для данного пункта меню в разделе Конструктор сайта');
     }
-    
+
     /**
-    * Возвращает маршрут, если пункт меню должен добавлять его, 
-    * в противном случае - false
-    * 
-    * @return \RS\Router\Route | null
-    */
-    public function getRoute()
+     * Возвраает класс иконки из коллекции zmdi
+     *
+     * @return string
+     */
+    public function getIconClass()
+    {
+        return 'zmdi-blur-linear';
+    }
+
+    /**
+     * Возвращает маршрут, если пункт меню должен добавлять его,
+     * в противном случае - false
+     *
+     * @param bool $cache
+     * @return \RS\Router\Route | null
+     */
+    public function getRoute($cache = true)
     {
         static $api;
         
@@ -64,7 +76,7 @@ class Page extends AbstractType
             
         $path_str = '';
         $sections = '';
-        foreach($api->getPathToFirst($this->menu['id']) as $one) {
+        foreach($api->getPathToFirst($this->menu['id'], $cache) as $one) {
             $path_str .= ' > '.$one['title'];
             if (!$one['hide_from_url']) {
                 $sections .= '/'.str_replace(' ','-', $one['alias']);
@@ -150,5 +162,17 @@ class Page extends AbstractType
     public function getTemplate()
     {
         return $this->menu['link_template'];
+    }
+
+
+    /**
+     * Удаляет страницу в конструкторе сайта, пи удалении элеемнта
+     */
+    public function onDelete()
+    {
+        $page = SectionPage::loadByRoute('menu.item_'.$this->menu['id'], 'theme');
+        if ($page['id']) {
+            $page->delete();
+        }
     }
 }

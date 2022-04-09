@@ -192,7 +192,8 @@ abstract class AbstractMethod
         //Разрешаем передавать в переменной custom - любые частные данные, 
         //которые могут затем могут отлавливать любые сторонние модули
         unset($params['custom']); 
-        
+        unset($params[\Setup::getSessionName()]);
+
         if (count($params)) {
             $error = new ApiException(t("Передан неверный набор параметров. Обнаружены неизвестные параметры '%0'", [implode(', ', array_keys($params))]), ApiException::ERROR_WRONG_PARAMS);
             $this->addMethodHelpUrlToException($error);            

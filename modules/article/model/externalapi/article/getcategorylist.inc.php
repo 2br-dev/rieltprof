@@ -172,10 +172,7 @@ class GetCategoryList extends \ExternalApi\Model\AbstractMethods\AbstractGetTree
      * @return array
      * @throws \RS\Exception
      */
-    protected function process($token = null, 
-                               $parent_id = 0, 
-                               $filter = [],
-                               $sort = 'sortn')
+    protected function process($token = null, $parent_id = 0, $filter = [], $sort = 'sortn')
     {
         //Если запрос пришёл из мобильного приложения, то смотрим parent_id в модуле
         if (isset($filter['mobile_public'])){

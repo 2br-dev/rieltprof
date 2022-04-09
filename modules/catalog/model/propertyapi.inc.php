@@ -343,7 +343,7 @@ class PropertyApi extends EntityList
             $public_where = ($public !== null) ? "public='".(int)$public."' " : null;
             $group_list_sql = implode(',', $groups_id);
             $res = OrmRequest::make()
-                ->select('T.*, TL.val_str, TL.val_int, TL.val_list_id, TL.group_id, TL.public, TL.is_expanded')
+                ->select('T.*, TL.val_str, TL.val_int, TL.val_list_id, TL.val_text, TL.group_id, TL.public, TL.is_expanded')
                 ->from($this->prop_item_table)->asAlias('T')
                 ->join($this->prop_link_table, 'T.id = TL.prop_id', 'TL')
                 ->where([
@@ -524,7 +524,7 @@ class PropertyApi extends EntityList
 
         if (!empty($product_ids)) {
             $res = \RS\Orm\Request::make()
-                ->select('T.*, L.val_str, L.val_int, L.val_list_id, L.product_id, L.available')
+                ->select('T.*, L.val_str, L.val_int, L.val_list_id, L.val_text, L.product_id, L.available')
                 ->from($this->prop_link_table)->asAlias('L')
                 ->join($this->prop_item_table, 'T.id = L.prop_id', 'T')
                 ->leftjoin(new Orm\Property\ItemValue(), 'IV.id = L.val_list_id', 'IV')
@@ -533,7 +533,7 @@ class PropertyApi extends EntityList
             // добавляем условие если нужны только видимые характеристики
             if ($onlyVisible) {
                 $res->leftjoin(new Orm\Property\Dir(), 'D.id = T.parent_id', 'D')
-                    ->where('(L.val_str > "" or L.val_int is not null or L.val_list_id is not null)')
+                    ->where('(L.val_str > "" or L.val_int is not null or L.val_list_id is not null or L.val_text > "")')
                     ->where('T.hidden = 0 AND (D.hidden = 0 OR T.parent_id = 0)');
             }
 
@@ -645,7 +645,7 @@ class PropertyApi extends EntityList
             if (!isset($query_cache[$group_list_sql]))
             {
                 $res = \RS\Orm\Request::make()
-                    ->select('T.*, L.val_str, L.val_int, L.val_list_id, L.group_id')
+                    ->select('T.*, L.val_str, L.val_int, L.val_list_id, L.val_text, L.group_id')
                     ->from($this->prop_link_table)->asAlias('L')
                     ->join($this->prop_item_table, 'T.id = L.prop_id', 'T')
                     ->where([
@@ -1346,28 +1346,31 @@ class PropertyApi extends EntityList
         $props = null;
 
         // Проверить массив $sorted_props на включение id товаров из фильтра
+
         foreach ($filters_new as $prop_id => $val_list_id) {
             $array_prop_diff = [];
             //берем значения пунктов фильтров [фильтр][пункт]
+            if (is_array($val_list_id)) {
                 foreach ($val_list_id as $val_id) {
                     // получили ид товаров из фильтра, теперь нужно проверить другие фильтры на наличие этих товаров у них
-                    if(isset($sorted_props_prop[$prop_id][$val_id]))
+                    if (isset($sorted_props_prop[$prop_id][$val_id]))
                         foreach ($sorted_props_prop[$prop_id][$val_id] as $product_id) {
-                            if(isset($sorted_props_prod[$product_id]))
+                            if (isset($sorted_props_prod[$product_id]))
                                 foreach ($sorted_props_prod[$product_id] as $key => $item) {
-                                    if($key != $prop_id) {
+                                    if ($key != $prop_id) {
                                         // собираем массив свойств которые должны быть выключены
-                                        if(!isset($array_prop_diff[$key])) {
+                                        if (!isset($array_prop_diff[$key])) {
                                             // ищем расхождение фильтров
-                                            $array_prop_diff[$key] = array_diff( array_keys($allowed_filters_1[$key]),$item);
+                                            $array_prop_diff[$key] = array_diff(array_keys($allowed_filters_1[$key]), $item);
                                         } else {
                                             // ищем схождение значений фильтров для их выключения
-                                            $array_prop_diff[$key] = array_intersect($array_prop_diff[$key] ,array_diff(array_keys($allowed_filters_1[$key]),$item));
+                                            $array_prop_diff[$key] = array_intersect($array_prop_diff[$key], array_diff(array_keys($allowed_filters_1[$key]), $item));
                                         }
                                     }
                                 }
                         }
                 }
+            }
 
             //выключаем фильтры
             foreach ($array_prop_diff as $prop_key => $prop_val) {

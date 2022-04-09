@@ -51,7 +51,6 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
     ];
     protected static $class = [];
     protected static $default_class_parameters = [
-        'property_template' => '%system%/coreobject/prop_form.tpl',
         'properties' => null, //Свойства объекта
         'indexes' => [],
     ];
@@ -284,6 +283,8 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
 
     /**
      * Проверяет наличие значения по ключу (ArrayAccess)
+     * @param $offset - имя свойства
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -690,6 +691,16 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
     public function _getTableArray()
     {
         return [static::_dbName(false), static::_tableName(false)];
+    }
+
+    /**
+     * Возвращает тип движка таблицы БД
+     *
+     * @return string
+     */
+    protected function getTableEngine()
+    {
+        return \Setup::$DB_TABLE_ENGINE;
     }
 
     /**
@@ -1250,7 +1261,8 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
     function dbUpdate()
     {
         if ($this->getStorageInstance() instanceof \RS\Orm\Storage\Db) {
-            $map = new DbMap($this->getProperties(), $this->getIndexes(), static::_dbName(false), static::_tableName(false));
+            $map = new DbMap($this->getProperties(), $this->getIndexes(), static::_dbName(false),
+                            static::_tableName(false), $this->getTableEngine());
             return $map->sync();
         }
         return true;
@@ -1328,7 +1340,9 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
     function getForm(array $tpl_vars = null, $switch = null, $is_multiedit = false, $template = null, $tpl_maker = null, $tpl_folder = null)
     {
         if ($tpl_maker === null) {
-            $tpl_maker = $is_multiedit ? '%system%/coreobject/multiedit_form.tpl' : '%system%/coreobject/src_form.tpl';
+            $tpl_maker = $is_multiedit ?
+                $this->getParameter('multiedit_maker_template', '%system%/coreobject/multiedit_form.tpl')
+                : $this->getParameter('maker_template', '%system%/coreobject/src_form.tpl');
         }
 
         if ($tpl_folder === null) {
@@ -1380,6 +1394,7 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
      * @param string $key - имя свойства
      * @param array $attributes - массив с атрибутами для формы
      * @param array $view_params - массив с атрибутами для формы [form => true, errors => true], form - только сама форма, errors - форма с ошибками
+     * @param string $class - список классов
      * @return string
      * @throws \SmartyException
      */
@@ -1387,6 +1402,10 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
     {
         $sm = new \RS\View\Engine();
         $property = $this->getProp($key);
+        if (isset($attributes['class'])) {
+            $property->addClass($attributes['class']);
+            unset($attributes['class']);
+        }
         $property->setAttr($attributes);
 
         $sm->assign([
@@ -1394,7 +1413,14 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
             'view_params' => $view_params,
             'object' => $this
         ]);
-        return $sm->fetch($this->getClassParameter('property_template'));
+
+        $template = $this->getClassParameter('property_template');
+        if (!$template) {
+            $template = $sm->templateExists('%THEME%/helper/forms/orm_forms.tpl')
+                ? '%THEME%/helper/forms/orm_forms.tpl' : '%system%/coreobject/prop_form.tpl';
+        }
+
+        return $sm->fetch($template);
     }
 
     /**
@@ -1628,6 +1654,17 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
     function __clone()
     {
         $this->__construct();
+    }
+
+    /**
+     * Проверяет наличие значения по ключу (ArrayAccess)
+     *
+     * @param string $offset - имя свойства
+     * @return bool
+     */
+    public function __isset($offset)
+    {
+        return $this->offsetExists($offset);
     }
 
     /**

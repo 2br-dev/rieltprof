@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>6b9ff6d288e7144cc5faf6a37ff413c215b518f4</sign>
+    <sign>c0e7112dce5a3bc905d0497a673279e56acc746f</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -14,7 +14,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>2986b2d18ef93bafa26444e4f21ca21bd6f68198</sign>
+    <sign>ee78f633188538b57e4ff69e74a58335746ebfb9</sign>
   </file>
   <file>
     <path>controller/front/sitemap.inc.php</path>
@@ -22,11 +22,11 @@
   </file>
   <file>
     <path>model/api.inc.php</path>
-    <sign>406e092f17cd2bf58c4deb4f664afeb41fed8c9e</sign>
+    <sign>9ada3f8de6c79097593b438ac99056c9b22f7e40</sign>
   </file>
   <file>
-    <path>view/sitemap_url.tpl</path>
+    <path>view/admin/sitemap_url.tpl</path>
     <sign>dde02c41fb515b201239a9a689c5b871d0741828</sign>
   </file>
-  <masterSign>a2912518142568a9423a5b10605232dcaf88c9691030cca3b638ed16664d17938bd7227be619d205590050ca0161f4e86e7990aaad0b8a5aff76f9df1c3ee226455cfea9a560ef941c86ef787deb3d0013251697ff2f63aa7b409297e38c6418345bde0fcfc013e6d018b2000a1f7f352c0041e5c82afe206fc1cb7137883d14</masterSign>
+  <masterSign>b2a2a4920ffe1e2d4cf25f848248c0bddc73f07b53521502e1ebe60deb6712d8b84829f78fee7851c16f32be9849e2d2cc9c2ce090b7fbb0e695a34fd3663bdb779c42a6710a95fc57ccd8ae478ba50762b6d1d368859c973cd979e566abaf6802c797341ee08fc719b5a9b1036f7c0dfcadffa41c3c762bcba4d3dc607efb85</masterSign>
 </signatures>

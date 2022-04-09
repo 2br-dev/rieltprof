@@ -24,6 +24,9 @@ class Register extends Front
     {
         $this->app->breadcrumbs->addBreadCrumb(t('Регистрация'));
 
+        $this->app->title->addSection(t('Регистрация'));
+        $this->app->meta->addDescriptions(t('На этой странице вы можете зарегистрироваться'));
+
         $referer = $this->url->request('referer', TYPE_STRING, SiteManager::getSite()->getRootUrl());
         $referer = HelperTools::cleanOpenRedirect(urldecode($referer));
 

@@ -24,6 +24,7 @@ abstract class AbstractType
         $row,
         $title,
         $attr_callback,
+        $stay_before = false,
         $value;
     
     protected
@@ -64,6 +65,29 @@ abstract class AbstractType
     function isCustomizable()
     {
         return !empty($this->property['customizable']);
+    }
+
+    /**
+     * Возвращает true, если колонка должна всегда находиться слева при кастомных сортировках.
+     * Актуально только если customizable = false.
+     *
+     * @return bool;
+     */
+    function isStayBefore()
+    {
+        return $this->stay_before;
+    }
+
+    /**
+     * Устанавливает, должна ли колонка всегда быть слева от сортируемых вручную колонок.
+     *
+     * @param bool $bool
+     * @return AbstractType
+     */
+    function setStayBefore($bool)
+    {
+        $this->stay_before = $bool;
+        return $this;
     }
     
     /**

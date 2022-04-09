@@ -42,7 +42,7 @@
                     var line = 
                         $('<tr>'+
                             '<td class="kv-sort">'+
-                                '<div class="ksort"><i class="zmdi zmdi-unfold-more"></i></div>'+
+                                '<div class="ksort"><i class="zmdi zmdi-unfold-more"><!----></i></div>'+
                             '</td>'+
                             '<td class="kv-key"><input type="text" name="'+data.varName+'[key][]"></td>'+
                             '<td class="kv-val"><input type="text" name="'+data.varName+'[val][]"></td>'+

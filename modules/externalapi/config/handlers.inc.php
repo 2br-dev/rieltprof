@@ -8,6 +8,7 @@
 namespace ExternalApi\Config;
 
 use ExternalApi\Model\Behavior\UsersUser;
+use ExternalApi\Model\Orm\AuthorizationToken;
 use ExternalApi\Model\Orm\UserApiMethodAccess;
 use RS\Orm\Request;
 use Users\Model\Orm\User;
@@ -22,6 +23,7 @@ class Handlers extends \RS\Event\HandlerAbstract
             ->bind('getroute')
             ->bind('orm.init.users-user')
             ->bind('orm.afterwrite.users-user')
+            ->bind('orm.afterdelete.users-user')
             ->bind('externalapi.getexceptions');
     }
 
@@ -128,5 +130,23 @@ class Handlers extends \RS\Event\HandlerAbstract
     {
         $list[] = new \ExternalApi\Model\Exception();
         return $list;
+    }
+
+    /**
+     * Вызывается после удаления пользователя.
+     * Удаляет все атворизационные токены при удалении пользователя
+     *
+     * @param $param
+     */
+    public static function ormAfterDeleteUsersUser($param)
+    {
+        $user = $param['orm'];
+        \RS\Orm\Request::make()
+            ->delete()
+            ->from(new \ExternalApi\Model\Orm\AuthorizationToken())
+            ->where([
+                'user_id' => $user['id']
+            ])
+            ->exec();
     }
 }

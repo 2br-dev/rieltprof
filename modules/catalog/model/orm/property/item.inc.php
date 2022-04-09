@@ -61,10 +61,12 @@ class Item extends OrmObject
     const TYPE_BOOL = 'bool';
     const TYPE_COLOR = 'color';
     const TYPE_IMAGE = 'image';
+    const TYPE_TEXT = 'text';
     // Поля БД, для записи значений характеристик
     const FIELD_FLOAT = 'val_int';
     const FIELD_STRING = 'val_str';
     const FIELD_LIST = 'val_list_id';
+    const FIELD_TEXT = 'val_text';
 
     protected static $table = 'product_prop';
 
@@ -89,6 +91,7 @@ class Item extends OrmObject
                 ]),
                 'alias' => new Type\Varchar([
                     'description' => t('Англ. псевдоним'),
+                    'maxLength' => 150,
                     'checker' => ['chkalias', null],
                     'hint' => t('Используется при включенной функции "Включить ЧПУ фильтры?" в настройках модуля каталог')
                 ]),
@@ -99,7 +102,8 @@ class Item extends OrmObject
                     'List' => [[__CLASS__, 'getAllowTypeValues']],
                     'meVisible' => false,
                     'template' => '%catalog%/form/property/type.tpl',
-                    'default' => self::TYPE_STRING
+                    'default' => self::TYPE_STRING,
+                    'hint' => t('Любой тип характеристики можно добавить  фильтр, кроме Текст')
                 ]),
                 'description' => new Type\Text([
                     'description' => t('Описание'),
@@ -127,7 +131,7 @@ class Item extends OrmObject
                     'description' => t('Имя, выгружаемое на Яндекс маркет'),
                 ]),
                 'xml_id' => new Type\Varchar([
-                    'maxLength' => '255',
+                    'maxLength' => '150',
                     'description' => t('Идентификатор товара в системе 1C'),
                     'visible' => false,
                 ]),
@@ -432,7 +436,7 @@ class Item extends OrmObject
         $tpl->assign('self', $this);
         $tpl->assign('value', is_null($this['value']) ? $this['defval'] : $this['value']);
         $tpl->assign('disabled', ($disabled) ? 'disabled="disabled"' : '');
-        return $tpl->fetch('%catalog%property_val.tpl');
+        return $tpl->fetch('%catalog%/form/product/property_val.tpl');
     }
 
     /**
@@ -453,6 +457,11 @@ class Item extends OrmObject
         if ($this->isListType()) {
             return implode(', ', !$list_available ? (array)$this['value_in_string'] : (array)$this['available_value_in_string']);
         }
+
+        if ($this['type'] == self::TYPE_TEXT) {
+            return nl2br($val);
+        }
+
         return $val;
     }
 
@@ -707,7 +716,12 @@ class Item extends OrmObject
                     'title' => t('Список изображений'),
                     'is_list' => true,
                     'save_field' => self::FIELD_LIST
-                ]
+                ],
+                self::TYPE_TEXT => [
+                    'title' => t('Текст'),
+                    'is_list' => false,
+                    'save_field' => self::FIELD_TEXT,
+                ],
             ];
 
             //Из сторонних содулей можно дополнить список, обработав событие

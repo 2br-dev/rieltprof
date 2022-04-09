@@ -145,7 +145,10 @@ class Handlers extends HandlerAbstract
         ], null, t('Просмотр категории продукции'));
 
         //Карточка товара
-        $routes[] = new Route('catalog-front-product', '/product/{id}/', null, t('Карточка товара'));
+        $routes[] = new Route('catalog-front-product', [
+            '/product/{id}/{tab}/',
+            '/product/{id}/'
+        ], null, t('Карточка товара'));
 
         //Сравнение товаров    
         $routes[] = new Route('catalog-front-compare', '/compare/', null, t('Сравнение товаров'));
@@ -164,6 +167,9 @@ class Handlers extends HandlerAbstract
 
         //Отображение отдельно склада
         $routes[] = new Route('catalog-front-warehouse', '/warehouse/{id}/', null, t('Просмотр отдельного склада'));
+
+        //Категории товаров
+        $routes[] = new Route('catalog-front-category', '/category/', null, t('Мобильный каталог'));
 
         return $routes;
     }
@@ -605,10 +611,12 @@ class Handlers extends HandlerAbstract
         if ($interval) {
             foreach ($params['minutes'] as $minute) {
                 if ((($minute - 60) % $interval) == 0) {
+
                     $api = new CurrencyApi();
                     echo t("\n--- Обновление курсов валют: ");
-                    echo ($api->getCBRFCourseWithUpdate()) ? t("успех") : t("неудача");
+                    echo ($api->getCBRFCourseWithUpdate(false)) ? t("успех") : t("неудача");
                     echo " ---\n";
+
                 }
             }
         }

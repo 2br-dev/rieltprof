@@ -6,19 +6,20 @@
 * @license http://readyscript.ru/licenseAgreement/
 */
 namespace Alerts\Controller\Admin;
-
-use \RS\Html\Table\Type as TableType,
-    \RS\Html\Toolbar,
-    \RS\Html\Toolbar\Button as ToolbarButton,
-    \RS\Html\Filter,
-    \RS\Html\Table;
     
-class Ctrl extends \RS\Controller\Admin\Crud
+use Alerts\Model\Api;
+use Alerts\Model\SMS\Manager as SmsManager;
+use Exception;
+use RS\Config\Loader;
+use RS\Controller\Admin\Crud;
+use RS\Module\Item;
+
+class Ctrl extends Crud
 {
     
     function __construct()
     {
-        $api = new \Alerts\Model\Api;
+        $api = new Api;
         parent::__construct($api);
     }
     
@@ -47,11 +48,11 @@ class Ctrl extends \RS\Controller\Admin\Crud
         
         $helper->viewAsAny();
         $this->view->assign([
-            'cfg' => \RS\Config\Loader::byModule($this),
+            'cfg' => Loader::byModule($this),
             'alerts' => $this->api->getList(),
-            'tfolders' => \RS\Module\Item::getResourceFolders('templates')
+            'tfolders' => Item::getResourceFolders('templates')
         ]);
-        $helper['form'] = $this->view->fetch('notice_list.tpl');
+        $helper['form'] = $this->view->fetch('admin/notice_list.tpl');
 
         $helper->setTopToolbar(null);
         $helper->setBottomToolbar($this->buttons(['apply']));
@@ -61,12 +62,12 @@ class Ctrl extends \RS\Controller\Admin\Crud
     
     function actionAjaxTestSms()
     {
-        $config = \RS\Config\Loader::getSiteConfig();
+        $config = Loader::getSiteConfig();
         try{
-            \Alerts\Model\SMS\Manager::send($config['admin_phone'], '%alerts%/test_sms.tpl', null, false);
+            SmsManager::send($config['admin_phone'], '%alerts%/admin/test_sms.tpl', null, false);
             $this->result->addMessage(t('SMS-сообщение успешно отправлено'));
         }
-        catch(\Exception $e){
+        catch(Exception $e){
             $this->result->addEMessage( t('Ошибка %0: %1', [$e->getCode(), $e->getMessage()]) );
         }
         return $this->result->setSuccess(true);

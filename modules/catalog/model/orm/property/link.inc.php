@@ -48,13 +48,16 @@ class Link extends \RS\Orm\AbstractObject
             ]),
             'val_str' => new Type\Varchar([
                 'description' => t('Строковое значение'),
-                'maxLength' => '255',
+                'maxLength' => '180',
             ]),
             'val_int' => new Type\Real([
                 'description' => t('Числовое значение')
             ]),
             'val_list_id' => new Type\Integer([
                 'description' => t('Списковое значение')
+            ]),
+            'val_text' => new Type\Text([
+                'description' => t('Текстовое значение'),
             ]),
             'available' => new Type\Integer([
                 'description' => t('Есть в наличии товары с такой характеристикой'),

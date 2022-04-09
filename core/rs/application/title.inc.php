@@ -8,6 +8,8 @@
 
 namespace RS\Application;
 
+use RS\Site\Manager as SiteManager;
+
 /**
 * Класс, отвечающий за содержимое тега title в head части страницы
 */
@@ -100,7 +102,7 @@ class Title
     function get()
     {
         $sec = $this->sections;
-        return implode(self::DELIMITER,array_reverse($sec));
+        return ($sec) ? implode(self::DELIMITER,array_reverse($sec)) : SiteManager::getSite()->getMainDomain();
     }
     
 }

@@ -43,7 +43,7 @@
     </tr>
 </table>
 
-<script type="text/javascript">
+<script>
     /**
      * Обновляет аттрибут name в форме
      */

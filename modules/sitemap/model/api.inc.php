@@ -235,7 +235,7 @@ class Api
             }
 
             foreach ($exclude_urls as $exclude_url) {
-                if (preg_match("/".trim(str_replace('/', '\/', $exclude_url))."/ui", $page['loc'])){
+                if ($exclude_url && preg_match("/".trim(str_replace('/', '\/', $exclude_url))."/ui", $page['loc'])){
                     continue 2;
                 }
             }
@@ -260,7 +260,7 @@ class Api
         ];
     }
 
-    function getSitemapUrl($chunk = null, $base_url)
+    function getSitemapUrl($chunk, $base_url)
     {
         $params = [
             'site_id' => $this->site_id,
@@ -371,7 +371,7 @@ class Api
     * @param array $content - содержимое элемента
     * @param \XMLWriter $xml - объект XML документа
     */
-    protected function writeItemContent(array $content = [], $xml)
+    protected function writeItemContent(array $content, $xml)
     {
         foreach ($content as $key=>$item) {
             if (is_array($item)) {

@@ -169,19 +169,21 @@ class Base extends \RS\Csv\Preset\AbstractPreset
             if (!empty($orm_object) && $orm_object instanceof \Catalog\Model\Orm\Product && isset($this->row['prop'])){
                 $this->prepareProductProperties($orm_object);
             }
-            
+
             if ($orm_object) {
                 //Обновление
                 unset($this->row[$this->id_field]);
                 $orm_object->getFromArray($this->row);
                 $orm_object->update();
+
             } else {
                 //Создание
                 $orm_object = clone $this->getOrmObject();
                 $orm_object->getFromArray($this->row);
-                unset($orm_object['id']);
+                //unset($orm_object['id']);
                 $orm_object->insert();
             }
+
         }
         
     }
@@ -366,8 +368,11 @@ class Base extends \RS\Csv\Preset\AbstractPreset
             if ($this->load_expression) {
                 $q->where($this->load_expression);
             }
-            $object = $q->object();
-            if ($object) {
+            $row = $q->exec()->fetchRow();
+
+            if ($row) {
+                $object = clone $this->getOrmObject();
+                $object->getFromArray($row,null, false, true);
                 $this->cache[$cache_key] = $object;
             } else {
                 return false;

@@ -7,18 +7,23 @@
 */
 namespace Menu\Model\MenuType;
 
+use Menu\Model\Orm\Menu;
+
 /**
 * Абстрактный класс типа меню
 */
 abstract class AbstractType
 {
+    /**
+     * @var Menu
+     */
     protected  $menu;
 
     /**
      * @param \Menu\Model\Orm\Menu $menu
      * @return AbstractType
      */
-    function init(\Menu\Model\Orm\Menu $menu)
+    function init(Menu $menu)
     {
         $this->menu = $menu;
         return $this;
@@ -132,4 +137,41 @@ abstract class AbstractType
         return true;
     }
 
+    /**
+     * Возвраает класс иконки из коллекции zmdi
+     *
+     * @return string
+     */
+    public function getIconClass()
+    {
+        return 'zmdi-assignment-o';
+    }
+
+    /**
+     * Обработчик, запускается, перед созданием пункта меню.
+     * Здесь можно выполнить валидацию всех параметров
+     */
+    public function onBeforeCreate()
+    {}
+
+    /**
+     * Обработчик, запускается, после создании пукнта меню
+     */
+    public function onCreate()
+    {}
+
+    /**
+     * Обработчик, запускается после удаления пункта меню
+     */
+    public function onDelete()
+    {}
+
+    /**
+     * Обработчик изменения пункта меню
+     *
+     * @param Menu $before_state предыдущее состояние меню
+     * @param Menu $new_state итоговое состояние меню
+     */
+    public function onUpdate($before_state, $new_state)
+    {}
 }

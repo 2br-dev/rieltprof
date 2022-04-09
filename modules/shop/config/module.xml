@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Магазин</name>
         <description multilanguage="true">Модуль предоставляет возможность оформлять и администрировать заказы, управлять корзиной</description>
-        <version>4.0.198</version>
+        <version>6.0.39</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         <check_quantity>0</check_quantity>
@@ -41,6 +41,7 @@
         <remove_nopublic_from_cart>0</remove_nopublic_from_cart>
         <cashregister_class>atolonline</cashregister_class>
         <cashregister_enable_auto_check>1</cashregister_enable_auto_check>
+        <sell_payment_object>take_from_product</sell_payment_object>
 
         <return_rules>
             <![CDATA[<p>Статья 25. Право потребителя на обмен товара надлежащего качества</p>
@@ -61,13 +62,14 @@
         <discount_combination>max</discount_combination>
         <fixed_discount_max_order_percent>100</fixed_discount_max_order_percent>
         <cart_item_max_discount>100</cart_item_max_discount>
+        <discount_amount_correct_round>0.01</discount_amount_correct_round>
         <payment_method>full_prepayment</payment_method>
         <personal_account_payment_method>advance</personal_account_payment_method>
         <personal_account_payment_subject>payment</personal_account_payment_subject>
         <check_conformity_uit_to_barcode>1</check_conformity_uit_to_barcode>
         <show_number_of_lines_in_cart>1</show_number_of_lines_in_cart>
-        <checkout_type>four_step</checkout_type>
         <recurring_show_methods_menu>0</recurring_show_methods_menu>
         <cdek_default_delivery>0</cdek_default_delivery>
+        <cart_life_time>60</cart_life_time>
     </defaultValues>
 </config>

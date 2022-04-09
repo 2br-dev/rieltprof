@@ -2,7 +2,7 @@
 /**
  * @package php-svg-lib
  * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien M?nager <fabien.menager@gmail.com>
+ * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license GNU LGPLv3+ http://www.gnu.org/copyleft/lesser.html
  */
 
@@ -12,7 +12,7 @@ use Svg\Surface\SurfaceInterface;
 
 class Path extends Shape
 {
-    static $commandLengths = [
+    static $commandLengths = array(
         'm' => 2,
         'l' => 2,
         'h' => 1,
@@ -22,12 +22,12 @@ class Path extends Shape
         'q' => 4,
         't' => 2,
         'a' => 7,
-    ];
+    );
 
-    static $repeatedCommands = [
+    static $repeatedCommands = array(
         'm' => 'l',
         'M' => 'L',
-    ];
+    );
 
     public function start($attributes)
     {
@@ -37,13 +37,13 @@ class Path extends Shape
             return;
         }
 
-        $commands = [];
+        $commands = array();
         preg_match_all('/([MZLHVCSQTAmzlhvcsqta])([eE ,\-.\d]+)*/', $attributes['d'], $commands, PREG_SET_ORDER);
 
-        $path = [];
+        $path = array();
         foreach ($commands as $c) {
             if (count($c) == 3) {
-                $arguments = [];
+                $arguments = array();
                 preg_match_all('/([-+]?((\d+\.\d+)|((\d+)|(\.\d+)))(?:e[-+]?\d+)?)/i', $c[2], $arguments, PREG_PATTERN_ORDER);
                 $item = $arguments[0];
                 $commandLower = strtolower($c[1]);
@@ -69,7 +69,7 @@ class Path extends Shape
                 }
 
             } else {
-                $item = [$c[1]];
+                $item = array($c[1]);
 
                 $path[] = $item;
             }
@@ -339,11 +339,12 @@ class Path extends Shape
                     break;
 
                 case 'a':
+                    // TODO: optimize this
                     $this->drawArc(
                         $surface,
                         $x + $l,
                         $y + $t,
-                        [
+                        array(
                             $current[1],
                             $current[2],
                             $current[3],
@@ -351,18 +352,19 @@ class Path extends Shape
                             $current[5],
                             $current[6] + $x + $l,
                             $current[7] + $y + $t
-                        ]
+                        )
                     );
                     $x += $current[6];
                     $y += $current[7];
                     break;
 
                 case 'A':
+                    // TODO: optimize this
                     $this->drawArc(
                         $surface,
                         $x + $l,
                         $y + $t,
-                        [
+                        array(
                             $current[1],
                             $current[2],
                             $current[3],
@@ -370,7 +372,7 @@ class Path extends Shape
                             $current[5],
                             $current[6] + $l,
                             $current[7] + $t
-                        ]
+                        )
                     );
                     $x = $current[6];
                     $y = $current[7];
@@ -396,12 +398,12 @@ class Path extends Shape
         $sweep = $coords[4];
         $tx = $coords[5];
         $ty = $coords[6];
-        $segs = [
-            [],
-            [],
-            [],
-            [],
-        ];
+        $segs = array(
+            array(),
+            array(),
+            array(),
+            array(),
+        );
 
         $segsNorm = $this->arcToSegments($tx - $fx, $ty - $fy, $rx, $ry, $large, $sweep, $rot);
 
@@ -413,7 +415,7 @@ class Path extends Shape
             $segs[$i][4] = $segsNorm[$i][4] + $fx;
             $segs[$i][5] = $segsNorm[$i][5] + $fy;
 
-            call_user_func_array([$surface, "bezierCurveTo"], $segs[$i]);
+            call_user_func_array(array($surface, "bezierCurveTo"), $segs[$i]);
         }
     }
 
@@ -462,7 +464,7 @@ class Path extends Shape
 
         // $Convert $into $cubic $bezier $segments <= 90deg
         $segments = ceil(abs($dtheta / M_PI * 2));
-        $result = [];
+        $result = array();
         $mDelta = $dtheta / $segments;
         $mT = 8 / 3 * sin($mDelta / 4) * sin($mDelta / 4) / sin($mDelta / 2);
         $th3 = $mTheta + $mDelta;
@@ -503,14 +505,14 @@ class Path extends Shape
         $cp2X = $toX + $mT * ($cosTh * $rx * $sinth3 + $sinTh * $ry * $costh3);
         $cp2Y = $toY + $mT * ($sinTh * $rx * $sinth3 - $cosTh * $ry * $costh3);
 
-        return [
+        return array(
             $cp1X,
             $cp1Y,
             $cp2X,
             $cp2Y,
             $toX,
             $toY
-        ];
+        );
     }
 
     function calcVectorAngle($ux, $uy, $vx, $vy)

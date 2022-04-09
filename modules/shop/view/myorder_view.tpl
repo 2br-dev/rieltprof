@@ -1,178 +1,177 @@
-{assign var=catalog_config value=ConfigLoader::byModule('catalog')}
-{addjs file="jcarousel/jquery.jcarousel.min.js"}
-{addjs file="myorder_view.js"}
-{assign var=cart value=$order->getCart()}
-{assign var=products value=$cart->getProductItems()}
-{assign var=order_data value=$cart->getOrderData()}
+{extends file="%THEME%/helper/wrapper/my-cabinet.tpl"}
+{block name="content"}
+    {$catalog_config = ConfigLoader::byModule('catalog')}
+    {$cart = $order->getCart()}
+    {$products = $cart->getProductItems()}
+    {$order_data = $cart->getOrderData()}
 
-<div class="viewOrder">
-    <div class="floatWrap">
-        <span class="statusItem" style="background: {$order->getStatus()->bgcolor}">{$order->getStatus()->title}</span>
-
-        <div class="orderViewCaption oh">
-
-            <div class="fright">
-                {if $order->getPayment()->hasDocs()}
-                    {$type_object=$order->getPayment()->getTypeObject()}
-                    {foreach $type_object->getDocsName() as $key=>$doc}
-                        <a href="{$type_object->getDocUrl($key)}" class="button" target="_blank">{$doc.title}</a>
+    <div class="col">
+        <div class="row">
+            <div class="col-md-7 mb-6 mb-md-0">
+                <a class="return-link" href="{$router->getUrl('shop-front-myorders')}">
+                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M14.7803 5.72846C15.0732 6.03307 15.0732 6.52693 14.7803 6.83154L9.81066 12L14.7803 17.1685C15.0732 17.4731 15.0732 17.9669 14.7803 18.2715C14.4874 18.5762 14.0126 18.5762 13.7197 18.2715L8.21967 12.5515C7.92678 12.2469 7.92678 11.7531 8.21967 11.4485L13.7197 5.72846C14.0126 5.42385 14.4874 5.42385 14.7803 5.72846Z"/>
+                    </svg>
+                    <span class="ms-2">{t}К списку заказов{/t}</span>
+                </a>
+                <h1 class="mb-lg-5 mb-4 mt-3 mt-lg-5">Заказ №{$order.order_num} от {$order.dateof|dateformat:"@date"}</h1>
+                {if !empty($order.user_text)}
+                    <div class="lk-order-warning">{$order.user_text}</div>
+                {/if}
+                <div class="mb-4">
+                    {$status = $order->getStatus()}
+                    <div class="lk-order-status"
+                         style="color: white; background: {$status.bgcolor}">
+                        {$status.title}
+                    </div>
+                </div>
+                <div class="row mb-5 g-4">
+                    {hook name="shop-myorder_view:order-info-items" title="{t}Просмотр заказа:информация о заказе{/t}"}
+                    {if $delivery_title = $order->getDelivery()->title}
+                        <div>
+                            <div class="fw-bold mb-2">{t}Доставка{/t}</div>
+                            <div>{$delivery_title}</div>
+                        </div>
+                    {/if}
+                    {if $payment_title = $order->getPayment()->title}
+                        <div>
+                            <div class="fw-bold mb-2">{t}Оплата{/t}</div>
+                            <div>{$payment_title}</div>
+                        </div>
+                    {/if}
+                    {$pvz = $order->getSelectedPvz()}
+                    {if $pvz}
+                        <div>
+                            <div class="fw-bold mb-2">{t}Пункт самовывоза{/t}</div>
+                            <div>{$pvz->getFullAddress()}</div>
+                        </div>
+                    {elseif $order.use_addr || $order.warehouse}
+                        <div>
+                            <div class="fw-bold mb-2">{t}Адрес получения{/t}</div>
+                            <div>{if $order.use_addr}
+                                    {$order->getAddress()->getLineView()}
+                                {elseif $order.warehouse}
+                                    {$order->getWarehouse()->adress}
+                                {/if}
+                            </div>
+                        </div>
+                    {/if}
+                    {if $order.track_number}
+                        <div>
+                            <div class="fw-bold mb-2">{t}Трек-номер заказа{/t}</div>
+                            <div>{$order.track_number}</div>
+                        </div>
+                    {/if}
+                    {if $order.contact_person}
+                        <div>
+                            <div class="fw-bold mb-2">{t}Контактное лицо{/t}</div>
+                            <div>{$order.contact_person}</div>
+                        </div>
+                    {/if}
+                    {foreach $order->getFieldsManager()->getStructure() as $item}
+                        <div>
+                            <div class="fw-bold mb-2">{$item.title}</div>
+                            <div>{$item.current_val}</div>
+                        </div>
                     {/foreach}
-                {/if}
-                {if $order->canOnlinePay()}
-                    <a href="{$order->getOnlinePayUrl()}" class="colorButton">{t}Оплатить{/t}</a><br>
-                {/if}
+                    {if $files = $order->getFiles()}
+                        <div>
+                            <div class="fw-bold mb-2">{t}Файлы{/t}</div>
+                            <div>
+                                {foreach $files as $file}
+                                    <a href="{$file->getUrl()}" target="_blank">{$file.name}</a>{if !$file@last},{/if}
+                                {/foreach}
+                            </div>
+                        </div>
+                    {/if}
+                    {$url = $order->getTrackUrl()}
+                    {if !empty($url)}
+                        <div>
+                            <div class="fw-bold mb-2">{t}Ссылка для отслеживания заказа{/t}:</td>
+                            <div>
+                                <a href="{$url}" target="_blank">{t}Перейти к отслеживанию{/t}</a>
+                            </div>
+                        </div>
+                    {/if}
+                    {/hook}
+                </div>
+                <div class="row row-cols-md-auto row-cols-1 g-3">
+                    {if $order->canOnlinePay()}
+                        <div><a href="{$order->getOnlinePayUrl()}" class="btn btn-primary col-12">{t}Оплатить заказ{/t}</a></div>
+                    {/if}
+                    <div><a href="{$router->getUrl('shop-front-cartpage', ['Act'=>'repeatOrder', 'order_num' => $order.order_num])}" rel="nofollow" class="btn btn-outline-primary col-12">{t}Повторить заказ{/t}</a></div>
+                    {if $order->canChangePayment()}
+                        <div><a href="{$router->getUrl('shop-front-myorderview', ['Act'=>'changePayment', 'order_id' => $order.order_num])}" rel="nofollow" class="btn btn-outline-primary col-12 rs-in-dialog">{t}Изменить оплату{/t}</a></div>
+                    {/if}
+                </div>
+            </div>
+            <div class="col">
+                <div class="order-items mb-xl-6 mb-4">
+                    <div role="button" class="order-items__title collapsed" id="orderItemsTitle" data-bs-toggle="collapse" data-bs-target="#orderItemsList">{t n=count($products)}Товаров в заказе: %n{/t}</div>
+                    <div class="collapse" id="orderItemsList" data-bs-target="orderItemsTitle">
+                        <div class="pt-4">
+                            <ul class="order-items__list">
+                                {foreach $order_data.items as $key => $item}
+                                    {$product = $products[$key].product}
+                                    {$multioffer_titles = $item.cartitem->getMultiOfferTitles()}
+                                    <li>
+                                        <a {if $product.id}href="{$product->getUrl()}"{/if}>
+                                            <div class="mb-2">
+                                                {hook name="shop-myorder_view:product-info-items" title="{t}Просмотр заказа:информация о товаре{/t}"}
+                                                {$item.cartitem.title} {$item.cartitem.model}
+
+                                                {if !empty($multioffer_titles)}
+                                                    <div class="order-items__multioffers">
+                                                    {foreach $multioffer_titles as $multioffer}
+                                                        <div class="order-items__multioffer">
+                                                            <span>{$multioffer.title} -</span>
+                                                            <span>{$multioffer.value}</span>
+                                                        </div>
+                                                    {/foreach}
+                                                    </div>
+                                                {/if}
+                                                {/hook}
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="text-gray">{$item.cartitem.amount} {$item.cartitem->getUnit()->stitle|default:$item.cartitem.extra_arr.unit}</div>
+                                                {if $item.discount_unformated > 0}
+                                                    <small class="col d-flex justify-content-end old-price no-wrap" title="{t}Скидка{/t}">
+                                                        {$item.cost|format_price} {$order.currency_stitle}
+                                                    </small>
+                                                {/if}
+                                                <div class="fw-bold ms-3 text-body no-wrap">
+                                                    {$item.cost_with_discount} {$order.currency_stitle}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lk-order-total">
+                    {foreach $order_data.other as $item}
+                        <div class="lk-order-total__item">
+                            <div class="me-3">{$item.cartitem.title}</div>
+                            <div class="no-wrap fw-bold">{if $item.total >0}{$item.total}{/if}</div>
+                        </div>
+                    {/foreach}
+                    <div class="border-top pt-3 lk-order-total__item">
+                        <div class="me-3">{t}Итого{/t}</div>
+                        <div class="no-wrap fw-bold">{$order_data.total_cost}</div>
+                    </div>
+                    {if $order->getPayment()->hasDocs()}
+                        {$type_object=$order->getPayment()->getTypeObject()}
+                        {foreach $type_object->getDocsName() as $key=>$doc}
+                            <div class="d-flex justify-content-end">
+                                <a href="{$type_object->getDocUrl($key)}" target="_blank">{$doc.title}</a>
+                            </div>
+                        {/foreach}
+                    {/if}
+                </div>
             </div>
         </div>
     </div>
-    
-    <div class="products">
-        <a class="control prev"></a>
-        <a class="control next"></a>
-        <div class="itemsWrap">
-            <ul class="items">
-                {foreach from=$order_data.items key=key item=item}
-                {assign var=product value=$products[$key].product}
-                {assign var=multioffer_titles value=$item.cartitem->getMultiOfferTitles()}
-                <li>
-                    {$main_image=$product->getMainImage()}
-                    {if $product.id>0}
-                        <a href="{$product->getUrl()}" class="image"><img src="{$main_image->getUrl(220, 200, 'xy')}" alt="{$main_image.title|default:"{$product.title}"}"></a>
-                        <a href="{$product->getUrl()}" class="title">{$item.cartitem.title}
-                            {if $item.cartitem.model}
-                                <br>{$item.cartitem.model}
-                            {/if}
-                        </a>
-                    {else}
-                        <span class="image"><img src="{$main_image->getUrl(220, 200, 'xy')}" alt="{$main_image.title|default:"{$product.title}"}"/></span>
-                        <span class="title">{$item.cartitem.title}
-                            {if $item.cartitem.model}
-                                <br>{$item.cartitem.model}
-                            {/if}
-                        </span>
-                    {/if}                
-                    {hook name="shop-myorder_view:product-info-items" title="{t}Просмотр заказа:информация о товаре{/t}"}                    
-                        <ul class="keyval">
-                            {if !empty($multioffer_titles)}
-                                {foreach $multioffer_titles as $multioffer}
-                                    <li>
-                                        <span class="key">{$multioffer.title} -</span> <span class="value">{$multioffer.value}</span>
-                                    </li>
-                                {/foreach}
-                            {/if}
-                            <li>
-                                <span class="key">{t}Количество{/t} -</span>
-                                <span class="value">{$item.cartitem.amount}
-                                    {if $catalog_config.use_offer_unit}
-                                        {$item.cartitem.data.unit}
-                                    {/if}
-                                </span>
-                            </li>
-                            <li><span class="key">{t}Стоимость{/t} -</span> <span class="value">{$item.cost_with_discount} {$order.currency_stitle}</span></li>
-                            {if $item.discount>0}
-                            <li><span class="key">{t}Скидка{/t} -</span> <span class="value">{$item.discount} {$order.currency_stitle}</span></li>
-                            {/if}
-                        </ul>
-                    {/hook}                    
-                </li>
-                {/foreach}
-            </ul>
-        </div>
-    </div>
-    <div class="orderActionButtons">
-        <a href="{$router->getUrl('shop-front-cartpage', ['Act'=>'repeatOrder', 'order_num' => $order.order_num])}" rel="nofollow" class="formSave repeatOrder">{t}Повторить заказ{/t}</a>
-        {if $order->canChangePayment()}
-            <a href="{$router->getUrl('shop-front-myorderview', ['Act'=>'changePayment', 'order_id' => $order.order_num])}" rel="nofollow" class="formSave inDialog">{t}Изменить оплату{/t}</a>
-        {/if}
-    </div>
-    <table class="formTable">
-        <tbody>
-            {hook name="shop-myorder_view:order-info-items" title="{t}Просмотр заказа:информация о заказе{/t}"}
-                <tr>
-                    <td class="key">{t}Дата заказа{/t}</td>
-                    <td class="value">{$order.dateof|dateformat}</td>
-                </tr>
-                {if $order.delivery}
-                    <tr>
-                        <td class="key">{t}Тип доставки{/t}</td>
-                        <td class="value">{$order->getDelivery()->title}</td>
-                    </tr>
-                {/if}
-                {if $order.use_addr || $order.warehouse}
-                    <tr>
-                        <td class="key">{t}Адрес получения{/t}</td>
-                        <td class="value">{if $order.use_addr}{$order->getAddress()->getLineView()}{elseif $order.warehouse}{$order->getWarehouse()->adress}{/if}</td>
-                    </tr>
-                {/if}
-                {if $order.track_number}
-                    <tr>
-                        <td class="key">{t}Трек-номер заказа{/t}</td>
-                        <td class="value">{$order.track_number}</td>
-                    </tr>
-                {/if}
-                <tr>
-                    <td class="key">{t}Контактное лицо{/t}</td>
-                    <td class="value">{$order->contact_person}</td>
-                </tr>
-                {assign var=fm value=$order->getFieldsManager()}
-                {foreach from=$fm->getStructure() item=item}
-                    <tr>
-                        <td class="key">{$item.title}</td>
-                        <td class="value">{$item.current_val}</td>
-                    </tr>
-                {/foreach}    
-                {foreach from=$order_data.other item=item}
-                {if $item.cartitem.type != 'coupon'}
-                <tr>
-                    <td class="key">{$item.cartitem.title}</td>
-                    <td class="value">{if $item.total >0}{$item.total}{/if}</td>
-                </tr>
-                {/if}
-                {/foreach}
-                
-                {if $order->getPayment()->hasDocs()}
-                <tr>
-                    <td class="key">{t}Документы{/t}:</td>
-                    <td class="value">
-                    {assign var=type_object value=$order->getPayment()->getTypeObject()}
-                    {foreach from=$type_object->getDocsName() key=key item=doc name="docs"}
-                        <a href="{$type_object->getDocUrl($key)}" class="underline" target="_blank">{$doc.title}</a>{if !$smarty.foreach.docs.last},{/if}
-                    {/foreach}
-                    </td>
-                </tr>
-                {/if}
-                
-                {if $files=$order->getFiles()}
-                <tr>
-                    <td class="key">{t}Файлы{/t}:</td>
-                    <td class="value">
-                    {foreach $files as $file}
-                        <a href="{$file->getUrl()}" class="underline" target="_blank">{$file.name}</a>{if !$file@last},{/if}
-                    {/foreach}
-                    </td>
-                </tr>
-                {/if}
-                {$url=$order->getTrackUrl()}
-                {if !empty($url)}
-                    <tr>
-                        <td class="key">{t}Ссылка для отслеживания заказа{/t}:</td>
-                        <td class="value">
-                            <a href="{$url}" target="_blank">{t}Перейти к отслеживанию{/t}</a>
-                        </td>
-                    </tr>
-                {/if}
-            {/hook}
-        </tbody>
-        <tfoot class="summary">
-            <tr>
-                <td class="key">{t}Итого{/t}</td>
-                <td class="value">{$order_data.total_cost}</td>
-            </tr>
-        </tfoot>
-    </table>
-    
-    {if !empty($order.user_text)}
-    <div class="userText">
-        {$order.user_text}
-    </div>
-    {/if}
-</div>
+{/block}

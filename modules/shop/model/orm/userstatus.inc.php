@@ -25,6 +25,7 @@ use RS\Site\Manager as SiteManager;
  * @property string $type Идентификатор(Англ.яз)
  * @property string $copy_type Дублирует системный статус
  * @property integer $is_system Это системный статус. (его нельзя удалять)
+ * @property integer $sortn Сорт. номер
  * --\--
  */
 class UserStatus extends OrmObject
@@ -150,7 +151,7 @@ class UserStatus extends OrmObject
      */
     public static function insertDefaultStatuses($site_id)
     {
-        $default_names = self::getDefaultStatues();
+        $default_names = self::getDefaultStatuses();
         $assoc = [];
         foreach ($default_names as $type => $data) {
             $record = new self();
@@ -170,9 +171,20 @@ class UserStatus extends OrmObject
     /**
      * Возвращает статусы по умолчанию
      *
+     * @deprecated 06.09.2021 Используйте вместо данного метода getDefaultStatuses
      * @return array
      */
     public static function getDefaultStatues()
+    {
+        return static::getDefaultStatuses();
+    }
+
+    /**
+     * Возвращает статусы по умолчанию
+     *
+     * @return array
+     */
+    public static function getDefaultStatuses()
     {
         return [
             self::STATUS_NEW => [
@@ -215,7 +227,7 @@ class UserStatus extends OrmObject
     public static function getDefaultStatusesTitles(array $first_element = [])
     {
         $result = [];
-        foreach (self::getDefaultStatues() as $key => $data) {
+        foreach (self::getDefaultStatuses() as $key => $data) {
             $result[$key] = $data['title'];
         }
         return $first_element + $result;
@@ -241,7 +253,7 @@ class UserStatus extends OrmObject
         static $defaults;
 
         if ($defaults === null) {
-            $defaults = self::getDefaultStatues();
+            $defaults = self::getDefaultStatuses();
         }
         return isset($defaults[$this['type']]);
     }

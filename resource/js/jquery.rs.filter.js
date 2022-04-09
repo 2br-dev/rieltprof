@@ -28,7 +28,7 @@
 
             form.sidePanel({
                 title: this.element.find(this.options.filterTitle).text(),
-                htmlHead: '<a class="rs-side-panel__head-link call-update" href="'+ form.data('cleanUrl') +'"><i class="zmdi zmdi-undo"></i>&nbsp;<span class="hidden-xs">'+lang.t('Очистить фильтр')+'</span></a>',
+                htmlHead: '<a class="rs-side-panel__head-link call-update" href="'+ form.data('cleanUrl') +'"><i class="zmdi zmdi-undo"><!----></i>&nbsp;<span class="hidden-xs">'+lang.t('Очистить фильтр')+'</span></a>',
                 position:position,
                 onShow: function(e, data) {
                     data.element.on('submit', function() {

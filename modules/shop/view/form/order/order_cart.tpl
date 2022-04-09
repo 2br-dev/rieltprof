@@ -33,7 +33,8 @@
                     <th class="chk" style="text-align:center" width="20">
                         <input type="checkbox" data-name="chk[]" class="chk_head select-page" title="{t}Выбрать все товары{/t}">
                     </th>
-                    <th></th>
+                    <th width="40"></th>
+                    <th width="20"></th>
                     <th>{t}Наименование{/t}</th>
                     <th>{t}Код{/t}</th>
                     <th>{t}Вес{/t} ({$catalog_config->getShortWeightUnit()})</th>
@@ -45,6 +46,7 @@
                 </thead>
                 <tbody id="orderEditCartItems" class="ordersEdit">
                     {if !empty($order_data.items)}
+                        {$products_in_cargo_status = $order->getProductsInCargoStatus()}
                         {foreach $order_data.items as $n => $item}
                             {$product = $products[$n].product}
                             {include file="%shop%/form/order/order_cart_item.tpl" catalog_config=$catalog_config user=$user router=$router order=$order delivery=$delivery pay=$pay}
@@ -52,7 +54,7 @@
                     {else}
                         <tr>
                             <td class="l-w-space"></td>
-                            <td colspan="8" align="center">{t}Добавьте товары к заказу{/t}</td>
+                            <td colspan="9" align="center">{t}Добавьте товары к заказу{/t}</td>
                             <td class="r-w-space"></td>
                         </tr>
                     {/if}
@@ -84,7 +86,7 @@
                             </td>
 
                         {/if}
-                        <td colspan="{if $item.cartitem.type=='coupon' || $item.cartitem.type=='order_discount'}6{else}7{/if}">
+                        <td colspan="{if $item.cartitem.type=='coupon' || $item.cartitem.type=='order_discount'}7{else}8{/if}">
                             {if $item.cartitem.type !='coupon' && $item.cartitem.type != 'order_discount'}
                                 <input type="hidden" name="items[{$key}][uniq]" value="{$key}">
                                 <input type="hidden" name="items[{$key}][type]" value="{$item.cartitem.type}">
@@ -154,16 +156,16 @@
 
 {*  Блок-контейнер для инициализации диалога добавления товара  *}
 
-<div class="product-group-container hide-group-cb hidden" data-urls='{ "getChild": "{adminUrl mod_controller="catalog-dialog" do="getChildCategory" site_id_context=$order.site_id}",
-                                                                       "getProducts": "{adminUrl mod_controller="catalog-dialog" do="getProducts" site_id_context=$order.site_id}",
-                                                                       "getDialog": "{adminUrl mod_controller="catalog-dialog" do=false site_id_context=$order.site_id}" }'>
+<div class="product-group-container hide-group-cb hidden" data-urls='{ "getChild": "{adminUrl mod_controller="catalog-dialog" do="getChildCategory" site_id_context=$order.site_id show_offers=true}",
+                                                                       "getProducts": "{adminUrl mod_controller="catalog-dialog" do="getProducts" site_id_context=$order.site_id show_offers=true}",
+                                                                       "getDialog": "{adminUrl mod_controller="catalog-dialog" do=false site_id_context=$order.site_id show_offers=true}" }'>
     <a href="JavaScript:;" class="select-button"></a><br>
     <div class="input-container"></div>
 </div>
 <br><br>
 
 {literal}
-    <script type="text/javascript">
+    <script>
         // $('.barcode-scanner').codeScanner();
     </script>
 {/literal}

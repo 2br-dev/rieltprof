@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<script>
     $.allReady(function() {
        $("#pushTokenMessageWrapper").pushTokenMessage(); 
     });

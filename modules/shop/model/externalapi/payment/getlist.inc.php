@@ -13,8 +13,7 @@ use \ExternalApi\Model\Exception as ApiException;
 */
 class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetList
 {
-    protected
-        $token_require = false;
+    protected $token_require = false;
         
     public
         /**

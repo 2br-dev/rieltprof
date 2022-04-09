@@ -3,7 +3,7 @@
 {addjs file="%main%/yandexmap/yandexmap.js"}
 <div id="{$mapId}" style="height:{$height}px;{if $width}width:{$width}px;{/if}" data-points='{$this_controller->getPointsJSON()}' data-zoom="{$zoom}" data-block_mouse_zoom="{$block_mouse_zoom}" data-auto_init="{$auto_init}">
 </div>
-<script type="text/javascript">
+<script>
     $(document).ready(function() {
         if ($("#{$mapId}").data('auto_init')) {
             $("#{$mapId}").initYandexMap({

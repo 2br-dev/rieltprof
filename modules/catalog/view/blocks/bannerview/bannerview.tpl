@@ -13,7 +13,7 @@
         </ul>
     </div>
 
-    <script type="text/javascript">
+    <script>
         $(function() {
             $('.advBlock').productsAsBanner();
         });

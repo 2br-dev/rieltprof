@@ -9,7 +9,7 @@
 namespace Catalog\Model\CommentType;
 
 /**
-* Тип комментария - коментарий к товару
+* Тип комментария - комментарий к товару
 */
 class Product extends \Comments\Model\Abstracttype
 {
@@ -107,17 +107,6 @@ class Product extends \Comments\Model\Abstracttype
     {
         $api = new \Comments\Model\Api(); 
         $api->recountItemRatingByComment($this->getLinkedObject(), $this->comment);
-    }
-
-    /**
-     * Возвращает количество различных оценок у товаров
-     *
-     * @return array
-     */
-    function getMarkMatrix()
-    {
-        $api = new \Comments\Model\Api();
-        return $api->getMarkMatrix($this->getLinkId(), $this->getTypeId(), 5);
     }
 }
 

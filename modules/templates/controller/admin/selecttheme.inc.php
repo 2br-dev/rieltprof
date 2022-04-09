@@ -26,7 +26,7 @@ class SelectTheme extends Front
     function actionIndex()
     {
         $this->view->assign('list_html', $this->actionAjaxThemeList(true));
-        return $this->result->setTemplate('select_theme.tpl');
+        return $this->result->setTemplate('admin/select_theme.tpl');
     }
 
     function actionAjaxThemeList($as_string = false)
@@ -38,7 +38,7 @@ class SelectTheme extends Front
             'theme_list' => $theme_list,
             'current' => $current_theme,
         ]);
-        $html = $this->view->fetch('select_theme_list.tpl');
+        $html = $this->view->fetch('admin/select_theme_list.tpl');
         if ($as_string) {
             return $html;
         } else {
@@ -81,6 +81,6 @@ class SelectTheme extends Front
             'theme_mp_list' => $marketplace_theme_api->getMarketplaceThemes()
         ]);
 
-        return $this->result->setTemplate('select_theme_mp_list.tpl');
+        return $this->result->setTemplate('admin/select_theme_mp_list.tpl');
     }
 }

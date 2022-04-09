@@ -1,5 +1,5 @@
 {include file=$elem.__typelink->getOriginalTemplate() field=$elem.__typelink}
-<script type="text/javascript">
+<script>
     $(function() { 
         /**
         * Обновляет тип формы

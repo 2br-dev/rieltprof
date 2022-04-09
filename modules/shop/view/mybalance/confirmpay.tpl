@@ -1,30 +1,34 @@
-<h2><span>{t}Подтверждение оплаты{/t}</span></h2>
+{* Шаблон страницы подтверждения оплаты с лицевого счета *}
 
-{if $api->hasError()}
-    <div class="pageError">
-        {foreach from=$api->getErrors() item=item}
-        <p>{$item}</p>
-        {/foreach}
+<div class="section d-flex justify-content-center">
+    <div class="col-md-9 col-lg-6">
+        <h1>{t}Подтверждение оплаты{/t}</h1>
+
+        {if $api->hasError()}
+            <div class="invalid-feedback d-block">
+                {$api->getErrorsStr()}
+            </div>
+        {/if}
+
+        <ul class="item-product-chars mt-3">
+            <li>
+                <span class="text-gray pe-1 bg-body">Сумма</span>
+                <span class="ms-2 bg-body fw-bold"> {$transaction->getCost(true, true)}</span>
+            </li>
+            <li>
+                <span class="text-gray pe-1 bg-body">{t}Назначение платежа{/t}</span>
+                <span class="ms-2 bg-body"> {$transaction->reason}</span>
+            </li>
+            <li>
+                <span class="text-gray pe-1 bg-body">{t}Источник{/t}</span>
+                <span class="ms-2 bg-body"> {t}Лицевой счет{/t}</span>
+            </li>
+        </ul>
+
+        {if !$api->hasError()}
+            <form method="POST" class="mt-5">
+                <button type="submit" class="btn btn-primary">{t}Оплатить{/t}</button>
+            </form>
+        {/if}
     </div>
-{/if}
-
-<table class="confirmPayTable">
-    <tr>
-        <td class="key">{t}Сумма{/t}</td>
-        <td class="val"><span class="scost">{$transaction->getCost(true, true)}</span></td>
-    </tr>
-    <tr>
-        <td class="key">{t}Назначение платежа{/t}</td>
-        <td class="val">{$transaction->reason}</td>
-    </tr>    
-    <tr>
-        <td class="key">{t}Источник{/t}</td>
-        <td class="val">{t}Лицевой счет{/t}</td>
-    </tr>        
-</table>
-
-{if !$api->hasError()}
-<form method="post">
-    <button type="submit" class="formSave">{t}Оплатить{/t}</button>
-</form>
-{/if}
+</div>

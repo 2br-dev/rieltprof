@@ -16,7 +16,7 @@ use FontLib\TrueType\File;
  * @package php-font-lib
  */
 class post extends Table {
-  protected $def = [
+  protected $def = array(
     "format"             => self::Fixed,
     "italicAngle"        => self::Fixed,
     "underlinePosition"  => self::FWord,
@@ -26,13 +26,13 @@ class post extends Table {
     "maxMemType42"       => self::uint32,
     "minMemType1"        => self::uint32,
     "maxMemType1"        => self::uint32,
-  ];
+  );
 
   protected function _parse() {
     $font = $this->getFont();
     $data = $font->unpack($this->def);
 
-    $names = [];
+    $names = array();
 
     switch ($data["format"]) {
       case 1:
@@ -46,7 +46,7 @@ class post extends Table {
 
         $data["glyphNameIndex"] = $glyphNameIndex;
 
-        $namesPascal = [];
+        $namesPascal = array();
         for ($i = 0; $i < $data["numberOfGlyphs"]; $i++) {
           $len           = $font->readUInt8();
           $namesPascal[] = $font->read($len);
@@ -64,6 +64,7 @@ class post extends Table {
         break;
 
       case 2.5:
+        // TODO
         break;
 
       case 3:
@@ -71,6 +72,7 @@ class post extends Table {
         break;
 
       case 4:
+        // TODO
         break;
     }
 
@@ -122,6 +124,7 @@ class post extends Table {
       break;
 
       case 2.5:
+        // TODO
       break;
 
       case 3:
@@ -129,6 +132,7 @@ class post extends Table {
       break;
 
       case 4:
+        // TODO
       break;
     }
 

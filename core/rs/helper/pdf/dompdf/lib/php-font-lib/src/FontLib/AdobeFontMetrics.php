@@ -29,7 +29,7 @@ class AdobeFontMetrics {
   }
 
   function write($file, $encoding = null) {
-    $map_data = [];
+    $map_data = array();
 
     if ($encoding) {
       $encoding = preg_replace("/[^a-z0-9-_]/", "", $encoding);
@@ -85,12 +85,12 @@ class AdobeFontMetrics {
     }
 
     $head = $font->getData("head");
-    $this->addArray("FontBBox", [
+    $this->addArray("FontBBox", array(
       $font->normalizeFUnit($head["xMin"]),
       $font->normalizeFUnit($head["yMin"]),
       $font->normalizeFUnit($head["xMax"]),
       $font->normalizeFUnit($head["yMax"]),
-    ]);
+    ));
 
     $glyphIndexArray = $font->getUnicodeCharMap();
 
@@ -114,11 +114,11 @@ class AdobeFontMetrics {
             $hmtx[$g] = $hmtx[0];
           }
 
-          $this->addMetric([
+          $this->addMetric(array(
             "C"  => ($code > 255 ? -1 : $code),
             "WX" => $font->normalizeFUnit($hmtx[$g][0]),
             "N"  => $name,
-          ]);
+          ));
         }
       }
       else {
@@ -127,19 +127,19 @@ class AdobeFontMetrics {
             $hmtx[$g] = $hmtx[0];
           }
 
-          $this->addMetric([
+          $this->addMetric(array(
             "U"  => $c,
             "WX" => $font->normalizeFUnit($hmtx[$g][0]),
             "N"  => (isset($names[$g]) ? $names[$g] : sprintf("uni%04x", $c)),
             "G"  => $g,
-          ]);
+          ));
         }
       }
 
       $this->endSection("CharMetrics");
 
       $kern = $font->getData("kern", "subtable");
-      $tree = $kern["tree"];
+      $tree = is_array($kern) ? $kern["tree"] : null;
 
       if (!$encoding && is_array($tree)) {
         $this->startSection("KernData");
@@ -200,7 +200,7 @@ class AdobeFontMetrics {
   }
 
   function addMetric($data) {
-    $array = [];
+    $array = array();
     foreach ($data as $key => $value) {
       $array[] = "$key $value";
     }

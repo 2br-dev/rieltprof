@@ -257,6 +257,8 @@
                 dialog: 'productDialog',
                 openDialog: false,
                 additionalItemHtml: '',
+                productItem: '.product-item',
+                productOffersToggle: '.product-offers-toggle',
 
                 userCost : '',
                 divPaginator: '.paginator',
@@ -311,6 +313,43 @@
             $(".group-block", $(context)).sortable();
 
             var tree, dialog;
+
+            var toggleOffers = function (element) {
+                if (!element.classList.contains('offers-loaded')) {
+                    loadOffers(element);
+                }
+                element.classList.toggle('offers-open');
+                toggleOffersElements(element, element.classList.contains('offers-open'));
+            }
+
+            var loadOffers = function (element) {
+                element.classList.add('offers-loaded')
+                $.ajaxQuery({
+                    url: element.dataset.urlLoadOffers,
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.success) {
+                            element.insertAdjacentHTML('afterend', response.html);
+                            toggleOffersElements(element, element.classList.contains('offers-open'));
+                        }
+                    }
+                });
+            }
+
+            var toggleOffersElements = function (element, open) {
+                while(element) {
+                    element = element.nextElementSibling;
+                    if (element.classList.contains('product-item-offer')) {
+                        if (open) {
+                            element.classList.remove('rs-hidden');
+                        } else {
+                            element.classList.add('rs-hidden');
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
 
             var loadProducts = function(optVars)
             {
@@ -515,6 +554,10 @@
                 }
 
                 $(options.tableProducts+' input:checkbox', dialog).change(checkboxChange);
+
+                $(options.productOffersToggle).on('click', (event) => {
+                    toggleOffers(event.target.closest(options.productItem));
+                });
 
                 //Пагинатор
                 $(options.pagLeft+','+options.pagRight).click(function() {

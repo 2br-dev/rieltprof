@@ -18,7 +18,7 @@ class Handlers extends \RS\Event\HandlerAbstract
     {
         $orm->getPropertyIterator()->append([
             t('Тэги'),
-                '_tags_' => new \RS\Orm\Type\UserTemplate('%tags%/tab_tags.tpl')
+                '_tags_' => new \RS\Orm\Type\UserTemplate('%tags%/admin/tab_tags.tpl')
         ]);
     }
     

@@ -1,5 +1,5 @@
 <div id="design-menu-app" @close-d-panel="close"></div>
-<script type="text/javascript">
+<script>
     //Добавим сведения о блока с настройками
     if (!window['global']['designer']){
         window['global']['designer'] = {};

@@ -15,31 +15,31 @@ use FontLib\Table\Table;
  * @package php-font-lib
  */
 class cmap extends Table {
-  private static $header_format = [
+  private static $header_format = array(
     "version"         => self::uint16,
     "numberSubtables" => self::uint16,
-  ];
+  );
 
-  private static $subtable_header_format = [
+  private static $subtable_header_format = array(
     "platformID"         => self::uint16,
     "platformSpecificID" => self::uint16,
     "offset"             => self::uint32,
-  ];
+  );
 
-  private static $subtable_v4_format = [
+  private static $subtable_v4_format = array(
     "length"        => self::uint16,
     "language"      => self::uint16,
     "segCountX2"    => self::uint16,
     "searchRange"   => self::uint16,
     "entrySelector" => self::uint16,
     "rangeShift"    => self::uint16,
-  ];
+  );
 
-  private static $subtable_v12_format = [
+  private static $subtable_v12_format = array(
     "length"        => self::uint32,
     "language"      => self::uint32,
     "ngroups"    => self::uint32
-  ];
+  );
 
   protected function _parse() {
     $font = $this->getFont();
@@ -48,7 +48,7 @@ class cmap extends Table {
 
     $data = $font->unpack(self::$header_format);
 
-    $subtables = [];
+    $subtables = array();
     for ($i = 0; $i < $data["numberSubtables"]; $i++) {
       $subtables[] = $font->unpack(self::$subtable_header_format);
     }
@@ -60,6 +60,7 @@ class cmap extends Table {
 
       $subtable["format"] = $font->readUInt16();
 
+      // @todo Only CMAP version 4 and 12
       if (($subtable["format"] != 4) && ($subtable["format"] != 12)) {
         unset($data["subtables"][$i]);
         $data["numberSubtables"]--;
@@ -72,9 +73,9 @@ class cmap extends Table {
 
         $subtable += $font->unpack(self::$subtable_v12_format);
 
-        $glyphIndexArray = [];
-        $endCodes = [];
-        $startCodes = [];
+        $glyphIndexArray = array();
+        $endCodes = array();
+        $startCodes = array();
 
         for ($p = 0; $p < $subtable['ngroups']; $p++) {
 
@@ -88,11 +89,11 @@ class cmap extends Table {
           }
         }
 
-        $subtable += [
+        $subtable += array(
           "startCode" => $startCodes,
           "endCode" => $endCodes,
           "glyphIndexArray" => $glyphIndexArray,
-        ];
+        );
 
       }
       else if ($subtable["format"] == 4) {
@@ -112,7 +113,7 @@ class cmap extends Table {
         $ro_start      = $font->pos();
         $idRangeOffset = $font->readUInt16Many($segCount);
 
-        $glyphIndexArray = [];
+        $glyphIndexArray = array();
         for ($i = 0; $i < $segCount; $i++) {
           $c1 = $startCode[$i];
           $c2 = $endCode[$i];
@@ -145,13 +146,13 @@ class cmap extends Table {
           }
         }
 
-        $subtable += [
+        $subtable += array(
           "endCode"         => $endCode,
           "startCode"       => $startCode,
           "idDelta"         => $idDelta,
           "idRangeOffset"   => $idRangeOffset,
           "glyphIndexArray" => $glyphIndexArray,
-        ];
+        );
       }
     }
 
@@ -164,7 +165,7 @@ class cmap extends Table {
     $subset          = $font->getSubset();
     $glyphIndexArray = $font->getUnicodeCharMap();
 
-    $newGlyphIndexArray = [];
+    $newGlyphIndexArray = array();
     foreach ($glyphIndexArray as $code => $gid) {
       $new_gid = array_search($gid, $subset);
       if ($new_gid !== false) {
@@ -174,7 +175,7 @@ class cmap extends Table {
 
     ksort($newGlyphIndexArray); // Sort by char code
 
-    $segments = [];
+    $segments = array();
 
     $i        = -1;
     $prevCode = 0xFFFF;
@@ -186,20 +187,20 @@ class cmap extends Table {
         $prevGid + 1 != $gid
       ) {
         $i++;
-        $segments[$i] = [];
+        $segments[$i] = array();
       }
 
-      $segments[$i][] = [$code, $gid];
+      $segments[$i][] = array($code, $gid);
 
       $prevCode = $code;
       $prevGid  = $gid;
     }
 
-    $segments[][] = [0xFFFF, 0xFFFF];
+    $segments[][] = array(0xFFFF, 0xFFFF);
 
-    $startCode = [];
-    $endCode   = [];
-    $idDelta   = [];
+    $startCode = array();
+    $endCode   = array();
+    $idDelta   = array();
 
     foreach ($segments as $codes) {
       $start = reset($codes);
@@ -222,8 +223,8 @@ class cmap extends Table {
     $searchRange *= 2;
     $rangeShift = $segCount * 2 - $searchRange;
 
-    $subtables = [
-      [
+    $subtables = array(
+      array(
         // header
         "platformID"         => 3, // Unicode
         "platformSpecificID" => 1,
@@ -243,14 +244,14 @@ class cmap extends Table {
         "idDelta"            => $idDelta,
         "idRangeOffset"      => $idRangeOffset,
         "glyphIndexArray"    => $newGlyphIndexArray,
-      ]
-    ];
+      )
+    );
 
-    $data = [
+    $data = array(
       "version"         => 0,
       "numberSubtables" => count($subtables),
       "subtables"       => $subtables,
-    ];
+    );
 
     $length = $font->pack(self::$header_format, $data);
 
@@ -270,12 +271,12 @@ class cmap extends Table {
       $length += $font->pack(self::$subtable_v4_format, $subtable);
 
       $segCount = $subtable["segCount"];
-      $length += $font->w([self::uint16, $segCount], $subtable["endCode"]);
+      $length += $font->w(array(self::uint16, $segCount), $subtable["endCode"]);
       $length += $font->writeUInt16(0); // reservedPad
-      $length += $font->w([self::uint16, $segCount], $subtable["startCode"]);
-      $length += $font->w([self::int16, $segCount], $subtable["idDelta"]);
-      $length += $font->w([self::uint16, $segCount], $subtable["idRangeOffset"]);
-      $length += $font->w([self::uint16, $segCount], array_values($subtable["glyphIndexArray"]));
+      $length += $font->w(array(self::uint16, $segCount), $subtable["startCode"]);
+      $length += $font->w(array(self::int16, $segCount), $subtable["idDelta"]);
+      $length += $font->w(array(self::uint16, $segCount), $subtable["idRangeOffset"]);
+      $length += $font->w(array(self::uint16, $segCount), array_values($subtable["glyphIndexArray"]));
 
       $after_subtable = $font->pos();
 

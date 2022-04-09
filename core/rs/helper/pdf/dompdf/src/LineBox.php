@@ -144,7 +144,7 @@ class LineBox
      */
     public function get_float_offsets()
     {
-        static $anti_infinite_loop = 10000;
+        static $anti_infinite_loop = 10000; // FIXME smelly hack
 
         $reflower = $this->_block_frame->get_reflower();
 

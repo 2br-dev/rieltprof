@@ -8,6 +8,7 @@
 
 namespace Main\Config;
 
+use RS\Application\Application;
 use RS\Http\Request as HttpRequest;
 use RS\Module\Exception as ModuleException;
 use RS\Orm\ConfigObject;
@@ -24,6 +25,15 @@ class File extends ConfigObject
     {
         parent::_init();
         $this->getPropertyIterator()->append([
+            t('Основные'),
+                'map_type' => new Type\Varchar([
+                    'description' => t('Тип используемой карты'),
+                    'hint' => t('Указанный тип карты будет использоваться в различных местах на сайте, в том числе во время оформления заказа при выборе ПВЗ'),
+                    'listFromArray' => [[
+                        'yandex' => t('Яндекс'),
+                        'google' => 'Google',
+                    ]],
+                ]),
             t('Изображения'),
                 'image_quality' => new Type\Integer([
                     'description' => t('Качество генерируемых фото (от 0 до 100). 100 - самое лучшее.'),
@@ -135,6 +145,10 @@ class File extends ConfigObject
                     ->setTemplate('%main%/form/config/yandex_help.tpl'),
                 'yandex_js_api_geocoder' => (new Type\Varchar())
                     ->setDescription(t('Ключ для "JavaScript API и HTTP Геокодера"')),
+            
+            t('Сервисы Google'),
+                'google_api_key_map' => (new Type\Varchar())
+                    ->setDescription(t('API ключ для Google карты')),
 
             t('Сервис DaData'),
                 'dadata_service_hint' => (new Type\ArrayList())
@@ -156,6 +170,12 @@ class File extends ConfigObject
                     ->setDescription(t('Разрешить удаленный доступ в административную панель технической поддержке ReadyScript'))
                     ->setHint(t('При обращении в поддержку, вам не нужно будет создавать и сообщать временный логин и пароль для сотрудников поддержки.'))
                     ->setCheckboxView(1, 0),
+
+            t('Канонические ссылки'),
+                'rel_canonical_class' => (new Type\Varchar())
+                    ->setDescription(t('Политика канонических ссылок'))
+                    ->setList(['Main\Model\RelCanonical\AbstractRelCanonical', 'getList'])
+                    ->setTemplate('%main%/form/config/field_rel_canonical_class.tpl'),
         ]);
 
         if (!function_exists('imagewebp')) {
@@ -211,5 +231,28 @@ class File extends ConfigObject
     {
         $user_agent = HttpRequest::commonInstance()->server('HTTP_USER_AGENT', TYPE_STRING);
         return (bool)preg_match('/Mac OS X/', $user_agent);
+    }
+
+    public function initMapJs()
+    {
+        $js_vars = [
+            'mapParams' => [
+                'map_type' => $this['map_type'],
+            ],
+        ];
+
+        switch ($this['map_type']) {
+            case 'yandex':
+                Application::getInstance()->addJs('%main%/rscomponent/yandexmap.js');
+                $js_vars['mapParams']['yandexJsApiGeocoder'] = $this['yandex_js_api_geocoder'];
+                break;
+            case 'google':
+                Application::getInstance()->addJs('%main%/rscomponent/googlemap.js');
+                $js_vars['mapParams']['googleApiKeyMap'] = $this['google_api_key_map'];
+                break;
+        }
+
+        Application::getInstance()->addJs('%main%/rscomponent/mapmanager.js');
+        Application::getInstance()->addJsVar($js_vars);
     }
 }

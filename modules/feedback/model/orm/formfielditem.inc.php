@@ -56,6 +56,7 @@ class FormFieldItem extends \RS\Orm\OrmObject
         $default; //По-умолчанию
 
     protected
+        $custom_class,
         $local_attr = [];
         
     /**
@@ -286,7 +287,7 @@ class FormFieldItem extends \RS\Orm\OrmObject
        if (strlen(trim($this->anwer_list))==0) return [];
 
        //разобьём на массив строку, по переносу строки
-       return explode("\n",$this->anwer_list);
+       return explode("\r\n",$this->anwer_list);
     }
 
     /**
@@ -335,10 +336,32 @@ class FormFieldItem extends \RS\Orm\OrmObject
         //Объединим с дополнительными параметрами
         $additional_attr = $this->getAdditionalAttributes();
         $attr = array_merge($attr, $additional_attr);
+        $attr = array_merge($attr, ['class' => ($attr['class'] ?? '').' '.$this->getCustomClass()]);
+
         foreach($attr as $key => $value) {
             $items[] = $key.'="'.$value.'"';
         }
 
         return implode(' ', $items);
+    }
+
+    /**
+     * Добавляет кастомный класс к полю
+     *
+     * @param string $class - кастомный класс
+     */
+    function setCustomClass ($class = '')
+    {
+        $this->custom_class = $class;
+    }
+
+    /**
+     * Возвращает установленный у поля кастомный класс
+     *
+     * @return string|null
+     */
+    function getCustomClass ()
+    {
+        return $this->custom_class;
     }
 }

@@ -3,7 +3,7 @@
     <defaultValues>    
         <name multilanguage="true">Уведомления</name>
         <description multilanguage="true">Отправка e-mail и sms уведомлений</description>        
-        <version>4.0.16</version>
+        <version>6.0.2</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         <sms_sender_class>smsuslugi</sms_sender_class>

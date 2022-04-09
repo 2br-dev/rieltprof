@@ -2,11 +2,9 @@
 
 namespace Sabberworm\CSS\Value;
 
-use Sabberworm\CSS\OutputFormat;
-
 class CSSFunction extends ValueList {
 
-	private $sName;
+	protected $sName;
 
 	public function __construct($sName, $aArguments, $sSeparator = ',', $iLineNo = 0) {
 		if($aArguments instanceof RuleValueList) {
@@ -31,10 +29,10 @@ class CSSFunction extends ValueList {
 	}
 
 	public function __toString() {
-		return $this->render(new OutputFormat());
+		return $this->render(new \Sabberworm\CSS\OutputFormat());
 	}
 
-	public function render(OutputFormat $oOutputFormat) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
 		$aArguments = parent::render($oOutputFormat);
 		return "{$this->sName}({$aArguments})";
 	}

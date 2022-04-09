@@ -100,7 +100,7 @@
             <br>
         </div>
     </form>
-    <script type="text/javascript">
+    <script>
 
           /**
           * Открытие и закрытие скрытых полей

@@ -6,12 +6,17 @@
 * @license http://readyscript.ru/licenseAgreement/
 */
 namespace ExternalApi\Model\ExternalApi\Oauth;
-use \ExternalApi\Model\Exception as ApiException;
-  
+
+use ExternalApi\Model\AbstractMethods\AbstractMethod;
+use ExternalApi\Model\Exception as ApiException;
+use ExternalApi\Model\TokenApi;
+use RS\Application\Auth;
+use RS\Site\Manager as SiteManager;
+
 /**
-* Авторизация.
+* Простая авторизация по логину и паролю.
 */
-class Token extends \ExternalApi\Model\AbstractMethods\AbstractMethod
+class Token extends AbstractMethod
 {        
     /**
     * Возвращает какими методами могут быть переданы параметры для данного метода API
@@ -23,10 +28,9 @@ class Token extends \ExternalApi\Model\AbstractMethods\AbstractMethod
         return [POST];
     }
     
-    
-    
+
     /**
-    * Метод позволяет авторизовать пользователя и получить авторизационный token.
+    * Однофакторная авторизация. Метод позволяет авторизовать пользователя и получить авторизационный token.
     * Token будет обладать набором прав, необходимых для работы приложения client_id.
     * Метод поддерживает прием параметров только методом POST.
     * 
@@ -110,35 +114,26 @@ class Token extends \ExternalApi\Model\AbstractMethods\AbstractMethod
             throw new ApiException(t('Приложения с таким client_id не существует или неверный client_secret'), ApiException::ERROR_BAD_CLIENT_SECRET_OR_ID);
         }
         
-        
-        
         //Авторизовываем пользователя
-        if ($user = \RS\Application\Auth::login($username, $password, false, false, true)) {
+        if ($user = Auth::login($username, $password, false, false, true)) {
             //Проверяем группу пользователя, соответствует ли она требованиям приложения
             if (!array_intersect($app->getAllowUserGroup(), $user->getUserGroups())) {
                 throw new ApiException(t('Пользователь не имеет права доступа к приложению'), ApiException::ERROR_APP_ACCESS_DENIED);
             }
             
-            $token = \ExternalApi\Model\TokenApi::createToken($user['id'], $client_id);
-            
-            $auth_user = \ExternalApi\Model\Utils::extractOrm($user);
-            $auth_user['fio']        = $user->getFio();
-            $auth_user['groups']     = $user->getUserGroups();
-            
+            $token = TokenApi::createToken($user['id'], $client_id);
+
             return [
                 'response' => [
-                    'auth' => [
-                        'token' => $token['token'],
-                        'expire' => $token['expire'],
-                    ],
-                    'user' => $auth_user,
-                    'site_uid' => \RS\Site\Manager::getSite()->getSiteHash()
+                    'auth' => Login::makeResponseAuthTokenData($token),
+                    'user' => Login::makeResponseUserData($user),
+                    'site_uid' => SiteManager::getSite()->getSiteHash()
                 ]
             ];
             
         } else {
             //Возвращаем ошибку
-            throw new ApiException(t(\RS\Application\Auth::getError()), ApiException::ERROR_BAD_AUTHORIZATION);
+            throw new ApiException(Auth::getError(), ApiException::ERROR_BAD_AUTHORIZATION);
         }   
     }    
 }

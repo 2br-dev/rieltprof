@@ -27,7 +27,7 @@ class View extends \RS\Controller\Admin\Block
         $items = $this->api->getAdminMenu();
 
         $this->view->assign('items', $items);
-        return $this->view->fetch('adminmenu.tpl');
+        return $this->view->fetch('admin/adminmenu.tpl');
     }    
 }
 

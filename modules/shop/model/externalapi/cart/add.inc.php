@@ -7,9 +7,11 @@
 */
 namespace Shop\Model\ExternalApi\Cart;
 
+use Catalog\Model\Orm\Offer;
 use ExternalApi\Model\AbstractMethods\AbstractMethod;
 use RS\Exception as RSException;
 use RS\Orm\Exception as OrmException;
+use RS\Orm\Request;
 use Shop\Model\Cart;
 
 /**
@@ -43,14 +45,14 @@ class Add extends AbstractMethod
     /**
      * Добавляет товар в корзину и возвращает корзину пользователя со всеми сведениями
      *
-     * @param string $token Авторизационный токен
      * @param string $id id товара для добавления
-     *
-     * @param int $amount
-     * @param int $offer
-     * @param array $multioffers
-     * @param array $concomitants
-     * @param array $concomitants_amount
+     * @param int $amount количество товара
+     * @param int $offer Порядковый номер комплектации (устаревший параметр). Если передан, то offer_id не учитывается
+     * @param int $offer_id ID комплектации.
+     * @param array $multioffers Массив с многомерными комплектациями
+     * @param array $concomitants Массив с ID сопутствующих товаров
+     * @param array $concomitants_amount Массив с количеством сопутствующих товаров
+     * @param string $token Авторизационный токен
      * @return array Возвращает список со сведения об элементах в корзине
      * @throws RSException
      * @throws OrmException
@@ -152,13 +154,39 @@ class Add extends AbstractMethod
      * </pre>
      *
      */
-    protected function process($token = null, $id, $amount = 1, $offer = 0, $multioffers = [], $concomitants = [], $concomitants_amount = [])
+    protected function process($id, $amount = 1, $offer = null, $offer_id = null, $multioffers = [], $concomitants = [], $concomitants_amount = [], $token = null)
     {
-        Cart::currentCart()->addProduct($id, $amount, $offer, $multioffers, $concomitants, $concomitants_amount, null, self::CART_SOURCE_API_SHOP_CART_ADD);
+        if ($offer !== null) {
+            $offer_id = $this->convertOfferIndexToId($id, $offer);
+        }
+
+        Cart::currentCart()->addProduct($id, $amount, $offer_id, $multioffers, $concomitants, $concomitants_amount, null, self::CART_SOURCE_API_SHOP_CART_ADD);
         
         $api = new \Shop\Model\ApiUtils();
         $response['response']['cartdata'] = $api->fillProductItemsData();
 
         return $response;
+    }
+
+    /**
+     * Конвертирует порядковый номер комплектации в ID комплектации.
+     * Необходимо для совместимости со старыми мобильными приложениями
+     *
+     * @param integer $product_id ID Товара
+     * @param integer $offer номер комплектации
+     * @return mixed
+     */
+    private function convertOfferIndexToId($product_id, $offer)
+    {
+        $offer_id = Request::make()
+            ->select('id')
+            ->from(new Offer())
+            ->where([
+                'product_id' => $product_id
+            ])
+            ->orderby('sortn')
+            ->limit($offer, 1)->exec()->getOneField('id', 0);
+
+        return $offer_id;
     }
 }

@@ -135,7 +135,14 @@ class PresetApi extends BaseModel
             $zip_file   = $zip_folder."data.zip";
             \RS\File\Tools::makePath($zip_file, true);
 
-            if (@copy($response['file'], $zip_file)){
+            $context = stream_context_create([
+                'ssl' => [
+                    'verify_peer'=> false,
+                    'verify_peer_name'=> false,
+                ]
+            ]);
+
+            if (@copy($response['file'], $zip_file, $context)){
                 $zip = new \ZipArchive();
 
                 if ($zip->open($zip_file) === TRUE) {

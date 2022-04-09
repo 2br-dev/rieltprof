@@ -14,13 +14,13 @@ namespace FontLib\TrueType;
  * @package php-font-lib
  */
 class Header extends \FontLib\Header {
-  protected $def = [
+  protected $def = array(
     "format"        => self::uint32,
     "numTables"     => self::uint16,
     "searchRange"   => self::uint16,
     "entrySelector" => self::uint16,
     "rangeShift"    => self::uint16,
-  ];
+  );
 
   public function parse() {
     parent::parse();

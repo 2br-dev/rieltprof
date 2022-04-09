@@ -28,15 +28,18 @@ class Product extends \RS\Csv\AbstractSchema
         $this->catalog_config = \RS\Config\Loader::byModule('catalog');
 
         $exclude = [
-            'id', 'site_id', 'processed', 'brand_id', 'unit', 'recommended', 'maindir', 'concomitant',
+            'id', 'site_id', 'processed', 'brand_id', 'unit', 'recommended', 'maindir', 'concomitant', 'offers_json'
         ];
         $exclude_if_inventory_control_on = [
             'num', 'reserve', 'waiting', 'writeoff',
         ];
 
+        $product = new Orm\Product();
+        $product->setFlag(Orm\Product::FLAG_DONT_UPDATE_DIR_COUNTER);
+
         parent::__construct(
             new Preset\Base([
-                'ormObject' => new Orm\Product(),
+                'ormObject' => $product,
                 'excludeFields' => $this->catalog_config['inventory_control_enable'] ? array_merge($exclude, $exclude_if_inventory_control_on) : $exclude,
                 'savedRequest' => \Catalog\Model\Api::getSavedRequest('Catalog\Controller\Admin\Ctrl_list'), //Объект запроса из сессии с параметрами текущего просмотра списка
                 'multisite' => true,
@@ -187,7 +190,6 @@ class Product extends \RS\Csv\AbstractSchema
         /** @var Orm\Product $product */
         $product = $_this->getPreset(0)->loadObject();
         if ($product){
-            $product->setFlag(Orm\Product::FLAG_DONT_UPDATE_DIR_COUNTER);
             $product->fillCost();
             if (isset($product['excost'])) {  
                 $row['excost'] = $product['excost'];

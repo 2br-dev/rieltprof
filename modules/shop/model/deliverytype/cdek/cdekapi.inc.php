@@ -20,9 +20,9 @@ use RS\Router\Manager as RouterManager;
 use Shop\Model\Cart;
 use Shop\Model\DeliveryType\Cdek2;
 use Shop\Model\DeliveryType\Helper\Pvz;
+use Shop\Model\Exception;
 use Shop\Model\Exception as ShopException;
 use Shop\Model\Log\LogDeliveryCdek;
-use Shop\Model\Orm\AbstractCartItem;
 use Shop\Model\Orm\Address;
 use Shop\Model\Orm\Delivery\CdekRegion;
 use Shop\Model\Orm\DeliveryOrder;
@@ -30,11 +30,12 @@ use Shop\Model\Orm\Order;
 use Shop\Model\Orm\OrderItem;
 use Shop\Model\Orm\Region;
 use Shop\Model\Orm\Tax;
+use Shop\Model\PaymentType\AbstractType;
 use Shop\Model\TaxApi;
 
 class CdekApi
 {
-    const DEVELOPER_KEY = "522d9ea0ad70744c58fd8d9ffae01fc1"; // Передаётся в некоторых запросах. Выдан СДЭК-ом 28.09.2017.
+    const DEVELOPER_KEY = 'r5$E7UPuZG:%X$r0j8N-5bUR~go$mKFr'; // Передаётся в некоторых запросах. Выдан СДЭК-ом 28.09.2017.
     const URL = "https://api.cdek.ru/v2/";
     const TEST_URL = 'https://api.edu.cdek.ru/v2/';
     const EXTERNAL_REQUEST_SOURCE_ID = 'delivery_cdek_api';
@@ -228,6 +229,11 @@ class CdekApi
             'packages' => $this->getOrderPackages($order),
         ];
 
+        if ($user['is_company']) {
+            $params['recipient']['company'] = $user['company'];
+            $params['recipient']['tin'] = $user['company_inn'];
+        }
+
         $cash_on_delivery = 0;
         if (!empty($order['payment'])) {
             if ($payment_type->cashOnDelivery()) {
@@ -388,6 +394,11 @@ class CdekApi
             ],
         ];
         $response = $this->apiRequest(ExternalRequest::METHOD_POST, 'print/orders', $params, LogDeliveryCdek::LEVEL_ORDER);
+        if (!$response) {
+            throw new ShopException(t('Не удалось выполнить запрос'));
+        } elseif (isset($response['error'])) {
+            throw new ShopException($response['error']);
+        }
         return $response['entity']['uuid'];
     }
 
@@ -573,9 +584,105 @@ class CdekApi
      */
     protected function getOrderPackages(Order $order): array
     {
+        $cargos = $order->getCargos();
+        if ($cargos) {
+            return $this->getOrderPackagesByCargo($order);
+        } else {
+            return $this->getOrderPackagesDefault($order);
+        }
+    }
+
+    /**
+     * Рассчитывает грузовые места, исходя из указанных пользоателем грузовых мест в заказе
+     *
+     * @param Order $order
+     * @return array
+     */
+    protected function getOrderPackagesByCargo(Order $order):array
+    {
         $payment_type = $order->getPayment()->getTypeObject();
         $delivery_type = $this->getTypeObject();
 
+        $packages = [];
+        foreach($order->getCargos() as $cargo) {
+            $package = [
+                'number' => $order['order_num'].'-'.$cargo['id'],
+                'comment' => $cargo['title'],
+                'weight' => $cargo->getTotalWeight(),
+                'length' => (int)($cargo['dept'] / 10),
+                'width' => (int)($cargo['width'] / 10),
+                'height' => (int)($cargo['height'] / 10),
+                'items' => []
+            ];
+
+            foreach($cargo->getCargoItems() as $cargo_item) {
+                $order_item = $cargo_item->getOrderItem();
+                if ($order_item) {
+                    $package['items'][] = [
+                        'marking' => $cargo_item->getUit()->asHex(),
+                    ] + $this->getOrderPackageItemData(
+                            $order,
+                            $payment_type,
+                            $delivery_type,
+                            $order_item,
+                            (int)$cargo_item['amount']
+                        );
+                }
+            }
+            $packages[] = $package;
+        }
+
+        return $packages;
+    }
+
+    /**
+     * Рассчитывает грузовые места по старому, когда еще не было грузовых мест в ReadyScript.
+     * Добавляет все товары в одну коробку и примерно рассчитывает ее возможные габариты
+     *
+     * @param Order $order
+     * @return array
+     * @throws RSException
+     */
+    protected function getOrderPackagesDefault(Order $order): array
+    {
+        $payment_type = $order->getPayment()->getTypeObject();
+        $delivery_type = $this->getTypeObject();
+
+        $package = $this->calculatePackageParams($order->getCart());
+        $package['number'] = $order['order_num'];
+        $i=0;
+        foreach ($order->getCart()->getProductItems() as $n => $item) {
+            /** @var OrderItem $product */
+            $cart_item = $item[Cart::CART_ITEM_KEY];
+
+            $package['items'][] = [
+                'marking' => '',
+            ] + $this->getOrderPackageItemData(
+                    $order,
+                    $payment_type,
+                    $delivery_type,
+                    $cart_item,
+                    (int)$cart_item['amount']
+                );
+
+
+            $i++;
+        }
+        return [$package];
+    }
+
+    /**
+     * Формирует сведения об одном товаре, передаваемые в СДЭК
+     *
+     * @param Order $order
+     * @param \Shop\Model\PaymentType\AbstractType  $payment_type
+     * @param \Shop\Model\DeliveryType\AbstractType $delivery_type
+     * @param OrderItem $order_item
+     * @param Float $amount
+     * @return array
+     */
+    protected function getOrderPackageItemData($order, $payment_type, $delivery_type, $order_item, $amount)
+    {
         $cash_on_delivery = 0;
         if (!empty($order['payment'])) {
             if ($payment_type->cashOnDelivery()) {
@@ -585,102 +692,29 @@ class CdekApi
             $cash_on_delivery = $delivery_type->getOption('default_cash_on_delivery');
         }
         $decrease_declared_cost = $delivery_type->getOption('decrease_declared_cost');
+        $product = $order_item->getEntity();
 
-        //Упаковка с товарами
-        $products = $order->getCart()->getProductItems();
+        $item_title = $order_item['title'];
+        $offer_title = $product->getOfferTitle($order_item['offer']);
+        if ($offer_title && $offer_title != $item_title) {
+            $item_title .= " [$offer_title]";
+        }
 
-        $package = [
-            'number' => $order['order_num'],
+        $single_cost = ($order_item['price'] - $order_item['discount']) / $order_item['amount'];
+        $item_weight = $product->getWeight($order_item['offer'], ProductApi::WEIGHT_UNIT_G) * $amount;
+        return [
+            'name' => $item_title,
+            'ware_key' => $product->getBarCode($order_item['offer']) ?: $product['id'],
+            'payment' => [
+                'value' => $cash_on_delivery ? $single_cost : 0,
+            ],
+            'cost' => ($decrease_declared_cost) ? 0 : $single_cost,
+            'weight' => $item_weight,
+            'amount' => $amount,
+            'url' => $product->getUrl(true),
         ];
-
-        $order_weight = 0;
-        $i=0;
-        $max_sizes = [0, 0, 0];
-        $secondary_max_sizes = [0, 0, 0];
-        $volume = 0;
-        $many_items = count($products) > 1;
-        foreach ($products as $n => $item) {
-            /** @var OrderItem $product */
-            $cart_item = $item[Cart::CART_ITEM_KEY];
-            /** @var Product $product */
-            $product = $cart_item->getEntity();
-
-            $item_title = $cart_item['title'];
-            $offer_title = $product->getOfferTitle($cart_item['offer']);
-            if ($offer_title && $offer_title != $item_title) {
-                $item_title .= " [$offer_title]";
-            }
-            $item_weight = $product->getWeight($cart_item['offer'], ProductApi::WEIGHT_UNIT_G) * $cart_item['amount'];
-
-            $package['items'][] = [
-                'name' => $item_title,
-                'ware_key' => $product->getBarCode($cart_item['offer']) ?: $product['id'],
-                'marking' => '',
-                'payment' => [
-                    'value' => $cash_on_delivery ? round(($cart_item['price'] - $cart_item['discount']) / $cart_item['amount'], 2) : 0,
-                ],
-                'cost' => ($decrease_declared_cost) ? 0 : $cart_item['single_cost'],
-                'weight' => $item_weight,
-                'amount' => $cart_item['amount'],
-                'url' => $product->getUrl(true),
-            ];
-
-            $order_weight += $item_weight;
-
-            $dimensions_object = $product->getDimensionsObject();
-            $length = $dimensions_object->getLength(ProductDimensions::DIMENSION_UNIT_SM);
-            $width = $dimensions_object->getWidth(ProductDimensions::DIMENSION_UNIT_SM);
-            $height = $dimensions_object->getHeight(ProductDimensions::DIMENSION_UNIT_SM);
-            $sizes = [$length, $width, $height];
-            rsort($sizes);
-            foreach ($max_sizes as $key => $value) {
-                if ($sizes[$key] > $value) {
-                    $secondary_max_sizes[$key] = ($item['cartitem']['amount'] > 1) ? $sizes[$key] : $max_sizes[$key];
-                    $max_sizes[$key] = $sizes[$key];
-                }
-            }
-            $volume += $dimensions_object->getVolume(ProductDimensions::DIMENSION_UNIT_SM) * $item['cartitem']['amount'];
-            if ($item['cartitem']['amount'] > 1) {
-                $many_items = true;
-            }
-
-            $i++;
-        }
-
-        $package['weight'] = $order_weight;
-
-        if ($many_items) {
-            $max_sizes[2] = $max_sizes[2] + $secondary_max_sizes[2];
-            rsort($max_sizes);
-            $root3 = pow($volume, 1 / 3);
-            if ($max_sizes[0] > $root3) {
-                $size_a = $max_sizes[0];
-                $volume_left = $volume / $size_a;
-                $root2 = sqrt($volume_left);
-                if ($max_sizes[1] > $root2) {
-                    $size_b = $max_sizes[1];
-                    $size_c = $volume_left / $size_b;
-                } else {
-                    $size_b = $root2;
-                    $size_c = $root2;
-                }
-            } else {
-                $size_a = $root3;
-                $size_b = $root3;
-                $size_c = $root3;
-            }
-        } else {
-            $size_a = $max_sizes[0];
-            $size_b = $max_sizes[1];
-            $size_c = $max_sizes[2];
-        }
-
-        $package['length'] = ceil($size_a);
-        $package['width'] = ceil($size_b);
-        $package['height'] = ceil($size_c);
-
-        return [$package];
     }
+
 
     /**
      * Возвращает данные места отправки заказа
@@ -796,6 +830,75 @@ class CdekApi
     }
 
     /**
+     * Возвращает стоимость доставки
+     *
+     * @param Order $order - объект заказа
+     * @param array $services - список дополнительных услуг
+     * @return float
+     * @throws RSException
+     * @throws ShopException
+     */
+    public function calculateDeliverySum(Order $order, array $services): float
+    {
+        static $cache = [];
+
+        $this->log->write(t('Начало калькуляции суммы доставки'), LogDeliveryCdek::LEVEL_CALCULATE);
+
+        $calculation = $this->getPriorityTariff($order);
+        $tariff_code = $calculation['tariff_code'];
+
+        $services_param = [];
+        foreach ($services as $service_code) {
+            $services_param[] = ['code' => $service_code];
+        }
+
+        try {
+            if (!$this->getAddressFrom()) {
+                throw new ShopException(t('Не указан город-отправитель'), ShopException::ERR_DELIVERY_CHECK_DATA_FAIL);
+            }
+
+            if (!$from_location = $this->findLocationIdByAddress($this->getAddressFrom())) {
+                throw new ShopException(t('Город отправки не найден в справочнике'));
+            }
+            if (!$to_location = $this->findLocationIdByAddress($order->getAddress())) {
+                throw new ShopException(t('Город доставки не найден в справочнике'));
+            }
+
+            $params = [
+                'tariff_code' => $tariff_code,
+                'from_location' => [
+                    'code' => $from_location,
+                ],
+                'to_location' => [
+                    'code' => $to_location,
+                ],
+                'services' => $services_param,
+                'packages' => [$this->calculatePackageParams($order->getCart())],
+            ];
+
+            $cache_key = md5(serialize($params));
+
+            if (isset($cache[$cache_key])) {
+                $this->log->write(t('Результат калькуляции взят из кэша') . "\n" . var_export($cache[$cache_key], true), LogDeliveryCdek::LEVEL_CALCULATE);
+            } else {
+                $params['date'] = date('Y-m-d\TH:i:sO', time() + ($this->getDaysBeforeSend() * 86400));
+
+                $response = $this->apiRequest(ExternalRequest::METHOD_POST, 'calculator/tariff', $params, LogDeliveryCdek::LEVEL_CALCULATE, true);
+                $cache[$cache_key] = $response;
+            }
+
+            if (isset($cache[$cache_key]['total_sum'])) {
+                return $cache[$cache_key]['total_sum'];
+            } else {
+                throw new ShopException(t('Отсутствует параметр total_sum в ответе СДЭК'));
+            }
+        } catch (ShopException $e) {
+            $this->log->write(t('[Ошибка] ') . $e->getMessage(), LogDeliveryCdek::LEVEL_CALCULATE);
+            throw $e;
+        }
+    }
+
+    /**
      * Возвращает список возможных тарифов доставки заказа
      *
      * @param Order $order - объект заказа
@@ -828,28 +931,13 @@ class CdekApi
                 'to_location' => [
                     'code' => $to_location,
                 ],
+                'packages' => [$this->calculatePackageParams($order->getCart())],
             ];
-
-            foreach ($order->getCart()->getProductItems() as $item) {
-                /** @var AbstractCartItem $cart_item */
-                $cart_item = $item[Cart::CART_ITEM_KEY];
-                $product = $cart_item->getEntity();
-                $dimensions = $product->getDimensionsObject();
-
-                for ($i = 0; $i < $cart_item['amount']; $i++) {
-                    $params['packages'][] = [
-                        'weight' => $product->getWeight($cart_item['offer'], ProductApi::WEIGHT_UNIT_G),
-                        'length' => $dimensions->getLength(ProductDimensions::DIMENSION_UNIT_SM),
-                        'height' => $dimensions->getHeight(ProductDimensions::DIMENSION_UNIT_SM),
-                        'width' => $dimensions->getWidth(ProductDimensions::DIMENSION_UNIT_SM),
-                    ];
-                }
-            }
 
             $cache_key = md5(serialize($params));
 
             if (isset($cache[$cache_key])) {
-                $this->log->write(t('Результат калькуляции взят из кэша'), LogDeliveryCdek::LEVEL_CALCULATE);
+                $this->log->write(t('Результат калькуляции взят из кэша') . "\n" . var_export($cache[$cache_key], true), LogDeliveryCdek::LEVEL_CALCULATE);
             } else {
                 $params['date'] = date('Y-m-d\TH:i:sO', time() + ($this->getDaysBeforeSend() * 86400));
 
@@ -862,6 +950,99 @@ class CdekApi
             $this->log->write(t('[Ошибка] ') . $e->getMessage(), LogDeliveryCdek::LEVEL_CALCULATE);
             throw $e;
         }
+    }
+
+    /**
+     * Рассчитывает суммарные габариты вес упаковки для указанной корзины товаров
+     *
+     * @param Cart $cart - корзина заказа
+     * @return array
+     * @throws RSException
+     * @throws ShopException
+     */
+    protected function calculatePackageParams(Cart $cart)
+    {
+        $products = $cart->getProductItems();
+
+        $order_weight = 0;
+        $i=0;
+        $max_sizes = [0, 0, 0];
+        $secondary_max_sizes = [0, 0, 0];
+        $volume = 0;
+        $many_items = count($products) > 1;
+        foreach ($products as $n => $item) {
+            /** @var OrderItem $product */
+            $cart_item = $item[Cart::CART_ITEM_KEY];
+            /** @var Product $product */
+            $product = $cart_item->getEntity();
+
+            $item_weight = $product->getWeight($cart_item['offer'], ProductApi::WEIGHT_UNIT_G) * $cart_item['amount'];
+            $order_weight += $item_weight;
+
+            $dimensions_object = $product->getDimensionsObject();
+            $length = $dimensions_object->getLength(ProductDimensions::DIMENSION_UNIT_SM);
+            $width = $dimensions_object->getWidth(ProductDimensions::DIMENSION_UNIT_SM);
+            $height = $dimensions_object->getHeight(ProductDimensions::DIMENSION_UNIT_SM);
+            $sizes = [$length, $width, $height];
+            rsort($sizes);
+            foreach ($max_sizes as $key => $value) {
+                if ($sizes[$key] > $value) {
+                    $secondary_max_sizes[$key] = ($item['cartitem']['amount'] > 1) ? $sizes[$key] : $max_sizes[$key];
+                    $max_sizes[$key] = $sizes[$key];
+                }
+            }
+            $volume += $dimensions_object->getVolume(ProductDimensions::DIMENSION_UNIT_SM) * $item['cartitem']['amount'];
+            if ($item['cartitem']['amount'] > 1) {
+                $many_items = true;
+            }
+
+            $i++;
+        }
+
+        if ($many_items) {
+            $max_sizes[2] = $max_sizes[2] + $secondary_max_sizes[2];
+            rsort($max_sizes);
+            $root3 = pow($volume, 1 / 3);
+            if ($max_sizes[0] > $root3) {
+                $size_a = $max_sizes[0];
+                $volume_left = $volume / $size_a;
+                $root2 = sqrt($volume_left);
+                if ($max_sizes[1] > $root2) {
+                    $size_b = $max_sizes[1];
+                    $size_c = $volume_left / $size_b;
+                } else {
+                    $size_b = $root2;
+                    $size_c = $root2;
+                }
+            } else {
+                $size_a = $root3;
+                $size_b = $root3;
+                $size_c = $root3;
+            }
+        } else {
+            $size_a = ceil($max_sizes[0]);
+            $size_b = ceil($max_sizes[1]);
+            $size_c = ceil($max_sizes[2]);
+        }
+
+        $length = ceil($size_a);
+        $width = ceil($size_b);
+        $height = ceil($size_c);
+
+        if (!$order_weight) {
+            throw new ShopException(t('Упаковка заказа имеет нулевой вес'));
+        }
+        if (!$length || !$width || !$height) {
+            throw new ShopException(t('Упаковка заказа имеет нулевые габариты'));
+        }
+
+        $result = [
+            'weight' => (int)$order_weight,
+            'length' => (int)$length,
+            'width' => (int)$width,
+            'height' => (int)$height,
+        ];
+        return $result;
     }
 
     /**
@@ -920,21 +1101,6 @@ class CdekApi
         }
 
         return $cache[$cache_key];
-    }
-
-    /**
-     * Возвращает загружен ли список регионов СДЭК
-     *
-     * @return bool
-     */
-    public function isCdekRegionsLoaded()
-    {
-        $count = (new OrmRequest())
-            ->select('count(code) count')
-            ->from(CdekRegion::_getTable())
-            ->exec()->getOneField('count');
-
-        return (bool)$count;
     }
 
     /**
@@ -1010,22 +1176,26 @@ class CdekApi
         if (!empty($region_list)) {
             $values = [];
             foreach ($region_list as $region) {
-                $values[] = [
-                    'code' => $region['code'],
-                    'city' => $region['city'] ?? '',
-                    'fias_guid' => $region['fias_guid'] ?? '',
-                    'kladr_code' => $region['kladr_code'] ?? '',
-                    'country' => $region['country'] ?? '',
-                    'region' => $region['region'] ?? '',
-                    'sub_region' => $region['sub_region'] ?? '',
-                    'processed' => 1,
-                ];
+                if (isset($region['code'])) {
+                    $values[] = [
+                        'code' => $region['code'],
+                        'city' => $region['city'] ?? '',
+                        'fias_guid' => $region['fias_guid'] ?? '',
+                        'kladr_code' => $region['kladr_code'] ?? '',
+                        'country' => $region['country'] ?? '',
+                        'region' => $region['region'] ?? '',
+                        'sub_region' => $region['sub_region'] ?? '',
+                        'processed' => 1,
+                    ];
+                }
             }
 
-            (new OrmRequest())
-                ->insert(CdekRegion::_getTable(), ['code', 'city', 'fias_guid', 'kladr_code', 'country', 'region', 'sub_region', 'processed'], ['code', 'fias_guid', 'kladr_code', 'processed'])
-                ->values($values, true)
-                ->exec();
+            if ($values) {
+                (new OrmRequest())
+                    ->insert(CdekRegion::_getTable(), ['code', 'city', 'fias_guid', 'kladr_code', 'country', 'region', 'sub_region', 'processed'], ['code', 'fias_guid', 'kladr_code', 'processed'])
+                    ->values($values, true)
+                    ->exec();
+            }
         }
 
         return count($region_list);

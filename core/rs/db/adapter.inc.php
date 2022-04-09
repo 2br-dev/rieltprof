@@ -34,15 +34,6 @@ class Adapter
                 $str = "-------- Page: ".@$_SERVER['HTTP_HOST'].@$_SERVER['REQUEST_URI'];
                 self::$log->write($str, LogDbAdapter::LEVEL_INFO);
             }
-
-            //Устанавливаем часовой пояс для Mysql 
-            $time = new \DateTime('now', new \DateTimeZone(\Setup::$TIMEZONE));
-            self::sqlExec("SET time_zone = '#time_zone'", [
-                'time_zone' => $time->format('P')
-            ]);
-            
-            //Устанавливаем не строгий режим MYSQL
-            self::sqlExec("SET sql_mode = ''");
         }
     }
     
@@ -59,7 +50,16 @@ class Adapter
             \Setup::$DB_SOCKET);
 
         if(self::$connection){
-            self::sqlExec("SET names utf8");
+            self::sqlExec("SET names ".\Setup::$DB_TABLE_CHARSET);
+
+            //Устанавливаем не строгий режим MYSQL
+            self::sqlExec("SET sql_mode = ''");
+
+            //Устанавливаем часовой пояс для Mysql
+            $time = new \DateTime('now', new \DateTimeZone(\Setup::$TIMEZONE));
+            self::sqlExec("SET time_zone = '#time_zone'", [
+                'time_zone' => $time->format('P')
+            ]);
         }
 
         return self::$connection;

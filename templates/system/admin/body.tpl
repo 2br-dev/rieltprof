@@ -7,7 +7,7 @@
 {addjs file="jquery.rs.barcode.js"}
 
 {addcss file="flatadmin/readyscript.ui/jquery-ui.css" basepath="common"}
-{addcss file="flatadmin/app.css?v=2" basepath="common" no_compress=true}
+{addcss file="flatadmin/app.css?v=3" basepath="common" no_compress=true}
 {addcss file="flatadmin/iconic-font/css/material-design-iconic-font.min.css" basepath="common"}
 {addcss file="common/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" basepath="common"}
 {addcss file="common/tour.css" basepath="common"}
@@ -49,7 +49,7 @@
                     </a>
 
                     <a href="{$router->getUrl('main.admin', ["Act" => "cleanCache"])}" class="rs-clean-cache">
-                        <i class="rs-icon rs-icon-refresh"></i><br>
+                        <i class="rs-icon rs-icon-refresh"><!----></i><br>
                         <span>{t}кэш{/t}</span>
                     </a>
                 </div>

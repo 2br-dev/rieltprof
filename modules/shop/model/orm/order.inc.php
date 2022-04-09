@@ -33,6 +33,8 @@ use Shop\Model\CashRegisterApi;
 use Shop\Model\DeliveryApi;
 use Shop\Model\DeliveryType\Helper\Pvz;
 use Shop\Model\OnlinePayApi;
+use Shop\Model\Orm\Cargo\OrderCargo;
+use Shop\Model\Orm\Cargo\OrderCargoItem;
 use Shop\Model\PaymentType\InterfaceRecurringPayments;
 use Shop\Model\PrintForm\AbstractPrintForm;
 use Shop\Model\ReceiptApi;
@@ -135,6 +137,19 @@ use Shop\Model\UserStatusApi;
  * @property integer $is_mobile_checkout Оформлен через мобильное приложение?
  * @property integer $register_user Зарегистрировать пользователя
  * @property array $regfields Дополнительные сведения
+ * @property integer $true_weight Фактический вес заказа в граммах
+ * @property integer $partner_id ID партнера
+ * @property integer $retailcrm_id Какому заказу соответствует в RetailCRM
+ * @property integer $is_exported_to_retailcrm Заказ экспортирован в RetailCRM
+ * @property integer $retailcrm_payment_id ID способа оплаты для заказа в RetailCRM
+ * @property integer $source_id Источник перехода пользователя
+ * @property string $utm_source Рекламная система UTM_SOURCE
+ * @property string $utm_medium Тип трафика UTM_MEDIUM
+ * @property string $utm_campaign Рекламная кампания UTM_COMPAING
+ * @property string $utm_term Ключевое слово UTM_TERM
+ * @property string $utm_content Различия UTM_CONTENT
+ * @property string $utm_dateof Дата события
+ * @property integer $id_yandex_market_cpa_order ID заказа в Яндекс.маркете
  * --\--
  */
 class Order extends OrmObject
@@ -151,6 +166,10 @@ class Order extends OrmObject
     const SPECIAL_CHECKOUT_FORBID_VALIDATE = 'checkout_forbid_validate';
     const SPECIAL_DISABLE_CHECK_QUANTITY = 'checkout_disable_check_quantity';
 
+    const PRODUCT_IN_CARGO_STATUS_NONE = 'none'; //Тоар не распределен по коробкам
+    const PRODUCT_IN_CARGO_STATUS_PARTIALLY = 'partially'; //Товар частично распределен по коробкам
+    const PRODUCT_IN_CARGO_STATUS_FULLY = 'fully'; //Товар полностью распределен по коробкам
+
     protected static $table = 'order';
         
     protected $use_generated_order_num = null; //Флаг использовать уникальный номер заказа
@@ -158,6 +177,7 @@ class Order extends OrmObject
     protected $cache_weigth = []; // кэшированный вес
     protected $refresh_mode = false;
     protected $my_currency;
+    protected $cargos;
 
     /** @var Address $address */
     public $address;
@@ -338,6 +358,9 @@ class Order extends OrmObject
                     'description' => t('Трек-номер'),
                     'deliveryVisible' => true,
                     'meVisible' => false,
+                    'attr' => [[
+                        'autocomplete' => 'off',
+                    ]],
                 ]),
                 'saved_payment_method_id' => (new Type\Integer())
                     ->setDescription(t('Выбранный "сохранённый метод оплаты"'))
@@ -662,14 +685,6 @@ class Order extends OrmObject
                 'List' => [['\Shop\Model\DeliveryApi', 'staticSelectList']],
                 'meVisible' => false,
             ]),
-            // todo поле deliverycost закомментировано по подозрению в неиспользуемости (20.10), если ошибока не появится - удалить
-            /*'deliverycost' => new Type\Decimal(array(
-                'maxLength' => '15',
-                'decimal' => 2,
-                'description' => t('Стоимость доставки'),
-                'condition' => array('step' => 'delivery'),
-                'meVisible' => false,
-            )),*/
             'courier_id' => new Type\Integer([
                 'description' => t('Курьер'),
                 'allowEmpty' => false,
@@ -850,7 +865,6 @@ class Order extends OrmObject
         }
     }
 
-
     /**
      * Функция срабатывает перед записью заказа
      *
@@ -863,7 +877,7 @@ class Order extends OrmObject
         $this->this_before_write = new Order($this['id'], false);
 
         if ($this['delivery']) {
-            $this->getDelivery()->getTypeObject()->beforeOrderWrite($this);
+            $this->getDelivery()->getTypeObject()->beforeOrderWrite($this, $flag);
         }
 
         $cart = $this->getCart();
@@ -936,7 +950,7 @@ class Order extends OrmObject
                 }
             }
         }
-        
+
         if ($flag == self::UPDATE_FLAG) { //При обновлении заказа 
             //Подгрузим данные для дальнейшей сверки с новыми
             //Прежняя корзина
@@ -1004,6 +1018,7 @@ class Order extends OrmObject
 
         //Выполняем действия с доставками и оплатами, если у этого типа доставок и оплат поддерживаются такие действия и включён флаг на разрешение
         if ($this['delivery_new_query']) { //Если доставке нужно делать запрос при создании или редактировании заказа
+            unset($this['delivery_new_query']);
             $delivery_type = $this->getDelivery()->getTypeObject();
             $delivery_type->onOrderCreate($this, $this->getAddress());
         }
@@ -1013,6 +1028,7 @@ class Order extends OrmObject
         if ($this['payment_new_query']) { //Если оплате нужно делать запрос при создании или редактировании заказа
             $payment_type = $payment->getTypeObject();
             $payment_type->onOrderCreate($this, $this->getAddress());
+            unset($this['payment_new_query']);
         }
 
         //Отправим уведомления
@@ -1346,15 +1362,16 @@ class Order extends OrmObject
     */
     function getFieldsManager()
     {
-        $order_fields_manager  = ConfigLoader::byModule($this)->getUserFieldsManager();
-        $order_fields_manager->setErrorPrefix('orderfield_');
-        $order_fields_manager->setArrayWrapper('userfields_arr');
-        
-        $data = @unserialize($this['userfields']);
+        if (!$this->order_fields_manager) {
+            $this->order_fields_manager = ConfigLoader::byModule($this)->getUserFieldsManager();
+            $this->order_fields_manager->setErrorPrefix('orderfield_');
+            $this->order_fields_manager->setArrayWrapper('userfields_arr');
+        }
 
-        if (!empty($data)) $order_fields_manager->setValues($data);
+        $data = @unserialize($this['userfields']);
+        if (!empty($data)) $this->order_fields_manager->setValues($data);
         
-        return $order_fields_manager;
+        return $this->order_fields_manager;
     }    
     
     /**
@@ -1515,6 +1532,12 @@ class Order extends OrmObject
         return $delivery->getDeliveryCostText($this, $this->getAddress());
     }
 
+    /**
+     * Возвращает дополнительный произвольный текст для данной доставки (обычно срок доставки)
+     *
+     * @param Delivery $delivery
+     * @return string
+     */
     function getDeliveryExtraText(Delivery $delivery)
     {
         return $delivery->getDeliveryExtraText($this, $this->getAddress());
@@ -2283,11 +2306,141 @@ class Order extends OrmObject
      */
     public function resetOrderForCheckout()
     {
+        $config = Loader::byModule($this);
+
         $this->clearErrors();
         $this['id'] = null;
         $this['status'] = null;
         $this['ip'] = $_SERVER['REMOTE_ADDR'];
         $this['expired'] = false;
         $this['only_pickup_points'] = 0;
+        $this['user_autologin'] = 1;
+        $this['warehouse'] = null;
+        $this['_serialized'] = null;
+        $this['extra'] = [];
+        $this['register_user'] =
+            $config['checkout_register_option'] == ShopConfig::CHECKOUT_REGISTER_OPTION_USER_CHOOSES ?
+                $config['register_user_default_checked'] : 0;
+    }
+
+    /**
+     * Очищает все ошибки в объекте
+     * @return void
+     */
+    public function clearErrors()
+    {
+        parent::clearErrors();
+        $this->getFieldsManager()->clearErrors();
+    }
+
+    /**
+     * Приводит базу данных в соответствие со структурой объекта
+     *
+     * @return bool
+     */
+    public function dbUpdate()
+    {
+        $result = parent::dbUpdate();
+        (new ArchiveOrder())->dbUpdate();
+        return $result;
+    }
+
+    /**
+     * Возвращает true, если клиент может самостоятельно удалить свой заказ
+     * Он это может сделать, если заказ находится в статусе Новый или Ожидает оплату или в дублерах данных статусов.
+     * + заказ не должен быть оплачен
+     *
+     * @return bool
+     */
+    public function canDelete()
+    {
+        return !$this['is_payed'] && in_array($this['status'], array_merge(
+                                            UserStatusApi::getStatusesIdByType(UserStatus::STATUS_NEW),
+                                            UserStatusApi::getStatusesIdByType(UserStatus::STATUS_WAITFORPAY)));
+    }
+
+    /**
+     * Возвращает все имеющиеся грузовые места, связанные с данным заказом
+     *
+     * @param bool $cache
+     * @return OrderCargo[]
+     */
+    public function getCargos($cache = true)
+    {
+        if (!$cache || !isset($this->cargos)) {
+            $this->cargos = OrmRequest::make()
+                ->from(new OrderCargo())
+                ->where([
+                    'order_id' => $this['id']
+                ])
+                ->orderby('id')
+                ->objects();
+        }
+
+        return $this->cargos;
+    }
+
+    /**
+     * Возвращает информацию о том, как товары распределены по грузовым местам.
+     *
+     * @return array
+     */
+    public function getProductsInCargoStatus()
+    {
+        $products_status = [];
+        $items_in_cargo = OrmRequest::make()
+            ->select('order_item_uniq, SUM(amount) as sum_amount')
+            ->from(new OrderCargoItem())
+            ->where([
+                'order_id' => $this['id']
+            ])
+            ->groupby('order_item_uniq')
+            ->exec()->fetchSelected('order_item_uniq', 'sum_amount');
+
+        $cart = $this->getCart();
+        foreach($cart->getProductItems() as $order_item_uniq => $item) {
+            $distributed = (float)$items_in_cargo[$order_item_uniq] ?? 0;
+            $amount = (float)$item['cartitem']['amount'];
+
+            if ($distributed <= 0) {
+                $status = self::PRODUCT_IN_CARGO_STATUS_NONE;
+                $status_text = t('Не распределен по грузовым местам');
+                $zmdi_class = 'zmdi-star-outline';
+            } elseif ($distributed < $amount) {
+                $status = self::PRODUCT_IN_CARGO_STATUS_PARTIALLY;
+                $status_text = t('Распределен по грузовым местам частично: %0/%1', [$distributed, $amount]);
+                $zmdi_class = 'zmdi-star-half';
+            } else {
+                $status = self::PRODUCT_IN_CARGO_STATUS_FULLY;
+                $status_text = t('Распределен по грузовым местам полностью');
+                $zmdi_class = 'zmdi-star';
+            }
+
+            $products_status[$order_item_uniq] = [
+                'distributed' => $distributed,
+                'total' => $amount,
+                'status' => $status,
+                'status_text' => $status_text,
+                'zmdi_class' => $zmdi_class
+            ];
+        }
+        return $products_status;
+    }
+
+    /**
+     * Возвращает true, если все товары распределены по грузоместам
+     *
+     * @return bool
+     */
+    function isAllProductsInCargo()
+    {
+        $result = true;
+        $products_status = $this->getProductsInCargoStatus();
+        foreach($products_status as $data) {
+            if ($data['status'] != self::PRODUCT_IN_CARGO_STATUS_FULLY) {
+                $result = false;
+            }
+        }
+        return $result;
     }
 }

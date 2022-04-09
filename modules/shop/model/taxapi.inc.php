@@ -81,6 +81,7 @@ class TaxApi extends EntityList
         } else {
             $ids = explode(',', $tax_ids);
         }
+
         return $ids;
     }
 

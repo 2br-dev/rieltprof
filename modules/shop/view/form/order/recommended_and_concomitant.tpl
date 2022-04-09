@@ -1,7 +1,7 @@
 <tr id="recommended-wrapper{$id}" class="recommended-wrapper">
     <td class="l-w-space">&nbsp;</td>
     <td class="chk">&nbsp;</td>
-    <td colspan="7">
+    <td colspan="8">
         <div class="tab" role="tabpanel">
             <ul class="tab-nav" role="tablist">
                 {if !empty($concomitants)}

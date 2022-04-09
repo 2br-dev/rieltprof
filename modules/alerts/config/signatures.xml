@@ -2,11 +2,11 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>e2bad2748d556c74944c562f19f75e0255bcdea1</sign>
+    <sign>d673cdcc3e3b599f3285783b232a884f9fffeda9</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
-    <sign>354b6429d7f9dcd89d1f9662e28d00f3a5859d20</sign>
+    <sign>72b2cba60d0823f80b5685d6fdc245c99655f1fb</sign>
   </file>
   <file>
     <path>config/handlers.inc.php</path>
@@ -18,7 +18,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>c850b1a89a0f23c4f84ecacb9b140a51f2e72804</sign>
+    <sign>4adf8ddf9134ef864ad8a0cbdead3f73687fc798</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
@@ -26,11 +26,7 @@
   </file>
   <file>
     <path>controller/admin/ctrl.inc.php</path>
-    <sign>a45b30b65999744d89829db82fd6fdbe7192a01b</sign>
-  </file>
-  <file>
-    <path>controller/admin/tools.inc.php</path>
-    <sign>ecf8a6d209936b7d42f6c965a27b84630721dc04</sign>
+    <sign>710f52cc2df7230a83bf111c2a73e94142119324</sign>
   </file>
   <file>
     <path>model/api.inc.php</path>
@@ -54,7 +50,7 @@
   </file>
   <file>
     <path>model/manager.inc.php</path>
-    <sign>0b882a999dbe5fefb3cccd4836b007547f921dfe</sign>
+    <sign>2de2603f290f274b7d97f1a47ed9634fd634efb4</sign>
   </file>
   <file>
     <path>model/noticeitemsapi.inc.php</path>
@@ -62,11 +58,11 @@
   </file>
   <file>
     <path>model/orm/noticeconfig.inc.php</path>
-    <sign>73aeb0a9ccb467dfa26836d155357c9c6375b08b</sign>
+    <sign>67f76af5d16c4a972c4318e1151bf79b9bfea15e</sign>
   </file>
   <file>
     <path>model/orm/noticeitem.inc.php</path>
-    <sign>11b8e7ef9a320a5d38d5dc33141e3b1e61903e57</sign>
+    <sign>e9d2ba1b3eaca2a304879660c9c47f65c79dc424</sign>
   </file>
   <file>
     <path>model/orm/noticelock.inc.php</path>
@@ -117,6 +113,14 @@
     <sign>5c1ff23affc8bfb3f3407e76d2988f9215c0b06b</sign>
   </file>
   <file>
+    <path>view/admin/notice_list.tpl</path>
+    <sign>4e45ce54d01ae53705c68bb8efd159df91225069</sign>
+  </file>
+  <file>
+    <path>view/admin/test_sms.tpl</path>
+    <sign>3b9c4de0253ae311a35733b03ab55b2774801d65</sign>
+  </file>
+  <file>
     <path>view/form/user/user_desktop_notices.tpl</path>
     <sign>51a035999c3f4cada22e8fcc07a3d3f5f7a04c2f</sign>
   </file>
@@ -157,20 +161,12 @@
     <sign>73493ad937e35f28a9b5f7223ba78a819e269b2e</sign>
   </file>
   <file>
-    <path>view/notice_list.tpl</path>
-    <sign>ce12be42b162e44f73385f1c0ca600c108d449d5</sign>
-  </file>
-  <file>
     <path>view/notice_template.tpl</path>
     <sign>a471ec3d346fabfeab4d8c28d51cd0eb113b503a</sign>
-  </file>
-  <file>
-    <path>view/test_sms.tpl</path>
-    <sign>3b9c4de0253ae311a35733b03ab55b2774801d65</sign>
   </file>
   <file>
     <path>view/text.tpl</path>
     <sign>cdc7d0adca4336340876996874008c8355c556cc</sign>
   </file>
-  <masterSign>52842d98c8bcf9941b4879d73a69f95c6a5c3fd9ba68a82f0112d54ee52b74947addcbdf78241e28939fbb7cd4baacd957fec29fe471438dcfb39ae4c3bbb0d9d5d12bad842755ddea86607952d75e1eeb3cae813ec537a63693e6831301caeeff5863e066a763dafe84d5fe5c2c1a3b8646c6728848c66594f1e64b9031dbca</masterSign>
+  <masterSign>43dff81a90b04db2dcf7644f05668dbecdec1c86ff651d994fad9a10ca4afc0e0016589de3189dc2fddefc6462cc009c90111f795f86f58679a7a0afedff5f79ae0f2a6dc63d38491ab78e55bb9c1af52fdfcf7c24e34945b286933fdd4aa14a15cc7937cf25e314358a206f44b7f59256d4b02891a2d93263bafef81a9957cc</masterSign>
 </signatures>

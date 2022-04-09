@@ -99,7 +99,7 @@ class MultiOfferLevelApi extends \RS\Module\AbstractModel\EntityList
     function getLevelsInfoByProductId($product_id)
     {
        $levels = \RS\Orm\Request::make()
-                    ->select('I.title as prop_title, Level.*')
+                    ->select('I.title as prop_title, I.type as prop_type, Level.*')
                     ->from(new \Catalog\Model\Orm\MultiOfferLevel(), 'Level')
                     ->join(new \Catalog\Model\Orm\Property\Item(), 'Level.prop_id = I.id', 'I')
                     ->where([

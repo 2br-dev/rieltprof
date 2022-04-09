@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Шаблоны, блоки</name>
         <description multilanguage="true">Предоставляет возможность редактировать шаблоны, управлять блоками</description>
-        <version>4.0.21</version>
+        <version>6.0.4</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>        
     </defaultValues>

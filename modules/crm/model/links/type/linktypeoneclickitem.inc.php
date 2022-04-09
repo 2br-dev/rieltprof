@@ -7,6 +7,7 @@
 */
 namespace Crm\Model\Links\Type;
 
+use Catalog\Model\OneClickItemApi;
 use Catalog\Model\Orm\OneClickItem;
 use RS\Orm\FormObject;
 use RS\Orm\PropertyIterator;
@@ -23,6 +24,7 @@ class LinkTypeOneClickItem extends AbstractType
      * @var OneClickItem
      */
     public $linked_object;
+    protected $last_objects_template = '%crm%/admin/links/lastobjects/oneclick.tpl';
 
     /**
      * Возвращает имя закладки, характеризующей данную связь
@@ -91,7 +93,7 @@ class LinkTypeOneClickItem extends AbstractType
     {
         if ($this->linked_object['id']) {
             return t('Покупка в 1 клик N%num от %date', [
-                'num' => $this->linked_object['id'],
+                'num' => $this->linked_object['number'] ?: $this->linked_object['id'],
                 'date' => date('d.m.Y', strtotime($this->linked_object['dateof']))
             ]);
         } else {
@@ -123,5 +125,20 @@ class LinkTypeOneClickItem extends AbstractType
             $url = Manager::obj()->getAdminUrl('edit', ['id' => $this->linked_object->id], 'catalog-oneclickctrl');
             return $url;
         }
+    }
+
+    /**
+     * Возвращает последние $limit объектов, с которыми возможно установить связь
+     *
+     * @param integer $limit
+     * @return []
+     */
+    public function getLastObjects($limit = null)
+    {
+        if (!$limit) {
+            $limit = 10;
+        }
+        $api = new OneClickItemApi();
+        return $api->getList(1, $limit, 'id DESC');
     }
 }

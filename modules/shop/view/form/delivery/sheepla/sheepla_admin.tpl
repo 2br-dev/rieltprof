@@ -18,7 +18,7 @@
 
         <input id="sheeplaInputMap" type="hidden" name="delivery_extra[value]" value="{$delivery_extra.value}"/>
         
-        <script type="text/javascript">
+        <script>
            $(document).ready(function(){
                
                /**

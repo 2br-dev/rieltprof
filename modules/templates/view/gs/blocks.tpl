@@ -15,23 +15,23 @@
         </div>
         
         <div class="dropdown smart-dropdown container-tools">
-            <a class="rs-dropdown-handler" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
+            <a class="rs-dropdown-handler" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"><!----></i></a>
             <ul class="dropdown-menu">
                 <li>
                     <a class="iswitch itool" title="{t}Включить/Выключить{/t}">
-                        <i class="zmdi zmdi-power"></i>
+                        <i class="zmdi zmdi-power"><!----></i>
                         <span class="title">{t}Включить/Выключить{/t}</span>
                     </a>
                 </li>
                 <li>
                     <a href="{adminUrl do="editModule" id=$block.id}" class="isettings itool crud-edit" title="{t}Настройка блока{/t}">
-                        <i class="zmdi zmdi-settings"></i>
+                        <i class="zmdi zmdi-settings"><!----></i>
                         <span class="title">{t}Настройка блока{/t}</span>
                     </a>
                 </li>
                 <li>
                     <a href="{adminUrl do="delModule" id=$block.id}" class="iremove itool crud-remove-one" title="{t}Удалить блок{/t}">
-                        <i class="zmdi zmdi-delete"></i>
+                        <i class="zmdi zmdi-delete"><!----></i>
                         <span class="title">{t}Удалить блок{/t}</span>
                     </a>
                 </li>

@@ -64,6 +64,9 @@ class Cms extends AbstractObject
                     'DB_TABLE_PREFIX' => new Type\Varchar([
                         'visible' => false
                     ]),
+                    'DB_TABLE_ENGINE' => new Type\Varchar([
+                        'visible' => false
+                    ]),
                     'SECRET_KEY' => new Type\Varchar([
                         'visible' => false
                     ]),

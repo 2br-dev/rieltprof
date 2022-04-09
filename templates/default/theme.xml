@@ -4,7 +4,7 @@
         <author>ReadyScript lab.</author>
         <name>Классическая</name>
         <description>Адаптивная тема, предусматривает различное отображение контента для различных устройств</description>
-        <version>4.0.144</version>
+        <version>6.0.4</version>
     </general>    
     <options>
         <group name="Основные">

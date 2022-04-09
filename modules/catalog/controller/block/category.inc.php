@@ -13,6 +13,7 @@ use RS\Debug\Action as DebugAction;
 use RS\Debug\Tool as DebugTool;
 use RS\Event\Manager as EventManager;
 use RS\Orm\Type;
+use RS\Router\RouteUnknown;
 
 /**
 * Блок-контроллер Список категорий

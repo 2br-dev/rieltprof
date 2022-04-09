@@ -28,6 +28,7 @@ class UserInGroup extends \RS\Orm\AbstractObject
                 'description' => t('ID пользователя')
             ]),
             'group' => new Type\Varchar([
+                'maxLength' => 50,
                 'description' => t('ID группы пользователей')
             ])
         ]);

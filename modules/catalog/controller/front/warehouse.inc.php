@@ -6,6 +6,7 @@
 * @license http://readyscript.ru/licenseAgreement/
 */
 namespace Catalog\Controller\Front;
+use Catalog\Model\Microdata\MicrodataWarehouse;
 use RS\Application\Application;
 
 /**
@@ -50,6 +51,8 @@ class Warehouse extends \RS\Controller\Front
         $this->view->assign([
             'warehouse' => $warehouse    //Склад
         ]);
+
+        $this->app->microdata->addMicrodata(new MicrodataWarehouse($warehouse));
         
         return $this->result->setTemplate('warehouse.tpl');
     }

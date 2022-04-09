@@ -24,26 +24,6 @@ class LogSettings {
 
     }
 
-    /**
-     * Отправляет запрос на изменение заказа и обновляет блоки
-     */
-    method() {
-        let data = new FormData();
-        data.append('key', 'value');
-
-        fetch(url, {
-            method: 'post',
-            headers: {'X-Requested-With': 'XMLHttpRequest'},
-            body: data,
-        }).then((response) => {
-            return response.json();
-        }).then((response) => {
-            if (response.success) {
-                console.log(response);
-            }
-        });
-    }
-
     static init(selector)
     {
         document.querySelectorAll(selector).forEach((element) => {
@@ -57,11 +37,3 @@ class LogSettings {
 document.addEventListener('DOMContentLoaded', () => {
     LogSettings.init('.rs-log-list');
 });
-//LogSettings.init('.rs-log-settings');
-
-// todo кусочек jQuery в нативном классе
-/*
-$(document).on('new-content', () => {
-    LogSettings.init('.rs-');
-});*/
-

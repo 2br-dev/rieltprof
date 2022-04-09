@@ -13,6 +13,10 @@ use RS\Html\Toolbar\Button as ToolbarButton;
 use RS\Html\Toolbar;
 use RS\AccessControl\Rights;
 use RS\AccessControl\DefaultModuleRights;
+use Templates\Model\Orm\Section;
+use Templates\Model\Orm\SectionContainer;
+use Templates\Model\Orm\SectionContext;
+use Templates\Model\Orm\SectionPage;
 use Templates\Model\TemplateModuleApi;
 
 /**
@@ -136,7 +140,7 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
                     ]
                 ]),
             ]]));
-        $helper['template'] = 'block_manager.tpl';
+        $helper['template'] = 'admin/block_manager.tpl';
         return $helper;
     }
 
@@ -254,7 +258,7 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
             'containers' => $containers,
             'elements' => $helper
         ]);
-        $helper['form'] = $this->view->fetch( 'copy_container.tpl' );
+        $helper['form'] = $this->view->fetch( 'admin/copy_container.tpl' );
         return $this->result->setTemplate( $helper['template'] );
     }
 
@@ -272,6 +276,8 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
          * @var \Templates\Model\Orm\SectionContainer $elem
          */
         $elem = $this->api->getElement();
+        $elem->setLocalParameter('maker_template', '%templates%/admin/tpl_maker_with_render.tpl');
+        $elem->element_type = SectionContainer::ELEMENT_TYPE_CONTAINER; //Для генератора preview кода
         
         if (!$primaryKeyValue) {
             $elem->page_id = $this->url->get('page_id', TYPE_INTEGER, 0);
@@ -350,6 +356,8 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
          * @var \Templates\Model\Orm\Section $elem
          */
         $elem   = $this->api->getElement();
+        $elem->setLocalParameter('maker_template', '%templates%/admin/tpl_maker_with_render.tpl');
+
         $helper = $this->helperAdd();
         $element_type = $this->url->get('element_type', TYPE_STRING, 'col');
 
@@ -581,7 +589,7 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
             'page_id' => $page_id,
             'context' => $context,
         ]);
-        $this->result->setHtml($this->view->fetch('block_manager_add_module_form.tpl'));
+        $this->result->setHtml($this->view->fetch('admin/block_manager_add_module_form.tpl'));
         return $this->result->getOutput();
     }
 
@@ -662,7 +670,7 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
     {
         $helper = new \RS\Controller\Admin\Helper\CrudCollection($this, $this->sectionApi, $this->url);
         $helper->setBottomToolbar($this->buttons(['save', 'cancel']));
-        $helper->setTemplate('%templates%/crud-block-form.tpl');
+        $helper->setTemplate('%templates%/admin/crud-block-form.tpl');
 
         $section_id = $this->url->get('section_id', TYPE_INTEGER, 0);
 
@@ -779,7 +787,7 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
            $helper     = new \RS\Controller\Admin\Helper\CrudCollection($block);
            $helper->setBottomToolbar($this->buttons(['save', 'cancel']));
            
-           $helper->setTemplate($this->mod_tpl.'crud-block-form.tpl'); 
+           $helper->setTemplate($this->mod_tpl.'admin/crud-block-form.tpl');
            $helper->setTopTitle(t('Настройки блока {title}'), ['title' => $block_info['title']]);
            
            $block_info['block_class']  = mb_strtolower(get_class($block));
@@ -943,12 +951,39 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
     
     function helperContextOptions()
     {
-        return parent::helperAdd();
+        $context = $this->url->request('context', TYPE_STRING);
+
+        $helper = parent::helperAdd();
+        $helper->getBottomToolbar()
+            ->addItem(new ToolbarButton\Space())
+            ->addItem(
+            new ToolbarButton\Button($this->router->getAdminUrl('resetContextOptions', ['context' => $context]), t('Сбросить'), [
+                'attr' => [
+                    'class' => 'crud-close-dialog crud-get',
+                    'data-confirm-text' => t('Вы действительно желаете сбросить настройки темы до значений по умолчанию?')
+                ]
+            ])
+        );
+
+        return $helper;
+    }
+
+    function actionResetContextOptions()
+    {
+        $context = $this->url->request('context', TYPE_STRING);
+        $theme = \RS\Theme\Item::makeByContext($context);
+        $options = $theme->getContextOptions();
+        $options['options_arr'] = $theme->getDefaultOptionValues();
+        $options->update();
+
+        return $this->result->setSuccess(true)
+                    ->addSection('close_dialog', true);
     }
     
     function actionContextOptions()
     {
         $context = $this->url->request('context', TYPE_STRING);
+        $is_front = $this->url->get('front', TYPE_INTEGER);
         
         $helper = $this->getHelper();
         
@@ -962,6 +997,10 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
             if ($this->result->isSuccess()) {
                 $this->result->setSuccess(true)
                              ->setSuccessText(t('Изменения успешно сохранены'));
+
+                if ($options->grid_system_changed) {
+                    $this->result->setRedirect($this->router->getAdminUrl(false));
+                }
             } else {
                 $this->result->setErrors($options->getDisplayErrors());
             }
@@ -971,6 +1010,12 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
         
         //Получаем динамический объект для генерации формы
         $form_object = $options->getContextFormObject();
+
+        if ($is_front) {
+            //Скрываем возможность изменять тип сеточного фреймворка, если окно
+            // открыто из клиентской части сайта в целях избежания слчайного изменения данного параметра
+            $form_object['__grid_system']->setVisible(false);
+        }
         
         $helper['form'] = $form_object->getForm();
         $helper->setTopTitle(t('Настройка темы {title}'), ['title' => $theme_info['name']]);
@@ -1003,5 +1048,52 @@ class BlockCtrl extends \RS\Controller\Admin\Crud
         \RS\Cache\Manager::obj()->invalidateByTags(CACHE_TAG_BLOCK_PARAM);
         
         return $this->result->setSuccess(true);
+    }
+
+    /**
+     * Возвращает пример блока, который будет сгенерирован
+     *
+     * @return \RS\Controller\Result\Standard
+     * @throws \RS\Controller\ExceptionPageNotFound
+     */
+    function actionAjaxRenderPreview()
+    {
+        $element = $this->url->get('element', TYPE_STRING);
+        $page_id = $this->url->get('page_id', TYPE_STRING);
+
+        $section_page = new SectionPage($page_id);
+
+        if ($section_page) {
+            $section_context = SectionContext::loadByWhere([
+                'site_id' => $section_page['site_id'],
+                'context' => $section_page['context']
+            ]);
+            if ($section_context) {
+
+                switch ($element) {
+                    case SectionContainer::ELEMENT_TYPE_CONTAINER:
+                        $element_object = new SectionContainer();
+                        break;
+                    case Section::ELEMENT_TYPE_ROW:
+                        $element_object = new Section();
+                        $element_object['element_type'] = Section::ELEMENT_TYPE_ROW;
+                        break;
+                    case Section::ELEMENT_TYPE_COL:
+                        $element_object = new Section();
+                        $element_object['element_type'] = Section::ELEMENT_TYPE_COL;
+                        break;
+                    default:
+                        $this->e404(t('Некорректное значение в параметре element'));
+                }
+
+                $element_object->fillFromPost();
+                $this->view->assign([
+                    'element_type' => $element,
+                    'grid_system' => $section_context['grid_system'],
+                    'element_object' => $element_object,
+                ]);
+            }
+        }
+        return $this->result->setTemplate('admin/renderer/element.tpl');
     }
 }

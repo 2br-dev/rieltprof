@@ -24,6 +24,9 @@ use Catalog\Model\Orm\Property\Item as PropertyItem;
  * @property integer $sortn Порядк. N
  * @property string $is_spec_dir Это спец. список?
  * @property integer $is_label Показывать как ярлык у товаров
+ * @property string $label_text_color Цвет надписи ярлыка
+ * @property string $label_bg_color Цвет фона ярлыка
+ * @property string $label_border_color Цвет границы ярлыка
  * @property integer $itemcount Количество элементов
  * @property integer $level Уровень вложенности
  * @property string $image Изображение
@@ -70,7 +73,7 @@ class Dir extends \RS\Orm\OrmObject
             t('Основные'),
                     'site_id' => new Type\CurrentSite(),
                     'name' => new Type\Varchar([
-                        'maxLength' => '255',
+                        'maxLength' => '170',
                         'description' => t('Название категории'),
                         'Checker' => ['chkEmpty', t('Название категории не может быть пустым')],
                         'attr' => [[
@@ -93,6 +96,8 @@ class Dir extends \RS\Orm\OrmObject
                     ]),
                     'parent' => new Type\Integer([
                         'maxLength' => '11',
+                        'default' => 0,
+                        'allowEmpty' => false,
                         'description' => t('Родитель'),
                         'tree' => [['\Catalog\Model\DirApi', 'staticTreeList'], 0, [0 => t('- Корень каталога -')]],
                         'specVisible' => false,
@@ -127,6 +132,24 @@ class Dir extends \RS\Orm\OrmObject
                         'specVisible' => true,
                         'checkboxView' => [1, 0]
                     ]),
+                    'label_text_color' => new Type\Color([
+                        'description' => t('Цвет надписи ярлыка'),
+                        'visible' => false,
+                        'specVisible' => true,
+                        'default' => '#FFFFFF'
+                    ]),
+                    'label_bg_color' => new Type\Color([
+                        'description' => t('Цвет фона ярлыка'),
+                        'visible' => false,
+                        'specVisible' => true,
+                        'default' => '#1DC25F'
+                    ]),
+                    'label_border_color' => new Type\Color([
+                        'description' => t('Цвет границы ярлыка'),
+                        'visible' => false,
+                        'specVisible' => true,
+                        'default' => '#1DC25F',
+                    ]),
                     'itemcount' => new Type\Integer([
                         'description' => t('Количество элементов'),
                         'visible' => false,
@@ -150,7 +173,7 @@ class Dir extends \RS\Orm\OrmObject
                         'rootVisible' => false
                     ]),
                     'xml_id' =>  new Type\Varchar([
-                        'maxLength' => '255',
+                        'maxLength' => '150',
                         'description' => t('Идентификатор в системе 1C'),
                         'meVisible' => false,
                     ]),
@@ -297,8 +320,7 @@ class Dir extends \RS\Orm\OrmObject
                     'rootVisible' => false
                 ]),
             t('Рекомендуемые товары'),
-                'recommended' => new Type\Varchar([
-                    'maxLength' => 4000,
+                'recommended' => new Type\Text([
                     'description' => t('Рекомендуемые товары'),
                     'visible' => false,
                 ]),
@@ -312,8 +334,7 @@ class Dir extends \RS\Orm\OrmObject
                     'meVisible' => true  //Видимость при мультиредактировании
                 ]),
             t('Сопутствующие товары'),
-                'concomitant' => new Type\Varchar([
-                    'maxLength' => 4000,
+                'concomitant' => new Type\Text([
                     'description' => t('Сопутствующие товары'),
                     'visible' => false,
                 ]),

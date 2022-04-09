@@ -28,7 +28,7 @@ class Image extends AbstractType
         $scale,
         $body_template = 'system/admin/html_elements/table/coltype/image.tpl';
     
-    function __construct($field, $title = null, $width, $height, $scale = 'xy', $property = null)
+    function __construct($field, $title, $width, $height, $scale = 'xy', $property = null)
     {
         parent::__construct($field, $title, $property);        
         $this->width = $width;

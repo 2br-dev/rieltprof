@@ -28,7 +28,7 @@ class BannerZone extends \RS\Controller\StandartBlock
     function getParamObject()
     {
         return parent::getParamObject()->appendProperty([
-            'zone' => new Type\Integer([
+            'zone' => new Type\Varchar([
                 'description' => t('Зона баннеров'),
                 'list' => [['\Banners\Model\ZoneApi', 'staticSelectList']]
             ]),
@@ -45,22 +45,35 @@ class BannerZone extends \RS\Controller\StandartBlock
     
     function actionIndex()
     {
-        $cache_id = json_encode($this->getParam());
+        $cache_id = json_encode($this->getParam()).(int)($this->user->id > 0);
         $template = $this->getParam('indexTemplate');
 
         if ($this->isViewCacheExpired($cache_id, $template, $this->getParam('cache_html_lifetime'))) {
             $zone_id = $this->getParam('zone');
 
+            $zone_api = new \Banners\Model\ZoneApi();
+            $zone = $zone_api->getById($zone_id);
+
             if ($debug_group = $this->getDebugGroup()) {
-                $create_href = $this->router->getAdminUrl('add', ['zone' => $zone_id], 'banners-ctrl');
+                $create_href = $this->router->getAdminUrl('add', ['zone' => $zone['id']], 'banners-ctrl');
                 $debug_group->addDebugAction(new \RS\Debug\Action\Create($create_href));
                 $debug_group->addTool('create', new \RS\Debug\Tool\Create($create_href));
             }
 
-            $zone_api = new \Banners\Model\ZoneApi();
-            $zone = $zone_api->getById($zone_id);
+            if ($zone) {
+                if ($this->getParam('rotate')) {
+                    $banner = $zone->getOneBanner();
+                    if ($banner['id']) {
+                        $banners = [$banner];
+                    }
+                } else {
+                    $banners = $zone->getBanners();
+                }
+            }
+
             $this->view->assign([
-                'zone' => $zone
+                'zone' => $zone,
+                'banners' => $banners ?? [],
             ]);
         }
         

@@ -1,0 +1,1 @@
+{"now"|date_format:"%Y"} {t}© Все права защищены.{/t} {t}Работает на <a href="https://readyscript.ru" class="text-decoration-none text-gray">ReadyScript</a>{/t}

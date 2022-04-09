@@ -12,6 +12,7 @@ use RS\Orm\PropertyIterator;
 use RS\Orm\Type\User as TypeUser;
 use RS\Router\Manager;
 use Shop\Model\Orm\Order;
+use Users\Model\Api as UserApi;
 use Users\Model\Orm\User;
 
 /**
@@ -24,6 +25,8 @@ class LinkTypeUser extends AbstractType
      * @var Order
      */
     public $linked_object;
+
+    protected $last_objects_template = '%crm%/admin/links/lastobjects/user.tpl';
 
     /**
      * Возвращает имя закладки, характеризующей данную связь
@@ -112,5 +115,20 @@ class LinkTypeUser extends AbstractType
             $url = Manager::obj()->getAdminUrl('edit', ['id' => $this->linked_object->id], 'users-ctrl');
             return $url;
         }
+    }
+
+    /**
+     * Возвращает последние $limit объектов, с которыми возможно установить связь
+     *
+     * @param integer $limit
+     * @return []
+     */
+    public function getLastObjects($limit = null)
+    {
+        if (!$limit) {
+            $limit = 10;
+        }
+        $api = new UserApi();
+        return $api->getList(1, $limit, 'id DESC');
     }
 }

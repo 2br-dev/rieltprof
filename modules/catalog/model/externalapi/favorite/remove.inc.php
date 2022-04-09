@@ -14,9 +14,7 @@ use \ExternalApi\Model\Exception as ApiException;
 */
 class Remove extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
 {
-    
-    const
-        RIGHT_FAVORITE = 1;
+    const RIGHT_FAVORITE = 1;
         
     protected
         $token_require = false,
@@ -80,7 +78,7 @@ class Remove extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
     * }
     * </pre>
     */
-    function process($token = null, $product_id)
+    function process($product_id, $token = null)
     {
         $favoriteapi = FavoriteApi::getInstance();
         if (!$token){ //Если токен не использовали.

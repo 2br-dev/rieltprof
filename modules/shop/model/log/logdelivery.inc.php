@@ -35,7 +35,7 @@ class LogDelivery extends AbstractLog
      */
     public function getTitle(): string
     {
-        return t('Доставка');
+        return t('Доставка СДЭК (Устаревший)');
     }
 
     /**

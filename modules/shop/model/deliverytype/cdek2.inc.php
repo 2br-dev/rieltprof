@@ -60,7 +60,7 @@ class Cdek2 extends AbstractType implements InterfaceDeliveryOrder, InterfaceIon
         $link .= '#tab-7';
         $regions_link = RouterManager::obj()->getAdminUrl('index', null, 'shop-cdekregionctrl');
         $shop_link = RouterManager::obj()->getAdminUrl('edit', ['mod' => 'shop'], 'modcontrol-control');
-        //$shop_link .= '#tab-10';
+        $shop_link .= '#tab-10';
 
         $description = t('Доставка СДЭК <br/><br/>
         <div class="notice-box no-padd">
@@ -69,8 +69,18 @@ class Cdek2 extends AbstractType implements InterfaceDeliveryOrder, InterfaceIon
                 Значения веса и габаритов по умолчанию можно указать в <u><a href="%link" target="_blank">настройках модуля "Каталог"</a></u>.<br/>
                 Для идентификации населённых пунктов используется <u><a href="%regions_link" target="_blank">список регионов СДЭК</a></u><br>
                 Подписаться на веб-хуки можно в <u><a href="%shop_link" target="_blank">настройках модуля "Магазин"</a></u>.
+                <br><br>
+                Для проверки работы службы доставки вы можете включить "тестовый режим" и использовать следующие ключи:<br>
+                Тестовый идентификатор: %test_id<br>
+                Тестовый секретный ключ: %test_key
             </div>
-        </div>', ['link' => $link, 'regions_link' => $regions_link, 'shop_link' => $shop_link]);
+        </div>', [
+            'link' => $link,
+            'regions_link' => $regions_link,
+            'shop_link' => $shop_link,
+            'test_id' => CdekApi::TEST_ACCOUNT,
+            'test_key' => CdekApi::TEST_SECURE_PASSWORD,
+        ]);
 
         return $description;
     }
@@ -100,7 +110,7 @@ class Cdek2 extends AbstractType implements InterfaceDeliveryOrder, InterfaceIon
     }
 
     /**
-     * Возвращает true если стоимость доставки можно расчитать на основе адреса доставки
+     * Возвращает true если стоимость доставки можно рассчитать на основе адреса доставки
      *
      * @param Address $address - адрес
      * @return bool
@@ -231,6 +241,22 @@ class Cdek2 extends AbstractType implements InterfaceDeliveryOrder, InterfaceIon
     }
 
     /**
+     * Возвращает дополнительный HTML для админ части в заказе
+     *
+     * @param Order $order - объект заказа
+     * @return string
+     */
+    public function getAdminHTML(Order $order)
+    {
+        try {
+            $delivery_period = $this->calcDeliveryPeriod($order);
+            return '<br>' . t('Срок доставки: ') . $delivery_period->getPeriodAsText();
+        } catch (RSException $e) {
+            return '<br>' . t('Ошибка при расчёте срока доставки: ') . $e->getMessage();
+        }
+    }
+
+    /**
      * Возвращает HTML для приложения на Ionic
      *
      * @param Order $order - объект заказа
@@ -303,9 +329,11 @@ class Cdek2 extends AbstractType implements InterfaceDeliveryOrder, InterfaceIon
                 $this->checkProductVolumeWeight($order);
             }
 
-            $this->api->getPriorityTariff($order);
+            //$this->api->getPriorityTariff($order);
+            $this->api->calculateDeliverySum($order, $this->getOption('additional_services', []));
+
         } catch (ShopException $exception) {
-            if (in_array($exception->getCode(), [ShopException::ERROR_LIST_DELIVERY_API])) {
+            if (in_array($exception->getCode(), ShopException::ERROR_LIST_DELIVERY_API)) {
                 return t('Произошла внутренняя ошибка, свяжитесь с администратором');
             }
             return $exception->getMessage();
@@ -360,17 +388,16 @@ class Cdek2 extends AbstractType implements InterfaceDeliveryOrder, InterfaceIon
      * Возвращает стоимость доставки для заданного заказа. Только число.
      *
      * @param Order $order - объект заказа
-     * @param Address $address - адрес доставки
+     * @param Address $address - адрес доставкиamountBreakPoint
      * @param Delivery $delivery - объект доставки
      * @param boolean $use_currency - использовать валюту?
      * @return double
      * @throws RSException
      */
-    function getDeliveryCost(Order $order, Address $address = null, Delivery $delivery, $use_currency = true)
+    function getDeliveryCost(Order $order, Address $address, Delivery $delivery, $use_currency = true)
     {
         try {
-            $calculation = $this->api->getPriorityTariff($order);
-            return $calculation['delivery_sum'];
+            return $this->api->calculateDeliverySum($order, $delivery->getTypeObject()->getOption('additional_services', []));
         } catch (ShopException $exception) {
             return 0;
         }
@@ -796,6 +823,12 @@ class Cdek2 extends AbstractType implements InterfaceDeliveryOrder, InterfaceIon
                 126 => t('Магистральный супер-экспресс дверь-склад'),
                 361 => t('Экспресс лайт дверь-постамат'),
                 363	=> t('Экспресс лайт склад-постамат'),
+                480 => t('Экспресс дверь-дверь'),
+                481 => t('Экспресс дверь-склад'),
+                482 => t('Экспресс склад-дверь'),
+                483 => t('Экспресс склад-склад'),
+                485 => t('Экспресс дверь-постамат'),
+                486 => t('Экспресс склад-постамат')
             ],
         ];
     }

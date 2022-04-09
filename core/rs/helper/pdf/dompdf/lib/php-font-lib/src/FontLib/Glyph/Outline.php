@@ -19,7 +19,7 @@ use FontLib\BinaryStream;
  */
 class Outline extends BinaryStream {
   /**
-   * @var glyf
+   * @var \FontLib\Table\Type\glyf
    */
   protected $table;
 
@@ -104,7 +104,7 @@ class Outline extends BinaryStream {
   }
 
   function getGlyphIDs() {
-    return [];
+    return array();
   }
 }
 

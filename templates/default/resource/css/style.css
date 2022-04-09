@@ -6197,3 +6197,20 @@ select#topic_id {
 .user-authorization-info a {
     text-decoration:underline;
 }
+
+.deliveryParamsPvz_inputWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.deliveryParamsPvz_inputWrapper .link {
+    margin-top: 8px;
+}
+
+.link.link-more {
+    background: #f29b30;
+    padding: 8px 12px;
+    color: white;
+    cursor: pointer;
+}

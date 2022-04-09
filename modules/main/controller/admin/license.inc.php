@@ -36,9 +36,9 @@ class License extends \RS\Controller\Admin\Crud
             ->setTable(new Table\Element([
             'Columns' => [
                 new TableType\Checkbox('license_key'),
-                new TableType\Usertpl('license_key', t('Лицензионный номер'), '%main%/license_col_number.tpl'),
+                new TableType\Usertpl('license_key', t('Лицензионный номер'), '%main%/admin/license_col_number.tpl'),
                 new TableType\Text('license_type_str', t('Тип')),
-                new TableType\Usertpl('object', t('Объект лицензирования'), '%main%/license_col_object.tpl', ['TdAttr' => ['class' => 'cell-small']]),
+                new TableType\Usertpl('object', t('Объект лицензирования'), '%main%/admin/license_col_object.tpl', ['TdAttr' => ['class' => 'cell-small']]),
                 new TableType\Datetime('date_of_activation', t('Дата активации'), ['format' => 'd.m.Y']),
                 new TableType\Text('domain', t('Домен')),
                 new TableType\Actions('license_key', [
@@ -52,7 +52,7 @@ class License extends \RS\Controller\Admin\Crud
         $helper['topToolbar']
             ->addItem(new ToolbarButton\Add($this->url->replaceKey([$this->action_var => 'addLic']), t('Добавить лицензию')), 'add')
             ->addItem(new ToolbarButton\Button($this->api->getBuyLicenseUrl(), t('Купить лицензию'), ['attr' => ['target' => '_blank']]));
-        $helper['beforeTableContent'] = $this->view->fetch('license_notice.tpl');        
+        $helper['beforeTableContent'] = $this->view->fetch('admin/license_notice.tpl');
         return $helper;
     }
     

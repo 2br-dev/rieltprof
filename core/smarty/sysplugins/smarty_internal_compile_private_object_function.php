@@ -22,26 +22,25 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
      * @var array
      * @see Smarty_Internal_CompileBase
      */
-    public $optional_attributes = ['_any'];
+    public $optional_attributes = array('_any');
 
     /**
      * Compiles code for the execution of function plugin
      *
-     * @param  array                                $args      array with attributes from parser
+     * @param array                                 $args      array with attributes from parser
      * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
-     * @param  array                                $parameter array with compilation parameter
-     * @param  string                               $tag       name of function
-     * @param  string                               $method    name of method to call
+     * @param array                                 $parameter array with compilation parameter
+     * @param string                                $tag       name of function
+     * @param string                                $method    name of method to call
      *
      * @return string compiled code
+     * @throws \SmartyCompilerException
+     * @throws \SmartyException
      */
     public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter, $tag, $method)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
-        //Does tag create output
-        $compiler->has_output = isset($_attr[ 'assign' ]) ? false : true;
-
         unset($_attr[ 'nocache' ]);
         $_assign = null;
         if (isset($_attr[ 'assign' ])) {
@@ -49,10 +48,10 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
             unset($_attr[ 'assign' ]);
         }
         // method or property ?
-        if (is_callable([$compiler->smarty->registered_objects[ $tag ][ 0 ], $method])) {
+        if (is_callable(array($compiler->smarty->registered_objects[ $tag ][ 0 ], $method))) {
             // convert attributes into parameter array string
             if ($compiler->smarty->registered_objects[ $tag ][ 2 ]) {
-                $_paramsArray = [];
+                $_paramsArray = array();
                 foreach ($_attr as $_key => $_value) {
                     if (is_int($_key)) {
                         $_paramsArray[] = "$_key=>$_value";
@@ -60,10 +59,10 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
                         $_paramsArray[] = "'$_key'=>$_value";
                     }
                 }
-                $_params = 'array(' . implode(",", $_paramsArray) . ')';
+                $_params = 'array(' . implode(',', $_paramsArray) . ')';
                 $output = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}({$_params},\$_smarty_tpl)";
             } else {
-                $_params = implode(",", $_attr);
+                $_params = implode(',', $_attr);
                 $output = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}({$_params})";
             }
         } else {
@@ -71,12 +70,12 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
             $output = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}";
         }
         if (!empty($parameter[ 'modifierlist' ])) {
-            $output = $compiler->compileTag('private_modifier', [],
-                                            ['modifierlist' => $parameter[ 'modifierlist' ], 'value' => $output]);
+            $output = $compiler->compileTag(
+                'private_modifier',
+                array(),
+                array('modifierlist' => $parameter[ 'modifierlist' ], 'value' => $output)
+            );
         }
-        //Does tag create output
-        $compiler->has_output = isset($_attr[ 'assign' ]) ? false : true;
-
         if (empty($_assign)) {
             return "<?php echo {$output};?>\n";
         } else {

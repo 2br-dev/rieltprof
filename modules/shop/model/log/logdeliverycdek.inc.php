@@ -21,7 +21,7 @@ class LogDeliveryCdek extends AbstractLog
     const LEVEL_PVZ = 'pvz';
     const LEVEL_ORDER = 'order';
     const LEVEL_WEB_HOOK = 'web_hook';
-    const LEVEL_UPDATE_CDEK_REGIONS = 'uddate_cdek_regions';
+    const LEVEL_UPDATE_CDEK_REGIONS = 'update_cdek_regions';
 
     /**
      * Возвращает идентификатор класса логирования

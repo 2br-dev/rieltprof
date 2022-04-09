@@ -24,6 +24,7 @@ use RS\Event\Exception as EventException;
 use RS\Helper\Tools;
 use RS\Module\AbstractModel\EntityList;
 use RS\Orm\Exception as OrmException;
+use RS\Orm\Request;
 use RS\Router\Manager as RouterManager;
 use Catalog\Model\Orm\Xstock;
 use RS\Config\Loader as ConfigLoader;
@@ -175,7 +176,11 @@ class Api extends EntityList
 
         foreach ($products as $product) {
             if (isset($product_photos[$product[$this->id_field]])) {
-                $product['images'] = $product_photos[$product[$this->id_field]];
+                $images = [];
+                 foreach($product_photos[$product[$this->id_field]] as $image) {
+                     $images[$image['id']] = $image;
+                 }
+                $product['images'] = $images;
             } else {
                 $product['images'] = [new PhotoStub()];
             }
@@ -627,6 +632,7 @@ class Api extends EntityList
 
         foreach ($products as $item) {
             $item['dynamic_num'] = isset($dynamic_nums[$item['id']]) ? $dynamic_nums[$item['id']] : 0;
+            $item->dynamic_num_warehouses_id = $this->dynamic_num_warehouses_id;
         }
 
         return $products;
@@ -1202,7 +1208,7 @@ class Api extends EntityList
      * @throws EventException
      * @throws OrmException
      */
-    function multiUpdateProductsAndOffersPrices($ids = [], array $excost )
+    function multiUpdateProductsAndOffersPrices($ids, array $excost )
     {
         $all_prices = []; //Массив с ценами, если поставлен флаг увеличения значения
         //Если необходимо мультиредактирование цен товаров и оно задано, то получим массив 
@@ -1742,7 +1748,7 @@ class Api extends EntityList
                 ->where('DL.public = 1')
                 ->orderby(null)
                 ->groupby('DL.id');
-        return $q->objects(new Dir());
+        return $q->objects(new Dir(), 'id');
     }
 
     /**
@@ -2988,5 +2994,21 @@ class Api extends EntityList
             'offer_id' => $offer_id,
             'weight' => $product['weight']
         ];
+    }
+
+    /**
+     * Очищает у всех твоаров поле offers_json. Тем самым заставляя
+     * пересчитать при следующем обращении все параметры комплектаций у товара.
+     *
+     * @return bool
+     */
+    public static function cleanAllOffersJsonCache()
+    {
+        Request::make()
+            ->update(new Product())
+            ->set(['offers_json' => null])
+            ->exec();
+
+        return true;
     }
 }

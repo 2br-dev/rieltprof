@@ -135,6 +135,7 @@ class File extends AbstractType
         $this->base = $base;
         $this->path = rtrim($path,'/');
         $this->storage = $this->base.$this->path.'/';
+        return $this;
     }
 
     /**
@@ -309,5 +310,14 @@ class File extends AbstractType
         }
         return $this->value;
     }
-    
+
+    /**
+     * Возвращает содержимое файла
+     *
+     * @return string
+     */
+    function getContent()
+    {
+        return file_get_contents($this->getFullPath());
+    }
 }

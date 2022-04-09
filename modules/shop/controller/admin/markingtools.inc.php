@@ -13,7 +13,6 @@ use RS\Config\Loader as ConfigLoader;
 use RS\Controller\Admin\Crud;
 use RS\Controller\Admin\Helper\CrudCollection;
 use RS\Controller\Result\Standard;
-use RS\Db\Adapter as DbAdapter;
 use RS\Helper\Tools as HelperTools;
 use RS\Html\Toolbar\Button as ToolbarButton;
 use RS\Orm\Request as OrmRequest;
@@ -23,11 +22,11 @@ use Shop\Model\Marking\MarkingApi;
 use Shop\Model\Marking\MarkingException;
 use Shop\Model\OrderApi;
 use Shop\Model\Orm\Order;
-use Shop\Model\Orm\OrderItem;
 use Shop\Model\Orm\OrderItemUIT;
 use Shop\Model\Orm\Shipment;
 use Shop\Model\Orm\ShipmentItem;
 use Shop\Model\Orm\Transaction;
+use Shop\Model\ShipmentApi;
 use Shop\Model\TransactionApi;
 
 /**
@@ -69,20 +68,10 @@ class MarkingTools extends Crud
 
         if ($this->url->isPost()) {
             $uit = $this->url->request('uit', TYPE_ARRAY);
+            $uit = HelperTools::unescapeArrayRecursive($uit);
 
-            $uit_ids = [];
-            foreach ($uit as $item_uit_list) {
-                foreach ($item_uit_list as $uit_key => $uit_item) {
-                    $uit_ids[] = DbAdapter::escape($uit_key);
-                }
-            }
-
-            $exist_uits = (new OrmRequest())
-                ->select('concat(U.gtin, U.serial) uit_id')
-                ->from(new OrderItemUIT(), 'U')
-                ->join(ShipmentItem::_getTable(), 'U.id = S.uit_id', 'S')
-                ->where('concat(U.gtin, U.serial) in ("#0")', [implode('","', $uit_ids)])
-                ->exec()->fetchSelected(null, 'uit_id');
+            $shipment_api = new ShipmentApi();
+            $exist_uits = $shipment_api->getExistsUits($uit);
 
             if ($exist_uits) {
                 return $this->result->setSuccess(false)
@@ -91,16 +80,7 @@ class MarkingTools extends Crud
                     ->addSection('uit_list', $exist_uits);
             }
 
-            foreach ($product_items as $uniq => $item) {
-                /** @var OrderItem $order_item */
-                $order_item = $item[Cart::CART_ITEM_KEY];
-                try {
-                    $order_item->rewriteUITs($uit[$uniq] ?? []);
-                } catch (MarkingException $e) {
-                    throw $e;
-                }
-            }
-
+            $shipment_api->saveUits($product_items, $uit);
             return $this->result->setSuccess(true);
         }
 
@@ -146,7 +126,7 @@ class MarkingTools extends Crud
 
         $this->wrapOutput(false);
         $product_id = $this->url->request('product_id', TYPE_INTEGER);
-        $code = $this->url->request('code', TYPE_STRING);
+        $code = htmlspecialchars_decode($this->url->request('code', TYPE_STRING, null, false), 3);
 
         $product = new Product($product_id);
         if (empty($product['id'])) {
@@ -171,7 +151,7 @@ class MarkingTools extends Crud
     }
 
     /**
-     * Согздаёт "отгрузку"
+     * Создаёт "отгрузку"
      *
      * @return Standard
      * @throws ShopException
@@ -180,7 +160,7 @@ class MarkingTools extends Crud
     {
         $shop_config = ConfigLoader::byModule('shop');
         $order_id = $this->url->get('order_id', TYPE_STRING);
-        $shipment_data = $this->url->post('shipment', TYPE_ARRAY);
+        $shipment_data = HelperTools::unescapeArrayRecursive($this->url->post('shipment', TYPE_ARRAY));
         $add_delivery_to_shipment = $this->url->post('add_delivery', TYPE_ARRAY);
         $create_receipt = $shop_config['create_receipt_upon_shipment'] ?: $this->url->post('create_receipt', TYPE_ARRAY);
         $order = new Order($order_id);

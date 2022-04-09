@@ -208,6 +208,7 @@ abstract class AbstractType
     /**
      * Возвращает дополнительный HTML для админ части в заказе
      *
+     * @param Order $order - объект заказа
      * @return string
      */
     public function getAdminHTML(Order $order)
@@ -308,7 +309,7 @@ abstract class AbstractType
                 'pvz_list' => $this->getPvzByAddress($order->getAddress()),
             ]);
 
-            $html .= $view->fetch('%shop%/delivery/delivery_params_pvz.tpl');
+            $html .= trim($view->fetch('%shop%/delivery/delivery_params_pvz.tpl'));
         }
 
         $html .= $this->getAdditionalHtml($order);
@@ -418,7 +419,7 @@ abstract class AbstractType
      * @param bool $use_currency - конвертировать стоимость в валюту заказа
      * @return float
      */
-    abstract public function getDeliveryCost(Order $order, ?Address $address = null, Delivery $delivery, $use_currency = true);
+    abstract public function getDeliveryCost(Order $order, Address $address, Delivery $delivery, $use_currency = true);
 
     /**
      * Возвращает цену в текстовом формате, т.е. здесь может быть и цена и надпись, например "Бесплатно"
@@ -429,7 +430,7 @@ abstract class AbstractType
      * @return string
      * @throws RSException
      */
-    public function getDeliveryCostText(Order $order, ?Address $address = null, Delivery $delivery)
+    public function getDeliveryCostText(Order $order, Address $address, Delivery $delivery)
     {
         $cost = $this->getDeliveryFinalCost($order, $address, $delivery);
         $order_currency = $order->getMyCurrency();
@@ -790,7 +791,7 @@ abstract class AbstractType
      * @throws \Exception
      * @throws \SmartyException
      */
-    public function wrapByWidjet(Delivery $delivery, ?Order $order = null, $content)
+    public function wrapByWidjet(Delivery $delivery, Order $order, $content)
     {
         $view = new ViewEngine();
         $view->assign([

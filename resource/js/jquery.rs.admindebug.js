@@ -1237,7 +1237,8 @@
             }
 
             $.rs.loading.show();
-            $form.ajaxSubmit({
+
+            var ajaxOptions = {
                 dataType: 'json',
                 data: {
                     ajax: 1
@@ -1250,14 +1251,34 @@
                     $.rs.checkMessages(response);
                     $.rs.checkMeters(response);
 
-                    if (response.success) {
-                        $.rs.updatable.updateTarget(e.currentTarget);
+                    if ($.rs.checkRepeat(response)) {
+                        var params = $.extend({
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {},
+                            url: url,
+                            success: ajaxOptions.success,
+                            error: ajaxOptions.error,
+                            checkAuthorization: false,
+                            checkMessages: false,
+                            checkWindowRedirect: false,
+                            checkMeters: false,
+                        }, response.queryParams);
+
+                        $.ajaxQuery(params);
+
+                    } else {
+                        if (response.success) {
+                            $.rs.updatable.updateTarget(e.currentTarget);
+                        }
                     }
                 },
                 error: function() {
                     $.rs.loading.error();
                 }
-            });
+            };
+
+            $form.ajaxSubmit(ajaxOptions);
 
             return false;
         },
@@ -1292,8 +1313,17 @@
             var $form = this._getListForm(e.currentTarget);
             var data = $form.serializeArray();
 
-            var checked = $('input[name="chk[]"]:checked', $form);
+            var forbid = $('input.firbid-miltiedit[name="chk[]"]:checked', $form);
+            if (forbid.length) {
+                let alertText = $('[data-forbid-multiedit-alert]').data('forbidMultieditAlert');
+                if (!alertText) {
+                    alertText = lang.t('Выбраны недопустимые для мультиредактирования элементы');
+                }
+                alert(alertText);
+                return false;
+            }
 
+            var checked = $('input[name="chk[]"]:checked', $form);
             if (!checked.length) {
                 return false;
             }

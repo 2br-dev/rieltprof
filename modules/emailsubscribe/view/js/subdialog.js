@@ -1,25 +1,45 @@
 /**
 * Отображает диалог подписки на новости
 */
-$(function() {
-   var emailSubscribeWindow; //Хранилище для функции окна подписки
+new class SubscribeWindow extends RsJsCore.classes.component {
 
     /**
-     * Открывает окно подписки
+     * Выполняет скрипт для защиты от роботов
+     *
+     * @param HTML
      */
-   function openSubscribeWindow() {
-        clearTimeout(emailSubscribeWindow);
-        //Смотрим не открыто ли другое окно уже
-        if (!$(".mfp-content").length && !$('#cboxLoadedContent').length){
-            $.openDialog({
-                url: global.emailsubscribe_dialog_url
-            });
-        }else { //Подождём ещё немного
-            emailSubscribeWindow = setTimeout(openSubscribeWindow, global.emailsubscribe_dialog_open_delay * 1000);
+    executeScript(HTML) {
+        var head = document.getElementsByTagName("head")[0];
+        var scr;
+
+        var tmp = document.createElement('div');
+        tmp.innerHTML = HTML;
+        var scrajx = tmp.getElementsByTagName('script');
+
+        for(var i in scrajx) {
+            scr = document.createElement("script");
+            scr.type = "text/javascript";
+            scr.text = scrajx[i].text;
+            head.appendChild(scr);
+            head.removeChild(scr);
         }
-   }
-   
-   if (global.emailsubscribe_dialog_open_delay){ //Если опция настроена и включена
-       emailSubscribeWindow = setTimeout(openSubscribeWindow, global.emailsubscribe_dialog_open_delay * 1000);
-   }
-});
+    }
+
+    /**
+     * Открывает диалог подписки на новости
+     */
+    openSubscribeDialog() {
+        this.plugins.openDialog.show({
+            url: global.emailsubscribe_dialog_url,
+            callback: (response, element) => {
+                this.executeScript(response.html);
+            }
+        })
+    }
+
+    onDocumentReady() {
+        if (global.emailsubscribe_dialog_open_delay){ //Если опция настроена и включена
+            setTimeout(() => {this.openSubscribeDialog()}, global.emailsubscribe_dialog_open_delay * 1000);
+        }
+    }
+};

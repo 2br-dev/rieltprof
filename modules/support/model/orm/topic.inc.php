@@ -7,6 +7,7 @@
 */
 namespace Support\Model\Orm;
 use \RS\Orm\Type;
+use RS\Router\Manager as RouterManager;
 
 /**
  * Тема, группирующая сообщения в поддержку
@@ -115,5 +116,16 @@ class Topic extends \RS\Orm\OrmObject
         $api->setFilter('topic_id', $this['id']);
         $api->setOrder('dateof');
         return $api->getFirst();
+    }
+
+    /**
+     * Возвращает ссылку на страницу переписки
+     *
+     * @param bool $absolute
+     * @return string
+     */
+    function getUrl($absolute = false)
+    {
+        return RouterManager::obj()->getUrl('support-front-support', ["Act" => "viewTopic", "id" => $this['id']], $absolute);
     }
 }

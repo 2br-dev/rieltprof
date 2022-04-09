@@ -12,11 +12,9 @@ namespace Banners\Model\ExternalApi\Banner;
 */
 class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
         
-    protected
-        $token_require = false;
+    protected $token_require = false;
     
     /**
     * Возвращает комментарии к кодам прав доступа

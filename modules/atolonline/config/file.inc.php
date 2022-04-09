@@ -24,7 +24,7 @@ class File extends \RS\Orm\ConfigObject
             ]),
             '_load_settings' => new Type\Varchar([
                 'description' => '',
-                'template' => '%atolonline%/load_settings.tpl'
+                'template' => '%atolonline%/admin/load_settings.tpl'
             ]),
             'login' => new Type\Varchar([
                 'description' => t('Логин'),

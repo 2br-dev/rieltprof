@@ -12,8 +12,7 @@ namespace Shop\Model\ExternalApi\Cart;
 */
 class Update extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
     
     protected
         $token_require = false, //Токен не обязателен
@@ -147,7 +146,7 @@ class Update extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
     * 
     * @return array Возвращает список со сведения об элементах в корзине
     */
-    protected function process($token = null, $products, $coupon = null)
+    protected function process($products, $token = null, $coupon = null)
     {
         $apply_coupon = \Shop\Model\Cart::currentCart()->update($products, $coupon);
         if ($apply_coupon !== true) {

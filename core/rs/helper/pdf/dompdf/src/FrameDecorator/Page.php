@@ -369,6 +369,7 @@ class Page extends AbstractFrameDecorator
                     return false;
                 }
 
+                // FIXME: Checking widows is tricky without having laid out the
                 // remaining line boxes.  Just ignore it for now...
 
                 // Rule D
@@ -454,7 +455,6 @@ class Page extends AbstractFrameDecorator
                 }
             }
         }
-
     }
 
     /**
@@ -489,14 +489,6 @@ class Page extends AbstractFrameDecorator
         } while ($p = $p->get_parent());
 
         $margin_height = $frame->get_margin_height();
-
-
-        // if it the first of the page, we don't break
-        if ($frame->get_style()->display === "table-row" &&
-            !$frame->get_prev_sibling() &&
-            $margin_height > $this->get_margin_height()
-        )
-            return false;
 
         // Determine the frame's maximum y value
         $max_y = (float)$frame->get_position("y") + $margin_height;

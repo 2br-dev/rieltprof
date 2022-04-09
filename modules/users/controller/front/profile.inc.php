@@ -37,7 +37,6 @@ class Profile extends AuthorizedFront
         $user = $this->getUserForProfile();
 
         if ($this->isMyPost() && $this->url->checkCsrf()) {
-
             if ($user->save($user['id'])) {
                 $_SESSION['user_profile_result'] = t('Изменения сохранены');
                 AppAuth::setCurrentUser($user); //Обновляем в пользователя в текущей сессии

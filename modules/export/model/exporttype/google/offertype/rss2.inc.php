@@ -75,9 +75,9 @@ class Rss2 extends AbstractOfferType
     * @param \Export\Model\Orm\ExportProfile $profile - объект профиля экспорта
     * @param \XMLWriter $writer - объект библиотеки для записи XML
     * @param \Catalog\Model\Orm\Product $product - объект товара
-    * @param integer $offer_index - индекс комплектации для отображения
+    * @param integer $offer_id - индекс комплектации для отображения
     */
-    public function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_index)
+    public function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_id)
     {
         $http_request = \RS\Http\Request::commonInstance();
         $request_host = $http_request->getProtocol() . '://' . $http_request->getDomainStr();
@@ -95,9 +95,9 @@ class Rss2 extends AbstractOfferType
         $current_offer = false; //Текущая комплектация
 
         $writer->startElement("item");
-            $this->fireOfferEvent('beforewriteoffer', $profile, $writer, $product, $offer_index);
+            $this->fireOfferEvent('beforewriteoffer', $profile, $writer, $product, $offer_id);
 
-            if ($offer_index!==false){
+            if ($offer_id!==false){
                 $writer->writeAttribute('g:item_group_id', $product->id);
             }
 
@@ -108,17 +108,17 @@ class Rss2 extends AbstractOfferType
                 $url_params = htmlspecialchars_decode($profile['url_params']);
             }
 
-            $title = strip_tags(trim($product->title.' '.(($offer_index !== false && !$profile->no_export_offers) ? $product->getOfferTitle($offer_index) : '')));
+            $title = strip_tags(trim($product->title.' '.(($offer_id !== false && !$profile->no_export_offers) ? $product->getOfferTitle($offer_id) : '')));
             $writer->writeElement("g:title", $title);
-            $writer->writeElement("g:link", $request_host . $product->getUrl() . ($url_params ? "?".$url_params : "") . ( $offer_index ? '#'.$offer_index : '' ));
+            $writer->writeElement("g:link", $request_host . $product->getUrl() . ($url_params ? "?".$url_params : "") . ( $offer_id ? '#'.$offer_id : '' ));
 
             //Добавим описание
             $description = $product->short_description;
-            if ($offer_index!==false){
+            if ($offer_id!==false){
                 /**
                 * @var \Catalog\Model\Orm\Offer
                 */
-                $current_offer = $product['offers']['items'][$offer_index];//Текущее предложение
+                $current_offer = $product['offers']['items'][$offer_id];//Текущее предложение
                 //Если есть доп параметры модели, то добавим их в конец
                 if (isset($current_offer['propsdata_arr']) && !empty($current_offer['propsdata_arr'])){
                     $arr = [];
@@ -130,7 +130,7 @@ class Rss2 extends AbstractOfferType
 
             }
             $writer->writeElement("g:description", strip_tags($description));
-            $barcode = $product->getBarCode($offer_index);
+            $barcode = $product->getBarCode($offer_id);
             //Уникаьлный артикул
              $profilegoogle =$profile->getTypeObject();
              $gid = (!$current_offer || ($profilegoogle->no_export_offers)) ? $barcode : $barcode."-".$current_offer['id'];
@@ -143,10 +143,10 @@ class Rss2 extends AbstractOfferType
             $this->writeOfferImages($profile, $writer, $product, $current_offer);
 
             // Берем цену по-умолчанию
-            $prices = $product->getOfferCost($offer_index, $product['xcost']);
+            $prices = $product->getOfferCost($offer_id, $product['xcost']);
              if (!empty($profile['export_cost_id'])) {
                  $price = $prices[$profile['export_cost_id']];
-             }else{
+             } else {
                 $price = $prices[\Catalog\Model\Costapi::getDefaultCostId()];
              }
             $old_price = 0;
@@ -155,7 +155,7 @@ class Rss2 extends AbstractOfferType
             }
 
             //Доступность
-            $this->writeOfferAvaliability($writer, $product, $price, $offer_index);
+            $this->writeOfferAvaliability($writer, $product, $price, $offer_id);
 
             //Цена
             if ($old_price > 0){ //Если есть старая цена продажи
@@ -171,16 +171,16 @@ class Rss2 extends AbstractOfferType
                 $writer->writeElement("g:brand", $brand['title']);
             }
             //Штрихкод
-            $sku = $product->getSKU($offer_index);
+            $sku = $product->getSKU($offer_id);
             if (!empty($sku)) {
                 $writer->writeElement("g:gtin", $sku);
             }
 
-            $this->writeEspecialOfferTags($profile, $writer, $product, $offer_index);
+            $this->writeEspecialOfferTags($profile, $writer, $product, $offer_id);
 
             //Вес товара
-            if ($product->getWeight($offer_index) && !$profile['not_use_shipping_weight_tag']){
-                $weight = ($product->getWeight($offer_index))/1000;
+            if ($product->getWeight($offer_id) && !$profile['not_use_shipping_weight_tag']){
+                $weight = ($product->getWeight($offer_id))/1000;
                 $writer->writeElement("g:shipping_weight", $weight.' kg');
             }
 
@@ -189,7 +189,7 @@ class Rss2 extends AbstractOfferType
                 $this->writeOfferAdditionalParams($profile, $writer, $current_offer);
             }
 
-            $this->fireOfferEvent('writeoffer', $profile, $writer, $product, $offer_index);
+            $this->fireOfferEvent('writeoffer', $profile, $writer, $product, $offer_id);
         $writer->endElement();
     }
 
@@ -212,9 +212,11 @@ class Rss2 extends AbstractOfferType
             }
         }
 
-        foreach ($current_offer['propsdata_arr'] as $prop_title => $value) {
-            if (isset($tags[$prop_title])) {
-                $writer->writeElement("g:".$tags[$prop_title], $value);
+        if ($current_offer['propsdata_arr']) {
+            foreach ($current_offer['propsdata_arr'] as $prop_title => $value) {
+                if (isset($tags[$prop_title])) {
+                    $writer->writeElement("g:".$tags[$prop_title], $value);
+                }
             }
         }
     }
@@ -225,15 +227,15 @@ class Rss2 extends AbstractOfferType
     * @param \XMLWriter $writer - объект библиотеки для записи XML
     * @param \Catalog\Model\Orm\Product $product - объект товара
     * @param float $price - индекс комплектации для отображения
-    * @param integer $offer_index - индекс комплектации для отображения
+    * @param integer $offer_id - id комплектации для отображения
     */
-    private function writeOfferAvaliability(\XMLWriter $writer, \Catalog\Model\Orm\Product $product, $price, $offer_index)
+    private function writeOfferAvaliability(\XMLWriter $writer, \Catalog\Model\Orm\Product $product, $price, $offer_id)
     {
         if ($this->shop_config && $product->shouldReserve()){ //Если есть только предзаказ
             $writer->writeElement("g:availability", "preorder");
         }else{
             // Определяем доступность товара
-            $available = $product->getNum($offer_index) > 0 && $price > 0;
+            $available = $product->getNum($offer_id) > 0 && $price > 0;
             $writer->writeElement("g:availability", $available ? "in stock" : "out of stock");
         }
     }
@@ -279,22 +281,34 @@ class Rss2 extends AbstractOfferType
             $offer_images = $current_offer['photos_arr'];
             if (!empty($offer_images)){
 
-                $not_first = 0;
-                foreach ($images as $k=>$image){
-                    if (in_array($image['id'], $offer_images)){
-                        $image_url = ($profile['export_photo_originals']) ? $image->getOriginalUrl() : $image->getUrl(800, 800, 'axy');
-                        $tag_name = ($k == 0) ? "g:image_link" : "g:additional_image_link"; // первое фото имеет отличный тег
-                        $writer->writeElement($tag_name, \RS\Http\Request::commonInstance()->getDomain(true) . $image_url);
+                $first = false;
+                $image_count = 0;
+                foreach ($images as $k => $image) {
+                    if (in_array($image['id'], $offer_images) && $image_count < 10) {
+                        $image_count++;
+                        $image_url = ($profile['export_photo_originals']) ? $image->getOriginalUrl(true) : $image->getUrl(800, 800, 'axy', true);
+                        if (!$first) { //Первое фото
+                            $writer->writeElement("g:image_link", $image_url);
+                            $first = true;
+                        } else {
+                            $writer->writeElement("g:additional_image_link", $image_url);
+                        }
                     }
                 }
             }
         }
         //Если просто товар или фото комплектаций не привязано
         if (!$current_offer || ($current_offer && empty($offer_images))){
-            foreach ($images as $k=>$image){
-                $image_url = ($profile['export_photo_originals']) ? $image->getOriginalUrl() : $image->getUrl(800, 800, 'axy');
-                $tag_name = ($k == 0) ? "g:image_link" : "g:additional_image_link"; // первое фото имеет отличный тег
-                $writer->writeElement($tag_name, \RS\Http\Request::commonInstance()->getDomain(true) . $image_url);
+            $first = false;
+            $image_chunk = array_chunk($images, 10);
+            foreach (reset($image_chunk) as $k => $image) {
+                $image_url = ($profile['export_photo_originals']) ? $image->getOriginalUrl(true) : $image->getUrl(800, 800, 'axy', true);
+                if (!$first) { //Первое фото
+                    $writer->writeElement("g:image_link", $image_url);
+                    $first = true;
+                } else {
+                    $writer->writeElement("g:additional_image_link", $image_url);
+                }
             }
         }
     }

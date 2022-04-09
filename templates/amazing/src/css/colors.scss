@@ -1,0 +1,20 @@
+@import 'theme';
+
+:root {
+  --theme-primary: #{$primary};
+  --theme-primary-dark: #{$primary-dark};
+  --theme-primary-light: #{$primary-light};
+  --theme-primary-very-light: #{$primary-very-light};
+  --theme-primary-border: #{$primary-border};
+  --theme-primary-btn-text: #{$white};
+  --theme-link: #{$link};
+  --theme-link-hover: #{$link-hover};
+
+  --theme-footer-bg: #{$footer-bg};
+  --theme-subfooter-bg: #{$subfooter-bg};
+  --theme-footer-link: #{$footer-link};
+  --theme-footer-text: #{$footer-text};
+
+  --theme-menubar-bg: #{$very-dark-gray};
+  --theme-menubar-link: #{$white};
+}

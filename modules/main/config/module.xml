@@ -3,10 +3,11 @@
     <defaultValues>
         <name multilanguage="true">Системный модуль</name>
         <description multilanguage="true">Основные функции движка</description>
-        <version>4.0.53</version>
+        <version>6.0.17</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         
+        <map_type>yandex</map_type>
         <image_quality>95</image_quality>
         <wmark_min_width>300</wmark_min_width>
         <wmark_min_height>300</wmark_min_height>
@@ -17,10 +18,17 @@
         <csv_delimiter>;</csv_delimiter>
         <csv_check_timeout>1</csv_check_timeout>
         <csv_timeout>26</csv_timeout>
-        <geo_ip_service>ipgeobase</geo_ip_service>
+        <geo_ip_service>dadata</geo_ip_service>
         <long_polling_can_enable>1</long_polling_can_enable>
         <long_polling_timeout_sec>20</long_polling_timeout_sec>
         <long_polling_event_listen_interval_sec>1</long_polling_event_listen_interval_sec>
         <enable_remote_support>1</enable_remote_support>
+        <default_weight>100</default_weight>
+        <weight_unit>g</weight_unit>
+        <default_product_length>10</default_product_length>
+        <default_product_width>10</default_product_width>
+        <default_product_height>10</default_product_height>
+        <dimensions_unit>sm</dimensions_unit>
+        <rel_canonical_class>rs</rel_canonical_class>
     </defaultValues>
 </config>

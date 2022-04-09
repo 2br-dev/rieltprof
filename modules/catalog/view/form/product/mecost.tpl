@@ -47,7 +47,7 @@
     {/foreach}
 </table>
 
-<script type="text/javascript">
+<script>
     $.allReady(function(){
         /**
         * Показ расширенного редактирования цены

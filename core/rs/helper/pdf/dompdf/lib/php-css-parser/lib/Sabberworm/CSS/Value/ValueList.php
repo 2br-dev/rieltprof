@@ -2,17 +2,15 @@
 
 namespace Sabberworm\CSS\Value;
 
-use Sabberworm\CSS\OutputFormat;
-
 abstract class ValueList extends Value {
 
 	protected $aComponents;
 	protected $sSeparator;
 
-	public function __construct($aComponents = [], $sSeparator = ',', $iLineNo = 0) {
+	public function __construct($aComponents = array(), $sSeparator = ',', $iLineNo = 0) {
 		parent::__construct($iLineNo);
 		if (!is_array($aComponents)) {
-			$aComponents = [$aComponents];
+			$aComponents = array($aComponents);
 		}
 		$this->aComponents = $aComponents;
 		$this->sSeparator = $sSeparator;
@@ -39,10 +37,10 @@ abstract class ValueList extends Value {
 	}
 
 	public function __toString() {
-		return $this->render(new OutputFormat());
+		return $this->render(new \Sabberworm\CSS\OutputFormat());
 	}
 
-	public function render(OutputFormat $oOutputFormat) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
 		return $oOutputFormat->implode($oOutputFormat->spaceBeforeListArgumentSeparator($this->sSeparator) . $this->sSeparator . $oOutputFormat->spaceAfterListArgumentSeparator($this->sSeparator), $this->aComponents);
 	}
 

@@ -328,7 +328,7 @@ class FileManagerApi extends \RS\Module\AbstractModel\BaseModel
     {
         
         if (preg_match('/^[a-zA-Z0-9\-\_.]+$/', $filename)
-            && (!$filterExtension || preg_match('/^[a-zA-Z0-9\-\_.]+?\.('.implode($this->allow_ext, '|').')$/', $filename))) 
+            && (!$filterExtension || preg_match('/^[a-zA-Z0-9\-\_.]+?\.('.implode('|', $this->allow_ext).')$/', $filename)))
         {
             return true;
         }

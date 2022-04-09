@@ -45,7 +45,19 @@
             <td class="value"><input type="text" name="db_prefix" value="{$generated_prefix}" data-check-pattern="^[_a-zA-Z0-9]*$" data-check-error="{t}Использованы недопустимые символы{/t}">
             <span class="field-error" data-field="db_prefix"></span>
             </td>
-        </tr>            
+        </tr>
+        <tr>
+            <td class="key">{t}Тип таблиц{/t}<br>
+            <span class="key-help">{t}По умолчанию - MyISAM{/t}</span>
+            </td>
+            <td class="value">
+                <select name="db_table_engine">
+                    <option value="MyISAM" selected>MyISAM</option>
+                    <option value="InnoDB">InnoDB</option>
+                    <option value="Aria">Aria</option>
+                </select>
+            </td>
+        </tr>
     </table>
     <div class="hr sim"></div>
     <h3>{t}Администратор системы{/t}</h3>

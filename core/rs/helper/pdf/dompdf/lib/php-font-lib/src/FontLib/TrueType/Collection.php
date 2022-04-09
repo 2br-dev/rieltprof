@@ -26,8 +26,8 @@ class Collection extends BinaryStream implements Iterator, Countable {
    */
   private $position = 0;
 
-  protected $collectionOffsets = [];
-  protected $collection = [];
+  protected $collectionOffsets = array();
+  protected $collection = array();
   protected $version;
   protected $numFonts;
 

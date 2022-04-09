@@ -91,7 +91,7 @@
     </div>
 </div>
 
-<script type=" text/javascript">
+<script>
     $.allReady(function() {
         $('.crm-block-interaction{$link_suffix}').blockCrm({
             {if $link_suffix}

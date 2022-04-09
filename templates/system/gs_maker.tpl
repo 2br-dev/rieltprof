@@ -3,9 +3,13 @@
     {if $layouts.grid_system != 'gs960'}
         {addcss file="%templates%/manager.css"}
     {/if}
-    <div id="all-containers-wrapper" class="all-containers-wrapper" data-page-id="{$layouts.page_id}" data-clone-url="{$router->getAdminUrl('copyContainer', ['context' => $layouts.theme_data.blocks_context, 'ajax' => 1], 'templates-blockctrl')}" data-sort-url="{$router->getAdminUrl('ajaxMoveContainer', [], 'templates-blockctrl')}">
+    <div id="all-containers-wrapper"
+        class="all-containers-wrapper"
+        data-page-id="{$layouts.page_id}"
+        data-clone-url="{$router->getAdminUrl('copyContainer', ['context' => $layouts.theme_data.blocks_context, 'ajax' => 1], 'templates-blockctrl')}"
+        data-sort-url="{$router->getAdminUrl('ajaxMoveContainer', [], 'templates-blockctrl')}">
 {/if}
-{foreach from=$layouts['containers'] item=container}
+{foreach $layouts['containers'] as $container}
     {include file="%system%/gs/container.tpl" container=$container assign=wrapped_content page_id=$layouts.page_id theme_context=$layouts.theme_data.blocks_context}
     {if $container.outside_template}
         {include file=$container.outside_template wrapped_content=$wrapped_content}

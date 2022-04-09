@@ -7,6 +7,8 @@
 */
 namespace Shop\Controller\Front;
 use RS\Application\Application;
+use Shop\Model\Orm\UserStatus;
+use Shop\Model\UserStatusApi;
 
 /**
  * Контроллер возвратов заказов
@@ -68,6 +70,10 @@ class MyProductsReturn extends \RS\Controller\AuthorizedFront
     function getOrders()
     {
         $this->order_api->setFilter('user_id', $this->user['id']);
+        $cancellation_statuses = UserStatusApi::getStatusesIdByType(UserStatus::STATUS_CANCELLED);
+        if ($cancellation_statuses) {
+            $this->order_api->setFilter('status', $cancellation_statuses, 'notin');
+        }
         return $this->order_api->getList();
     }
 

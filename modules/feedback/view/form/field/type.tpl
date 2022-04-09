@@ -1,6 +1,6 @@
 {include file=$field->getOriginalTemplate()}
 {literal}
-<script type="text/javascript">
+<script>
     $(function() {
         
         //Навесим события

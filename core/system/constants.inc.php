@@ -10,6 +10,9 @@
 * Здесь определяются глобальные константы
 */
 
+// Базовые константы 
+define('DS', DIRECTORY_SEPARATOR);
+
 // \RS\Http\Request
 define('TYPE_STRING','string');
 define('TYPE_INTEGER','integer');

@@ -7,6 +7,8 @@
 */
 namespace Crm\Model\Links\Type;
 
+use RS\View\Engine;
+use Shop\Model\OrderApi;
 use Shop\Model\OrmType\SelectOrder;
 use RS\Orm\FormObject;
 use RS\Orm\PropertyIterator;
@@ -23,6 +25,7 @@ class LinkTypeOrder extends AbstractType
      * @var Order
      */
     public $linked_object;
+    protected $last_objects_template = '%crm%/admin/links/lastobjects/order.tpl';
 
     /**
      * Возвращает имя закладки, характеризующей данную связь
@@ -127,5 +130,20 @@ class LinkTypeOrder extends AbstractType
     {
         $current_site_id = \RS\Site\Manager::getSiteId();
         return $this->linked_object['id'] && ($this->linked_object['site_id'] != $current_site_id);
+    }
+
+    /**
+     * Возвращает последние $limit объектов, с которыми возможно установить связь
+     *
+     * @param integer $limit
+     * @return []
+     */
+    public function getLastObjects($limit = null)
+    {
+        if (!$limit) {
+            $limit = 10;
+        }
+        $api = new OrderApi();
+        return $api->getList(1, $limit);
     }
 }

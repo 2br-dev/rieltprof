@@ -15,8 +15,7 @@ use \RS\Orm\Type;
 */
 class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetTreeList
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
 
     protected $menu_preload_data;     //Массив предзагрузки с пунктами меню
     protected $token_require = false; //Токен не обязателен
@@ -261,10 +260,7 @@ class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetTreeList
     * 
     * @return array Возвращает список объектов и связанные с ним сведения.
     */
-    protected function process($token = null, 
-                               $parent_id = 0, 
-                               $filter = [],
-                               $sort = 'sortn')
+    protected function process($token = null, $parent_id = 0, $filter = [], $sort = 'sortn')
     {
         //Если запрос пришёл из мобильного приложения, то смотрим parent_id в модуле
         if (isset($filter['mobile_public'])){

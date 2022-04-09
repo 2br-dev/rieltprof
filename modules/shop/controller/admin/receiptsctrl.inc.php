@@ -7,6 +7,7 @@
 */
 namespace Shop\Controller\Admin;
 
+use RS\Controller\Admin\Helper\CrudCollection;
 use \RS\Html\Table\Type as TableType,
     \RS\Html\Toolbar\Button as ToolbarButton,
     \RS\Html\Toolbar,
@@ -15,7 +16,11 @@ use \RS\Html\Table\Type as TableType,
     \Shop\Model;
 use RS\AccessControl\Rights;
 use RS\AccessControl\DefaultModuleRights;
-    
+use RS\Orm\FormObject;
+use RS\Orm\PropertyIterator;
+use Shop\Config\ModuleRights;
+use RS\Orm\Type;
+
 /**
 * Контроллер Управление чеками
 */
@@ -41,13 +46,27 @@ class ReceiptsCtrl extends \RS\Controller\Admin\Crud
              'Items' => [
                  new ToolbarButton\Dropdown([
                      [
+                         'title' => t('Повторно выбить чек прихода'),
+                         'attr' => [
+                             'href' => $this->router->getAdminUrl('makeReceipt', ['operation' => 'sell', 'transaction_id' => $transaction_id, 'referer' => $this->url->selfUri()]),
+                             'class' => 'crud-add crud-sm-dialog'
+                         ]
+                     ],
+                     [
+                         'title' => t('Повторно выбить чек возврата'),
+                         'attr' => [
+                             'href' => $this->router->getAdminUrl('makeReceipt', ['operation' => 'sell_refund', 'transaction_id' => $transaction_id, 'referer' => $this->url->selfUri()]),
+                             'class' => 'crud-add crud-sm-dialog'
+                         ]
+                     ],
+                     [
                          'title' => t('Добавить чек корректировки'),
                          'attr' => [
                              'href' => $this->router->getAdminUrl(false, ['transaction_id' => $transaction_id, 'referer' => $this->url->selfUri()], 'shop-correctionreceiptctrl'),
-                             'class' => 'crud-add crud-sm-dialog button add'
+                             'class' => 'crud-add crud-sm-dialog'
                          ]
                      ],
-                 ], ['attr' => ['class' => 'button add']]),
+                 ]),
              ]]
         ));
         
@@ -70,9 +89,9 @@ class ReceiptsCtrl extends \RS\Controller\Admin\Crud
                 new TableType\Datetime('dateof', t('Дата'), ['Sortable' => SORTABLE_BOTH]),
                 new TableType\Text('type', t('Тип чека')),
                 new TableType\Text('total', t('Сумма чека')),
-                new TableType\Usertpl('status', t('Статус'), '%shop%/receipt_status_cell.tpl'),
+                new TableType\Usertpl('status', t('Статус'), '%shop%/admin/receipt_status_cell.tpl'),
                 new TableType\Text('error', t('Ошибка'), ['hidden' => true]),
-                new TableType\Usertpl('__actions__', t('Действия'), '%shop%/receipt_actions_cell.tpl'),
+                new TableType\Usertpl('__actions__', t('Действия'), '%shop%/admin/receipt_actions_cell.tpl'),
             ]
         ]));
         
@@ -121,7 +140,7 @@ class ReceiptsCtrl extends \RS\Controller\Admin\Crud
         
         $this->wrapOutput(false);
         
-        return $this->result->setTemplate('%shop%/receipt_error.tpl');
+        return $this->result->setTemplate('%shop%/admin/receipt_error.tpl');
     }
     
     
@@ -139,23 +158,13 @@ class ReceiptsCtrl extends \RS\Controller\Admin\Crud
         $receipt_id       = $this->url->get('id', TYPE_INTEGER);
         $receipt          = new \Shop\Model\Orm\Receipt($receipt_id);
 
-        //$cashregister_api = new \Shop\Model\CashRegisterApi();
-        /**
-        * @var \Shop\Model\CashRegisterType\AbstractType
-        */
-        //$provider = $cashregister_api->getTypeByShortName($receipt['provider']);
-        
-        //$info = $receipt->getExtraInfo('success_info');
-        //$receipt_url = $cashregister_api->getReceiptUrl($receipt);
-
         $this->view->assign([
             'receipt' => $receipt,
-            //'receipt_url' => $receipt_url,
         ]);
         
         $this->wrapOutput(false);
         
-        return $this->result->setTemplate('%shop%/receipt_info.tpl');
+        return $this->result->setTemplate('%shop%/admin/receipt_info.tpl');
     }
     
     /**
@@ -201,5 +210,85 @@ class ReceiptsCtrl extends \RS\Controller\Admin\Crud
             $this->result->addEMessage($e->getMessage());
             return $this->result;
         }
+    }
+
+    /**
+     * Выбивает чек продажи
+     */
+    function actionMakeReceipt()
+    {
+        if ($error = Rights::CheckRightError($this, ModuleRights::RIGHT_CORRECTION_RECEIPT)) {
+            return $this->result->setSuccess(false)
+                ->addEMessage($error);
+        }
+        $referer        = $this->request('referer', TYPE_STRING);
+        $transaction_id = $this->request('transaction_id', TYPE_INTEGER, 0);
+        $operation = $this->request('operation', TYPE_STRING, 'sell');
+
+        $operation_flag = ($operation === 'sell' ? Model\CashRegisterType\AbstractType::OPERATION_SELL :
+            Model\CashRegisterType\AbstractType::OPERATION_SELL_REFUND);
+
+        $helper = new CrudCollection($this);
+        $helper
+            ->setTopTitle(t('Выбить чек %type', ['type' => $operation_flag == 'sell' ? t('прихода') : t('возврата')]))
+            ->viewAsForm();
+
+        $form_object = new FormObject(new PropertyIterator([
+            'transaction_id' => new Type\Integer([
+                'description' => t('ID транзакции'),
+                'hint' => t('Чек будет выбит на всю сумму транзакции'),
+                'checker' => ['chkEmpty', t('Укажите ID транзакции')]
+            ])
+        ]));
+
+        $form_object['transaction_id'] = $transaction_id;
+
+        if ($this->url->isPost()) {
+
+            $cashregister_api = new \Shop\Model\CashRegisterApi();
+            try{
+                if (!$form_object->checkData()) {
+                    return $this->result->setSuccess(false)->setErrors($form_object->getDisplayErrors());
+                }
+                $transaction = new Model\Orm\Transaction($form_object['transaction_id']);
+
+                if (!$transaction['id']) {
+                    return $this->result->setSuccess(false)->setErrors(t('Транзакция не найдена'));
+                }
+
+                $result = $cashregister_api->createReceipt($transaction, $operation_flag);
+
+                if ($result === true) {
+                    return $this->result->setSuccess(true)
+                        ->addMessage(t('Чек создан'))
+                        ->setNoAjaxRedirect($referer);
+                } else {
+                    return $this->result->setSuccess(false)
+                        ->addEMessage($result);
+                }
+            }
+            catch(\Exception $e){
+                $this->result->setSuccess(false);
+                $this->result->addEMessage($e->getMessage());
+                return $this->result;
+            }
+        }
+
+        $helper
+            ->setBottomToolbar(new Toolbar\Element( [
+                'Items' => [
+                    'save' => new ToolbarButton\SaveForm(null, t('Создать')),
+                    'cancel' => new ToolbarButton\Cancel($this->url->getSavedUrl($this->controller_name.'index')),
+                ]
+            ]));
+
+        $this->view->assign([
+            'transaction_id' => $transaction_id,
+            'referer' => $referer
+        ]);
+
+        $helper->setFormObject($form_object);
+
+        return $this->result->setTemplate($helper['template']);
     }
 }

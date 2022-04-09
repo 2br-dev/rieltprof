@@ -35,7 +35,7 @@ class Widgets extends Front
             'widgets' => $this->api->getMainList($total),
             'total' => $total
         ]);
-        return $this->result->setTemplate('widgets.tpl');
+        return $this->result->setTemplate('admin/widget/widgets.tpl');
     }
 
     /**
@@ -44,7 +44,7 @@ class Widgets extends Front
     public function actionGetWidgetList()
     {
         $this->view->assign('list', $this->api->getFullList(true, true));
-        return $this->result->addSection('title', t('Добавить виджет'))->setTemplate('widget_list.tpl');
+        return $this->result->addSection('title', t('Добавить виджет'))->setTemplate('admin/widget/widget_list.tpl');
     }
 
     /**

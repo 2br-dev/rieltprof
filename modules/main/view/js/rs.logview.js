@@ -22,9 +22,11 @@ class LogView {
                 this.clearLog();
             }
         });
-        this.owner.querySelector(this.selector.inputDate).addEventListener('change', (event) => {
-            let inputTime = event.target.closest(this.selector.datetime).querySelector(this.selector.inputTime);
-            inputTime.disabled = !event.target.value;
+        this.owner.querySelectorAll(this.selector.inputDate).forEach((element) => {
+            element.addEventListener('change', (event) => {
+                let inputTime = event.target.closest(this.selector.datetime).querySelector(this.selector.inputTime);
+                inputTime.disabled = !event.target.value;
+            })
         });
 
         this.owner.querySelectorAll(this.selector.datetime).forEach((element) => {

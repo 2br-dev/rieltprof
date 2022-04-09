@@ -69,7 +69,7 @@
         background-repeat: no-repeat;
     }
 </style>
-<script type="text/javascript">
+<script>
     $('.yaMapPointsTable tbody .delYandexPoint').click(function(){
         $(this).closest('tr').remove();
     });

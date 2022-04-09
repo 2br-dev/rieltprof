@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Баннеры</name>
         <description multilanguage="true">Позволяет администрировать баннеры для разных зон</description>        
-        <version>4.0.7</version>
+        <version>6.0.5</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
     </defaultValues>

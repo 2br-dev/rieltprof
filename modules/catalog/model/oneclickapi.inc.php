@@ -101,11 +101,6 @@ class OneClickApi extends EntityList
         }
         $this->click_info['products'] = $products;
 
-        $notice = new CatalogNotice\OneClickUser();
-        $notice->init($this->click_info);
-        //Отсылаем sms пользователю
-        AlertsManager::send($notice);
-
         //Добавим в БД
         $this->addOneClickInfo();
     }

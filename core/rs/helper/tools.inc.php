@@ -285,6 +285,26 @@ class Tools
         }
         return $result;
     }
+
+    /**
+     * Рекурсивно деэкранирует ключи и значения массива функцией htmlspecialchars_decode
+     *
+     * @param array $array исходный массив
+     * @return array возвращает экранированный исходный массив
+     */
+    public static function unescapeArrayRecursive(array $array)
+    {
+        $result = [];
+        foreach($array as $key => $value) {
+            $key = self::unEntityString($key);
+            if (is_array($value)) {
+                $result[$key] = self::unescapeArrayRecursive($value);
+            } else {
+                $result[$key] = self::unEntityString($value);
+            }
+        }
+        return $result;
+    }
     
     /**
     * Переводит спецсимволы строки в entity

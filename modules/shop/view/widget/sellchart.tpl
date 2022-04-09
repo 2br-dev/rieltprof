@@ -56,7 +56,7 @@
     {/if}
 </div>
 
-<script type="text/javascript">
+<script>
     $.allReady(function() {
         $('#sellWidget').rsSellChart();
     });

@@ -80,7 +80,7 @@ class Wizard extends \RS\Controller\Admin\Front
             'currentStep' => '1'
         ]);
         
-        $this->helper['form'] = $this->view->fetch('checkupdate.tpl');
+        $this->helper['form'] = $this->view->fetch('admin/checkupdate.tpl');
         return $this->result->setTemplate( $this->helper['template'] );                
     }
     
@@ -102,7 +102,7 @@ class Wizard extends \RS\Controller\Admin\Front
             'data' => $this->api->getPrepearedData()
         ]);
                 
-        $this->helper['form'] = $this->view->fetch('selectproduct.tpl');
+        $this->helper['form'] = $this->view->fetch('admin/selectproduct.tpl');
         return $this->result->setTemplate( $this->helper['template'] ); 
     }
     
@@ -140,10 +140,10 @@ class Wizard extends \RS\Controller\Admin\Front
                 new TableType\Checkbox('module', [
                     'cellAttrParam' => 'checkbox_attr'
                 ]),
-                new TableType\Usertpl('title', t('Название модуля'), '%siteupdate%/module_col.tpl'),
+                new TableType\Usertpl('title', t('Название модуля'), '%siteupdate%/admin/module_col.tpl'),
                 new TableType\Text('my_version', t('Текущая версия')),
                 new TableType\Text('new_version', t('Доступная версия')),
-                new TableType\Usertpl('module', '', '%siteupdate%/changelog_col.tpl')
+                new TableType\Usertpl('module', '', '%siteupdate%/admin/changelog_col.tpl')
             ]
         ]);
         
@@ -168,7 +168,7 @@ class Wizard extends \RS\Controller\Admin\Front
         ]);
         
         unset($_SESSION['SUCCESS_INSTALL_TEXT']);
-        $this->helper['form'] = $this->view->fetch('update.tpl');
+        $this->helper['form'] = $this->view->fetch('admin/update.tpl');
         return $this->result->setTemplate( $this->helper['template'] );
     }
     
@@ -188,7 +188,7 @@ class Wizard extends \RS\Controller\Admin\Front
             ]));
         
         $this->view->assign('changelog', $this->api->getChangelog($module));
-        $this->helper['form'] = $this->view->fetch('view_changelog.tpl');
+        $this->helper['form'] = $this->view->fetch('admin/view_changelog.tpl');
         
         return $this->result->setTemplate( $this->helper['template'] );
     }
@@ -212,6 +212,6 @@ class Wizard extends \RS\Controller\Admin\Front
         ]);
         
         $this->wrapOutput(false);
-        return $this->result->setTemplate('post_redirector.tpl');
+        return $this->result->setTemplate('admin/post_redirector.tpl');
     }
 }

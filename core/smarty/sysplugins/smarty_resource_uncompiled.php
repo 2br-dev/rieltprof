@@ -29,7 +29,7 @@ abstract class Smarty_Resource_Uncompiled extends Smarty_Resource
      * @var bool
      */
     public $hasCompiledHandler = true;
-    
+
     /**
      * populate compiled object with compiled filepath
      *
@@ -43,7 +43,7 @@ abstract class Smarty_Resource_Uncompiled extends Smarty_Resource
         $compiled->exists = $_template->source->exists;
         if ($_template->smarty->merge_compiled_includes || $_template->source->handler->checkTimestamps()) {
             $compiled->file_dependency[ $_template->source->uid ] =
-                [$compiled->filepath, $compiled->timestamp, $_template->source->type,];
+                array($compiled->filepath, $compiled->timestamp, $_template->source->type,);
         }
     }
 }

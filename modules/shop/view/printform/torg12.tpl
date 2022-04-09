@@ -505,7 +505,7 @@
                 <TD colspan="18" class="tr6 td29">
                     <P class="p1" contenteditable="true">
                         {if $user.is_company}
-                            {$user.company}{if !empty($user.company_address)}, {$user.company_address}{/if}{if !empty($user.phone)}, т. {$user.phone}{/if}{if !empty($user.company_rs)}, р/с {$user.company_rs}, в {$user.company_bank}{/if}{if !empty($user.company_bank_ks)}, к/с {$user.company_bank_ks}{/if}{if !empty($user.company_bank_bik)}, БИК {$user.company_bank_bik}{/if}
+                            {$user.company}{if !empty($user.company_address)}, {$user.company_address}{/if}{if !empty($user.company_inn)}, ИНН {$user.company_inn}{/if}{if !empty($user.phone)}, т. {$user.phone}{/if}{if !empty($user.company_rs)}, р/с {$user.company_rs}, в {$user.company_bank}{/if}{if !empty($user.company_bank_ks)}, к/с {$user.company_bank_ks}{/if}{if !empty($user.company_bank_bik)}, БИК {$user.company_bank_bik}{/if}
                         {else}
                             {$user->getFio()}
                         {/if}
@@ -619,7 +619,7 @@
                 <TD colspan="18" class="tr6 td29">
                     <P class="p1" contenteditable="true">
                         {if $user.is_company}
-                            {$user.company}{if !empty($user.company_address)}, {$user.company_address}{/if}{if !empty($user.phone)}, т. {$user.phone}{/if}{if !empty($user.company_rs)}, р/с {$user.company_rs}, в {$user.company_bank}{/if}{if !empty($user.company_bank_ks)}, к/с {$user.company_bank_ks}{/if}{if !empty($user.company_bank_bik)}, БИК {$user.company_bank_bik}{/if}
+                            {$user.company}{if !empty($user.company_address)}, {$user.company_address}{/if}{if !empty($user.company_inn)}, ИНН {$user.company_inn}{/if}{if !empty($user.phone)}, т. {$user.phone}{/if}{if !empty($user.company_rs)}, р/с {$user.company_rs}, в {$user.company_bank}{/if}{if !empty($user.company_bank_ks)}, к/с {$user.company_bank_ks}{/if}{if !empty($user.company_bank_bik)}, БИК {$user.company_bank_bik}{/if}
                         {else}
                             {$user->getFio()}
                         {/if}
@@ -859,7 +859,7 @@
                 <TD class="tr4 td2"><P class="p1 ft1">&nbsp;</P></TD>
                 <TD class="tr4 td57"><P class="p1 ft1">&nbsp;</P></TD>
                 <TD colspan="4" class="tr7 td36 border-right"><P class="p1 center" contenteditable="true">{$order.order_num}</P></TD>
-                <TD colspan="2" class="tr7 td39 border-right"><P class="p1 center" contenteditable="true">{date("Y.m.d" , strtotime($order.dateof))}</P></TD>
+                <TD colspan="2" class="tr7 td39 border-right"><P class="p1 center" contenteditable="true">{date("d.m.Y" , strtotime($order.dateof))}</P></TD>
                 <TD class="tr4 td14"><P class="p1 ft1">&nbsp;</P></TD>
                 <TD class="tr4 td15"><P class="p1 ft1">&nbsp;</P></TD>
                 <TD class="tr4 td16"><P class="p1 ft1">&nbsp;</P></TD>

@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>994f766b27953aeadf5dd3316bc29748be02f405</sign>
+    <sign>b729c0ccf38b5666e45727a3bf171e21e7040a85</sign>
   </file>
   <file>
     <path>config/demo/album.csv</path>
@@ -46,7 +46,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>d485de9f7218c8351e2b4d19be92b85b0dbc0552</sign>
+    <sign>f189bb2492095a57d3bcd3fffb719c6b435cf0e6</sign>
   </file>
   <file>
     <path>controller/admin/ctrl.inc.php</path>
@@ -62,11 +62,11 @@
   </file>
   <file>
     <path>model/orm/album.inc.php</path>
-    <sign>8c5e7c5083724c9bc1265c534797a1e7993a5ae7</sign>
+    <sign>daf9681ce56b16412ab72aa70247db8a7c1997a6</sign>
   </file>
   <file>
     <path>view/form/album/photos.tpl</path>
     <sign>f6f40bd0ce0791e1b95194280c688f8fa69a09ca</sign>
   </file>
-  <masterSign>0183217b35de52a24dddbf01a7e12e1a79632a5bbf90affb27e08529db858e2f9e75068657d17b0f38e07242043173728a0d235140befc505c23147675c341e06e324204159775ad5c2fcf5e7dc0bd3a212f022e18ba09303bd9dc92abed3bc125ce1659e6ed9b0e68caa76e7b390146e9a499f566ab8bbceb2f7db49baa82ce</masterSign>
+  <masterSign>3c6131718bb69270794ef8603d6f701b661d45dd6801712c0fd3e649bd48e560a027f12c4fea22c16ba5b764ab28fa59f1c7e0cdcb1b77f8aaff874d15f853a80207604d31dba9f236c4a2114c2b6c87e517cb6671aff4c7f44fa9651ea891f833c4b83a787bab13d38b70a69ae9983e20e35503419c2278bf028bd7e4989ab3</masterSign>
 </signatures>

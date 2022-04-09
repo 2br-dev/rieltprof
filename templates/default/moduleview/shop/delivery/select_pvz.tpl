@@ -1,4 +1,4 @@
-<div id="pvzMapWrapper" class="selectPvz {if empty($delivery_pvz_list)}selectPvz_empty{else}rs-selectPvz{/if}" data-pvz-json='{$pvz_json}' data-dialog-options='{ "width" : "95%", "height" : "95%" }'>
+<div id="pvzMapWrapper" class="selectPvz {if empty($delivery_pvz_list)}selectPvz_empty{else}rs-selectPvz{/if}" data-pvz-json='{$pvz_json}' data-dialog-options='{ "width" : "95%", "height" : "95%" }' style="width: 100%; height: 82vh;">
     {$app->autoloadScripsAjaxBefore()}
     {addcss file="%shop%/delivery/selectpvz.css"}
     {addjs file="%shop%/delivery/rs.selectpvz.js"}

@@ -23,10 +23,9 @@ class AuthLog extends \RS\Controller\Admin\Widget
         $total = $log_api->getListCount();
         
         $list = $log_api->getLogItems('Users\Model\Logtype\AdminAuth', $pageSize, ($page-1)*$pageSize, false);
-        
+
         $paginator = new \RS\Helper\Paginator($page, $total, $pageSize, 'main.admin', ['mod_controller' => $this->getUrlName()]);
-        
-        
+
         $this->view->assign([
             'list' => $list,
             'paginator' => $paginator

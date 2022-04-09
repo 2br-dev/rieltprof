@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>b5d66bd8dd202c7ac354928dec6070ce01e35acd</sign>
+    <sign>49a8667989f29e987bc8f42decea4ccfcb26770f</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -14,15 +14,15 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>007726f13ea4843ac6347f426267759a0b31de4d</sign>
+    <sign>784ad2029227ce2554f5fc18e9860c848dc5ff62</sign>
   </file>
   <file>
     <path>controller/admin/supportctrl.inc.php</path>
-    <sign>6aac13ba5e32b8bbe6bbf580a6c08493d6ba685a</sign>
+    <sign>62ee448c97e8350d4b57368ba97afac1c64531d3</sign>
   </file>
   <file>
     <path>controller/admin/topicsctrl.inc.php</path>
-    <sign>064d62a57ff5177b8cfe98e27242d9a90719d8fd</sign>
+    <sign>54fea26afa17adb06fa1c7b44b12df427caecaf5</sign>
   </file>
   <file>
     <path>controller/admin/widget/newtopics.inc.php</path>
@@ -34,7 +34,7 @@
   </file>
   <file>
     <path>controller/front/support.inc.php</path>
-    <sign>57c669e11517d4c94f5dd52dc9ecfe8187268b8d</sign>
+    <sign>abeef6f01c9b37c788f2f5f577bc7fdeae980640</sign>
   </file>
   <file>
     <path>model/api.inc.php</path>
@@ -54,7 +54,7 @@
   </file>
   <file>
     <path>model/orm/topic.inc.php</path>
-    <sign>0e2dc74ea35eab30cc94eb54e5ac54c480d0a6ee</sign>
+    <sign>aed90398ae192ad07d28969fc6d3bc793fdb76af</sign>
   </file>
   <file>
     <path>model/topicapi.inc.php</path>
@@ -65,8 +65,16 @@
     <sign>0aded96e414873fc6f77ac163a4715598c8505d3</sign>
   </file>
   <file>
-    <path>view/adminview.tpl</path>
-    <sign>acba2efaf1335f6de7b454c0a77b21f5fa6738a0</sign>
+    <path>view/admin/adminview.tpl</path>
+    <sign>14ed85ba50325336b260f232220a85d9225cc073</sign>
+  </file>
+  <file>
+    <path>view/admin/table_user_cell.tpl</path>
+    <sign>4b58a3c49b1924e86c099b8393725d47008ef23b</sign>
+  </file>
+  <file>
+    <path>view/admin/user_type_cell.tpl</path>
+    <sign>b61bd8bf8a393403e14e41539097abf109cbcf11</sign>
   </file>
   <file>
     <path>view/blocks/new_messages.tpl</path>
@@ -78,7 +86,11 @@
   </file>
   <file>
     <path>view/hooks/users-blocks-authblock/cabinet-menu-items.post.tpl</path>
-    <sign>a8d8423fd08aef5a8a2dd9d1854fb5a6b5fd2c70</sign>
+    <sign>adaf1e8ffadc3fed212eb60b6a54dab464ed826b</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/support.js</path>
+    <sign>ef4e655f99192c629f613f86c537622d37a1a4af</sign>
   </file>
   <file>
     <path>view/notice/desktop_support.tpl</path>
@@ -102,23 +114,15 @@
   </file>
   <file>
     <path>view/support.tpl</path>
-    <sign>64dad27cc9dc8cfdd31949b68354cfbdd0b8bd3b</sign>
-  </file>
-  <file>
-    <path>view/table_user_cell.tpl</path>
-    <sign>4b58a3c49b1924e86c099b8393725d47008ef23b</sign>
+    <sign>d3d7be38117e4f6bc35c7bcb3bcba576ba097f09</sign>
   </file>
   <file>
     <path>view/topics.tpl</path>
-    <sign>f658abdbb67367e343fb6cd89fc1a6cc4d47d6b1</sign>
-  </file>
-  <file>
-    <path>view/user_type_cell.tpl</path>
-    <sign>b61bd8bf8a393403e14e41539097abf109cbcf11</sign>
+    <sign>8bd3b07c3a5f27be9b2f400e7eb9b63dd34eebe5</sign>
   </file>
   <file>
     <path>view/widget/newtopics.tpl</path>
     <sign>587192b8fa01c1125d2dea272d4a4ffd6db6839f</sign>
   </file>
-  <masterSign>3ea70dd0bd562ecdae00924eb01fece4896fa4035d552368e05b3f94ca7a6122b3887aa327814dbe9327174d1a07adf654dcf4ebd270c0a113ea24856c795c107882fdab5d23c82e7912ffdc6d0152271f33fdeb279dea91bc738e96e1ac9347e4f34107ba026a15460c1e7a4ef71bcb497791bfe24999bee8830988406e6f23</masterSign>
+  <masterSign>1a1c2b50536698afde61d3395fe88a25a686f0de8dcc2a3701a2cdd7739fc83a67e7c71e7cf08795310e256e6efb9ad3124cf7af1c0b179e1e87e624e98719eca462d02160dd9ce8c9f370a55ffe439009d78028dd7a886fb6c7329debaacc2cfe727ea89cead61972ae7371da52e5630756f75398794161e91f847b3a9a0432</masterSign>
 </signatures>

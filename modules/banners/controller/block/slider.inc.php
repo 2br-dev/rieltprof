@@ -18,6 +18,7 @@ class Slider extends \RS\Controller\StandartBlock
         $default_params = [
             'indexTemplate' => 'blocks/slider/slider.tpl', //Должен быть задан у наследника
             'zone' => null,
+            'autoplay_delay' => 10,
             'cache_html_lifetime' => 300
     ];
     
@@ -27,6 +28,10 @@ class Slider extends \RS\Controller\StandartBlock
             'zone' => new Type\Integer([
                 'description' => t('Зона баннеров'),
                 'list' => [['\Banners\Model\ZoneApi', 'staticSelectList']]
+            ]),
+            'autoplay_delay' => new Type\Integer([
+                'description' => t('Время показа одного слайда, сек'),
+                'hint' => t('0 - отключить автопроигрывание слайдов')
             ]),
             'cache_html_lifetime' => new Type\Integer([
                 'description' => t('Время кэширования HTML блока, секунд?'),
@@ -51,7 +56,8 @@ class Slider extends \RS\Controller\StandartBlock
             $zone_api = new \Banners\Model\ZoneApi();
             $zone = $zone_api->getById($zone_id);
             $this->view->assign([
-                'zone' => $zone
+                'zone' => $zone,
+                'banners' => $zone ? $zone->getBanners() : []
             ]);
         }
         

@@ -12,11 +12,9 @@ namespace Catalog\Model\ExternalApi\Warehouse;
 */
 class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
         
-    protected
-        $token_require = false;
+    protected $token_require = false;
     
     /**
     * Возвращает комментарии к кодам прав доступа
@@ -95,7 +93,7 @@ class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
      * @return array
      * @throws \ExternalApi\Model\Exception
      */
-    function process($token = null, $id)
+    function process($id, $token = null)
     {
         return  parent::process($token, $id);
     }

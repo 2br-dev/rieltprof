@@ -7,6 +7,7 @@
 */
 
 namespace Catalog\Controller\Admin;
+use Catalog\Model\Orm\Product;
 use RS\Site\Manager;
 
 /**
@@ -101,6 +102,7 @@ class Dialog extends \RS\Controller\Admin\Block
         if ($pageSize<1) $pageSize = 1;
 
         $total         = $this->productapi->getListCount();
+        $this->productapi->queryObj()->groupby($this->productapi->defAlias() . '.id');
         $list          = $this->productapi->getList($page, $pageSize);
         $list          = $this->productapi->addProductsPhotos($list);
         $products_dirs = $this->productapi->getProductsDirs($list, true);
@@ -113,6 +115,7 @@ class Dialog extends \RS\Controller\Admin\Block
         $this->view->assign([
             'list' => $list,
             'hideProductCheckbox' => $this->url->request('hideProductCheckbox', TYPE_INTEGER, 0),
+            'show_offers' => $this->url->request('show_offers', TYPE_BOOLEAN),
             'products_dirs' => $products_dirs,
             'costtypes' => $costApi->getList(),
             'paginator' => [
@@ -132,5 +135,15 @@ class Dialog extends \RS\Controller\Admin\Block
         }
 
     }
-}
 
+    public function actionLoadOffers()
+    {
+        $product_id = $this->url->request('product_id', TYPE_INTEGER);
+        $product = new Product($product_id);
+
+        $this->view->assign([
+            'product' => $product,
+        ]);
+        return $this->result->setSuccess(true)->setTemplate('%catalog%/dialog/product_offers.tpl');
+    }
+}

@@ -8,8 +8,10 @@
 
 namespace Main\Config;
 
+use Main\Model\Orm\DisableRoute;
 use RS\Config\Loader as ConfigLoader;
 use RS\Module\AbstractPatches;
+use RS\Orm\Type;
 
 class Patches extends AbstractPatches
 {
@@ -19,7 +21,14 @@ class Patches extends AbstractPatches
             '20052',
             '300',
             '4038',
+            '604'
         ];
+    }
+
+    public function beforeUpdate604()
+    {
+        $disabled_route = new DisableRoute();
+        $disabled_route['__route_id']->setMaxLength(150);
     }
 
     public function afterUpdate4038()

@@ -13,11 +13,9 @@ use Article\Model\Orm\Article;
 */
 class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
         
-    protected
-        $token_require = false;
+    protected $token_require = false;
     
     /**
     * Возвращает комментарии к кодам прав доступа
@@ -93,7 +91,7 @@ class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
      * @return array
      * @throws \ExternalApi\Model\Exception
      */
-    function process($token = null, $article_id, $sections = ['images'])
+    function process($article_id, $token = null, $sections = ['images'])
     {
         $result = parent::process($token, $article_id);
 

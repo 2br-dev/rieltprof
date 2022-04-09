@@ -203,6 +203,11 @@ class Checkout {
     openSelectPvzDialog() {
         let url = new URL(this.owner.dataset.pvzSelectUrl, this.owner.dataset.rootUrl);
         url.searchParams.append('city_id', this.owner.querySelector('[name="addr_city_id"]').value);
+        url.searchParams.append('city', this.owner.querySelector('[name="addr_city"]').value);
+        url.searchParams.append('region_id', this.owner.querySelector('[name="addr_region_id"]').value);
+        url.searchParams.append('region', this.owner.querySelector('[name="addr_region"]').value);
+        url.searchParams.append('country_id', this.owner.querySelector('[name="addr_country_id"]').value);
+        url.searchParams.append('country', this.owner.querySelector('[name="addr_country"]').value);
         url.searchParams.append('delivery', this.owner.querySelector('[name="delivery"]:checked').value);
 
         // todo кусочек jQuery в нативном классе

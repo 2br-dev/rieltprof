@@ -59,6 +59,7 @@
                     path = path.replace(/^theme:([\w]+)\/(.*)$/, '%THEME%/$2');
                 }
                 $this.focus().val(path);
+                $this.change();
                 closeDialog();
                 return false;
             },

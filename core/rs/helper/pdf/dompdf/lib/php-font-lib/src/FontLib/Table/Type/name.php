@@ -17,11 +17,11 @@ use FontLib\Font;
  * @package php-font-lib
  */
 class name extends Table {
-  private static $header_format = [
+  private static $header_format = array(
     "format"       => self::uint16,
     "count"        => self::uint16,
     "stringOffset" => self::uint16,
-  ];
+  );
 
   const NAME_COPYRIGHT          = 0;
   const NAME_NAME               = 1;
@@ -43,7 +43,7 @@ class name extends Table {
   const NAME_COMPAT_FULL_NAME   = 18;
   const NAME_SAMPLE_TEXT        = 19;
 
-  static $nameIdCodes = [
+  static $nameIdCodes = array(
     0  => "Copyright",
     1  => "FontName",
     2  => "FontSubfamily",
@@ -64,26 +64,26 @@ class name extends Table {
     17 => "PreferredSubfamily",
     18 => "CompatibleFullName",
     19 => "SampleText",
-  ];
+  );
 
-  static $platforms = [
+  static $platforms = array(
     0 => "Unicode",
     1 => "Macintosh",
     // 2 =>  Reserved
     3 => "Microsoft",
-  ];
+  );
 
-  static $platformSpecific = [
+  static $platformSpecific = array(
     // Unicode
-    0 => [
+    0 => array(
       0 => "Default semantics",
       1 => "Version 1.1 semantics",
       2 => "ISO 10646 1993 semantics (deprecated)",
       3 => "Unicode 2.0 or later semantics",
-    ],
+    ),
 
     // Macintosh
-    1 => [
+    1 => array(
       0  => "Roman",
       1  => "Japanese",
       2  => "Traditional Chinese",
@@ -116,10 +116,10 @@ class name extends Table {
       29 => "Slavic",
       30 => "Vietnamese",
       31 => "Sindhi",
-    ],
+    ),
 
     // Microsoft
-    3 => [
+    3 => array(
       0  => "Symbol",
       1  => "Unicode BMP (UCS-2)",
       2  => "ShiftJIS",
@@ -131,8 +131,8 @@ class name extends Table {
       //  8 => Reserved
       //  9 => Reserved
       10 => "Unicode UCS-4",
-    ],
-  ];
+    ),
+  );
 
   protected function _parse() {
     $font = $this->getFont();
@@ -141,7 +141,7 @@ class name extends Table {
 
     $data = $font->unpack(self::$header_format);
 
-    $records = [];
+    $records = array();
     for ($i = 0; $i < $data["count"]; $i++) {
       $record      = new nameRecord();
       $record_data = $font->unpack(nameRecord::$format);
@@ -150,7 +150,7 @@ class name extends Table {
       $records[] = $record;
     }
 
-    $names = [];
+    $names = array();
     foreach ($records as $record) {
       $font->seek($tableOffset + $data["stringOffset"] + $record->offset);
       $s                      = $font->read($record->length);

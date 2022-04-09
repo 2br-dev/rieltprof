@@ -76,6 +76,7 @@ class Wizard extends \RS\Controller\AbstractModule
                 'db_port',
                 'db_name',
                 'db_prefix',
+                'db_table_engine',
                 
                 'supervisor_email',
                 'supervisor_pass',

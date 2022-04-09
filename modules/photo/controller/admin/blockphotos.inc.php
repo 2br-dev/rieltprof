@@ -18,8 +18,8 @@ class BlockPhotos extends \RS\Controller\Admin\Block
     protected
         $api,
         $default_params = [
-            'indexTemplate' => 'form.tpl', //Шаблон по умолчанию
-            'photoTemplate' => 'form_onepic.tpl', //Шаблон одной картинки
+            'indexTemplate' => 'admin/form.tpl', //Шаблон по умолчанию
+            'photoTemplate' => 'admin/form_onepic.tpl', //Шаблон одной картинки
     ],
         $action_var = 'pdo';
         

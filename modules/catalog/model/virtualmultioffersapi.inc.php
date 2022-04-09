@@ -61,12 +61,15 @@ class VirtualMultiOffersApi
             foreach ($offers as $offer){
                 $props = (array)$offer['propsdata_arr'];
                 $item  = [];
+                $item_like_array = [];
                 if (!empty($props)){
                     foreach ($props as $key=>$val){
                         $item[$key] = $val;
+                        $item_like_array[] = [$key, $val];
                     }    
                 }
                 $arr[$offer['product_id']]['values'] = $item;
+                $arr[$offer['product_id']]['values_array_json'] = json_encode($item_like_array, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
                 //Получим url для переключения
                 $arr[$offer['product_id']]['url']    = \RS\Router\Manager::obj()->getUrl('catalog-front-product', [
                     'id' => $alias_by_product_id[$offer['product_id']]['alias'] ? $alias_by_product_id[$offer['product_id']]['alias'] : $offer['product_id'],

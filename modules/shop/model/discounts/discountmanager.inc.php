@@ -11,9 +11,9 @@ namespace Shop\Model\Discounts;
 use Catalog\Model\CostApi;
 use Catalog\Model\Orm\Product;
 use RS\Config\Loader as ConfigLoader;
+use Shop\Model\Cart;
 use Shop\Model\Orm\AbstractCartItem;
 use Shop\Model\Orm\CartItem;
-use Shop\Model\Orm\Discount;
 
 // TODO зарефакторить после рефакторинга комплектаций (пора)
 class DiscountManager
@@ -50,7 +50,7 @@ class DiscountManager
     }
 
     /**
-     * Возвращает иотговую скидку на товарную позицию
+     * Возвращает итоговую скидку на товарную позицию
      *
      * @param AbstractCartItem $cart_item
      * @return float
@@ -58,7 +58,11 @@ class DiscountManager
     public function getCartItemFinalDiscount($cart_item): float
     {
         $base_cost = $this->getCartItemBaseCost($cart_item);
-        return round($this->calculateDiscountSum($cart_item->getDiscounts(), $base_cost), 2);
+        $final_discount = round($this->calculateDiscountSum($cart_item->getDiscounts(), $base_cost), 2);
+
+        $final_discount = Cart::correctDiscountSumByAmount($final_discount, $cart_item['amount']);
+
+        return $final_discount;
     }
 
     /**
@@ -110,7 +114,7 @@ class DiscountManager
      * Расчитывает суммарный размер скидки на основе переданного массиве скидок
      *
      * @param AbstractDiscount[] $discounts - массив скидок
-     * @param float $base_cost - базовая цена, от которой расчитывается скидка
+     * @param float $base_cost - базовая цена, от которой рассчитывается скидка
      * @return float
      */
     protected function calculateDiscountSum(array $discounts, $base_cost): float

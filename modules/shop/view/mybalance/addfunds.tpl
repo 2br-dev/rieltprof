@@ -1,56 +1,53 @@
-{addjs file='%shop%/mybalance.js'}
+{* Шаблон страницы пополнения баланса в личном кабинете *}
+{extends file="%THEME%/helper/wrapper/my-cabinet.tpl"}
+{block name="content"}
+    <div class="col">
+        <h1 class="mb-lg-6 mb-sm-5 mb-4">{t}Баланс:{/t} {$balance_string}</h1>
+        <div class="tab-pills__wrap mb-5">
+            <ul class="nav nav-pills tab-pills">
+                <li class="nav-item">
+                    <a href="{$router->getUrl('shop-front-mybalance')}" class="nav-link ">{t}История операций{/t}</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link active">{t}Пополнить баланс{/t}</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="mb-4 col-xl-7 col-md-10">
+                {t}Вы можете пополнить свой баланс наиболее удобным способом. Укажите сумму пополнения и выберите способ оплаты{/t}
+            </div>
+            <h2 class="mb-4">{t}Сумма пополнения{/t}</h2>
+            <form method="POST">
+                <div class="col-xl-4 col-md-6 col-sm-8 mb-6">
+                    <label for="input-topic" class="form-label">{t currency=$base_currency.stitle}Сумма пополнения (%currency){/t}</label>
+                    <div class="row">
+                        <div class="col">
+                            <input id="input-topic" class="rs-cost-field form-control {if $api->hasError()}is-invalid{/if}" type="text" name="cost" value="{$smarty.post.cost}" placeholder="{t}0.00{/t}" required>
+                            {if $api->hasError()}<div class="invalid-feedback">{$api->getErrors()|join:", "}</div>{/if}
+                        </div>
+                        {if $current_currency.stitle != $base_currency.stitle}
+                            {addjs file="%shop%/rscomponent/addfunds.js"}
+                            <div class="col">
+                                <input type="text" disabled class="form-control rs-converted-cost" data-ratio="{$current_currency.ratio}" data-liter="{$current_currency.stitle}">
+                            </div>
+                        {/if}
+                    </div>
+                </div>
 
-{if $api->hasError()}
-    <div class="pageError">
-        {foreach from=$api->getErrors() item=item}
-            <p>{$item}</p>
-        {/foreach}
+                <div class="col-xxl-8 col-xl-9">
+                    <div class="row w-100 g-3 row-cols-md-2 ">
+                        {foreach $pay_list as $item}
+                            <div>
+                                <button name="payment" type="submit" class="lk-balance-up" value="{$item.id}">
+                                    <span class="h3">{$item.title}</span>
+                                    <span>{$item.description}</span>
+                                </button>
+                            </div>
+                        {/foreach}
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-{/if}
-
-
-<form method="POST" id="order-form">
-    <input type="hidden" name="payment" value="0">
-    <div class="formSection">
-        <span class="formSectionTitle">{t}Выберите способ оплаты{/t}</span>
-    </div>
-    <table class="formTable">
-        <tbody>
-        {foreach from=$pay_list item=item}
-            <tr>
-                <td class="value fixedRadio topPadd">
-                    <input type="radio" name="payment" value="{$item.id}" id="dlv_{$item.id}"
-                           {if $smarty.post.payment==$item.id}checked{/if}>
-                </td>
-                <td class="value marginRadio topPadd">
-                    <label for="dlv_{$item.id}">{$item.title}</label>
-                    <div class="help">{$item.description}</div>
-                </td>
-            </tr>
-        {/foreach}
-        </tbody>
-    </table>
-
-    <div class="formSection">
-        <span class="formSectionTitle">{t}Укажите сумму пополнения{/t} ({$base_currency.stitle})</span>
-    </div>
-    <table class="formTable">
-        <tr>
-            <td class="value">
-                <br>
-                {t}Сумма{/t}: <input class="cost_field" name="cost" value="{$smarty.post.cost}">
-            </td>
-            <td class="value">
-                {if $current_currency.stitle != $base_currency.stitle}
-                    <label class="label_curr"></label>
-                {/if}
-                <input class="hidden_curr" data-ratio="{$current_currency.ratio}" data-liter="{$current_currency.stitle}" type="hidden" value="">
-            </td>
-            <td class="value">
-                <button type="submit" class="formSave">{t}Пополнить{/t}</button>
-            </td>
-        </tr>
-    </table>
-
-</form>
-<br><br><br>
+{/block}

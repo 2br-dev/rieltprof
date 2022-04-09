@@ -158,6 +158,7 @@ class FrameTree
         $xp = new DOMXPath($this->_dom);
 
         // Move table caption before the table
+        // FIXME find a better way to deal with it...
         $captions = $xp->query('//table/caption');
         foreach ($captions as $caption) {
             $table = $caption->parentNode;
@@ -189,6 +190,7 @@ class FrameTree
         }
     }
 
+    // FIXME: temporary hack, preferably we will improve rendering of sequential #text nodes
     /**
      * Remove a child from a node
      *

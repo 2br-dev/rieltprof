@@ -3,7 +3,11 @@
 <div class="fileinput fileinput-{if $field->get() != ''}exists{else}new{/if}" data-provides="fileinput">
     <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width:{$field->preview_width}px; height:{$field->preview_height}px; line-height:{$field->preview_height}px">
         {if $field->get() != ''}
-            <img src="{$field->getUrl($field->preview_width, $field->preview_height, $field->preview_resize_type)}" alt="">
+            {if $field->getExtension() == 'svg'}
+                <img src="{$field->getLink()}" alt="" style="max-width: {$field->preview_width}px; max-height:{$field->preview_height}px">
+            {else}
+                <img src="{$field->getUrl($field->preview_width, $field->preview_height, $field->preview_resize_type)}" alt="">
+            {/if}
         {/if}
     </div>
     <div>

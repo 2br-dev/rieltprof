@@ -15,6 +15,9 @@
 {addcss file="bootstrap.popover.min.css?v={$css_version}"}
 {addcss file="%users%/verification.css"}
 
+{addjs file="core6/rsplugins/legacy/modal.js" basepath="common" header=true unshift=true}
+{addjs file="core6/rs.jscore.js" basepath="common" header=true unshift=true}
+
 {addjs file="html5shiv.js" unshift=true header=true}
 {addjs file="jquery.min.js" name="jquery" basepath="common" unshift=true header=true}
 {addjs file="bootstrap/bootstrap.min.js" basepath="common"}

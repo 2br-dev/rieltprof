@@ -15,6 +15,9 @@ use RS\Exception;
 
 /**
  * Таблица хранит сведения об отключенных маршрутах
+ * --/--
+ * @property string $route_id ID отключенного маршрута
+ * --\--
  */
 class DisableRoute extends AbstractObject
 {
@@ -27,6 +30,7 @@ class DisableRoute extends AbstractObject
     {
         $this->getPropertyIterator()->append([
             'route_id' => new Type\Varchar([
+                'maxLength' => 150,
                 'primaryKey' => true,
                 'description' => t('ID отключенного маршрута')
             ])

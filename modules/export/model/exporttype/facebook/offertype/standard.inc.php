@@ -27,10 +27,10 @@ class Standard extends AbstractOfferType
      * @param ExportProfile $profile
      * @param \XMLWriter $writer
      * @param Product $product
-     * @param mixed $offer_index
+     * @param mixed $offer_id
      * @throws \RS\Exception
      */
-    function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_index)
+    function writeOffer(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_id)
     {
         $http_request = \RS\Http\Request::commonInstance();
         $request_host = $http_request->getProtocol() . '://' . $http_request->getDomainStr();
@@ -39,11 +39,11 @@ class Standard extends AbstractOfferType
         $current_offer = false; // Текущая комплектация
 
         $writer->startElement("item");
-        $this->fireOfferEvent('beforewriteoffer', $profile, $writer, $product, $offer_index);
+        $this->fireOfferEvent('beforewriteoffer', $profile, $writer, $product, $offer_id);
 
-        if ( $offer_index !== false ){
+        if ( $offer_id !== false ){
             $writer->writeAttribute('g:item_group_id', $product->id);
-            $current_offer = $product['offers']['items'][$offer_index];//Текущее предложение
+            $current_offer = $product['offers']['items'][$offer_id];//Текущее предложение
         }
 
         // Дополнительные параметры адреса страницы
@@ -52,9 +52,9 @@ class Standard extends AbstractOfferType
             $url_params = htmlspecialchars_decode($profile['url_params']);
         }
 
-        $title = strip_tags(trim($product->title.' '.(($offer_index !== false && !$profile->no_export_offers) ? $product->getOfferTitle($offer_index) : '')));
+        $title = strip_tags(trim($product->title.' '.(($offer_id !== false && !$profile->no_export_offers) ? $product->getOfferTitle($offer_id) : '')));
         $writer->writeElement("g:title", $title);
-        $writer->writeElement("g:link", $request_host . $product->getUrl() . ($url_params ? "?".$url_params : "") . ($offer_index ? '#'.$offer_index : ''));
+        $writer->writeElement("g:link", $request_host . $product->getUrl() . ($url_params ? "?".$url_params : "") . ($offer_id ? '#'.$offer_id : ''));
 
         // Описание
         if ( $profile->full_description && (strlen($product->description) < 5001)) {
@@ -65,7 +65,7 @@ class Standard extends AbstractOfferType
         $writer->writeElement("g:description", strip_tags($description));
 
         // Уникальный артикул
-        $barcode = $product->getBarCode($offer_index);
+        $barcode = $product->getBarCode($offer_id);
         $profiles = $profile->getTypeObject();
 
         $gid = $barcode;
@@ -83,7 +83,7 @@ class Standard extends AbstractOfferType
         $this->writeOfferImages($profile, $writer, $product, $current_offer);
 
         // Цена по умолчанию
-        $prices = $product->getOfferCost($offer_index, $product['xcost']);
+        $prices = $product->getOfferCost($offer_id, $product['xcost']);
         if ( !empty($profile['export_cost_id']) ) {
             $price = $prices[$profile['export_cost_id']];
         }else{
@@ -95,7 +95,7 @@ class Standard extends AbstractOfferType
         }
 
         // Доступность
-        $this->writeOfferAvaliability($writer, $product, $price, $offer_index);
+        $this->writeOfferAvaliability($writer, $product, $price, $offer_id);
 
         // Цена
         if ($old_price > 0){ //Если есть старая цена продажи
@@ -112,17 +112,17 @@ class Standard extends AbstractOfferType
         }
 
         // Штрихкод
-        $sku = $product->getSKU($offer_index);
+        $sku = $product->getSKU($offer_id);
         if ( !empty($sku) ) {
             $writer->writeElement("g:gtin", $sku);
         }
 
         // Запись доп. полей
-        $this->writeEspecialOfferTags($profile, $writer, $product, $offer_index);
+        $this->writeEspecialOfferTags($profile, $writer, $product, $offer_id);
 
         // Вес товара
-        if ( $product->getWeight($offer_index) ) {
-            $weight = ($product->getWeight($offer_index))/1000;
+        if ( $product->getWeight($offer_id) ) {
+            $weight = ($product->getWeight($offer_id))/1000;
             $writer->writeElement("g:shipping_weight", $weight.' kg');
         }
 
@@ -131,7 +131,7 @@ class Standard extends AbstractOfferType
             $this->writeOfferAdditionalParams($profile, $writer, $current_offer);
         }
 
-        $this->fireOfferEvent('writeoffer', $profile, $writer, $product, $offer_index);
+        $this->fireOfferEvent('writeoffer', $profile, $writer, $product, $offer_id);
         $writer->endElement();
     }
 
@@ -272,15 +272,15 @@ class Standard extends AbstractOfferType
      * @param \XMLWriter $writer
      * @param Product $product
      * @param $price
-     * @param $offer_index
+     * @param $offer_id
      */
-    private function writeOfferAvaliability(\XMLWriter $writer, Product $product, $price, $offer_index)
+    private function writeOfferAvaliability(\XMLWriter $writer, Product $product, $price, $offer_id)
     {
 
         if ($this->shop_config && $product->shouldReserve()){ //Если есть только предзаказ
             $writer->writeElement("g:availability", "preorder");
         } elseif ($this->shop_config['check_quantity']) { //Если нельзя продавать товары, которых нет в наличии
-            $available = $product->getNum($offer_index) > 0 && $price > 0;
+            $available = $product->getNum($offer_id) > 0 && $price > 0;
             $writer->writeElement("g:availability", $available ? "in stock" : "out of stock");
         } else {
             $writer->writeElement("g:availability",  "in stock");
@@ -301,10 +301,11 @@ class Standard extends AbstractOfferType
         if ( $current_offer ){ //Если есть комплектации, посмотим привязани ли фото к конкретной комплектации
             $offer_images = $current_offer['photos_arr'];
             if ( !empty($offer_images) ) {
+                $first = true;
                 foreach ($images as $k=>$image){
                     if ( in_array($image['id'], $offer_images )){
                         $image_url = ( $profile['export_photo_originals'] ) ? $image->getOriginalUrl() : $image->getUrl(800, 800, 'axy');
-                        $tag_name = ( $first ?? true ) ? "g:image_link" : "g:additional_image_link"; // первое фото имеет отличный тег
+                        $tag_name = $first  ? "g:image_link" : "g:additional_image_link"; // первое фото имеет отличный тег
                         $writer->writeElement($tag_name, \RS\Http\Request::commonInstance()->getDomain(true) . $image_url);
                         $first = false;
                     }
@@ -313,10 +314,12 @@ class Standard extends AbstractOfferType
         }
         //Если просто товар или фото комплектаций не привязано
         if ( !$current_offer || ($current_offer && empty($offer_images)) ){
-            foreach ($images as $k=>$image){
+            $first = true;
+            foreach ($images as $k => $image){
                 $image_url = ( $profile['export_photo_originals'] ) ? $image->getOriginalUrl() : $image->getUrl(800, 800, 'axy');
-                $tag_name = ( $k == 0 ) ? "g:image_link" : "g:additional_image_link"; // первое фото имеет отличный тег
+                $tag_name = ( $first ) ? "g:image_link" : "g:additional_image_link"; // первое фото имеет отличный тег
                 $writer->writeElement($tag_name, \RS\Http\Request::commonInstance()->getDomain(true) . $image_url);
+                $first = false;
             }
         }
     }

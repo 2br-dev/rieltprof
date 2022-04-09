@@ -44,7 +44,7 @@ class SectionPage extends \RS\Orm\OrmObject
                 'no_export' => true
             ]),
             'route_id' => new Type\Varchar([
-                'maxLength' => '255',
+                'maxLength' => '150',
                 'allowempty' => false,
                 'description' => t('Маршрут'),
                 'hint' => t('Маршрут означает определенный тип страниц, Например: "просмотр товара", или "список продукции"'),
@@ -71,7 +71,12 @@ class SectionPage extends \RS\Orm\OrmObject
         
         $this->addIndex(['site_id', 'route_id', 'context'], self::INDEX_UNIQUE);
     }
-    
+
+    /**
+     * Возвращает список маршрутов, пригодных для связи со страницами
+     *
+     * @return array
+     */
     public static function getRouteSelectList()
     {
         $routes = \RS\Router\Manager::obj()->getRoutes();
@@ -86,14 +91,15 @@ class SectionPage extends \RS\Orm\OrmObject
         asort($result);
         return $result;
     }
-    
+
     /**
-    * Возвращает объект страницы для нужного маршрута
-    * 
-    * @param mixed $route_id
-    * @param string $context - дополнительный идентификатор темы
-    * @param integer $site_id - ID сайта
-    */
+     * Возвращает объект страницы для нужного маршрута
+     *
+     * @param mixed $route_id
+     * @param string $context - дополнительный идентификатор темы
+     * @param integer $site_id - ID сайта
+     * @return SectionPage
+     */
     public static function loadByRoute($route_id, $context = 'theme', $site_id = null)
     {
         if ($site_id === null) {
@@ -136,7 +142,13 @@ class SectionPage extends \RS\Orm\OrmObject
         $route = \RS\Router\Manager::getRoute($this['route_id']);
         return $route;
     }
-    
+
+    /**
+     * Возвращает все контейнеры, которые связаны с данной страницей
+     *
+     * @param integer $page_id ID страницы
+     * @return array|\RS\Orm\AbstractObject[]
+     */
     protected function loadContainers($page_id)
     {
         if (empty($page_id)) return [];
@@ -146,17 +158,21 @@ class SectionPage extends \RS\Orm\OrmObject
             ->orderby('type')
             ->objects(null, 'type');
     }
-    
+
     /**
-    * Возвращает контейнеры, которые находятся на этой странице
-    */
+     * Возвращает расширенную информацию о контейнерах, которые находятся на этой странице,
+     * включая информацию о контейнерах, которые были унаследованы со страницы по умолчанию
+     *
+     * @param null $route_id
+     * @return array
+     */
     public function getContainers($route_id = null)
     {
         $default_containers = $loaded_containers = $this->loadContainers($this['id']);
         
         $last = end($loaded_containers);
         $max = $last ? $last['type'] : 0;
-        
+
         if ($this['route_id'] != 'default' && $this['inherit']) {
             $page = self::loadByRoute('default', $this['context']);
             $default_containers = $this->loadContainers($page['id']);
@@ -178,7 +194,12 @@ class SectionPage extends \RS\Orm\OrmObject
         
         return $containers;
     }
-    
+
+    /**
+     * Удаляет страницу, включая все вложенные элементы
+     *
+     * @return bool
+     */
     function delete()
     {
         //Удаляем все контейнеры, которые находятся внутри данного

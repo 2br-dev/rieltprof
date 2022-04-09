@@ -106,7 +106,7 @@ class ProductDimensions
             $this->loadDimensions($reload_dimensions);
             $this->cache = [];
         }
-        if (!isset($value[$dimension][$unit])) {
+        if (!isset($this->cache[$dimension][$unit])) {
             $this->cache[$dimension][$unit] = $this->dimensions[$dimension] * self::DIMENSION_COEFFICIENT[$this->config['dimensions_unit']] / self::DIMENSION_COEFFICIENT[$unit];
         }
 
@@ -125,9 +125,9 @@ class ProductDimensions
             $this->product['properties'] = null;
         }
         $this->product->fillProperty();
-        $this->dimensions[self::DIMENSION_LENGTH] = (float)$this->product->getPropertyValueById($this->config['property_product_length'], $this->config['default_product_length']);
-        $this->dimensions[self::DIMENSION_WIDTH] = (float)$this->product->getPropertyValueById($this->config['property_product_width'], $this->config['default_product_width']);
-        $this->dimensions[self::DIMENSION_HEIGHT] = (float)$this->product->getPropertyValueById($this->config['property_product_height'], $this->config['default_product_height']);
+        $this->dimensions[self::DIMENSION_LENGTH] = (float)($this->product->getPropertyValueById($this->config['property_product_length']) ?: $this->config['default_product_length']);
+        $this->dimensions[self::DIMENSION_WIDTH] = (float)($this->product->getPropertyValueById($this->config['property_product_width']) ?: $this->config['default_product_width']);
+        $this->dimensions[self::DIMENSION_HEIGHT] = (float)($this->product->getPropertyValueById($this->config['property_product_height']) ?: $this->config['default_product_height']);
     }
 
     /**

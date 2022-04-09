@@ -2,8 +2,7 @@
 
 namespace Sabberworm\CSS\Value;
 
-
-use Sabberworm\CSS\OutputFormat;
+use Sabberworm\CSS\Parsing\ParserState;
 
 class URL extends PrimitiveValue {
 
@@ -14,6 +13,23 @@ class URL extends PrimitiveValue {
 		$this->oURL = $oURL;
 	}
 
+	public static function parse(ParserState $oParserState) {
+		$bUseUrl = $oParserState->comes('url', true);
+		if ($bUseUrl) {
+			$oParserState->consume('url');
+			$oParserState->consumeWhiteSpace();
+			$oParserState->consume('(');
+		}
+		$oParserState->consumeWhiteSpace();
+		$oResult = new URL(CSSString::parse($oParserState), $oParserState->currentLine());
+		if ($bUseUrl) {
+			$oParserState->consumeWhiteSpace();
+			$oParserState->consume(')');
+		}
+		return $oResult;
+	}
+
+
 	public function setURL(CSSString $oURL) {
 		$this->oURL = $oURL;
 	}
@@ -23,10 +39,10 @@ class URL extends PrimitiveValue {
 	}
 
 	public function __toString() {
-		return $this->render(new OutputFormat());
+		return $this->render(new \Sabberworm\CSS\OutputFormat());
 	}
 
-	public function render(OutputFormat $oOutputFormat) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
 		return "url({$this->oURL->render($oOutputFormat)})";
 	}
 

@@ -1,0 +1,142 @@
+@import 'theme';
+
+.skeleton-block {
+  position: relative;
+  border: 2px dashed transparent;
+  display:inline-flex;
+  align-items: center;
+}
+
+.skeleton-block.hoverable:hover {
+  border-color: $light-gray;
+  .skeleton-block__buttons {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.skeleton-block__buttons {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: -38px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 7;
+
+  a {
+    text-decoration:none;
+  }
+}
+
+.skeleton-block__change {
+  display: flex;
+  align-items: center;
+  padding: 8px 30px 8px 8px;
+  border-radius: 8px;
+  background: #247CFF url("../img/skeleton/skeleton-gear.svg") no-repeat right 8px top 50%;
+  color: $white;
+  text-decoration: none;
+  transition: all .3s ease;
+  white-space: nowrap;
+  line-height: 1.2;
+
+  &:hover {
+    background-color: #2F44FF;
+    color: $white;
+    text-decoration: none;
+  }
+  &:active {
+    background-color: #1337B6;
+    svg {
+      fill: $white;
+    }
+  }
+}
+
+.skeleton-block__delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: #FFE1E1;
+  border-radius: 8px;
+  margin-left: 4px;
+  transition: all .3s ease;
+  svg {
+    fill: #FF5959;
+    transition: all .3s ease;
+  }
+  &:hover {
+    background: #FF5959;
+    svg {
+      fill: #FFE1E1;
+    }
+  }
+  &:active {
+    background: #FF2F2F;
+    svg {
+      fill: $white;
+    }
+  }
+}
+
+.skeleton-block__dropdown.dropdown-menu {
+  padding: 16px;
+  min-width: 220px;
+  box-sizing: border-box;
+  ol{
+    padding: 0;
+    margin: 0;
+    counter-reset: myCounter;
+  }
+
+  li{
+    list-style: none;
+    display: flex;
+    line-height: 1.2;
+  }
+
+  li:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  li:before {
+    counter-increment: myCounter;
+    content:counter(myCounter);
+    font-size: 8px;
+    color: white;
+    background: #D3D5DB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-right: 8px;
+    margin-top: 2px;
+    min-width: 14px;
+    max-width: 14px;
+    height: 14px;
+  }
+}
+
+.btn-light-danger {
+  background-color: #FFE1E1;
+  color:#FF5959;
+
+  &:hover {
+    background-color: #FF5959;
+    color:white;
+  }
+}
+
+.btn-light-success {
+  background-color: #AFE2FF;
+  color:#247CFF;
+
+  &:hover {
+    background-color: #149CFF;
+    color:white;
+  }
+}

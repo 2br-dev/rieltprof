@@ -8,7 +8,7 @@
 namespace Site\Model\CommentType;
 
 /**
-* Тип комментария - коментарий к сайту
+* Тип комментария - комментарий к сайту
 */
 class Site extends \Comments\Model\Abstracttype
 {

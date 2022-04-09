@@ -2,9 +2,3 @@
        name="{$name}"
        data-context="{$context}"
        {$attributes}>
-
-<script>
-    $(function() {
-        $('#{$unique_id}').reCaptchaV3();
-    });
-</script>

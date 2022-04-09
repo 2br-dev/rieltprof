@@ -45,7 +45,7 @@ class Manual extends AbstractType implements InterfaceIonicMobile
      * @param boolean $use_currency - использовать валюту?
      * @return double
      */
-    function getDeliveryCost(Order $order, Address $address = null, Delivery $delivery, $use_currency = true)
+    function getDeliveryCost(Order $order, Address $address, Delivery $delivery, $use_currency = true)
     {
         return 0;
     }
@@ -59,7 +59,7 @@ class Manual extends AbstractType implements InterfaceIonicMobile
      * @return string
      * @throws RSException
      */
-    function getDeliveryCostText(Order $order, Address $address = null, Delivery $delivery)
+    function getDeliveryCostText(Order $order, Address $address, Delivery $delivery)
     {
         $cost = $this->getDeliveryFinalCost($order, $address);
         return ($cost) ? CustomView::cost($cost) : t('Будет рассчитана менеджером');

@@ -82,9 +82,9 @@ class Control extends Front
                     'href' => $this->router->getAdminPattern('edit', [':mod' => '@class']),
                     'Sortable' => SORTABLE_BOTH
                 ]),
-                new TableType\Usertpl('description', t('Описание'), '%modcontrol%/col_description.tpl'),
+                new TableType\Usertpl('description', t('Описание'), '%modcontrol%/admin/col_description.tpl'),
                 new TableType\Text('version', t('Версия'), ['TdAttr' => ['class' => 'cell-small'], 'Sortable' => SORTABLE_BOTH]),
-                new TableType\Usertpl('enabled', t('Включен'), '%modcontrol%/col_enabled.tpl', ['Sortable' => SORTABLE_BOTH]),
+                new TableType\Usertpl('enabled', t('Включен'), '%modcontrol%/admin/col_enabled.tpl', ['Sortable' => SORTABLE_BOTH]),
                 new TableType\Text('class', t('Идентификатор'), ['ThAttr' => ['width' => '50'], 'Sortable' => SORTABLE_BOTH, 'CurrentSort' => SORTABLE_ASC]),
                 new TableType\Actions('class', [
                     new TableType\Action\Edit($this->router->getAdminPattern('edit', [':mod' => '~field~']), null, ['noajax' => true]),
@@ -105,7 +105,7 @@ class Control extends Front
             'caption' => t('Поиск по модулям')
         ]));
 
-        $helper->setFilterContent($this->view->fetch('filter_by_options.tpl'));
+        $helper->setFilterContent($this->view->fetch('admin/filter_by_options.tpl'));
 
         $helper->setListFunction('tableData');
 
@@ -114,7 +114,7 @@ class Control extends Front
         if (!defined('CANT_UPLOAD_MODULE')) {
             $items[] = new ToolbarButton\Add($this->url->replaceKey([$this->action_var => 'add']), t('добавить модуль'), ['noajax' => false]);
         }
-        $items[] = new ToolbarButton\Button($this->router->getAdminUrl('AjaxReloadLicenseData', [], 'main-modulelicensescontrol'), '<i class="zmdi zmdi-refresh f-18"></i><span class="visible-xs-inline">&nbsp;'.t('Обновить лицензии модулей').'</span>', [
+        $items[] = new ToolbarButton\Button($this->router->getAdminUrl('AjaxReloadLicenseData', [], 'main-modulelicensescontrol'), '<i class="zmdi zmdi-refresh f-18"><!----></i><span class="visible-xs-inline">&nbsp;'.t('Обновить лицензии модулей').'</span>', [
                 'attr' => [
                     'class' => 'crud-get btn-default',
                     'title' => t('Обновить лицензии модулей')
@@ -151,7 +151,7 @@ class Control extends Front
         $this->app->addJs('%modcontrol%/module_view.js');
 
         $helper = new CrudCollection($this);
-        $helper->setTemplate($this->mod_tpl . 'crud_module.tpl');
+        $helper->setTemplate($this->mod_tpl . 'admin/crud_module.tpl');
 
         $modname = $this->url->request('mod', TYPE_STRING);
 
@@ -255,7 +255,7 @@ class Control extends Front
             'elements' => $helper
         ]);
 
-        $helper['form'] = $this->view->fetch('add.tpl');
+        $helper['form'] = $this->view->fetch('admin/add.tpl');
         return $this->result->setTemplate($helper['template']);
     }
 
@@ -309,7 +309,7 @@ class Control extends Front
             $helper['bottomToolbar']->removeItem('next');
         }
 
-        $helper['form'] = $this->view->fetch('add_step2.tpl');
+        $helper['form'] = $this->view->fetch('admin/add_step2.tpl');
         return $this->result->setTemplate($helper['template']);
     }
 
@@ -334,7 +334,7 @@ class Control extends Front
             'module_name' => $_SESSION['INSTALLED_MODULE']
         ]);
         unset($_SESSION['INSTALLED_MODULE']);
-        $helper['form'] = $this->view->fetch('add_ok.tpl');
+        $helper['form'] = $this->view->fetch('admin/add_ok.tpl');
 
         return $this->result->setTemplate($helper['template']);
     }
@@ -494,7 +494,7 @@ class Control extends Front
                 'module_item' => $module
             ]);
 
-            $helper['form'] = $this->view->fetch('show_changelog.tpl');
+            $helper['form'] = $this->view->fetch('admin/show_changelog.tpl');
             $this->result->setTemplate($helper['template']);
         }
 
@@ -512,7 +512,7 @@ class Control extends Front
             'modules' => $this->api->tableData(ModuleApi::SORT_BY_MODULE_NAME)
         ]);
 
-        return $this->result->addSection('title', t('Перейти к настройкам модуля'))->setTemplate('module_list.tpl');
+        return $this->result->addSection('title', t('Перейти к настройкам модуля'))->setTemplate('admin/module_list.tpl');
     }
 
     /**
@@ -526,7 +526,7 @@ class Control extends Front
         $helper = new CrudCollection($this);
         $helper->viewAsAny();
         $helper->setTopTitle(t('Поиск по настройкам'));
-        $helper->setForm($this->view->fetch('search_options.tpl'));
+        $helper->setForm($this->view->fetch('admin/search_options.tpl'));
 
         return $this->result->setTemplate($helper->getTemplate());
     }
@@ -556,7 +556,7 @@ class Control extends Front
 
         return $this->result
                         ->setSuccess(true)
-                        ->setTemplate('search_options_result.tpl');
+                        ->setTemplate('admin/search_options_result.tpl');
     }
 
 

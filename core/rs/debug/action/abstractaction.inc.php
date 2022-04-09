@@ -42,7 +42,7 @@ class AbstractAction
     * @param mixed $data - массив или объект с interface ArrayAccess, с параметрами объекта действия
     * @return string
     */
-    protected function getHref($href_pattern = null, $data)
+    protected function getHref($href_pattern, $data)
     {
         $this->data = $data;        
         $href = $href_pattern;

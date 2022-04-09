@@ -343,16 +343,16 @@ class Table extends AbstractFrameReflower
                 }
             }
 
-            if ($max_height !== "none" && $min_height > $max_height) {
+            if ($max_height !== "none" && $max_height !== "auto" && (float)$min_height > (float)$max_height) {
                 // Swap 'em
                 list($max_height, $min_height) = [$min_height, $max_height];
             }
 
-            if ($max_height !== "none" && $height > $max_height) {
+            if ($max_height !== "none" && $max_height !== "auto" && $height > (float)$max_height) {
                 $height = $max_height;
             }
 
-            if ($height < $min_height) {
+            if ($height < (float)$min_height) {
                 $height = $min_height;
             }
         } else {
@@ -433,7 +433,7 @@ class Table extends AbstractFrameReflower
         $left = $style->margin_left;
         $right = $style->margin_right;
 
-        $diff = $cb["w"] - $width;
+        $diff = (float)$cb["w"] - (float)$width;
 
         if ($left === "auto" && $right === "auto") {
             if ($diff < 0) {
@@ -444,7 +444,7 @@ class Table extends AbstractFrameReflower
             }
 
             $style->margin_left = sprintf("%Fpt", $left);
-            $style->margin_right = sprintf("%Fpt", $right);
+            $style->margin_right = sprintf("%Fpt", $right);;
         } else {
             if ($left === "auto") {
                 $left = (float)$style->length_in_pt($cb["w"], $cb["w"]) - (float)$style->length_in_pt($right, $cb["w"]) - (float)$style->length_in_pt($width, $cb["w"]);

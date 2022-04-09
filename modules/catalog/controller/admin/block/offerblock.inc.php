@@ -171,10 +171,12 @@ class OfferBlock extends AdminBlock
         $offer = $this->offer_api->getElement();
         $offer->first_sortn = 1;
         if ($offer_id && !$offer->load($offer_id)) return $this->e404(t('Комплектация не найдена'));
-        
+
+        $offer->fillStockNum();
+
         if ($this->url->isPost()) {
             //Сохранение
-            
+
             $this->result->setSuccess( $this->offer_api->save($offer_id ?: null, ['id' => $offer_id]) );
             if (!$this->result->isSuccess()) {
                 //Ошибка сохранения формы
@@ -184,7 +186,6 @@ class OfferBlock extends AdminBlock
             return $this->result;
         } else {
             //Чтение
-            $offer->fillStockNum();
             if (!$offer_id) { //Создание комплектации
                 $product_barcode = $this->url->request('product_barcode', TYPE_STRING);                        
                 $offer['product_id'] = $this->product['id'];

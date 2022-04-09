@@ -45,7 +45,7 @@ class AccessModuleRight extends \RS\Orm\AbstractObject
             ]),
             'right' => new Type\Varchar([
                 'description' => t('Идентификатор права'),
-                'maxLength' => 150,
+                'maxLength' => 140,
             ]),
             'access' => new Type\Enum([Cms::ACCESS_ALLOW, Cms::ACCESS_DISALLOW], [
                 'description' => t('Уровень доступа'),

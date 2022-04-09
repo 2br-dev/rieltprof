@@ -268,7 +268,7 @@ class Stylesheet
      * @param string $key the Style's selector
      * @param Style $style the Style to be added
      *
-     * @throws Exception
+     * @throws \Dompdf\Exception
      */
     function add_style($key, Style $style)
     {
@@ -293,6 +293,7 @@ class Stylesheet
      * @param string $key the selector of the requested Style
      * @return Style
      *
+     * @Fixme _styles is a two dimensional array. It should produce wrong results
      */
     function lookup($key)
     {
@@ -311,7 +312,10 @@ class Stylesheet
      */
     function create_style(Style $parent = null)
     {
-        return new Style($this, $this->_current_origin);
+        if ($parent == null) {
+            $parent = $this;
+        }
+        return new Style($parent, $this->_current_origin);
     }
 
     /**
@@ -356,13 +360,42 @@ class Stylesheet
 
             list($this->_protocol, $this->_base_host, $this->_base_path, $filename) = $parsed_url;
 
-            // Fix submitted by Nick Oostveen for aliased directory support:
-            if ($this->_protocol == "") {
-                $file = $this->_base_path . $filename;
-            } else {
-                $file = Helpers::build_url($this->_protocol, $this->_base_host, $this->_base_path, $filename);
-            }
+            $file = Helpers::build_url($this->_protocol, $this->_base_host, $this->_base_path, $filename);
 
+            $options = $this->_dompdf->getOptions();
+            // Download the remote file
+            if (!$options->isRemoteEnabled() && ($this->_protocol != "" && $this->_protocol !== "file://")) {
+                Helpers::record_warnings(E_USER_WARNING, "Remote CSS resource '$file' referenced, but remote file download is disabled.", __FILE__, __LINE__);
+                return;
+            }
+            if ($this->_protocol == "" || $this->_protocol === "file://") {
+                $realfile = realpath($file);
+
+                $rootDir = realpath($options->getRootDir());
+                if (strpos($realfile, $rootDir) !== 0) {
+                    $chroot = $options->getChroot();
+                    $chrootValid = false;
+                    foreach($chroot as $chrootPath) {
+                        $chrootPath = realpath($chrootPath);
+                        if ($chrootPath !== false && strpos($realfile, $chrootPath) === 0) {
+                            $chrootValid = true;
+                            break;
+                        }
+                    }
+                    if ($chrootValid !== true) {
+                        Helpers::record_warnings(E_USER_WARNING, "Permission denied on $file. The file could not be found under the paths specified by Options::chroot.", __FILE__, __LINE__);
+                        return;
+                    }
+                }
+
+                if (!$realfile) {
+                    Helpers::record_warnings(E_USER_WARNING, "File '$realfile' not found.", __FILE__, __LINE__);
+                    return;
+                }
+
+                $file = $realfile;
+            }
+            
             list($css, $http_response_header) = Helpers::getFileContent($file, $this->_dompdf->getHttpContext());
 
             $good_mime_type = true;
@@ -378,7 +411,7 @@ class Stylesheet
                 }
             }
 
-            if (!$good_mime_type || $css == "") {
+            if (!$good_mime_type || empty($css)) {
                 Helpers::record_warnings(E_USER_WARNING, "Unable to load css file $file", __FILE__, __LINE__);
                 return;
             }
@@ -614,6 +647,7 @@ class Stylesheet
                         case "nth-last-of-type":
                             $last = true;
                         case "nth-of-type":
+                            //FIXME: this fix-up is pretty ugly, would parsing the selector in reverse work better generally?
                             $descendant_delimeter = strrpos($query, "::");
                             $isChild = substr($query, $descendant_delimeter-5, 5) == "child";
                             $el = substr($query, $descendant_delimeter+2);
@@ -644,6 +678,7 @@ class Stylesheet
                         case "nth-last-child":
                             $last = true;
                         case "nth-child":
+                            //FIXME: this fix-up is pretty ugly, would parsing the selector in reverse work better generally?
                             $descendant_delimeter = strrpos($query, "::");
                             $isChild = substr($query, $descendant_delimeter-5, 5) == "child";
                             $el = substr($query, $descendant_delimeter+2);
@@ -674,6 +709,7 @@ class Stylesheet
                             $tok = "";
                             break;
 
+                        //TODO: bit of a hack attempt at matches support, currently only matches against elements
                         case "matches":
                             $pseudo_classes[$tok] = true;
                             $p = $i + 1;
@@ -698,6 +734,7 @@ class Stylesheet
                         case ":first-line":
                         case "first-letter":
                         case ":first-letter":
+                            // TODO
                             $el = trim($tok, ":");
                             $pseudo_elements[$el] = true;
                             break;
@@ -817,6 +854,7 @@ class Stylesheet
                             break;
 
                         case "~=":
+                            // FIXME: this will break if $value contains quoted strings
                             // (e.g. [type~="a b c" "d e f"])
                             $values = explode(" ", $value);
                             $query .= "[";
@@ -924,7 +962,7 @@ class Stylesheet
      * {@link FrameTree}.  Aside from parsing CSS, this is the main purpose
      * of this class.
      *
-     * @param FrameTree $tree
+     * @param \Dompdf\Frame\FrameTree $tree
      */
     function apply_styles(FrameTree $tree)
     {
@@ -938,6 +976,7 @@ class Stylesheet
         // styles have been assigned, we order the cached styles by specificity
         // and create a final style object to assign to the frame.
 
+        // FIXME: this is not particularly robust...
 
         $styles = [];
         $xp = new DOMXPath($tree->get_dom());
@@ -954,6 +993,7 @@ class Stylesheet
                 $query = $this->_css_selector_to_xpath($selector, true);
 
                 // Retrieve the nodes, limit to body for generated content
+                //TODO: If we use a context node can we remove the leading dot?
                 $nodes = @$xp->query('.' . $query["query"]);
                 if ($nodes == null) {
                     Helpers::record_warnings(E_USER_WARNING, "The CSS selector '$selector' is not valid", __FILE__, __LINE__);
@@ -1081,21 +1121,21 @@ class Stylesheet
             if (isset($styles[$id])) {
 
                 /** @var array[][] $applied_styles */
-                $applied_styles = $styles[$frame->get_id()];
+                $applied_styles = $styles[$id];
 
                 // Sort by specificity
                 ksort($applied_styles);
 
                 if ($DEBUGCSS) {
                     $debug_nodename = $frame->get_node()->nodeName;
-                    print "<pre>\n[$debug_nodename\n";
+                    print "<pre>\n$debug_nodename [\n";
                     foreach ($applied_styles as $spec => $arr) {
-                        printf("specificity: 0x%08x\n", $spec);
+                        printf("  specificity 0x%08x\n", $spec);
                         /** @var Style $s */
                         foreach ($arr as $s) {
-                            print "[\n";
+                            print "  [\n";
                             $s->debug_print();
-                            print "]\n";
+                            print "  ]\n";
                         }
                     }
                 }
@@ -1110,6 +1150,7 @@ class Stylesheet
                         foreach ($media_queries as $media_query) {
                             list($media_query_feature, $media_query_value) = $media_query;
                             // if any of the Style's media queries fail then do not apply the style
+                            //TODO: When the media query logic is fully developed we should not apply the Style when any of the media queries fail or are bad, per https://www.w3.org/TR/css3-mediaqueries/#error-handling
                             if (in_array($media_query_feature, self::$VALID_MEDIA_TYPES)) {
                                 if ((strlen($media_query_feature) === 0 && !in_array($media_query, $acceptedmedia)) || (in_array($media_query, $acceptedmedia) && $media_query_value == "not")) {
                                     continue (3);
@@ -1165,25 +1206,21 @@ class Stylesheet
                 }
             }
 
-            // Inherit parent's styles if required
+            // Inherit parent's styles if parent exists
             if ($p) {
-
                 if ($DEBUGCSS) {
-                    print "inherit:\n";
-                    print "[\n";
+                    print "  inherit [\n";
                     $p->get_style()->debug_print();
-                    print "]\n";
+                    print "  ]\n";
                 }
-
                 $style->inherit($p->get_style());
             }
 
             if ($DEBUGCSS) {
-                print "DomElementStyle:\n";
-                print "[\n";
+                print "  DomElementStyle [\n";
                 $style->debug_print();
-                print "]\n";
-                print "/$debug_nodename]\n</pre>";
+                print "  ]\n";
+                print "]\n</pre>";
             }
 
             /*DEBUGCSS print: see below different print debugging method
@@ -1212,7 +1249,6 @@ class Stylesheet
             $this->_styles[$key] = null;
             unset($this->_styles[$key]);
         }
-
     }
 
     /**
@@ -1225,7 +1261,6 @@ class Stylesheet
      */
     private function _parse_css($str)
     {
-
         $str = trim($str);
 
         // Destroy comments and remove HTML comments
@@ -1235,6 +1270,7 @@ class Stylesheet
             "/-->$/"
         ], "", $str);
 
+        // FIXME: handle '{' within strings, e.g. [attr="string {}"]
 
         // Something more legible:
         $re =
@@ -1328,6 +1364,7 @@ class Stylesheet
                         // border
                         // padding
                         // background-color
+                        //Todo:Reason is unknown
                         //Other properties (like further font or border attributes) not tested.
                         //If a border or background color around each paper sheet is desired,
                         //assign it to the <body> tag, possibly only for the css of the correct media type.
@@ -1348,6 +1385,7 @@ class Stylesheet
                             /** @noinspection PhpMissingBreakStatementInspection */
                             case ":first":
                                 $key = $page_selector;
+                                break;
 
                             default:
                                 break 2;
@@ -1376,7 +1414,6 @@ class Stylesheet
             if ($match[7] !== "") {
                 $this->_parse_sections($match[7]);
             }
-
         }
     }
 
@@ -1391,41 +1428,33 @@ class Stylesheet
         $DEBUGCSS = $this->_dompdf->getOptions()->getDebugCss();
         $parsed_url = "none";
 
-        if (mb_strpos($val, "url") === false) {
+        if (empty($val) || $val === "none") {
+            $path = "none";
+        } elseif (mb_strpos($val, "url") === false) {
             $path = "none"; //Don't resolve no image -> otherwise would prefix path and no longer recognize as none
         } else {
             $val = preg_replace("/url\(\s*['\"]?([^'\")]+)['\"]?\s*\)/", "\\1", trim($val));
 
             // Resolve the url now in the context of the current stylesheet
             $parsed_url = Helpers::explode_url($val);
-            if ($parsed_url["protocol"] == "" && $this->get_protocol() == "") {
-                if ($parsed_url["path"][0] === '/' || $parsed_url["path"][0] === '\\') {
-                    $path = $_SERVER["DOCUMENT_ROOT"] . '/';
-                } else {
-                    $path = $this->get_base_path();
-                }
-
-                $path .= $parsed_url["path"] . $parsed_url["file"];
+            $path = Helpers::build_url($this->_protocol,
+                $this->_base_host,
+                $this->_base_path,
+                $val);
+            if (($parsed_url["protocol"] == "" || $parsed_url["protocol"] == "file://") && ($this->_protocol == "" || $this->_protocol == "file://")) {
                 $path = realpath($path);
                 // If realpath returns FALSE then specifically state that there is no background image
                 if (!$path) {
                     $path = 'none';
                 }
-            } else {
-                $path = Helpers::build_url($this->get_protocol(),
-                    $this->get_host(),
-                    $this->get_base_path(),
-                    $val);
             }
         }
-
         if ($DEBUGCSS) {
             print "<pre>[_image\n";
             print_r($parsed_url);
-            print $this->get_protocol() . "\n" . $this->get_base_path() . "\n" . $path . "\n";
+            print $this->_protocol . "\n" . $this->_base_path . "\n" . $path . "\n";
             print "_image]</pre>";
         }
-
         return $path;
     }
 
@@ -1467,6 +1496,7 @@ class Stylesheet
             // If the protocol is php, assume that we will import using file://
             // $url = Helpers::build_url($protocol == "php://" ? "file://" : $protocol, $host, $path, $url);
             // Above does not work for subfolders and absolute urls.
+            // Todo: As above, do we need to replace php or file to an empty protocol for local files?
 
             $url = $this->_image($url);
 
@@ -1477,7 +1507,6 @@ class Stylesheet
             $this->_base_host = $host;
             $this->_base_path = $path;
         }
-
     }
 
     /**
@@ -1547,6 +1576,7 @@ class Stylesheet
 
         foreach ($properties as $prop) {
             // If the $prop contains an url, the regex may be wrong
+            // @todo: fix the regex so that it works every time
             /*if (strpos($prop, "url(") === false) {
               if (preg_match("/([a-z-]+)\s*:\s*[^:]+$/i", $prop, $m))
                 $prop = $m[0];
@@ -1606,7 +1636,6 @@ class Stylesheet
             }
             //For easier debugging, don't use overloading of assignments with __set
             $style->$prop_name = $value;
-            //$style->props_set($prop_name, $value);
         }
         if ($DEBUGCSS) print '_parse_properties]';
 
@@ -1636,7 +1665,7 @@ class Stylesheet
             if ($i === false) { continue; }
 
             //$selectors = explode(",", mb_substr($sect, 0, $i));
-            $selectors = preg_split("/,(?![^\(]*\))/", mb_substr($sect, 0, $i),0, PREG_SPLIT_NO_EMPTY);
+            $selectors = preg_split("/,(?![^\(]*\))/", mb_substr($sect, 0, $i), 0, PREG_SPLIT_NO_EMPTY);
             if ($DEBUGCSS) print '[section';
 
             $style = $this->_parse_properties(trim(mb_substr($sect, $i + 1)));
@@ -1652,6 +1681,7 @@ class Stylesheet
                 if ($DEBUGCSS) print '#' . $selector . '#';
                 //if ($DEBUGCSS) { if (strpos($selector,'p') !== false) print '!!!p!!!#'; }
 
+                //FIXME: tag the selector with a hash of the media query to separate it from non-conditional styles (?), xpath comments are probably not what we want to do here
                 if (count($media_queries) > 0) {
                     $style->set_media_queries($media_queries);
                 }
@@ -1664,17 +1694,18 @@ class Stylesheet
         }
 
         if ($DEBUGCSS) {
-            print '_parse_sections]';
+            print "_parse_sections]\n";
         }
     }
 
     /**
      * @return string
      */
-    public static function getDefaultStylesheet()
+    public function getDefaultStylesheet()
     {
-        $dir = realpath(__DIR__ . "/../..");
-        return $dir . self::DEFAULT_STYLESHEET;
+        $options = $this->_dompdf->getOptions();
+        $rootDir = realpath($options->getRootDir());
+        return $rootDir . self::DEFAULT_STYLESHEET;
     }
 
     /**

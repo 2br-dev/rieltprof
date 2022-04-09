@@ -2,7 +2,7 @@
 
 namespace Sabberworm\CSS\CSSList;
 
-use Sabberworm\CSS\OutputFormat;
+use Sabberworm\CSS\Parsing\ParserState;
 
 /**
  * The root CSSList of a parsed file. Contains all top-level css contents, mostly declaration blocks, but also any @-rules encountered.
@@ -16,11 +16,17 @@ class Document extends CSSBlockList {
 		parent::__construct($iLineNo);
 	}
 
+	public static function parse(ParserState $oParserState) {
+		$oDocument = new Document($oParserState->currentLine());
+		CSSList::parseList($oParserState, $oDocument);
+		return $oDocument;
+	}
+
 	/**
 	 * Gets all DeclarationBlock objects recursively.
 	 */
 	public function getAllDeclarationBlocks() {
-		$aResult = [];
+		$aResult = array();
 		$this->allDeclarationBlocks($aResult);
 		return $aResult;
 	}
@@ -36,7 +42,7 @@ class Document extends CSSBlockList {
 	 * Returns all RuleSet objects found recursively in the tree.
 	 */
 	public function getAllRuleSets() {
-		$aResult = [];
+		$aResult = array();
 		$this->allRuleSets($aResult);
 		return $aResult;
 	}
@@ -54,7 +60,7 @@ class Document extends CSSBlockList {
 			$sSearchString = $mElement;
 			$mElement = $this;
 		}
-		$aResult = [];
+		$aResult = array();
 		$this->allValues($mElement, $aResult, $sSearchString, $bSearchInFunctionArguments);
 		return $aResult;
 	}
@@ -66,10 +72,7 @@ class Document extends CSSBlockList {
 	 * @example getSelectorsBySpecificity('>= 100')
 	 */
 	public function getSelectorsBySpecificity($sSpecificitySearch = null) {
-		if (is_numeric($sSpecificitySearch) || is_numeric($sSpecificitySearch[0])) {
-			$sSpecificitySearch = "== $sSpecificitySearch";
-		}
-		$aResult = [];
+		$aResult = array();
 		$this->allSelectors($aResult, $sSpecificitySearch);
 		return $aResult;
 	}
@@ -93,9 +96,9 @@ class Document extends CSSBlockList {
 	}
 
 	// Override render() to make format argument optional
-	public function render(OutputFormat $oOutputFormat = null) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat = null) {
 		if($oOutputFormat === null) {
-			$oOutputFormat = new OutputFormat();
+			$oOutputFormat = new \Sabberworm\CSS\OutputFormat();
 		}
 		return parent::render($oOutputFormat);
 	}

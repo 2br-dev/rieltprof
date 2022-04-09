@@ -24,6 +24,7 @@ class Field
     public $maxlen = 0;
     public $hidden = false;
     public $boolAsInt = false;
+    public $modifier = null; //callable
     
     /**
     * Возвращает значение свойства товара
@@ -39,6 +40,9 @@ class Field
             $property_id = (int) $export_type_object['fieldmap'][$name]['prop_id']; // Идентификатор свойстава товара
             $default_value = $export_type_object['fieldmap'][$name]['value']; // Значение по умолчанию
             $value = $product->getPropertyValueById($property_id); // Получаем значение свойства товара
+            if (is_callable($this->modifier)) {
+                $value = call_user_func($this->modifier, $value, $this, $profile, $product);
+            }
             // Выводим значение свойства, либо значение по умолчанию
             return $value === null ? $default_value : $value;
         } else {

@@ -3,7 +3,7 @@
     <defaultValues>    
         <name multilanguage="true">Подписка на E-mail рассылку</name>
         <description multilanguage="true">Добавляет возможность подписки пользователя на рассылку</description>        
-        <version>4.0.6</version>
+        <version>6.0.1</version>
         <author>ReadyScript lab.</author>
         <dialog_open_delay>0</dialog_open_delay>
         <is_system>1</is_system>

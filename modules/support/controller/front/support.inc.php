@@ -20,9 +20,7 @@ class Support extends \RS\Controller\AuthorizedFront
     {
         $this->api = new \Support\Model\Api();
         $this->topic_api = new \Support\Model\TopicApi();
-        
-        $this->app->breadcrumbs
-            ->addBreadCrumb(t('Личный кабинет'));
+
     }
     
     function actionIndex()

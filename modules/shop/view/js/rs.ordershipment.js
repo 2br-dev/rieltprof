@@ -268,7 +268,7 @@ class orderShipment {
      */
     itemAddUIT(item, data) {
         let gtin = data[this.dataKeys.gtin];
-        let serial = data[this.dataKeys.serial];
+        let serial = data[this.dataKeys.serial].replace(/\"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         let list = item.querySelector(this.selector.itemUITList);
 
         let probablyUIT = list.querySelector(this.selector.UITListItem + '[data-id="' + gtin + serial + '"]');

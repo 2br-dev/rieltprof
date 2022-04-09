@@ -64,6 +64,7 @@ class Factory
      *
      * @throws Exception
      * @return AbstractFrameDecorator
+     * FIXME: this is admittedly a little smelly...
      */
     static function decorate_frame(Frame $frame, Dompdf $dompdf, Frame $root = null)
     {
@@ -83,15 +84,15 @@ class Factory
 
         switch ($display) {
 
-            case "flex":
-            case "table-caption":
+            case "flex": //FIXME: display type not yet supported 
+            case "table-caption": //FIXME: display type not yet supported
             case "block":
                 $positioner = "Block";
                 $decorator = "Block";
                 $reflower = "Block";
                 break;
 
-            case "inline-flex":
+            case "inline-flex": //FIXME: display type not yet supported 
             case "inline-block":
                 $positioner = "Inline";
                 $decorator = "Block";
@@ -181,7 +182,7 @@ class Factory
                 break;
 
             default:
-
+                // FIXME: should throw some sort of warning or something?
             case "none":
                 if ($style->_dompdf_keep !== "yes") {
                     // Remove the node and the frame

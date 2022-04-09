@@ -2,8 +2,6 @@
 
 namespace Sabberworm\CSS\Property;
 
-use Sabberworm\CSS\OutputFormat;
-
 /**
  * Class representing an @charset rule.
  * The following restrictions apply:
@@ -20,7 +18,7 @@ class Charset implements AtRule {
 	public function __construct($sCharset, $iLineNo = 0) {
 		$this->sCharset = $sCharset;
 		$this->iLineNo = $iLineNo;
-		$this->aComments = [];
+		$this->aComments = array();
 	}
 
 	/**
@@ -39,10 +37,10 @@ class Charset implements AtRule {
 	}
 
 	public function __toString() {
-		return $this->render(new OutputFormat());
+		return $this->render(new \Sabberworm\CSS\OutputFormat());
 	}
 
-	public function render(OutputFormat $oOutputFormat) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
 		return "@charset {$this->sCharset->render($oOutputFormat)};";
 	}
 

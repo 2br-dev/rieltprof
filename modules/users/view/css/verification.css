@@ -3,6 +3,14 @@
     margin-bottom:20px;
 }
 
+.rs-verify-code-block .rs-verify-error {
+    display:block;
+}
+
+.rs-verify-code-block .rs-verify-error.hidden {
+    display:none;
+}
+
 .rs-verify-code-block .rs-verify-send-message {
     font-size:12px;
     color:gray;

@@ -4,6 +4,11 @@ namespace Sabberworm\CSS;
 
 use Sabberworm\CSS\Parsing\OutputException;
 
+/**
+ * Class OutputFormat
+ *
+ * @method OutputFormat setSemicolonAfterLastRule( bool $bSemicolonAfterLastRule ) Set whether semicolons are added after last rule.
+ */
 class OutputFormat {
 	/**
 	* Value format
@@ -35,6 +40,10 @@ class OutputFormat {
 	public $sSpaceAfterBlocks = '';
 	public $sSpaceBetweenBlocks = "\n";
 
+	// Content injected in and around @-rule blocks.
+	public $sBeforeAtRuleBlock = '';
+	public $sAfterAtRuleBlock = '';
+
 	// This is what’s printed before and after the comma if a declaration block contains multiple selectors.
 	public $sSpaceBeforeSelectorSeparator = '';
 	public $sSpaceAfterSelectorSeparator = ' ';
@@ -43,7 +52,12 @@ class OutputFormat {
 	public $sSpaceAfterListArgumentSeparator = '';
 	
 	public $sSpaceBeforeOpeningBrace = ' ';
-	
+
+	// Content injected in and around declaration blocks.
+	public $sBeforeDeclarationBlock = '';
+	public $sAfterDeclarationBlockSelectors = '';
+	public $sAfterDeclarationBlock = '';
+
 	/**
 	* Indentation
 	*/
@@ -64,7 +78,7 @@ class OutputFormat {
 	}
 	
 	public function get($sName) {
-		$aVarPrefixes = ['a', 's', 'm', 'b', 'f', 'o', 'c', 'i'];
+		$aVarPrefixes = array('a', 's', 'm', 'b', 'f', 'o', 'c', 'i');
 		foreach($aVarPrefixes as $sPrefix) {
 			$sFieldName = $sPrefix.ucfirst($sName);
 			if(isset($this->$sFieldName)) {
@@ -75,11 +89,11 @@ class OutputFormat {
 	}
 	
 	public function set($aNames, $mValue) {
-		$aVarPrefixes = ['a', 's', 'm', 'b', 'f', 'o', 'c', 'i'];
+		$aVarPrefixes = array('a', 's', 'm', 'b', 'f', 'o', 'c', 'i');
 		if(is_string($aNames) && strpos($aNames, '*') !== false) {
-			$aNames = [str_replace('*', 'Before', $aNames), str_replace('*', 'Between', $aNames), str_replace('*', 'After', $aNames)];
+			$aNames = array(str_replace('*', 'Before', $aNames), str_replace('*', 'Between', $aNames), str_replace('*', 'After', $aNames));
 		} else if(!is_array($aNames)) {
-			$aNames = [$aNames];
+			$aNames = array($aNames);
 		}
 		foreach($aVarPrefixes as $sPrefix) {
 			$bDidReplace = false;
@@ -104,7 +118,7 @@ class OutputFormat {
 		} else if(strpos($sMethodName, 'get') === 0) {
 			return $this->get(substr($sMethodName, 3));
 		} else if(method_exists('\\Sabberworm\\CSS\\OutputFormatter', $sMethodName)) {
-			return call_user_func_array([$this->getFormatter(), $sMethodName], $aArguments);
+			return call_user_func_array(array($this->getFormatter(), $sMethodName), $aArguments);
 		} else {
 			throw new \Exception('Unknown OutputFormat method called: '.$sMethodName);
 		}
@@ -141,17 +155,36 @@ class OutputFormat {
 	public function level() {
 		return $this->iIndentationLevel;
 	}
-	
+
+	/**
+	 * Create format.
+	 *
+	 * @return OutputFormat Format.
+	 */
 	public static function create() {
 		return new OutputFormat();
 	}
-	
+
+	/**
+	 * Create compact format.
+	 *
+	 * @return OutputFormat Format.
+	 */
 	public static function createCompact() {
-		return self::create()->set('Space*Rules', "")->set('Space*Blocks', "")->setSpaceAfterRuleName('')->setSpaceBeforeOpeningBrace('')->setSpaceAfterSelectorSeparator('');
+		$format = self::create();
+		$format->set('Space*Rules', "")->set('Space*Blocks', "")->setSpaceAfterRuleName('')->setSpaceBeforeOpeningBrace('')->setSpaceAfterSelectorSeparator('');
+		return $format;
 	}
-	
+
+	/**
+	 * Create pretty format.
+	 *
+	 * @return OutputFormat Format.
+	 */
 	public static function createPretty() {
-		return self::create()->set('Space*Rules', "\n")->set('Space*Blocks', "\n")->setSpaceBetweenBlocks("\n\n")->set('SpaceAfterListArgumentSeparator', ['default' => '', ',' => ' ']);
+		$format = self::create();
+		$format->set('Space*Rules', "\n")->set('Space*Blocks', "\n")->setSpaceBetweenBlocks("\n\n")->set('SpaceAfterListArgumentSeparator', array('default' => '', ',' => ' '));
+		return $format;
 	}
 }
 
@@ -256,7 +289,7 @@ class OutputFormatter {
 			} else {
 				$sResult .= $sSeparator;
 			}
-			if($mValue instanceof Renderable) {
+			if($mValue instanceof \Sabberworm\CSS\Renderable) {
 				$sResult .= $mValue->render($oFormat);
 			} else {
 				$sResult .= $mValue;

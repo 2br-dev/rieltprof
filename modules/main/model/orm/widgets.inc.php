@@ -61,7 +61,7 @@ class Widgets extends \RS\Orm\OrmObject
             ]),
         
             'class' => new Type\Varchar([
-                'maxLength' => '255',
+                'maxLength' => '150',
             ]),
             'vars' => new Type\Text([
             ]),

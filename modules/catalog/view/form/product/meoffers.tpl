@@ -25,14 +25,14 @@
             <td>
                 <div class="multi_edit_rightcol coveron">
                     <div class="cover"></div>
-                    {include file="multioffers_form.tpl"}
+                    {include file="%catalog%/form/product/multioffers_form.tpl"}
                 </div>
             </td>
         </tr>
     </table>
 </div>
 
-<script type="text/javascript">
+<script>
     $.allReady(function() {
         $('#offersME').offerme();
     });

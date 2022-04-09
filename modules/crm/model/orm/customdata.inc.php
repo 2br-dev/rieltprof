@@ -41,7 +41,8 @@ class CustomData extends AbstractObject
                 'description' => t('ID объекта')
             ]),
             'field' => new Type\Varchar([
-                'description' => t('Идентификатор поля')
+                'description' => t('Идентификатор поля'),
+                'maxLength' => 100
             ]),
             'value_float' => new Type\Real([
                 'decimal' => 4,

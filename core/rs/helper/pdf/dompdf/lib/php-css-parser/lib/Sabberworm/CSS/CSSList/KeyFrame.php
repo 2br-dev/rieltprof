@@ -2,7 +2,6 @@
 
 namespace Sabberworm\CSS\CSSList;
 
-use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Property\AtRule;
 
 class KeyFrame extends CSSList implements AtRule {
@@ -33,10 +32,10 @@ class KeyFrame extends CSSList implements AtRule {
 	}
 
 	public function __toString() {
-		return $this->render(new OutputFormat());
+		return $this->render(new \Sabberworm\CSS\OutputFormat());
 	}
 
-	public function render(OutputFormat $oOutputFormat) {
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
 		$sResult = "@{$this->vendorKeyFrame} {$this->animationName}{$oOutputFormat->spaceBeforeOpeningBrace()}{";
 		$sResult .= parent::render($oOutputFormat);
 		$sResult .= '}';

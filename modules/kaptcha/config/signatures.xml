@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>0281bdd67cb05e3a74d847854dfa27e195201ddd</sign>
+    <sign>0b0bab8a40a8b7556a82fa942aa063eaabb5e480</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -14,7 +14,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>b97645385913e2f15f60f494cede0242c16f989a</sign>
+    <sign>8ba5a323f090ee17b5e72235c61dba59a302790d</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
@@ -46,15 +46,15 @@
   </file>
   <file>
     <path>view/form/rs_default.tpl</path>
-    <sign>dc16481f50f79f9e9f4ab404fe2f4650550af192</sign>
+    <sign>f4c04ea6ddc1791057c22a32de7ee956e03760a2</sign>
   </file>
   <file>
     <path>view/js/recaptcha3.js</path>
-    <sign>029fee99ad0da65bbb6241dffa3c77eeca5f8c08</sign>
+    <sign>c2c9d4a3147d0304fb5886d6e31381a94fb73af7</sign>
   </file>
   <file>
     <path>view/recaptcha3/recaptcha3.tpl</path>
-    <sign>29f818b574a16b9f6a4a7feccbbced289fad935a</sign>
+    <sign>53bc6a703a6faab8fbc5a192780c8ce5a5ecd5b0</sign>
   </file>
-  <masterSign>2052d9e33194cecbf2db9b6421a8d4fd6febd67689b62bd23385e6b8ca6988a9b351d3bc02c652eb9154c62f8f14d02d50dc48e5c04feeb41e74b8222bb137f2d2c3d88aa1a1f0a1da9e0c1b58e1ea53ba0ccabb3eeb8b8646689dd2c782f280340867c03724f92dc0fd50236387431147d8b9e4417402e20e35196b99f23fcc</masterSign>
+  <masterSign>97d2ec64d61ac2f6e45256379ceacabfbb1a2846ceb18a5f6b575549eb5aba9c55eca4f219c95999fde64b7484b9ade99b00c5aa1e0784b4ea6a95aaec7fe3cc4cfcfc08ad59a1f96427732955a2c67c0258ea857936799b5de4f8ba17b5e891a3b4ec1ad5fa42e264c55cf8037131f818df09a4f4b740ca3bf155a78e8e55e2</masterSign>
 </signatures>

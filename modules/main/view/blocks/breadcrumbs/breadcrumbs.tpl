@@ -1,18 +1,14 @@
-{assign var=bc value=$app->breadcrumbs->getBreadCrumbs()}
+{$bc = $app->breadcrumbs->getBreadCrumbs()}
 {if !empty($bc)}
-<nav class="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
-    <i>
+<nav class="breadcrumb" aria-label="breadcrumb">
+    <ul class="breadcrumb__list">
         {foreach from=$bc item=item name="path"}
             {if empty($item.href)}
-                <i typeof="v:Breadcrumb">
-                    <span {if $smarty.foreach.path.first}class="first"{/if} property="v:title">{$item.title}</span>
-                </i>
+                <li class="breadcrumb__item"><span>{$item.title}</span></li>
             {else}
-                <i typeof="v:Breadcrumb">
-                    <a href="{$item.href}" {if $smarty.foreach.path.first}class="first"{/if} rel="v:url" property="v:title">{$item.title}</a>
-                </i>
+                <li class="breadcrumb__item"><a href="{$item.href}" {if $smarty.foreach.path.first}class="first"{/if}>{$item.title}</a></li>
             {/if}
         {/foreach}
-    </i>
+    </ul>
 </nav>
 {/if}

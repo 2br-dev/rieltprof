@@ -42,7 +42,7 @@ class TransactionCtrl extends Crud
         $helper->setTable(new Table\Element([
             'Columns' => [
                 new TableType\Text('id', t('№'), ['Sortable' => SORTABLE_BOTH, 'CurrentSort' => SORTABLE_DESC]),
-                new TableType\Usertpl('user_id', t('Пользователь'), '%shop%/order_user_cell.tpl', [
+                new TableType\Usertpl('user_id', t('Пользователь'), '%shop%/admin/order_user_cell.tpl', [
                     'allowLinks' => true
                 ]),
                 new TableType\Text('reason', t('Назначение')),
@@ -50,12 +50,12 @@ class TransactionCtrl extends Crud
                     return $field->getRow()->getPayment()->title;
                 }),
                 new TableType\Datetime('dateof', t('Дата'), ['Sortable' => SORTABLE_BOTH]),
-                new TableType\Usertpl('cost', t('Сумма'), '%shop%/transaction_cost_cell.tpl', ['Sortable' => SORTABLE_BOTH]),
+                new TableType\Usertpl('cost', t('Сумма'), '%shop%/admin/transaction_cost_cell.tpl', ['Sortable' => SORTABLE_BOTH]),
                 new TableType\Text('comission', t('Комиссия'), ['hidden' => true]),
                 new TableType\Text('status', t('Статус')),
-                new TableType\Usertpl('receipt', t('Чек'), '%shop%/transaction_receipt.tpl'),
+                new TableType\Usertpl('receipt', t('Чек'), '%shop%/admin/transaction_receipt.tpl'),
                 new TableType\Text('error', t('Ошибка'), ['hidden' => true]),
-                new TableType\Usertpl('__actions__', t('Действия'), '%shop%/transaction_actions_cell.tpl'),
+                new TableType\Usertpl('__actions__', t('Действия'), '%shop%/admin/transaction_actions_cell.tpl'),
                 new TableType\Actions('id', [
                     new TableType\Action\DropDown([
                         [

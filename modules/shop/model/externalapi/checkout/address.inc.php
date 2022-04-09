@@ -16,8 +16,7 @@ use RS\Application\Auth;
 */
 class Address extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
         
     protected
         $token_require = false,
@@ -275,7 +274,13 @@ class Address extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMetho
         //Все успешно, присвоим этого пользователя заказу
         if (!$this->order->hasError()) {
             $this->order['user_id'] = $this->token ? $this->token->getUser()->id : \RS\Application\Auth::getCurrentUser()->id;
-        }       
+        }
+
+        //Контрольная проверка на коллизию
+        if (!$this->token && !$user) {
+            $this->order->addError(t('Произошла ошибка, перезагрузите приложение и повторите авторизацию!'));
+            \RS\Application\Auth::logout();
+        }
     }  
     
     
@@ -691,16 +696,15 @@ class Address extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMetho
     */
     protected function process($token = null,
                                $use_addr = 0,
-                               $type = null, 
+                               $type = null,
                                $user = [],
                                $only_pickup_points = 0,
                                $address = [],
-                               $contact_person = "", 
+                               $contact_person = "",
                                $regfields_arr = [],
                                $orderfields_arr = [],
                                $order_extra = [])
-    {   
-        
+    {
         $errors = [];
         $response['response']['success'] = false; 
               

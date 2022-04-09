@@ -11,6 +11,7 @@ namespace RS\Log;
 use RS\Config\Loader as ConfigLoader;
 use RS\Db\Exception as DbException;
 use RS\Exception as RSException;
+use RS\File\Tools as FileTools;
 use RS\Helper\Log;
 use RS\Site\Manager as SiteManager;
 
@@ -55,6 +56,7 @@ abstract class AbstractLog
         static $instance;
         if (!isset($instance)) {
             $instance = new static();
+            FileTools::makePrivateDir(\Setup::$PATH . \Setup::$LOGS_DIR);
         }
         return $instance;
     }

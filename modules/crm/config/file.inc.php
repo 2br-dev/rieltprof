@@ -48,6 +48,19 @@ class File extends ConfigObject
                     'Attr' => [['size' => 5, 'multiple' => 'multiple', 'class' => 'multiselect']],
                     'runtime' => false,
                 ]),
+                'cancel_task_statuses' => new Type\ArrayList([
+                    'description' => t('Статусы, которые характеризуют задачу как отмененную (Удерживая CTRL можно выбрать несколько)'),
+                    'list' => [['\Crm\Model\Orm\Status', 'getStatusesTitles'], 'crm-task'],
+                    'Attr' => [['size' => 5, 'multiple' => 'multiple', 'class' => 'multiselect']],
+                    'hint' => t('Задачи с такими статусами не удут учитываться при подсчете просроченных задач'),
+                    'runtime'=>false,
+                ]),
+                'complete_task_statuses' => new Type\ArrayList([
+                    'description' => t('Статусы, которые характеризуют задачу как выполненную (Удерживая CTRL можно выбрать несколько)'),
+                    'list' => [['\Crm\Model\Orm\Status', 'getStatusesTitles'], 'crm-task'],
+                    'Attr' => [['size' => 5, 'multiple' => 'multiple', 'class' => 'multiselect']],
+                    'runtime'=>false,
+                ]),
             t('Дополнительные поля сделок'),
                 '__deal_userfields__' => new Type\UserTemplate('%crm%/form/config/deal_userfield.tpl'),
                 'deal_userfields' => new Type\ArrayList([

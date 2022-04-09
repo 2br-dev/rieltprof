@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme scriptType="shop" scriptMajorVersion="6" themeType="pc">
+    <general>
+        <author>ReadyScript lab.</author>
+        <name>Изумительная</name>
+        <description>Адаптивная универсальная тема, собранная по сетке bootstrap 5</description>
+        <version>6.0.7</version>
+    </general>
+    <options>
+        <group name="Шапка">
+            <option name="catalog_view_type" type="image-select">
+                <description>Вариант отображения каталога</description>
+                <default>button</default>
+                <values>
+                    <value key="button">Кнопка в шапке</value>
+                    <value key="horizontal">Горизонтальный каталог</value>
+                </values>
+            </option>
+            <option name="catalog_nesting_type" type="image-select">
+                <description>Вариант отображения подкатегорий</description>
+                <default>variant2</default>
+                <values>
+                    <value key="variant1">Категории третьего уровня отображаются сразу</value>
+                    <value key="variant2">Категории третьего уровня отображаются только после выбора категории второго уровня</value>
+                </values>
+            </option>
+            <option name="catalog_with_images" type="image-select">
+                <description>Оторажать картинку 24x24 px перед категориями первого уровня</description>
+                <default>0</default>
+                <values>
+                    <value key="0">Нет</value>
+                    <value key="1">Да</value>
+                </values>
+            </option>
+            <option name="sticky_header" type="image-select">
+                <description>Вариант отображения шапки во время промотки</description>
+                <default>sticky_up</default>
+                <values>
+                    <value key="none">Шапка не является фиксированной</value>
+                    <value key="sticky">Шапка является фиксированной</value>
+                    <value key="sticky_up">Отображать шапку свайпом вверх</value>
+                </values>
+            </option>
+            <option name="catalog_enable_designer_column" type="checkbox">
+                <description>Добавить колонку с блоком Дизайнер в список категорий.</description>
+                <default>0</default>
+            </option>
+            <option name="category_item_resolution_count" type="string">
+                <default>5,7,8</default>
+                <description>Количество элементов в горизонтальной строке категорий для разрешения LG, XL, XXL (через запятую 3 числа). </description>
+                <hint>Используйте данную опцию, чтобы скрыть не умещающиеся категории в горизонтальной строке. Оставьте поле пустым, если желаете всегда отображать все пункты.</hint>
+            </option>
+        </group>
+        <group name="Товары">
+            <option name="product_card_view_type" type="image-select">
+                <description>Вариант карточки товара</description>
+                <default>second</default>
+                <values>
+                    <value key="first">Фото, комплектации, цена в три колонки</value>
+                    <value key="second">Крупное фото, цена в две колонки</value>
+                </values>
+            </option>
+            <option name="product_tabs_view_type" type="image-select">
+                <description>Вариант отображения табов</description>
+                <default>first</default>
+                <values>
+                    <value key="first">Все табы соединены одной линией</value>
+                    <value key="second">Каждый таб как отдельная кнопка</value>
+                </values>
+            </option>
+            <option name="filter_view_variant" type="image-select">
+                <description>Тип отображения фильтра</description>
+                <default>invisible</default>
+                <values>
+                    <value key="visible">Фильтр отображается на больших разрешениях</value>
+                    <value key="invisible">Фильтр всегда открывается по кнопке</value>
+                </values>
+            </option>
+            <option name="buyinoneclick" module="catalog" type="proxy">
+                <description>Включить покупку в 1 клик</description>
+                <default>1</default>
+            </option>
+            <option name="tabs_on_new_page" module="catalog" type="proxy">
+                <description>Вкладки о товаре, которые необходимо отобразить на отдельной странице и отдельном URL</description>
+            </option>
+            <option name="show_rating" type="checkbox">
+                <description>Отображать количество отзывов и оценку товара</description>
+                <default>1</default>
+            </option>
+            <option name="review_enabled" type="checkbox">
+                <description>Включить отзывы у товара</description>
+                <default>1</default>
+            </option>
+            <option name="price_like_slider" module="catalog" type="proxy">
+                <description>Показывать фильтр по цене в виде слайдера</description>
+                <default>1</default>
+            </option>
+            <option name="button_as_amount" type="checkbox">
+                <default>0</default>
+                <description>Заменять кнопку "В корзину" на поле ввода количества, после добавления товара в корзину</description>
+                <hint>Опция актуальна только для товаров без комплектаций</hint>
+            </option>
+            <option name="show_offers_in_list" type="checkbox">
+                <default>1</default>
+                <description>Отображать комплектации в списках товаров</description>
+                <hint>Может потребовать больше производительности от сервера</hint>
+            </option>
+            <option name="enable_compare" type="checkbox">
+                <default>1</default>
+                <description>Включить сравнение товаров</description>
+            </option>
+            <option name="enable_favorite" type="checkbox">
+                <default>1</default>
+                <description>Включить добавление товаров в избранное</description>
+            </option>
+            <option name="enable_short_description_in_product_card" type="checkbox">
+                <default>1</default>
+                <description>Отображать краткое описание товара в карточке и табличном виде в списках</description>
+            </option>
+            <option name="enable_product_zoom" type="checkbox">
+                <default>1</default>
+                <description>Включить увеличение товара по двойному клику</description>
+            </option>
+        </group>
+        <group name="Корзина">
+            <option name="show_modal_cart" type="checkbox">
+                <default>1</default>
+                <description>Показывать упрощенную корзину во всплывающем окне после добавления товара в корзину</description>
+            </option>
+            <option name="buy_one_click_in_cart" type="checkbox">
+                <default>1</default>
+                <description>Включить покупку в 1 клик в корзине</description>
+            </option>
+            <option name="show_unselected_concomitant_in_cart" type="checkbox">
+                <default>1</default>
+                <description>Показывать в корзине все сопутствующие, даже не выбранные</description>
+            </option>
+            <option name="enable_discount_coupons" type="checkbox">
+                <default>1</default>
+                <description>Давать возможность указать купон на скидку в корзину</description>
+            </option>
+        </group>
+        <group name="Блок Категории товаров">
+            <option name="top_category_with_images" type="select">
+                <description>Вариант отображения категорий</description>
+                <default>upper</default>
+                <values>
+                    <value key="upper">Картинка над названием категории</value>
+                    <value key="background">Картинка на фоне названия категории</value>
+                </values>
+            </option>
+        </group>
+        <group name="Личный кабинет">
+            <option name="use_personal_account" module="shop" type="proxy">
+                <description>Включить лицевой счет пользователя</description>
+                <default>1</default>
+            </option>
+            <option name="recurring_show_methods_menu" module="shop" type="proxy">
+                <description>Показывать пункт меню "Мои привязанные карты"</description>
+                <default>0</default>
+            </option>
+        </group>
+        <group name="Подвал сайта">
+            <option name="default_phone" type="string">
+                <description>Контактный номер телефона</description>
+                <default>+7(000)000-00-00</default>
+            </option>
+            <option name="default_email" type="string">
+                <description>Публичный Email</description>
+                <default>support@example.com</default>
+            </option>
+            <option name="default_address" type="string">
+                <description>Адрес, отображаемый в подвале сайта</description>
+                <default>г. Краснодар, ул Тестовая, д. 404, оф. 503</default>
+            </option>
+        </group>
+        <group name="Цвета">
+            <option name="color_primary" type="colorpicker">
+                <description>Основной цвет</description>
+                <default>#247CFF</default>
+            </option>
+            <option name="color_dark" type="colorpicker">
+                <description>Темный цвет</description>
+                <default>#1337B6</default>
+            </option>
+            <option name="color_light" type="colorpicker">
+                <description>Яркий цвет</description>
+                <default>#149CFF</default>
+            </option>
+            <option name="color_very_light" type="colorpicker">
+                <description>Очень яркий цвет</description>
+                <default>#F3FBFF</default>
+            </option>
+            <option name="color_border" type="colorpicker">
+                <description>Цвет границы</description>
+                <default>#AFE2FF</default>
+            </option>
+            <option name="color_btn_text" type="colorpicker">
+                <description>Цвет текста в кнопках</description>
+                <default>#ffffff</default>
+            </option>
+            <option name="color_link" type="colorpicker">
+                <description>Цвет ссылки</description>
+                <default>#2F44FF</default>
+            </option>
+            <option name="color_link_hover" type="colorpicker">
+                <description>Цвет ссылки при наведении</description>
+                <default>#247CFF</default>
+            </option>
+
+            <option name="menubar_bg" type="colorpicker">
+                <description>Цвет фона меню</description>
+                <default>#404147</default>
+            </option>
+            <option name="menubar_link" type="colorpicker">
+                <description>Цвет ссылок меню</description>
+                <default>#ffffff</default>
+            </option>
+
+            <option name="footer_bg" type="colorpicker">
+                <description>Цвет фона подвала</description>
+                <default>#333333</default>
+            </option>
+            <option name="subfooter_bg" type="colorpicker">
+                <description>Цвет фона нижней части подвала</description>
+                <default>#1B1B1F</default>
+            </option>
+            <option name="footer_link" type="colorpicker">
+                <description>Цвет ссылок в подвале</description>
+                <default>#FFFFFF</default>
+            </option>
+            <option name="footer_text" type="colorpicker">
+                <description>Цвет текста в подвале</description>
+                <default>#FFFFFF</default>
+            </option>
+        </group>
+        <group name="Другое">
+            <option name="body_increased_width" type="checkbox">
+                <description>Увеличенная максимальная ширина рабочей зоны (1500px)</description>
+                <default>1</default>
+            </option>
+            <option name="show_cookie_use_policy" type="checkbox">
+                <description>Отображать уведомление об использовании cookie</description>
+                <default>1</default>
+            </option>
+            <option name="force_white_background_category" type="checkbox">
+                <description>Использовать только белый фон под изображениями категорий</description>
+                <hint>Используйте, если вы загружаете изображения категорий с прозрачным фоном</hint>
+                <default>1</default>
+            </option>
+            <option name="force_white_background_brand" type="checkbox">
+                <description>Использовать только белый фон под изображениями брендов</description>
+                <hint>Используйте, если вы загружаете изображения брендов с прозрачным фоном</hint>
+                <default>1</default>
+            </option>
+            <option name="enable_jquery" type="checkbox">
+                <default>0</default>
+                <description>Включить jQuery (Может понадобиться для корректной работы дополнений)</description>
+            </option>
+        </group>
+    </options>
+</theme>

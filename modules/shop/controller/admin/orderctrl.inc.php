@@ -33,11 +33,14 @@ use RS\Module\Item as ModuleItem;
 use RS\Router\Manager as RouterManager;
 use Shop\Config\ModuleRights;
 use Shop\Model\AddressApi;
+use Shop\Model\ArchiveOrderApi;
+use Shop\Model\Cart;
 use Shop\Model\DeliveryApi;
 use Shop\Model\DeliveryType\InterfaceDeliveryOrder;
 use Shop\Model\Exception as ShopException;
 use Shop\Model\HtmlFilterType as ShopHtmlFilterType;
 use Shop\Model\OrderApi;
+use Shop\Model\Orm\AbstractCartItem;
 use Shop\Model\Orm\Address;
 use Shop\Model\Orm\Delivery;
 use Shop\Model\Orm\Order;
@@ -132,11 +135,11 @@ class OrderCtrl extends Crud
                     new TableType\Checkbox('id', ['showSelectAll' => true]),
                     new TableType\Viewed(null, $this->api->getMeterApi()),
                     new TableType\Text('order_num', t('Номер'), ['Sortable' => SORTABLE_BOTH, 'href' => $edit_href]),
-                    new TableType\Usertpl('user_id', t('Покупатель'), '%shop%/order_user_cell.tpl', ['href' => $edit_href]),
-                    new TableType\Usertpl('status', t('Статус'), '%shop%/order_status_cell.tpl', ['Sortable' => SORTABLE_BOTH, 'href' => $edit_href]),
+                    new TableType\Usertpl('user_id', t('Покупатель'), '%shop%/admin/order_user_cell.tpl', ['href' => $edit_href]),
+                    new TableType\Usertpl('status', t('Статус'), '%shop%/admin/order_status_cell.tpl', ['Sortable' => SORTABLE_BOTH, 'href' => $edit_href]),
                     new TableType\Datetime('dateof', t('Дата оформления'), ['Sortable' => SORTABLE_BOTH, 'CurrentSort' => SORTABLE_DESC]),
                     new TableType\Datetime('dateofupdate', t('Дата обновления'), ['Sortable' => SORTABLE_BOTH, 'hidden' => true]),
-                    new TableType\Usertpl('totalcost', t('Сумма'), '%shop%/order_totalcost_cell.tpl', ['Sortable' => SORTABLE_BOTH]),
+                    new TableType\Usertpl('totalcost', t('Сумма'), '%shop%/admin/order_totalcost_cell.tpl', ['Sortable' => SORTABLE_BOTH]),
                     new TableType\StrYesno('is_payed', t('Оплачен'), ['Sortable' => SORTABLE_BOTH, 'hidden' => true]),
                     new TableType\Userfunc('user_phone', t('Телефон покупателя'), function ($user_phone, $_this) {
                         /**
@@ -161,7 +164,9 @@ class OrderCtrl extends Crud
                         return $user['e_mail'];
                     }, ['hidden' => true]),
                     new TableType\Text('manager_user_id', t('Менеджер заказа'), ['Sortable' => SORTABLE_BOTH, 'href' => $edit_href, 'hidden' => true]),
-
+                    new TableType\Text('id', t('ID заказа'), ['Sortable' => SORTABLE_BOTH, 'href' => $edit_href, 'hidden' => true]),
+                    new TableType\Text('admin_comments', t('Комментарий администратора'), ['Sortable' => SORTABLE_BOTH, 'hidden' => true]),
+                    new TableType\Text('comments', t('Комментарий клиента'), ['Sortable' => SORTABLE_BOTH, 'hidden' => true]),
                     new TableType\Actions('id', [
                         new TableType\Action\Edit($this->router->getAdminPattern('edit', [':id' => '~field~']), null, [
                             'noajax' => true,
@@ -230,6 +235,7 @@ class OrderCtrl extends Crud
                 ]
             ],
         ]));
+        $helper['topToolbar']->addItem(new ToolbarButton\Button(RouterManager::obj()->getAdminUrl(null, null, 'shop-archiveorderctrl'), t('Архив заказов')));
 
         $helper
             ->setTree($this->getIndexTreeElement(), $this->getTreeApi())
@@ -246,7 +252,7 @@ class OrderCtrl extends Crud
 
         $helper->setBottomToolbar(new Toolbar\Element([
             'Items' => [
-                new ToolbarButton\DropUp([
+                'print' => new ToolbarButton\DropUp([
                     [
                         'title' => t('Печать'),
                         'attr' => [
@@ -281,12 +287,20 @@ class OrderCtrl extends Crud
                         'title' => t('редактировать'),
                         'attr' => [
                             'data-url' => $this->router->getAdminUrl('multiEdit_order'),
-                            'class' => 'btn-alt btn-primary crud-multiedit'
+                            'class' => 'btn-alt btn-primary crud-multiedit',
                         ],
                     ]
                 ], ['attr' => ['class' => 'edit']]),
-                new ToolbarButton\Delete(null, null, ['attr' =>
-                    ['data-url' => $this->router->getAdminUrl('del')]
+                new ToolbarButton\Button(null, t('архивировать'), [
+                    'attr' => [
+                        'data-url' => $this->router->getAdminUrl('archiveOrders'),
+                        'class' => 'btn-alt btn-warning crud-post',
+                    ],
+                ]),
+                new ToolbarButton\Delete(null, null, [
+                    'attr' => [
+                        'data-url' => $this->router->getAdminUrl('del'),
+                    ],
                 ]),
             ]
         ]));
@@ -297,7 +311,8 @@ class OrderCtrl extends Crud
                     new Filter\Line(['Items' => [
                         new Filter\Type\Text('order_num', '№'),
                         new Filter\Type\DateRange('dateof', t('Дата оформления')),
-                        new Filter\Type\Text('totalcost', t('Сумма'), ['showtype' => true])
+                        new Filter\Type\Text('totalcost', t('Сумма'), ['showtype' => true]),
+                        new Filter\Type\Text('id', t('ID Заказа'))
                     ]]),
                 ],
                 'SecContainer' => new Filter\Seccontainer([
@@ -361,7 +376,7 @@ class OrderCtrl extends Crud
             ],
             'sortable' => true,
             'sortUrl' => $this->router->getAdminUrl('treeMove'),
-            'mainColumn' => new TableType\Usertpl('title', t('Название'), '%shop%/order_tree_cell.tpl', [
+            'mainColumn' => new TableType\Usertpl('title', t('Название'), '%shop%/admin/order_tree_cell.tpl', [
                 'linkAttr' => ['class' => 'call-update'],
                 'href' => $this->router->getAdminPattern(false, [':status' => '@id'])
             ]),
@@ -428,31 +443,19 @@ class OrderCtrl extends Crud
             );
             //Добавим ещё повотр заказа
             $helper['bottomToolbar']->addItem(
-                new ToolbarButton\Cancel($this->router->getAdminUrl('add', ['from_order' => $id]), t('Повторить заказ'), [
+                new ToolbarButton\Button($this->router->getAdminUrl('add', ['from_order' => $id]), t('Повторить заказ'), [
                     'noajax' => true,
                     'attr' => [
                         'class' => 'btn btn-alt btn-primary m-l-30',
                     ]
                 ])
             );
+
             // Добавим контрол отгрузки
             $helper['bottomToolbar']->addItem(
                 new ToolbarButton\Button($this->router->getAdminUrl('shipment', ['order_id' => $id], 'shop-markingtools'), t('Отгрузить'), [
                     'attr' => [
                         'class' => 'btn btn-alt btn-primary m-l-30 crud-edit shipmentToolbarButton',
-                    ]
-                ])
-            );
-            // Добавим ссылку на транзакции
-            $params = [
-                'f[entity][type]' => 'order',
-                'f[entity][id]' => $id,
-            ];
-            $helper['bottomToolbar']->addItem(
-                new ToolbarButton\Button($this->router->getAdminUrl('index', $params, 'shop-transactionctrl'), t('Перейти к транзакциям'), [
-                    'attr' => [
-                        'class' => 'm-l-30',
-                        'target' => '_blank',
                     ]
                 ])
             );
@@ -495,8 +498,10 @@ class OrderCtrl extends Crud
             $order->setRefreshMode(true);
         }
 
+        $old_order = false;
         if ($id) {
             $order->load($id);
+            $old_order = new Order($id);
             $this->api->getMeterApi()->markAsViewed($id);
 
         } elseif ($order_id) { //Если идёт только создание
@@ -642,16 +647,46 @@ class OrderCtrl extends Crud
         $return_api = new ProductsReturnApi();
         $returned_items = $return_api->getReturnItemsByOrder($id);
 
+        $old_order_stocks = [];
+        if ($old_order) {
+            foreach ($old_order->getCart()->getCartItemsByType(Cart::TYPE_PRODUCT) as $order_item) {
+                $offer = $order_item['offer'];
+                if (!isset($old_order_stocks[$offer])) {
+                    $old_order_stocks[$offer] = 0;
+                }
+                $old_order_stocks[$offer] += $order_item['amount'];
+            }
+        }
+        $order_available_stocks = [];
+        foreach ($order->getCart()->getProductItems() as $item) {
+            /** @var AbstractCartItem $cart_item */
+            $cart_item = $item[Cart::CART_ITEM_KEY];
+            /** @var Product $product */
+            $product = $cart_item->getEntity();
+            $offer = $cart_item['offer'];
+
+            $order_available_stocks[$offer] = $product->getNum($offer);
+            if ($order_available_stocks[$offer] < 0) {
+                $order_available_stocks[$offer] = 0;
+            }
+            if (isset($old_order_stocks[$offer])) {
+                $order_available_stocks[$offer] += $old_order_stocks[$offer];
+            }
+        }
+
         $this->view->assign([
-            'order_footer_fields' => $order->getForm(null, 'footer', false, null, '%shop%/order_footer_maker.tpl'),
-            'order_depend_fields' => $order->getForm(null, 'depend', false, null, '%shop%/order_depend_maker.tpl'),
-            'order_user_fields' => $order->getForm(null, 'user', false, null, '%shop%/order_depend_maker.tpl'),
-            'order_info_fields' => $order->getForm(null, 'info', false, null, '%shop%/order_info_maker.tpl'),
-            'order_delivery_fields' => $order->getForm(null, 'delivery', false, null, '%shop%/order_info_maker.tpl'),
-            'order_payment_fields' => $order->getForm(null, 'payment', false, null, '%shop%/order_info_maker.tpl'),
+            'order_footer_fields' => $order->getForm(null, 'footer', false, null, '%shop%/admin/order_footer_maker.tpl'),
+            'order_depend_fields' => $order->getForm(null, 'depend', false, null, '%shop%/admin/order_depend_maker.tpl'),
+            'order_user_fields' => $order->getForm(null, 'user', false, null, '%shop%/admin/order_depend_maker.tpl'),
+            'order_info_fields' => $order->getForm(null, 'info', false, null, '%shop%/admin/order_info_maker.tpl'),
+            'order_delivery_fields' => $order->getForm(null, 'delivery', false, null, '%shop%/admin/order_info_maker.tpl'),
+            'order_payment_fields' => $order->getForm(null, 'payment', false, null, '%shop%/admin/order_info_maker.tpl'),
 
             'catalog_folders' => ModuleItem::getResourceFolders('catalog'),
             'elem' => $order,
+            'old_order' => $old_order,
+            'old_order_stocks' => $old_order_stocks,
+            'order_available_stocks' => $order_available_stocks,
             'user_id' => $order['user_id'],
             'warehouse_list' => $warehouses,
             'courier_list' => $couriers,
@@ -662,7 +697,7 @@ class OrderCtrl extends Crud
             'user_num_of_order' => $user_num_of_order,
             'returned_items' => $returned_items,
         ]);
-        $helper['form'] = $this->view->fetch('%shop%/orderview.tpl');
+        $helper['form'] = $this->view->fetch('%shop%/admin/orderview.tpl');
         $helper->setTopTitle(null);
 
         if ($refresh_mode) { //Если режим обновления
@@ -720,8 +755,8 @@ class OrderCtrl extends Crud
         $user_status_api = new UserStatusApi();
         $this->view->assign([
             'elem' => $order,
-            'order_footer_fields' => $order->getForm(null, 'footer', false, null, '%shop%/order_footer_maker.tpl'),
-            'order_user_fields' => $order->getForm(null, 'user', false, null, '%shop%/order_depend_maker.tpl'),
+            'order_footer_fields' => $order->getForm(null, 'footer', false, null, '%shop%/admin/order_footer_maker.tpl'),
+            'order_user_fields' => $order->getForm(null, 'user', false, null, '%shop%/admin/order_depend_maker.tpl'),
             'catalog_folders' => ModuleItem::getResourceFolders('catalog'),
             'warehouse_list' => $warehouses,
             'courier_list' => $couriers,
@@ -729,7 +764,7 @@ class OrderCtrl extends Crud
             'user_num_of_order' => 0,
             'refresh_mode' => false
         ]);
-        $helper['form'] = $this->view->fetch('%shop%/orderview.tpl');
+        $helper['form'] = $this->view->fetch('%shop%/admin/orderview.tpl');
         return $this->result->setTemplate($helper['template']);
     }
 
@@ -879,6 +914,7 @@ class OrderCtrl extends Crud
                 'address_part' => $this->actionGetAddressRecord($use_addr)->getHtml()
             ]);
         }
+        $use_addr = $this->url->request('use_addr', TYPE_INTEGER); //Использовать адрес пользователя
 
         if ($this->url->isPost()) { //Если пришёл запрос
             //Получим данные
@@ -886,7 +922,6 @@ class OrderCtrl extends Crud
                 $this->api->addError($error);
                 return $this->result->setSuccess(false)->setErrors($this->api->getDisplayErrors());
             }
-            $use_addr = $this->url->request('use_addr', TYPE_INTEGER); //Использовать адрес пользователя
             $post_address = $this->url->request('address', TYPE_ARRAY);  //Сведения об адресе
             $edit_type = $this->url->request('edit_type', TYPE_STRING);
 
@@ -918,7 +953,7 @@ class OrderCtrl extends Crud
                 'elem' => $order,
                 'user_id' => $user_id,
                 'address' => $address,
-                'order_address_fields' => $order->getForm(null, 'address', false, null, '%shop%/order_info_maker.tpl'),
+                'order_address_fields' => $order->getForm(null, 'address', false, null, '%shop%/admin/order_info_maker.tpl'),
             ]);
 
             return $this->result->setSuccess(true)
@@ -931,18 +966,19 @@ class OrderCtrl extends Crud
 
         $this->view->assign([
             'order' => $order,
+            'user_id' => $user_id,
             'address_list' => $address_list,
         ]);
 
         $bottom_toolbar_items = [];
-        if ($order['use_addr']) {
-            $bottom_toolbar_items['update_address'] = new ToolbarButton\SaveForm(null, t('изменить выбранный адрес'), [
+        if ($use_addr) {
+            $bottom_toolbar_items['update_address'] = new ToolbarButton\SaveForm(null, t('сохранить'), [
                 'attr' => [
                     'data-url' => $this->router->getAdminUrl(null, $this->url->getSource(GET) + ['edit_type' => 'edit']),
                 ],
             ]);
         }
-        if ($order['user_id'] || !$order['use_addr']) {
+        if ($user_id || !$order['use_addr']) {
             $bottom_toolbar_items['new_address'] = new ToolbarButton\SaveForm(null, t('сохранить новый адрес'), [
                 'attr' => [
                     'data-url' => $this->router->getAdminUrl(null, $this->url->getSource(GET) + ['edit_type' => 'new']),
@@ -1011,7 +1047,7 @@ class OrderCtrl extends Crud
                 'user_id' => $user_id,
                 'warehouse_list' => $warehouses,
                 'user_delivery_cost' => $user_delivery_cost,
-                'order_delivery_fields' => $order->getForm(null, 'delivery', false, null, '%shop%/order_info_maker.tpl'),
+                'order_delivery_fields' => $order->getForm(null, 'delivery', false, null, '%shop%/admin/order_info_maker.tpl'),
             ]);
 
             return $this->result->setSuccess(true)
@@ -1069,7 +1105,7 @@ class OrderCtrl extends Crud
                 'elem' => $order,
                 'payment_id' => $pay_id,
                 'pay' => $order->getPayment(),
-                'order_payment_fields' => $order->getForm(null, 'payment', false, null, '%shop%/order_info_maker.tpl'),
+                'order_payment_fields' => $order->getForm(null, 'payment', false, null, '%shop%/admin/order_info_maker.tpl'),
             ]);
 
             return $this->result->setSuccess(true)
@@ -1226,10 +1262,12 @@ class OrderCtrl extends Crud
 
             if ($shop_config['old_cost_delta_as_discount']) {
                 $old_cost_id = $cost_list[$type_cost['old_cost']] ?? $catalog_config['old_cost'];
-                $old_cost = $product->getCost($old_cost_id, $offer_id, false);
-                if ($old_cost > $base_cost) {
-                    $discount_from_old_cost = $old_cost - $base_cost;
-                    $base_cost = $old_cost;
+                if ($old_cost_id) {
+                    $old_cost = $product->getCost($old_cost_id, $offer_id, false);
+                    if ($old_cost > $base_cost) {
+                        $discount_from_old_cost = $old_cost - $base_cost;
+                        $base_cost = $old_cost;
+                    }
                 }
             }
 
@@ -1363,7 +1401,7 @@ class OrderCtrl extends Crud
         $helper = new CrudCollection($this);
         $helper->setTopTitle(t('Статистика по заказам'));
         $helper->viewAsAny();
-        $helper['form'] = $this->view->fetch('orders_report.tpl');
+        $helper['form'] = $this->view->fetch('admin/orders_report.tpl');
 
         return $this->result->setTemplate($helper['template']);
     }
@@ -1425,7 +1463,7 @@ class OrderCtrl extends Crud
             'paginator' => $paginator
         ]);
 
-        return $this->result->addSection(['title' => t('Быстрый просмотр заказов'),])->setTemplate('quick_show_orders.tpl');
+        return $this->result->addSection(['title' => t('Быстрый просмотр заказов'),])->setTemplate('admin/quick_show_orders.tpl');
     }
 
     /**
@@ -1496,18 +1534,24 @@ class OrderCtrl extends Crud
 
             $order_id = $this->url->get('order', TYPE_INTEGER, null);
 
-            $order = new Order($order_id);
-            if ($order_id && $order['use_addr']) {
-                $address = $order->getAddress();
-                if ($address['id']) {
-                    $address['user_id'] = $user['id'];
-                    $address->update();
-                }
-            }
-
             if ($user->hasError()) {
                 return $this->result->setSuccess(false)->addEMessage($user->getErrorsStr());
             }
+
+            $order = new Order($order_id);
+            if ($order['id']) {
+                if ($order['use_addr']) {
+                    $address = $order->getAddress();
+                    if ($address['id']) {
+                        $address['user_id'] = $user['id'];
+                        $address->update();
+                    }
+                }
+                $order['user_id'] = $user['id'];
+                $order['user_type'] = Order::USER_TYPE_USER;
+                $order->update();
+            }
+
             $this->view->assign([
                 'user' => $user
             ]);
@@ -1577,6 +1621,7 @@ class OrderCtrl extends Crud
                         $this->result->setHtml($result['html']);
                         break;
                     case 'output':
+                        $this->wrapOutput(false);
                         Application::getInstance()->headers->addHeader('Content-Type', $result['content_type'])->sendHeaders();
                         echo $result['content'];
                         break;
@@ -1633,5 +1678,35 @@ class OrderCtrl extends Crud
         } catch (ShopException $e) {
             return $this->result->setSuccess(false)->addEMessage($e->getMessage())->addSection('noUpdate', true);
         }
+    }
+
+    /**
+     * Перемещает заказы в архив
+     *
+     * @return Standard
+     */
+    public function actionArchiveOrders()
+    {
+        $ids = $this->modifySelectAll($this->url->request('chk', TYPE_ARRAY, []));
+        $offset = $this->url->request('offset', TYPE_INTEGER, 0);
+
+        $ids_parts = array_chunk($ids, ArchiveOrderApi::MOVE_STEP_COUNT);
+
+        $api = new ArchiveOrderApi();
+        $api->moveToArchive($ids_parts[$offset]);
+
+        $this->result->setSuccess(true);
+        $offset++;
+        if (count($ids_parts) > $offset) {
+            $this->result->addSection('repeat', true)->addSection('queryParams', [
+                'data' => [
+                    'chk' => $ids,
+                    'offset' => $offset,
+                ],
+            ]);
+        } else {
+            $this->result->addMessage(t('%0 заказов перемещено в архив', [count($ids)]));
+        }
+        return $this->result;
     }
 }

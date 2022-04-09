@@ -38,7 +38,7 @@ class Tools extends \RS\Controller\Admin\Front
             ]
         ]));
         $helper->viewAsForm();
-        $helper['form'] = $this->view->fetch('cms_settings_form.tpl');
+        $helper['form'] = $this->view->fetch('admin/cms_settings_form.tpl');
 
         if ($this->url->isPost()) {
 
@@ -65,7 +65,7 @@ class Tools extends \RS\Controller\Admin\Front
 
                     $_SESSION['atol_import_params'] = $params;
                     $this->view->assign('shops', $shops);
-                    $helper['form'] = $this->view->fetch('cms_settings_form2.tpl');
+                    $helper['form'] = $this->view->fetch('admin/cms_settings_form2.tpl');
                     return $this->result
                                     ->setSuccess(true)
                                     ->setTemplate($helper['template']);

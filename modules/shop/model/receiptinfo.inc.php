@@ -112,7 +112,7 @@ class ReceiptInfo
      */
     public function getTotal()
     {
-        return $this->total;
+        return number_format($this->total,2, '.', '');
     }
 
     /**

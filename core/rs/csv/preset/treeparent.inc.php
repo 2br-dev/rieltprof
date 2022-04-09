@@ -20,6 +20,7 @@ class TreeParent extends AbstractPreset
         
         $is_multisite,
         $tree_delimiter = '/',
+        $tree_delimiter_replacer = '%2f%',
         $tree_field,
         $parent_field,
         $root_value,
@@ -178,6 +179,8 @@ class TreeParent extends AbstractPreset
             $parts = explode($this->tree_delimiter, $tree_value);
             $parent = 0;
             foreach($parts as $n => $part) {
+                $part = str_replace($this->tree_delimiter_replacer, $this->tree_delimiter, $part);
+
                 $loaded_item = $this->loadItem($part, $parent);
                 
                 if ($loaded_item) {
@@ -250,7 +253,8 @@ class TreeParent extends AbstractPreset
                 ])->exec()->fetchRow();
             if ($row) {
                 $id = $row[$this->parent_field];
-                $result[] = $row[$this->getMappedField($this->tree_field)];
+                $item = $row[$this->getMappedField($this->tree_field)];
+                $result[] = str_replace($this->tree_delimiter, $this->tree_delimiter_replacer, $item);
             } else {
                 $id = false;
             }

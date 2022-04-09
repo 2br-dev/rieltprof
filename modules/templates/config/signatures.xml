@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>1397ddc90c28575050e33061c3e12cd3d58df466</sign>
+    <sign>6ab3f7742f5e8f5eb5248dce8fef4802454e177a</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -18,7 +18,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>51b59505cad9fea982273b239428e779fbff4fa5</sign>
+    <sign>4b0472d253243364ee4d1025b460dae7185f4971</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
@@ -26,23 +26,23 @@
   </file>
   <file>
     <path>controller/admin/blockctrl.inc.php</path>
-    <sign>a5f91f530966a05325f05aeb3f2c4041aa0d84cf</sign>
+    <sign>054ef1b7d9b14e35b4685a3a7e1e7f73d4801f94</sign>
   </file>
   <file>
     <path>controller/admin/filemanager.inc.php</path>
-    <sign>7119bb9252a603187eb5652b6c6e1782338e8a6d</sign>
+    <sign>d8a8af64eefe64a5594eff046df8d1ff19ccf377</sign>
   </file>
   <file>
     <path>controller/admin/hooksort.inc.php</path>
-    <sign>4c3e46f5519b041bb508d0f379cfb45d6be5abe5</sign>
+    <sign>6730510b4918ca564b1106d7399653c4f440caf6</sign>
   </file>
   <file>
     <path>controller/admin/selecttemplate.inc.php</path>
-    <sign>1797183738a2509e547ed37869f6f211896e579a</sign>
+    <sign>bab6b703118b3c74e76509a9267a072ccf08c51e</sign>
   </file>
   <file>
     <path>controller/admin/selecttheme.inc.php</path>
-    <sign>6face9d6cd601bfc310ea24470c7eeaffb2ec53e</sign>
+    <sign>70e6ef3fcb005a0fb3642b5c0d02d51c9b969c78</sign>
   </file>
   <file>
     <path>controller/admin/tools.inc.php</path>
@@ -58,7 +58,7 @@
   </file>
   <file>
     <path>model/filemanagerapi.inc.php</path>
-    <sign>a7a3b44c7681e25acafc539792f22d31b213c1f9</sign>
+    <sign>5f33f97ad206cc56b3b24914bb985d098aebc1c5</sign>
   </file>
   <file>
     <path>model/marketplacethemeapi.inc.php</path>
@@ -70,27 +70,31 @@
   </file>
   <file>
     <path>model/orm/section.inc.php</path>
-    <sign>188348380c24f4872a760ef785eccd44922af203</sign>
+    <sign>d6772142668cc9109166a31f2729680c44c15726</sign>
   </file>
   <file>
     <path>model/orm/sectioncontainer.inc.php</path>
-    <sign>122a6adf0bc149046c223401783ba697348d257c</sign>
+    <sign>9df41c5b5500ce9ee6da47ac9735072b239713b5</sign>
   </file>
   <file>
     <path>model/orm/sectioncontext.inc.php</path>
-    <sign>560570a96fd2677b1babec8ddccc686fbaf4ed12</sign>
+    <sign>060a60432185638b8c8c9424a39c26512a7415d9</sign>
   </file>
   <file>
     <path>model/orm/sectionmodule.inc.php</path>
-    <sign>4be20344c2dc6ad7851e2c1029913f74ad0dcb94</sign>
+    <sign>ae5ab3eb139098254f990e675166053f2fe4dbb1</sign>
   </file>
   <file>
     <path>model/orm/sectionpage.inc.php</path>
-    <sign>38dead7bd20c3c66898764a8d9c918669ad563f8</sign>
+    <sign>ab3efeebf7f5d54b0de9af023dfdb5c259beb3fd</sign>
   </file>
   <file>
     <path>model/orm/templatehooksort.inc.php</path>
-    <sign>158eb5da4b80b971b9954135cde090e3e5c4107d</sign>
+    <sign>c0156ce61b3bb11aba9a67933545ca7e37a0f0a4</sign>
+  </file>
+  <file>
+    <path>model/ormtype/imageselect.inc.php</path>
+    <sign>2e160711a8170ad0e125d5a43586acae5c91dd13</sign>
   </file>
   <file>
     <path>model/pageapi.inc.php</path>
@@ -105,20 +109,56 @@
     <sign>a22196480f3701db8de96ce2dbc966adee8efba7</sign>
   </file>
   <file>
-    <path>view/block_manager.tpl</path>
-    <sign>420b80b2d8226ae24113be66e42d7f84fef354b4</sign>
+    <path>view/admin/block_manager.tpl</path>
+    <sign>75c8d6ba5f46f774061777d7b0951347dfed4242</sign>
   </file>
   <file>
-    <path>view/block_manager_add_module_form.tpl</path>
+    <path>view/admin/block_manager_add_module_form.tpl</path>
     <sign>862f0a4d50074a27ae94099cee6980e1a2011384</sign>
   </file>
   <file>
-    <path>view/copy_container.tpl</path>
+    <path>view/admin/copy_container.tpl</path>
     <sign>85a211a878e63d95f0b165cc984078bec3cb94ad</sign>
   </file>
   <file>
-    <path>view/crud-block-form.tpl</path>
+    <path>view/admin/crud-block-form.tpl</path>
     <sign>968f33031450b41109e6cbcf713e548384391682</sign>
+  </file>
+  <file>
+    <path>view/admin/file_manager.tpl</path>
+    <sign>7731954d23a56f1f0f6abb3e3fc9365b109471aa</sign>
+  </file>
+  <file>
+    <path>view/admin/hook_sort.tpl</path>
+    <sign>149a43b444c1f3ad00020b5b170f4400939b6eb5</sign>
+  </file>
+  <file>
+    <path>view/admin/ormtype/image_select.tpl</path>
+    <sign>02f13ecd1164a99fb71f029f2042e44844333700</sign>
+  </file>
+  <file>
+    <path>view/admin/renderer/element.tpl</path>
+    <sign>cbd8b915e4f43f112422ae751ae7bf25a2c98e0d</sign>
+  </file>
+  <file>
+    <path>view/admin/select_template.tpl</path>
+    <sign>8f048dd6a4bdc88a761a9a38902e17f3fe82b4c2</sign>
+  </file>
+  <file>
+    <path>view/admin/select_theme.tpl</path>
+    <sign>2a00963952a85c3c0d637cb129edadb26d706f5e</sign>
+  </file>
+  <file>
+    <path>view/admin/select_theme_list.tpl</path>
+    <sign>262aa1bd4038786187ecdf7bff5873ab4f4090a3</sign>
+  </file>
+  <file>
+    <path>view/admin/select_theme_mp_list.tpl</path>
+    <sign>bfc97eb166d1ef1a935a6a80c0e6f0eec331818f</sign>
+  </file>
+  <file>
+    <path>view/admin/tpl_maker_with_render.tpl</path>
+    <sign>4f3b6001330120f84c1b88a5ffc40e3230a72fb7</sign>
   </file>
   <file>
     <path>view/css/bootstrap.css</path>
@@ -126,31 +166,39 @@
   </file>
   <file>
     <path>view/css/bootstrap4.css</path>
-    <sign>7c88c2b305afb95bfccd1b32587a5f9a77cff4c5</sign>
+    <sign>cc5c3086aa03d08527392870bfe307ea916bff73</sign>
+  </file>
+  <file>
+    <path>view/css/bootstrap5.css</path>
+    <sign>fef1633c7f2154c60538ec57ec24c1dd7a583a0d</sign>
   </file>
   <file>
     <path>view/css/hooksort.css</path>
     <sign>da39a3ee5e6b4b0d3255bfef95601890afd80709</sign>
   </file>
   <file>
+    <path>view/css/imageselect.css</path>
+    <sign>e80cb059945496b077131e23004f536c68c2dd8f</sign>
+  </file>
+  <file>
     <path>view/css/manager.css</path>
-    <sign>56dc60a6b7f4862a8334bf0031823a7f48302253</sign>
+    <sign>8ec8f7b7d93335a42a97ea1dfd6496b28439d1b9</sign>
   </file>
   <file>
     <path>view/css/moduleblocks.css</path>
     <sign>9a4ab58e6265c0d269719a1e2d5287d8650c6a4e</sign>
   </file>
   <file>
+    <path>view/css/previewblock.css</path>
+    <sign>84fa0289a5f637360c6f79cc039466095f1e70b1</sign>
+  </file>
+  <file>
     <path>view/css/uploadfiles.css</path>
     <sign>9da88498188329aec195b919dd60551e96afa188</sign>
   </file>
   <file>
-    <path>view/file_manager.tpl</path>
-    <sign>7731954d23a56f1f0f6abb3e3fc9365b109471aa</sign>
-  </file>
-  <file>
     <path>view/form/clone_theme.tpl</path>
-    <sign>6cb2be9a4074a2749ef78d2aa7c6e82b39b7f4dc</sign>
+    <sign>f556c7b3aaf406a6f716163c10ffa32a29af294b</sign>
   </file>
   <file>
     <path>view/form/file_edit.tpl</path>
@@ -169,8 +217,24 @@
     <sign>3bc2fac17d167a5b2b1915ff5850bdde51bd1a9c</sign>
   </file>
   <file>
+    <path>view/form/section/align_self.tpl</path>
+    <sign>9a8faeb508628c91e07b47def7dc1e4d827a28a8</sign>
+  </file>
+  <file>
+    <path>view/form/section/child_width.tpl</path>
+    <sign>acfe0ccbaef614713cd517a37e854ed80a98aaa7</sign>
+  </file>
+  <file>
     <path>view/form/section/clearfix_after.tpl</path>
     <sign>a32c96a26efade51440e28b3025f734308c40044</sign>
+  </file>
+  <file>
+    <path>view/form/section/gutter_x.tpl</path>
+    <sign>3beb12288b5229aa1a5abefcd34deff8eddc5b48</sign>
+  </file>
+  <file>
+    <path>view/form/section/gutter_y.tpl</path>
+    <sign>86d34f92922e929ee31a56637846299b15099af4</sign>
   </file>
   <file>
     <path>view/form/section/inset_align.tpl</path>
@@ -178,7 +242,7 @@
   </file>
   <file>
     <path>view/form/section/line.tpl</path>
-    <sign>2e0b70560b9672038f3ff5256ae3cb82d093f72a</sign>
+    <sign>105442b25bcc5e6041b763ca24d6b2cb1df0f287</sign>
   </file>
   <file>
     <path>view/form/section/order.tpl</path>
@@ -214,7 +278,7 @@
   </file>
   <file>
     <path>view/gs/blocks.tpl</path>
-    <sign>7a0346f808e7961f4a319bb6e632cefcf4fc7b4c</sign>
+    <sign>cf001547aa7847bc06216bc5ad80814ffb68cab5</sign>
   </file>
   <file>
     <path>view/gs/bootstrap/attribute.tpl</path>
@@ -222,15 +286,15 @@
   </file>
   <file>
     <path>view/gs/bootstrap/container.tpl</path>
-    <sign>352670b3cdc985ba19c856ce6ea15a687d684932</sign>
+    <sign>b0bf230c5620d9e07049b7040bbcf71d34f307f5</sign>
   </file>
   <file>
     <path>view/gs/bootstrap/pageview.tpl</path>
-    <sign>4532f4c0974f751c17fb95e96963e4ccd3ebe5dc</sign>
+    <sign>7218b0cebd78b773ed902af647a567a8a5b405f2</sign>
   </file>
   <file>
     <path>view/gs/bootstrap/section.tpl</path>
-    <sign>2484bdd6428e9b7ea42b8f7997589aa44b07519b</sign>
+    <sign>06b9068e2723a0221ce9ea7953a9a154d0250843</sign>
   </file>
   <file>
     <path>view/gs/bootstrap4/attribute.tpl</path>
@@ -238,23 +302,39 @@
   </file>
   <file>
     <path>view/gs/bootstrap4/container.tpl</path>
-    <sign>3d965427bc8e4a1b5beaeb028be8455cf37c019f</sign>
+    <sign>309a5283ffbc54607e0f643cc5e2f1a87e64ada5</sign>
   </file>
   <file>
     <path>view/gs/bootstrap4/pageview.tpl</path>
-    <sign>a3093fd75d35e4a3d6b0b382a016d0b052bca1de</sign>
+    <sign>d6e84d5d44fa00aa14d11419ca3d8ff08d843de3</sign>
   </file>
   <file>
     <path>view/gs/bootstrap4/section.tpl</path>
-    <sign>f757de6f07bb47f2f1ff6597a525ca7b1a2bf9b4</sign>
+    <sign>e09d3ffbd42920fedb1285ff190418ba9edc55b7</sign>
+  </file>
+  <file>
+    <path>view/gs/bootstrap5/attribute.tpl</path>
+    <sign>fc619e599b167ad701cb2525922ad01a781b55b3</sign>
+  </file>
+  <file>
+    <path>view/gs/bootstrap5/container.tpl</path>
+    <sign>8a23e3b11a1b6f8c6d788f9ad2d194192e923f52</sign>
+  </file>
+  <file>
+    <path>view/gs/bootstrap5/pageview.tpl</path>
+    <sign>6c34ea41b4aab488cd5a251550acf0cb513bffd7</sign>
+  </file>
+  <file>
+    <path>view/gs/bootstrap5/section.tpl</path>
+    <sign>9b5da6c32ee9e81fe017d9f3481e584b85767c81</sign>
   </file>
   <file>
     <path>view/gs/containers.tpl</path>
-    <sign>3a43cb3222a8e0bfa0f23967e4565c9ae23868b8</sign>
+    <sign>8c1a741757cb08b5e54103998c3e566c06a83719</sign>
   </file>
   <file>
     <path>view/gs/gs960/container.tpl</path>
-    <sign>c3105f71095febbc832b26b03813c555f6ad94d5</sign>
+    <sign>1e104e448c9f5c81300e6bd379fe0bce25b98575</sign>
   </file>
   <file>
     <path>view/gs/gs960/pageview.tpl</path>
@@ -262,7 +342,7 @@
   </file>
   <file>
     <path>view/gs/gs960/section.tpl</path>
-    <sign>37466ae03a69388d5f21dac8e155c1bcc598d0c6</sign>
+    <sign>f94cc436df2fe4dba1dc40230a665b57ad946446</sign>
   </file>
   <file>
     <path>view/gs/none/pageview.tpl</path>
@@ -271,10 +351,6 @@
   <file>
     <path>view/help/blockctrl_index.tpl</path>
     <sign>9831f9985f2c813fec2f7165d92d6c4bab6ce0e7</sign>
-  </file>
-  <file>
-    <path>view/hook_sort.tpl</path>
-    <sign>149a43b444c1f3ad00020b5b170f4400939b6eb5</sign>
   </file>
   <file>
     <path>view/img/12_col.gif</path>
@@ -306,11 +382,7 @@
   </file>
   <file>
     <path>view/img/devices.png</path>
-    <sign>abb867b8f14ad10ed40c51a273766b886e1e5be5</sign>
-  </file>
-  <file>
-    <path>view/img/devices_bootstrap4.png</path>
-    <sign>93fbff8f279b7ada0517e713d8202391ce6bf101</sign>
+    <sign>8dcdb422247aa83627317699e3413a2b870e2ba1</sign>
   </file>
   <file>
     <path>view/img/s_ddown.png</path>
@@ -329,16 +401,24 @@
     <sign>eaf299560b97140985d75ebe562eb44f9b7863a8</sign>
   </file>
   <file>
+    <path>view/js/imageselect.js</path>
+    <sign>843d99566eacd34627e29fe6605e0a0b616ad135</sign>
+  </file>
+  <file>
     <path>view/js/jquery.blockeditor.js</path>
-    <sign>3892ef065377c8f4c596d4dfa8ad9f0ca2d85e2a</sign>
+    <sign>6267c1bf5d907b326f2f404fb39fbaf119cad882</sign>
   </file>
   <file>
     <path>view/js/jquery.uploadtemplatefiles.js</path>
     <sign>f35d3745fe4d169b8b34be4d1d6b2b1cac00dbd5</sign>
   </file>
   <file>
+    <path>view/js/previewblock.js</path>
+    <sign>4f013d7d1529317180ff53f7844bbd4902073513</sign>
+  </file>
+  <file>
     <path>view/js/selecttemplate.js</path>
-    <sign>a0fa44bb97c92a7b541b13457d377cba58d30625</sign>
+    <sign>6abb1a9955c1135ff093125c954f85003a42a7c2</sign>
   </file>
   <file>
     <path>view/js/selecttheme.js</path>
@@ -348,21 +428,5 @@
     <path>view/js/tplmanager.js</path>
     <sign>38fedf9a7c86b88218c0728cd164cb4423a3e7b7</sign>
   </file>
-  <file>
-    <path>view/select_template.tpl</path>
-    <sign>8f048dd6a4bdc88a761a9a38902e17f3fe82b4c2</sign>
-  </file>
-  <file>
-    <path>view/select_theme.tpl</path>
-    <sign>2a00963952a85c3c0d637cb129edadb26d706f5e</sign>
-  </file>
-  <file>
-    <path>view/select_theme_list.tpl</path>
-    <sign>262aa1bd4038786187ecdf7bff5873ab4f4090a3</sign>
-  </file>
-  <file>
-    <path>view/select_theme_mp_list.tpl</path>
-    <sign>bfc97eb166d1ef1a935a6a80c0e6f0eec331818f</sign>
-  </file>
-  <masterSign>14d7bc1a4c5add27c4a286358f1836421c587a90ccf5d51ed758d8f5dea07d14ccc0361b2f3b1d5923b10a2b006c56a677d1561c82ee886d991d8d95516df377674dd960451ba7acb9b45986cd9312b54fdea42c6861654e0a8e9b3fd2997c98898df2e9b2666c4aa27760e15de7f6f60f3167b48d59ab8bcd046a8e309d20b3</masterSign>
+  <masterSign>637a731f3f4e168d8b05e81ae7bf3c90fb8e610d9a907ec03051ee7bd27a74389889a2d9570d701a3f1d7643ed01e80965c342651d72873730f2077a464f4be149dff173cd99d127e1083dfccbb003e947a534a17e5a5a6971a9c7c6e25a43ef1dfc003962e4bd724d4920e011cf9663044773e27f493afe4e3dde74a13e4faf</masterSign>
 </signatures>

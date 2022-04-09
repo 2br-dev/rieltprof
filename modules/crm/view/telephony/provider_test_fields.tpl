@@ -1,6 +1,6 @@
 {$provider_test = $field->provider_object->getEventTestObject()}
 
-<script type="text/javascript">
+<script>
     $(function() {
         $('select[name="provider"]').change(function() {
             var provider = $(this).val();

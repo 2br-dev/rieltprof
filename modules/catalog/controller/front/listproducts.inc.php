@@ -36,6 +36,8 @@ class ListProducts extends Front
     const ROUTE_EXTRA_MONEY_ARRAY = 'money_array';
     const ROUTE_EXTRA_FILTERS_ALLOWED_SORTED = 'filters_allowed_sorted';
     const ROUTE_EXTRA_CATEGORY = 'category';
+    const ROUTE_EXTRA_QUERY = 'query';
+    const ROUTE_EXTRA_SUBCATEGORIES = 'subcategory';
 
     public $config;
     public $query;
@@ -156,11 +158,12 @@ class ListProducts extends Front
                 $category->declareRoot(); // если категория корневая, то устанавливаем соответствующий alias
         }
 
+        //Редирект с устаревших адресов типа /catalog/ на /catalog/all/
         if ( $dir === '0' && $this->config['show_all_products'] && !$this->url->isKey('query') ) {
             $part = explode('//',$this->url->server('REQUEST_URI', TYPE_STRING));
-            // !$part[1] ? $part[1] = '?'.explode('/?',$this->url->server('REQUEST_URI', TYPE_STRING))[1] : false;
             Application::getInstance()->redirect($category->getUrl() . ($part[1] ? $part[1] : ''), 301);
         }
+
         //Если есть alias и открыта страница с id вместо alias, то редирект
         $this->checkRedirectToAliasUrl($dir, $category, $category->getUrl());
         $dir_id = $category['id'] ? $category['id'] : false;
@@ -298,13 +301,18 @@ class ListProducts extends Front
                 $sort_field = $this->cur_sort == 'rank' ? $this->cur_sort : $this->api->defAlias() . '.' . $this->cur_sort;
                 $this->api->setSortOrder($sort_field, $this->cur_n_sort, $this->in_stock_first);
 
-                if (!empty($this->query) && $dir == 0) { //Если это результат поиска,
+                if (!empty($this->query) && $dir_id == 0) { //Если это результат поиска,
                     $sub_dirs = $this->api->getDirList(); //Загружаем список категорий, в которых найдены товары
                 } else {
                     //Загружаем список подактегорий, у текущей категории
                     $this->dirapi->setFilter('parent', $dir_id);
                     $this->dirapi->setFilter('public', 1);
                     $sub_dirs = $this->dirapi->getList();
+                }
+
+                if (!empty($this->query) && count($sub_dirs) == 1 && isset($sub_dirs[$dir_id])) {
+                    //Не выводим подкатегории, если это категория, в которой происходит поиск
+                    $sub_dirs = [];
                 }
 
                 //Подгружаем обязательные сведения о товарах
@@ -320,7 +328,8 @@ class ListProducts extends Front
 
                 $getpage = urldecode($this->url->get('p', TYPE_INTEGER, 0));
                 if ($getpage > $paginator->total_pages && !$this->url->isAjax()) {
-                    $this->e404(t('Страницы не существует'));
+                    //Если страницы не существует, то перенаправляем на первую страницу
+                    $this->app->redirect($paginator->getPageHref(1));
                 }
 
                 //Подгружаем обязательные сведения о товарах
@@ -328,6 +337,7 @@ class ListProducts extends Front
                 $list = $this->api->addProductsPhotos($list);
                 $list = $this->api->addProductsCost($list);
                 $list = $this->api->addProductsProperty($list);
+                $list = $this->api->addProductsDynamicNum($list);
 
                 //Заполняем meta - теги
                 $path = $this->dirapi->getPathToFirst($dir_id);
@@ -378,6 +388,8 @@ class ListProducts extends Front
                 }
 
                 $this->router->getCurrentRoute()->addExtra(self::ROUTE_EXTRA_CATEGORY, $category); //Занесем текущую категорию в роутер
+                $this->router->getCurrentRoute()->addExtra(self::ROUTE_EXTRA_QUERY, $this->query); //Занесем текущую категорию в роутер
+                $this->router->getCurrentRoute()->addExtra(self::ROUTE_EXTRA_SUBCATEGORIES, $sub_dirs); //Занесем текущую категорию в роутер
 
                 if ($this->page > 1) {
                     $this->app->title->addSection(t('Страница %0', [$this->page]), 0, Title::ADD_AFTER);

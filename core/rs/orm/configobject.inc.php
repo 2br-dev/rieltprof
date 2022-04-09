@@ -281,16 +281,23 @@ abstract class ConfigObject extends AbstractObject implements ConfigInterface
 
     /**
      * Возвращает папку для хранения файлов данного модуля
+     * @param bool $absolute Если true, то будет возвращен абсолютный путь к папке
+     * @param bool $private Если true, то в корне будет создан .htaccess со строкой "deny from all"
      * @return string
      */
-    function getModuleStorageDir()
+    function getModuleStorageDir($absolute = true, $private = false)
     {
         $this_module = ModuleItem::nameByObject($this, false);
-        $module_storage_dir = \Setup::$PATH . \Setup::$STORAGE_DIR . DS . $this_module;
+        $module_storage_relative_dir = \Setup::$FOLDER.\Setup::$STORAGE_DIR . DS . $this_module;
+        $module_storage_dir = \Setup::$ROOT . $module_storage_relative_dir;
         if (!is_dir($module_storage_dir)) {
             \RS\File\Tools::makePath($module_storage_dir);
         }
-        return $module_storage_dir;
+
+        if ($private) {
+            \RS\File\Tools::makePrivateDir($module_storage_dir);
+        }
+        return $absolute ? $module_storage_dir : $module_storage_relative_dir;
     }
 
     /**

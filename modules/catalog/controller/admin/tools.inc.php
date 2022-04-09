@@ -7,6 +7,7 @@
 */
 namespace Catalog\Controller\Admin;
 
+use Catalog\Model\Api;
 use Catalog\Model\Api as ProductApi;
 use Catalog\Model\BrandApi;
 use Catalog\Model\Dirapi;
@@ -26,6 +27,8 @@ use RS\Site\Manager as SiteManager;
 */
 class Tools extends Front
 {
+    const TIMEOUT_PRODUCT_REINDEX = 20;
+
     /**
      * Удаление несвязанных характеристик
      *
@@ -159,12 +162,13 @@ class Tools extends Front
     {
         $config = $this->getModuleConfig();
         $property_index = in_array('properties', $config['search_fields']);
-        
+        $page = $this->url->post('page', TYPE_INTEGER, 1);
+
         $api = new ProductApi();
         $count = 0;
-        $page = 1;
+        $start = time();
         /** @var Product[] $list */
-        while($list = $api->getList($page, 200)) {
+        while($list = $api->getList($page, 200, 'id')) {
             if ($property_index) {
                 $list = $api->addProductsProperty($list);
             }
@@ -174,9 +178,22 @@ class Tools extends Front
             }
             $count += count($list);
             $page++;
+
+            if (time() - $start > self::TIMEOUT_PRODUCT_REINDEX) {
+                return $this->result
+                    ->setSuccess(true)
+                    ->addSection('repeat',true)
+                    ->addSection('queryParams', [
+                        'url' => $this->url->getSelfUrl(),
+                        'data'=> [
+                            'ajax' => 1,
+                            'page' => $page,
+                        ]
+                    ]);
+            }
         }
         
-        return $this->result->setSuccess(true)->addMessage(t('Обновлено %0 товаров', [$count]));
+        return $this->result->setSuccess(true)->addMessage(t('Все товары обновлены'));
     }
     
     /**
@@ -271,5 +288,18 @@ class Tools extends Front
         }
 
         return $this->result->setSuccess(true)->addMessage(t('Обновлено %0 товаров', [count($empty_products)]));
+    }
+
+    /**
+     * Очищает кэш о комплектациях
+     *
+     * @return \RS\Controller\Result\Standard
+     */
+    public function actionCleanAllOffersJsonCache()
+    {
+        if (Api::cleanAllOffersJsonCache()) {
+            return $this->result->setSuccess(true)
+                ->addMessage(t('Кэш сведений о комплектациях успешно очищен'));
+        }
     }
 }

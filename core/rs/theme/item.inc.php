@@ -293,7 +293,9 @@ class Item
         if (isset($theme_xml->options)) {
             foreach($theme_xml->options->group as $group) {
                 foreach($group->option as $option) {
-                    $result[ (string)$option['name'] ] = (string)$option->default;
+                    if (isset($option->default)) {
+                        $result[(string)$option['name']] = (string)$option->default;
+                    }
                 }
             }
         }

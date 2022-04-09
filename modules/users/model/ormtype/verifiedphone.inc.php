@@ -136,7 +136,7 @@ class VerifiedPhone extends Varchar
     }
 
     /**
-     * Устанавливает действие, которое будт выполнено после верификации
+     * Устанавливает действие, которое будет выполнено после верификации
      *
      * @param AbstractVerifyTypePhone $action
      */
@@ -146,7 +146,7 @@ class VerifiedPhone extends Varchar
     }
 
     /**
-     * Возвращает действие, которое будт выполнено после верификации
+     * Возвращает действие, которое будет выполнено после верификации
      *
      * @return AbstractVerifyAction
      */

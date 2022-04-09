@@ -27,8 +27,32 @@ class Patches extends \RS\Module\AbstractPatches
     {
         return [
             '200166',
-            '5253'
+            '5253',
+            '603'
         ];
+    }
+
+    /**
+     * Удаляет ошибочно созданные JS файлы в старых темах
+     */
+    function afterUpdate603()
+    {
+        $files = [
+            '/moduleview/main/js/rscomponent/googlemap.my.js',
+            '/moduleview/main/js/rscomponent/mapmanager.my.js',
+            '/moduleview/main/js/rscomponent/yandexmap.my.js',
+        ];
+
+        foreach(glob(\Setup::$SM_TEMPLATE_PATH.'*', GLOB_ONLYDIR) as $dir) {
+            if (is_dir($dir)) {
+                foreach($files as $file) {
+                    $filename = $dir.$file;
+                    if (file_exists($filename)) {
+                        @unlink($filename);
+                    }
+                }
+            }
+        }
     }
 
     /**

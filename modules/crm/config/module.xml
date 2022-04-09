@@ -3,13 +3,17 @@
     <defaultValues>
         <name multilanguage="true">CRM ReadyScript</name>
         <description multilanguage="true">Модуль предоставляет возможность для фиксации взаимодействий с пользователями интернет-магазина.</description>
-        <version>4.0.32</version>
+        <version>6.0.4</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         <widget_task_pagesize>15</widget_task_pagesize>
         <expiration_task_notice_statuses type="array">
             <value>0</value>
         </expiration_task_notice_statuses>
+        <complete_task_statuses type="array">
+            <value>7</value>
+        </complete_task_statuses>
+        <cancel_task_statuses type="array"/>
         <expiration_task_default_notice_time type="array">
             <value>300</value>
         </expiration_task_default_notice_time>

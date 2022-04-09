@@ -412,6 +412,9 @@ class Vkontakte extends AbstractType implements ExchangableInterface
 
         $list = $fetcher->fetchList($this['export_amount']);
         $catalogApi = new \Catalog\Model\Api();
+        $catalogApi->setSiteContext($profile['site_id']);
+        $catalogApi->resetQueryObject();
+
         $exported_offers_count = 0;
 
         $this->log->append(t('Отобрана порция из %n товаров для выгрузки', [
@@ -569,7 +572,7 @@ class Vkontakte extends AbstractType implements ExchangableInterface
         $cost_id = !empty($profile['export_cost_id']) ? $profile['export_cost_id'] : null;
 
         $request_params = [
-            'name' => $this->getProductTitle($product, $offer),
+            'name' => $this->getProductTitle($product, $offer, $profile),
             'description' => $this->getProductDescription($product),
             'price' => $product->getCost($cost_id, $offer_index, false, true),
             'url' => $product->getUrl(true). ($profile['url_params'] ? "?".$profile['url_params'] : "") .( $offer_index ? '#'.$offer_index : '' ),
@@ -787,13 +790,14 @@ class Vkontakte extends AbstractType implements ExchangableInterface
      *
      * @param Product $product Товар
      * @param Offer $offer Комплектация
+     * @param ExportProfile $profile Профиль экспорта
      * @return string
      */
-    private function getProductTitle(Product $product, Offer $offer)
+    private function getProductTitle(Product $product, Offer $offer, ExportProfile $profile)
     {
         $product_title = $product['title'];
 
-        if ($offer['title'] != $product_title) {
+        if ($offer['title'] != $product_title && !$profile['no_export_offers']) {
             $product_title .= ' '.$offer['title'];
         }
 

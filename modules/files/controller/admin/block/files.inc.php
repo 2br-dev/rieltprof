@@ -44,7 +44,7 @@ class Files extends \RS\Controller\Admin\Block
             'max_upload_size' => \RS\File\Tools::getMaxPostFileSize(),
             'files' => $this->file_api->getList()
         ]);
-        return $this->result->setTemplate('filesblock.tpl');
+        return $this->result->setTemplate('adminblocks/files/filesblock.tpl');
     }
     
     /**
@@ -57,7 +57,7 @@ class Files extends \RS\Controller\Admin\Block
         
         foreach($items as &$item) {
             if ($item['success']) {
-                $item['html'] = $this->view->assign('linked_file', $item['file'])->fetch('one_file.tpl');
+                $item['html'] = $this->view->assign('linked_file', $item['file'])->fetch('adminblocks/files/one_file.tpl');
                 unset($item['file']);
             }
         }
@@ -78,7 +78,7 @@ class Files extends \RS\Controller\Admin\Block
         if ($this->url->isPost()) {
             $this->result->setSuccess( $this->file_api->save($id) );
             if ($this->result->isSuccess()) {
-                $html = $this->view->assign('linked_file', $file)->fetch('one_file.tpl');
+                $html = $this->view->assign('linked_file', $file)->fetch('adminblocks/files/one_file.tpl');
                 $this->result->addSection('html', $html);
             } else {
                 //Ошибка сохранения формы
@@ -88,7 +88,7 @@ class Files extends \RS\Controller\Admin\Block
             return $this->result;
         }
         
-        $form = $file->getForm(null, null, false, null, '%files%/form_maker.tpl');
+        $form = $file->getForm(null, null, false, null, '%files%/adminblocks/files/form_maker.tpl');
         return $this->result->setHtml($form);
     }
     

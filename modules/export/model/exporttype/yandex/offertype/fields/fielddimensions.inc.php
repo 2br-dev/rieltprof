@@ -36,8 +36,9 @@ class FieldDimensions extends ExportType\Field implements ExportType\ComplexFiel
             $dimensions[] = $this->getValue('dimensions_l', $profile, $product);
             $dimensions[] = $this->getValue('dimensions_w', $profile, $product);
             $dimensions[] = $this->getValue('dimensions_h', $profile, $product);
-            
-            $writer->writeElement('dimensions', implode('/', $dimensions));
+            $dimensions_line = preg_replace('/[^0-9\.\,\/]/', '', implode('/', $dimensions));
+            $dimensions_line = str_replace(',', '.', $dimensions_line);
+            $writer->writeElement('dimensions', $dimensions_line);
         }
     }
 }

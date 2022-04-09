@@ -63,7 +63,7 @@ abstract class Smarty_Template_Resource_Base
      *
      * @var array
      */
-    public $file_dependency = [];
+    public $file_dependency = array();
 
     /**
      * Content buffer
@@ -73,18 +73,13 @@ abstract class Smarty_Template_Resource_Base
     public $content = null;
 
     /**
-     * required plugins
+     * Included sub templates
+     * - index name
+     * - value use count
      *
-     * @var array
+     * @var int[]
      */
-    public $required_plugins = [];
-
-    /**
-     * Included subtemplates
-     *
-     * @var array
-     */
-    public $includes = [];
+    public $includes = array();
 
     /**
      * Flag if this is a cache resource
@@ -130,8 +125,7 @@ abstract class Smarty_Template_Resource_Base
                 call_user_func($callback, $_template);
             }
             $_template->isRenderingCache = false;
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $_template->isRenderingCache = false;
             while (ob_get_level() > $level) {
                 ob_end_clean();
@@ -151,7 +145,7 @@ abstract class Smarty_Template_Resource_Base
     public function getTimeStamp()
     {
         if ($this->exists && !$this->timestamp) {
-            $this->timestamp = @filemtime($this->filepath);
+            $this->timestamp = filemtime($this->filepath);
         }
         return $this->timestamp;
     }

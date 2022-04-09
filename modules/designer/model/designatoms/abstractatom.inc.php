@@ -288,7 +288,7 @@ abstract class AbstractAtom{
      * Добавляет aтрибут атома
      *
      * @param Attrs\AbstractAttr|Attrs\AbstractAttr[] $attribute - аттрибут для установки
-     * @param string $group - название группы группы, которой принадлежат оттрибудты
+     * @param string $group - название группы группы, которой принадлежат атрибуты
      *
      * @return $this
      */

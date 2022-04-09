@@ -42,7 +42,7 @@ class Api extends \RS\Orm\AbstractObject
     * Сохраняет значение $value для ключа $key
     * 
     * @param mixed $key - ключ
-    * @param string $value - значение
+    * @param mixed $value - значение
     * @return void;
     */
     public static function set($key, $value) 
@@ -58,7 +58,7 @@ class Api extends \RS\Orm\AbstractObject
     * 
     * @param string $key - ключ
     * @param mixed $default - значение по-умолчанию, возвращается в случае, если ключ не найден
-    * @return string
+    * @return mixed
     */
     public static function get($key, $default = null)
     {

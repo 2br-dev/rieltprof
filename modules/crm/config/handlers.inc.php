@@ -365,6 +365,15 @@ class Handlers extends \RS\Event\HandlerAbstract
         ];
 
         $items[] = [
+            'title' => t('Диаграмма Ганта'),
+            'alias' => 'crm-taskgantctrl',
+            'link' => '%ADMINPATH%/crm-taskgantctrl/',
+            'parent' => 'crm',
+            'typelink' => 'link',
+            'sortn' => 55
+        ];
+
+        $items[] = [
             'title' => t('Звонки'),
             'alias' => 'crm-call-history',
             'link' => '%ADMINPATH%/crm-callhistoryctrl/',

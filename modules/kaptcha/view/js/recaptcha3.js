@@ -6,62 +6,102 @@
  * 
  * @author ReadyScript lab.
  */
-(function( $ ) {
-    $.fn.reCaptchaV3 = function() {
-        return this.each(function() {
-            var element = $(this);
-            var form = element.closest('form');
-            var submitButton = form.find('[type="submit"]:first');
-            var canSubmit;
 
-            var setCanSubmit = function(bool) {
-                canSubmit = bool;
-                submitButton.prop('disabled', !bool);
-            };
+(function() {
+    /**
+     * Класс обеспечивает работу одной формы с ReCaptchaV3
+     */
+    class reCaptchaV3 {
 
+        constructor(form) {
+            this.form = form;
+            this.submitButton = this.form.querySelector('[type="submit"]');
+            this.canSubmit = false;
+
+            this.bindForm();
+        }
+
+        setCanSubmit(bool) {
+            this.canSubmit = bool;
+            this.submitButton.disabled = !bool;
+        }
+
+        bindForm() {
             if (typeof(grecaptcha) != 'undefined') {
-                if (form.length) {
-                    setCanSubmit(false);
+                if (this.form) {
+                    this.setCanSubmit(false);
 
-                    form.addClass('not-initialized');
-                    var action = element.data('context') ? element.data('context') : 'default';
-                    action = action.replace(/[^A-Za-z/_]/g, '');
+                    this.form.classList.add('not-initialized');
 
-                    $(form).on('submit', function (event, reCaptchaSubmit) {
-                        if (!reCaptchaSubmit) {
+                    //Обрабатываем событие отправки формы. Этот обработчик будет всегда первый
+                    this.form.addEventListener('submit', (event) => {
 
-                            event.preventDefault(); //Запрещаем отправлять форму любым естественным образом.
-                            // Форму можно будет отправить только после получения токена ReCaptcha.
+                        if (!event.detail || !event.detail.reCaptchaSubmit) {
+                            let captchaInput = this.form.querySelector('.recaptcha-v3');
+                            if (captchaInput) {
+                                let action = captchaInput.dataset.context ? captchaInput.dataset.context : 'default';
+                                action = action.replace(/[^A-Za-z/_]/g, '');
 
-                            if (canSubmit) {
-                                setCanSubmit(false);
-                                form.addClass('submiting');
-                                grecaptcha.execute(global.reCaptchaV3SiteKey, { action: action })
-                                    .then(function (token) {
-                                        element.val(token);
-                                        form.trigger('submit', [true]); //Выполняем реальный пост
-                                        form.removeClass('submiting');
-                                        setCanSubmit(true);
-                                    }, function (error) {
-                                        console.log('ReCaptcha V3 Error' + error);
-                                        form.removeClass('submiting');
-                                        setCanSubmit(true);
-                                    });
+                                event.preventDefault(); //Запрещаем отправлять форму любым естественным образом.
+                                event.stopPropagation();
+                                // Форму можно будет отправить только после получения токена ReCaptcha.
+
+                                if (this.canSubmit) {
+                                    this.setCanSubmit(false);
+                                    this.form.classList.add('submiting');
+
+                                    //Добавляем токен reCaptcha, а затем повторяем попытку отправки формы
+                                    grecaptcha.execute(global.reCaptchaV3SiteKey, {action: action})
+                                        .then((token) => {
+                                            captchaInput.value = token;
+                                            console.log('call');
+                                            this.form.dispatchEvent(new CustomEvent('submit', {
+                                                cancelable: true,
+                                                bubbles: true,
+                                                detail: {
+                                                    reCaptchaSubmit: true
+                                                }
+                                            }));
+                                            this.form.classList.remove('submiting');
+                                            this.setCanSubmit(true);
+                                        }, (error) => {
+                                            console.error('ReCaptcha V3 Error' + error);
+                                            this.form.classList.remove('submiting');
+                                            this.setCanSubmit(true);
+                                        });
+                                }
                             }
                         }
-                    });
+                    }, true); //Ловим событие в режиме capture
 
-                    grecaptcha.ready(function () {
+                    grecaptcha.ready(() => {
                         //Убираем класс с формы, когда загрузится ReCaptcha
-                        form.removeClass('not-initialized');
-                        setCanSubmit(true);
+                        this.form.classList.remove('not-initialized');
+                        this.setCanSubmit(true);
                     });
                 }
             } else {
                 alert('Не подключен Google ReCaptcha API.js скрипт');
             }
+        }
 
-        });
+        static init(context) {
+            context.querySelectorAll('form .recaptcha-v3').forEach(it => {
+                let form = it.closest('form');
+                if (form) {
+                    if (!form.reCaptchaV3) {
+                        form.reCaptchaV3 = new reCaptchaV3(form);
+                    }
+                }
+            });
+        }
     }
-}( jQuery ));
 
+    document.addEventListener('DOMContentLoaded', (event) => {
+        reCaptchaV3.init(event.target);
+    });
+
+    document.addEventListener('new-content', (event) => {
+        reCaptchaV3.init(event.target);
+    });
+})();

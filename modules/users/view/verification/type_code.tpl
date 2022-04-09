@@ -9,9 +9,9 @@
 <div class="rs-verify-code-block" data-token="{$verify_session->getToken()}">
     <div class="rs-verify-line">
         {* Сюда будет записана ошибка, в случае если токен истечет *}
-        <div class="rs-verify-error error {if !$error}hidden{/if}">{$error}</div>
 
-        <input type="text" placeholder="{$verify_session.code_debug|default:"{t}Код{/t}"}" name="code" value="" class="verify-key" autocomplete="off">
+        <input type="text" placeholder="{$verify_session.code_debug|default:"{t}Код{/t}"}" name="code" value="" class="form-control verify-key mb-2{if $error} is-invalid{/if}" autocomplete="off">
+        <div class="rs-verify-error invalid-feedback {if !$error}hidden{/if}">{$error}</div>
 
         {if $verify_session.send_counter > 0 && $verify_session.code_expire > time()}
             <div class="rs-verify-send-message">

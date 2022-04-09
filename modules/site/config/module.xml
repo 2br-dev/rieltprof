@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Управление сайтами</name>
         <description multilanguage="true">Добавление, изменение сайтов в системе</description>
-        <version>4.0.13</version>
+        <version>6.0.3</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         <enable_agreement_personal_data>1</enable_agreement_personal_data>

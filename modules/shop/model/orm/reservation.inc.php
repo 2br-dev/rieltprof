@@ -128,6 +128,11 @@ class Reservation extends \RS\Orm\OrmObject
             ]),
             'comment' => new Type\Text([
                 'description' => t('Комментарий администратора')
+            ]),
+            'affiliate_id' => new Type\Integer([
+                'description' => t('Выбранный филиал на момент оформления предварительного заказа'),
+                'hint' => t('В случае, если будет включена опция в настройках модуля Каталог "Ограничить остатки товара остатками связанных с филиалом складов", то уведомление о поступление товара будет приходить только, если товар поступил именно на связанные с филиалом склады.'),
+                'visible' => false
             ])
         ]);
     }    
@@ -228,5 +233,18 @@ class Reservation extends \RS\Orm\OrmObject
     function getUser()
     {
         return new User($this['user_id']);
+    }
+
+    /**
+     * Возращает идентификатор цвета текущего статуса
+     *
+     * @return string
+     */
+    function getStatusColor()
+    {
+        switch($this['status']) {
+            case self::STATUS_OPEN: return '#d70fac';
+            case self::STATUS_CLOSE: return '#0fd71e';
+        }
     }
 }

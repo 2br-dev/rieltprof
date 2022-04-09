@@ -13,8 +13,7 @@ use Main\Model\StatisticEvents;
 */
 class GetCartData extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
     
     protected
         $token_require = false, //Токен не обязателен

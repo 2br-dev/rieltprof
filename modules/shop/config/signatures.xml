@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>b799878cc9472d229f412a64c17cdeeb790ddd2c</sign>
+    <sign>ae6cbf00aaca91500213b9578635820352262b3d</sign>
   </file>
   <file>
     <path>config/delivery/cdek/cdek_1.csv</path>
@@ -38,7 +38,7 @@
   </file>
   <file>
     <path>config/demo/substatus.csv</path>
-    <sign>9f8f3b0296c7d33ce6c69f431753e01b24110426</sign>
+    <sign>8d51ba5e84c1d2c233929122577317bd8794b08c</sign>
   </file>
   <file>
     <path>config/demo/zones.csv</path>
@@ -46,19 +46,19 @@
   </file>
   <file>
     <path>config/file.inc.php</path>
-    <sign>d85ce47650ef5490bf6d437d1a8aa08900094a07</sign>
+    <sign>ffec91943232c29d4acd640a3ca05c8928cf7791</sign>
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>0d325efd9bbc8d6ceec47a032d4c627b591e7e4b</sign>
+    <sign>19e551785a20ac3eaf26bb538166a04f0e24563d</sign>
   </file>
   <file>
     <path>config/install.inc.php</path>
-    <sign>3e5519f6352266ccc05da94b7829b39dc287761b</sign>
+    <sign>d3204d17cb20efa5ac0ae07a66a9a9d4a62821a0</sign>
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>0c70032f3500b1654f61af0b89f2fa6f2ecdbcf1</sign>
+    <sign>b377c3659fcdb0161c4ce2c9ec4ef672d4676df7</sign>
   </file>
   <file>
     <path>config/modulerights.inc.php</path>
@@ -66,15 +66,27 @@
   </file>
   <file>
     <path>config/patches.inc.php</path>
-    <sign>4da2ac249d142d9a93929546546118625bf49066</sign>
+    <sign>38b4fb0621267fec0a290af41c0a36f3d1879741</sign>
   </file>
   <file>
     <path>controller/admin/actiontemplatesctrl.inc.php</path>
     <sign>52778b6fd843a75e49467fd233a1ae30bdab3f39</sign>
   </file>
   <file>
+    <path>controller/admin/archiveorderctrl.inc.php</path>
+    <sign>0333275b7b69194a9f0fd492ef20b09e7727a96e</sign>
+  </file>
+  <file>
     <path>controller/admin/balancectrl.inc.php</path>
     <sign>d19514914892f7d0580039c453dc7a8409548d8b</sign>
+  </file>
+  <file>
+    <path>controller/admin/cargoctrl.inc.php</path>
+    <sign>9384473c52b4c4bdd7d32eb474b8723b6487b39c</sign>
+  </file>
+  <file>
+    <path>controller/admin/cargopresetctrl.inc.php</path>
+    <sign>b84fcbbd37365a7bac482edf153519b4d8eb4376</sign>
   </file>
   <file>
     <path>controller/admin/cdekregionctrl.inc.php</path>
@@ -90,7 +102,7 @@
   </file>
   <file>
     <path>controller/admin/deliveryorderctrl.inc.php</path>
-    <sign>dac05a5160ffb2059b487e1927eed985ccb59c94</sign>
+    <sign>0ed72571f896ca0be57de7ba1f406688cc9a0ba9</sign>
   </file>
   <file>
     <path>controller/admin/discountctrl.inc.php</path>
@@ -98,11 +110,11 @@
   </file>
   <file>
     <path>controller/admin/markingtools.inc.php</path>
-    <sign>10b59ba15cd50f682d804a945bb73b2411712f9d</sign>
+    <sign>fdffc99262767b92ea8a4e14ca44dabe96fc5999</sign>
   </file>
   <file>
     <path>controller/admin/orderctrl.inc.php</path>
-    <sign>226750e109241cedc1fadbe1cf07c6ca9f016558</sign>
+    <sign>4508959d837a4d9a2ffe82ba2e25c6c7a342ec77</sign>
   </file>
   <file>
     <path>controller/admin/ordershipmentctrl.inc.php</path>
@@ -114,7 +126,7 @@
   </file>
   <file>
     <path>controller/admin/receiptsctrl.inc.php</path>
-    <sign>a8f85802513adee32f98dcc97f6805e1741f9224</sign>
+    <sign>d46e6a38d8dbee2fe7f25122af1c0e3432b7e9f4</sign>
   </file>
   <file>
     <path>controller/admin/regionctrl.inc.php</path>
@@ -122,7 +134,7 @@
   </file>
   <file>
     <path>controller/admin/reservationctrl.inc.php</path>
-    <sign>b77b3b5028026f4757ffa4f48fec103b5e58da16</sign>
+    <sign>a73765700bb9b0b57c24e1aa8973ad86b8e6b0f8</sign>
   </file>
   <file>
     <path>controller/admin/returnsctrl.inc.php</path>
@@ -130,7 +142,7 @@
   </file>
   <file>
     <path>controller/admin/savedpaymentmethodsctrl.inc.php</path>
-    <sign>133f49d858b779864a0c39a8799777b083cbda68</sign>
+    <sign>92a2c7d71013fe3e5d53b4468890296cca128dd2</sign>
   </file>
   <file>
     <path>controller/admin/substatusctrl.inc.php</path>
@@ -142,11 +154,11 @@
   </file>
   <file>
     <path>controller/admin/tools.inc.php</path>
-    <sign>8dd947866cea7fb6b96960c04c3b9018b0b39117</sign>
+    <sign>6a7f5fb602666749175cb601b8482c5c8a56b4fa</sign>
   </file>
   <file>
     <path>controller/admin/transactionctrl.inc.php</path>
-    <sign>389fe306572038b0979e45dd3ddfdd07c238aa4f</sign>
+    <sign>c08e666db945d063f8e0c3c6902ec3b4e365673c</sign>
   </file>
   <file>
     <path>controller/admin/widget/lastorders.inc.php</path>
@@ -182,7 +194,7 @@
   </file>
   <file>
     <path>controller/block/checkout.inc.php</path>
-    <sign>b78573b7e0d3a8a8579f833e7b8613fc165a09f0</sign>
+    <sign>6cc2415216e29a4a86f97c5965f78251ee9461f5</sign>
   </file>
   <file>
     <path>controller/block/checkoutstep.inc.php</path>
@@ -190,19 +202,15 @@
   </file>
   <file>
     <path>controller/block/concomitant.inc.php</path>
-    <sign>fc4cf0e12cf59a2df5ebf2aedbb723d3bb7a04fd</sign>
+    <sign>3265d0a7c86b7dff18c558a186779dddfe2f752f</sign>
   </file>
   <file>
     <path>controller/block/oneclickcart.inc.php</path>
-    <sign>b49b97e88f47a79d72dd029d0894ca39d335309b</sign>
+    <sign>6e3c45eb6dc0c95f5712b2000a71f9204a1008ed</sign>
   </file>
   <file>
     <path>controller/block/productamountincart.inc.php</path>
     <sign>dfb582dfa4a967bbc872d234148fd4e57f15025b</sign>
-  </file>
-  <file>
-    <path>controller/block/productreturns.inc.php</path>
-    <sign>22d5612552f4b167d2bf04ecdc4bdaf73f611a9a</sign>
   </file>
   <file>
     <path>controller/block/selectedaddressblock.inc.php</path>
@@ -210,11 +218,11 @@
   </file>
   <file>
     <path>controller/front/cartcheckout.inc.php</path>
-    <sign>c27f3320dcf472f33217924ce444b1a1323d8f89</sign>
+    <sign>5e219e60eacb1a2ff9b250fbfbf7dd8bb94ead18</sign>
   </file>
   <file>
     <path>controller/front/cartpage.inc.php</path>
-    <sign>48f6c493170d02dbe68381c0d3cfac679f36bbfa</sign>
+    <sign>1b587cdf2b8396fa0e73c0bbb26426e43bc65a83</sign>
   </file>
   <file>
     <path>controller/front/cashregister.inc.php</path>
@@ -250,23 +258,23 @@
   </file>
   <file>
     <path>controller/front/myorders.inc.php</path>
-    <sign>7435c0e690731c898104379aacfeb2a71477c246</sign>
+    <sign>004b87eed388342a238bc7dff3f02ce6ec6439d4</sign>
   </file>
   <file>
     <path>controller/front/myorderview.inc.php</path>
-    <sign>311d3c76fbcc61862e2ba11badefebe72789ad3d</sign>
+    <sign>435e37cd2a44e9dba6da6ee792d325dee5baab90</sign>
   </file>
   <file>
     <path>controller/front/myproductsreturn.inc.php</path>
-    <sign>aee19ff78eeab53600aaa516338296bbbbe752ea</sign>
+    <sign>d43804310d9905728c4e892c90867690510056b8</sign>
   </file>
   <file>
     <path>controller/front/mysavedpaymentmethods.inc.php</path>
-    <sign>55a02d94ea8b575b49c22a3087d32e02d1b0d9d4</sign>
+    <sign>270f7c4bf726e2bddb30266ba07c74b0ce85ef41</sign>
   </file>
   <file>
     <path>controller/front/onlinepay.inc.php</path>
-    <sign>94aed03fd73d7b57d37581b7c318328a534167aa</sign>
+    <sign>8af66625dd15e501e0a5982418798655d0926c28</sign>
   </file>
   <file>
     <path>controller/front/regiontools.inc.php</path>
@@ -274,15 +282,15 @@
   </file>
   <file>
     <path>controller/front/reservation.inc.php</path>
-    <sign>ce11de111f2eab2b3e4b1e50a8d52f2c1cd6f556</sign>
+    <sign>4c9045f74cf06390b14b29382ae4757b22a084be</sign>
   </file>
   <file>
     <path>controller/front/selectedaddresschange.inc.php</path>
-    <sign>9930504259366866636c4324c056b9dd397a3323</sign>
+    <sign>4320a5b6b3da2c8b11a2df1a1a5409b3800319fc</sign>
   </file>
   <file>
     <path>controller/front/selectpvz.inc.php</path>
-    <sign>8591a03d31c09d4d52462af7bf01f549035200eb</sign>
+    <sign>f6ab220003b4027cf47388725669c073b36d0aca</sign>
   </file>
   <file>
     <path>model/actiontemplatesapi.inc.php</path>
@@ -294,15 +302,27 @@
   </file>
   <file>
     <path>model/apiutils.inc.php</path>
-    <sign>9b3b68fe896c2bf47c129dbbd3c0ab6167858a4e</sign>
+    <sign>681b83fb5c5bc539d553833307c9113e6b5e2622</sign>
+  </file>
+  <file>
+    <path>model/archiveorderapi.inc.php</path>
+    <sign>716f82fdf0fdce97d48d55359a1f6f77a60d8880</sign>
+  </file>
+  <file>
+    <path>model/behavior/catalogproduct.inc.php</path>
+    <sign>85fa220d3792213778ca9064910a52e2f1f5d092</sign>
   </file>
   <file>
     <path>model/behavior/usersuser.inc.php</path>
     <sign>3671ed7931fc6b5a9f7387ea0ece491da36fd533</sign>
   </file>
   <file>
+    <path>model/cargopresetapi.inc.php</path>
+    <sign>8f3659829f8edb767067f9cc16c0747609809107</sign>
+  </file>
+  <file>
     <path>model/cart.inc.php</path>
-    <sign>af7fd513469c65b1dce9617f9167080342796c1d</sign>
+    <sign>343cac671edf920465264284f2eea543121b7d5d</sign>
   </file>
   <file>
     <path>model/cashregisterapi.inc.php</path>
@@ -314,7 +334,7 @@
   </file>
   <file>
     <path>model/cashregistertype/abstracttype.inc.php</path>
-    <sign>078dc564c78d592de70a81e3cf8408d51686bd8c</sign>
+    <sign>507c47219d896733cc3a68aa9c1ce6a1100df1ac</sign>
   </file>
   <file>
     <path>model/cashregistertype/stub.inc.php</path>
@@ -326,11 +346,11 @@
   </file>
   <file>
     <path>model/changetransaction.inc.php</path>
-    <sign>d15c57d7f4ef4358a2b97e16ed9f9989d2aec4fd</sign>
+    <sign>c0ef55ccf0b3a4b065889877e80919bd357ec898</sign>
   </file>
   <file>
     <path>model/csvpreset/orderitemsbase.inc.php</path>
-    <sign>6ef8ea22e8c3b5e2f824951c5f1089c7a15da2db</sign>
+    <sign>229ab79ad4107d20c4fa1d536261ce8d1497f255</sign>
   </file>
   <file>
     <path>model/csvpreset/orderproducts.inc.php</path>
@@ -362,7 +382,7 @@
   </file>
   <file>
     <path>model/csvschema/region.inc.php</path>
-    <sign>6af553a2e4dba9f42f13ecf2fb21d2407a83d365</sign>
+    <sign>703cebefd6e646916276f1d5fe284f095bcbf218</sign>
   </file>
   <file>
     <path>model/csvschema/substatus.inc.php</path>
@@ -390,19 +410,19 @@
   </file>
   <file>
     <path>model/deliverytype/abstracttype.inc.php</path>
-    <sign>cdc0a369518306a09de3b027aa9c42d8cd249be9</sign>
+    <sign>bd9cb67871cc798c1be6cd815aa1f2f1021f8f35</sign>
   </file>
   <file>
     <path>model/deliverytype/cdek.inc.php</path>
-    <sign>d47ef8c573459cf561f58041d9fb6474c3dcf19e</sign>
+    <sign>6755919f7c71b69944d57cf4b026997c0257316b</sign>
   </file>
   <file>
     <path>model/deliverytype/cdek/api.inc.php</path>
-    <sign>75f0e7d504ba0c6f3d5eae8a480781e1f328ef93</sign>
+    <sign>93e12b040f8c4fd89689b88a962adc343e7083dd</sign>
   </file>
   <file>
     <path>model/deliverytype/cdek/cdekapi.inc.php</path>
-    <sign>e40a30af9112891042390d14112eb22b747a0271</sign>
+    <sign>c255466ebf163ba1071b8e1e3dd9a4a10db221a4</sign>
   </file>
   <file>
     <path>model/deliverytype/cdek/cdekinfo.inc.php</path>
@@ -446,11 +466,11 @@
   </file>
   <file>
     <path>model/deliverytype/cdek2.inc.php</path>
-    <sign>7a182fbd17a1fb8b8a8ffc5be2ac217fe0a4e85a</sign>
+    <sign>7b42ca34d8d064214e7793b1fcbac8d5dc4b80bc</sign>
   </file>
   <file>
     <path>model/deliverytype/fixedpay.inc.php</path>
-    <sign>d9d440780dbefc0c580dcb8fb7b9d327610f4808</sign>
+    <sign>bee4d79cd514b11591cce06b9d963c55a9a05199</sign>
   </file>
   <file>
     <path>model/deliverytype/helper/deliveryperiod.inc.php</path>
@@ -482,11 +502,11 @@
   </file>
   <file>
     <path>model/deliverytype/manual.inc.php</path>
-    <sign>04ea64e8395a6b10c3cecdcf67cd4448db451ac0</sign>
+    <sign>2f4f0d7a504bbf734f9198da27bec924925ab748</sign>
   </file>
   <file>
     <path>model/deliverytype/myself.inc.php</path>
-    <sign>077268c7f96365daf72cf2bb7c4719c0c176a477</sign>
+    <sign>ad2692087d8e822205acae8ee206458486fb731c</sign>
   </file>
   <file>
     <path>model/deliverytype/ruspost/handbook.inc.php</path>
@@ -498,15 +518,11 @@
   </file>
   <file>
     <path>model/deliverytype/russianpostcalc.inc.php</path>
-    <sign>4f65d0c9e3b6d767b0bfd440b64dc01373aa2cfd</sign>
+    <sign>6e66c6fe90b9d0fa55aabad8789934660b75f372</sign>
   </file>
   <file>
     <path>model/deliverytype/sheepla/sheeplalanguage.inc.php</path>
     <sign>f21dcc8a956fee7b07845d1284c47464360a3fe0</sign>
-  </file>
-  <file>
-    <path>model/deliverytype/spsr.inc.php</path>
-    <sign>e18ce651424408b81271a94c5dd1d4e00bacf831</sign>
   </file>
   <file>
     <path>model/deliverytype/spsr/spsrlocations.inc.php</path>
@@ -514,15 +530,15 @@
   </file>
   <file>
     <path>model/deliverytype/stub.inc.php</path>
-    <sign>03bb811f004ec7928c96bcecad41b24461beb5e8</sign>
+    <sign>92bce78c0ae70d9e73addca52aec6253bae68713</sign>
   </file>
   <file>
     <path>model/deliverytype/traitinterfacedeliveryorder.inc.php</path>
-    <sign>8129534ae4949ff28cc14648a60dfc6fb6fd931d</sign>
+    <sign>5ff3b224623af16d99255c304ca0a7d67d5f83c9</sign>
   </file>
   <file>
     <path>model/deliverytype/universal.inc.php</path>
-    <sign>dc7b6e221f09c0d97426b23f7372427a810379f7</sign>
+    <sign>bcd754ebdeab865626965d7a8f3918e11745d0dd</sign>
   </file>
   <file>
     <path>model/discountapi.inc.php</path>
@@ -538,7 +554,7 @@
   </file>
   <file>
     <path>model/discounts/discountmanager.inc.php</path>
-    <sign>29c3c491d20814548e7cfc6237f87e7fee25737d</sign>
+    <sign>9d039bcb62b0304c6e142af5580008900998d2cd</sign>
   </file>
   <file>
     <path>model/exception.inc.php</path>
@@ -554,7 +570,7 @@
   </file>
   <file>
     <path>model/externalapi/cart/add.inc.php</path>
-    <sign>84141f8be85a9c284fb20540e40589790328481c</sign>
+    <sign>c9f1ccfefc8b13ec092edcb9d1503f0b71b8c500</sign>
   </file>
   <file>
     <path>model/externalapi/cart/clear.inc.php</path>
@@ -562,7 +578,7 @@
   </file>
   <file>
     <path>model/externalapi/cart/getcartdata.inc.php</path>
-    <sign>257ec52329572cc13f6883cf02e8b566d4bdfc12</sign>
+    <sign>d98ddc3b017022605f2947b5dbd7bcd82bf529d5</sign>
   </file>
   <file>
     <path>model/externalapi/cart/oneclickcartfields.inc.php</path>
@@ -570,11 +586,11 @@
   </file>
   <file>
     <path>model/externalapi/cart/oneclickcartsend.inc.php</path>
-    <sign>13414b6ce28fd0ee785fe91bdd68d2da0059df6b</sign>
+    <sign>e4db54f3d08d122e404b7d04663618da2a8c62c8</sign>
   </file>
   <file>
     <path>model/externalapi/cart/remove.inc.php</path>
-    <sign>3f2d173629866638798cc5758c3305f5da7d0db9</sign>
+    <sign>1c44daed0c871b8a096a8affad3a86d8f84618fa</sign>
   </file>
   <file>
     <path>model/externalapi/cart/repeatorder.inc.php</path>
@@ -582,11 +598,11 @@
   </file>
   <file>
     <path>model/externalapi/cart/update.inc.php</path>
-    <sign>7179a894f715dd14bdc79977aec561009140c755</sign>
+    <sign>902a56cace91a0a0e36e9af3f04e0f0cd2978f64</sign>
   </file>
   <file>
     <path>model/externalapi/checkout/address.inc.php</path>
-    <sign>e0303444c4eaff544c2ba8c62e5efb539c52a9ba</sign>
+    <sign>5e0187ba2f1c0f8d813b74455613a8cfe3dc8b38</sign>
   </file>
   <file>
     <path>model/externalapi/checkout/confirm.inc.php</path>
@@ -614,7 +630,7 @@
   </file>
   <file>
     <path>model/externalapi/delivery/getlist.inc.php</path>
-    <sign>31bc7beb6325bfbd89cf9fa7921febf796defba8</sign>
+    <sign>eca7099bd06106b4e824c963ebda0875d4386343</sign>
   </file>
   <file>
     <path>model/externalapi/order/additionalfields.inc.php</path>
@@ -654,19 +670,19 @@
   </file>
   <file>
     <path>model/externalapi/payment/getlist.inc.php</path>
-    <sign>119311dd3bb503c415bce32d797ed095fbcc595d</sign>
+    <sign>3263685eca7eb06d170cf2d98a970781836acafc</sign>
   </file>
   <file>
     <path>model/externalapi/product/reserve.inc.php</path>
-    <sign>74df9eb2e98462247563ea09aef4c04d7723f6e5</sign>
+    <sign>d79c116bd79a0949a0a6db1edf9de6404c78c48d</sign>
   </file>
   <file>
     <path>model/externalapi/reservation/get.inc.php</path>
-    <sign>96cb6e221543d65afe27ae042fec52b98b15b240</sign>
+    <sign>3c9aac3841852b53feba75ecd1669b4d35ab4169</sign>
   </file>
   <file>
     <path>model/externalapi/reservation/getlist.inc.php</path>
-    <sign>714dae48bf550332c5fd98a3723a68fc839fd2cc</sign>
+    <sign>cc7d97797e430256566d82aad1e24aa0584cccc2</sign>
   </file>
   <file>
     <path>model/externalapi/status/getlist.inc.php</path>
@@ -702,11 +718,11 @@
   </file>
   <file>
     <path>model/log/logdelivery.inc.php</path>
-    <sign>395bf4275748d8b36c0f671ab9b35fd306c9e5db</sign>
+    <sign>c0051ab6a4d9a07776deff44f680a2a8643ee773</sign>
   </file>
   <file>
     <path>model/log/logdeliverycdek.inc.php</path>
-    <sign>6e68ce55e0fb8a43452a7cacaf03a1d5f0a8fb6c</sign>
+    <sign>bf6c1ca2b7ffadc04310ad4acfb7cd13b89505e2</sign>
   </file>
   <file>
     <path>model/log/logonlinepay.inc.php</path>
@@ -722,11 +738,7 @@
   </file>
   <file>
     <path>model/marking/markedclasses/markedclasscommon.inc.php</path>
-    <sign>159343ef87087b4e397ca3afed0e060e0d0b478b</sign>
-  </file>
-  <file>
-    <path>model/marking/markedclasses/markedclassshoes.inc.php</path>
-    <sign>2c76563d92b9c3e82e6d4a163b311fa0fd202ec3</sign>
+    <sign>ed531241a96da208530119deee69c9c1b55f8b46</sign>
   </file>
   <file>
     <path>model/marking/markingapi.inc.php</path>
@@ -798,7 +810,11 @@
   </file>
   <file>
     <path>model/orderapi.inc.php</path>
-    <sign>a16613361ae3e0389b98225ab180546fc8301495</sign>
+    <sign>b254be72fbb22311da2af4ad39027325f29bb892</sign>
+  </file>
+  <file>
+    <path>model/ordercargoapi.inc.php</path>
+    <sign>5515103c9cabe4203eaf3ce63a1774814adad263</sign>
   </file>
   <file>
     <path>model/orm/abstractcartitem.inc.php</path>
@@ -810,7 +826,27 @@
   </file>
   <file>
     <path>model/orm/address.inc.php</path>
-    <sign>fc508551caa606f1e5ae1400ee06d7bfa343877b</sign>
+    <sign>4c7b23d834d3216e705d557836eda968645768a7</sign>
+  </file>
+  <file>
+    <path>model/orm/archiveorder.inc.php</path>
+    <sign>306f0c6daaee149fd2215890fa39a5576a6a2df8</sign>
+  </file>
+  <file>
+    <path>model/orm/archiveorderitem.inc.php</path>
+    <sign>6887a932376d94dcd319a5d46371d84a6dd0995d</sign>
+  </file>
+  <file>
+    <path>model/orm/cargo/cargopreset.inc.php</path>
+    <sign>a89ad99030c9d9d2081c31b9469e2fb7543376ce</sign>
+  </file>
+  <file>
+    <path>model/orm/cargo/ordercargo.inc.php</path>
+    <sign>3235141170fe45e4e1a64ffa018cd019f7d8c143</sign>
+  </file>
+  <file>
+    <path>model/orm/cargo/ordercargoitem.inc.php</path>
+    <sign>ca024b5d6ec9a056d4f841ec9c561edc4f3e9194</sign>
   </file>
   <file>
     <path>model/orm/cartitem.inc.php</path>
@@ -826,11 +862,11 @@
   </file>
   <file>
     <path>model/orm/delivery.inc.php</path>
-    <sign>32e45929242fd76fab4deecebe805428dc7c403a</sign>
+    <sign>3371f535338ba67d5919b761b7d1a9ca8b55aed7</sign>
   </file>
   <file>
     <path>model/orm/delivery/cdekregion.inc.php</path>
-    <sign>c3d6ed797cedf5d7f37bd8425f0dd850dedd3eda</sign>
+    <sign>b9f5c53b2767a21eeb2e0d523df7931036f62b49</sign>
   </file>
   <file>
     <path>model/orm/deliverydir.inc.php</path>
@@ -838,7 +874,7 @@
   </file>
   <file>
     <path>model/orm/deliveryorder.inc.php</path>
-    <sign>a74f40917992d3fd08b03a34850b46a7dd36ed60</sign>
+    <sign>7485e9f73bb66851e0c878eb1fd651884e3efdbe</sign>
   </file>
   <file>
     <path>model/orm/deliveryxzone.inc.php</path>
@@ -846,19 +882,19 @@
   </file>
   <file>
     <path>model/orm/discount.inc.php</path>
-    <sign>caf4881aed9c46711251db5be0e48643d6e2e2ef</sign>
+    <sign>a7376aaf1e09aa9833c0a361e09b171c44684f01</sign>
   </file>
   <file>
     <path>model/orm/order.inc.php</path>
-    <sign>415af001a804f16039f3ed79fa53da7c838a1329</sign>
+    <sign>4845098d105b702cf5b7ad319ed86c8282dffb70</sign>
   </file>
   <file>
     <path>model/orm/orderitem.inc.php</path>
-    <sign>94217a8cd350e750dde0629b7bfcb0776e576932</sign>
+    <sign>0dfd7ba4c05b63442c9cd8d793c537b5c636cc15</sign>
   </file>
   <file>
     <path>model/orm/orderitemuit.inc.php</path>
-    <sign>10bb17c4ec78737ee279d38cce0171781850b253</sign>
+    <sign>f0a3c4837378c6f61a63cfa12c6abccf08548e5e</sign>
   </file>
   <file>
     <path>model/orm/payment.inc.php</path>
@@ -866,7 +902,7 @@
   </file>
   <file>
     <path>model/orm/productsreturn.inc.php</path>
-    <sign>8f457e0194d5e4b8e8a3db82c0c582c8aab5137b</sign>
+    <sign>fa9a43ea18051faea5457f763197c38300dc1554</sign>
   </file>
   <file>
     <path>model/orm/productsreturnorderitem.inc.php</path>
@@ -874,15 +910,15 @@
   </file>
   <file>
     <path>model/orm/receipt.inc.php</path>
-    <sign>1ed227eb8ef01cf72de56dba1b9963f24c657887</sign>
+    <sign>71c34533037dfe3677bf99dba868e7abcb5804d2</sign>
   </file>
   <file>
     <path>model/orm/region.inc.php</path>
-    <sign>3ff589805b2263b847914d945b96ee3ae9819cf5</sign>
+    <sign>55c4b901a1f9ed5fdc3885fef79c9daf43634cbd</sign>
   </file>
   <file>
     <path>model/orm/reservation.inc.php</path>
-    <sign>00022152fe7b178771bea7d22ff95ba65a3d28cd</sign>
+    <sign>4950d02101681066bdd38f474ff68a762dda9fc5</sign>
   </file>
   <file>
     <path>model/orm/savedpaymentmethod.inc.php</path>
@@ -894,11 +930,11 @@
   </file>
   <file>
     <path>model/orm/shipmentitem.inc.php</path>
-    <sign>efd5a0e10027cb3cfc3e994f9117f0f490a6e94c</sign>
+    <sign>402251ef6c4acc68508fe3ba08b52e529e6cf767</sign>
   </file>
   <file>
     <path>model/orm/substatus.inc.php</path>
-    <sign>dc1619fb56adcd3cd8341b6c070845cae77d7524</sign>
+    <sign>fd1cffeae44281417fb36e9dd3833d0d3bca9f14</sign>
   </file>
   <file>
     <path>model/orm/tax.inc.php</path>
@@ -918,7 +954,7 @@
   </file>
   <file>
     <path>model/orm/userstatus.inc.php</path>
-    <sign>c699a95ea0b57eaf2504bc5d147333c1a4dd4051</sign>
+    <sign>7a8269b9387e88c5839ba06b0e400e325103a8ba</sign>
   </file>
   <file>
     <path>model/orm/xregion.inc.php</path>
@@ -942,11 +978,11 @@
   </file>
   <file>
     <path>model/paymentapi.inc.php</path>
-    <sign>dd213ab43a1056369fcbf5912e6dd6398a59f999</sign>
+    <sign>1b28a9011190c49cfb00a33403d0677c18230a7a</sign>
   </file>
   <file>
     <path>model/paymenttype/abstracttype.inc.php</path>
-    <sign>d42307654e5d7c722eb78b3c1ca437da0edbc623</sign>
+    <sign>01cb18d7dd4da2a1fe327b69873b5a60174b8677</sign>
   </file>
   <file>
     <path>model/paymenttype/assist.inc.php</path>
@@ -998,11 +1034,11 @@
   </file>
   <file>
     <path>model/paymenttype/traitinterfacerecurringpayments.inc.php</path>
-    <sign>02c78028a4d39b84469b6d97d14ca1af5f135420</sign>
+    <sign>7b76673d75c7d2094330e8030b72ed2f7c2f6570</sign>
   </file>
   <file>
     <path>model/paymenttype/yandexkassaapi.inc.php</path>
-    <sign>a62e8fbe1ed6f0d89bb2474b6b506c162401d319</sign>
+    <sign>3d9eedd92a00b8e27fd7b8d1997ee584f2114a73</sign>
   </file>
   <file>
     <path>model/paymenttype/yandexmoney.inc.php</path>
@@ -1054,7 +1090,7 @@
   </file>
   <file>
     <path>model/receiptinfo.inc.php</path>
-    <sign>20a3a2b1189d3a70d144b319751401ca09c1d8b7</sign>
+    <sign>53c448ed53cc7732f18aca2e7217188d31a4dffd</sign>
   </file>
   <file>
     <path>model/regionapi.inc.php</path>
@@ -1062,7 +1098,7 @@
   </file>
   <file>
     <path>model/reservationapi.inc.php</path>
-    <sign>c040b8d8569dd8047a837d9ecf568aa834eaaeff</sign>
+    <sign>205c4a6dbb5bb8cdb724e0de192d76078cb4be55</sign>
   </file>
   <file>
     <path>model/savedpaymentmethodapi.inc.php</path>
@@ -1070,11 +1106,11 @@
   </file>
   <file>
     <path>model/selectedaddress.inc.php</path>
-    <sign>cb0df7b031bef4fe9010c45b1af260ed2907cbf6</sign>
+    <sign>a3d908fe503577817924e9ae60b3b66ebf7e9d45</sign>
   </file>
   <file>
     <path>model/shipmentapi.inc.php</path>
-    <sign>ccf68e6a68f11206f0b6736cd386beff5ab02dcc</sign>
+    <sign>1642a57351d8015e24c54989fa03f94773a2d060</sign>
   </file>
   <file>
     <path>model/substatusapi.inc.php</path>
@@ -1082,7 +1118,7 @@
   </file>
   <file>
     <path>model/taxapi.inc.php</path>
-    <sign>af6b47f6c740ae7138db069c53e5e04de8d167a0</sign>
+    <sign>6b8321bd3fb89bec911c98250230b1e91904c737</sign>
   </file>
   <file>
     <path>model/toucanapi.inc.php</path>
@@ -1126,59 +1162,155 @@
   </file>
   <file>
     <path>view/address/selected_address_change.tpl</path>
-    <sign>68c5bd06949b1946cb070d682a0853044c331f5e</sign>
+    <sign>60fe84ab1a89c88a4af921c1f0392aee56d7498e</sign>
   </file>
   <file>
     <path>view/address/selected_address_change_regions.tpl</path>
-    <sign>b1023c4c3d672311a2a351a6ebd1414c5e1f3b3f</sign>
+    <sign>bfcaae4f22c94aedb6be5802547e1d9f923dccef</sign>
+  </file>
+  <file>
+    <path>view/admin/cargo/cargo_form.tpl</path>
+    <sign>495ff868f6a88acf82782fd2e6d4b8303d1c9419</sign>
+  </file>
+  <file>
+    <path>view/admin/cargo/cargo_item.tpl</path>
+    <sign>af0c7158fe9a4d463ca4b78c16323364a8f01bc0</sign>
+  </file>
+  <file>
+    <path>view/admin/cargo/order_cargo_dialog.tpl</path>
+    <sign>838a69b0b1ea18f789f702043cb587a5eed2e484</sign>
+  </file>
+  <file>
+    <path>view/admin/cdek_rebase.tpl</path>
+    <sign>b6f638b8a71cc253f72a66d54da047150b6172cc</sign>
+  </file>
+  <file>
+    <path>view/admin/order_depend_maker.tpl</path>
+    <sign>d25ec8c16d852a8a3b6889723f22a66aeee37183</sign>
+  </file>
+  <file>
+    <path>view/admin/order_footer_maker.tpl</path>
+    <sign>eb82b6d4123d83020e57528e9287f1d8e750d74f</sign>
+  </file>
+  <file>
+    <path>view/admin/order_info_maker.tpl</path>
+    <sign>dd52ff85075aca48dc4e14c95bb33f2e9db5fdde</sign>
+  </file>
+  <file>
+    <path>view/admin/order_status_cell.tpl</path>
+    <sign>e94e6d75d40f7aa05e805c33daa4f1b29d34605b</sign>
+  </file>
+  <file>
+    <path>view/admin/order_totalcost_cell.tpl</path>
+    <sign>6918588f770fd63c1b48dc29475fd1cda01fef2f</sign>
+  </file>
+  <file>
+    <path>view/admin/order_tree_cell.tpl</path>
+    <sign>e6cc10025f7acd55d2402d09c974e34cf2f878c1</sign>
+  </file>
+  <file>
+    <path>view/admin/order_user_cell.tpl</path>
+    <sign>18c5836924471a8f676fb4f95127538c56852d5c</sign>
+  </file>
+  <file>
+    <path>view/admin/orders_report.tpl</path>
+    <sign>c15ad0fbde4e515a446ed9ced18c9f02e2b1a2aa</sign>
+  </file>
+  <file>
+    <path>view/admin/orderview.tpl</path>
+    <sign>64fea5b3517f1798fdd8c2c1a6f42b8c3407bc9b</sign>
+  </file>
+  <file>
+    <path>view/admin/quick_show_orders.tpl</path>
+    <sign>575f6209933fc4fd23a7811888d836efdc0f77c6</sign>
+  </file>
+  <file>
+    <path>view/admin/receipt_actions_cell.tpl</path>
+    <sign>e36adb6c909deb5e12f5bdd25ea3e5309f644f78</sign>
+  </file>
+  <file>
+    <path>view/admin/receipt_error.tpl</path>
+    <sign>7ffbc04b31038f95392409357d51b963be878288</sign>
+  </file>
+  <file>
+    <path>view/admin/receipt_info.tpl</path>
+    <sign>8925f6d70c62d4c00d2a71aa193f1f3a1a3f3333</sign>
+  </file>
+  <file>
+    <path>view/admin/receipt_status_cell.tpl</path>
+    <sign>c441f4156e305985c0ded6a964a791b1b3f868bc</sign>
+  </file>
+  <file>
+    <path>view/admin/reservation_cron_check.tpl</path>
+    <sign>463890c170d408d900d857e6c335233ca9045692</sign>
+  </file>
+  <file>
+    <path>view/admin/select_pvz.tpl</path>
+    <sign>8cc3ecb24e972d6bec81b8add788194819066b56</sign>
+  </file>
+  <file>
+    <path>view/admin/transaction_actions_cell.tpl</path>
+    <sign>b38ea750fa5f489abbb8fdac9dee94eb0dec78f0</sign>
+  </file>
+  <file>
+    <path>view/admin/transaction_cost_cell.tpl</path>
+    <sign>bc97f49d3e76fd7f3dfb88f130cea9b390ce20ab</sign>
+  </file>
+  <file>
+    <path>view/admin/transaction_receipt.tpl</path>
+    <sign>3de5137e2186e277651c3d3474f96da1bd6c18c4</sign>
   </file>
   <file>
     <path>view/blocks/cart/cart.tpl</path>
-    <sign>fc9c989dbc11120d69bdfe667d79eea9babd3621</sign>
+    <sign>74e63f0c14b841176c23cb285378caf766b819d2</sign>
   </file>
   <file>
     <path>view/blocks/cart/cart_full.tpl</path>
-    <sign>0896cdc2a414e1bef5156a72dec53b65c2fb383b</sign>
+    <sign>a6002242ca59d9b10ec5dc201df513621ccfd43b</sign>
+  </file>
+  <file>
+    <path>view/blocks/cart/cart_mobile.tpl</path>
+    <sign>78c1c09a698023ccbbf9b336cdf0ca287e5e3773</sign>
   </file>
   <file>
     <path>view/blocks/checkout/address_block.tpl</path>
-    <sign>334fa37daec1f3235bac2a1416d01a9ed866fc0b</sign>
+    <sign>ed319ef911e1bb2e9fc81f11cb0a4d3b36431aeb</sign>
   </file>
   <file>
     <path>view/blocks/checkout/captcha_block.tpl</path>
-    <sign>fff204518473ea167703c5bd8aa579005c0ca8ac</sign>
+    <sign>da39a3ee5e6b4b0d3255bfef95601890afd80709</sign>
   </file>
   <file>
     <path>view/blocks/checkout/checkout.tpl</path>
-    <sign>a638032669c9b18644c88b9d5751f2afc83a0f81</sign>
+    <sign>d85dd85238afc77ea6575d32c59f0f6bf875ff0f</sign>
   </file>
   <file>
     <path>view/blocks/checkout/city_block.tpl</path>
-    <sign>774a19e54e477dc689c8b4e2aee4b0ba068e4beb</sign>
+    <sign>91ae28165bfd8ed3e8d61e8c05e745334ec3643b</sign>
   </file>
   <file>
     <path>view/blocks/checkout/comment_block.tpl</path>
-    <sign>2c6608079e921bb6b779ce9813eb62ef2b426234</sign>
+    <sign>d5e47ebc776cff038f21c1d8ef1dc0f397f522a4</sign>
   </file>
   <file>
     <path>view/blocks/checkout/delivery_block.tpl</path>
-    <sign>5de283b5e676ad13f4edf76e48edd1fb44819008</sign>
+    <sign>eaa53fd009ae22b11050011ef1753d572904b368</sign>
   </file>
   <file>
     <path>view/blocks/checkout/payment_block.tpl</path>
-    <sign>718bf1142397b2345943588e69a5ed9cb48bcc42</sign>
+    <sign>e03f292c10d9797ecb05f61426b79579a92de11a</sign>
   </file>
   <file>
     <path>view/blocks/checkout/products_block.tpl</path>
-    <sign>c41b563b808f77bde7d5c5054f28707f9cd77116</sign>
+    <sign>4f81f76584a5337099573149442627b2553f2b1e</sign>
   </file>
   <file>
     <path>view/blocks/checkout/total_block.tpl</path>
-    <sign>b28db43c3c805cc49fdc323dd921b5874bd951f3</sign>
+    <sign>6514d08cf67a80bd8f158b66f039049880a4398f</sign>
   </file>
   <file>
     <path>view/blocks/checkout/user_block.tpl</path>
-    <sign>5a25313c4f4616a4443a6b3deb793b2bb761ce19</sign>
+    <sign>b72ec8f743347bc6a700c34bc341cb7c8c4faf38</sign>
   </file>
   <file>
     <path>view/blocks/checkoutstep/step.tpl</path>
@@ -1186,19 +1318,15 @@
   </file>
   <file>
     <path>view/blocks/concomitant/concomitant.tpl</path>
-    <sign>611efab0eb3dd87de7109220d55e23b06e37eba7</sign>
+    <sign>9d23225f5a4403b3b96b74d5c7560fe48d994f04</sign>
   </file>
   <file>
     <path>view/blocks/oneclickcart/oneclickcart.tpl</path>
-    <sign>8b0ed6e90518cd662183fb27b348aa153608edcb</sign>
+    <sign>c6aab5b7d6906a50ce8b9d4bb584c87e309459fc</sign>
   </file>
   <file>
     <path>view/blocks/productamountincart/productamountincart.tpl</path>
     <sign>7e31a50d244a1e350242a4f098ad52940a6ba5eb</sign>
-  </file>
-  <file>
-    <path>view/blocks/productreturns/productreturns.tpl</path>
-    <sign>ea0332b8424787dcd6906cf7ef2a486b500df4a8</sign>
   </file>
   <file>
     <path>view/blocks/selectedaddress/selected_address.tpl</path>
@@ -1206,47 +1334,27 @@
   </file>
   <file>
     <path>view/cart_checkout.tpl</path>
-    <sign>759578ee2c054e3e57d23df340131f1f70364cf9</sign>
+    <sign>84626123557d6ffcde6e19ed7133ec0ed4e23526</sign>
   </file>
   <file>
     <path>view/cartpage.tpl</path>
-    <sign>9e602b443b918ffd4e68919b2cff656dccd10647</sign>
+    <sign>ee648ea37309f3758bf135402afb6c0fe08d747a</sign>
   </file>
   <file>
-    <path>view/cdek_city_check.tpl</path>
-    <sign>da39a3ee5e6b4b0d3255bfef95601890afd80709</sign>
+    <path>view/cartpage_page.tpl</path>
+    <sign>f0304edc0239baa42190d5ffaa7d00787f54de50</sign>
   </file>
   <file>
-    <path>view/cdek_rebase.tpl</path>
-    <sign>b6f638b8a71cc253f72a66d54da047150b6172cc</sign>
+    <path>view/cartpage_popup.tpl</path>
+    <sign>2f2141930e6e325fa8fbef55f526c57572cb1391</sign>
   </file>
   <file>
     <path>view/checkout/address.tpl</path>
-    <sign>ebb9083311d142c8221d4d6eebcafaea3fbe5efa</sign>
-  </file>
-  <file>
-    <path>view/checkout/confirm.tpl</path>
-    <sign>3ece12c7370476f2cc58f042ab75e088ad01295c</sign>
-  </file>
-  <file>
-    <path>view/checkout/delivery.tpl</path>
-    <sign>3160913bd7c04739b32ba008fe5d61a386a4379e</sign>
+    <sign>6c12b5530e0b30d419e8d83133658e4eeff9c2fb</sign>
   </file>
   <file>
     <path>view/checkout/finish.tpl</path>
-    <sign>30b7b00535d348580e51a75a773d367829e05917</sign>
-  </file>
-  <file>
-    <path>view/checkout/payment.tpl</path>
-    <sign>b2aa24caeb6155a151dda1c8100d814707ccbe66</sign>
-  </file>
-  <file>
-    <path>view/checkout/warehouse.tpl</path>
-    <sign>04b311935bb09cc917f00d0b32096bfdf0a9cc12</sign>
-  </file>
-  <file>
-    <path>view/color_cell.tpl</path>
-    <sign>b765192a7f939602878efa33396a6f8ca5928d66</sign>
+    <sign>d721d280ccd07f70626533236f06318de55b4bcd</sign>
   </file>
   <file>
     <path>view/css/commoditycheck.css</path>
@@ -1258,19 +1366,15 @@
   </file>
   <file>
     <path>view/css/delivery/selectpvz.css</path>
-    <sign>6a618b1eeb42560bde29d3b65ffcb750d28cd258</sign>
+    <sign>59d0a8fd2d64417a49c432426b389267ad60f7be</sign>
   </file>
   <file>
     <path>view/css/delivery/widjet.css</path>
     <sign>6afc941367c2817c6f964d9046b6bc91660d504d</sign>
   </file>
   <file>
-    <path>view/css/order/checkout.css</path>
-    <sign>f77e85dee41ef3d14cbd0bb5cac71444f8446a33</sign>
-  </file>
-  <file>
-    <path>view/css/order/onlinepay.css</path>
-    <sign>1810269dbfba5a039704024d59d11e25018f798e</sign>
+    <path>view/css/ordercargo.css</path>
+    <sign>ae134bbcc618af73f480cf5445e8fb3336a39d1c</sign>
   </file>
   <file>
     <path>view/css/orderform.css</path>
@@ -1290,7 +1394,7 @@
   </file>
   <file>
     <path>view/css/orderview.css</path>
-    <sign>3bb690c2668d25b975a30c69f9aae4db20cf28e1</sign>
+    <sign>1bfd6d20b85936c2f8fb20d8ff4abd476d855c47</sign>
   </file>
   <file>
     <path>view/css/productamountincart.css</path>
@@ -1299,10 +1403,6 @@
   <file>
     <path>view/css/productsreturn/productsreturn.css</path>
     <sign>8b51bedc509c9564df3e65678cc1030c927ecd8c</sign>
-  </file>
-  <file>
-    <path>view/css/returns.css</path>
-    <sign>21ed0a987d54c97f4b7040439d167f353d669c38</sign>
   </file>
   <file>
     <path>view/css/savedpaymentmethods.css</path>
@@ -1342,7 +1442,7 @@
   </file>
   <file>
     <path>view/delivery/delivery_params_pvz.tpl</path>
-    <sign>4e1eab047d4af389ef49a9b021a50f1bb66df7fd</sign>
+    <sign>29f06d1a11025a56c9840a62212dc0911e96922b</sign>
   </file>
   <file>
     <path>view/delivery/helper/filterstype/checkbox.tpl</path>
@@ -1362,7 +1462,7 @@
   </file>
   <file>
     <path>view/delivery/select_pvz.tpl</path>
-    <sign>f5fd7a88c1bfb36006ce911eb25ca60579996ff7</sign>
+    <sign>2ac15c514ade2a8fa28f5135ed49adaeb6dc174f</sign>
   </file>
   <file>
     <path>view/delivery/sheepla/widget.tpl</path>
@@ -1418,7 +1518,7 @@
   </file>
   <file>
     <path>view/form/delivery/cdek/cdek_call_courier.tpl</path>
-    <sign>8a3d3f83379956139c521746ea13b503ce5814fe</sign>
+    <sign>59f8819686d86f0c09c776e76e8eec4b64f85ce8</sign>
   </file>
   <file>
     <path>view/form/delivery/cdek/cdek_delete_order.tpl</path>
@@ -1434,15 +1534,15 @@
   </file>
   <file>
     <path>view/form/delivery/cdek/cdek_print_form.tpl</path>
-    <sign>2f20580b58db401a91f146c9ae1e5fc770e48cef</sign>
+    <sign>d983415ce799ef127b55be473af2f4b8243dfdb6</sign>
   </file>
   <file>
     <path>view/form/delivery/cdek/cdek_print_label_form.tpl</path>
-    <sign>cbc0914af3966635207c9e6d14a9a29d04b76375</sign>
+    <sign>2896553e8d34b1d96c68d2348580cfab9f407df4</sign>
   </file>
   <file>
     <path>view/form/delivery/cdek/field_tariff_type_list.tpl</path>
-    <sign>7290d64e0d51876a51816ccd8a636ed34f570b4d</sign>
+    <sign>49731b2c85e073a6fd3285d69ee630a2dac4e06a</sign>
   </file>
   <file>
     <path>view/form/delivery/cdek/notice.tpl</path>
@@ -1454,11 +1554,11 @@
   </file>
   <file>
     <path>view/form/delivery/cdek/tariff_list.tpl</path>
-    <sign>3f7267dae3e4fc232148c38ba5689792ba94c4a5</sign>
+    <sign>1ab42b737f9088f0dee4b2e7469b34678ab8072b</sign>
   </file>
   <file>
     <path>view/form/delivery/delivery_periods.tpl</path>
-    <sign>67fc2a2ff6194cc38f1878825e803646857774b8</sign>
+    <sign>a9e819c9ca31951326d108e422c1196e53b2ec16</sign>
   </file>
   <file>
     <path>view/form/delivery/delivery_rules_tr.tpl</path>
@@ -1470,23 +1570,23 @@
   </file>
   <file>
     <path>view/form/delivery/other.tpl</path>
-    <sign>a245f801d1de5d681b5040ec13b0cbd416e9441b</sign>
+    <sign>85870bec69bfa418288c08fae75e419e1efaf131</sign>
   </file>
   <file>
     <path>view/form/delivery/sheepla/sheepla_additional_html.tpl</path>
-    <sign>a43d078d20230d11cf93d5720fbed56dbb56ee87</sign>
+    <sign>8f5a1ba32e190ab239c702cd7cc2560eaaafde8e</sign>
   </file>
   <file>
     <path>view/form/delivery/sheepla/sheepla_admin.tpl</path>
-    <sign>45b0b9d35ad3245019a8731f72f036dfee925e4c</sign>
+    <sign>4c89f7c8656acebe9d5acfe4ae77327c69dbd167</sign>
   </file>
   <file>
     <path>view/form/delivery/sheepla/sheepla_admin_api.tpl</path>
-    <sign>48f2cc8267430b129bca675aa66ecebba3afdb69</sign>
+    <sign>40a8327b4f03e2a6eae618e6e6f67449a6a925c8</sign>
   </file>
   <file>
     <path>view/form/delivery/sheepla/sheepla_get_status.tpl</path>
-    <sign>155f14ac1fd0b5aee79b852c9cf37d55c8770720</sign>
+    <sign>260d1887862ca046d78f16f6573dd83324c610c9</sign>
   </file>
   <file>
     <path>view/form/delivery/sheepla/sheepla_template.tpl</path>
@@ -1518,7 +1618,7 @@
   </file>
   <file>
     <path>view/form/order/address_dialog.tpl</path>
-    <sign>92b803fc9ae21baa7f6f4ce77954ce124940248a</sign>
+    <sign>e667dba7a1cbd259e970cbd135f6ad0c4b8a96c6</sign>
   </file>
   <file>
     <path>view/form/order/delivery.tpl</path>
@@ -1526,7 +1626,7 @@
   </file>
   <file>
     <path>view/form/order/delivery/delivery_order_view.tpl</path>
-    <sign>7588d037e0267381fdd55bc5ed81e50696664a5e</sign>
+    <sign>b20c1832359a3eac69e42754f3cdf5bc3af619a3</sign>
   </file>
   <file>
     <path>view/form/order/delivery/delivery_params_delivery_order.tpl</path>
@@ -1538,15 +1638,19 @@
   </file>
   <file>
     <path>view/form/order/delivery_dialog.tpl</path>
-    <sign>de84e90fff8797ff6524142fec874638ae1354e7</sign>
+    <sign>696d94f48787348244448708f022374fd0439fe8</sign>
+  </file>
+  <file>
+    <path>view/form/order/order_cargos.tpl</path>
+    <sign>1db8574d2df8e398654c2901d154d7d23c0f789b</sign>
   </file>
   <file>
     <path>view/form/order/order_cart.tpl</path>
-    <sign>a43b6710e02ee807a6e0d791476c5885a9d6bb35</sign>
+    <sign>50033c4d2d83a454cb5a947db24425e01c6a5ce3</sign>
   </file>
   <file>
     <path>view/form/order/order_cart_item.tpl</path>
-    <sign>005a22cce2c8270e7a1c931e90058ff3ee2f3c56</sign>
+    <sign>48394d77e3646cb3e9625ea663ffc8a568add8a3</sign>
   </file>
   <file>
     <path>view/form/order/order_delivery_address.tpl</path>
@@ -1554,7 +1658,7 @@
   </file>
   <file>
     <path>view/form/order/order_shipment.tpl</path>
-    <sign>0f02310f170b8527f76e169b818912523f2ed442</sign>
+    <sign>431c7b75f22dad3b19a0a1652b4ff32193caf72b</sign>
   </file>
   <file>
     <path>view/form/order/order_transactions.tpl</path>
@@ -1566,7 +1670,7 @@
   </file>
   <file>
     <path>view/form/order/payment_dialog.tpl</path>
-    <sign>886729483af8e78098f2e2936289da9677e9acd9</sign>
+    <sign>8d1d039facdcfa38c015d054704af4a1eb9f1fbb</sign>
   </file>
   <file>
     <path>view/form/order/payment_recurring_payments.tpl</path>
@@ -1574,7 +1678,7 @@
   </file>
   <file>
     <path>view/form/order/recommended_and_concomitant.tpl</path>
-    <sign>ddc2cde91e985e2dbdb141216c3bc27b04172ee3</sign>
+    <sign>bb3f33d9c61ea016146cfbaef8a77e97f697e49d</sign>
   </file>
   <file>
     <path>view/form/order/select_payment_method.tpl</path>
@@ -1586,7 +1690,7 @@
   </file>
   <file>
     <path>view/form/order/user_dialog.tpl</path>
-    <sign>501895b32610e7888253c2c1ee334e3989d26ea4</sign>
+    <sign>e9400e78d0b4e16c4fa0177676c720638d600de5</sign>
   </file>
   <file>
     <path>view/form/order/user_select_or_reg.tpl</path>
@@ -1606,7 +1710,7 @@
   </file>
   <file>
     <path>view/form/payment/other.tpl</path>
-    <sign>5212f69158f52a6babcb996b91554622e8472e0f</sign>
+    <sign>104c2424696da9f07b61fa15e5966a9dee3fb68d</sign>
   </file>
   <file>
     <path>view/form/payment/paypal/help.tpl</path>
@@ -1638,7 +1742,7 @@
   </file>
   <file>
     <path>view/form/payment/yandexmoney/cps_provider.tpl</path>
-    <sign>9f990c23f6e9165e9e1091b0c010656a700c57fc</sign>
+    <sign>3a428c17e717500cdd3d5927fb9126c36e84d92f</sign>
   </file>
   <file>
     <path>view/form/payment/yandexmoney/help.tpl</path>
@@ -1646,11 +1750,11 @@
   </file>
   <file>
     <path>view/form/payment/yandexmoney/payment_type.tpl</path>
-    <sign>308cea0318157ec01e636be3f900e1dc1aacee14</sign>
+    <sign>f492e5bb739eff9ef31cb49f0a09bdcb5606e608</sign>
   </file>
   <file>
     <path>view/form/productsreturn/pre_add/order_num.tpl</path>
-    <sign>26575fb21190bb62510fa6b64fdf2a04b93927d7</sign>
+    <sign>a84c6e3bd4ebadaace8b71c6d3f0f65958495cf1</sign>
   </file>
   <file>
     <path>view/form/productsreturn/returnproductselect.tpl</path>
@@ -1682,7 +1786,7 @@
   </file>
   <file>
     <path>view/hooks/users-blocks-authblock/cabinet-menu-items.post.tpl</path>
-    <sign>2dcb3380457cd516dc1130aca47265f62856e41a</sign>
+    <sign>ab2e232da44b868c566066bba34b3821cf9ed3eb</sign>
   </file>
   <file>
     <path>view/img/act.png</path>
@@ -1733,12 +1837,16 @@
     <sign>61376f8f36c629b116cd3edc753c41c208b68fb4</sign>
   </file>
   <file>
+    <path>view/js/delivery/rs.adminselectpvz.js</path>
+    <sign>f04cebe4184f8b80789e9be7c59e66b115c4655d</sign>
+  </file>
+  <file>
     <path>view/js/delivery/rs.field_pvz.js</path>
-    <sign>c2ed417fee0266f04cdc57d5a70f2efb27b8083b</sign>
+    <sign>d864bbbe694a3ca5ec600b36d481abebbd255518</sign>
   </file>
   <file>
     <path>view/js/delivery/rs.selectpvz.js</path>
-    <sign>a8235e4bf2acc196f84df005ef5ca1d7f6bafdcb</sign>
+    <sign>24b9beaedd6999522e26aff3753091944ea22672</sign>
   </file>
   <file>
     <path>view/js/delivery/sheepla_widjet.js</path>
@@ -1753,16 +1861,8 @@
     <sign>181260c5e712c375673dc6412d313fdf83864025</sign>
   </file>
   <file>
-    <path>view/js/jquery.cart.js</path>
-    <sign>27b95650d744af9435b8af6c089dfea75f0397cc</sign>
-  </file>
-  <file>
-    <path>view/js/jquery.oneclickcart.js</path>
-    <sign>b16f73ffe2581d5a4e07622947ea301ac154826c</sign>
-  </file>
-  <file>
     <path>view/js/jquery.orderedit.js</path>
-    <sign>8033cee68c25f9f8a49afd695b49a75228ecaad0</sign>
+    <sign>b771ad81d133ce711e9467070a0467cec5dc2d70</sign>
   </file>
   <file>
     <path>view/js/jquery.sellchart.js</path>
@@ -1771,10 +1871,6 @@
   <file>
     <path>view/js/jquery.tax.js</path>
     <sign>fc0189ef5b4b7389dc10a54d6d3baaad0e96c040</sign>
-  </file>
-  <file>
-    <path>view/js/mybalance.js</path>
-    <sign>859a8e1690329a0e422f0f42bf7ce5e597d13bb3</sign>
   </file>
   <file>
     <path>view/js/onepageorder.js</path>
@@ -1786,7 +1882,7 @@
   </file>
   <file>
     <path>view/js/order/rs.checkout.js</path>
-    <sign>0a65e5acff40ab5a1141876e25952ecf0366654e</sign>
+    <sign>68b539f853f1190d86ab0efc1dc52a66861cdaf0</sign>
   </file>
   <file>
     <path>view/js/order/success_receipt.js</path>
@@ -1798,67 +1894,99 @@
   </file>
   <file>
     <path>view/js/productamountincart.js</path>
-    <sign>219704506008468c76b492ed228c9a72f4c57be9</sign>
+    <sign>6ca77d85ee7881e35704304315573b135357beac</sign>
   </file>
   <file>
     <path>view/js/productsreturn/productsreturn.js</path>
     <sign>e5da364c2e85a3338518e4ebdd697f19b6ec9e2d</sign>
   </file>
   <file>
-    <path>view/js/returns.js</path>
-    <sign>acbd5cbb0934da9329272ee4f1b33516db763905</sign>
+    <path>view/js/rs.ordercargo.js</path>
+    <sign>27f9b46d2c682bece9c073d6d18628917ba249e7</sign>
   </file>
   <file>
     <path>view/js/rs.ordershipment.js</path>
-    <sign>8090c8382d7ec5c5fc2bdef3291b6f3da411d5af</sign>
+    <sign>81259725e64c286fdbda490b686da23075f8d6eb</sign>
   </file>
   <file>
     <path>view/js/rs.selectedaddresschange.js</path>
-    <sign>8cdd196db29cfbce07b62ac1cb0f8e3bda93a899</sign>
+    <sign>2ba5059191146a4cf12cb703136b5927ea10b3a2</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/addfunds.js</path>
+    <sign>365aab27671492a017a933a8160c7dceeac761f8</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/cart.js</path>
+    <sign>95516a79949595d3c0c12c87b31d2a4ca3b5b00e</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/checkout.js</path>
+    <sign>f4ef3023470fc15ec71266d5bf5e12309bfe6276</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/returns.js</path>
+    <sign>cbded7d9554b818f8ae49d1b9f7ab961b8e66a5c</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/savedpaymentmethods.js</path>
+    <sign>eb2242d05b294181f42c63f822ad937272ce9adc</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/selectcity.js</path>
+    <sign>598ee42a28ec8a1626f54cb76a42038084589187</sign>
+  </file>
+  <file>
+    <path>view/js/rscomponent/successreceipt.js</path>
+    <sign>1ecc5aa5e8851566d583ec2a0930eb138e5ec19b</sign>
   </file>
   <file>
     <path>view/js/savedpaymentmethods.js</path>
     <sign>8f85e8e5af3264b1b9701ca00a46315b5ccc7017</sign>
   </file>
   <file>
+    <path>view/js/selectaddresschange.js</path>
+    <sign>7a1651aeca290ba08c1f03492a6112702196332d</sign>
+  </file>
+  <file>
     <path>view/licagreement.tpl</path>
-    <sign>f9987aacf2322675cba21258c72927e5047baa04</sign>
+    <sign>1332b80f2100db62f843ba8b3faabb5c4c0f2c6b</sign>
   </file>
   <file>
     <path>view/mybalance/addfunds.tpl</path>
-    <sign>0c8c71488f97b2b1b693ca7d7281225a685e6e2c</sign>
+    <sign>1c9af7097b73bf8616ae0a6c8e2f512d83b967c4</sign>
   </file>
   <file>
     <path>view/mybalance/confirmpay.tpl</path>
-    <sign>69348dda1c1f53eabc6a1c8d477f9d00ddc6b797</sign>
+    <sign>0219f070efe466799517cfd57eb0f6b3757da672</sign>
   </file>
   <file>
     <path>view/mybalance/mybalance.tpl</path>
-    <sign>3ebf1e63d1d2b55dbdf5c48446770d8a131d347a</sign>
+    <sign>c517602d97a8103be55d6ca5db875bc2f084dc02</sign>
   </file>
   <file>
     <path>view/myorder_change_payment.tpl</path>
-    <sign>547a14668e70cd897d00d318d3cb63a888597105</sign>
+    <sign>4d71019b032e1fb43192f430ac09af2db6e01c36</sign>
   </file>
   <file>
     <path>view/myorder_view.tpl</path>
-    <sign>e99d792c49c654dea504c3865b47c6dc6276a0bd</sign>
+    <sign>1622037aeab548b64a8c9256d34c6593f86e0bd5</sign>
   </file>
   <file>
     <path>view/myorders.tpl</path>
-    <sign>07648c65fa5789d0be2ee5d81989292d25632af4</sign>
+    <sign>6e7b7d400e425f38fd0fbcf2b23dc1bf5bf9fc56</sign>
   </file>
   <file>
     <path>view/myproducts_return.tpl</path>
-    <sign>39a29900dbac1cb1f3f737535165bce71c256a3b</sign>
+    <sign>25b2633839351c4c2753a5ea916c98398a1352dd</sign>
   </file>
   <file>
     <path>view/myproducts_return_add.tpl</path>
-    <sign>2e93a1bb82204fcebedc414cb1f54278f5333c40</sign>
+    <sign>d39aae186b91cd5ee6d682d31a6ee20d0d3b7b21</sign>
   </file>
   <file>
     <path>view/notice/desktop_checkout.tpl</path>
-    <sign>fd7ccff49211f7cdc73c5c5f830432615d61cdda</sign>
+    <sign>0c732b7060d0120e72dec67b704599339182df0a</sign>
   </file>
   <file>
     <path>view/notice/desktop_receipterror.tpl</path>
@@ -1878,7 +2006,7 @@
   </file>
   <file>
     <path>view/notice/toadmin_checkout.tpl</path>
-    <sign>941733205583f403af49b3f11d35980dd8122266</sign>
+    <sign>a65b84a3de0febb430387e115052042c84fb740c</sign>
   </file>
   <file>
     <path>view/notice/toadmin_checkout_sms.tpl</path>
@@ -1918,7 +2046,7 @@
   </file>
   <file>
     <path>view/notice/touser_assignorder.tpl</path>
-    <sign>b0fb75ff5797df3dbfb779c9892b3351204a952e</sign>
+    <sign>94a3fcef05deebe33af769fb2966099d49092ac3</sign>
   </file>
   <file>
     <path>view/notice/touser_assignorder_sms.tpl</path>
@@ -1934,7 +2062,7 @@
   </file>
   <file>
     <path>view/notice/touser_checkout.tpl</path>
-    <sign>6fcf5113aa5dc7c22d2715bcacaccfce43c4e9fe</sign>
+    <sign>9e7cc05dcce0cadb34aab36233bcb5c0034f385d</sign>
   </file>
   <file>
     <path>view/notice/touser_checkout_sms.tpl</path>
@@ -1982,67 +2110,27 @@
   </file>
   <file>
     <path>view/onlinepay/fail.tpl</path>
-    <sign>4bbaa5784075353be82d5014c21f2eecda8ea7a9</sign>
+    <sign>c6123dd1bdddb80058aa9126927063a4092de659</sign>
   </file>
   <file>
     <path>view/onlinepay/payment_method_selected.tpl</path>
-    <sign>c86fee98c37534fd5271b91d42180c26855844c0</sign>
+    <sign>8dfa8c5ae7746189343dc78140c5cc6472446b8a</sign>
   </file>
   <file>
     <path>view/onlinepay/post.tpl</path>
-    <sign>94bb01d3eb39552886d95e01467826b651d220b6</sign>
+    <sign>cfff15159d3628489cf11965b3e61243f60bef8f</sign>
   </file>
   <file>
     <path>view/onlinepay/select_method.tpl</path>
-    <sign>8eb2ef6825c6ac0b8530e24f5bf2c478ec83a66a</sign>
+    <sign>2c8c8cd0fb10d0b1bc62c48441e381ab01706afa</sign>
   </file>
   <file>
     <path>view/onlinepay/status.tpl</path>
-    <sign>817c50cf67ff9255f783ac09b34de0e618bc23f4</sign>
+    <sign>f42f2339a28ea7a026fbe290536f0ed7008f5a2e</sign>
   </file>
   <file>
     <path>view/onlinepay/success.tpl</path>
-    <sign>c00bbe75319e91a620bd0fe9b572ed7497657bd4</sign>
-  </file>
-  <file>
-    <path>view/order_depend_maker.tpl</path>
-    <sign>d25ec8c16d852a8a3b6889723f22a66aeee37183</sign>
-  </file>
-  <file>
-    <path>view/order_footer_maker.tpl</path>
-    <sign>eb82b6d4123d83020e57528e9287f1d8e750d74f</sign>
-  </file>
-  <file>
-    <path>view/order_info_maker.tpl</path>
-    <sign>dd52ff85075aca48dc4e14c95bb33f2e9db5fdde</sign>
-  </file>
-  <file>
-    <path>view/order_status_cell.tpl</path>
-    <sign>e94e6d75d40f7aa05e805c33daa4f1b29d34605b</sign>
-  </file>
-  <file>
-    <path>view/order_totalcost_cell.tpl</path>
-    <sign>6918588f770fd63c1b48dc29475fd1cda01fef2f</sign>
-  </file>
-  <file>
-    <path>view/order_tree_cell.tpl</path>
-    <sign>e6cc10025f7acd55d2402d09c974e34cf2f878c1</sign>
-  </file>
-  <file>
-    <path>view/order_user_cell.tpl</path>
-    <sign>18c5836924471a8f676fb4f95127538c56852d5c</sign>
-  </file>
-  <file>
-    <path>view/order_userstatus_tree_cell.tpl</path>
-    <sign>7253474a236413994ef7f60fede7542a48d465db</sign>
-  </file>
-  <file>
-    <path>view/orders_report.tpl</path>
-    <sign>c15ad0fbde4e515a446ed9ced18c9f02e2b1a2aa</sign>
-  </file>
-  <file>
-    <path>view/orderview.tpl</path>
-    <sign>29ba85f6d09c606d5185df18a590e5214ec5f174</sign>
+    <sign>d7315f2b715e297919db9b53ee07baf6e2a40a34</sign>
   </file>
   <file>
     <path>view/payment/bill.tpl</path>
@@ -2050,11 +2138,11 @@
   </file>
   <file>
     <path>view/payment/bill_transaction.tpl</path>
-    <sign>9389afe306352aca68369164c0dbae79af623172</sign>
+    <sign>adf88c7859be38ccecc11396761b2a4e96460a2d</sign>
   </file>
   <file>
     <path>view/payment/bill_use_site_company.tpl</path>
-    <sign>78df16a025fdadc5852e77e1ecd67502248aaef7</sign>
+    <sign>af04abcb1c872ea5bf0840888eb7766253f3450d</sign>
   </file>
   <file>
     <path>view/payment/pd4.tpl</path>
@@ -2078,7 +2166,7 @@
   </file>
   <file>
     <path>view/printform/orderform.tpl</path>
-    <sign>c0bb6c65018c9d4bbf10bf8efc03af8dfdfbb51a</sign>
+    <sign>1b6109a28574c3a8e6afdd55c087ea2ae648f5de</sign>
   </file>
   <file>
     <path>view/printform/schetfactura.tpl</path>
@@ -2086,7 +2174,7 @@
   </file>
   <file>
     <path>view/printform/torg12.tpl</path>
-    <sign>d39c7bcbbbf77532b55334b81f6189ca735ba1ee</sign>
+    <sign>7d376fc2928227826f53a23aa0b9b60663e65aaa</sign>
   </file>
   <file>
     <path>view/printform/transportnayanakladnaya.tpl</path>
@@ -2094,7 +2182,7 @@
   </file>
   <file>
     <path>view/printform/upd.tpl</path>
-    <sign>5507dca52df460fac045aebbdbfb97f4beadcebb</sign>
+    <sign>15422160865e204d0fffc2cf601617ef6d62d47b</sign>
   </file>
   <file>
     <path>view/productform/taxes.tpl</path>
@@ -2105,76 +2193,28 @@
     <sign>dd7522cad91e5678bc77074fda840868fd726f1e</sign>
   </file>
   <file>
-    <path>view/quick_show_orders.tpl</path>
-    <sign>575f6209933fc4fd23a7811888d836efdc0f77c6</sign>
-  </file>
-  <file>
-    <path>view/receipt_actions_cell.tpl</path>
-    <sign>e36adb6c909deb5e12f5bdd25ea3e5309f644f78</sign>
-  </file>
-  <file>
-    <path>view/receipt_error.tpl</path>
-    <sign>7ffbc04b31038f95392409357d51b963be878288</sign>
-  </file>
-  <file>
-    <path>view/receipt_info.tpl</path>
-    <sign>8925f6d70c62d4c00d2a71aa193f1f3a1a3f3333</sign>
-  </file>
-  <file>
-    <path>view/receipt_status_cell.tpl</path>
-    <sign>c441f4156e305985c0ded6a964a791b1b3f868bc</sign>
-  </file>
-  <file>
     <path>view/reservation.tpl</path>
-    <sign>ade2a9efdfc457a722522e468233e2bf50fc84c2</sign>
-  </file>
-  <file>
-    <path>view/reservation_cron_check.tpl</path>
-    <sign>463890c170d408d900d857e6c335233ca9045692</sign>
+    <sign>61585a725b72ca33fe4057ce76dc1eb1d215720e</sign>
   </file>
   <file>
     <path>view/reservation_success.tpl</path>
-    <sign>139d1ff02cd877cdad1855818ee74d6c74a7be5d</sign>
+    <sign>f88620a344e02ae1ca2c128e67065256c9c51e02</sign>
   </file>
   <file>
     <path>view/return/pdf_form.tpl</path>
-    <sign>ebdecb0d58c847a88de40019901f5ceff5f299d8</sign>
+    <sign>4f7c6509ab6ff98637da8af133e4dd50c955d79f</sign>
   </file>
   <file>
     <path>view/return/return_rules.tpl</path>
-    <sign>4bc5cdb9cb86c8d0d71f66179e01df7633ca35e0</sign>
-  </file>
-  <file>
-    <path>view/return_status_cell.tpl</path>
-    <sign>c938e95f522eaddf346bae3f95167b9836e73cc8</sign>
-  </file>
-  <file>
-    <path>view/returnsuccess.tpl</path>
-    <sign>e6b64e18560604144e7cd5cbfdece0b9383dd439</sign>
+    <sign>662841899130759a04720c51d28de4cd02c0885c</sign>
   </file>
   <file>
     <path>view/saved_payment_methods.tpl</path>
-    <sign>c99011fbfa3d9fa748f20d54713536db31378ccd</sign>
+    <sign>b28cd89a4d085ec1c125ddcfa6b26737fd15f978</sign>
   </file>
   <file>
     <path>view/show_complekts.tpl</path>
-    <sign>438be7792ac1dc31fc2df2d7a580e81735510122</sign>
-  </file>
-  <file>
-    <path>view/transaction_actions_cell.tpl</path>
-    <sign>b38ea750fa5f489abbb8fdac9dee94eb0dec78f0</sign>
-  </file>
-  <file>
-    <path>view/transaction_cost_cell.tpl</path>
-    <sign>bc97f49d3e76fd7f3dfb88f130cea9b390ce20ab</sign>
-  </file>
-  <file>
-    <path>view/transaction_receipt.tpl</path>
-    <sign>3de5137e2186e277651c3d3474f96da1bd6c18c4</sign>
-  </file>
-  <file>
-    <path>view/transactionview.tpl</path>
-    <sign>e169f1b2a35be03171d5063447f1ddc011daafb0</sign>
+    <sign>a4c469b2434f940931ddc3f63d0d1b0627b2316b</sign>
   </file>
   <file>
     <path>view/widget/lastorder.tpl</path>
@@ -2194,7 +2234,7 @@
   </file>
   <file>
     <path>view/widget/sellchart.tpl</path>
-    <sign>39ebc9e5d6c50174474249095c43ac16b447b0f4</sign>
+    <sign>45a6da1d41a24193c96a45d5b3010ecbeb1aabb5</sign>
   </file>
-  <masterSign>b846a65dcb62af4d822578403aba5551ceaa1e3ddbc2df2847ec3b256ac94f3b587f5875ca38716524e51ef677a6d310e22089f98064bc44cdef3fc40fc592d47e40239ec6827cef42f0ad441c99d328683fb83e3fd98c0ff7ad3586ebcfa3f2c34c9cee482f50cd7de639ca0f3d3003dfc30ea6d795e05aae4bac13737b9212</masterSign>
+  <masterSign>7a485f9a855ffa9662bf38499064541d32f4a756ebbde8711edcfb8d9270c33b3ee1b4aa26b9c94fddcde3957aca41776ea06401b24cf2646af0d4bd65cc19dca60ed0bdd151713bf30430fa6700655293ac7e9144962a0a28bc1d7bad6f70bd46f2c176d335186a662e060d66628a0c85c8d4f13e60c687a76a823679c44310</masterSign>
 </signatures>

@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<script type=" text/javascript">
+<script>
     $.allReady(function() {
         $('#offers').offer();
     });

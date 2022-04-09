@@ -15,7 +15,7 @@ use FontLib\Table\Table;
  * @package php-font-lib
  */
 class hhea extends Table {
-  protected $def = [
+  protected $def = array(
     "version"             => self::Fixed,
     "ascent"              => self::FWord,
     "descent"             => self::FWord,
@@ -33,7 +33,7 @@ class hhea extends Table {
     self::int16,
     "metricDataFormat"    => self::int16,
     "numOfLongHorMetrics" => self::uint16,
-  ];
+  );
 
   function _encode() {
     $font                              = $this->getFont();

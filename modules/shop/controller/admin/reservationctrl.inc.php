@@ -34,7 +34,7 @@ class ReservationCtrl extends \RS\Controller\Admin\Crud
         $helper->setHeaderHtml(
             $this->view
             ->assign('is_cron_work', \RS\Cron\Manager::obj()->isCronWork())
-            ->fetch('reservation_cron_check.tpl')
+            ->fetch('admin/reservation_cron_check.tpl')
         );
 
         $helper->setTable(new Table\Element([
@@ -75,6 +75,7 @@ class ReservationCtrl extends \RS\Controller\Admin\Crud
                 'Lines' =>  [
                     new Filter\Line(['items' => [
                         new Filter\Type\Text('product_id', t('ID товара')),
+                        new Filter\Type\Text('product_title', t('Наименование товара'), ['SearchType' => '%like%']),
                         new Filter\Type\Text('product_barcode', t('Артикул товара')),
                         new Filter\Type\Text('email', 'E-mail', ['SearchType' => '%like%']),
                         new Filter\Type\Text('phone', t('Телефон'), ['SearchType' => '%like%']),

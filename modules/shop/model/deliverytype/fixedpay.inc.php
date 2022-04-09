@@ -60,7 +60,7 @@ class FixedPay extends AbstractType implements InterfaceIonicMobile
      * @param boolean $use_currency - использовать валюту?
      * @return double
      */
-    function getDeliveryCost(Order $order, Address $address = null, Delivery $delivery, $use_currency = true)
+    function getDeliveryCost(Order $order, Address $address, Delivery $delivery, $use_currency = true)
     {
         return $this->getOption('cost', 0);
     }

@@ -13,11 +13,9 @@ use Catalog\Model\Orm\Product;
 use Export\Model\Api;
 use Export\Model\ExportType;
 use Export\Model\ExportType\Vkontakte\Utils\VkTools;
-use Export\Model\Orm\ExportProfile;
 use Export\Model\Orm\ExternalProductLink;
 use Export\Model\Orm\Vk\VkCategoryLink;
 use RS\Cache\Manager;
-use RS\Router\Manager as RouterManager;
 use RS\Config\Loader;
 use RS\Event\HandlerAbstract;
 use RS\Router\Route;
@@ -68,6 +66,7 @@ class Handlers extends HandlerAbstract
     public static function exportGetTypes($list)
     {
         $list[] = new ExportType\Yandex\Yandex();
+        $list[] = new ExportType\AliExpress\AliExpress();
         $list[] = new ExportType\MailRu\MailRu();
         $list[] = new ExportType\Google\Google();
         $list[] = new ExportType\Avito\Avito();
@@ -103,6 +102,8 @@ class Handlers extends HandlerAbstract
     public static function cron($params)
     {
         $export_api = new Api();
+        $export_api->setMultisite(false);
+        $export_api->resetQueryObject();
         $export_api->setFilter('is_enabled', 1);
         $export_api->setFilterExchangableByApi();
 
@@ -192,12 +193,22 @@ class Handlers extends HandlerAbstract
      */
     public static function ormInitCatalogProduct(Product $product)
     {
+        $availability = [
+            'ACTIVE' => t('Поставки будут'),
+            'INACTIVE' => t('Поставок не будет'),
+            'DELISTED' => t('Товар в архиве')
+        ];
+
         $product->getPropertyIterator()->append([
-            t('Экспорт'),
-            'market_sku' => new OrmType\Varchar( [
-                'description' => t('SKU на Яндекс.Маркете (market-sku)'),
-                'hint' => t('Используется в выгрузке YML на Яндекс.Маркет')
-            ]),
+            t('Яндекс.Маркет'),
+                'market_sku' => new OrmType\Varchar( [
+                    'description' => t('SKU на Яндекс.Маркете (market-sku)'),
+                    'hint' => t('Используется в выгрузке YML на Яндекс.Маркет')
+                ]),
+                'availability' => new OrmType\Enum(array_keys($availability), [
+                    'description' => t('Планы по поставкам'),
+                    'listFromArray' => [$availability]
+                ])
         ]);
     }
 

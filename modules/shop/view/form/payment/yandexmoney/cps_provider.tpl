@@ -6,7 +6,7 @@
 </div>
 
 
-<script type="text/javascript">
+<script>
    $(document).ready(function(){
        //Проверим были ли выбраны терминалы
        if ($("select[name='data[payment_type]']").val()=='GP'){

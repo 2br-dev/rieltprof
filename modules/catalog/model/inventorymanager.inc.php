@@ -135,6 +135,8 @@ class InventoryManager implements \Catalog\Model\StockInterface
                 'id' => $item['product_id'],
             ])
             ->exec();
+
+        OfferApi::getInstance()->updateLinkedProperties($item['product_id']);
     }
 
     /**

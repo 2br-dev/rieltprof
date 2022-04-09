@@ -1,0 +1,1 @@
+<li><a href="{$router->getUrl('cartoffers-front-cartoffers')}">{t}Спецпредложения{/t}</a></li>

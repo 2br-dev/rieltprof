@@ -11,7 +11,7 @@
 <body class="exception-bg">
     <div class="admin-style">
         <div class="exception">
-            <p><img src="{$Setup.IMG_PATH}/adminstyle/flatadmin/auth/rs-logo.svg"></p>
+            <p><img src="{$Setup.IMG_PATH}/adminstyle/flatadmin/auth/rs-logo.svg" height="50"></p>
             <h2>{$error.code}</h2>
             <small>{$error.comment}</small>
 

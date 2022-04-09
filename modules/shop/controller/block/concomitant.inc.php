@@ -32,7 +32,7 @@ class Concomitant extends \RS\Controller\StandartBlock
         $route = \RS\Router\Manager::obj()->getCurrentRoute();
         if ($route->getId() == 'catalog-front-product' || $route->getId() == 'shop-front-multioffers') {
             if (isset($route->product)) {
-                if ($shop_config['check_quantity'] && ($route->product['num']<=0)){
+                if ($shop_config['check_quantity'] && ($route->product['num'] <= 0)){
                     return false;
                 }
                 $this->view->assign([

@@ -37,7 +37,6 @@ class Handlers extends \RS\Event\HandlerAbstract
                 $site = $partner;
             }
         }
-        
         if ($site !== false) {
             //Реализация опции "Перенаправлять на основной домен сайта"
             if ($redirect_to_main_domain) {

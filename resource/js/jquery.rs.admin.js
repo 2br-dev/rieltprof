@@ -71,7 +71,7 @@
 
             this.panel = $('<div class="rs-side-panel">\
                         <div class="rs-side-panel__title">\
-                            <a class="rs-side-close"><i class="zmdi zmdi-close"></i>' + title + '</a>\
+                            <a class="rs-side-close"><i class="zmdi zmdi-close"><!----></i>' + title + '</a>\
                         </div>\
                         <div class="rs-side-panel__body">\
                         </div>')

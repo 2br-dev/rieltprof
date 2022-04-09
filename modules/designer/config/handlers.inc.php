@@ -8,6 +8,7 @@
 namespace Designer\Config;
 
 use Designer\Model\BlocksApi;
+use Designer\Model\MenuType\Designer as MenuTypeDesigner;
 use RS\Router\Route;
 
 class Handlers extends \RS\Event\HandlerAbstract
@@ -16,7 +17,9 @@ class Handlers extends \RS\Event\HandlerAbstract
     {
         $this
             ->bind('getroute')
-            ->bind('render.beforeoutput');
+            ->bind('render.beforeoutput')
+            ->bind('menu.gettypes');
+
     }
 
     /**
@@ -69,5 +72,14 @@ class Handlers extends \RS\Event\HandlerAbstract
         }
 
         return $html;
+    }
+
+    /**
+     * Добавляет новый тип пунктов меню - страница для Дизайнера
+     */
+    public static function menuGetTypes($list)
+    {
+        $list[] = new MenuTypeDesigner();
+        return $list;
     }
 }

@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Экспорт данных</name>
         <description multilanguage="true">Экспорт данных в сторонние форматы</description>
-        <version>4.0.46</version>
+        <version>6.0.14</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
     </defaultValues>

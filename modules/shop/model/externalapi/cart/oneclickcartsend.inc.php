@@ -38,11 +38,11 @@ class OneClickCartSend extends \ExternalApi\Model\AbstractMethods\AbstractMethod
 
     /**
     * Создаёт заказ в один клик из переданных данных
-    * 
-    * @param string $token Авторизационный токен
+    *
     * @param string $name ФИО пользователя
     * @param string $phone телефон пользователя. Например +79XX234XX00
     * @param array $clickfields массив дополнительных полей со сведениями
+    * @param string $token Авторизационный токен
     * 
     * @example POST /api/methods/cart.oneclickcartsend?name=Алексей&phone=+79628678430
     * 
@@ -60,7 +60,7 @@ class OneClickCartSend extends \ExternalApi\Model\AbstractMethods\AbstractMethod
     * 
     * @return array Возращает, либо пустой массив ошибок, если заказ успешно создан
     */
-    protected function process($token = null, $name, $phone, $clickfields = [])
+    protected function process($name, $phone, $clickfields = [], $token = null)
     {          
         //Добавим доп поля для покупки в один клик корзины
         $click_fields_manager = \RS\Config\Loader::byModule('catalog')->getClickFieldsManager();

@@ -8,7 +8,6 @@
  */
 namespace Dompdf\FrameReflower;
 
-use Dompdf\FontMetrics;
 use Dompdf\Frame;
 use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
 use Dompdf\FrameDecorator\TableCell as TableCellFrameDecorator;
@@ -370,29 +369,27 @@ class Block extends AbstractFrameReflower
                         }
                     }
 
+                    // FIXME: overflow hidden
                 }
             }
 
         } else {
             // Expand the height if overflow is visible
-            if ($height === "auto" && $content_height > $height /* && $style->overflow === "visible" */) {
+            if ($height === "auto" && $content_height > 0 /* && $style->overflow === "visible" */) {
                 $height = $content_height;
             }
 
+            // FIXME: this should probably be moved to a seperate function as per
             // _calculate_restricted_width
 
             // Only handle min/max height if the height is independent of the frame's content
-            if (!($style->overflow === "visible" ||
-                ($style->overflow === "hidden" && $height === "auto"))
-            ) {
-
+            if (!($style->overflow === "visible" || ($style->overflow === "hidden" && $height === "auto"))) {
                 $min_height = $style->min_height;
                 $max_height = $style->max_height;
 
                 if (isset($cb["h"])) {
                     $min_height = $style->length_in_pt($min_height, $cb["h"]);
                     $max_height = $style->length_in_pt($max_height, $cb["h"]);
-
                 } else if (isset($cb["w"])) {
                     if (mb_strpos($min_height, "%") !== false) {
                         $min_height = 0;
@@ -407,16 +404,16 @@ class Block extends AbstractFrameReflower
                     }
                 }
 
-                if ($max_height !== "none" && $min_height > $max_height) {
+                if ($max_height !== "none" && $max_height !== "auto" && (float)$min_height > (float)$max_height) {
                     // Swap 'em
                     list($max_height, $min_height) = [$min_height, $max_height];
                 }
 
-                if ($max_height !== "none" && $height > $max_height) {
+                if ($max_height !== "none" && $max_height !== "auto" && $height > (float)$max_height) {
                     $height = $max_height;
                 }
 
-                if ($height < $min_height) {
+                if ($height < (float)$min_height) {
                     $height = $min_height;
                 }
             }
@@ -495,7 +492,7 @@ class Block extends AbstractFrameReflower
 
                     // Set the spacing for each child
                     if ($line->wc > 1) {
-                        $spacing = ($width - ($line->left + $line->w + $line->right) + $space_width) / ($line->wc - 1);
+                        $spacing = ($width - ($line->left + $line->w + $line->right)) / ($line->wc - 1);
                     } else {
                         $spacing = 0;
                     }
@@ -582,13 +579,14 @@ class Block extends AbstractFrameReflower
                 $baseline = $canvas->get_font_baseline($style->font_family, $style->font_size);
                 $y_offset = 0;
 
+                //FIXME: The 0.8 ratio applied to the height is arbitrary (used to accommodate descenders?)
                 if($isInlineBlock) {
                     $lineFrames = $line->get_frames();
                     if (count($lineFrames) == 1) {
                         continue;
                     }
                     $frameBox = $frame->get_frame()->get_border_box();
-                    $imageHeightDiff = $height * 0.8 - $frameBox['h'];
+                    $imageHeightDiff = $height * 0.8 - (float)$frameBox['h'];
 
                     $align = $frame->get_style()->vertical_align;
                     if (in_array($align, Style::$vertical_align_keywords) === true) {
@@ -605,14 +603,14 @@ class Block extends AbstractFrameReflower
                                 $y_offset = -0.2 * $height + $imageHeightDiff;
                                 break;
 
-                            case "text-top":
-                                $y_offset = $height - (float)$style->length_in_pt($style->line_height, $style->font_size);
+                            case "text-top": // FIXME: this should be the height of the frame minus the height of the text
+                                $y_offset = $height - $style->line_height;
                                 break;
 
                             case "top":
                                 break;
 
-                            case "text-bottom":
+                            case "text-bottom": // FIXME: align bottom of image with the descender?
                             case "bottom":
                                 $y_offset = 0.3 * $height + $imageHeightDiff;
                                 break;
@@ -623,7 +621,7 @@ class Block extends AbstractFrameReflower
                                 break;
                         }
                     } else {
-                        $y_offset = $baseline - (float)$style->length_in_pt($align, $style->font_size) - $frameBox['h'];
+                        $y_offset = $baseline - (float)$style->length_in_pt($align, $style->font_size) - (float)$frameBox['h'];
                     }
                 } else {
                     $parent = $frame->get_parent();
@@ -682,6 +680,7 @@ class Block extends AbstractFrameReflower
 
         // Handle "clear"
         if ($child_style->clear !== "none") {
+            //TODO: this is a WIP for handling clear/float frames that are in between inline frames
             if ($child->get_prev_sibling() !== null) {
                 $this->_frame->add_line();
             }
@@ -748,6 +747,7 @@ class Block extends AbstractFrameReflower
             }
 
             if ($cb_w < $float_x + $float_w - $old_x) {
+                // TODO handle when floating elements don't fit
             }
 
             $line_box->get_float_offsets();

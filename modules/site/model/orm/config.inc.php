@@ -23,6 +23,8 @@ use RS\Theme\Manager as ThemeManager;
  * @property string $favicon Иконка сайта 16x16 (PNG, ICO)
  * @property string $favicon_svg Иконка сайта в формате SVG
  * @property string $logo Логотип
+ * @property string $logo_sm Квадратная версия логотипа
+ * @property string $logo_xs Квадратная версия логотипа(микро)
  * @property string $slogan Лозунг
  * @property string $firm_name Наименование организации
  * @property string $firm_inn ИНН организации
@@ -80,7 +82,7 @@ class Config extends AbstractObject
             ]),
             t('Основные'),
                 'admin_email' => new Type\Varchar([
-                    'maxLength' => '150',
+                    'maxLength' => '250',
                     'description' => t('E-mail администратора(ов)'),
                     'hint' => t('На этот ящик будут приходить уведомления о событиях в системе(заказы, покупки в 1 клик, обращениях пользователей, и т.д.). <br>Допустимо указывать несколько E-mail адресов через запятую.<br> Например: admin@example.com или admin@example.com,manager@example.com'),
                 ]),
@@ -111,12 +113,30 @@ class Config extends AbstractObject
                 'logo' => new Type\Image([
                     'maxLength' => '200',
                     'description' => t('Логотип'),
+                    'hint' => t('Основной логотип, будет использоваться по умолчанию'),
                     'max_file_size' => 10000000,
-                    'allow_file_types' => ['image/pjpeg', 'image/jpeg', 'image/png', 'image/gif'],
+                    'allow_file_types' => ['image/pjpeg', 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
                     'PreviewSize' => [275,80],
                 ]),
+                'logo_sm' => new Type\Image([
+                    'maxLength' => '200',
+                    'description' => t('Квадратная версия логотипа'),
+                    'hint' => t('Может использоваться в некоторых темах оформления, в мобильных версиях'),
+                    'max_file_size' => 10000000,
+                    'allow_file_types' => ['image/pjpeg', 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
+                    'PreviewSize' => [96,96],
+                ]),
+                'logo_xs' => new Type\Image([
+                    'maxLength' => '200',
+                    'description' => t('Квадратная версия логотипа(микро)'),
+                    'hint' => t('Может использоваться в некоторых темах оформления, в мобильном таб-баре'),
+                    'max_file_size' => 10000000,
+                    'allow_file_types' => ['image/pjpeg', 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
+                    'PreviewSize' => [48,48],
+                ]),
                 'slogan' => new Type\Varchar([
-                    'description' => t('Лозунг')
+                    'description' => t('Лозунг'),
+                    'hint' => t('Обычно отображается под логотипом')
                 ]),
                 'firm_name' => new Type\Varchar([
                     'maxLength' => '255',
@@ -281,6 +301,11 @@ class Config extends AbstractObject
                 'enable_agreement_personal_data' => new Type\Integer([
                     'description' => t('Включить отображение соглашения на обработку персональных данных в формах'),
                     'checkboxView' => [1,0]
+                ]),
+            t('Мета-теги'),
+                'make_default_description_from_title' => new Type\Integer([
+                    'description' => t('Заполнять мета-тег description (если он пустой) из title'),
+                    'checkboxView' => [1, 0]
                 ])
         ]);
     }
@@ -292,7 +317,8 @@ class Config extends AbstractObject
     
     function _initDefaults()
     {
-        $this['theme'] = 'default';
+        $this['theme'] = 'amazing';
+        $this['make_default_description_from_title'] = 1;
     }
 
     public static function getActualInstance()

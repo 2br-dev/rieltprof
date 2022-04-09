@@ -328,14 +328,13 @@ class OrderApi extends AbstractModel\EntityList implements HasMeterInterface
             ->select('
                 COUNT(id) as orderscount,
                 SUM(totalcost) as totalcost,
-                SUM(user_delivery_cost) as user_delivery_cost,
-                SUM(deliverycost) as single_deliverycost
+                SUM(user_delivery_cost) as user_delivery_cost
             ')
             ->exec()
             ->fetchRow();
 
         //Цена без учёта стоимости доставки
-        $list['all']['deliverycost'] = $list['all']['user_delivery_cost'] + $list['all']['single_deliverycost'];
+        $list['all']['deliverycost'] = $list['all']['user_delivery_cost'];
         $list['all']['total_without_delivery'] = $list['all']['totalcost'] - $list['all']['deliverycost'];
         //Соберём статистику по типам оплаты
         $request->select = "";
@@ -344,8 +343,7 @@ class OrderApi extends AbstractModel\EntityList implements HasMeterInterface
                 payment,
                 COUNT(id) as orderscount,
                 SUM(totalcost) as totalcost,
-                SUM(user_delivery_cost) as user_delivery_cost,
-                SUM(deliverycost) as single_deliverycost
+                SUM(user_delivery_cost) as user_delivery_cost
             ')
             ->groupby('payment')
             ->exec()
@@ -354,7 +352,7 @@ class OrderApi extends AbstractModel\EntityList implements HasMeterInterface
         if (!empty($list['payment'])) {
 
             foreach ($list['payment'] as $key => $item) {
-                $list['payment'][$key]['deliverycost'] = $item['user_delivery_cost'] + $item['single_deliverycost'];
+                $list['payment'][$key]['deliverycost'] = $item['user_delivery_cost'];
                 $list['payment'][$key]['total_without_delivery'] = $item['totalcost'] - $list['payment'][$key]['deliverycost'];
             }
         }
@@ -367,8 +365,7 @@ class OrderApi extends AbstractModel\EntityList implements HasMeterInterface
                 delivery,
                 COUNT(id) as orderscount,
                 SUM(totalcost) as totalcost,
-                SUM(user_delivery_cost) as user_delivery_cost,
-                SUM(deliverycost) as single_deliverycost
+                SUM(user_delivery_cost) as user_delivery_cost
             ')
             ->groupby('delivery')
             ->exec()
@@ -377,7 +374,7 @@ class OrderApi extends AbstractModel\EntityList implements HasMeterInterface
         if (!empty($list['delivery'])) {
 
             foreach ($list['delivery'] as $key => $item) {
-                $list['delivery'][$key]['deliverycost'] = $item['user_delivery_cost'] + $item['single_deliverycost'];
+                $list['delivery'][$key]['deliverycost'] = $item['user_delivery_cost'];
             }
         }
 

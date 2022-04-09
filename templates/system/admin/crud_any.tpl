@@ -14,7 +14,7 @@
                             {if $elements.topToolbar}
                                 <div class="buttons xs-dropdown place-left">
                                     <a class="btn btn-default toggle visible-xs-inline-block" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" id="clientHeadButtons" >
-                                        <i class="zmdi zmdi-more-vert"></i>
+                                        <i class="zmdi zmdi-more-vert"><!----></i>
                                     </a>
                                     <div class="xs-dropdown-menu" aria-labelledby="clientHeadButtons">
                                         {$elements.topToolbar->getView()}

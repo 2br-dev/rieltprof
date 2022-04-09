@@ -23,20 +23,17 @@ use RS\Orm\Type;
 use RS\Router\Manager as RouterManager;
 
 /**
-* @defgroup Catalog Catalog(Каталог товаров)
-* Модуль предоставляет возможность управляь списками товаров, валют, характеристик, единиц измерения, типов цен.
-*/
-
-/**
  * Конфигурационный файл модуля Каталог товаров
  */
 class File extends ConfigObject
 {
-    const
-        ACTION_NOTHING      = "nothing",
-        ACTION_CLEAR_STOCKS = "clear_stocks",
-        ACTION_DEACTIVATE   = "deactivate",
-        ACTION_REMOVE       = "remove";
+    const ACTION_NOTHING      = "nothing";
+    const ACTION_CLEAR_STOCKS = "clear_stocks";
+    const ACTION_DEACTIVATE   = "deactivate";
+    const ACTION_REMOVE       = "remove";
+
+    const BRAND_PRODUCTS_TYPE_SPECIAL = 'special';
+    const BRAND_PRODUCTS_TYPE_ALL = 'all';
 
     protected $before_state;
 
@@ -169,6 +166,7 @@ class File extends ConfigObject
             ]),
             'use_offer_unit' => new Type\Integer([
                 'description' => t('Использовать единицы измерения у комлектаций'),
+                'hint' => t('В этом случае возле цены будет отображена единица измерения'),
                 'maxLength'   => 1,
                 'checkboxview' => [1, 0]
             ]),
@@ -225,6 +223,19 @@ class File extends ConfigObject
                 'description' => t('Включить зависимые фильры'),
                 'hint' => t('Beta-версия зависимых фильтров. Работает только со списковыми характеристиками.'),
                 'checkboxview' => [1, 0],
+            ]),
+            'tabs_on_new_page' => new Type\ArrayList([
+                'description' => t('Вкладки о товаре, которые необходимо отобразить на отдельной странице и отдельном URL'),
+                'hint' => t('Используйте данную опцию, если желаете на разных страницах разместить сведения о товаре, характеристики, и т.д.'),
+                'Attr' => [['size' => 5,'multiple' => 'multiple', 'class' => 'multiselect']],
+                'CheckboxListView' => true,
+                'runtime' => false,
+                'listFromArray' => [[
+                    'property' => t('Характеристики'),
+                    'comments' => t('Отзывы'),
+                    'files' => t('Файлы'),
+                    'stock' => t('Наличие')
+                ]]
             ]),
             t('Купить в один клик'),
                 '__clickfields__' => new Type\UserTemplate('%catalog%/form/config/userfield.tpl'),
@@ -289,6 +300,13 @@ class File extends ConfigObject
                     'default' => CatalogProduct::ACCESS_TYPE_HIDDEN,
                 ]),
             t('Бренды'),
+                'brand_products_type' => new Type\Varchar([
+                    'description' => t('Тип выводимых товаров на странице Бренда'),
+                    'listFromArray' => [[
+                        self::BRAND_PRODUCTS_TYPE_SPECIAL => t('Избранные товары из спецкатегории'),
+                        self::BRAND_PRODUCTS_TYPE_ALL => t('Все товары бренда')
+                    ]]
+                ]),
                 'brand_products_specdir' => new Type\Integer([
                     'description' => t('Спецкатегория, из которой выводить товары на странице бренда'),
                     'tree' => [['\Catalog\Model\DirApi', 'staticSpecTreeList'], 0, [0 => t('- Не выбрано -')]]
@@ -300,6 +318,14 @@ class File extends ConfigObject
                     'description' => t('Отображать только товары в наличии на странице бренда'),
                     'checkboxview' => [1, 0],
                 ]),
+                'brand_sort' => new Type\Varchar([
+                    'description' => t(''),
+                    'listFromArray' => [[
+                        'title asc' => t('По названию в алфавитном порядке'),
+                        'title desc' => t('По названию в обратном алфавитном порядке'),
+                        'sortn asc' => t('По порядку в админ.панели')
+                    ]]
+                ]),
             t('Склады'),
                 'warehouse_sticks' => new Type\Varchar([
                     'description' => t('Градация наличия товара на складах'),
@@ -310,6 +336,7 @@ class File extends ConfigObject
                 'inventory_control_enable' => new Type\Integer([
                     'visible' => false,
                     'description' => t('Включить складской учет'),
+                    'hint' => t('Если вы включаете складской учет на стороне сайта, то обмен с 1С будет невозможен')
                 ]),
                 'ic_enable_button' => new Type\Integer([
                     'checkboxView' => [1, 0],
@@ -335,7 +362,6 @@ class File extends ConfigObject
                 ]),
                 'import_yml_timeout' => new Type\Integer([
                     'description' => t('Время выполнения импорта продуктов из yml, сек.'),
-                    'default' => 26
                 ]),
                 'import_yml_cost_id' => new Type\Integer([
                     'description' => t('Тип цен, в который будет записываться цена товаров во время импорта продуктов из yml'),
@@ -375,18 +401,20 @@ class File extends ConfigObject
                 'dont_update_fields' => new Type\ArrayList([
                     'description' => t('Поля товара, которые не следует обновлять'),
                     'Attr' => [['size' => 5,'multiple' => 'multiple', 'class' => 'multiselect']],
-                    'List' => [['\Catalog\Model\Importymlapi', 'getUpdatableProductFields']],
+                    'ListFromArray' => [[
+                        'title' => t('Наименование'),
+                        'barcode' => t('Артикул'),
+                        'description' => t('Описание')
+                    ]],
                     'CheckboxListView' => true,
                     'runtime' => false,
                 ]),
                 'use_htmlentity' => new Type\Integer([
                     'description' => t('Не использовать htmlentity'),
-                    'default' => 0,
                     'CheckboxView' => [1, 0],
                 ]),
                 'increase_cost' => new Type\Integer([
                     'description' => t('Увеличить цену на %'),
-                    'default' => 0,
                 ]),
                 'use_vendorcode' => new Type\Varchar([
                     'maxLength' => '50',
@@ -397,6 +425,26 @@ class File extends ConfigObject
                     ]
                     ],
                     'default' => 'offer_id',
+                ]),
+                'yml_product_group_identifier' => new Type\Varchar([
+                    'description' => t('Что считать идентификатором группы товаров'),
+                    'listFromArray' => [[
+                        'group_id' => t('group_id'),
+                        'alias' => t('alias'),
+                    ]],
+                ]),
+                'yml_offer_properties' => new Type\ArrayList([
+                    'description' => t('Характеристики комплектаций'),
+                    'list' => [['Catalog\Model\PropertyApi', 'staticSelectList']],
+                    'runtime' => false,
+                    'attr' => [[
+                        'multiple' => true,
+                        'size' => 20,
+                    ]],
+                ]),
+                'yml_import_multioffers' => new Type\Integer([
+                    'description' => t('Создавать многомерные комплектации у товаров'),
+                    'CheckboxView' => [1, 0],
                 ]),
             t('Параметры товаров'),
                 'default_product_meta_title' => new Type\Varchar([
@@ -468,6 +516,7 @@ class File extends ConfigObject
     public static function getDefaultValues()
     {
         return parent::getDefaultValues() + [
+            'brand_products_type' => self::BRAND_PRODUCTS_TYPE_SPECIAL,
             'tools' => [
                 [
                     'url' => RouterManager::obj()->getAdminUrl('ajaxCleanProperty', [], 'catalog-tools'),
@@ -534,6 +583,12 @@ class File extends ConfigObject
                     'title' => t('Разархивировать товары складского учета'),
                     'description' => t('Восстановит архивные документы'),
                     'class' => 'crud-add',
+                ],
+                [
+                    'url' => RouterManager::obj()->getAdminUrl('CleanAllOffersJsonCache', [], 'catalog-tools'),
+                    'title' => t('Очистить кэш комплектаций у товаров'),
+                    'description' => t('Безопасная операция, заставит систему при следующих обращениях к товару формировать кэш заново.'),
+                    'class' => 'crud-get',
                 ],
             ]
             ];

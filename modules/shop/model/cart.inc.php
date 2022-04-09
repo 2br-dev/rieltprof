@@ -83,6 +83,7 @@ class Cart
     protected $order_items = []; // Элементы оформленного заказа
     protected $prevent_change_event = false;
     protected $first_cart_data_call = true;
+    protected $enable_affiliate_restrictions = true;
     private $custom_amount_checker;
 
     /**
@@ -224,13 +225,14 @@ class Cart
      */
     public static function deleteExpiredCartItems()
     {
+        $shop_config = ConfigLoader::byModule(__CLASS__);
+        $interval = $shop_config['cart_life_time'] ?? 60;
         // Получаем список истекших сессий
         $sessions = OrmRequest::make()
             ->select("distinct session_id")
             ->from(new Orm\CartItem)
-            ->where('dateof < DATE_SUB(NOW(), interval 60 day)')
+            ->where("dateof < DATE_SUB(NOW(), interval {$interval} day)")
             ->exec()->fetchSelected(null, 'session_id');
-
         // Удаляем все элементы корзин, относящиеся к этим истекшим сессиям
         if($sessions){
             OrmRequest::make()
@@ -490,7 +492,9 @@ class Cart
                 }
                 if ($concomitant_item_ids) {
                     $api = new CatalogApi();
-                    $api->setAffiliateRestrictions();
+                    if ($this->enable_affiliate_restrictions) {
+                        $api->setAffiliateRestrictions();
+                    }
                     $api->setFilter('id', $concomitant_item_ids, 'in');
                     $products = $api->getAssocList('id');
                     $products = $api->addProductsCost($products);
@@ -513,6 +517,18 @@ class Cart
     }
 
     /**
+     * Включает или выключает установку ограничений по остаткам для филиалов.
+     * В случае запросов по API, иногда нужно отключать лимит по филиалам,
+     * т.к. филиал может неточно устанавливаться
+     *
+     * @param bool $bool
+     */
+    function enableAffiliateRestrictions($bool)
+    {
+        $this->enable_affiliate_restrictions = $bool;
+    }
+
+    /**
      * Возвращает список товаров в корзине
      *
      * @param boolean $cache - использовать кэш?
@@ -532,7 +548,9 @@ class Cart
             }
             if (!empty($ids)) {
                 $api = new CatalogApi();
-                $api->setAffiliateRestrictions();
+                if ($this->enable_affiliate_restrictions) {
+                    $api->setAffiliateRestrictions();
+                }
                 $api->setFilter('id', $ids, 'in');
                 $products = $api->getAssocList('id');
                 $products = $api->addProductsCost($products);
@@ -658,7 +676,7 @@ class Cart
 
         $offer  = (int)$offer;
         $amount = (float)$amount;
-        $amount_step = $product->getAmountStep();
+        $amount_step = $product->getAmountStep($offer);
         if ($amount < $amount_step) {
             $amount = $amount_step;
         }
@@ -1204,18 +1222,20 @@ class Cart
 
         if ($format) {
 
-            foreach($result['items'] as &$product) {
+            foreach ($result['items'] as &$product) {
                 $product['single_cost'] = CustomView::cost($product['single_cost'], $currency);
-                $product['cost']        = CustomView::cost($product['cost'], $currency);
-                $product['base_cost']   = CustomView::cost($product['base_cost'], $currency);
-                $product['discount']    = CustomView::cost($product['discount'], $currency);
+                $product['cost'] = CustomView::cost($product['cost'], $currency);
+                $product['base_cost'] = CustomView::cost($product['base_cost'], $currency);
+                $product['discount_unformated'] = $product['discount'];
+                $product['discount'] = CustomView::cost($product['discount'], $currency);
 
-                if (isset($product['sub_products'])){
-                    foreach($product['sub_products'] as &$sub_product) {
-                        $sub_product['cost']        = CustomView::cost($sub_product['cost'], $currency);
+                if (isset($product['sub_products'])) {
+                    foreach ($product['sub_products'] as &$sub_product) {
+                        $sub_product['cost'] = CustomView::cost($sub_product['cost'], $currency);
                         $sub_product['single_cost'] = CustomView::cost($sub_product['single_cost'], $currency);
-                        if (isset($sub_product['discount'])){
-                            $sub_product['discount']    = CustomView::cost($sub_product['discount'], $currency);
+                        if (isset($sub_product['discount'])) {
+                            $sub_product['discount_unformated'] = $sub_product['discount'];
+                            $sub_product['discount'] = CustomView::cost($sub_product['discount'], $currency);
                         }
                     }
                 }
@@ -1372,8 +1392,11 @@ class Cart
             $payment = $this->order->getPayment();
             if ($payment['commission']) { //Если комиссия за оплату назначена
                 if ($payment['commission_as_product_discount']) {
-                    foreach($result['items'] as $key=>&$item) {
+                    foreach($result['items'] as $key => &$item) {
                         $payment_commisson = ceil($item['cost'] * $payment['commission'] / 100);
+
+                        $payment_commisson = Cart::correctDiscountSumByAmount($payment_commisson, $item['amount']);
+
                         $item['cost'] += $payment_commisson;
                         $item['discount'] -= $payment_commisson;
                         $result['total'] += $payment_commisson;
@@ -1469,16 +1492,17 @@ class Cart
 
             if ($item['type'] == self::TYPE_PRODUCT) {
                 //Определимся с единицами измерения
-                $unit = $products[$uniq][self::TYPE_PRODUCT]->getUnit()->stitle;
-                if ($catalog_config['use_offer_unit']){
+                $unit = $products[$uniq][self::TYPE_PRODUCT]->getUnit();
+                if ($catalog_config['use_offer_unit']) {
                     $offer = @$products[$uniq][self::TYPE_PRODUCT]['offers']['items'][(int)$item['offer']];
-                    if ($offer) $unit = $offer->getUnit()->stitle;
+                    if ($offer) $unit = $offer->getUnit();
                 }
 
                 $new_item['title']         = $products[$uniq][self::CART_ITEM_KEY]['title'];
                 $new_item['model']         = $products[$uniq][self::TYPE_PRODUCT]->isOffersUse() ? $products[$uniq][self::TYPE_PRODUCT]->getOfferTitle($item['offer']) : '';
                 $new_item['barcode']       = $products[$uniq][self::TYPE_PRODUCT]->getBarCode($item['offer']);
                 $new_item['sku']           = $products[$uniq][self::TYPE_PRODUCT]->getSku($item['offer']);
+                $new_item['unit_id']       = $unit['id'];
                 $new_item['single_weight'] = $cartdata['items'][$uniq]['single_weight'];
                 $new_item['single_cost']   = $cartdata['items'][$uniq]['single_cost'];
                 $new_item['price']         = $cartdata['items'][$uniq]['base_cost'];
@@ -1489,7 +1513,7 @@ class Cart
                     $new_item->setExtraParam('custom_extra', $custom_extra);
                 }
                 $new_item->setExtraParam('tax_ids', TaxApi::getProductTaxIds($products[$uniq][self::TYPE_PRODUCT]));
-                $new_item->setExtraParam('unit', $unit);
+                $new_item->setExtraParam('unit', $unit['stitle']); //Для совместимости со старыми шаблонами
             }
             $new_item['sortn'] = $i++;
             $this->order_items[$uniq] = $new_item;
@@ -1688,6 +1712,7 @@ class Cart
                 'single_cost_with_discount' => round($single_cost - $single_discount, 2),
                 'single_cost_noformat' => $single_cost,
                 'discount' => $discount,
+                'discount_unformated' => $discount,
                 'cartitem' => $cartitem
             ];
             if ($cost == 0 && $discount == 0) {
@@ -1910,7 +1935,7 @@ class Cart
             if ($product->getMinOrderQuantity() > 0 && $amount < $product->getMinOrderQuantity()) {
                 $product_stock = $product->getNum($cart_item['offer']);
                 if ($module_config['allow_buy_num_less_min_order'] && $product_stock < $product->getMinOrderQuantity()) {
-                    $allow_amount = ($module_config['allow_buy_all_stock_ignoring_amount_step']) ? $product_stock : $product_stock - ($product_stock % $product->getAmountStep());
+                    $allow_amount = ($module_config['allow_buy_all_stock_ignoring_amount_step']) ? $product_stock : $product_stock - ($product_stock % $product->getAmountStep($cart_item['offer']));
                     if ($amount != $allow_amount) {
                         $result['items'][$n]['amount_error'] = t('Товар можно купить только в количестве %0', [$allow_amount.' '.$product->getUnit()['stitle']]);
                         $result['has_error'] = true;
@@ -2043,8 +2068,9 @@ class Cart
         } else {
             $module_config = ConfigLoader::byModule($this);
             $product = $item[self::TYPE_PRODUCT];
-            if ($amount < $product->getAmountStep() && (!$module_config['allow_buy_all_stock_ignoring_amount_step'] || $amount != $product->getNum())) {
-                $result['items'][$n]['amount_error'] = t('Количество должно быть не менее %0', [$product->getAmountStep()]);
+            $amount_step = $product->getAmountStep($item[self::CART_ITEM_KEY]['offer']);
+            if ($amount < $amount_step && (!$module_config['allow_buy_all_stock_ignoring_amount_step'] || $amount != $product->getNum())) {
+                $result['items'][$n]['amount_error'] = t('Количество должно быть не менее %0', [$amount_step]);
                 $result['has_error'] = true;
             }
             elseif ($module_config['check_quantity'] && $amount > $product->getNum($item[self::CART_ITEM_KEY]['offer'])) {
@@ -2122,6 +2148,8 @@ class Cart
                         }
                         $count_discount += $one_item_discount; //Общий плюсованный размер скидки
 
+                        $one_item_discount = Cart::correctDiscountSumByAmount($one_item_discount, $data['amount']);
+
                         $data['cost']     = $data['cost'] - $one_item_discount;
                         $data['discount'] = ($one_item_discount + $data['discount']);
                         $result['total'] -= $one_item_discount;
@@ -2139,6 +2167,8 @@ class Cart
                                     }
                                     $count_discount += $one_item_discount; //Общий плюсованный размер скидки
 
+                                    $one_item_discount = Cart::correctDiscountSumByAmount($one_item_discount, $subdata['amount']);
+
                                     $subdata['cost']     = $subdata['cost'] - $one_item_discount;
                                     $subdata['discount'] = (isset($subdata['discount'])) ? $one_item_discount + $subdata['discount'] : $one_item_discount;
                                     $result['total'] -= $one_item_discount;
@@ -2155,7 +2185,7 @@ class Cart
     }
 
     /**
-     * Корректирует фиксированную скидку в соответствии с граничениями на процент заказа/позиции.
+     * Корректирует фиксированную скидку в соответствии с ограничениями на процент заказа/позиции.
      * Возвращает итоговую сумму и долю скидки.
      *
      * @param array $result - массив со сведениями о корзине
@@ -2433,9 +2463,26 @@ class Cart
         if ($coupon['oneuserlimit'] > 0) {
             //Проверим авторизован ли пользователь
             if (!Auth::isAuthorize()) {
-                return t('Для активации купона необходимо авторизоватся');
+                return t('Для активации купона необходимо авторизоваться');
             } elseif ($this->getCouponUsedTimesByCurrentUser($coupon) >= $coupon['oneuserlimit']) {
                 return t('Превышено число использования купона');
+            }
+        }
+
+        if ($coupon['only_first_order']) {
+            if (!Auth::isAuthorize()) {
+                return t('Для активации купона необходимо авторизоваться');
+            } else {
+                $order_api = new OrderApi();
+                $order_api->setFilter(['user_id' => Auth::getCurrentUser()['id']]);
+                $order_count = $order_api->getList();
+                $archive_order_api = new ArchiveOrderApi();
+                $archive_order_api->setFilter(['user_id' => Auth::getCurrentUser()['id']]);
+                $archive_order_count = $archive_order_api->getList();
+
+                if (!empty($order_count) || !empty($archive_order_count)) {
+                    return t('Купон можно применить только к первому заказу');
+                }
             }
         }
 
@@ -2764,7 +2811,7 @@ class Cart
     protected function correctAmount(Product $product, float $amount, ?int $offer): float
     {
         $config = ConfigLoader::byModule($this);
-        $amount_step = $product->getAmountStep();
+        $amount_step = $product->getAmountStep($offer);
 
         if ($amount == 0) {
             $amount = ($product->getNum($offer) < $amount_step && $config['allow_buy_all_stock_ignoring_amount_step']) ? $product->getNum($offer) : $amount_step;
@@ -2807,5 +2854,19 @@ class Cart
     public function getMode()
     {
         return $this->mode;
+    }
+
+    /**
+     * Возвращает сумму скидки, скорректированную относительно количества товаров
+     *
+     * @param float $discount_sum - сумма скидки
+     * @param float $amount - количество товара
+     * @return float
+     */
+    public static function correctDiscountSumByAmount($discount_sum, $amount)
+    {
+        $config = ConfigLoader::byModule('shop');
+        $precision = $config['discount_amount_correct_round'];
+        return round(($discount_sum / $amount) / $precision) * $precision * $amount;
     }
 }

@@ -34,7 +34,7 @@ class Routes extends \RS\Controller\Admin\Front
             'Columns' => [
                 new TableType\Text('id', 'ID'),
                 new TableType\Text('description', t('Описание')),
-                new TableType\Usertpl('patterns', t('Маска пути'), '%main%/pageseo_column_route.tpl', ['TdAttr' => ['class' => 'cell-small']]),
+                new TableType\Usertpl('patterns', t('Маска пути'), '%main%/admin/pageseo_column_route.tpl', ['TdAttr' => ['class' => 'cell-small']]),
                 new TableType\StrYesno('hidden', t('Скрытый')),
                 new TableType\YesNo('active', t('Активный'), [
                     'toggleUrl' => $this->router->getAdminPattern('AjaxToggleRoute', [':id' => '@id']),
@@ -81,7 +81,7 @@ class Routes extends \RS\Controller\Admin\Front
         ]);
 
         $helper->viewAsAny();
-        $helper['form'] = $this->view->fetch('routes.tpl');
+        $helper['form'] = $this->view->fetch('admin/routes.tpl');
 
         return $this->result->setTemplate($helper['template']);
     }

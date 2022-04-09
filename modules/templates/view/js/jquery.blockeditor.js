@@ -47,7 +47,7 @@
           
           var redrawColumns = function() {
               var current_device = $('.device-selector li.act').data('device');              
-              var devices = ['lg', 'md', 'sm', 'xs', 'xl'];
+              var devices = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
               var sectionSizesReference = {
                   '-1': 'auto',
                   '-2': 'col'
@@ -77,9 +77,11 @@
               var current_device = $(this).addClass('act').data('device');
                             
               $(this).siblings().removeClass('act');
-              $('.pageview').removeClass('xs sm md lg xl').addClass(current_device);
-              
-              $.cookie('page-constructor-device-'+options.gridSystem , current_device);
+              $('.pageview').removeClass('xs sm md lg xl xxl').addClass(current_device);
+
+              $.cookie('page-constructor-device-'+options.gridSystem , current_device, {
+                  expires: 900
+              });
               redrawColumns();
               expandTools();
           });

@@ -1,6 +1,17 @@
 class YandexMap {
-
     constructor(element, callbackOnInit = null) {
+        this.owner = element;
+
+        if (window.RsYandexMapReady) {
+            this.onReady(callbackOnInit);
+        } else {
+            document.addEventListener('YandexMap.ready', () => {
+                this.onReady(callbackOnInit);
+            });
+        }
+    }
+
+    onReady(callbackOnInit) {
         this.selector = {};
         this.class = {
             button: 'button',
@@ -13,16 +24,17 @@ class YandexMap {
             dispatchEventTarget: undefined,
         };
 
-        this.owner = element;
-
-        if (this.owner.dataset.yandexMapOptions) {
-            this.options = Object.assign(this.options, JSON.parse(this.owner.dataset.yandexMapOptions));
+        if (this.owner.dataset.mapOptions) {
+            this.options = Object.assign(this.options, JSON.parse(this.owner.dataset.mapOptions));
         }
 
         this.map = new ymaps.Map(this.owner, {
             center: this.options.center,
             zoom: this.options.zoom
         });
+
+        this.clusterer = new ymaps.Clusterer();
+        this.map.geoObjects.add(this.clusterer);
 
         this.owner.addEventListener('click', (event) => {
             let target = event.target;
@@ -35,7 +47,7 @@ class YandexMap {
                 if (!this.options.dispatchEventTarget) {
                     eventProperties['bubbles'] = true;
                 }
-                let event = new CustomEvent('yandexMap.buttonClick', eventProperties);
+                let event = new CustomEvent('map.buttonClick', eventProperties);
 
                 if (this.options.dispatchEventTarget) {
                     this.options.dispatchEventTarget.dispatchEvent(event);
@@ -52,20 +64,40 @@ class YandexMap {
     }
 
     /**
-     * Размещает на карте точку
+     * Создаёт точку и размещает её на карте, возвращает созданную точку
      *
      * @param {number} latitude - широта
      * @param {number} longitude - долгота
      * @param {object} properties - данные метки
+     * @param {object} options - опции метки
+     * @return {object}
      */
-    addPoint(latitude, longitude, properties = {}) {
-        let newObject = new ymaps.Placemark([latitude, longitude], properties, {});
-        this.map.geoObjects.add(newObject);
+    addPoint(latitude, longitude, properties = {}, options = {}) {
+        let newObject = new ymaps.Placemark([latitude, longitude], properties, options);
+        this.clusterer.add(newObject);
         return newObject;
     }
 
     /**
-     * Устанавливет границы карты
+     * Размещает ранее созданную точку на карте
+     *
+     * @param {object} pointObject - объект точки
+     */
+    addPointObject(pointObject) {
+        this.clusterer.add(pointObject);
+    }
+
+    /**
+     * Удаляет точку с карты
+     *
+     * @param {object} pointObject - объект точки
+     */
+    removePoint(pointObject) {
+        this.clusterer.remove(pointObject);
+    }
+
+    /**
+     * Устанавливает границы карты
      *
      * @param {float} top - верхняя граница
      * @param {float} bottom - нижняя граница
@@ -131,30 +163,6 @@ class YandexMap {
     }
 
     static init(selector, callbackOnInit) {
-        let script = document.querySelector('script[src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"]');
-        if (!script) {
-            let script = document.createElement('script');
-            script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
-            document.body.appendChild(script);
-            script.onload = () => {
-                ymaps.ready(() => {
-                    YandexMap.init2(selector, callbackOnInit);
-                });
-            };
-        } else if (typeof ymaps === 'undefined') {
-            script.onload = () => {
-                ymaps.ready(() => {
-                    YandexMap.init2(selector, callbackOnInit);
-                });
-            };
-        } else {
-            ymaps.ready(() => {
-                YandexMap.init2(selector, callbackOnInit);
-            });
-        }
-    }
-
-    static init2(selector, callbackOnInit) {
         document.querySelectorAll(selector).forEach((element) => {
             if (!element.yandexMap) {
                 element.yandexMap = new YandexMap(element, callbackOnInit);
@@ -182,6 +190,35 @@ class YandexMap {
 
         YandexMap.init(elementSelector);
     }
+
+    static prepare() {
+        let script = document.querySelector('script[src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"]');
+        if (!script) {
+            let script = document.createElement('script');
+            script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
+            document.body.appendChild(script);
+            script.onload = () => {
+                ymaps.ready(() => {
+                    window.RsYandexMapReady = true;
+                    document.dispatchEvent(new CustomEvent('YandexMap.ready'));
+                });
+            };
+        } else {
+            if ((typeof ymaps)  == 'undefined' || (typeof ymaps.Map) == 'undefined') {
+                let interval = setInterval(() => {
+                    if ((typeof ymaps) != 'undefined' && (typeof ymaps.Map) != 'undefined') {
+                        window.RsYandexMapReady = true;
+                        document.dispatchEvent(new CustomEvent('YandexMap.ready'));
+                        clearInterval(interval);
+                    }
+                }, 10);
+            } else {
+                window.RsYandexMapReady = true;
+                document.dispatchEvent(new CustomEvent('YandexMap.ready'));
+            }
+        }
+    }
 }
 
+YandexMap.prepare();
 YandexMap.initListeners();

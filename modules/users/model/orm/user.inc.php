@@ -422,7 +422,7 @@ class User extends OrmObject
 
                     $error_text = t('Такой %0 уже занят', [$field_title]);
                     if ($_this->link_to_auth_in_error) {
-                        $error_text .= t(', <a href="%0" class="inDialog">авторизуйтесь</a>', [$config->getAuthorizationUrl()]);
+                        $error_text .= t(', <a href="%0" class="rs-in-dialog inDialog">авторизуйтесь</a>', [$config->getAuthorizationUrl()]);
                     }
                     return $error_text;
                 }
@@ -1049,10 +1049,14 @@ class User extends OrmObject
     {
         /** @var UsersConfig $config */
         $config = ConfigLoader::byModule($this);
-        return $config->getUserFieldsManager()
-            ->setErrorPrefix('userfield_')
-            ->setArrayWrapper('data')
-            ->setValues((array)$this['data']);
+        if (!$this->field_manager) {
+            $this->field_manager = $config->getUserFieldsManager()
+                ->setErrorPrefix('userfield_')
+                ->setArrayWrapper('data');
+        }
+        $this->field_manager->setValues((array)$this['data']);
+
+        return $this->field_manager;
     }
 
     /**
@@ -1063,6 +1067,22 @@ class User extends OrmObject
     public function getFio()
     {
         return trim($this['surname'] . ' ' . $this['name'] . ' ' . $this['midname']);
+    }
+
+    /**
+     * Возращает фамилию и инициалы
+     *
+     * @return string
+     */
+    public function getShortFio()
+    {
+        if ($this['name']) {
+            $initials = mb_strtoupper(mb_substr($this['name'],0,1)).'.';
+            if ($this['midname']) {
+                $initials .= mb_strtoupper(mb_substr($this['midname'],0,1)).'.';
+            }
+        }
+        return trim($this['surname'].' '.($initials ?? ''));
     }
 
     /**

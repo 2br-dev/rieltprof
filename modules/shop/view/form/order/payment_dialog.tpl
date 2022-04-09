@@ -24,7 +24,7 @@
     </form>
 </div>
 
-<script type="text/javascript">
+<script>
     $(function() {
         /**
         * Назначаем действия, если всё успешно вернулось 

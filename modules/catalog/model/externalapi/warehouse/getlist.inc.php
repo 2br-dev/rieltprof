@@ -12,11 +12,9 @@ namespace Catalog\Model\ExternalApi\Warehouse;
 */
 class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetList
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
     
-    protected
-        $token_require = false;
+    protected $token_require = false;
     
     /**
     * Возвращает комментарии к кодам прав доступа
@@ -145,11 +143,7 @@ class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetList
      * @return array Возвращает список объектов и связанные с ним сведения.
      * @throws \ExternalApi\Model\Exception
      */
-    protected function process($token = null, 
-                               $filter = [],
-                               $sort = "title", 
-                               $page = 1,
-                               $pageSize = 1000)
+    protected function process($token = null, $filter = [], $sort = "title", $page = 1, $pageSize = 1000)
     {
         return parent::process($token, $filter, $sort, $page, $pageSize);
     }

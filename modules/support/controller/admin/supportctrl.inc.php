@@ -41,7 +41,7 @@ class SupportCtrl extends \RS\Controller\Admin\Crud
         $helper->setTable(new Table\Element([
             'Columns' => [
                 new \RS\Html\Table\Type\Text('dateof', t('Дата'), ['Sortable' => SORTABLE_BOTH, 'ThAttr' => ['width' => 150]]),
-                new \RS\Html\Table\Type\Usertpl('is_admin', '', '%support%/user_type_cell.tpl', ['ThAttr' => ['width' => 15]]),
+                new \RS\Html\Table\Type\Usertpl('is_admin', '', '%support%/admin/user_type_cell.tpl', ['ThAttr' => ['width' => 15]]),
                 new \RS\Html\Table\Type\Text('message', t('Сообщение')),
                 new TableType\Actions('id', [
                         new TableType\Action\Edit($this->router->getAdminPattern('edit', [':id' => '~field~']), null, [
@@ -101,6 +101,6 @@ class SupportCtrl extends \RS\Controller\Admin\Crud
        
         $this->view->assign('topic', $topic);
         $this->view->assign('elements', $helper->active());
-        return $this->result->setTemplate('adminview.tpl');
+        return $this->result->setTemplate('admin/adminview.tpl');
     }
 }

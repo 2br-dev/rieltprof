@@ -24,14 +24,14 @@ class nameRecord extends BinaryStream {
   public $offset;
   public $string;
 
-  public static $format = [
+  public static $format = array(
     "platformID"         => self::uint16,
     "platformSpecificID" => self::uint16,
     "languageID"         => self::uint16,
     "nameID"             => self::uint16,
     "length"             => self::uint16,
     "offset"             => self::uint16,
-  ];
+  );
 
   public function map($data) {
     foreach ($data as $key => $value) {

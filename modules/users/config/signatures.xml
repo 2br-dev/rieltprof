@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>d2f4b3dd9ea5c950d3211533196b566c47ace7bb</sign>
+    <sign>962004e19e0f2c182d1b7aa30e31b10962cda421</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -18,7 +18,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>bded6fe9b07ad71a80531e90c634e270cb065312</sign>
+    <sign>2d911e2ba603b2b2298efac00feabf3459650b8e</sign>
   </file>
   <file>
     <path>config/modulerights.inc.php</path>
@@ -26,7 +26,7 @@
   </file>
   <file>
     <path>config/patches.inc.php</path>
-    <sign>f9259ffaec647dfb91c6409d414af5b4de8e18cd</sign>
+    <sign>a4c8f604e2fecd3b1ec431745bac53fb69e822da</sign>
   </file>
   <file>
     <path>controller/admin/ajaxlist.inc.php</path>
@@ -50,7 +50,7 @@
   </file>
   <file>
     <path>controller/admin/widget/authlog.inc.php</path>
-    <sign>0f8c0b7a316573ff7503076a8f72c8aa5e494ea0</sign>
+    <sign>9036549bd56f370738acded83ade84502a1f8d30</sign>
   </file>
   <file>
     <path>controller/block/authblock.inc.php</path>
@@ -58,19 +58,19 @@
   </file>
   <file>
     <path>controller/front/auth.inc.php</path>
-    <sign>41340e6890f3f28fb523ea548a27fdfb8a9260ba</sign>
+    <sign>27f83346c7ec0d4fa70d76a81658de45bde93095</sign>
   </file>
   <file>
     <path>controller/front/profile.inc.php</path>
-    <sign>6c9b149e0f854409c7f886440ae583a790b97023</sign>
+    <sign>5d7486e2ec2110d6ead9dad5e30ef6aca926a56e</sign>
   </file>
   <file>
     <path>controller/front/register.inc.php</path>
-    <sign>c297d3e89e8dc4f828a4e05e63ae2a406378f8e9</sign>
+    <sign>01eb5930f5d56de55e0d0e418b36014635d1d0ff</sign>
   </file>
   <file>
     <path>controller/front/verify.inc.php</path>
-    <sign>80bc2668d493c7a447a097319b372ece7fc76ba2</sign>
+    <sign>92b1a20a24ee1653a017d181696e7373f9a4090d</sign>
   </file>
   <file>
     <path>model/api.inc.php</path>
@@ -78,7 +78,7 @@
   </file>
   <file>
     <path>model/apiutils.inc.php</path>
-    <sign>d1e46bb3524643a46d679e5abae9625522ea9af3</sign>
+    <sign>d0ba5d3f4a91456cfb09250488d363ed94a87015</sign>
   </file>
   <file>
     <path>model/csvpreset/cost.inc.php</path>
@@ -94,7 +94,7 @@
   </file>
   <file>
     <path>model/csvschema/users.inc.php</path>
-    <sign>a8c28e9412caa54f79159f61c101bdaf3c030b0e</sign>
+    <sign>cb717ab287b2960466fdfa939ab85169c60261a7</sign>
   </file>
   <file>
     <path>model/csvschema/usersgroup.inc.php</path>
@@ -115,6 +115,10 @@
   <file>
     <path>model/externalapi/user/get.inc.php</path>
     <sign>d13c0b317e854ed2b048980430381e978a042896</sign>
+  </file>
+  <file>
+    <path>model/externalapi/user/registration.inc.php</path>
+    <sign>5fc6a194c84b43b3521be2af97be90ee07f16c1d</sign>
   </file>
   <file>
     <path>model/externalapi/user/update.inc.php</path>
@@ -170,7 +174,7 @@
   </file>
   <file>
     <path>model/orm/accessmoduleright.inc.php</path>
-    <sign>4764b930e44e5adeb2052c9687e1ad47ed837a7b</sign>
+    <sign>365baf90e3b3adf8ddad50ea5e0c92f281e3ee08</sign>
   </file>
   <file>
     <path>model/orm/accesssite.inc.php</path>
@@ -178,15 +182,15 @@
   </file>
   <file>
     <path>model/orm/log.inc.php</path>
-    <sign>6e573091aa01d24a69f14c15d005dd81a9c0812a</sign>
+    <sign>7ec3c219883f7b3f873be580a048b5a43e57fd65</sign>
   </file>
   <file>
     <path>model/orm/tryauth.inc.php</path>
-    <sign>c8004f5d7ca048ef47519eb20a3db4478b45db4a</sign>
+    <sign>8253e139f47212bd1b9fb3a5f435d2a2e2ef87ee</sign>
   </file>
   <file>
     <path>model/orm/user.inc.php</path>
-    <sign>63014aa3cdebb4d1e7dfd85d3b913beb2be839d3</sign>
+    <sign>a7f578cc7bef979aa5b3dc7c55e8c1f9abf4963d</sign>
   </file>
   <file>
     <path>model/orm/usergroup.inc.php</path>
@@ -194,15 +198,15 @@
   </file>
   <file>
     <path>model/orm/useringroup.inc.php</path>
-    <sign>c21eee28f57041b897dffd64fe0cd6e1538f57ca</sign>
+    <sign>e342236f0f004ce11e9edfeccdbeab630ecd5eaa</sign>
   </file>
   <file>
     <path>model/orm/verificationsession.inc.php</path>
-    <sign>071f26de919f863fcc903057172249423225183d</sign>
+    <sign>43d3d2e1c48c0af27da243159ba53bea880e13e4</sign>
   </file>
   <file>
     <path>model/ormtype/verifiedphone.inc.php</path>
-    <sign>dab09200e3183a334bc247d807afbd81bd0575a6</sign>
+    <sign>1807c9efa1c64c4a01ac8fba435ce83745e8a529</sign>
   </file>
   <file>
     <path>model/verification/action/abstractverifyaction.inc.php</path>
@@ -218,7 +222,7 @@
   </file>
   <file>
     <path>model/verification/action/twostepauthorize.inc.php</path>
-    <sign>7de8d4bd3c9e52028e6c0f59f25ac904cb48cd0b</sign>
+    <sign>86cf0584f040a086f02fbafd784349f9ea7eae00</sign>
   </file>
   <file>
     <path>model/verification/action/twostepprofile.inc.php</path>
@@ -246,7 +250,7 @@
   </file>
   <file>
     <path>model/verification/verificationengine.inc.php</path>
-    <sign>3388a105c31402bd63f215f7147125f4c28e5586</sign>
+    <sign>c8b0850dab697a97fdf3fa73195aec0ca5501e82</sign>
   </file>
   <file>
     <path>model/verification/verificationexception.inc.php</path>
@@ -262,23 +266,27 @@
   </file>
   <file>
     <path>view/authorization.tpl</path>
-    <sign>2b8baea2bb88cf548b8c9726213d5a641c54f873</sign>
+    <sign>0dc8ee35edb3784c7ddd3a22a13641b30e26976f</sign>
   </file>
   <file>
     <path>view/authorization_by_phone.tpl</path>
-    <sign>d7532c8b7e86589c102f808cd30385bd70894e32</sign>
+    <sign>b61a65f9ed28016f8dfaa4b1b81d163800679489</sign>
   </file>
   <file>
     <path>view/authorization_two_step.tpl</path>
-    <sign>5702683458ab4a8f6fd73827d96c2c3719f2ddb2</sign>
+    <sign>7b83d081ad8fbb702592c4fa4a31334b5b5593a7</sign>
   </file>
   <file>
     <path>view/blocks/authblock/authblock.tpl</path>
-    <sign>d924258cc201261bbb2cc1711436f0c287abb3d5</sign>
+    <sign>daa595d95143d603906c8d746f3e0654e2061d77</sign>
+  </file>
+  <file>
+    <path>view/blocks/authblock/authblock_mobile.tpl</path>
+    <sign>d187e34fdaa2f9fc7f5e33e787788c423b68fc0c</sign>
   </file>
   <file>
     <path>view/change_pass.tpl</path>
-    <sign>18b1c6f7c7d4124f549d63280fd045548839d181</sign>
+    <sign>df4d5e800c6244db2ee53b2f9599bb2c4d1404b1</sign>
   </file>
   <file>
     <path>view/css/groupedit.css</path>
@@ -290,7 +298,7 @@
   </file>
   <file>
     <path>view/css/verification.css</path>
-    <sign>a64ef4c43d00c1e60804d125ac088d125a32721c</sign>
+    <sign>279c8f310fecca95e2ce3e25d6d788c2e386e164</sign>
   </file>
   <file>
     <path>view/email/recover_pass.tpl</path>
@@ -361,8 +369,8 @@
     <sign>69e8e7677576ef6e15e15b9c0c34b95594f83cb6</sign>
   </file>
   <file>
-    <path>view/js/verification.js</path>
-    <sign>3b05d80771bd0a87065599c98df9316cfc64dba1</sign>
+    <path>view/js/rscomponent/verification.js</path>
+    <sign>0c364650f607777b1281b921eb756b2eb815afa5</sign>
   </file>
   <file>
     <path>view/notice/toadmin_passrecover.tpl</path>
@@ -406,27 +414,23 @@
   </file>
   <file>
     <path>view/profile.tpl</path>
-    <sign>ad6abcf4b1cbbaa89f8b2e210aea01856c90eaf0</sign>
+    <sign>cc597f218d6481608bc5cfbb0450d183c96b49b9</sign>
   </file>
   <file>
     <path>view/recover_pass.tpl</path>
-    <sign>717b99869ac0410b3da9e6727156b77a7141af9d</sign>
+    <sign>27a1e9285dfe9313afff4e905b403b6e608624fe</sign>
   </file>
   <file>
     <path>view/register.tpl</path>
-    <sign>bb858bf9e740f82edf6cf80537288da74c3c4554</sign>
-  </file>
-  <file>
-    <path>view/userinfo.tpl</path>
-    <sign>c5fd5f71cd1d4db122d8e94487129ea7a3aaa86d</sign>
+    <sign>3ae296cc63204ef7e84cc645810a1d4a554d3d61</sign>
   </file>
   <file>
     <path>view/verification/type_code.tpl</path>
-    <sign>44d2f09d41af014557c86de73799babf9c43d6d9</sign>
+    <sign>fab76c10518b073e1fd201bac5be503450b0ac3c</sign>
   </file>
   <file>
     <path>view/verification/type_phone_inline.tpl</path>
-    <sign>56fb2d1904c09ee30ed07e81bc101bdc7c690a6a</sign>
+    <sign>4ce442ad5092cf06d54f0660e845bc6b749d2a10</sign>
   </file>
   <file>
     <path>view/verification/verification_notice_sms.tpl</path>
@@ -436,5 +440,5 @@
     <path>view/widget/authlog.tpl</path>
     <sign>c732b9afc24e50fd94f7edfbbcc689e311a8a6c5</sign>
   </file>
-  <masterSign>82edbf000fff81c36fb1aaca1223f0000b7578f77951437eac539c43f80a68fb6e504b544285185208008d3120e05626fe7be477dca3c1625f4dc083bb7d71486586102c8d80ffeb750d3dd59be8d1a3c9f8b01e5acf84a14184edecb05cc8edecedccf1b289b6dee3a752639da9bad724ae289872f78923893d4a7f5cd93130</masterSign>
+  <masterSign>9db9cd448755536eb7dafbd297b3c315e339c4a2b3bc2c4a620a7fb325510d7fdecfce6d2c91bc8afdffe806fbcdd5bf314f19ddd3bc4033ec71d75fbbec0804b43226c19decea76ee159af0a3f91445640bb7f04e2e7be877573fcbcd26502bdd21f50253f7b0261816c73be400b16b705e32b20b2ee5f288e719c00916f1db</masterSign>
 </signatures>

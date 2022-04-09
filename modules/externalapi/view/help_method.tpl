@@ -23,16 +23,28 @@
                     <th>{t}Наличие{/t}</th>
                     <th>{t}Значение по умолчанию{/t}</th>
                     <th>{t}Описание{/t}</th>
-                </tr>            
-            {foreach $info.params as $name => $param_info}
-                {if !$param_info.is_disabled}
-                <tr>
-                    <td>{$param_info.name}</td>
-                    <td>{$param_info.type}</td>
-                    <td>{if $param_info.is_optional}{t}Опциональный{/t}{else}<b>{t}Обязательный{/t}</b>{/if}</td>
-                    <td>{if is_string($param_info.default_value) || is_null($param_info.default_value)}{$param_info.default_value}{else}{var_export($param_info.default_value)}{/if}</td>
-                    <td>{$param_info.comment}</td>
                 </tr>
+                {if isset($info.params.token)}
+                    {$param_info = $info.params.token}
+                    {if !$param_info.is_disabled}
+                        <tr>
+                            <td>{$param_info.name}</td>
+                            <td>{$param_info.type}</td>
+                            <td>{if $param_info.is_optional}{t}Опциональный{/t}{else}<b>{t}Обязательный{/t}</b>{/if}</td>
+                            <td>{if is_string($param_info.default_value) || is_null($param_info.default_value)}{$param_info.default_value}{else}{var_export($param_info.default_value)}{/if}</td>
+                            <td>{$param_info.comment}</td>
+                        </tr>
+                    {/if}
+                {/if}
+            {foreach $info.params as $name => $param_info}
+                {if $name != 'token' && !$param_info.is_disabled}
+                    <tr>
+                        <td>{$param_info.name}</td>
+                        <td>{$param_info.type}</td>
+                        <td>{if $param_info.is_optional}{t}Опциональный{/t}{else}<b>{t}Обязательный{/t}</b>{/if}</td>
+                        <td>{if is_string($param_info.default_value) || is_null($param_info.default_value)}{$param_info.default_value}{else}{var_export($param_info.default_value)}{/if}</td>
+                        <td>{$param_info.comment}</td>
+                    </tr>
                 {/if}
             {/foreach}
             </table>

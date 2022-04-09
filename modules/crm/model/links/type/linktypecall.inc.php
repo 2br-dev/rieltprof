@@ -7,6 +7,7 @@
 */
 namespace Crm\Model\Links\Type;
 
+use Crm\Model\CallHistoryApi;
 use Crm\Model\Orm\Telephony\CallHistory;
 use Crm\Model\OrmType\SelectCall;
 use RS\Orm\FormObject;
@@ -24,6 +25,8 @@ class LinkTypeCall extends AbstractType
      * @var Order
      */
     public $linked_object;
+
+    protected $last_objects_template = '%crm%/admin/links/lastobjects/call.tpl';
 
     /**
      * Возвращает имя закладки, характеризующей данную связь
@@ -106,5 +109,20 @@ class LinkTypeCall extends AbstractType
             $url = Manager::obj()->getAdminUrl('edit', ['id' => $this->linked_object->id], 'crm-callhistoryctrl');
             return $url;
         }
+    }
+
+    /**
+     * Возвращает последние $limit объектов, с которыми возможно установить связь
+     *
+     * @param integer $limit
+     * @return []
+     */
+    public function getLastObjects($limit = null)
+    {
+        if (!$limit) {
+            $limit = 10;
+        }
+        $api = new CallHistoryApi();
+        return $api->getList(1, $limit, 'id DESC');
     }
 }

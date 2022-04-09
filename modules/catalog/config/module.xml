@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Каталог товаров</name>
         <description multilanguage="true">Администрирование каталога товаров по рубрикам</description>        
-        <version>4.0.135</version>
+        <version>6.0.37</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         <dependfrom>photo</dependfrom>
@@ -26,10 +26,12 @@
         <update_price_round_value>0</update_price_round_value>
         <brand_products_specdir>0</brand_products_specdir>
         <brand_products_cnt>8</brand_products_cnt>
+        <brand_sort>sortn asc</brand_sort>
         <use_offer_unit>0</use_offer_unit>
         <import_photos_timeout>20</import_photos_timeout>
         <use_seo_filters>0</use_seo_filters>
         <import_yml_timeout>20</import_yml_timeout>
+        <yml_product_group_identifier>group_id</yml_product_group_identifier>
         <show_all_products>0</show_all_products>
         <list_default_view_as>blocks</list_default_view_as>
         <warehouse_sticks>1,5,15,25,50</warehouse_sticks>
@@ -39,7 +41,7 @@
         <csv_offer_search_field>sortn</csv_offer_search_field>
         <csv_file_upload_type>0</csv_file_upload_type>
         <csv_file_upload_access>hidden</csv_file_upload_access>
-        <price_like_slider>0</price_like_slider>
+        <price_like_slider>1</price_like_slider>
         <not_public_product_404>1</not_public_product_404>
         <not_public_category_404>0</not_public_category_404>
         <yuml_import_setting>0</yuml_import_setting>
@@ -48,6 +50,7 @@
         <not_public_property_dir_404>1</not_public_property_dir_404>
         <inventory_control_enable>0</inventory_control_enable>
         <dependent_filters>0</dependent_filters>
+        <tabs_on_new_page type="array"/>
         <csv_id_fields type="array">
             <value>title</value>
             <value>barcode</value>

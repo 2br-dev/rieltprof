@@ -23,6 +23,7 @@ use Shop\Model\ZoneApi;
  * @property integer $is_city Является городом?
  * @property string $area Муниципальный район
  * @property integer $sortn Порядок
+ * @property string $fias_guid Идентификатор ФИАС
  * @property string $kladr_id ID по КЛАДР
  * @property string $type_short Тип субъекта, населенного пункта сокращенно
  * @property integer $processed Обновлено только что

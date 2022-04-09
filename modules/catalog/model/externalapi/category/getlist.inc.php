@@ -228,11 +228,7 @@ class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetTreeList
     * 
     * @return array Возвращает список объектов и связанные с ним сведения.
     */
-    protected function process($token = null,
-                               $parent_id = 0,                                 
-                               $filter = [],
-                               $sort = 'sortn', 
-                               $sections = ['image'])
+    protected function process($token = null, $parent_id = 0, $filter = [], $sort = 'sortn', $sections = ['image'])
     {
         $result = parent::process($token, $parent_id, $filter, $sort);
         

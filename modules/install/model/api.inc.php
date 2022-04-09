@@ -15,7 +15,7 @@ class Api extends \RS\Module\AbstractModel\BaseModel
 {
     const 
         NEED_PHP_VERSION = '7.1.0',
-        NEED_MYSQL_VERSION = '5.0';
+        NEED_MYSQL_VERSION = '5.7+';
     
     private
         $local_storage,
@@ -83,7 +83,15 @@ class Api extends \RS\Module\AbstractModel\BaseModel
         } catch (\RS\Db\Exception $e) {
             return t('Невозможно подключиться к базе данных');
         }
-    
+
+        //Проверяем наличие выбранного Engine в БД
+        $result = \RS\Db\Adapter::sqlExec('SHOW ENGINES');
+        $engines = $result->fetchSelected(null, 'Engine');
+
+        if (!in_array(strtolower(\Setup::$DB_TABLE_ENGINE), array_map('strtolower', $engines))) {
+            return t('СУБД не поддерживает выбранный тип таблиц. Выберите другой тип таблиц.');
+        }
+
         return true;
     }    
     

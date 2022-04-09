@@ -1004,7 +1004,8 @@ class Form extends DesignAtoms\AbstractAtom {
             $field_types = [
                 'string',
                 'text',
-                'email'
+                'email',
+                'file'
             ];
             if (in_array($field['show_type'], $field_types)){
                 $sub_children[] = self::fillChildForHint($children_params, $form, $field);

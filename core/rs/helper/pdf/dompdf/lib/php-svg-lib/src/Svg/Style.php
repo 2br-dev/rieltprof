@@ -8,9 +8,6 @@
 
 namespace Svg;
 
-use Sabberworm\CSS\Property\Selector;
-use Sabberworm\CSS\Rule\Rule;
-use Sabberworm\CSS\RuleSet\DeclarationBlock;
 use Svg\Tag\AbstractTag;
 
 class Style
@@ -46,30 +43,30 @@ class Style
 
     protected function getStyleMap()
     {
-        return [
-            'color'             => ['color', self::TYPE_COLOR],
-            'opacity'           => ['opacity', self::TYPE_NUMBER],
-            'display'           => ['display', self::TYPE_NAME],
+        return array(
+            'color'             => array('color', self::TYPE_COLOR),
+            'opacity'           => array('opacity', self::TYPE_NUMBER),
+            'display'           => array('display', self::TYPE_NAME),
 
-            'fill'              => ['fill', self::TYPE_COLOR],
-            'fill-opacity'      => ['fillOpacity', self::TYPE_NUMBER],
-            'fill-rule'         => ['fillRule', self::TYPE_NAME],
+            'fill'              => array('fill', self::TYPE_COLOR),
+            'fill-opacity'      => array('fillOpacity', self::TYPE_NUMBER),
+            'fill-rule'         => array('fillRule', self::TYPE_NAME),
 
-            'stroke'            => ['stroke', self::TYPE_COLOR],
-            'stroke-dasharray'  => ['strokeDasharray', self::TYPE_NAME],
-            'stroke-dashoffset' => ['strokeDashoffset', self::TYPE_NUMBER],
-            'stroke-linecap'    => ['strokeLinecap', self::TYPE_NAME],
-            'stroke-linejoin'   => ['strokeLinejoin', self::TYPE_NAME],
-            'stroke-miterlimit' => ['strokeMiterlimit', self::TYPE_NUMBER],
-            'stroke-opacity'    => ['strokeOpacity', self::TYPE_NUMBER],
-            'stroke-width'      => ['strokeWidth', self::TYPE_NUMBER],
+            'stroke'            => array('stroke', self::TYPE_COLOR),
+            'stroke-dasharray'  => array('strokeDasharray', self::TYPE_NAME),
+            'stroke-dashoffset' => array('strokeDashoffset', self::TYPE_NUMBER),
+            'stroke-linecap'    => array('strokeLinecap', self::TYPE_NAME),
+            'stroke-linejoin'   => array('strokeLinejoin', self::TYPE_NAME),
+            'stroke-miterlimit' => array('strokeMiterlimit', self::TYPE_NUMBER),
+            'stroke-opacity'    => array('strokeOpacity', self::TYPE_NUMBER),
+            'stroke-width'      => array('strokeWidth', self::TYPE_NUMBER),
 
-            'font-family'       => ['fontFamily', self::TYPE_NAME],
-            'font-size'         => ['fontSize', self::TYPE_NUMBER],
-            'font-weight'       => ['fontWeight', self::TYPE_NAME],
-            'font-style'        => ['fontStyle', self::TYPE_NAME],
-            'text-anchor'       => ['textAnchor', self::TYPE_NAME],
-        ];
+            'font-family'       => array('fontFamily', self::TYPE_NAME),
+            'font-size'         => array('fontSize', self::TYPE_NUMBER),
+            'font-weight'       => array('fontWeight', self::TYPE_NAME),
+            'font-style'        => array('fontStyle', self::TYPE_NAME),
+            'text-anchor'       => array('textAnchor', self::TYPE_NAME),
+        );
     }
 
     /**
@@ -105,14 +102,14 @@ class Style
 
         $stylesheets = $tag->getDocument()->getStyleSheets();
 
-        $styles = [];
+        $styles = array();
 
         foreach ($stylesheets as $_sc) {
 
-            /** @var DeclarationBlock $_decl */
+            /** @var \Sabberworm\CSS\RuleSet\DeclarationBlock $_decl */
             foreach ($_sc->getAllDeclarationBlocks() as $_decl) {
 
-                /** @var Selector $_selector */
+                /** @var \Sabberworm\CSS\Property\Selector $_selector */
                 foreach ($_decl->getSelectors() as $_selector) {
                     $_selector = $_selector->getSelector();
 
@@ -120,7 +117,7 @@ class Style
                     if ($class !== null) {
                         foreach ($class as $_class) {
                             if ($_selector === ".$_class") {
-                                /** @var Rule $_rule */
+                                /** @var \Sabberworm\CSS\Rule\Rule $_rule */
                                 foreach ($_decl->getRules() as $_rule) {
                                     $styles[$_rule->getRule()] = $_rule->getValue() . "";
                                 }
@@ -132,7 +129,7 @@ class Style
 
                     // Match tag name
                     if ($_selector === $tag->tagName) {
-                        /** @var Rule $_rule */
+                        /** @var \Sabberworm\CSS\Rule\Rule $_rule */
                         foreach ($_decl->getRules() as $_rule) {
                             $styles[$_rule->getRule()] = $_rule->getValue() . "";
                         }
@@ -262,11 +259,11 @@ class Style
                 }
             }
 
-            return [
+            return array(
                 $r * 255.0,
                 $g * 255.0,
                 $b * 255.0,
-            ];
+            );
         }
 
         // Gradient
@@ -305,7 +302,7 @@ class Style
 
             if ($percent) {
                 if ($triplet[$c][strlen($triplet[$c]) - 1] === "%") {
-                    $triplet[$c] = $triplet[$c] / 100;
+                    $triplet[$c] = floatval($triplet[$c]) / 100;
                 }
                 else {
                     $triplet[$c] = $triplet[$c] / 255;
@@ -313,7 +310,7 @@ class Style
             }
             else {
                 if ($triplet[$c][strlen($triplet[$c]) - 1] === "%") {
-                    $triplet[$c] = round($triplet[$c] * 2.55);
+                    $triplet[$c] = round(floatval($triplet[$c]) * 2.55);
                 }
             }
         }
@@ -323,7 +320,7 @@ class Style
 
     static function parseHexColor($hex)
     {
-        $c = [0, 0, 0];
+        $c = array(0, 0, 0);
 
         // #FFFFFF
         if (isset($hex[6])) {
@@ -348,10 +345,10 @@ class Style
      */
     static function parseCssStyle($style)
     {
-        $matches = [];
+        $matches = array();
         preg_match_all("/([a-z-]+)\\s*:\\s*([^;$]+)/si", $style, $matches, PREG_SET_ORDER);
 
-        $styles = [];
+        $styles = array();
         foreach ($matches as $match) {
             $styles[$match[1]] = $match[2];
         }
@@ -395,11 +392,12 @@ class Style
             return $referenceSize * substr($size, 0, $pos);
         }
 
+        // TODO cm, mm, pc, in, etc
 
         return null;
     }
 
-    static $colorNames = [
+    static $colorNames = array(
         'antiquewhite'         => '#FAEBD7',
         'aqua'                 => '#00FFFF',
         'aquamarine'           => '#7FFFD4',
@@ -548,5 +546,5 @@ class Style
         'wheat'                => '#f5deb3',
         'whitesmoke'           => '#f5f5f5',
         'yellowgreen'          => '#9acd32',
-    ];
+    );
 }

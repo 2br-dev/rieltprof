@@ -19,23 +19,23 @@ use FontLib\Font;
  * @property File $font
  */
 class Header extends \FontLib\Header {
-  protected $def = [
+  protected $def = array(
     "format"        => self::uint32,
     "numTables"     => self::uint16,
     "searchRange"   => self::uint16,
     "entrySelector" => self::uint16,
     "rangeShift"    => self::uint16,
-  ];
+  );
 
   public function parse() {
     $font = $this->font;
 
-    $this->data = $font->unpack([
+    $this->data = $font->unpack(array(
       "EOTSize"            => self::uint32,
       "FontDataSize"       => self::uint32,
       "Version"            => self::uint32,
       "Flags"              => self::uint32,
-      "FontPANOSE"         => [self::uint8, 10],
+      "FontPANOSE"         => array(self::uint8, 10),
       "Charset"            => self::uint8,
       "Italic"             => self::uint8,
       "Weight"             => self::uint32,
@@ -52,7 +52,7 @@ class Header extends \FontLib\Header {
       "Reserved2"          => self::uint32,
       "Reserved3"          => self::uint32,
       "Reserved4"          => self::uint32,
-    ]);
+    ));
 
     $this->data["Padding1"] = $font->readUInt16();
     $this->readString("FamilyName");

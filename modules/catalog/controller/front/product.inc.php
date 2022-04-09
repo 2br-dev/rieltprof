@@ -10,12 +10,14 @@ namespace Catalog\Controller\Front;
 use Catalog\Model\Api as ProductApi;
 use Catalog\Model\Dirapi;
 use Catalog\Model\Logtype\ShowProduct as LogtypeShowProduct;
+use Catalog\Model\Microdata\MicrodataProduct;
 use Catalog\Model\Orm\Dir;
 use RS\Config\Loader as ConfigLoader;
 use RS\Controller\Front;
 use RS\Debug\Action as DebugAction;
 use RS\Debug\Tool as DebugTool;
 use RS\Img\Core;
+use RS\Theme\Manager;
 use Users\Model\LogApi as UserLogApi;
 
 /**
@@ -35,6 +37,7 @@ class Product extends Front
     function init()
     {
         $this->id     = $this->url->get('id', TYPE_STRING);
+        $this->tab    = $this->url->get('tab', TYPE_STRING);
         $this->api    = new ProductApi();
         $this->dirapi = new Dirapi();
         $this->config = ConfigLoader::byModule($this);
@@ -51,7 +54,11 @@ class Product extends Front
         $item = $this->api->getById($this->id);
         if (!$item){
             $this->e404(t('Такого товара не существует'));
-        } 
+        }
+
+        if ($this->tab && !in_array($this->tab, (array)$this->config->tabs_on_new_page)) {
+            $this->e404(t('Некорректно указана вкладка'));
+        }
 
         //Если нужно скрывать скрытый товар
         if ((!$item['public'] || ($this->config['hide_unobtainable_goods'] == 'Y' && $item['num']<=0)) && $this->config['not_public_product_404']){
@@ -65,7 +72,6 @@ class Product extends Front
         $item->fillCategories();
         $item->fillCost();
         $item->fillProperty(true);
-        $item->fillOffers();
         $item->calculateUserCost();
 
         // Прикрепляем к маршруту загруженый объект товара для использования в блоках
@@ -98,9 +104,12 @@ class Product extends Front
             }
         }
         
-        $this->view->assign('path', $path);
-        $this->view->assign('product', $item);
-        $this->view->assign('back_url', $this->url->getSavedUrl('catalog.list.index'));
+        $this->view->assign([
+            'path' => $path,
+            'product' => $item,
+            'back_url' => $this->url->getSavedUrl('catalog.list.index'),
+            'tab' => $this->tab
+        ]);
         
         //Заполняем meta теги
         $item_title       = $item->getMetaTitle();
@@ -117,6 +126,11 @@ class Product extends Front
             if ($this->config['concat_dir_meta'] || !$item_keywords) {
                 $this->app->meta->addKeywords( !empty($one_dir['meta_keywords']) ? $seoGenDir->replace($one_dir['meta_keywords']) : $one_dir['name'] );
             }
+        }
+
+        if ($this->tab) {
+            $tab_list = $this->config->__tabs_on_new_page->getList();
+            $this->app->title->addSection($tab_list[$this->tab]);
         }
         
         //Инициализируем SEO генератор
@@ -151,6 +165,8 @@ class Product extends Front
         $this->app->title->addSection(!empty($item_title) ? $item_title : $item['title']);
         $this->app->meta->addKeywords($item_keywords);
         $this->app->meta->addDescriptions($item_description);
+
+        $this->app->microdata->addMicrodata(new MicrodataProduct($item));
         
         //Пишем лог
         UserLogApi::appendUserLog(new LogtypeShowProduct(), $item['id'], null, $item['id']);

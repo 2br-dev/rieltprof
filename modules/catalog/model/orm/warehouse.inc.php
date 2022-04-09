@@ -48,6 +48,16 @@ class WareHouse extends OrmObject
 
     function _init()
     {
+        $days = [
+            'MONDAY' => t('Понедельник'),
+            'TUESDAY' => t('Вторник'),
+            'WEDNESDAY' => t('Среда'),
+            'THURSDAY' => t('Четверг'),
+            'FRIDAY' => t('Пятница'),
+            'SATURDAY' => t('Суббота'),
+            'SUNDAY' => t('Воскресенье')
+        ];
+
         parent::_init()->append([
             t('Основные'),
                 'site_id' => new Type\CurrentSite(),
@@ -144,7 +154,7 @@ class WareHouse extends OrmObject
                 'dont_change_stocks' => new Type\Integer([
                     'description' => t('Не списывать остатки с данного склада'),
                     'hint' => t('При списании/возврате остатков вместо данного склада будет использован склад по умолчанию.<br/><br/>
-                                Опция не может быть включена у склада по умалчанию.'),
+                                Опция не может быть включена у склада по умолчанию.'),
                     'CheckboxView' => [1, 0],
                 ]),
                 'use_in_sitemap' => new Type\Integer([
@@ -153,7 +163,7 @@ class WareHouse extends OrmObject
                     'checkboxView' => [1, 0]
                 ]),
                 'xml_id' => new Type\Varchar([
-                    'maxLength' => '255',
+                    'maxLength' => '150',
                     'allowEmpty' => true,
                     'meVisible' => false,
                     'description' => t('Идентификатор в системе 1C'),
@@ -175,6 +185,21 @@ class WareHouse extends OrmObject
                     'maxLength' => 1000,
                     'viewAsTextarea' => true,
                     'description' => t('Описание'),
+                ]),
+            t('Дополнительная информация'),
+                'schedule_items' => new Type\VariableList([
+                    'description' => t('Расписание работы'),
+                    'hint' => t('Информация из данного поля может использоваться различными модулями для интеграций'),
+                    'tableFields' => [[
+                        new Type\VariableList\SelectVariableListField('startDay', t('Начальный день'), $days),
+                        new Type\VariableList\TextVariableListField('startTime', t('Время начала работы, ЧЧ:ММ')),
+                        new Type\VariableList\SelectVariableListField('endDay', t('Последний день'), $days),
+                        new Type\VariableList\TextVariableListField('endTime', t('Время конца работы, ЧЧ:ММ')),
+                    ]]
+                ]),
+                '_schedule_items' => new Type\Text([
+                    'description' => t('Данные по расписанию работы'),
+                    'visible' => false
                 ]),
         ]);
 
@@ -241,6 +266,13 @@ class WareHouse extends OrmObject
         if (empty($this['xml_id'])) {
             unset($this['xml_id']);
         }
+
+        $this['_schedule_items'] = serialize($this['schedule_items']);
+    }
+
+    function afterObjectLoad()
+    {
+        $this['schedule_items'] = @unserialize($this['_schedule_items']) ?: [];
     }
 
     /**

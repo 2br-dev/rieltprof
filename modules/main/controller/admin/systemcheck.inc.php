@@ -25,7 +25,7 @@ class SystemCheck extends \RS\Controller\Admin\Front
         $helper = new \RS\Controller\Admin\Helper\CrudCollection($this);
         $helper->setTopTitle(t('Самотестирование серверного окружения'));
         $helper->viewAsForm();
-        $helper['form'] = $this->view->fetch('systemcheck.tpl');
+        $helper['form'] = $this->view->fetch('admin/systemcheck.tpl');
 
         return $this->result->setTemplate( $helper['template'] );
     }

@@ -47,6 +47,7 @@ class Album extends \RS\Orm\OrmObject
             ]),
             'alias' => new Type\Varchar([
                 'description' => t('URL имя'),
+                'maxLength' => 150,
                 'checker' => ['chkEmpty', t('Укажите идентификатор альбома')],
                 'meVisible' => false
             ]),

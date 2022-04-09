@@ -13,11 +13,9 @@ namespace MobileSiteApp\Model\ExternalApi\MobileSiteApp;
 */
 class GetExtendsJSON extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
         
-    protected
-        $token_require = false; //Токен не обязателен
+    protected $token_require = false; //Токен не обязателен
     
     /**
     * Возвращает комментарии к кодам прав доступа

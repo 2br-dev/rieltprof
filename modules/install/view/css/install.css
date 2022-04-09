@@ -592,15 +592,18 @@ h3 {
 }
 
 .config-table input,
+.config-table select,
 .inp-style {
-    height:30px;
-    line-height:30px;
+    height:34px;
+    line-height:34px;
     border:1px solid #e2e2e2;
     max-width:100%;
+    box-sizing: border-box;
 }
 
-.config-table input {
-    width:350px;    
+.config-table input,
+.config-table select {
+    width:350px;
 }
 
 .config-table input[type=checkbox] {

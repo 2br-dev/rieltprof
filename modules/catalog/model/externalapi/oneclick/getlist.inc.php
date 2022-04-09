@@ -12,11 +12,9 @@ namespace Catalog\Model\ExternalApi\Oneclick;
 */
 class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetList
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
     
-    protected
-        $token_require = false;
+    protected $token_require = false;
     
     /**
     * Возвращает комментарии к кодам прав доступа
@@ -155,11 +153,7 @@ class GetList extends \ExternalApi\Model\AbstractMethods\AbstractGetList
      * @return array Возвращает список объектов и связанные с ним сведения.
      * @throws \ExternalApi\Model\Exception
      */
-    protected function process($token = null, 
-                               $filter = [],
-                               $sort = "dateof DESC",
-                               $page = 1,
-                               $pageSize = 1000)
+    protected function process($token = null, $filter = [], $sort = "dateof DESC", $page = 1, $pageSize = 1000)
     {
         $response = parent::process($token, $filter, $sort, $page, $pageSize);
 

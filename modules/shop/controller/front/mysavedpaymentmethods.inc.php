@@ -22,7 +22,7 @@ class MySavedPaymentMethods extends Front
 {
     public function actionIndex()
     {
-        $this->app->breadcrumbs->addBreadCrumb(t('Мои привязанные карты'), $this->router->getUrl('shop-front-mysavedpaymentmethods'));
+        $this->app->breadcrumbs->addBreadCrumb(t('Мои привязанные карты'));
 
         $payment_api = new PaymentApi();
         $payment_api->setFilter(['public' => 1]);

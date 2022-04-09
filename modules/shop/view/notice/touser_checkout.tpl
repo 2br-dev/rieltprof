@@ -32,7 +32,7 @@
 
         {$pvz = $data->order->getSelectedPvz()}
         {if $pvz}
-            {t}Пункт самовывоза{/t} - "{$pvz->getTitle()}" ({t}Адрес{/t}: {$pvz->getAddress()}) <br>
+            {t}Пункт самовывоза{/t} - "{$pvz->getTitle()}" ({t}Адрес{/t}: {$pvz->getFullAddress()}) <br>
         {elseif $data->order.warehouse && $delivery->getTypeObject()->isMyselfDelivery()}
             {$warehouse=$data->order->getWarehouse()}
             {t}Склад самовывоза{/t} - "{$warehouse.title}" ({t}Адрес{/t}: {$warehouse.adress}) <br>
@@ -81,7 +81,7 @@
                 <td>{$item.cartitem.amount}</td>
                 <td>
                     <span class="cost">{$item.total}</span>
-                    {if $item.discount>0}{t}скидка{/t} {$item.discount}{/if}
+                    {if $item.discount_unformated > 0}{t}скидка{/t} {$item.discount}{/if}
                 </td>
             </tr>
             {/foreach}

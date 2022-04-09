@@ -10,6 +10,7 @@ class SelectedAddressChange {
             otherAddressCloseButton: '.rs-selectedAddressChange_otherAddressCloseButton',
             otherAddressSelectButton: '.rs-selectedAddressChange_otherAddressSelectButton',
             regionBlock: '.rs-selectedAddressChange_regionBlock',
+            otherRegionForm: '.rs-selectedAddressChange_otherAddressForm'
         };
         this.class = {
             open: 'rs-open',
@@ -17,7 +18,7 @@ class SelectedAddressChange {
         this.mode = {
             selectedAddress: 'selectedAddress',
             dispatchEvent: 'dispatchEvent',
-        }
+        };
         this.options = {
             mode: this.mode.dispatchEvent,
             source: undefined,
@@ -26,6 +27,12 @@ class SelectedAddressChange {
 
         this.owner = element;
         let $this = this;
+
+        this.owner.querySelector(this.selector.otherRegionForm).addEventListener('submit', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            this.selectOtherAddress(event.target);
+        });
 
         if (this.owner.dataset.selectedAddressChangeOptions) {
             this.options = Object.assign(this.options, JSON.parse(this.owner.dataset.selectedAddressChangeOptions));

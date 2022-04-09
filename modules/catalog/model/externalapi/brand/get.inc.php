@@ -12,11 +12,9 @@ namespace Catalog\Model\ExternalApi\Brand;
 */
 class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
         
-    protected
-        $token_require = false;
+    protected $token_require = false;
     
     /**
     * Возвращает комментарии к кодам прав доступа
@@ -115,7 +113,7 @@ class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
      * @return array
      * @throws \ExternalApi\Model\Exception
      */
-    function process($token = null, $brand_id, $sections = ['products_count'])
+    function process($brand_id, $token = null, $sections = ['products_count'])
     {
         $response = parent::process($token, $brand_id);
         

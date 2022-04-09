@@ -51,6 +51,6 @@ class SelectTemplate extends \RS\Controller\Admin\Front
         $helper->setTopTitle(t('Редактор шаблонов'));
 
         $this->view->assign('elements', $helper);
-        return $this->result->setTemplate('select_template.tpl');
+        return $this->result->setTemplate('admin/select_template.tpl');
     }
 }

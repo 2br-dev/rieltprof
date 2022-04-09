@@ -76,12 +76,7 @@ class Currency extends \RS\Orm\OrmObject
         ]);
         $this->addIndex(['title', 'site_id'], self::INDEX_UNIQUE);
     }
-    
-    function beforeWrite($flag)
-    {
 
-    }
-    
     /**
     * Действие после сохраниния объектра
     * 

@@ -1,29 +1,39 @@
-{if !empty($status_message)}<div class="pageError">{$status_message}</div>{/if}
-<form method="POST" action="{$router->getUrl('users-front-auth')}" class="authorization">
-    <div class="authorizationWrapper">
-        {$this_controller->myBlockIdInput()}
-        <input type="hidden" name="referer" value="{$data.referer}">
+{* Диалог авторизации пользователя *}
+{extends "%THEME%/helper/wrapper/dialog/standard.tpl"}
+
+{block "title"}{t}Вход{/t}{/block}
+{block "body"}
+    {$is_dialog_wrap=$url->request('dialogWrap', $smarty.const.TYPE_INTEGER)}
+    {if !empty($status_message)}<div class="alert alert-danger" role="alert">{$status_message}</div>{/if}
+
+    <form action="{$router->getUrl('users-front-auth')}" method="POST">
         {hook name="users-authorization:form" title="{t}Авторизация:форма{/t}"}
-            {if $url->request('dialogWrap', $smarty.const.TYPE_INTEGER)}
-                <h2 data-dialog-options='{ "width": "360" }'>{t}Авторизация{/t}</h2>
-            {/if}
-            <div class="dialogForm">
-                {if !empty($error)}<div class="error">{$error}</div>{/if}
-                <input type="text" name="login" value="{$data.login|default:$Setup.DEFAULT_DEMO_LOGIN}" class="login" placeholder="E-mail">
-                <input type="password" name="pass" class="password" value="{$Setup.DEFAULT_DEMO_PASS}" placeholder="{t}Пароль{/t}">
-
-                <div class="floatWrap">
-                    <div class="rememberBlock">
-                        <input type="checkbox" id="rememberMe" name="remember" value="1" {if $data.remember}checked{/if}> <label for="rememberMe">{t}Запомнить меня{/t}</label>
-                    </div>
-                    <button type="submit">{t}Войти{/t}</button>
+            {$this_controller->myBlockIdInput()}
+            <input type="hidden" name="referer" value="{$data.referer}">
+            <input type="hidden" name="remember" value="1">
+            <div class="g-4 row row-cols-1">
+                <div>
+                    <label for="input-auth1" class="form-label">{$login_placeholder}</label>
+                    <input type="text" placeholder="{$login_placeholder}" name="login"
+                           value="{$data.login|default:$Setup.DEFAULT_DEMO_LOGIN}"
+                           class="form-control {if !empty($error)}is-invalid{/if}"
+                           autocomplete="off" id="input-auth1">
+                    {if $error}<div class="invalid-feedback">{$error}</div>{/if}
                 </div>
-
-                <div class="noAccount">
-                    {t}Нет аккаунта? {/t}&nbsp;&nbsp;&nbsp;<a href="{$router->getUrl('users-front-register')}" class="inDialog">{t}Зарегистрируйтесь{/t}</a><br>
-                    {t}Забыли пароль? {/t}&nbsp;&nbsp;&nbsp;<a href="{$router->getUrl('users-front-auth', ["Act" => "recover"])}" class="inDialog">{t}Восстановить пароль{/t}</a>
+                <div>
+                    <label for="input-auth2" class="form-label">Пароль</label>
+                    <input type="password" name="pass" value="{$Setup.DEFAULT_DEMO_PASS}"
+                           class="form-control {if !empty($error)}is-invalid{/if}"
+                           autocomplete="off" id="input-auth2">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary w-100">{t}Войти{/t}</button>
+                </div>
+                <div class="d-flex align-items-center justify-content-between fs-5">
+                    <a href="{$router->getUrl('users-front-auth', ["Act" => "recover"])}" {if $is_dialog_wrap}class="rs-in-dialog"{/if}>{t}Забыли пароль?{/t}</a>
+                    <a href="{$router->getUrl('users-front-register')}" {if $is_dialog_wrap}class="rs-in-dialog"{/if}>{t}У меня нет аккаунта{/t}</a>
                 </div>
             </div>
         {/hook}
-    </div>
-</form>
+    </form>
+{/block}

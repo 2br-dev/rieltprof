@@ -29,7 +29,7 @@ class TemplateHookSort extends \RS\Orm\AbstractObject
             'site_id' => new Type\CurrentSite(),
             'context' => new Type\Varchar([
                 'description' => t('Контекст темы оформления'),
-                'maxLength' => 100
+                'maxLength' => 50
             ]),
             'hook_name' => new Type\Varchar([
                 'description' => t('Идентификатор хука'),

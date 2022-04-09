@@ -1,0 +1,192 @@
+/* Выбор города*/
+.citySelect,
+.cityContacts {
+    line-height:32px;
+    height:32px;
+    overflow:hidden;    
+    font-size:14px;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.cityContacts {
+    margin-left:20px;
+}
+
+.cityIcon {
+    height:20px;
+    width:20px;
+    background:url(../img/geopoint.png) no-repeat center center;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.cityPhoneIcon {
+    height:20px;
+    width:20px;
+    background:url(../img/phone.png) no-repeat center center;
+    display:inline-block;
+    vertical-align:middle;    
+}
+
+.cityPhone {
+    line-height:32px;
+    vertical-align:middle;    
+}
+
+.affiliates {
+    min-width:260px;
+    overflow:hidden;
+    background: white;
+    padding:20px;
+}
+
+.affiliatesContacts .affiliates,
+#colorbox .affiliates {
+    padding:0;
+}
+
+.affiliates .fastSearch {
+    width:100%;
+    box-sizing:border-box;
+    height:33px;
+    line-height:33px;
+    border:none;
+    border-bottom:1px solid #dcdcc9;    
+    margin-bottom:15px;
+    background:url(../img/small-search.png) no-repeat left center;
+    padding-left:24px;
+}
+
+.affiliatesColumns {
+    -moz-column-width:200px;
+    -webkit-column-width:200px;
+    column-width:200px;    
+}
+
+#colorbox .affiliatesColumns {
+    width:650px;
+}
+
+.affiliates .tree {    
+    width:200px;
+    margin-right:10px;
+    padding:0;
+    list-style:none;
+}
+
+.no-csscolumns .affiliates .tree {
+    float:left;   /* Для старых версий IE, где не подерживается CSS-Columns */
+}
+
+.affiliates .tree > li {
+    font-size:14px;
+    padding:3px 0;
+}
+
+.affiliates .tree ul {
+    font-size:14px;
+    padding:0;
+    list-style:none;
+}
+
+.affiliates .tree ul li {
+    padding:3px 0;
+}
+
+.affiliates .tree ul li a {
+    opacity:0.7;
+}
+
+.affiliates .hl {
+    font-weight:bold;
+    color: #555;
+}
+
+.searchAffiliates {
+    padding:0;
+    list-style:none;
+    background: white;
+    position:absolute;
+    z-index:10000;
+    -moz-box-shadow:0 2px 4px #999;
+    -webkit-box-shadow:0 2px 4px #999;    
+    box-shadow:0 2px 3px #aaa;
+    font-size:14px;
+}
+
+.searchAffiliates li {
+    line-height:30px;
+}
+
+.searchAffiliates li.other {
+    border-top:1px solid #ccc;
+    color: #666;
+}
+
+.searchAffiliates li.other a {
+    text-decoration:underline;
+}
+
+.searchAffiliates li.other:first-child {
+    border-top:none;
+}
+
+.searchAffiliates li .item {
+    display:block;
+    padding:0 5px;
+}
+
+.searchAffiliates li .item.ui-state-focus {
+    background: #EBEBE5;
+    color:black;
+}
+
+.affiliatesContacts {
+    background: white;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.affiliatesContacts .affiliates {
+    display:none;
+    background:none;
+    margin-top:10px;
+}
+
+.affiliatesContacts .affiliates.visible {
+    display:block;
+}
+
+.affiliatesContacts .currentCity {
+    font-size:15px;
+}
+
+.affiliatesContacts .cityName {
+    font-weight:bold;
+}
+
+.affiliatesContacts .otherCity {
+    border-bottom:1px dashed #aaa;
+}
+
+.alliliateWhTable {
+    width:100%;
+    border:none;
+}
+
+.alliliateWhTable th {
+    vertical-align: middle;
+    padding:15px 0;    
+}
+
+.alliliateWhTable td {
+    vertical-align: middle;
+    padding:15px 0;
+    border-top:1px solid #ccc;
+}
+
+.alliliateWhTable .address {
+    font-size:12px;
+    color:#939384;
+}

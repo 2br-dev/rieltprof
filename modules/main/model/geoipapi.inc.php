@@ -99,7 +99,7 @@ class GeoIpApi
     {
         if (!$this->geo_service) return false;
 
-        if (!is_array($_SESSION[self::SESSION_GEOIP_CITY])) {
+        if (!isset($_SESSION[self::SESSION_GEOIP_CITY]) || !is_array($_SESSION[self::SESSION_GEOIP_CITY])) {
             $_SESSION[self::SESSION_GEOIP_CITY] = [];
         }
 

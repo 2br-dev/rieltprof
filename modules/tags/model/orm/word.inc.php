@@ -39,6 +39,7 @@ class Word extends \RS\Orm\AbstractObject
             ]),
             'alias' => new Type\Varchar([
                 'description' => t('Английское название тега'),
+                'maxLength' => '150',
                 'unique' => true
             ])
         ]);

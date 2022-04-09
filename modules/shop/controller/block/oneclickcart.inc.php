@@ -6,6 +6,7 @@
 * @license http://readyscript.ru/licenseAgreement/
 */
 namespace Shop\Controller\Block;
+use Catalog\Model\Orm\OneClickItem;
 use \RS\Orm\Type;
 
 /**
@@ -34,7 +35,7 @@ class OneClickCart extends \RS\Controller\StandartBlock
     function init()
     {
         parent::init();
-        $this->api = new \Catalog\Model\OneClickApi();
+        $this->api = new \Catalog\Model\OneClickItemApi();
     }
 
     /**
@@ -59,42 +60,62 @@ class OneClickCart extends \RS\Controller\StandartBlock
      */
     function actionIndex()
     {
-        //Добавим доп поля для покупки в один клик корзины
-        $click_fields_manager = \RS\Config\Loader::byModule('catalog')->getClickFieldsManager();
-        $click_fields_manager->setErrorPrefix('clickfield_');
-        $click_fields_manager->setArrayWrapper('clickfields');
+        /**
+         * @var $click OneClickItem
+         */
+        $click = $this->api->getElement();
+
+        if ($this->user->id <= 0) {
+            $click->__kaptcha->setEnable($this->getParam('use_captcha'));
+        }
         
         //Предварительные данные
-        $errors  = [];
-        if ($this->isMyPost()){
-            $phone = $this->request('phone', TYPE_STRING, false);      //Телефон
-            $name  = $this->request('name', TYPE_STRING, false);      //Имя пользователя
-            
-            if ($this->api->checkFieldsFromPostToSend($click_fields_manager, false)) { //OK
-                $this->api->send($this->api->getPreparedProductsFromCart()); //Отправим данные
+        if ($this->isMyPost()) {
+
+            //@deprecated Переменные для совместимости со старыми шаблонами, до версии ReadyScript 6
+            $old_values = [];
+            if ($name = $this->url->post('name', TYPE_STRING)) {
+                $old_values['user_fio'] = $name;
+            }
+            if ($phone = $this->url->post('phone', TYPE_STRING)) {
+                $old_values['user_phone'] = $phone;
+            }
+            //---
+
+            $click->products = $this->api->getPreparedProductsFromCart();
+
+            $this->result->setSuccess($this->api->save(null, $old_values));
+            if ($this->result->isSuccess()) {
+                $this->view->assign([
+                    'success' => t('Спасибо, в ближайшее время с Вами свяжется наш менеджер.')
+                ]);
+
                 //Очистим корзину
                 $cart = \Shop\Model\Cart::currentCart();
                 $cart->clean();
-                $this->result->setSuccess(true);
-            }else{
-                $errors = $this->api->getErrors();
-                $this->result->setSuccess(false);
             }
 
             $this->view->assign([
-                'phone' => $phone,
-                'name' => $name,
                 'open' => true,
             ]);
+        } else {
+            $click['user_fio']   = $this->user['id'] ? $this->user->getFio() : "";
+            $click['user_phone'] = $this->user['phone'];
         }
         
         $this->view->assign([
-            'success' => $this->result->isSuccess(),
-            'errors' => $errors,
-            'use_captcha' => $this->getParam('use_captcha'),
-            'oneclick_userfields' => $click_fields_manager,
+            'click' => $click,
         ]);
-        
+        // @deprecated Для совместимости со старыми шаблонами, до ReadyScript 6
+        $this->view->assign([
+            'success' => $this->result->isSuccess(),
+            'errors' => $click->getErrors(),
+            'use_captcha' => $this->getParam('use_captcha'),
+            'oneclick_userfields' => $click->getFieldsManager(),
+            'phone' => $click['user_phone'],
+            'name' => $click['user_fio'],
+        ]);
+        //---
         return $this->result->setTemplate( $this->getParam('indexTemplate') );
     }
 }

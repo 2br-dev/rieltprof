@@ -23,7 +23,7 @@ class Verify extends Front
     protected $verification_engine;
 
     /**
-     *
+     * Выполняется при инициализации класса
      */
     function init()
     {

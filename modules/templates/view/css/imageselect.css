@@ -1,0 +1,15 @@
+.image-select .owl-carousel {
+    padding:0 30px;
+}
+
+.image-select .owl-prev {
+    position:absolute;
+    left:0;
+    top:20%;
+}
+
+.image-select .owl-next {
+    position:absolute;
+    right:0;
+    top:20%;
+}

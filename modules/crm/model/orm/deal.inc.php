@@ -410,4 +410,14 @@ class Deal extends \RS\Orm\OrmObject
     {
         return ModuleRights::DEAL_DELETE;
     }
+
+    /**
+     * Возвращает объект текущего статуса
+     *
+     * @return Status
+     */
+    public function getStatus()
+    {
+        return new Status($this['status_id']);
+    }
 }

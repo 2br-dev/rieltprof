@@ -28,13 +28,6 @@ class Install extends AbstractInstall
                 'flag' => \RS\Orm\AbstractObject::INSERT_FLAG
             ]);
 
-            //Обновляем структуру базы данных для объекта Товар
-            $product = new \Catalog\Model\Orm\Product();
-            $product->dbUpdate();
-
-            //Обновляем структуру базы данных для объекта Категория Товара
-            $dir = new \Catalog\Model\Orm\Dir();
-            $dir->dbUpdate();
 
             //Добавляем виджеты на рабочий стол
             $widget_api = new \Main\Model\Widgets();
@@ -43,6 +36,21 @@ class Install extends AbstractInstall
             $widget_api->insertWidget('shop-widget-lastorders', 1);
             $widget_api->insertWidget('shop-widget-orderstatuses', 1);
             $widget_api->insertWidget('shop-widget-reservation', 3);
+        }
+        return $result;
+    }
+
+    function update()
+    {
+        $result = parent::update();
+        if ($result) {
+            //Обновляем структуру базы данных для объекта Товар
+            $product = new \Catalog\Model\Orm\Product();
+            $product->dbUpdate();
+
+            //Обновляем структуру базы данных для объекта Категория Товара
+            $dir = new \Catalog\Model\Orm\Dir();
+            $dir->dbUpdate();
         }
         return $result;
     }

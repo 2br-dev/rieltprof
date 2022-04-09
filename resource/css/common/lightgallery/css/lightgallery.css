@@ -837,7 +837,9 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   display: inline-block !important;
 }
 .lg-outer .lg-item, .lg-outer .lg-img-wrap {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   position: absolute;
   width: 100%;

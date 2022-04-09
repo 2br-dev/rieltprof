@@ -12,12 +12,13 @@
         </tr>
         {* Сведения о товаре *}
         {if !empty($values)}
-            {foreach from=$values item=data}
+            {foreach $values as $key => $data}
                 <tr>
                     <td> 
                        {$data.title}
                     </td>
-                    <td class="feedback_result_value"> 
+                    <td class="feedback_result_value">
+                        <input type="hidden" name="clickfields[{$key}]" value="{if $data.type == 'bool'}{if $data.current_val == 'Да'}1{else}0{/if}{else}{$data.current_val}{/if}">
                        {$data.current_val}
                     </td>
                 </tr>

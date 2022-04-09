@@ -53,7 +53,17 @@ class Xcost extends \RS\Orm\AbstractObject
         
         $this->addIndex(['product_id', 'cost_id'], self::INDEX_UNIQUE);
     }
-    
+
+    /**
+     * Возвращает свойства, формирующие первичный ключ
+     *
+     * @return string[]
+     */
+    function getPrimaryKeyProperty()
+    {
+        return ['product_id', 'cost_id'];
+    }
+
     /**
     * Заполняет текущий объект либо краткими данными, если $data - число, либо полными, если $data - массив
     * 

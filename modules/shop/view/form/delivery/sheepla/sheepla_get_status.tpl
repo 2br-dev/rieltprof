@@ -7,7 +7,7 @@
 
 </div>
 
-<script type="text/javascript">
+<script>
 
 $.allReady(function(){
     sheepla.init({

@@ -44,7 +44,7 @@ class SavedPaymentMethodsCtrl extends Crud
         $helper->setTable(new Table\Element([
             'Columns' => [
                 new TableType\Text('id', t('№'), ['Sortable' => SORTABLE_BOTH, 'CurrentSort' => SORTABLE_DESC]),
-                new TableType\Usertpl('user_id', t('Пользователь'), '%shop%/order_user_cell.tpl', [
+                new TableType\Usertpl('user_id', t('Пользователь'), '%shop%/admin/order_user_cell.tpl', [
                     'allowLinks' => true,
                 ]),
                 new TableType\Text('type', t('Тип'), ['Sortable' => SORTABLE_BOTH]),

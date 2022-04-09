@@ -38,6 +38,7 @@ use RS\Orm\Type;
  * @property integer $round Округлять скидку до целых чисел?
  * @property integer $uselimit Лимит использования, раз
  * @property integer $oneuserlimit Лимит использования одним пользователем, раз
+ * @property integer $only_first_order Только для первого заказа
  * @property integer $wasused Была использована, раз
  * @property integer $makecount Сгенерировать купонов
  * --\--
@@ -137,6 +138,11 @@ class Discount extends OrmObject
                            сообщение о авторизации'),
                 'Attr' => [['size' => '5']],
             ]),
+            'only_first_order' => (new Type\Integer())
+                ->setDescription(t('Только для первого заказа'))
+                ->setCheckboxView(1, 0)
+                ->setMaxLength(1)
+                ->setDefault(0),
             'wasused' => new Type\Integer([
                 'maxLength' => '5',
                 'description' => t('Была использована, раз'),

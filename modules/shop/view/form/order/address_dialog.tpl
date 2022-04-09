@@ -2,7 +2,7 @@
     <form id="addressAddForm" method="POST" action="{urlmake}" data-city-autocomplete-url="{$router->getAdminUrl('searchCity')}" data-order-block="#addressBlockWrapper" enctype="multipart/form-data" class="crud-form" data-dialog-options='{ "width":800, "height":700 }'>
         {hook name="shop-form-order-address_dialog:form" title="{t}Редактирование заказа - диалог адреса:форма{/t}"}
             <table class="otable">
-                {if $order.user_id}
+                {if $user_id}
                     <tbody class="new-address">
                         <tr>
                             <td class="otitle">{t}Изменяемый адрес{/t}:</td>
@@ -27,7 +27,7 @@
             </table>
         {/hook}
     </form>
-    <script type="text/javascript">
+    <script>
         /**
         * Получает адрес для получения подсказок для города
         */

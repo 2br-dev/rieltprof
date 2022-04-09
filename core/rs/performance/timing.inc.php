@@ -111,7 +111,7 @@ class Timing
 
         $_SESSION[self::SESSION_VAR][$this->page_id] = [
             self::SECTION_INFO => [
-                self::SUBSECTION_INFO_ABSOLUTE_URL => !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'] : '',
+                self::SUBSECTION_INFO_ABSOLUTE_URL => (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['REQUEST_URI'])) ? $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'] : '',
                 self::SUBSECTION_INFO_DATE => date('Y-m-d H:i:s'),
                 self::SUBSECTION_INFO_TOTAL_TIME => 0,
                 self::SUBSECTION_INFO_TOTAL_SQL_TIME => 0,
@@ -308,7 +308,7 @@ class Timing
                     $info[self::SUBSECTION_INFO_TOTAL_SQL_QUERIES] += 1;
                 }
 
-                if ($sort == 'time' || $sort == 'sql_time') {
+                if ($data['sql_queries'] && ($sort == 'time' || $sort == 'sql_time')) {
                     usort($data['sql_queries'], function ($a, $b) use ($asc) {
                         $n = $asc ? 1 : -1;
                         return ($a['duration_sec'] < $b['duration_sec']) ? -$n : $n;

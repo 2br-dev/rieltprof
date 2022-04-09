@@ -82,7 +82,7 @@
     <p><b>{t}Реквизиты для возврата{/t}:</b></p>
     <p>{t}Наименование банка{/t}: {$return.bank_name}</p>
     <p>{t}БИК{/t}: {$return.bik}</p>
-    <p>{t}Рассчетный счет{/t}: {$return.bank_account}</p>
+    <p>{t}Расчетный счет{/t}: {$return.bank_account}</p>
     <p>{t}Корреспондентский счет{/t}: {$return.correspondent_account}</p>
 </div>
 <br/>

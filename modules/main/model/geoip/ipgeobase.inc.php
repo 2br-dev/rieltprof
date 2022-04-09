@@ -9,6 +9,7 @@ namespace Main\Model\GeoIp;
 
 /**
 * Сервис по определению города и географических координат по IP - ipgeobase.ru
+* @deprecated Сервис закрылся в 2021
 */
 class IpGeoBase extends AbstractService
 {

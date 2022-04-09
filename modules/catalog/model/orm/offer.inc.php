@@ -176,7 +176,7 @@ class Offer extends OrmObject
                 'visible' => false,
             ]),
             'xml_id' => new Type\Varchar([
-                'maxLength' => '255',
+                'maxLength' => '150',
                 'description' => t('Идентификатор товара в системе 1C'),
                 'visible' => false,
             ]),
@@ -377,8 +377,12 @@ class Offer extends OrmObject
                 $offer_stock['offer_id'] = $this['id'];
                 $offer_stock['warehouse_id'] = $warehouse_id;
                 $offer_stock['stock'] = $stock_num;
-                $offer_stock->insert(false, ['stock'], ['product_id', 'offer_id', 'warehouse_id']);
+                $offer_stock['remains'] = $this['remains'];
+                $offer_stock['reserve'] = $this['reserve'];
+                $offer_stock->insert(false, ['stock', 'remains', 'reserve'], ['product_id', 'offer_id', 'warehouse_id']);
             }
+
+            Product::resetOffersJsonCache($this['product_id']);
         }
     }
 

@@ -6,6 +6,8 @@
 * @license http://readyscript.ru/licenseAgreement/
 */
 namespace Catalog\Model\CsvPreset;
+use Catalog\Model\Orm\Property\Dir;
+use Catalog\Model\Orm\Property\Item;
 use \Catalog\Model\Orm\Property\ItemValue;
 
 /**
@@ -247,30 +249,65 @@ class Property extends \RS\Csv\Preset\AbstractPreset
                 if (preg_match($this->mask_pattern, $item, $match)) {
                     
                     $index_name = "({$match['group_name']}){$match['property']}";
+                    if (strpos($match['value'], $this->value_delimiter) !== false) {
+                        $match['value'] = explode($this->value_delimiter, $match['value']);
+                    }
+
                     if (isset(self::$index[$index_name])) {
+                        //Получаем ID характеристики
                         $prop_id = self::$index[$index_name];
-                        if (strpos($match['value'], $this->value_delimiter) !== false) {
-                            $match['value'] = explode($this->value_delimiter, $match['value']);
-                        }
-                        
                         if (self::$props[$prop_id]->isListType()) {
                             //Конвертируем списковые значения в ID
                             $match['value'] = array_map(function($value) use ($prop_id) {
                                 return ItemValue::getIdByValue($prop_id, trim($value));
                             }, (array)$match['value']);
                         }
-                        
-                        $result_array[$prop_id] = [
-                            'id' => $prop_id,
-                            'is_my' => 1,
-                            'value' => $match['value']
-                        ];
+                    } else {
+                        //Создаем группу и характеристику (с типом строка), если ее еще нет в базе
+                        $group_id = $this->findGroupIdByName($match['group_name']);
+                        if (!$group_id) {
+                            $group = new Dir();
+                            $group['title'] = $match['group_name'];
+                            $group->insert();
+                            $group_id = $group['id'];
+                            self::$groups[$group_id] = $group;
+                        }
+
+                        $prop = new Item();
+                        $prop['title'] = $match['property'];
+                        $prop['parent_id'] = $group_id;
+                        $prop->insert();
+                        $prop_id = $prop['id'];
+                        self::$props[$prop_id] = $prop;
+                        self::$index[$index_name] = $prop_id;
                     }
+
+                    $result_array[$prop_id] = [
+                        'id' => $prop_id,
+                        'is_my' => 1,
+                        'value' => $match['value']
+                    ];
                 }
             }
 
             $this->schema->getPreset($this->link_preset_id)->row[$this->array_field] = $result_array;
         }
-    }    
+    }
+
+    /**
+     * Возращает ID группы по названию
+     *
+     * @return integer | bool(false)
+     */
+    function findGroupIdByName($name)
+    {
+        foreach(self::$groups as $id => $group) {
+            if ($group['title'] == $name) {
+                return $id;
+            }
+        }
+
+        return false;
+    }
     
 }

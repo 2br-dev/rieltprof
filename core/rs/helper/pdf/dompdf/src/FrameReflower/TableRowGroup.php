@@ -7,7 +7,6 @@
  */
 namespace Dompdf\FrameReflower;
 
-use Dompdf\Frame;
 use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
 use Dompdf\FrameDecorator\Table as TableFrameDecorator;
 
@@ -21,7 +20,7 @@ class TableRowGroup extends AbstractFrameReflower
 
     /**
      * TableRowGroup constructor.
-     * @param Frame $frame
+     * @param \Dompdf\Frame $frame
      */
     function __construct($frame)
     {

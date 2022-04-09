@@ -30,7 +30,7 @@ class BlockTags extends \RS\Controller\Admin\Block
             throw new \RS\Controller\ParameterException(t('Не заданы параметры type или linkid'));
         }
         $this->view->assign('word_list_html', $this->actionGetWords($this->param['type'], $this->param['linkid']));
-        return $this->fetch('form.tpl');
+        return $this->fetch('admin/form.tpl');
     }
     
     function actionAddWords()
@@ -58,7 +58,7 @@ class BlockTags extends \RS\Controller\Admin\Block
         
         $word_list = $this->api->getWords($type, $link_id);
         $this->view->assign('word_list', $word_list);
-        return $this->view->fetch('words.tpl');
+        return $this->view->fetch('admin/words.tpl');
     }
     
     /**

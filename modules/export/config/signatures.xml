@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>e65c72f1fadb9815365b39c3e9b18c61f1567747</sign>
+    <sign>35255eb68b45ff2583642778c06f8a4934f39716</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -10,7 +10,7 @@
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>4406a361ed6155a9dbdb7f77559c999dad6bfc26</sign>
+    <sign>6fb275ce3a379a00617660d443c8626bd631f864</sign>
   </file>
   <file>
     <path>config/install.inc.php</path>
@@ -18,7 +18,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>3719660b88bc069c442b6df4f16c93e3d1532733</sign>
+    <sign>ec0cf2b2ff9515eb0f2051e52260333993afe476</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
@@ -26,7 +26,7 @@
   </file>
   <file>
     <path>controller/admin/ctrl.inc.php</path>
-    <sign>57e6ad23c5dbbe9156761ad0c6a01348c6e93424</sign>
+    <sign>21ac7e3fbaa2b151cc89c20151c7468ba5f71370</sign>
   </file>
   <file>
     <path>controller/admin/oauthvk.inc.php</path>
@@ -46,11 +46,19 @@
   </file>
   <file>
     <path>model/exporttype/abstractoffertype.inc.php</path>
-    <sign>f32eceed09aec862530f68f4c9325b20b1f0d5f8</sign>
+    <sign>9b230f0d6fba6d6444597c1ce013aaa6df17115d</sign>
   </file>
   <file>
     <path>model/exporttype/abstracttype.inc.php</path>
-    <sign>2a51630fb3573d6a17c8f99fb74fb26e66a14fa8</sign>
+    <sign>e1aca9339735dc4b5b5f06b1dc35f437c085fe81</sign>
+  </file>
+  <file>
+    <path>model/exporttype/aliexpress/aliexpress.inc.php</path>
+    <sign>3d8e056ea131c7a92bd98295d8db3b43e962406a</sign>
+  </file>
+  <file>
+    <path>model/exporttype/aliexpress/offertype/yml.inc.php</path>
+    <sign>d4b2edea8640af11c84c6fb117242044099322f7</sign>
   </file>
   <file>
     <path>model/exporttype/avito/avito.inc.php</path>
@@ -58,7 +66,7 @@
   </file>
   <file>
     <path>model/exporttype/avito/offertype/commonavitooffertype.inc.php</path>
-    <sign>4265294c0b0729f156bacf47c420ca246c6eae3d</sign>
+    <sign>28b324c7304b7705e25e12bc070bbf07950e7af1</sign>
   </file>
   <file>
     <path>model/exporttype/avito/offertype/consumerelectronics.inc.php</path>
@@ -74,7 +82,7 @@
   </file>
   <file>
     <path>model/exporttype/complexfieldinterface.inc.php</path>
-    <sign>a86eb6147473218dc68c2a9461e35af4e7477e6a</sign>
+    <sign>e8e848bc58bdea27b0c61643e53fd0bba03ce72a</sign>
   </file>
   <file>
     <path>model/exporttype/exchangableinterface.inc.php</path>
@@ -86,11 +94,11 @@
   </file>
   <file>
     <path>model/exporttype/facebook/offertype/standard.inc.php</path>
-    <sign>eb943cfa8ca6daef804dd30352169f02a12a7506</sign>
+    <sign>04cb0b48ce619d2f8e608431b294af29211c5fd0</sign>
   </file>
   <file>
     <path>model/exporttype/field.inc.php</path>
-    <sign>81f802abc51c4d0f9d919703a5014c0d956195ba</sign>
+    <sign>c9cacf0cae0a97d6f54c2869c4fa4e583c88d31b</sign>
   </file>
   <file>
     <path>model/exporttype/google/google.inc.php</path>
@@ -98,7 +106,7 @@
   </file>
   <file>
     <path>model/exporttype/google/offertype/rss2.inc.php</path>
-    <sign>2a1df5f855e6d2b03960669ec80b221750737263</sign>
+    <sign>76b91d90b8a27d14204fc3beec72b3b18d799a31</sign>
   </file>
   <file>
     <path>model/exporttype/mailru/mailru.inc.php</path>
@@ -106,7 +114,7 @@
   </file>
   <file>
     <path>model/exporttype/vkontakte/offertype/simple.inc.php</path>
-    <sign>531ae26032f489d906f4e8539ef55b5f0a129984</sign>
+    <sign>d3999769689fbb898de1ed310d24e9bd40613f09</sign>
   </file>
   <file>
     <path>model/exporttype/vkontakte/utils/vkquery.inc.php</path>
@@ -118,7 +126,7 @@
   </file>
   <file>
     <path>model/exporttype/vkontakte/vkontakte.inc.php</path>
-    <sign>1b470feea2a46c44d7ef0bbefbfac2a946343ac2</sign>
+    <sign>35a8ceda1922d0d2ad7fef690b7cc6425d5e5a30</sign>
   </file>
   <file>
     <path>model/exporttype/yandex/offertype/artisttitle.inc.php</path>
@@ -134,7 +142,11 @@
   </file>
   <file>
     <path>model/exporttype/yandex/offertype/commonoffertype.inc.php</path>
-    <sign>a1bb679eee060e4ecc3668f947166c44633f8436</sign>
+    <sign>07571665e5e12af44767d0ca09860051b702a453</sign>
+  </file>
+  <file>
+    <path>model/exporttype/yandex/offertype/fbs.inc.php</path>
+    <sign>4d46818cbfc63f1cfa76d576a8fdbc4880b83177</sign>
   </file>
   <file>
     <path>model/exporttype/yandex/offertype/fields/condition.inc.php</path>
@@ -150,7 +162,7 @@
   </file>
   <file>
     <path>model/exporttype/yandex/offertype/fields/fielddimensions.inc.php</path>
-    <sign>dc3f5b4f06ce458f89d5cd8a4dc4cbb73215034b</sign>
+    <sign>97d899a334bbf0bcdce5c1e1c92fccbf7c87d05d</sign>
   </file>
   <file>
     <path>model/exporttype/yandex/offertype/fields/fieldrec.inc.php</path>
@@ -162,7 +174,7 @@
   </file>
   <file>
     <path>model/exporttype/yandex/offertype/simple.inc.php</path>
-    <sign>e0e22d58fd164213f8b3c12b787878b3067c4213</sign>
+    <sign>981321ed209230f4e1add2c5605fe9aa33202c03</sign>
   </file>
   <file>
     <path>model/exporttype/yandex/offertype/vendormodel.inc.php</path>
@@ -170,7 +182,7 @@
   </file>
   <file>
     <path>model/exporttype/yandex/yandex.inc.php</path>
-    <sign>1324c1d3b6f28d6b8e4bca78ab92e23c8816db5a</sign>
+    <sign>d074e3e0246447070c11123dad4cf44c5a9db4ad</sign>
   </file>
   <file>
     <path>model/fetcher.inc.php</path>
@@ -197,12 +209,20 @@
     <sign>e0437d58b59eb9c0c6f9b1c535504beae39e075c</sign>
   </file>
   <file>
-    <path>view/action_cell.tpl</path>
+    <path>view/admin/action_cell.tpl</path>
     <sign>9597de62be2fee2a606dfbc2dc8d072b0c24d66b</sign>
   </file>
   <file>
-    <path>view/exchangable_alert.tpl</path>
+    <path>view/admin/exchangable_alert.tpl</path>
     <sign>b4ecd78ecda579e6aa30d142a34a22dd4bc2a315</sign>
+  </file>
+  <file>
+    <path>view/admin/show_log.tpl</path>
+    <sign>588372a71bb9fbe13732a73034126c7296343fdc</sign>
+  </file>
+  <file>
+    <path>view/admin/url_cell.tpl</path>
+    <sign>d9129307bc17b8a48f071ec25367c8da0ea71549</sign>
   </file>
   <file>
     <path>view/form/exporttype/avito/help.tpl</path>
@@ -218,7 +238,7 @@
   </file>
   <file>
     <path>view/form/profile/other.tpl</path>
-    <sign>98378a0bc505f412959fb2ef3473d133f99fdb0f</sign>
+    <sign>a94473e5983462f298a631ddd7d27fa7a4620141</sign>
   </file>
   <file>
     <path>view/form/profile/products.tpl</path>
@@ -237,14 +257,6 @@
     <sign>b4161fb65b0b2ca95e26b1b6926ca30be5550df0</sign>
   </file>
   <file>
-    <path>view/show_log.tpl</path>
-    <sign>588372a71bb9fbe13732a73034126c7296343fdc</sign>
-  </file>
-  <file>
-    <path>view/url_cell.tpl</path>
-    <sign>d9129307bc17b8a48f071ec25367c8da0ea71549</sign>
-  </file>
-  <file>
     <path>view/vk/vk_action_cell.tpl</path>
     <sign>ec22916f4c547f61562c26d690ec1738453b1fb4</sign>
   </file>
@@ -256,5 +268,5 @@
     <path>view/vk/vk_cat_line.tpl</path>
     <sign>ee24f5b85bde027a073a814634d21a6cb4ce1172</sign>
   </file>
-  <masterSign>65fcf036c1b97ed092d81176519205944b383ea2efaf4efb59e74d675f85f4d4eb5b59ec3a476578112c453d1e9a4b4bb9135ed47cb84f85c739ce0521fddf07de9f185d64436844f99e082a6fd891b86a3a9d4f82bbde11c4f1bd1bbabc53d7e5c0fdeada976b966aa5228c42f1b4eaa85ee1aaa40b0e82c136fc45588cb444</masterSign>
+  <masterSign>46727a33aab3975d1ed7f049f6f2ce35c44bf9587a16080af2090351a3b227fc4845325c1984561144bddfe8c2d9609d5c00f69cb56eaf0d42d4cf2409889bf6213d9df4909969121a01d9fe9634fa4b1a18bc2e299e0236ee7f0ed90a960e2d03f0a6a6633b1cfe7cf1d3ac52358050bb00db5afb660ca6e779ba8d02ae7fea</masterSign>
 </signatures>

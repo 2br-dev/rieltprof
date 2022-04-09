@@ -13,16 +13,12 @@ use \ExternalApi\Model\Exception as ApiException;
 */
 abstract class AbstractAdd extends AbstractAuthorizedMethod
 {
-    const
-        /**
-        * Право на загрузку объекта
-        */
-        RIGHT_ADD = 1;
+    /** Право на загрузку объекта */
+    const RIGHT_ADD = 1;
 
     protected $token_require = false;
     
-    protected
-        $object;
+    protected $object;
     
     /**
     * Возвращает комментарии к кодам прав доступа
@@ -68,7 +64,7 @@ abstract class AbstractAdd extends AbstractAuthorizedMethod
     * @throws ApiException
     * @return array Возвращает значения свойств объекта
     */
-    protected function process($token = null, $data, $client_name, $client_id)
+    protected function process($data, $client_name, $client_id, $token = null)
     {
         $this->object = $this->getOrmObject();
         if ($this->object->save($data)) {

@@ -57,7 +57,7 @@ class HookSort extends \RS\Controller\Admin\Front
         
         $collection->viewAsForm();
         $collection->setTopTitle(t('Порядок модулей'));
-        $collection['form'] = $this->view->fetch('hook_sort.tpl');
+        $collection['form'] = $this->view->fetch('admin/hook_sort.tpl');
         
         return $this->result->setTemplate( $collection['template'] );
     }

@@ -28,6 +28,7 @@ use Shop\Model\Orm\OrderItem;
 use Shop\Model\Orm\ProductsReturn;
 use Shop\Model\Orm\ProductsReturnOrderItem;
 use Shop\Model\Orm\Receipt;
+use Shop\Model\Orm\Region;
 use Shop\Model\Orm\Shipment;
 use Shop\Model\Orm\ShipmentItem;
 use Shop\Model\Orm\Tax;
@@ -168,7 +169,7 @@ abstract class AbstractType
         foreach (array_chunk($items, $this->getMaxReceiptLength()) as $n => $one_receipt) {
             $receipt = [];
 
-            $receipt = $this->addReceiptItemsData($receipt, $one_receipt);
+            $receipt = $this->addReceiptItemsData($receipt, $one_receipt, $operation_type);
             $receipt = $this->addReceiptOtherData($receipt, $operation_type, $n);
 
             $receipts[] = $receipt;
@@ -193,7 +194,7 @@ abstract class AbstractType
         foreach (array_chunk($items, $this->getMaxReceiptLength()) as $n => $one_receipt) {
             $receipt = [];
 
-            $receipt = $this->addReceiptItemsData($receipt, $one_receipt);
+            $receipt = $this->addReceiptItemsData($receipt, $one_receipt, $operation_type);
             $receipt = $this->addReceiptOtherData($receipt, $operation_type, $n);
 
             $receipts[] = $receipt;
@@ -223,7 +224,7 @@ abstract class AbstractType
         foreach (array_chunk($items, $this->getMaxReceiptLength()) as $n => $one_receipt) {
             $receipt = [];
 
-            $receipt = $this->addReceiptItemsData($receipt, $one_receipt);
+            $receipt = $this->addReceiptItemsData($receipt, $one_receipt, $operation_type);
             $receipt = $this->addReceiptOtherData($receipt, $operation_type, $n);
 
             $receipts[] = $receipt;
@@ -286,15 +287,22 @@ abstract class AbstractType
      *
      * @param array $receipt - данные чека
      * @param array $items - позиции в чеке
+     * @param string $operation_type - тип операции
      * @return array
      */
-    protected function addReceiptItemsData(array $receipt, array $items)
+    protected function addReceiptItemsData(array $receipt, array $items, $operation_type)
     {
         $receipt_total_sum = 0;
 
         foreach ($items as $item) {
             if ($item instanceof OrderItem) {
                 $item_data = $this->getItemDataFromOrderItem($item);
+                if ($operation_type == self::OPERATION_SELL) {
+                    //Если это чек предоплаты, то Признак предмета расчета нужно указывать "Платеж"
+                    if ($this->config['sell_payment_object'] == 'payment') {
+                        $item_data['payment_object'] = "payment";
+                    }
+                }
             }
             if ($item instanceof ShipmentItem) {
                 $item_data = $this->getItemDataFromShipmentItem($item);
@@ -350,7 +358,9 @@ abstract class AbstractType
         $result['quantity'] = (float)$product_return_item['amount'];
         $result['sum'] = (float)($product_return_item['cost'] * $product_return_item['amount']);
         $result['payment_method'] = CashRegisterApi::PAYMENT_METHOD_FULL_PAYMENT;
-        $result['payment_object'] = $product['payment_subject'];
+
+        //Если товар не найден, значит это доставка, доставка - это услуга
+        $result['payment_object'] = $product['id'] ? $product['payment_subject'] : 'service';
         if ($product->getUnit()['stitle']) {
             $result['measurement_unit'] = $product->getUnit()['stitle'];
         }
@@ -443,6 +453,18 @@ abstract class AbstractType
     protected function getRightTaxForProduct(Order $order, Product $product)
     {
         $address = $order->getAddress();
+        $delivery = $order->getDelivery();
+
+        if (!isset($address->city)){  //если доставка самовывоз, и свой адрес пользователь не вводил
+            if ($delivery->getTypeObject()->isMyselfDelivery()) {  // для расчета ставки налога использовать регион(Город) из доставки
+                $city_id = $delivery->getTypeObject()->getOption('myself_addr');
+                $city_region = new Region($city_id);
+                if ($city_region['id']) {
+                    $address = Address::createFromRegion($city_region);
+                }
+            }
+        }
+
         $tax_api = new TaxApi();
         $taxes = $tax_api->getProductTaxes($product, $this->transaction->getUser(), $address);
 

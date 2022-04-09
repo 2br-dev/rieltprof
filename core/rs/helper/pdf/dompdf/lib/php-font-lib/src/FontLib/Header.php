@@ -19,7 +19,7 @@ abstract class Header extends BinaryStream {
    * @var File
    */
   protected $font;
-  protected $def = [];
+  protected $def = array();
 
   public $data;
 

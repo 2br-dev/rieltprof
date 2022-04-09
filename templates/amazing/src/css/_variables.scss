@@ -1,0 +1,101 @@
+@import "../node_modules/bootstrap/scss/variables";
+@import "theme";
+
+$spacers: map-merge($spacers, (5: $spacer * 2, 6: $spacer * 3));
+$gutters: $spacers;
+
+$border-color: $light-gray;
+$color-contrast-light: $white;
+$color-contrast-dark: $black;
+$min-contrast-ratio: 3.8;
+
+$theme-colors: (
+        "primary":    $primary,
+        "gray":       $gray,
+        "secondary":  $secondary,
+        "success":    $success,
+        "info":       $info,
+        "warning":    $warning,
+        "danger":     $danger,
+        "light":      $light,
+        "dark":       $dark
+);
+
+$font-weight-bold: $font-bold;
+$font-family-base: $font-family;
+$font-size-base: 16px;
+$headings-font-weight: $font-bold;
+$headings-margin-bottom: 1rem;
+
+
+$h1-font-size: 2rem;
+$h2-font-size: 1.5rem;
+$h3-font-size: 1.25rem;
+$h4-font-size: 1rem;
+$h5-font-size: 0.875rem;
+$h6-font-size: 0.75rem;
+$font-sizes: (
+    1: $h1-font-size,
+    2: $h2-font-size,
+    3: $h3-font-size,
+    4: $h4-font-size,
+    5: $h5-font-size,
+    6: $h6-font-size,
+);
+
+$link-color: $link;
+$link-hover-color: $link-hover;
+
+$btn-focus-width: 0;
+$btn-padding-x: 32px;
+$btn-padding-y: 11px;
+$btn-border-radius: 8px;
+
+$accordion-button-focus-box-shadow: 0;
+$accordion-button-focus-border-color: transparent;
+$accordion-body-padding-x: 0;
+$accordion-body-padding-y: 0;
+$accordion-border-width: 0;
+$accordion-body-padding-x: 0;
+$accordion-body-padding-y: 0;
+
+$nav-link-color: $dark-gray;
+$nav-pills-link-active-bg: transparent;
+$nav-link-padding-x: 30px;
+$nav-pills-link-active-color: $dark-gray;
+
+$form-select-padding-x: 1rem;
+$form-select-padding-y: 11px;
+$form-select-border-radius: 4px;
+$form-select-focus-box-shadow: 0;
+$form-label-font-size: 0.875rem;
+$input-padding-x: 16px;
+$input-padding-y: 11px;
+$input-border-radius: 4px;
+$input-focus-box-shadow: 0;
+$input-height: 120px;
+$form-validation-states: (
+        "invalid": (
+                "color": $dark-red,
+                "icon": url('../img/icons/invalid.svg')
+        ),
+        "valid": (
+                "color": $green,
+                "icon": url('../img/icons/valid.svg')
+        )
+);
+
+$input-height-inner-half: none;
+
+$modal-md: 484px;
+$modal-lg: 738px;
+$modal-content-border-width: 1px;
+$modal-content-border-color: $light-gray;
+$modal-header-border-width: 0;
+
+$dropdown-padding-x: 24px;
+$dropdown-padding-y: 24px;
+$dropdown-border-radius: 8px;
+$dropdown-border-color: $light-gray;
+$dropdown-item-padding-x: 0;
+$dropdown-item-padding-y: 0;

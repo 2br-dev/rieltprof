@@ -185,7 +185,7 @@ class Tools
         }
         $filesize = number_format($filesize,1,'.',' ');
         //Делаем вместо 1.0 Кб или 200.0 Мб - 1 Кб, 200 Мб
-        if (strrpos($filesize, '.0') !== false) $filesize = (int)$filesize;
+        $filesize = str_replace('.0', '', $filesize);
         return $filesize.' '.$units[$i];        
     }
     
@@ -266,6 +266,7 @@ class Tools
     {
         $htaccess_path = $path.'/.htaccess';
         if (!file_exists($htaccess_path)) {
+            self::makePath($htaccess_path, true);
             file_put_contents($htaccess_path, 'deny from all');
         }
 

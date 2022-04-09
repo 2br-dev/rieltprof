@@ -8,6 +8,8 @@
 
 namespace Main\Controller\Admin;
 use RS\Config\Install;
+use RS\Config\Migration\ConvertTablesToAllowEmoji;
+use RS\Config\Migration\OldTemplatePatcher;
 use RS\Html\Toolbar;
 use RS\Html\Toolbar\Button as ToolbarButton;
 
@@ -58,7 +60,7 @@ class Options extends \RS\Controller\Admin\ConfigEdit
     {
         $helper = parent::helperIndex();
         $helper->setTopTitle(t('Настройка системы'));
-        $helper->setTemplate('%main%/crud-options.tpl');
+        $helper->setTemplate('%main%/admin/crud-options.tpl');
         return $helper;
     }
 
@@ -168,7 +170,7 @@ class Options extends \RS\Controller\Admin\ConfigEdit
             'changelog' => $this->cms_config->getChangelog()
         ]);
         
-        $helper['form'] = $this->view->fetch('show_changelog.tpl');
+        $helper['form'] = $this->view->fetch('admin/show_changelog.tpl');
         $this->result->setTemplate( $helper['template'] );
         
         return $this->result;
@@ -191,7 +193,7 @@ class Options extends \RS\Controller\Admin\ConfigEdit
            'listeners' => $listeners
         ]);
 
-        $helper->setForm($this->view->fetch('show_event_listeners.tpl'));
+        $helper->setForm($this->view->fetch('admin/show_event_listeners.tpl'));
 
         return $this->result->setTemplate($helper->getTemplate());
     }
@@ -212,6 +214,61 @@ class Options extends \RS\Controller\Admin\ConfigEdit
             $this->result->addEMessage(t('Не удалось переустановить ядро'));
         }
         return $this->result;
+    }
+
+    /**
+     * Запускает распаковку патч папки в шаблоны, созданные для версии 5.x
+     * Действие выполняется пошагово
+     */
+    function actionOldTemplatePatch()
+    {
+        $state = $this->url->request('state', TYPE_ARRAY, []);
+
+        $migration = new OldTemplatePatcher();
+        $result = $migration->patch(20, $state);
+        if ($result === true) {
+            return $this->result->setSuccess(true)
+                ->addSection('noUpdate', true)
+                ->addMessage(t('Патч успешно установлен'));
+        } else {
+            return $this->result->addSection([
+                'repeat' => true,
+                'queryParams' => [
+                    'url' => $this->url->selfUri(),
+                    'data' => [
+                        'state' => $result
+                    ]
+                ]
+            ]);
+        }
+    }
+
+    function actionConvertToUtf8mb4()
+    {
+        $state = $this->url->request('state', TYPE_ARRAY, []);
+
+        $migration = new ConvertTablesToAllowEmoji(true);
+        $result = $migration->patch(20, $state);
+
+        if ($result === true) {
+            return $this->result->setSuccess(true)
+                ->addSection('noUpdate', true)
+                ->addMessage(t('Все таблицы успешно сконвертированы'));
+        } elseif (is_string($result)) {
+            return $this->result->setSuccess(false)
+                ->addSection('noUpdate', true)
+                ->addEMessage($result);
+        } else {
+            return $this->result->addSection([
+                'repeat' => true,
+                'queryParams' => [
+                    'url' => $this->url->selfUri(),
+                    'data' => [
+                        'state' => $result
+                    ]
+                ]
+            ]);
+        }
     }
 }
 

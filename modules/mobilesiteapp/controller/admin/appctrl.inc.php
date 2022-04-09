@@ -38,7 +38,7 @@ class AppCtrl extends \RS\Controller\Admin\Front
 
     function actionIndex()
     {
-        return $this->result->setTemplate('loading.tpl');
+        return $this->result->setTemplate('admin/loading.tpl');
     }
 
     /**
@@ -77,7 +77,11 @@ class AppCtrl extends \RS\Controller\Admin\Front
     }
 
     /**
-     * Возвращает контент страницы с информацией о подписке
+     * Возвращает шаблон страницы с информацией о подписке
+     *
+     * @param $domain
+     * @param $info
+     * @return string
      */
     function viewInfo($domain, $info)
     {
@@ -87,15 +91,17 @@ class AppCtrl extends \RS\Controller\Admin\Front
             'order_count' => $this->app_api->getAppOrderCount()
         ]);
 
-        return 'view_app.tpl';
+        return 'admin/view_app.tpl';
     }
 
 
     /**
-     * Возвращает контент для промо страницы
+     * Возвращает шаблон для промо страницы
+     *
+     * @return string
      */
     function viewPromo()
     {
-        return 'promo.tpl';
+        return 'admin/promo.tpl';
     }
 }

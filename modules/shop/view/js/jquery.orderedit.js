@@ -19,13 +19,6 @@ $.orderEdit = function( method )
     var methods = {
         init: function(initoptions) {
             data.options = $.extend(data.options, initoptions);
-
-            $('.admin-comment-ta')
-                .autogrow({vertical: true, horizontal: false})
-                .keyup(function(e) {
-                    $(this).parents('.admin-comment').toggleClass('filled', $(this).val() != '');
-                });
-            
             methods.bindEvents();
 
             $('html')
@@ -71,6 +64,16 @@ $.orderEdit = function( method )
                         event.preventDefault();
                         event.stopPropagation();
                         $.messenger(lang.t('В заказе произошли изменения. Необходимо сохранить заказ.'), {theme:'error'});
+                    }
+                })
+                .on('change', '.amount-block .num', (event) => {
+                    let input = event.target;
+                    let block = input.closest('.amount-block');
+
+                    if (parseFloat(input.value) > parseFloat(block.dataset.maxAmount)) {
+                        block.classList.add('amount-error');
+                    } else {
+                        block.classList.remove('amount-error');
                     }
                 });
 
@@ -131,6 +134,8 @@ $.orderEdit = function( method )
                     $.messenger(lang.t('В составе заказа произошли изменения. Необходимо сохранить заказ.'), {theme:'error'});
                 }
             });
+
+            initAutoGrow();
         },
         
         /**
@@ -159,6 +164,17 @@ $.orderEdit = function( method )
                 }
             });
         }
+    },
+
+    initAutoGrow = function() {
+        let field = $('.admin-comment-ta');
+        if (!field.data('auto-grow-initialized')) {
+            field.autogrow({vertical: true, horizontal: false})
+                .keyup(function (e) {
+                    $(this).parents('.admin-comment').toggleClass('filled', $(this).val() != '');
+                }).data('auto-grow-initialized', true);
+        }
+
     };
     
     //private
@@ -338,7 +354,7 @@ $.orderEdit = function( method )
         var offer_index = $('.product-offers',context).val();
         $.ajaxQuery({
             url: $(this).data('url'),
-            data: {offer_index: offer_index},
+            data: {offer_id: offer_index},
             type: 'POST',
             success: function(response) {
                 var cost_select    = $('.product-offer-cost', context);
@@ -482,6 +498,7 @@ $.orderEdit = function( method )
 
         // Показываем диалог выбора продукта
         $('.product-group-container').selectProduct({
+            showProductOffers: true,
             showCostTypes: true,
             startButton: '.select-button',
             userCost: userCost,

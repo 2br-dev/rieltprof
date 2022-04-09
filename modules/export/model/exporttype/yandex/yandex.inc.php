@@ -35,7 +35,7 @@ class Yandex extends AbstractType
                     'checkboxview' => [1, 0],
                 ]),
                 'export_fb_model' => new Type\Integer([
-                    'description' => t('Экспортировать прайс-лист для Маркета по модели FB* (будут добавлены теги shop-sku, market-sku, manufacturer, count)'),
+                    'description' => t('Экспортировать прайс-лист для Маркета по модели DB*/FB* (будут добавлены теги shop-sku, market-sku, manufacturer, count)'),
                     'checkboxview' => [1, 0],
                 ]),
                 'delivery_options_cost' => new Type\Integer([
@@ -102,6 +102,7 @@ class Yandex extends AbstractType
             new OfferType\Book(),
             new OfferType\AudioBook(),
             new OfferType\ArtistTitle(),
+            new OfferType\Fbs()
         ];
     }
     

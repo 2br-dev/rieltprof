@@ -16,7 +16,7 @@
                     });
                 }
                 initEvents();
-                iniOffers($(".offers"));
+                // iniOffers($(".offers"));
 
 
                 $('.barcode-scanner').on("keypress", function (event) {
@@ -51,10 +51,14 @@
             if($(selector).length) {
                 $(selector).each(function () {
                     var prod_id = $(this).val();
+                    var offer_id = $(this).data('offerId');
                     var uniq = genUniq();
                     var $input = $('<input type="hidden">');
                     $(options.added_items).append($input.attr('name', 'items[' + uniq + '][product_id]').val(prod_id).clone());
                     $(options.added_items).append($input.attr('name', 'items[' + uniq + '][amount]').val(1).clone());
+                    if (offer_id) {
+                        $(options.added_items).append($input.attr('name', 'items[' + uniq + '][offer_id]').val(offer_id).clone());
+                    }
                     if ($('input[name="type"]').val() == options.inventory) {
                         $(options.added_items).append($input.attr('name', 'items[' + uniq + '][calc_amount]').val(0).clone());
                         $(options.added_items).append($input.attr('name', 'items[' + uniq + '][fact_amount]').val(0).clone());

@@ -17,11 +17,9 @@ use Shop\Model\Orm\Region;
 */
 class Config extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
         
-    protected
-        $token_require = false; //Токен не обязателен
+    protected $token_require = false; //Токен не обязателен
     
     /**
     * Возвращает комментарии к кодам прав доступа
@@ -308,13 +306,8 @@ class Config extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
      * @return array
      * @throws \RS\Exception
      */
-    protected function process($token = null, 
-                               $client_id, 
-                               $client_secret,
-                               $lat = "0",
-                               $lon = "0")
+    protected function process($client_id, $client_secret, $token = null, $lat = "0", $lon = "0")
     {
-        
         //Проверим предварительно приложение
         $app = \RS\RemoteApp\Manager::getAppByType($client_id);
         

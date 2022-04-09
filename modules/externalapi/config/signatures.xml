@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>61678b6ab19a2dd37612f7481ff291e67a0dcf81</sign>
+    <sign>58d2e86ce7a9364d81f814d73a7b4cefe57673bf</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -10,7 +10,7 @@
   </file>
   <file>
     <path>config/handlers.inc.php</path>
-    <sign>bae5a0b3f2852ae54517c3e8a294b2e6e71a3fce</sign>
+    <sign>e2186cdf05cc35f937e912508cd2705bb315ff2c</sign>
   </file>
   <file>
     <path>config/install.inc.php</path>
@@ -18,7 +18,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>c0dfbbaf8b51b5ec8a323a0798932b18ae6798f7</sign>
+    <sign>1aed4167f1674dbdde6c28173ca621207789485a</sign>
   </file>
   <file>
     <path>controller/admin/authtokenctrl.inc.php</path>
@@ -30,7 +30,7 @@
   </file>
   <file>
     <path>controller/front/apigate.inc.php</path>
-    <sign>bacd0efcf9b87cabf47c47b17738b342c113da35</sign>
+    <sign>313846fdc03fcd49d51b7bcf92f8c75a44ee95d6</sign>
   </file>
   <file>
     <path>model/abstractexception.inc.php</path>
@@ -38,11 +38,11 @@
   </file>
   <file>
     <path>model/abstractmethods/abstractadd.inc.php</path>
-    <sign>505973af84591f8548638227ed1097abd18547a4</sign>
+    <sign>a8521ba58f52658f9dd3f31fca0111d40e1df263</sign>
   </file>
   <file>
     <path>model/abstractmethods/abstractauthorizedmethod.inc.php</path>
-    <sign>f0f317681b29c7fcb6f4d76adb2bc860173700a5</sign>
+    <sign>3015efb1c5949d72891ccd5c63f42f263b25cd19</sign>
   </file>
   <file>
     <path>model/abstractmethods/abstractfilteredlist.inc.php</path>
@@ -62,7 +62,7 @@
   </file>
   <file>
     <path>model/abstractmethods/abstractmethod.inc.php</path>
-    <sign>17473ad65074d377d025053cbd7c965fc5d36e79</sign>
+    <sign>64233d36d44764e4a71957e81aa1921a7be4dd96</sign>
   </file>
   <file>
     <path>model/abstractmethods/abstractupdate.inc.php</path>
@@ -105,8 +105,24 @@
     <sign>97786931eb3543126975fd117f2e9a3a3068c22b</sign>
   </file>
   <file>
+    <path>model/externalapi/oauth/login.inc.php</path>
+    <sign>7bbb0a6b404e638579ca5e8da8336aca6856b0d9</sign>
+  </file>
+  <file>
     <path>model/externalapi/oauth/token.inc.php</path>
-    <sign>faeddffb98718e780e4068127d044b162989b410</sign>
+    <sign>622dc5b6db504e4483e870813c8f0fab69927eec</sign>
+  </file>
+  <file>
+    <path>model/externalapi/verification/checkcode.inc.php</path>
+    <sign>1447ac86ac72ec0634435c2a0287d7e61438dade</sign>
+  </file>
+  <file>
+    <path>model/externalapi/verification/resetsession.inc.php</path>
+    <sign>ba7b81a69bbac0d59d75d4d99ab152703b8ae688</sign>
+  </file>
+  <file>
+    <path>model/externalapi/verification/sendcode.inc.php</path>
+    <sign>9c61d6a1ba400976fbe882495830761044bd4369</sign>
   </file>
   <file>
     <path>model/logapi.inc.php</path>
@@ -150,7 +166,7 @@
   </file>
   <file>
     <path>view/form/config/allow_api_methods.tpl</path>
-    <sign>970813d8cf8fd484857a2a5ed93f51ae6f44c87a</sign>
+    <sign>b34cc7cedc62a4b5165e98aebf90c4f21e51d9e7</sign>
   </file>
   <file>
     <path>view/form/log/request_params.tpl</path>
@@ -170,7 +186,7 @@
   </file>
   <file>
     <path>view/help_method.tpl</path>
-    <sign>3192470b4665c4c7a5b68e3e6eace36920e87bd0</sign>
+    <sign>2b826eb9b24b020701a304cabe75c9471da48837</sign>
   </file>
   <file>
     <path>view/help_method_list.tpl</path>
@@ -178,7 +194,7 @@
   </file>
   <file>
     <path>view/help_wrapper.tpl</path>
-    <sign>131f268632a52b3875a24fcb4cd33d5b5d586d08</sign>
+    <sign>14fa1139164dbdc4faba87e8295482850e77379f</sign>
   </file>
   <file>
     <path>view/js/tabs.js</path>
@@ -192,5 +208,5 @@
     <path>view/update_data_info.tpl</path>
     <sign>e5eac22a0a7dbdbdffe48f3a99c9f4d4be67fd39</sign>
   </file>
-  <masterSign>68ee2112ca05cc6026bb3ae8e7ec8ba6a84f7a9b242b06c2e1700af75ecdd593a1e9d27b817004653df5b118e26c2ee6a68117d029b383935260e86fa64105ec1dcbedccafedeb2c282755f870942680f2c70e9e2b66678dbf66d4ef68b57858ac53008052db471670bdf1ce4d6dc21aa1299f82eb0b7779c3888e5cbb803d05</masterSign>
+  <masterSign>a98ffc7a74d1a70e3338cbb6f717c5b53f8575e53aea9862d8ec3f4ec9798830e9e74628c34e90cdeb4a9b82498146bbc7bbb42206aac1e78ddb60fe94ec904faa7df783eb93d81fc0c8da1d0be10ba5666d36837c512a595b77975cbdd517b14ee5c2844a26d2cc4634a7cb5f57452637c2cc3a3782b61c0e7fce3e7ef2c649</masterSign>
 </signatures>

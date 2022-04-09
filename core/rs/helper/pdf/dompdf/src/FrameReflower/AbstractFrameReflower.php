@@ -73,7 +73,7 @@ abstract class AbstractFrameReflower
         $style = $frame->get_style();
 
         // Margins of float/absolutely positioned/inline-block elements do not collapse.
-        if (!$frame->is_in_flow() || $frame->is_inline_block()) {
+        if (!$frame->is_in_flow() || $frame->is_inline_block() || $frame->get_root() == $frame || $frame->get_parent() == $frame->get_root()) {
             return;
         }
 
@@ -311,7 +311,7 @@ abstract class AbstractFrameReflower
 
         // Convert escaped hex characters into ascii characters (e.g. \A => newline)
         $string = preg_replace_callback("/\\\\([0-9a-fA-F]{0,6})/",
-            function ($matches) { return Helpers::unichr(hexdec($matches[1])); },
+            function ($matches) { return \Dompdf\Helpers::unichr(hexdec($matches[1])); },
             $string);
         return $string;
     }
@@ -447,11 +447,15 @@ abstract class AbstractFrameReflower
                 // Directive match
 
                 if ($match[7] === "open-quote") {
+                    // FIXME: do something here
                     $text .= $quotes[0][0];
                 } else if ($match[7] === "close-quote") {
+                    // FIXME: do something else here
                     $text .= $quotes[0][1];
                 } else if ($match[7] === "no-open-quote") {
+                    // FIXME:
                 } else if ($match[7] === "no-close-quote") {
+                    // FIXME:
                 } else if (mb_strpos($match[7], "attr(") === 0) {
                     $i = mb_strpos($match[7], ")");
                     if ($i === false) {
@@ -494,6 +498,8 @@ abstract class AbstractFrameReflower
         if ($style->content && $frame->get_node()->nodeName === "dompdf_generated") {
             $content = $this->_parse_content();
             // add generated content to the font subset
+            // FIXME: This is currently too late because the font subset has already been generated.
+            //        See notes in issue #750.
             if ($frame->get_dompdf()->getOptions()->getIsFontSubsettingEnabled() && $frame->get_dompdf()->get_canvas() instanceof CPDF) {
                 $frame->get_dompdf()->get_canvas()->register_string_subset($style->font_family, $content);
             }

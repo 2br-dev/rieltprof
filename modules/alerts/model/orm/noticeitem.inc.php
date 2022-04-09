@@ -52,7 +52,8 @@ class NoticeItem extends \RS\Orm\OrmObject
                 'description' => t('Подпись к ссылке')
             ]),
             'notice_type' => new Type\Varchar([
-                'description' => t('Тип уведомления')
+                'description' => t('Тип уведомления'),
+                'maxLength' => 100
             ]),
             'destination_user_id' => new Type\Integer([
                 'description' => t('Пользователь-адресат уведомления'),

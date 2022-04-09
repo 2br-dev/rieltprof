@@ -367,7 +367,14 @@ class PhotoApi extends EntityList
                     $result = rename($source, $destination);
                     break;
                 case self::MOVE_TYPE_COPY:
-                    $result = copy($source, $destination);
+                    $ctx = stream_context_create([
+                        "ssl" => [
+                            "verify_peer" => false,
+                            "verify_peer_name" => false,
+                        ],
+                    ]);
+
+                    $result = copy($source, $destination, $ctx);
                     break;
             }
         }

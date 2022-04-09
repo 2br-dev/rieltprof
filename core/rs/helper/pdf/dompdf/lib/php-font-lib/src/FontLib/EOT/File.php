@@ -58,6 +58,7 @@ class File extends \FontLib\TrueType\File {
     if ($flags & self::TTEMBED_XORENCRYPTDATA) {
       // Process XOR
     }
+    // TODO Read font data ...
   }
 
     /**

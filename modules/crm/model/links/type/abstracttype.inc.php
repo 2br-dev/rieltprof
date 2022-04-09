@@ -14,6 +14,8 @@ use RS\View\Engine;
  */
 abstract class AbstractType
 {
+    protected $last_objects_template;
+
     /**
      * Возвращает внутренний идентификатор типа связи
      *
@@ -108,5 +110,39 @@ abstract class AbstractType
     public function isObjectOtherSite()
     {
         return false;
+    }
+
+    /**
+     * Возвращает последние $limit объектов, с которыми возможно установить связь
+     *
+     * @param integer $limit Количество элементов
+     * @return []
+     */
+    public function getLastObjects($limit = null)
+    {
+        return [];
+    }
+
+    /**
+     * Возвращает готовый HTML со списком объектов, с которыми возможно установить сязь
+     *
+     * @param integer $limit
+     * @return string
+     * @throws \SmartyException
+     */
+    public function getLastObjectsHtml($limit = null)
+    {
+        if ($this->last_objects_template) {
+            $last_objects = $this->getLastObjects($limit);
+            if ($last_objects) {
+                $view = new Engine();
+                $view->assign([
+                    'last_objects' => $last_objects
+                ]);
+                return $view->fetch($this->last_objects_template);
+            }
+        }
+
+        return '';
     }
 }

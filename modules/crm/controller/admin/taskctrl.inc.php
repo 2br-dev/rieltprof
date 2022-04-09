@@ -61,9 +61,13 @@ class TaskCtrl extends Crud
         $helper->setTopTitle('Задачи'); //Установим заголовок раздела
         $helper->setTopToolbar($this->buttons(['add'], ['add' => t('добавить задачу')]));
         $helper->addCsvButton('crm-task');
-        $helper->getTopToolbar()->addItem(
-            new ToolbarButton\Button($this->router->getAdminUrl(false, ['type' => $this->api->getElement()->getShortAlias(), 'filter' => ['preset_id' => $this->dir]], 'crm-boardctrl'), t('Показать на доске'))
-        );
+        $helper->getTopToolbar()
+            ->addItem(
+                new ToolbarButton\Button($this->router->getAdminUrl(false, ['type' => $this->api->getElement()->getShortAlias(), 'filter' => ['preset_id' => $this->dir]], 'crm-boardctrl'), t('Показать на доске'))
+            )
+            ->addItem(
+                new ToolbarButton\Button($this->router->getAdminUrl(false, ['preset' => $this->dir], 'crm-taskgantctrl'), t('Диаграмма Ганта'))
+            );
 
         $helper->setTopHelp(t('В данном разделе представлены задачи, которые создали Вы, либо для Вас. Информируйте о ходе выполнения задачи с помощью статусов. Здесь отображаются все задачи в системе, независимо от выбранного мультисайта.'));
 
@@ -271,13 +275,15 @@ class TaskCtrl extends Crud
         $id = $this->url->request('id', TYPE_INTEGER);
         $this->api->setFilter('id', $id);
         $reason = '';
+
         if ($task = $this->api->getFirst()) {
             if ($task->delete()) {
+
                 if (!$this->url->request('dialogMode', TYPE_INTEGER)) {
                     $this->result->setAjaxWindowRedirect($this->url->getSavedUrl($this->controller_name . 'index'));
                 }
-
-                return $this->result->setSuccess(true)->setNoAjaxRedirect($this->url->getSavedUrl($this->controller_name . 'index'));
+                return $this->result->setSuccess(true)
+                    ->setNoAjaxRedirect($this->url->getSavedUrl($this->controller_name . 'index'));
             } else {
                 $reason = t(' Причина: %0', [$task->getErrorsStr()]);
             }

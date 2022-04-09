@@ -1,5 +1,5 @@
 {include file=$elem.__use_site_company->getOriginalTemplate() field=$elem.__use_site_company}
-<script type="text/javascript">
+<script>
 $(function() {
     var useChange = function() {
         $('input[name^="data[firm_"]').prop('disabled', $('input[name="data[use_site_company]"]').prop('checked') );

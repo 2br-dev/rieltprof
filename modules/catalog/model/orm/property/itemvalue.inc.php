@@ -37,6 +37,7 @@ class ItemValue extends \RS\Orm\OrmObject
             ]),
             'value' => new Type\Varchar([
                 'description' => t('Значение характеристики'),
+                'maxLength' => 180,
                 'attr' => [[
                     'data-autotranslit' => 'alias'
                 ]],
@@ -44,9 +45,9 @@ class ItemValue extends \RS\Orm\OrmObject
             ]),
             'alias' => new Type\Varchar([
                 'description' => t('Англ. псевдоним'),
+                'maxLength' => 150,
                 'checker' => ['chkalias', null],
                 'hint' => t('Используется при включенной функции "Включить ЧПУ фильтры?" в настройках модуля каталог'),
-
             ]),
             'color' => new Type\Color([
                 'description' => t('Цвет'),
@@ -65,6 +66,7 @@ class ItemValue extends \RS\Orm\OrmObject
             ]),
             'xml_id' => new Type\Varchar([
                 'description' => t('Внешний идентификатор'),
+                'maxLength' => 150,
                 'visible' => false
             ])
         ]);

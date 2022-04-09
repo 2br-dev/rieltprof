@@ -146,6 +146,12 @@ class File extends ConfigObject
                     'hint' => t('В случае, если вы продаете товары в разных единицах измерения лучше показывать возле корзны количество товарных строк'),
                     'checkboxView' => [1, 0]
                 ]),
+                'cart_life_time' => new Type\Integer([
+                    'description' => 'Время жизни корзины (дней)',
+                    'Checker' => ['chkEmpty', 'Укажите время жизни корзины'],
+                    'hint' => t('По прошествии указанного количества дней запись о корзине будет удаляться из базы'),
+                    'default' => 60
+                ]),
             t('Регион по умолчанию'),
                 'default_region_id' => new Type\Integer([
                     'description' => t('Регион по умолчанию'),
@@ -221,7 +227,7 @@ class File extends ConfigObject
                 'checkout_register_option' => (new Type\Varchar())
                     ->setDescription(t('Что делать с незарегистрированными пользователями?'))
                     ->setListFromArray([
-                        self::CHECKOUT_REGISTER_OPTION_USER_CHOOSES => t('Пользователь выбирает регистрирроваться или нет'),
+                        self::CHECKOUT_REGISTER_OPTION_USER_CHOOSES => t('Пользователь выбирает регистрироваться или нет'),
                         self::CHECKOUT_REGISTER_OPTION_ONLY_REGISTER => t('Всегда регистрировать пользователя'),
                         self::CHECKOUT_REGISTER_OPTION_ONLY_NO_REGISTER => t('Всегда оформлять заказы без регистрации'),
                     ])
@@ -382,6 +388,14 @@ class File extends ConfigObject
                     'hint' => t('Отвечает за формирование правильной ссылки на чек.'),
                     'list' => [['\Shop\Model\CashRegisterApi', 'getStaticOFDList']],
                 ]),
+                'sell_payment_object' => new Type\Varchar([
+                    'description' => t('Признак предмета расчета при предоплате'),
+                    'hint' => t('Если вы используете духчековую модель предоплата/полный расчет, то выберите Платеж, чтобы в чеке предоплаты был именно такой Признак предмета расчета'),
+                    'listFromArray' => [[
+                        'take_from_product' => t('Задается у объекта продажи(товара, доставки, ...)'),
+                        'payment' => t('Всегда `Платеж`')
+                    ]]
+                ]),
                 'payment_method' => new Type\Varchar([
                     'description' => t('Признак способа расчета'),
                     'hint' => t('Перекрывается настройками способа оплаты, а затем настройками товара'),
@@ -419,6 +433,16 @@ class File extends ConfigObject
                     ->setDescription(t('Максимальная скидка на товарную позицию (в процентах)'))
                     ->setHint(t('Может принимать значения от 0 до 100'))
                     ->setChecker('chkMinmax', t('"Максимальная скидка на товарную позицию" должна иметь значение от 0 до 100'), 0, 100),
+                'discount_amount_correct_round' => (new Type\Decimal())
+                    ->setDescription(t('Округлять размер скидки до'))
+                    ->setHint(t('Дробная часть указывается через точку<br/>
+                                        Округление происходит <b>в болижайшую сторону</b>,<br/>
+                                        результат округления кратен значению:<br/>
+                                        <b>0.01</b> - до сотых (13,5678 = 13,57).<br/>
+                                        <b>0.1</b> - до десятых (13,5678 = 13,6)<br/>
+                                        <b>1</b> - округлять до целых (13,5678 = 14)<br/>
+                                        <b>10</b> - до десятков (13,5678 = 10)<br/>'))
+                    ->setDecimal(2),
             t('Отгрузка заказов'),
                 'check_conformity_uit_to_barcode' => (new Type\Integer())
                     ->setDescription('Проверять соответствие кода маркировки штрихкоду товара')
@@ -514,6 +538,12 @@ class File extends ConfigObject
         }
         if ($this['require_address']) {
             $fields[] = 'address';
+        }
+        if ($this['require_street']) {
+            $fields[] = 'street';
+        }
+        if ($this['require_house']) {
+            $fields[] = 'house';
         }
         return $fields;
     }
@@ -670,6 +700,13 @@ class File extends ConfigObject
                     'description' => t('Позволяет настроить быстрые кнопки для отправки SMS сообщений в курьерском приложении'),
                     'target' => '_blank',
                     'class' => ' ',
+                ],
+                [
+                    'url' => RouterManager::obj()->getAdminUrl('cleanUserCarts', [], 'shop-tools'),
+                    'title' => t('Очистить корзины у всех пользователей'),
+                    'description' => t('Используйте данный инструмент, если вы желаете очистить собранные в корзины товары у всех пользователей на текущем сайте'),
+                    'confirm' => t('Вы действительно желаете удалить корзины пользователей?'),
+                    'class' => 'crud-get',
                 ],
             ]
             ];

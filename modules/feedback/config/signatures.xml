@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>69ee9fc845de9acf6fe8fd1d5bdcb91f78abedcd</sign>
+    <sign>f3d15bf119e59941d25f774698d27e3d37007ff7</sign>
   </file>
   <file>
     <path>config/demo/forms.csv</path>
@@ -22,7 +22,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>093e964d7bfbbbf2736bd1f263281b5f284d7569</sign>
+    <sign>b65f4c0bc3d032b26840b9e855fc8771c8eaa0c7</sign>
   </file>
   <file>
     <path>controller/admin/ctrl.inc.php</path>
@@ -66,7 +66,7 @@
   </file>
   <file>
     <path>model/orm/formfielditem.inc.php</path>
-    <sign>b3d03a92cf254d55ea073fd466e994636a619fc3</sign>
+    <sign>37798773290b6db7a008aa55895ed6e5246d11fe</sign>
   </file>
   <file>
     <path>model/orm/formitem.inc.php</path>
@@ -82,19 +82,19 @@
   </file>
   <file>
     <path>view/blocks/button/button.tpl</path>
-    <sign>bddaa542140a3417788c805fd2fac802322accbe</sign>
+    <sign>109b32699ca290b6ce234571b3bb4385b3a14134</sign>
   </file>
   <file>
     <path>view/blocks/feedback/feedback.tpl</path>
-    <sign>dbf5855305227d61e6c0ad92df79a22f5203535f</sign>
+    <sign>84d04b363a22887bc3f9ec3474094c15ee243367</sign>
   </file>
   <file>
     <path>view/blocks/feedback/field.tpl</path>
-    <sign>53fb3d4d4eb22426d78653a474a378011b1f07f6</sign>
+    <sign>c4388159f0ca5c8c9840bb3d909ed3de2335fdaf</sign>
   </file>
   <file>
     <path>view/form.tpl</path>
-    <sign>6ac2bce8563696c18b39ceccca9c8fa877dc7f8c</sign>
+    <sign>bd84b6d6b31855c79106f602b4e23b9febc3eb91</sign>
   </file>
   <file>
     <path>view/form/field/attributes_list.tpl</path>
@@ -106,7 +106,7 @@
   </file>
   <file>
     <path>view/form/field/type.tpl</path>
-    <sign>d699824068c14774773e53268bae683c3e5b0e08</sign>
+    <sign>a9357d06e52862fd46b0e74a21c0be8c8a69c383</sign>
   </file>
   <file>
     <path>view/mail/default.tpl</path>
@@ -116,5 +116,5 @@
     <path>view/notice/desktop_new_result.tpl</path>
     <sign>5f4d98729422da7ff3345db9aa2b2b053dc8eaf1</sign>
   </file>
-  <masterSign>528af38c5cfbf6dcad195ff4f5d7675766cc5ae2ce44b1303548a44ea13766a1e870f6843170d10af5f0f50026c0ba5ed565cbfb09cd1f28139a1a8118da0f068158f9824d5de5cf71a5740c6dabd3264924bfda2798148d1952d120d115a3f7e7f276941fa0338429e0208a75f821ce97657c9ab504bd6ec7e6822a845d6442</masterSign>
+  <masterSign>8698dcd2e67b2dfc9b5548688aa0792a194a1cd457470b85cd00ef9a555d7ca7baf72e572d908673f4dbc3256612f9509ac8b6feeb961c78fd49ec2fb067563d201c2c279a8f35deb4646738e42294a0c0d315ae439c3f4d5254060394916c2edc1a44ffe29e72b449ba5989c30e71e394cd696a28b887b6acafddaa86a7c548</masterSign>
 </signatures>

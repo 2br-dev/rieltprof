@@ -44,6 +44,16 @@ class Article extends AbstractType
     {
         return t('Позволяет задать произвольный текст на странице пункта меню');
     }
+
+    /**
+     * Возвраает класс иконки из коллекции zmdi
+     *
+     * @return string
+     */
+    public function getIconClass()
+    {
+        return 'zmdi-assignment';
+    }
     
     /**
     * Возвращает маршрут, если пункт меню должен добавлять его, 

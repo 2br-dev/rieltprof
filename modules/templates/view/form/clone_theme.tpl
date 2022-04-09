@@ -16,28 +16,28 @@
                 <td class="otitle">{t}Новый идентификатор (Англ. яз){/t}</td>
                 <td><input type="text" name="new_name" size="30" maxlength="25" value="{$elem.new_name}">
                     {$errors=$clone_api->getFormErrors('new_name')}
-                    <div class="field-error top-corner" data-field="new_name">{if $errors}<span class="text"><i class="cor"></i>{$errors}</span>{/if}</div>
+                    <div class="field-error top-corner" data-field="new_name">{if $errors}<span class="text"><i class="cor"><!----></i>{$errors}</span>{/if}</div>
                 </td>
             </tr>
             <tr>
                 <td class="otitle">{t}Новое название темы{/t}</td>
                 <td><input type="text" name="new_title" size="50" maxlength="50" value="{$elem.new_name}">
                     {$errors=$clone_api->getFormErrors('new_title')}
-                    <div class="field-error top-corner" data-field="new_title">{if $errors}<span class="text"><i class="cor"></i>{$errors}</span>{/if}</div>
+                    <div class="field-error top-corner" data-field="new_title">{if $errors}<span class="text"><i class="cor"><!----></i>{$errors}</span>{/if}</div>
                 </td>
             </tr>
             <tr>
                 <td class="otitle">{t}Автор новой темы{/t}</td>
                 <td><input type="text" name="new_author" size="50" maxlength="50" value="{$elem.new_author}">
                     {$errors=$clone_api->getFormErrors('new_author')}
-                    <div class="field-error top-corner" data-field="new_author">{if $errors}<span class="text"><i class="cor"></i>{$errors}</span>{/if}</div>
+                    <div class="field-error top-corner" data-field="new_author">{if $errors}<span class="text"><i class="cor"><!----></i>{$errors}</span>{/if}</div>
                 </td>
             </tr>
             <tr>
                 <td class="otitle">{t}Описание новой темы{/t}</td>
                 <td><textarea cols="50" rows="5" name="new_descr">{$elem.new_descr}</textarea>
                     {$errors=$clone_api->getFormErrors('new_descr')}
-                    <div class="field-error top-corner" data-field="new_descr">{if $errors}<span class="text"><i class="cor"></i>{$errors}</span>{/if}</div>
+                    <div class="field-error top-corner" data-field="new_descr">{if $errors}<span class="text"><i class="cor"><!----></i>{$errors}</span>{/if}</div>
                 </td>
             </tr>            
             <tr>

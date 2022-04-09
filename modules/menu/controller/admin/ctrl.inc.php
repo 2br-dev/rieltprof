@@ -84,7 +84,7 @@ class Ctrl extends Crud
             'hideFullValue' => true,
             'sortable' => true,
             'sortUrl' => $this->router->getAdminUrl('treeMove'),
-            'mainColumn' => new TableType\Usertpl('title', t('Название'), '%menu%/tree_column.tpl'),
+            'mainColumn' => new TableType\Usertpl('title', t('Название'), '%menu%/admin/tree_column.tpl'),
             'tools' => new TableType\Actions('id', [
                 new TableType\Action\Edit($this->router->getAdminPattern('edit', [':id' => '~field~']), null, [
                     'attr' => [

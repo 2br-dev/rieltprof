@@ -39,7 +39,9 @@ use Shop\Model\DeliveryApi;
 use Shop\Model\DeliveryType;
 use Shop\Model\DeliveryType\Cdek2;
 use Shop\Model\Log\LogCashRegister;
+use Shop\Model\Log\LogDelivery;
 use Shop\Model\Log\LogDeliveryCdek;
+use Shop\Model\Log\LogOnlinePay;
 use Shop\Model\Log\LogPaymentYandexKassaApi;
 use Shop\Model\OrderApi;
 use Shop\Model\Orm\CartItem;
@@ -98,7 +100,9 @@ class Handlers extends HandlerAbstract
     {
         $list[] = LogCashRegister::getInstance();
         $list[] = LogDeliveryCdek::getInstance();
+        $list[] = LogDelivery::getInstance();
         $list[] = LogPaymentYandexKassaApi::getInstance();
+        $list[] = LogOnlinePay::getInstance();
         return $list;
     }
 
@@ -110,6 +114,7 @@ class Handlers extends HandlerAbstract
     public static function ormInitCatalogWarehouse(Warehouse $warehouse)
     {
         $warehouse->getPropertyIterator()->append([
+            t('Основные'),
             'linked_region_id' => (new Type\Integer())
                 ->setDescription('Город метонахождения')
                 ->setTree('\Shop\Model\RegionApi::staticTreeList', 0, [0 => t('- Не выбран -')])
@@ -125,6 +130,7 @@ class Handlers extends HandlerAbstract
     public static function initialize()
     {
         User::attachClassBehavior(new ShopBehavior\UsersUser);
+        Product::attachClassBehavior(new ShopBehavior\CatalogProduct);
     }
 
     /**
@@ -308,7 +314,10 @@ class Handlers extends HandlerAbstract
         //Лицензионное соглашение
         $routes[] = new Route('shop-front-licenseagreement', '/license-agreement/', null, t('Лицензионное соглашение'));
         //Просмотр заказа
-        $routes[] = new Route('shop-front-myorderview', ['/my/orders/view-{order_id}/'], null, t('Просмотр заказа'));
+        $routes[] = new Route('shop-front-myorderview', [
+            '/my/orders/view-{order_id}/',
+            '/my/orders/{Act:(delete|changepayment)}-{order_id}/'
+        ], null, t('Просмотр заказа'));
         //Мои заказы
         $routes[] = new Route('shop-front-myorders', ['/my/orders/'], null, t('Мои заказы'));
         //Мои возвраты
@@ -403,7 +412,6 @@ class Handlers extends HandlerAbstract
         $list[] = new DeliveryType\FixedPay();
         $list[] = new DeliveryType\Myself();
         $list[] = new DeliveryType\Manual();
-        $list[] = new DeliveryType\Spsr();
         $list[] = new DeliveryType\RussianPost();
         $list[] = new DeliveryType\Universal();
         $list[] = new DeliveryType\Cdek2();
@@ -489,6 +497,17 @@ class Handlers extends HandlerAbstract
                     'allowEmpty' => false,
                     'default' => 0,
                 ]),
+                'reservation' => new Type\Enum(['default', 'throughout', 'forced'], [
+                    'allowEmpty' => false,
+                    'default' => 'default',
+                    'description' => t('Предварительный заказ'),
+                    'hint' => t('По-умолчанию означает: как в настройках модуля Магазин'),
+                    'ListFromArray' => [[
+                        'default' => t('По умолчанию'),
+                        'throughout' => t('Запрещено'),
+                        'forced' => t('Только предзаказ')
+                    ]],
+                ]),
             t('Налоги'),
                 'tax_ids' => new Type\Varchar([
                     'description' => t('Налоги'),
@@ -501,6 +520,11 @@ class Handlers extends HandlerAbstract
                     ->setDescription(t('Класс маркируемых товаров'))
                     ->setList('Shop\Model\Marking\MarkingApi::MarkedClassesSelectList')
                     ->setDefault(''),
+                'tn_ved_codes' => (new Type\Varchar())
+                    ->setDescription(t('Код ТН ВЭД. Если несколько, то через запятую'))
+                    ->setHint('Код ТН ВЭД. Состоит из 10 цифр без пробелов. Код применяется для товаров, которые ввозят на территорию Российской Федерации. Код определяется Единой товарной номенклатурой ВЭД и указан в международной транспортной накладной (CMR).'),
+                'gtd' => (new Type\Varchar())
+                    ->setDescription(t('Номер Грузовой Таможенной Декларации'))
         ]);
     }
 

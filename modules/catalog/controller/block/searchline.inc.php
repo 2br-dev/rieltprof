@@ -165,10 +165,11 @@ class SearchLine extends StandartBlock
                     $brand = $product->getBrand();
                     $available = ($shop_config && $shop_config->check_quantity && $product['num'] <= 0) ? 0 : 1;
 
+                    $query_escaped = preg_quote($query, '#');
                     $result_json[] = [
                         'value' => $product['title'],
-                        'label' => preg_replace("#($query)#iu", '<b>$1</b>', $product['title']),
-                        'barcode' => preg_replace("#($query)#iu", '<b>$1</b>', $product['barcode']),
+                        'label' => preg_replace("#($query_escaped)#iu", '<b>$1</b>', $product['title']),
+                        'barcode' => preg_replace("#($query_escaped)#iu", '<b>$1</b>', $product['barcode']),
                         'brand' => $brand['title'],
                         'image' => $product->getMainImage()->getUrl($this->getParam('imageWidth'), $this->getParam('imageHeight'), $this->getParam('imageResizeType')),
                         'available' => $this->getParam('showUnavailableProducts') ? 1 : $available,
@@ -197,7 +198,7 @@ class SearchLine extends StandartBlock
                     foreach ($list as $brand) {
                         $result_json[] = [
                             'value' => $brand['title'],
-                            'label' => preg_replace("#($query)#iu", '<b>$1</b>', $brand['title']),
+                            'label' => preg_replace("#($query_escaped)#iu", '<b>$1</b>', $brand['title']),
                             'image' => $brand->getMainImage()->getUrl($this->getParam('imageWidth'), $this->getParam('imageHeight'), $this->getParam('imageResizeType')),
                             'type' => 'brand',
                             'url' => $brand->getUrl()
@@ -214,7 +215,7 @@ class SearchLine extends StandartBlock
                     foreach ($list as $dir) {
                         $result_json[] = [
                             'value' => $dir['name'],
-                            'label' => preg_replace("#($query)#iu", '<b>$1</b>', $dir['name']),
+                            'label' => preg_replace("#($query_escaped)#iu", '<b>$1</b>', $dir['name']),
                             'image' => $dir->getMainImage()->getUrl($this->getParam('imageWidth'), $this->getParam('imageHeight'), $this->getParam('imageResizeType')),
                             'type' => 'category',
                             'url' => $dir->getUrl()

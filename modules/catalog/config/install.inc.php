@@ -71,6 +71,7 @@ class Install extends AbstractInstall
             ['\Catalog\Model\CsvSchema\Brand', 'brand'],
             ['\Catalog\Model\CsvSchema\Typecost', 'typecost'],
             ['\Catalog\Model\CsvSchema\Property', 'property'],
+            ['\Catalog\Model\CsvSchema\PropertyValue', 'propertyvalue'],
             ['\Catalog\Model\CsvSchema\Unit', 'unit'],
             ['\Catalog\Model\CsvSchema\Dir', 'dir'],
             

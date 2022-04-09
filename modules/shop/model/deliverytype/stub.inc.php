@@ -63,7 +63,7 @@ class Stub extends AbstractType
     * @param \Shop\Model\Orm\Address $address - Адрес доставки
     * @return double
     */
-    function getDeliveryCost(\Shop\Model\Orm\Order $order, \Shop\Model\Orm\Address $address = null, \Shop\Model\Orm\Delivery $delivery, $use_currency = true)
+    function getDeliveryCost(\Shop\Model\Orm\Order $order, \Shop\Model\Orm\Address $address, \Shop\Model\Orm\Delivery $delivery, $use_currency = true)
     {
         return 0;
     }

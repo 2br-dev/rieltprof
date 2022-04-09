@@ -291,4 +291,12 @@ class UserFieldsManager
         ]);
         return $view->fetch($this->admin_tpl);
     }
+
+    /**
+     * Очищает все ошибки
+     */
+    function clearErrors()
+    {
+        $this->errors = [];
+    }
 }

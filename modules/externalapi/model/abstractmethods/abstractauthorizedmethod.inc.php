@@ -167,5 +167,4 @@ abstract class AbstractAuthorizedMethod extends AbstractMethod
         }
         return $response;
     }
-    
 }

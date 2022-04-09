@@ -1,46 +1,29 @@
-<div class="changePaymentWrapper">
-    <h2 class="dialogTitle" data-dialog-options='{ "width": "400" }'>{t}Способы оплаты{/t}</h2>
-    {if $success}
-        <div class="formResult success">
-            {t}Способ доставки изменен{/t}
-        </div>
-    {else}
-        <form method="POST" enctype="multipart/form-data" action="{urlmake}">
-            {csrf}
-            {$this_controller->myBlockIdInput()}
+{* Диалог изменения способа оплаты в заказе *}
+{extends "%THEME%/helper/wrapper/dialog/standard.tpl"}
 
-
-            {if $errors}
-                <div class="pageError">
-                    {foreach from=$errors item=error_field}
-                        {foreach from=$error_field item=error}
-                            <p>{$error}</p>
-                        {/foreach}
-                    {/foreach}
-                </div>
-            {/if}
-
-            <table class="formTable tabFrame">
-            {foreach $payments as $payment}
-
-                    <tr>
-                        <td class="key">
-                            <input id="payment{$payment.id}" {if $payment.id == $order.payment}checked{/if} type="radio" name="payment" value="{$payment.id}"/>
-                            <label for="payment{$payment.id}">{$payment.title}</label>
-                        </td>
-                    </tr>
-
-            {/foreach}
-            </table>
-            <script type="text/javascript">
-                $(function() {
-                    if ($.fn.styler) {
-                        //Стилизуем выпадающий список
-                        $("[name='payment']").styler();
-                    }
-                });
-            </script>
-            <input type="submit" class="formSave" value="{t}Отправить{/t}"/>
-        </form>
+{block "title"}{t}Изменить способ оплаты{/t}{/block}
+{block "body"}
+    {$is_dialog_wrap=$url->request('dialogWrap', $smarty.const.TYPE_INTEGER)}
+    {if $errors}
+        <div class="alert alert-danger" role="alert">{$errors|join:", "}</div>
     {/if}
-</div>
+
+    <form method="POST" enctype="multipart/form-data" action="{urlmake}">
+        {csrf}
+        {$this_controller->myBlockIdInput()}
+
+        <div class="g-4 row row-cols-1">
+            {foreach $payments as $payment}
+                <div>
+                    <label for="payment{$payment.id}" class="check">
+                        <input class="radio" id="payment{$payment.id}" {if $payment.id == $order.payment}checked{/if} type="radio" name="payment" value="{$payment.id}"/>
+                        <span>{$payment.title}</span>
+                    </label>
+                </div>
+            {/foreach}
+            <div>
+                <button type="submit" class="btn btn-primary w-100">{t}Отправить{/t}</button>
+            </div>
+        </div>
+    </form>
+{/block}

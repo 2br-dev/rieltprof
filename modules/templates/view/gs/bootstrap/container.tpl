@@ -1,11 +1,11 @@
 {extends file="%templates%/gs/containers.tpl"}
 
-{block name="container_class"}container bs_col{$container.object.columns}{/block}
+{block name="container_class"}container bs_col{$container.object.columns} clearfix-workarea{/block}
 {block name="container_workarea_class"}container-workarea{/block}
 
 {block name="container_tools"}
     <a class="iplusrow itool crud-add" title="{t}Добавить строку{/t}" href="{adminUrl do=addSection page_id=$currentPage.id parent_id=-$container.object.type element_type="row"}">
-        <i class="zmdi zmdi-plus"></i>
+        <i class="zmdi zmdi-plus"><!----></i>
     </a>
 {/block}
 

@@ -175,7 +175,7 @@ class Address extends OrmObject
         // Скорректируем название страны
         $this['country'] = $country ? $country['title'] : null;
         // Скорректируем область
-        if (!empty($this['region_id']) && $region['parent_id'] == $country['id']) {
+        if (!empty($this['region_id']) && $region && $country && $region['parent_id'] == $country['id']) {
             $this['region'] = $region['title'];
         } else {
             $this['region_id'] = 0;
@@ -221,12 +221,12 @@ class Address extends OrmObject
         }
 
         $parts2 = [$address_base];
-        if ($this['street']) $parts2[] = 'ул. ' . $this['street'];
+        if ($this['street']) $parts2[] = t('ул. %0', [$this['street']]);
         if ($this['house']) {
-            $parts2[] = $this['house'] . ($this['block'] ? '/' . $this['block'] : '');
+            $parts2[] = $this['house'] . ($this['block'] ? ' корпус ' . $this['block'] : '');
         }
 
-        if ($this['apartment']) $parts2[] = 'кв./офис ' . $this['apartment'];
+        if ($this['apartment']) $parts2[] = t('кв./офис %0', [$this['apartment']]);
         if ($this['entrance']) $parts2[] = t('подъезд %0', [$this['entrance']]);
         if ($this['floor']) $parts2[] = t('этаж %0', [$this['floor']]);
         if ($this['entryphone']) $parts2[] = t('домофон %0', [$this['entryphone']]);

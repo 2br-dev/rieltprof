@@ -30,7 +30,7 @@ class Cdek extends AbstractType implements interfaceIonicMobile
     const API_URL = "https://integration.cdek.ru/"; //Основной URL
     const API_URL_CALCULATE = "http://api.cdek.ru/calculator/calculate_price_by_json.php"; //URL для калькуляции доставки
     const API_CALCULATE_VERSION = "1.0"; //Версия API для подсчёта стоимости доставки
-    const DEVELOPER_KEY ="522d9ea0ad70744c58fd8d9ffae01fc1";// СДЭК попросил добавить дополнительный атрибут к запросу  28.09.2017
+    const DEVELOPER_KEY ='r5$E7UPuZG:%X$r0j8N-5bUR~go$mKFr';// СДЭК попросил добавить дополнительный атрибут к запросу  28.09.2017
 
     protected $tariffId = [];  //Идентификатор тарифа по которому будет произведена доставка
     protected $delivery_cost_info = []; //Стоимость доставки по данному расчётному классу
@@ -595,7 +595,7 @@ class Cdek extends AbstractType implements interfaceIonicMobile
         $data_create        = date('Y-m-d');
         $sxml['Date']       = $data_create;
         $sxml['Account']    = trim($this->getOption('secret_login',null)); //Id аккаунта
-        $sxml['Number']     = (isset($extra_info['cdek_act_number']['data']['actNumber']) && !empty($extra_info['cdek_act_number']['data']['actNumber'])) ? $extra_info['cdek_act_number']['data']['actNumber'] : 1; //Номер Акта
+        $sxml['Number']     = (isset($extra_info['cdek_act_number']['data']['actNumber']) && !empty($extra_info['cdek_act_number']['data']['actNumber'])) ? $extra_info['cdek_act_number']['data']['actNumber'] : $order['order_num']; //Номер Акта
         $sxml['Secure']     = $this->getSecure($data_create); //Генерируемый секретный ключ
         $sxml['OrderCount'] = 1; //Общее количество заказов в xml
 
@@ -634,6 +634,13 @@ class Cdek extends AbstractType implements interfaceIonicMobile
         //Доп. данные указанные в доставке
         $extra_info = $order->getExtraKeyPair('delivery_extra');
         $extra_ti = $order->getExtraKeyPair('tariffId');
+
+        //Если это новый заказ в административной панели
+        if (empty($extra_info['tariffId']) && empty($extra_ti)) {
+            $this->requestDeliveryInfo($order, $address);
+            $extra_ti = $this->getTariffId();
+        }
+
         if (isset($extra_info['pvz_data'])) {
             $extra_info = array_merge($extra_info, json_decode(htmlspecialchars_decode($extra_info['pvz_data']), true));
         } elseif (isset($extra_info['value'])) {
@@ -730,7 +737,7 @@ class Cdek extends AbstractType implements interfaceIonicMobile
         $sxml->Order->Address['Flat']   = $flat;
         $cdek_info = new \Shop\Model\DeliveryType\Cdek\CdekInfo();
         $tariffs = $cdek_info->getAllTariffsWithInfo();
-        $extra_ti = $order->getExtraKeyPair('tariffId');
+        //$extra_ti = $order->getExtraKeyPair('tariffId');
         if (isset($tariffs[$extra_ti])) {
             $tariff = $tariffs[$extra_ti];
             if ($tariff && in_array($tariff['regim_id'], [2, 4])) { //Если нужны почтоматы
@@ -1504,7 +1511,7 @@ class Cdek extends AbstractType implements interfaceIonicMobile
         if (!$order){
             $order = \Shop\Model\Orm\Order::currentOrder();
         }
-        $this->getDeliveryCostText($order, null, $delivery);
+        $this->getDeliveryCostText($order, $order->getAddress(), $delivery);
 
         $pochtomates = $this->getPvzList($order);
         if (!empty($pochtomates)){ //Если нужны почтоматы
@@ -1637,7 +1644,7 @@ class Cdek extends AbstractType implements interfaceIonicMobile
      * @return double
      * @throws \RS\Event\Exception
      */
-    function getDeliveryCost(Order $order, Address $address = null, Delivery $delivery, $use_currency = true)
+    function getDeliveryCost(Order $order, Address $address, Delivery $delivery, $use_currency = true)
     {
         $order_delivery = $order->getDelivery();
         $cache_key = md5($order['order_num'].$order_delivery['id']);
@@ -2134,16 +2141,16 @@ class Cdek extends AbstractType implements interfaceIonicMobile
         $file = fopen($file_path,'a');
         foreach ($data as $key => $city)
         {
-            unset($city->cityUuid);
-            unset($city->regionCodeExt);
-            unset($city->latitude);
-            unset($city->longitude);
-            unset($city->country);
-            unset($city->countryCode);
-            unset($city->regionFiasGuid);
-            unset($city->fiasGuid);
-            $data[$key] = (array)$data[$key];
-            fputcsv($file, $data[$key],';','"');
+            $row = [
+                'cityName' => $city->cityName ?? '',
+                'cityCode' => $city->cityCode ?? '',
+                'region' => $city->region ?? '',
+                'regionCode' => $city->regionCode ?? '',
+                'subRegion' => $city->subRegion ?? '',
+                'kladr' => $city->kladr ?? '',
+                'paymentLimit' => $city->paymentLimit ?? ''
+            ];
+            fputcsv($file, $row,';','"');
         }
         fclose($file);
     }
@@ -2167,5 +2174,16 @@ class Cdek extends AbstractType implements interfaceIonicMobile
         parent::loadOptions($opt);
         $this->api->setWriteLog($this->getOption('write_log'));
         $this->api->setTimeout($this->getOption('timeout'));
+    }
+
+    /**
+     * Возвращает ошибки, мешающие выбрать способ доставки в списке доставок
+     *
+     * @param Order $order - заказ
+     * @return string
+     */
+    public function getSelectError(Order $order): string
+    {
+        return $this->somethingWrong($order, $order->getAddress());
     }
 }

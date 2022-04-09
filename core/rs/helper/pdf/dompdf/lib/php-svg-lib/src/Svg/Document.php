@@ -48,13 +48,13 @@ class Document extends AbstractTag
     protected $surface;
 
     /** @var AbstractTag[] */
-    protected $stack = [];
+    protected $stack = array();
 
     /** @var AbstractTag[] */
-    protected $defs = [];
+    protected $defs = array();
 
     /** @var \Sabberworm\CSS\CSSList\Document[] */
-    protected $styleSheets = [];
+    protected $styleSheets = array();
 
     public function loadFile($filename)
     {
@@ -66,12 +66,12 @@ class Document extends AbstractTag
         xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, false);
         xml_set_element_handler(
             $parser,
-            [$this, "_tagStart"],
-            [$this, "_tagEnd"]
+            array($this, "_tagStart"),
+            array($this, "_tagEnd")
         );
         xml_set_character_data_handler(
             $parser,
-            [$this, "_charData"]
+            array($this, "_charData")
         );
 
         return $this->parser = $parser;
@@ -163,13 +163,13 @@ class Document extends AbstractTag
             }
         }
 
-        return [
+        return array(
             0        => $this->width,
             1        => $this->height,
 
             "width"  => $this->width,
             "height" => $this->height,
-        ];
+        );
     }
 
     public function getDocument(){

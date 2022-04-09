@@ -78,6 +78,7 @@ class File extends \RS\Orm\OrmObject
             ]),
             'xml_id' => new Type\Varchar([
                 'description' => t('Идентификатор в сторонней системе'),
+                'maxLength' => 150,
                 'visible' => false,
                 'unique' => true
             ]),
@@ -89,6 +90,7 @@ class File extends \RS\Orm\OrmObject
             ]),
             'uniq_name' => new Type\Varchar([
                 'description' => t('Уникальное название файла (url-имя)'),
+                'maxLength' => 150,
                 'visible' => false,
                 'unique' => true
             ])

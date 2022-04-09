@@ -1,6 +1,6 @@
 {include file=$elem.__allow_api_methods->getOriginalTemplate() field=$elem.__allow_api_methods}
 
-<script type="text/javascript">
+<script>
 $(function() {
     $('[name="allow_api_methods[]"][value="all"]').change(function() {
         if ($(this).is(':checked')) {

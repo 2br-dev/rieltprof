@@ -66,8 +66,12 @@ class Image extends File
     function getUrl($width, $height, $img_type = 'xy', $absolute = false)
     {
         if ($this->get()) {
-            $url = $this->getImageCore()->getImageUrl($this->getRealPath(), $width, $height, $img_type);
-            return $absolute ? \RS\Site\Manager::getSite()->getAbsoluteUrl($url) : $url;
+            if ($this->getExtension() == 'svg') {
+                return $this->getLink($absolute);
+            } else {
+                $url = $this->getImageCore()->getImageUrl($this->getRealPath(), $width, $height, $img_type);
+                return $absolute ? \RS\Site\Manager::getSite()->getAbsoluteUrl($url) : $url;
+            }
         } else {
             return $this->getStub()->getUrl($width, $height, $img_type, $absolute);
         }

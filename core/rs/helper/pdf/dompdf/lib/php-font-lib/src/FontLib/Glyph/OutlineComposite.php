@@ -9,8 +9,6 @@
 
 namespace FontLib\Glyph;
 
-use FontLib\Table\Type\glyf;
-
 /**
  * Composite glyph outline
  *
@@ -31,14 +29,14 @@ class OutlineComposite extends Outline {
   /**
    * @var OutlineComponent[]
    */
-  public $components = [];
+  public $components = array();
 
   function getGlyphIDs() {
     if (empty($this->components)) {
       $this->parseData();
     }
 
-    $glyphIDs = [];
+    $glyphIDs = array();
     foreach ($this->components as $_component) {
       $glyphIDs[] = $_component->glyphIndex;
 
@@ -220,9 +218,9 @@ class OutlineComposite extends Outline {
   }
 
   public function getSVGContours() {
-    $contours = [];
+    $contours = array();
 
-    /** @var glyf $glyph_data */
+    /** @var \FontLib\Table\Type\glyf $glyph_data */
     $glyph_data = $this->getFont()->getTableObject("glyf");
 
     /** @var Outline[] $glyphs */
@@ -232,10 +230,10 @@ class OutlineComposite extends Outline {
       $_glyph = $glyphs[$component->glyphIndex];
 
       if ($_glyph !== $this) {
-        $contours[] = [
+        $contours[] = array(
           "contours"  => $_glyph->getSVGContours(),
           "transform" => $component->getMatrix(),
-        ];
+        );
       }
     }
 

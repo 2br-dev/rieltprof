@@ -10,7 +10,7 @@ namespace Export\Model\ExportType\Yandex\OfferType;
 
 use Catalog\Model\Orm\Product as Product;
 use Export\Model\Orm\ExportProfile as ExportProfile;
-use RS\Orm\Exception as OrmException;
+use RS\Exception as RSException;
 
 class Simple extends CommonOfferType
 {
@@ -42,7 +42,7 @@ class Simple extends CommonOfferType
      * @param \XMLWriter $writer
      * @param Product $product
      * @param mixed $offer_index
-     * @throws OrmException
+     * @throws RSException
      */
     function writeEspecialOfferTags(ExportProfile $profile, \XMLWriter $writer, Product $product, $offer_index)
     {

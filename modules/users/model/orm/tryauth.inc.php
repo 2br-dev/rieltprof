@@ -27,6 +27,7 @@ class TryAuth extends \RS\Orm\AbstractObject
     {
         $properties = $this->getPropertyIterator()->append([
             'ip' => new Type\Varchar([
+                'maxLength' => 50,
                 'description' => t('IP-адрес'),
                 'primaryKey' => true
             ]),

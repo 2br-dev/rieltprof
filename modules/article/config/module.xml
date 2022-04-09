@@ -3,7 +3,7 @@
     <defaultValues>
         <name multilanguage="true">Статьи</name>
         <description multilanguage="true">Добавление, редактирование статей, категорий</description>        
-        <version>3.0.34</version>
+        <version>6.0.2</version>
         <author>ReadyScript lab.</author>
         <is_system>1</is_system>
         <preview_list_pagesize>10</preview_list_pagesize>

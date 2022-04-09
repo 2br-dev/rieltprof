@@ -14,16 +14,14 @@ use \RS\Orm\Type;
 */
 class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
 {
-    const
-        RIGHT_LOAD = 1;
+    const RIGHT_LOAD = 1;
 
     protected
         $view, //Объект движка шаблонизатора
         $site; //Текущий объект сайта
     protected $token_require = false;
-    /**
-     * @var \Menu\Model\Orm\Menu $object
-     */
+
+    /** @var \Menu\Model\Orm\Menu $object */
     protected $object;
 
     function __construct()
@@ -134,7 +132,7 @@ class Get extends \ExternalApi\Model\AbstractMethods\AbstractGet
      * @return array
      * @throws \ExternalApi\Model\Exception
      */
-    function process($token = null, $menu_id)
+    function process($menu_id, $token = null)
     {
         $response = parent::process($token, $menu_id);
         $this->appendArticleHtmlContent();

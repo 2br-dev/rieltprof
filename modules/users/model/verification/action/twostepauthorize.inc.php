@@ -65,7 +65,9 @@ class TwoStepAuthorize extends AbstractVerifyTypeCode
     }
 
     /**
-     * устанавливает URL, на который необходимо вернуть пользователя после автоизации
+     * Устанавливает URL, на который необходимо вернуть пользователя после автоизации
+     *
+     * @param string $referer
      */
     public function setReferer($referer)
     {
@@ -83,6 +85,25 @@ class TwoStepAuthorize extends AbstractVerifyTypeCode
         return $this->getData('referer', $default);
     }
 
+    /**
+     * Устанавливает ID приложения. Используется при двухфакторной авторизации через JSON API
+     *
+     * @param string $client_id
+     */
+    public function setAppClientId($client_id)
+    {
+        $this->addData('client_id', $client_id);
+    }
+
+    /**
+     * Возвращает ID приложения. Используется при двухфакторной авторизации через JSON API
+     *
+     * @return string
+     */
+    public function getAppClientId()
+    {
+        $this->getData('client_id');
+    }
 
     /**
      * Возвращает название операции в родительном падеже

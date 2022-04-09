@@ -32,8 +32,8 @@ class Ctrl extends \RS\Controller\Admin\Crud
             'Columns' => [
                 new TableType\Checkbox('id'),            
                 new TableType\Text('description', t('Страница')),
-                new TableType\Usertpl('routeview', t('Маршрут'), $this->mod_tpl.'pageseo_column_route.tpl', ['hidden' => true]),
-                new TableType\Usertpl('', t('Мета-теги'), $this->mod_tpl.'pageseo_column_meta.tpl', ['TdAttr' => ['class' => 'cell-small']]),
+                new TableType\Usertpl('routeview', t('Маршрут'), $this->mod_tpl.'admin/pageseo_column_route.tpl', ['hidden' => true]),
+                new TableType\Usertpl('', t('Мета-теги'), $this->mod_tpl.'admin/pageseo_column_meta.tpl', ['TdAttr' => ['class' => 'cell-small']]),
                 new TableType\Actions('id', [
                             new TableType\Action\Edit($this->router->getAdminPattern('edit', [':id' => '~field~']),null, [
                                 'attr' => [

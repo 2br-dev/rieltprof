@@ -26,7 +26,7 @@ class AllBrands extends \RS\Controller\Front
     function actionIndex()
     {
         $this->api->setFilter('public', 1);
-        $this->api->setOrder("title ASC");
+        $this->api->setOrder($this->getModuleConfig()->brand_sort ?: 'title asc');
         $brands = $this->api->getList();
         
         //Хлебные крошки

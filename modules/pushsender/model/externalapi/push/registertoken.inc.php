@@ -10,8 +10,7 @@ use \ExternalApi\Model\Exception as ApiException;
 
 class RegisterToken extends \ExternalApi\Model\AbstractMethods\AbstractAuthorizedMethod
 {
-    const
-        RIGHT_REGISTER = 1;
+    const RIGHT_REGISTER = 1;
         
     protected
         $token_require = false,

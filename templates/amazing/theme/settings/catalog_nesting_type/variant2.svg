@@ -1,0 +1,31 @@
+<svg width="169" height="124" viewBox="0 0 169 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="168" height="15" rx="7.5" fill="#247CFF"/>
+<rect x="1" y="22" width="168" height="102" fill="#EBEBEB"/>
+<rect y="23" width="55" height="101" fill="#D8D8D8"/>
+<rect x="14" y="35" width="29" height="9" rx="4.5" fill="#ABABAB"/>
+<rect x="14" y="80" width="29" height="9" rx="4.5" fill="#ABABAB"/>
+<rect x="14" y="65" width="29" height="9" rx="4.5" fill="#ABABAB"/>
+<rect x="14" y="50" width="29" height="9" rx="4.5" fill="#ABABAB"/>
+<rect x="70" y="35" width="29" height="6" rx="3" fill="#C4C4C4"/>
+<rect x="126" y="63" width="22" height="3" rx="1.5" fill="#247CFF"/>
+<rect x="126" y="63" width="22" height="3" rx="1.5" fill="#838383"/>
+<rect x="126" y="77" width="22" height="3" rx="1.5" fill="#247CFF"/>
+<rect x="126" y="77" width="22" height="3" rx="1.5" fill="#838383"/>
+<rect x="126" y="91" width="22" height="3" rx="1.5" fill="#247CFF"/>
+<rect x="126" y="91" width="22" height="3" rx="1.5" fill="#838383"/>
+<rect x="126" y="105" width="22" height="3" rx="1.5" fill="#247CFF"/>
+<rect x="126" y="105" width="22" height="3" rx="1.5" fill="#838383"/>
+<rect x="70" y="51" width="29" height="6" rx="3" fill="#C4C4C4"/>
+<rect x="126" y="35" width="22" height="3" rx="1.5" fill="#247CFF"/>
+<rect x="126" y="35" width="22" height="3" rx="1.5" fill="#838383"/>
+<rect x="126" y="49" width="22" height="3" rx="1.5" fill="#247CFF"/>
+<rect x="126" y="49" width="22" height="3" rx="1.5" fill="#838383"/>
+<rect x="70" y="67" width="29" height="6" rx="3" fill="#C4C4C4"/>
+<rect x="70" y="83" width="29" height="6" rx="3" fill="#C4C4C4"/>
+<rect x="70" y="99" width="29" height="6" rx="3" fill="#C4C4C4"/>
+<line x1="112.5" y1="23" x2="112.5" y2="124" stroke="#D8D8D8"/>
+<line x1="59.5962" y1="58.6464" x2="64.5459" y2="63.5962" stroke="#DADADA"/>
+<line x1="63.8388" y1="63.5962" x2="59.5962" y2="67.8388" stroke="#DADADA"/>
+<line x1="116.596" y1="59.6464" x2="121.546" y2="64.5962" stroke="#DADADA"/>
+<line x1="120.839" y1="64.5962" x2="116.596" y2="68.8388" stroke="#DADADA"/>
+</svg>

@@ -1,0 +1,249 @@
+.admin-style .gant-filter-line .dropdown {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom:20px;
+}
+
+.admin-style .gant {
+    display:grid;
+    position:relative;
+    grid-template-columns: auto 1fr;
+}
+
+.admin-style .gant .g-columns {
+    display:grid;
+    grid-auto-flow:column;
+}
+
+.admin-style .gant .left-part .g-columns {
+    grid-auto-columns: min-content;
+}
+
+.admin-style .gant .right-part .g-columns > * {
+    min-width:var(--gant-min-cell-width);
+}
+
+.admin-style .gant .num-column {
+    width:90px;
+}
+
+.admin-style .gant .user-column {
+    min-width:150px;
+    padding:0 10px;
+}
+
+@media (max-width: 1199px) {
+    .admin-style .gant .visible-lg-flex {
+        display:none !important;
+    }
+}
+
+.admin-style .gant .ready-column {
+    min-width:100px;
+    padding:0 10px;
+    text-align: center;
+}
+
+.admin-style .gant .task-column {
+    min-width:300px;
+    padding:0 10px;
+}
+
+
+.admin-style .gant .g-head > div {
+    text-align:center;
+    padding:10px 0;
+    border-bottom:1px solid #aaa;
+}
+
+.admin-style .gant .right-part .g-head {
+    position:relative;
+    background-color:rgba(255, 255, 255, 0.3);
+    z-index:4;
+}
+
+.admin-style .gant .g-body {
+    padding:5px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.admin-style .gant .g-body > * {
+    height:40px;
+}
+
+.admin-style .gant .left-part .g-body > * {
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.admin-style .gant .g-text-overflow {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.admin-style .gant .g-chart {
+    display:block;
+    height:20px;
+    margin-top:10px;
+    border-left:1px solid white;
+    border-right:1px solid white;
+    z-index:2;
+}
+
+.admin-style .gant .g-day-columns {
+    grid-template-columns: repeat(var(--gant-days), minmax(var(--gant-min-cell-width), 1fr));
+}
+
+.admin-style .gant .g-chart-wrapper {
+    position:relative;
+    transition: opacity ease 0.3s;
+    opacity:0.8;
+}
+
+.admin-style .gant .g-chart-wrapper i {
+    position:absolute;
+    pointer-events: none;
+}
+
+.admin-style .gant .g-chart-wrapper .g-time-from {
+    border-left: 1px solid #000;
+    position: absolute;
+    top: -6px;
+    left:1px;
+    padding-bottom: 20px;
+    padding-left: 3px;
+    font-size: 11px;
+    display:none;
+    z-index:-1;
+}
+
+.admin-style .gant .g-chart-wrapper .g-time-to {
+    border-right: 1px solid #000;
+    position: absolute;
+    bottom: -6px;
+    right: 1px;
+    padding-top: 20px;
+    padding-right: 3px;
+    font-size: 11px;
+    display:none;
+    z-index:-1;
+}
+
+.admin-style .gant .g-chart-wrapper:hover .g-time-from,
+.admin-style .gant .g-chart-wrapper:hover .g-time-to {
+    display:block;
+}
+
+.admin-style .gant .g-chart-wrapper:hover {
+    opacity:1;
+    z-index:3;
+}
+
+.admin-style .gant .g-lines {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    z-index:-1;
+}
+
+.admin-style .gant .g-lines i {
+    display: block;
+    border-right: 1px solid #ddd;
+}
+
+.admin-style .gant .g-areas {
+    display:grid;
+    grid-auto-flow:column;
+    padding:0;
+    list-style:none;
+}
+.admin-style .gant .weekend {
+    background: rgba(218, 176, 166, 0.2);
+}
+
+.admin-style .gant > * {
+    position: relative;
+}
+
+.admin-style .gant .right-part {
+    overflow-x:auto;
+}
+
+.admin-style .gant .g-today-line {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index:-1;
+}
+
+.admin-style .gant .g-today {
+    display: block;
+    border-left: 2px dashed #000;
+    min-width:0 !important;
+}
+
+.admin-style .gant .fix {
+    display: inline-block;
+    min-width:100%;
+}
+
+.admin-style .gant .highlight {
+    background: #ffff001c;
+}
+
+.admin-style .g-top-line {
+    display:flex;
+    justify-content: space-between;
+    z-index:5;
+    position: relative;
+}
+
+.admin-style .g-user-line {
+    height:51px;
+    position:relative;
+}
+
+.admin-style .g-user-line .g-columns {
+    position: absolute;
+    width:100%;
+    top:0;
+    left:0;
+}
+
+.admin-style .g-user-line .g-chart-wrapper {
+    z-index:2;
+}
+
+.admin-style .g-zoom {
+    display:flex;
+    align-items: center;
+    margin-top:8px;
+}
+
+.admin-style .g-zoom-slider {
+    width:150px;
+
+    shape-outside: polygon(0 20px, 150px 20px, 150px 0px, 0 12px);
+    clip-path: polygon(0 20px, 150px 20px, 150px 0, 0 12px);
+    height: 20px !important;
+}
+
+.admin-style .g-zoom-slider.ui-slider .ui-slider-handle {
+    height:100%;
+    width:15px;
+}
+
+.admin-style .g-empty {
+    text-align:center;
+    font-size:24px;
+    color:darkgrey;
+    padding-top:10vh;
+}
+.admin-style .g-zindex-zero {
+    position:relative;
+    z-index:0;
+}

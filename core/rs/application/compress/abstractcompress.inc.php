@@ -91,7 +91,7 @@ abstract class AbstractCompress
      * @param int $compress_type - тип сжатия: 0 - не сжимать, 1 - объединять, 2 - объединять, сжимать
      * @return array
      */
-    public function getCompressed($no_compress = [], $compress_type)
+    public function getCompressed($no_compress, $compress_type)
     {
         if ($compress_type == self::NO_COMPRESS)
             return $no_compress;

@@ -2,7 +2,7 @@
 <signatures>
   <file>
     <path>config/changelog.txt</path>
-    <sign>d3b945477b64b80ae939e2b72b09fa86c180c601</sign>
+    <sign>1dd5d60623add23e086906bd780069d89406c5ad</sign>
   </file>
   <file>
     <path>config/file.inc.php</path>
@@ -18,7 +18,7 @@
   </file>
   <file>
     <path>config/module.xml</path>
-    <sign>afa8d38f2d53f4ec71de950b78b3e90ea7eae7e9</sign>
+    <sign>1ff17186ce59189ee880cb0a1115782e412b672d</sign>
   </file>
   <file>
     <path>config/patches.inc.php</path>
@@ -26,7 +26,7 @@
   </file>
   <file>
     <path>controller/admin/appctrl.inc.php</path>
-    <sign>65c2320bbc0043285cdacf23da5b66a7f0a62c58</sign>
+    <sign>ffd4ecdb63e7462e1deebbe36f3c2f2b1493379f</sign>
   </file>
   <file>
     <path>controller/front/gate.inc.php</path>
@@ -38,7 +38,7 @@
   </file>
   <file>
     <path>model/apptypes/mobilesiteapp.inc.php</path>
-    <sign>266a8f5be863f05fb33c7342eed8b579973f4be8</sign>
+    <sign>73ea9e3d7aed6e68fee8c3898b7afe74792eb4fd</sign>
   </file>
   <file>
     <path>model/extendapi.inc.php</path>
@@ -50,11 +50,11 @@
   </file>
   <file>
     <path>model/externalapi/mobilesiteapp/config.inc.php</path>
-    <sign>739cf84fd474fcc5327453d02b8a0fb08a0f8584</sign>
+    <sign>e7fcf004f09bc9d7bd5dd9d94b39a657cc23c7e9</sign>
   </file>
   <file>
     <path>model/externalapi/mobilesiteapp/getextendsjson.inc.php</path>
-    <sign>b6f60e5916afab2dee166d87be36e0bbee953e22</sign>
+    <sign>0ff3b7e88c74d1af23519ff1afe47ae2d0a6ba57</sign>
   </file>
   <file>
     <path>model/push/messagetousers.inc.php</path>
@@ -67,6 +67,22 @@
   <file>
     <path>model/templatemanager.inc.php</path>
     <sign>a38546a85e7c502d163e83ba9127c8b1dfc60f87</sign>
+  </file>
+  <file>
+    <path>view/admin/loading.tpl</path>
+    <sign>307174cdd1db92fa1209fcb83c23f994115273f0</sign>
+  </file>
+  <file>
+    <path>view/admin/phonepreview.tpl</path>
+    <sign>50f82ee495b467b9dd0763ea4741dfdb6107226d</sign>
+  </file>
+  <file>
+    <path>view/admin/promo.tpl</path>
+    <sign>910f430bb606247e8dd5eab31e23ae0904e6d010</sign>
+  </file>
+  <file>
+    <path>view/admin/view_app.tpl</path>
+    <sign>63bbdbbd4b31f1586121179a67b7d1b74815a699</sign>
   </file>
   <file>
     <path>view/css/jquery.smartbanner.css</path>
@@ -195,10 +211,6 @@
   <file>
     <path>view/js/view_app.js</path>
     <sign>357e3bf462c33c8b81c6ae20ccd3315836b75b53</sign>
-  </file>
-  <file>
-    <path>view/loading.tpl</path>
-    <sign>307174cdd1db92fa1209fcb83c23f994115273f0</sign>
   </file>
   <file>
     <path>view/pages/article/blocks/articlepage.tpl</path>
@@ -337,20 +349,8 @@
     <sign>502aa9cae15c80cc8a69fa8781330578d1fb9b9e</sign>
   </file>
   <file>
-    <path>view/phonepreview.tpl</path>
-    <sign>50f82ee495b467b9dd0763ea4741dfdb6107226d</sign>
-  </file>
-  <file>
-    <path>view/promo.tpl</path>
-    <sign>910f430bb606247e8dd5eab31e23ae0904e6d010</sign>
-  </file>
-  <file>
-    <path>view/view_app.tpl</path>
-    <sign>a01bea874e8a802d1ad8de19b35284db761ebb43</sign>
-  </file>
-  <file>
     <path>view/wrapper.tpl</path>
     <sign>06fa51ae5cfcdf8facbddf41b79394dc02006575</sign>
   </file>
-  <masterSign>030b478b5c5bc202023db95a2144ea17647e0ea1563149ff6d70d02db4ecd182407e76b659bacfac2c92588c63ab129964f5c7b7759b465ccc5433a278b3b42e6485af6aec3009e7970072448d5d3b60d1bda83f5c16d1447505689bb818ce8c65a4213b893c0f518511d9ce43cb8bd1b6e2b97372a81b34e115382c68ecca41</masterSign>
+  <masterSign>667b16b2881972e66ae75226553fc47a26a4b469b907000c0f4e73480019b5e83699b3519e9b23b8426650fd8a41961752cc88ed400b8bb699376665723c9e2fb56f68dbff8fc297a7f4005665e99880551744bb5720ae7c723e16a7e204746a457f5e4cc70ae050e5428dabbeacd90ddb3e97d647fef9238f5a52db8a32b82d</masterSign>
 </signatures>

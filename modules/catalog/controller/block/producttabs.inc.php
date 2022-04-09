@@ -61,6 +61,7 @@ class ProductTabs extends StandartBlock
                     'title DESC' => t('Название обратн. порядок'),
                     'dateof DESC' => t('Дата обратн. порядок'),
                     'rating DESC' => t('Рейтинг обратн. порядок'),
+                    'rand()' => t('Случайный порядок')
                 ]]
             ]),
             'only_in_stock' => new Type\Integer([

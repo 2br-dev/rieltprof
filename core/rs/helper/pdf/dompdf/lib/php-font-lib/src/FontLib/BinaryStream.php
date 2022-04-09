@@ -62,7 +62,7 @@ class BinaryStream {
    * @return bool
    */
   public function open($filename, $mode = self::modeRead) {
-    if (!in_array($mode, [self::modeRead, self::modeWrite, self::modeReadWrite])) {
+    if (!in_array($mode, array(self::modeRead, self::modeWrite, self::modeReadWrite))) {
       throw new \Exception("Unkown file open mode");
     }
 
@@ -293,7 +293,7 @@ class BinaryStream {
   }
 
   public function unpack($def) {
-    $d = [];
+    $d = array();
     foreach ($def as $name => $type) {
       $d[$name] = $this->r($type);
     }
@@ -363,7 +363,7 @@ class BinaryStream {
             return $this->readInt8Many($type[1]);
           }
 
-          $ret = [];
+          $ret = array();
           for ($i = 0; $i < $type[1]; $i++) {
             $ret[] = $this->r($type[0]);
           }

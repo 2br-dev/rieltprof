@@ -2,7 +2,7 @@
 /**
  * @package php-svg-lib
  * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien Mï¿½nager <fabien.menager@gmail.com>
+ * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license GNU LGPLv3+ http://www.gnu.org/copyleft/lesser.html
  */
 
@@ -12,7 +12,7 @@ class Polygon extends Shape
 {
     public function start($attributes)
     {
-        $tmp = [];
+        $tmp = array();
         preg_match_all('/([\-]*[0-9\.]+)/', $attributes['points'], $tmp);
 
         $points = $tmp[0];

@@ -206,6 +206,8 @@ function rename_folder($old_path, $name, $transliteration)
  */
 function create_img($imgfile, $imgthumb, $newwidth, $newheight = null, $option = "crop")
 {
+    if (mb_substr($imgfile, -4) == '.svg') return true;
+
 	$timeLimit = ini_get('max_execution_time');
 	set_time_limit(30);
 	$result = false;
@@ -556,6 +558,9 @@ function config_loading($current_path, $fld)
  */
 function image_check_memory_usage($img, $max_breedte, $max_hoogte)
 {
+    if (mb_substr($img, -4) == '.svg') {
+        return true;
+    }
 	if (file_exists($img))
 	{
 		$K64 = 65536; // number of bytes in 64K

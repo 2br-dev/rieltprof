@@ -7,9 +7,11 @@
 */
 namespace Catalog\Controller\Front;
 
+use Catalog\Config\File as ConfigFile;
 use Catalog\Model\Api as ProductApi;
 use Catalog\Model\BrandApi;
 use RS\Controller\Front;
+use RS\Helper\Paginator;
 
 /**
  * Контроллер отвечает за просмотр брэнда
@@ -34,6 +36,7 @@ class Brand extends Front
     {
         $config = $this->getModuleConfig();
         $id = urldecode($this->url->get('id', TYPE_STRING));
+        $page = $this->url->get('p', TYPE_INTEGER, 1);
 
         /** @var \Catalog\Model\Orm\Brand $brand */
         $brand = $this->brand_api->getById($id);
@@ -56,9 +59,23 @@ class Brand extends Front
         //Получим директории в которых есть товар с заданным производителем
         $dirs = $this->brand_api->getBrandDirs($brand);
 
-        //Получим товары из спец. категорий принадлежащих этому бренду
         $limit = $config['brand_products_cnt'];
-        $products = $this->brand_api->getProductsInSpecDirs($brand, $limit);
+        if ($config['brand_products_type'] == ConfigFile::BRAND_PRODUCTS_TYPE_ALL) {
+            $this->api->setFilter([
+                'brand_id' => $brand['id'],
+                'public' => 1
+            ]);
+
+            if ($config['brand_products_hide_unobtainable']) {
+                $this->api->setFilter('num', 0, '>');
+            }
+
+            $paginator = new Paginator($page, $this->api->getListCount(), $limit);
+            $products = $this->api->getList($page, $limit);
+        } else {
+            //Получим товары из спец. категорий принадлежащих этому бренду
+            $products = $this->brand_api->getProductsInSpecDirs($brand, $limit);
+        }
 
         if (!empty($products)) {
             //Загружаем только фото и цены, остальные сведения, если нужны нужно подгружать в шаблоне
@@ -68,6 +85,7 @@ class Brand extends Front
         }
 
         $this->view->assign([
+            'paginator' => $paginator ?? null,
             'products' => $products,         //Товары бренда в спец. категориях
             'brand' => $brand,               //Бренд
             'dirs' => $dirs                 //Категории бренда

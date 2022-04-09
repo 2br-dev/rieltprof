@@ -18,6 +18,7 @@ use RS\Orm\Type;
  * @property integer $site_id ID сайта
  * @property string $title Название баннера
  * @property string $file Баннер
+ * @property string $mobile_file Баннер для мобильных разрешений
  * @property integer $use_original_file Использовать оригинал файла для вставки
  * @property string $link Ссылка
  * @property integer $targetblank Открывать ссылку в новом окне
@@ -50,6 +51,12 @@ class Banner extends OrmObject
                     'description' => t('Баннер'),
                     'storage' => [\Setup::$ROOT, \Setup::$FOLDER . static::$src_folder],
                     'template' => '%banners%/form/banner/file.tpl'
+                ]),
+                'mobile_file' => new Type\File([
+                    'description' => t('Баннер для мобильных разрешений'),
+                    'hint' => t('Используйте данное поле, чтобы отобразить в мобильной версии баннер с другим содержимым. Не все темы поддерживают данное поле'),
+                    'storage' => [\Setup::$ROOT, \Setup::$FOLDER . static::$src_folder],
+                    'template' => '%banners%/form/banner/mobile_file.tpl'
                 ]),
                 'use_original_file' => new Type\Integer([
                     'description' => t('Использовать оригинал файла для вставки'),
@@ -213,6 +220,21 @@ class Banner extends OrmObject
         $link = $this['__file']->getLink();
         return $absolute ? \RS\Site\Manager::getSite()->getAbsoluteUrl($link) : $link;
     }
+
+    /**
+    * Возвращает путь к оригиналу файла для мобильной версии
+    *
+    * @param bool $absolute Если true, то возвращает абсолютный путь, иначе возвращает относительный
+    * @return string
+    */
+    function getMobileOriginalUrl($absolute = false)
+    {
+        /**
+        * @var \RS\Orm\Type\File
+        */
+        $link = $this['__mobile_file']->getLink();
+        return $absolute ? \RS\Site\Manager::getSite()->getAbsoluteUrl($link) : $link;
+    }
     
     /**
     * Возвращает путь к изображению с заданными размерами
@@ -229,6 +251,22 @@ class Banner extends OrmObject
         $img = new \RS\Img\Core(\Setup::$ROOT, \Setup::$FOLDER.static::$src_folder, \Setup::$FOLDER.static::$dst_folder);
         return $img->getImageUrl($this['__file']->getRealPath(), $width, $height, $scale, $absolute);
     }
+
+    /**
+    * Возвращает путь к изображению для мобильной версии с заданными размерами
+    *
+    * @param integer $width - ширина изображения
+    * @param integer $height - высота изображения
+    * @param string $scale - тип масштабирования (xy|cxy|axy)
+    * @param bool $absolute - если задано true, то будет возвращен абсолютный путь
+    * @return string
+    */
+    function getMobileImageUrl($width, $height, $scale = 'xy', $absolute = false)
+    {
+        //Пользуемся общей системой отображения картинок этой CMS.
+        $img = new \RS\Img\Core(\Setup::$ROOT, \Setup::$FOLDER.static::$src_folder, \Setup::$FOLDER.static::$dst_folder);
+        return $img->getImageUrl($this['__mobile_file']->getRealPath(), $width, $height, $scale, $absolute);
+    }
     
     /**
     * Возвращает true, если файл баннера является файлом форматов jpg, gif, png
@@ -237,7 +275,28 @@ class Banner extends OrmObject
     */
     function isImageFile()
     {
-        $filename = $this['__file']->getRealPath();
+        return $this->isImageInField('file');
+    }
+
+    /**
+     * Возвращает true, если файл баннера является файлом форматов jpg, gif, png
+     *
+     * @return bool
+     */
+    function isMobileImageFile()
+    {
+        return $this->isImageInField('mobile_file');
+    }
+
+    /**
+     * Возвращает true, если загружена картинка в поле $field
+     *
+     * @param string $field Поле с типом Type\File
+     * @return bool
+     */
+    protected function isImageInField($field)
+    {
+        $filename = $this['__'.$field]->getRealPath();
         list($name, $ext) = \RS\File\Tools::parseFileName($filename, true);
         return in_array(strtolower($ext), ['jpg', 'gif', 'png']);
     }

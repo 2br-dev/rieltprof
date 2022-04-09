@@ -215,13 +215,13 @@ html, body {
 #### Structure (`var_dump()`)
 
 ```php
-use const CSS\CSSList\Document;use const CSS\CSSList\KeyFrame;use const CSS\Property\Charset;use const CSS\Property\Selector;use const CSS\Rule\Rule;use const CSS\RuleSet\AtRuleSet;use const CSS\RuleSet\DeclarationBlock;use const CSS\Value\CSSString;use const CSS\Value\Size;use const CSS\Value\URL;class SabberwormDocument#4 (2) {
+class Sabberworm\CSS\CSSList\Document#4 (2) {
   protected $aContents =>
-  [4] {
+  array(4) {
     [0] =>
-    class SabberwormCharset#6 (2) {
+    class Sabberworm\CSS\Property\Charset#6 (2) {
       private $sCharset =>
-      class SabberwormCSSString#5 (2) {
+      class Sabberworm\CSS\Value\CSSString#5 (2) {
         private $sString =>
         string(5) "utf-8"
         protected $iLineNo =>
@@ -231,21 +231,21 @@ use const CSS\CSSList\Document;use const CSS\CSSList\KeyFrame;use const CSS\Prop
       int(1)
     }
     [1] =>
-    class SabberwormAtRuleSet#7 (4) {
+    class Sabberworm\CSS\RuleSet\AtRuleSet#7 (4) {
       private $sType =>
       string(9) "font-face"
       private $sArgs =>
       string(0) ""
       private $aRules =>
-      [2] {
+      array(2) {
         'font-family' =>
-        [1] {
+        array(1) {
           [0] =>
-          class SabberwormRule#8 (4) {
+          class Sabberworm\CSS\Rule\Rule#8 (4) {
             private $sRule =>
             string(11) "font-family"
             private $mValue =>
-            class SabberwormCSSString#9 (2) {
+            class Sabberworm\CSS\Value\CSSString#9 (2) {
               private $sString =>
               string(10) "CrassRoots"
               protected $iLineNo =>
@@ -258,15 +258,15 @@ use const CSS\CSSList\Document;use const CSS\CSSList\KeyFrame;use const CSS\Prop
           }
         }
         'src' =>
-        [1] {
+        array(1) {
           [0] =>
-          class SabberwormRule#10 (4) {
+          class Sabberworm\CSS\Rule\Rule#10 (4) {
             private $sRule =>
             string(3) "src"
             private $mValue =>
-            class SabberwormURL#11 (2) {
+            class Sabberworm\CSS\Value\URL#11 (2) {
               private $oURL =>
-              class SabberwormCSSString#12 (2) {
+              class Sabberworm\CSS\Value\CSSString#12 (2) {
                 private $sString =>
                 string(15) "../media/cr.ttf"
                 protected $iLineNo =>
@@ -286,18 +286,18 @@ use const CSS\CSSList\Document;use const CSS\CSSList\KeyFrame;use const CSS\Prop
       int(3)
     }
     [2] =>
-    class SabberwormDeclarationBlock#13 (3) {
+    class Sabberworm\CSS\RuleSet\DeclarationBlock#13 (3) {
       private $aSelectors =>
-      [2] {
+      array(2) {
         [0] =>
-        class SabberwormSelector#14 (2) {
+        class Sabberworm\CSS\Property\Selector#14 (2) {
           private $sSelector =>
           string(4) "html"
           private $iSpecificity =>
           NULL
         }
         [1] =>
-        class SabberwormSelector#15 (2) {
+        class Sabberworm\CSS\Property\Selector#15 (2) {
           private $sSelector =>
           string(4) "body"
           private $iSpecificity =>
@@ -305,15 +305,15 @@ use const CSS\CSSList\Document;use const CSS\CSSList\KeyFrame;use const CSS\Prop
         }
       }
       private $aRules =>
-      [1] {
+      array(1) {
         'font-size' =>
-        [1] {
+        array(1) {
           [0] =>
-          class SabberwormRule#16 (4) {
+          class Sabberworm\CSS\Rule\Rule#16 (4) {
             private $sRule =>
             string(9) "font-size"
             private $mValue =>
-            class SabberwormSize#17 (4) {
+            class Sabberworm\CSS\Value\Size#17 (4) {
               private $fSize =>
               double(1.6)
               private $sUnit =>
@@ -334,19 +334,19 @@ use const CSS\CSSList\Document;use const CSS\CSSList\KeyFrame;use const CSS\Prop
       int(8)
     }
     [3] =>
-    class SabberwormKeyFrame#18 (4) {
+    class Sabberworm\CSS\CSSList\KeyFrame#18 (4) {
       private $vendorKeyFrame =>
       string(9) "keyframes"
       private $animationName =>
       string(6) "mymove"
       protected $aContents =>
-      [2] {
+      array(2) {
         [0] =>
-        class SabberwormDeclarationBlock#19 (3) {
+        class Sabberworm\CSS\RuleSet\DeclarationBlock#19 (3) {
           private $aSelectors =>
-          [1] {
+          array(1) {
             [0] =>
-            class SabberwormSelector#20 (2) {
+            class Sabberworm\CSS\Property\Selector#20 (2) {
               private $sSelector =>
               string(4) "from"
               private $iSpecificity =>
@@ -354,15 +354,15 @@ use const CSS\CSSList\Document;use const CSS\CSSList\KeyFrame;use const CSS\Prop
             }
           }
           private $aRules =>
-          [1] {
+          array(1) {
             'top' =>
-            [1] {
+            array(1) {
               [0] =>
-              class SabberwormRule#21 (4) {
+              class Sabberworm\CSS\Rule\Rule#21 (4) {
                 private $sRule =>
                 string(3) "top"
                 private $mValue =>
-                class SabberwormSize#22 (4) {
+                class Sabberworm\CSS\Value\Size#22 (4) {
                   private $fSize =>
                   double(0)
                   private $sUnit =>
@@ -383,11 +383,11 @@ use const CSS\CSSList\Document;use const CSS\CSSList\KeyFrame;use const CSS\Prop
           int(13)
         }
         [1] =>
-        class SabberwormDeclarationBlock#23 (3) {
+        class Sabberworm\CSS\RuleSet\DeclarationBlock#23 (3) {
           private $aSelectors =>
-          [1] {
+          array(1) {
             [0] =>
-            class SabberwormSelector#24 (2) {
+            class Sabberworm\CSS\Property\Selector#24 (2) {
               private $sSelector =>
               string(2) "to"
               private $iSpecificity =>
@@ -395,15 +395,15 @@ use const CSS\CSSList\Document;use const CSS\CSSList\KeyFrame;use const CSS\Prop
             }
           }
           private $aRules =>
-          [1] {
+          array(1) {
             'top' =>
-            [1] {
+            array(1) {
               [0] =>
-              class SabberwormRule#25 (4) {
+              class Sabberworm\CSS\Rule\Rule#25 (4) {
                 private $sRule =>
                 string(3) "top"
                 private $mValue =>
-                class SabberwormSize#26 (4) {
+                class Sabberworm\CSS\Value\Size#26 (4) {
                   private $fSize =>
                   double(200)
                   private $sUnit =>
@@ -460,15 +460,15 @@ html, body {font-size: 1.6em;}
 #### Structure (`var_dump()`)
 
 ```php
-use const CSS\CSSList\Document;use const CSS\Property\Selector;use const CSS\Rule\Rule;use const CSS\RuleSet\DeclarationBlock;use const CSS\Value\CSSString;use const CSS\Value\RuleValueList;use const CSS\Value\Size;class SabberwormDocument#4 (2) {
+class Sabberworm\CSS\CSSList\Document#4 (2) {
   protected $aContents =>
-  [1] {
+  array(1) {
     [0] =>
-    class SabberwormDeclarationBlock#5 (3) {
+    class Sabberworm\CSS\RuleSet\DeclarationBlock#5 (3) {
       private $aSelectors =>
-      [1] {
+      array(1) {
         [0] =>
-        class SabberwormSelector#6 (2) {
+        class Sabberworm\CSS\Property\Selector#6 (2) {
           private $sSelector =>
           string(7) "#header"
           private $iSpecificity =>
@@ -476,19 +476,19 @@ use const CSS\CSSList\Document;use const CSS\Property\Selector;use const CSS\Rul
         }
       }
       private $aRules =>
-      [3] {
+      array(3) {
         'margin' =>
-        [1] {
+        array(1) {
           [0] =>
-          class SabberwormRule#7 (4) {
+          class Sabberworm\CSS\Rule\Rule#7 (4) {
             private $sRule =>
             string(6) "margin"
             private $mValue =>
-            class SabberwormRuleValueList#12 (3) {
+            class Sabberworm\CSS\Value\RuleValueList#12 (3) {
               protected $aComponents =>
-              [4] {
+              array(4) {
                 [0] =>
-                class SabberwormSize#8 (4) {
+                class Sabberworm\CSS\Value\Size#8 (4) {
                   private $fSize =>
                   double(10)
                   private $sUnit =>
@@ -499,7 +499,7 @@ use const CSS\CSSList\Document;use const CSS\Property\Selector;use const CSS\Rul
                   int(2)
                 }
                 [1] =>
-                class SabberwormSize#9 (4) {
+                class Sabberworm\CSS\Value\Size#9 (4) {
                   private $fSize =>
                   double(2)
                   private $sUnit =>
@@ -510,7 +510,7 @@ use const CSS\CSSList\Document;use const CSS\Property\Selector;use const CSS\Rul
                   int(2)
                 }
                 [2] =>
-                class SabberwormSize#10 (4) {
+                class Sabberworm\CSS\Value\Size#10 (4) {
                   private $fSize =>
                   double(1)
                   private $sUnit =>
@@ -521,7 +521,7 @@ use const CSS\CSSList\Document;use const CSS\Property\Selector;use const CSS\Rul
                   int(2)
                 }
                 [3] =>
-                class SabberwormSize#11 (4) {
+                class Sabberworm\CSS\Value\Size#11 (4) {
                   private $fSize =>
                   double(2)
                   private $sUnit =>
@@ -544,21 +544,21 @@ use const CSS\CSSList\Document;use const CSS\Property\Selector;use const CSS\Rul
           }
         }
         'font-family' =>
-        [1] {
+        array(1) {
           [0] =>
-          class SabberwormRule#13 (4) {
+          class Sabberworm\CSS\Rule\Rule#13 (4) {
             private $sRule =>
             string(11) "font-family"
             private $mValue =>
-            class SabberwormRuleValueList#15 (3) {
+            class Sabberworm\CSS\Value\RuleValueList#15 (3) {
               protected $aComponents =>
-              [4] {
+              array(4) {
                 [0] =>
                 string(7) "Verdana"
                 [1] =>
                 string(9) "Helvetica"
                 [2] =>
-                class SabberwormCSSString#14 (2) {
+                class Sabberworm\CSS\Value\CSSString#14 (2) {
                   private $sString =>
                   string(9) "Gill Sans"
                   protected $iLineNo =>
@@ -579,9 +579,9 @@ use const CSS\CSSList\Document;use const CSS\Property\Selector;use const CSS\Rul
           }
         }
         'color' =>
-        [1] {
+        array(1) {
           [0] =>
-          class SabberwormRule#16 (4) {
+          class Sabberworm\CSS\Rule\Rule#16 (4) {
             private $sRule =>
             string(5) "color"
             private $mValue =>
@@ -611,6 +611,8 @@ use const CSS\CSSList\Document;use const CSS\Property\Selector;use const CSS\Rul
 
 ## Contributors/Thanks to
 
+* [raxbg](https://github.com/raxbg) for contributions to parse `calc`, grid lines, and various bugfixes.
+* [westonruter](https://github.com/westonruter) for bugfixes and improvements.
 * [FMCorz](https://github.com/FMCorz) for many patches and suggestions, for being able to parse comments and IE hacks (in lenient mode).
 * [Lullabot](https://github.com/Lullabot) for a patch that allows to know the line number for each parsed token.
 * [ju1ius](https://github.com/ju1ius) for the specificity parsing code and the ability to expand/compact shorthand properties.
@@ -625,7 +627,7 @@ use const CSS\CSSList\Document;use const CSS\Property\Selector;use const CSS\Rul
 ## Misc
 
 * Legacy Support: The latest pre-PSR-0 version of this project can be checked with the `0.9.0` tag.
-* Running Tests: To run all unit tests for this project, have `phpunit` installed and run `phpunit .`.
+* Running Tests: To run all unit tests for this project, run `composer install` to install phpunit and use `./vendor/phpunit/phpunit/phpunit`.
 
 ## License
 

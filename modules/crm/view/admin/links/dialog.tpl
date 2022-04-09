@@ -1,6 +1,6 @@
+{addcss file="%crm%/links.css"}
 <div class="formbox">
         <div class="tabs link-manager" id="linkAddForm" data-dialog-options='{ "width":600, "height":720 }'>
-
             <ul class="tab-nav" role="tablist">
                 {foreach $links_type_objects as $type}
                     <li class="{if $type->getId() == $link_type}active{/if}"><a data-target="#tab-link-{$type->getId()}" data-toggle="tab" role="tab">{$type->getTabName()}</a></li>
@@ -14,6 +14,8 @@
                             <input type="hidden" name="link_type" value="{$type->getId()}">
                             {$type->getTabForm()->getForm()}
                         </form>
+
+                        {$type->getLastObjectsHtml()}
                     </div>
                 {/foreach}
             </div>
