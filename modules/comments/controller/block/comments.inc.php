@@ -96,7 +96,6 @@ class Comments extends \RS\Controller\StandartBlock
         $this->actionCommentFormDialog();
 
         $this->view->assign([
-
             'mod_config' => $this->config,
             'list_html' => $this->actionGetCommentList()->getHtml()
         ]);

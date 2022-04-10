@@ -30,9 +30,10 @@ class AllAds extends StandartBlock
 
     protected $default_params = [
         'indexTemplate' => '%rieltprof%/block/all_ads.tpl', //Должен быть задан у наследника
-        'pageSize' => 100,
+        'listTemplate'  => '%rieltprof%/block/ad_list.tpl',
+        'pageSize' => 50,
     ];
-    protected $page;
+    protected $page, $pageSize;
 
     /** @var ProductApi $api */
     public $api;
@@ -40,20 +41,33 @@ class AllAds extends StandartBlock
     function init()
     {
         $this->api = new ProductApi();
+        $this->page = $this->url->get('p', TYPE_INTEGER, 1);
+        $this->pageSize = $this->getParam('pageSize');
     }
 
     function actionIndex()
     {
-        $pageSize = $this->getParam('pageSize', null);
+        $this->view->assign([
+            'ad_list_html' => $this->actionGetAdsList()->getHtml()
+        ]);
+        return $this->result->setTemplate($this->getParam('indexTemplate'));
+    }
 
+    public function actionGetAdsList()
+    {
         $this->api->setFilter('public', 1);
         $total = $this->api->getListCount();
-        $products = $this->api->getList();
+        $paginator = new \RS\Helper\Paginator($this->page, $total, $this->pageSize);
+        $products = $this->api->getList($this->page, $this->pageSize);
         $this->view->assign([
             'ads' => $products,
             'block_title' => $this->getParam('block_title'),
-            'total' => $total
+            'total' => $total,
+            'pageSize' => $this->pageSize,
+            'page' => $this->page,
+            'paginator' => $paginator
+
         ]);
-        return $this->result->setTemplate($this->getParam('indexTemplate'));
+        return $this->result->setTemplate( $this->getParam('listTemplate') );
     }
 }

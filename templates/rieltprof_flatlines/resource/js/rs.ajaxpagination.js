@@ -12,7 +12,8 @@
                 method: 'get',      //каким методом делать запрос на сервер
                 appendElement: '',  //какой элемент DOM дополнять новыми значениями
                 findElement: null,  //в каком элементе DOM из response искать данные для вставки. Задайте false, чтобы вставлять весь response
-                clickOnScroll:false,            //Автоматически выполнять подгрузку при попадании в зону видимости
+                clickOnScroll: true,            //Автоматически выполнять подгрузку при попадании в зону видимости
+                scrollElement: null,
                 context: 'body',                //Ограничивает работу пагина данным элементом. Применяется когда на странице несколько списков с загрузкой
                 loaderElement: '.rs-ajax-paginator',    //какой элемент DOM в response считать новым elseLoader'ом (если не будет найден, то elseLoader пропадет)
                 loaderBlock: '', // селектор блока пагинации (loaderElement должен находиться в нём)
@@ -28,6 +29,7 @@
 
             var methods = {
                 init: function(initoptions) {
+
                     if (data) return;
                     data = {}; $this.data('ajaxPagination', data);
                     data.options = $.extend({}, defaults, initoptions, $this.data('paginationOptions'));
@@ -37,15 +39,19 @@
                     data.context = $(data.options.context);
                     $this.on('click', methods.load);
                     if (data.options.clickOnScroll) {
-                        $(window).bind('scroll', methods.checkScroll);
+                        var scrollElement = $this.data('scrollElement');
+                        if(scrollElement === 'undefined'){
+                            $(window).bind('scroll', methods.checkScroll);
+                        }else{
+                            $(scrollElement).bind('scroll', methods.checkScroll);
+                        }
                     }
+
                 },
                 load: function() {
                     if ($this.hasClass(data.options.loadingClass)) return false;
-
                     var href = $this.attr('href') ? $this.attr('href') : $this.data('url');
                     $this.addClass(data.options.loadingClass);
-
                     $.ajax({
                         url: href,
                         dataType: 'json',
@@ -55,7 +61,6 @@
                             var appendData = parsed.filter(data.options.findElement)
                                 .add(parsed.find(data.options.findElement))
                                 .children();
-
                             $(data.options.appendElement, data.context).append(appendData);
 
                             //Обновляем элемент "показать еще"
