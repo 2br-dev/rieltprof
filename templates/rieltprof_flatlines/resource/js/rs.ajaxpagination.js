@@ -63,7 +63,7 @@
                                 .add(parsed.find(data.options.findElement))
                                 .children();
                             $(data.options.appendElement, data.context).append(appendData);
-
+                            fillImages();
                             //Обновляем элемент "показать еще"
                             var new_loader;
                             var new_loader_element;
