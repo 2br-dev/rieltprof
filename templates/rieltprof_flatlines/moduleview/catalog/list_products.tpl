@@ -1,8 +1,10 @@
 {* Просмотр списка товаров в категории, просмотр результатов поиска *}
 
 {$shop_config=ConfigLoader::byModule('shop')}
+{$config = \RS\Config\Loader::byModule('rieltprof')}
 {$check_quantity=$shop_config.check_quantity}
 {$list = $this_controller->api->addProductsDirs($list)}
+{addjs file="rs.ajaxpagination.js"}
 
 {if $THEME_SETTINGS.enable_favorite}
     {$list = $this_controller->api->addProductsFavorite($list)}
@@ -61,9 +63,19 @@
         </div>
     {else}
         {if count($list)}
-            {include file="list_products_items.tpl"}
-            <div class="pull-right">
-                {include file="%THEME%/paginator.tpl"}
+            {include file="list_products_items.tpl" total=$total}
+            <div class="rs-pagination-block">
+                {if $paginator->page < $paginator->total_pages}
+                    <div class="mt-5">
+                        <a class="btn btn-outline-primary col-12 rs-ajax-paginator"
+                           data-pagination-options='{ "appendElement":".ads-list", "loaderBlock":".rs-pagination-block", "replaceBrowserUrl": false, "clickOnScroll": true}'
+                           data-url="{$paginator->getPageHref($paginator->page+1)}"
+                           data-scroll-element="#products"
+                        >
+{*                            <span>{t}Показать еще{/t}</span>*}
+                        </a>
+                    </div>
+                {/if}
             </div>
         {else}
             <div class="empty-list">
@@ -77,6 +89,7 @@
                     {moduleinsert name="\Main\Controller\Block\BreadCrumbs"}
                     <div class="title">
                         <span>{$category['name']}</span>
+                        <span class="title-count-object"> ({$config->getCountObjectByDirId($category['id'])})</span>
                     </div>
                     {t}Нет ни одного объекта{/t}
                 {/if}

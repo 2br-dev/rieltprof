@@ -554,3 +554,18 @@ button[type="submit"]{
 .global-wrapper#account .content .main-block table .my-objects-data .actions a.republish-object {
     background-image: url(../img/refresh.svg);
 }
+.menu-count-object {
+    font-size: 12px;
+}
+.btn.btn-popup .popup{
+    min-width: 180px;
+}
+.global-wrapper#search .content .title span {
+    margin-right: 5px;
+}
+.title-count-object{
+    font-size: smaller !important;
+}
+.global-wrapper#search .content .title {
+    align-items: center;
+}

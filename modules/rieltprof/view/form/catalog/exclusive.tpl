@@ -1,4 +1,4 @@
-<input type="checkbox" name="exclusive" value="1" title="{t}Только наличка?{/t}" id="exclusive" {if $elem.exclusive}checked{/if}>
+<input type="checkbox" name="exclusive" value="1" title="{t}Эксклюзив{/t}" id="exclusive" {if $elem.exclusive}checked{/if}>
 </td>
 </tr>
 <tr class="advertise">

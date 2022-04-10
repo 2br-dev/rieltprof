@@ -340,4 +340,30 @@ class File extends ConfigObject
             default: return new \Catalog\Model\Orm\Product($id);
         }
     }
+
+    /**
+     * Возвращает количество объектов по типам (квартира, дача, новостройка и тд.)
+     * @param $object_string
+     * @return int
+     */
+    public function getCountObjectByType($object_string)
+    {
+        $product_api = new \Catalog\Model\Api();
+        $product_api->clearFilter();
+        $product_api->setFilter('object', $object_string)->setFilter('public', 1);
+        return $product_api->getListCount();
+    }
+
+    /**
+     * Возвращает количество объектов в категории по id категории
+     * @param $dir_id
+     * @return int
+     */
+    public function getCountObjectByDirId($dir_id)
+    {
+        $product_api = new \Catalog\Model\Api();
+        $product_api->clearFilter();
+        $product_api->setFilter('maindir', $dir_id)->setFilter('public', 1);
+        return $product_api->getListCount();
+    }
 }

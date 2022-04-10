@@ -8,7 +8,7 @@
 {*        <th>&nbsp;</th>*}
         <th>&nbsp;</th>
         <th>&nbsp;</th>
-        <th class="features"> </th>
+        <th class="features">Особые отметки</th>
         <th class="district">Район</th>
         <th class="type">Тип объекта</th>
         <th class="price">Стоимость</th>
@@ -28,7 +28,7 @@
 {if $paginator->total_pages > $paginator->page}
     <div class="text-center more-wrapper">
         <a
-            data-pagination-options='{ "appendElement":".ads-list" }'
+            data-pagination-options='{ "appendElement":".ads-list", "clickOnScroll": true }'
             data-url="{$router->getUrl('rieltprof-block-allads', ['_block_id' => $_block_id, 'p' => $paginator->page+1, 'aid' => $aid])}"
             data-scroll-element=".main-block"
             class="rs-ajax-paginator"

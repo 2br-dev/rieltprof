@@ -1,4 +1,4 @@
-<input type="checkbox" name="encumbrance" value="1" title="{t}Только наличка?{/t}" id="encumbrance" {if $elem.encumbrance}checked{/if}>
+<input type="checkbox" name="encumbrance" value="1" title="{t}Ограничение банка{/t}" id="encumbrance" {if $elem.encumbrance}checked{/if}>
 </td>
 </tr>
 <tr class="encumbrance_notice">
