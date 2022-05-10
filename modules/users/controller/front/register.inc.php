@@ -72,7 +72,6 @@ class Register extends Front
     {
         $user = new User();
         $user->usePostKeys($this->use_post_keys);
-
         //Включаем капчу
         if (!$user['__phone']->isEnabledVerification()) {
             $user['__captcha']->setEnable(true);

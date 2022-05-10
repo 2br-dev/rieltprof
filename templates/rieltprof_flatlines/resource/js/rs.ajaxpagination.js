@@ -49,7 +49,6 @@
 
                 },
                 load: function() {
-                    console.log('click');
                     if ($this.hasClass(data.options.loadingClass)) return false;
                     var href = $this.attr('href') ? $this.attr('href') : $this.data('url');
                     $this.addClass(data.options.loadingClass);

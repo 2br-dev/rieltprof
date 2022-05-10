@@ -178,7 +178,13 @@ class RegionApi extends TreeList
         $_this->setFilter('parent_id', 0, '>');
         $_this->setFilter('is_city', 0);
         $_this->setOrder('title');
-        return $_this -> getList();
+        $arr = [];
+        $list = $_this -> getList();
+        foreach ($list as $region){
+            $arr[$region['id']] = $region['title'];
+        }
+
+        return $arr;
     }  
     
     /**

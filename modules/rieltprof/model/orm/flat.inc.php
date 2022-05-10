@@ -394,13 +394,13 @@ class Flat extends OrmObject
                 'visible' => false,
             )),
             'group_id' => new Type\Varchar(array(
-                'maxLength' => '255',
+                'maxLength' => '150',
                 'description' => t('Идентификатор группы товаров'),
                 'hint' => t('Вы можете объединять схожие товары в группы, в этом случае другие товары группы будут выступать в качестве комплектаций.<br> Укажите у нескольких товаров один и тот же идентификатор и задайте характеристики у основной комплектации каждого товара группы.', array(), 'Описание поля `Идентификатор группы товаров`'),
                 'visible' => false
             )),
             'xml_id' => new Type\Varchar(array(
-                'maxLength' => '255',
+                'maxLength' => '150',
                 'description' => t('Идентификатор в системе 1C'),
                 'meVisible' => false,
                 'visible' => false
@@ -425,7 +425,6 @@ class Flat extends OrmObject
                 'visible' => false
             )),
             'recommended' => new Type\Varchar(array(
-                'maxLength' => 4000,
                 'description' => t('Рекомендуемые товары'),
                 'visible' => false,
             )),
@@ -433,7 +432,6 @@ class Flat extends OrmObject
                 'visible' => false
             )),
             'concomitant' => new Type\Varchar(array(
-                'maxLength' => 4000,
                 'description' => t('Сопутствующие товары'),
                 'visible' => false,
             )),
@@ -621,8 +619,9 @@ class Flat extends OrmObject
      * @param string $flag - строковое представление текущей операции (insert или update)
      * @return false|void
      */
-    function beforeWrite($flag)
+    function beforeWrite($flag, \RS\Event\Event $event)
     {
+
         $url = \RS\Http\Request::commonInstance();
         // Передаем из клиентской части тип сделки - Продажа(sale) или Аренда(rent)
         $action = $url->request('action', TYPE_STRING);
@@ -776,6 +775,10 @@ class Flat extends OrmObject
         }
         $this['public'] = 1;
         $this['actual_on_date'] = date('Y-m-d');
+
+//        $same = true;
+//        $event->addError(t('Ошибка'));
+//        $event->stopPropagation();
 
 //        $this->addProperty($config[''])
 

@@ -1,11 +1,11 @@
 {* Для работы во всплывающих окнах, должен подключаться в layout.tpl *}
-{addjs file="%users%/verification.js"}
-{addcss file="%users%/verification.css"}
+{addjs file="verification.js"}
+{*{addcss file="%users%/verification.css"}*}
 {* --- *}
 
 {$delay_refresh_code = $verify_session->getRefreshCodeDelay()}
 {$error = $verify_session->getErrorsStr()}
-
+<p>111</p>
 <div class="rs-verify-code-block" data-token="{$verify_session->getToken()}">
     <div class="rs-verify-line">
         <input type="text" placeholder="{$verify_session.code_debug|default:"{t}Код{/t}"}" name="code" value="" class="rs-verify-key" autocomplete="off">

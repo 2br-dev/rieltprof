@@ -771,6 +771,7 @@ abstract class AbstractObject extends AcceptBehavior implements \ArrayAccess, \I
     public function save($primaryKeyValue = null, $user_post = [], $post_var = null, $files_var = null)
     {
         $flag = ($primaryKeyValue > 0) ? self::UPDATE_FLAG : self::INSERT_FLAG;
+
         if ($this->checkData($user_post, $post_var, $files_var, null, null, $flag)) {
             $usekeys = $this->getLocalParameter('use_keys');
             $exclude = $this->getLocalParameter('exclude_keys');

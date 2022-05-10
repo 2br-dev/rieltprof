@@ -25,71 +25,81 @@
                     </div>
                     <div class="text-data">
                         <div class="row header-holder">
-                            <strong>Заявка на регистрацию</strong>
+                            <strong>Регистрация</strong>
                         </div>
+                        {if $user_config.user_one_fio_field}
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-field">
+                                        {$user->getPropertyView('fio', ['class' => 'nempty'], [form => true, errors => false])}
+                                        <label for="">ФИО*</label>
+                                        <div class="formFieldError">{$user->getErrorsByForm('fio', ',')}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {else}
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-field">
+    {*                                    <input type="text" name="surname" {if count($user->getErrorsByForm('surname'))}class="has-error"{/if}>*}
+                                        {$user->getPropertyView('surname', ['class' => 'nempty'], [form => true, errors => false])}
+                                        <label for="">Фамилия</label>
+                                        <div class="formFieldError">{$user->getErrorsByForm('surname', ',')}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-field">
+    {*                                    <input type="text" name="name" {if count($user->getErrorsByForm('name'))}class="has-error"{/if}>*}
+                                        {$user->getPropertyView('name', ['class' => 'nempty'], [form => true, errors => false])}
+                                        <label for="">Имя</label>
+                                        <div class="formFieldError">{$user->getErrorsByForm('name', ',')}</div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-field">
+                                        {$user->getPropertyView('midname', ['class' => 'nempty'])}
+                                        <label for="">Отчество</label>
+                                    </div>
+                                </div>
+                            </div>
+                        {/if}
                         <div class="row">
                             <div class="col">
                                 <div class="input-field">
-    {*                                <input type="text" name="surname" {if count($user->getErrorsByForm('surname'))}class="has-error"{/if}>*}
-                                    {$user->getPropertyView('surname', ['class' => 'nempty'], [form => true, errors => false])}
-                                    <label for="">Фамилия</label>
-                                    <div class="formFieldError">{$user->getErrorsByForm('surname', ',')}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="input-field">
-    {*                                <input type="text" name="name" {if count($user->getErrorsByForm('name'))}class="has-error"{/if}>*}
-                                    {$user->getPropertyView('name', ['class' => 'nempty'], [form => true, errors => false])}
-                                    <label for="">Имя</label>
-                                    <div class="formFieldError">{$user->getErrorsByForm('name', ',')}</div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="input-field">
-                                    {$user->getPropertyView('midname', ['class' => 'nempty'])}
-                                    <label for="">Отчество</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="input-field">
-    {*                                <input type="text" name="e_mail" {if count($user->getErrorsByForm('e_mail'))}class="has-error"{/if}>*}
+{*                                    <input type="text" name="e_mail" {if count($user->getErrorsByForm('e_mail'))}class="has-error"{/if}>*}
                                     {$user->getPropertyView('e_mail', ['class' => 'nempty'], [form => true, errors => false])}
                                     <label for="">E-mail</label>
                                     <div class="formFieldError">{$user->getErrorsByForm('e_mail', ',')}</div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="input-field">
-    {*                                <input type="text" name="phone" {if count($user->getErrorsByForm('phone'))}class="has-error"{/if}>*}
-                                    {$user->getPropertyView('phone', ['class' => 'nempty'], [form => true, errors => false])}
-                                    <label for="">Телефон</label>
-                                    <div class="formFieldError">{$user->getErrorsByForm('phone', ',')}</div>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="register-phone-block">
+{*                                    <input type="text" name="phone" {if count($user->getErrorsByForm('phone'))}class="has-error"{/if}>*}
+                            {$user->getPropertyView('phone', ['class' => 'nempty'], [form => true, errors => false])}
+{*                                    <label for="">Телефон</label>*}
+                                    <div class="formFieldError register-phone-error">{$user->getErrorsByForm('phone', ',')}</div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="input-field">
                                     <input type="password" name="openpass" {if count($user->getErrorsByForm('openpass'))}class="has-error"{/if}>
-                                    <label class="fieldName">{t}Пароль{/t}</label>
+                                    <label class="fieldName">{t}Пароль*{/t}</label>
                                     <div class="formFieldError">{$user->getErrorsByForm('openpass', ',')}</div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="input-field">
-                                    <input type="password" name="openpass_confirm"><label class="fieldName">{t}Повтор пароля{/t}</label>
+                                    <input type="password" name="openpass_confirm"><label class="fieldName">{t}Повтор пароля*{/t}</label>
                                     <div class="formFieldError">{$user->getErrorsByForm('openpass_confirm', ',')}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col avatar-holder">
-                                <input type="file" id="avatar" name="photo"><label for="avatar" class="btn btn-flat waves-effect" id="photo">Фотография</label>
-                                <span class="filename">Выберите файл с Вашей фотографией</span>
+                                <input type="file" id="avatar" name="photo"><label for="avatar" class="btn btn-flat waves-effect" id="photo">Фото</label>
+                                <span class="filename">Выберите файл (не обязательное)</span>
                                 <div class="formFieldError">{$user->getErrorsByForm('photo', ',')}</div>
                             </div>
                         </div>
@@ -97,7 +107,7 @@
                     <div class="bottom">
                         <div class="left"><a href="/auth/" class="btn btn-outlined waves-effect waves-dark">Авторизация</a></div>
                         <div class="right">
-                            {*                        <a href="index.html" class="btn waves-effect waves-light">Отправить заявку</a>*}
+{*                            <a href="index.html" class="btn waves-effect waves-light">Отправить заявку</a>*}
                             <input type="submit" value="{t}Зарегистрироваться{/t}" class="btn waves-effect waves-light"/>
                         </div>
                         {if $conf_userfields->notEmpty()}
@@ -121,13 +131,10 @@
     </div>
     {include file="%rieltprof%/statistics.tpl"}
 </div>
-
-
-
-
-
+{* Регистрация пользователя *}
 {*{$user_config=$this_controller->getModuleConfig()}*}
 {*{$is_dialog_wrap=$url->request('dialogWrap', $smarty.const.TYPE_INTEGER)}*}
+
 {*<div class="form-style modal-body mobile-width-wide">*}
 
 {*    {if $is_dialog_wrap}*}
@@ -151,24 +158,24 @@
 {*        {$this_controller->myBlockIdInput()}*}
 {*        <input type="hidden" name="referer" value="{$referer}">*}
 
-{*            {hook name="users-registers:form" title="{t}Регистрация:форма{/t}"}*}
-{*                <div class="form-group">*}
-{*                    <input type="radio" name="is_company" value="0" id="is_company_no" {if !$user.is_company}checked{/if}>&nbsp;<label for="is_company_no">{t}Частное лицо{/t}</label><br>*}
-{*                    <input type="radio" name="is_company" value="1" id="is_company_yes" {if $user.is_company}checked{/if}>&nbsp;<label for="is_company_yes">{t}Юридическое лицо или ИП{/t}</label>*}
-{*                </div>*}
+{*        {hook name="users-registers:form" title="{t}Регистрация:форма{/t}"}*}
+{*            <div class="form-group">*}
+{*                <input type="radio" name="is_company" value="0" id="is_company_no" {if !$user.is_company}checked{/if}>&nbsp;<label for="is_company_no">{t}Частное лицо{/t}</label><br>*}
+{*                <input type="radio" name="is_company" value="1" id="is_company_yes" {if $user.is_company}checked{/if}>&nbsp;<label for="is_company_yes">{t}Юридическое лицо или ИП{/t}</label>*}
+{*            </div>*}
 
 {*            <div class="mobile-2-column">*}
 {*                {hook name="users-registers:form-fields" title="{t}Регистрация:поля формы{/t}"}*}
-{*                <div class="form-fields_company{if !$user.is_company} hidden{/if}">*}
-{*                    <div class="form-group">*}
-{*                        <label class="label-sup">{t}Наименование компании{/t}</label>*}
-{*                        {$user->getPropertyView('company', ['placeholder' => "{t}Например, ООО Ромашка{/t}"])}*}
+{*                    <div class="form-fields_company{if !$user.is_company} hidden{/if}">*}
+{*                        <div class="form-group">*}
+{*                            <label class="label-sup">{t}Наименование компании{/t}</label>*}
+{*                            {$user->getPropertyView('company', ['placeholder' => "{t}Например, ООО Ромашка{/t}"])}*}
+{*                        </div>*}
+{*                        <div class="form-group">*}
+{*                            <label class="label-sup">{t}ИНН{/t}</label>*}
+{*                            {$user->getPropertyView('company_inn', ['placeholder' => "{t}10 или 12 цифр{/t}"])}*}
+{*                        </div>*}
 {*                    </div>*}
-{*                    <div class="form-group">*}
-{*                        <label class="label-sup">{t}ИНН{/t}</label>*}
-{*                        {$user->getPropertyView('company_inn', ['placeholder' => "{t}10 или 12 цифр{/t}"])}*}
-{*                    </div>*}
-{*                </div>*}
 
 {*                {if $user_config.user_one_fio_field}*}
 {*                    <div class="form-group">*}
@@ -184,17 +191,17 @@
 {*                    {/if}*}
 
 {*                    {if $user_config->canShowField('surname')}*}
-{*                    <div class="form-group">*}
-{*                        <label class="label-sup">{t}Фамилия{/t}</label>*}
-{*                        {$user->getPropertyView('surname', ['placeholder' => "{t}Например, Иванов{/t}"])}*}
-{*                    </div>*}
+{*                        <div class="form-group">*}
+{*                            <label class="label-sup">{t}Фамилия{/t}</label>*}
+{*                            {$user->getPropertyView('surname', ['placeholder' => "{t}Например, Иванов{/t}"])}*}
+{*                        </div>*}
 {*                    {/if}*}
 
 {*                    {if $user_config->canShowField('midname')}*}
-{*                    <div class="form-group">*}
-{*                        <label class="label-sup">{t}Отчество{/t}</label>*}
-{*                        {$user->getPropertyView('midname', ['placeholder' => "{t}Например, Иванович{/t}"])}*}
-{*                    </div>*}
+{*                        <div class="form-group">*}
+{*                            <label class="label-sup">{t}Отчество{/t}</label>*}
+{*                            {$user->getPropertyView('midname', ['placeholder' => "{t}Например, Иванович{/t}"])}*}
+{*                        </div>*}
 {*                    {/if}*}
 {*                {/if}*}
 
@@ -242,17 +249,17 @@
 {*                    </div>*}
 {*                {/if}*}
 
-{*                <div class="form-group">*}
-{*                    <label class="label-sup">{t}Пароль{/t}</label>*}
-{*                    {$user->getPropertyView('openpass')}*}
-{*                </div>*}
-{*                <div class="form-group">*}
-{*                    <label class="label-sup">{t}Повтор пароля{/t}</label>*}
-{*                    {$user->getPropertyView('openpass_confirm')}*}
-{*                </div>*}
+{*                    <div class="form-group">*}
+{*                        <label class="label-sup">{t}Пароль{/t}</label>*}
+{*                        {$user->getPropertyView('openpass')}*}
+{*                    </div>*}
+{*                    <div class="form-group">*}
+{*                        <label class="label-sup">{t}Повтор пароля{/t}</label>*}
+{*                        {$user->getPropertyView('openpass_confirm')}*}
+{*                    </div>*}
 {*                {/hook}*}
 {*            </div>*}
-{*            {/hook}*}
+{*        {/hook}*}
 
 {*        {if $CONFIG.enable_agreement_personal_data}*}
 {*            {include file="%site%/policy/agreement_phrase.tpl" button_title="{t}Зарегистрироваться{/t}"}*}

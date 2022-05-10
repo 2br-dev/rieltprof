@@ -69,4 +69,13 @@ class Tools extends \RS\Controller\Admin\Front
             echo json_encode('error');
         }
     }
+
+    function actionGetCities()
+    {
+        $region = $this->request('id', TYPE_INTEGER, 0);
+        $location_api = new \Rieltprof\Model\LocationApi();
+        $cities = $location_api->getCitiesByRegionId($region);
+        $this->result->addSection('list', $cities);
+        return $this->result;
+    }
 }

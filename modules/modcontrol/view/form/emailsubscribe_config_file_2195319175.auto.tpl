@@ -4,7 +4,7 @@
                         <form method="POST" action="{urlmake}" enctype="multipart/form-data" class="crud-form">
             <input type="submit" value="" style="display:none">
             <div class="notabs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                    
                                     <table class="otable">
                                                                                     
                                     <tr>
@@ -44,21 +44,15 @@
                                     </tr>
                                                             
                                     <tr>
-                                    <td class="otitle">{$elem.__portion_count->getTitle()}&nbsp;&nbsp;{if $elem.__portion_count->getHint() != ''}<a class="help-icon" title="{$elem.__portion_count->getHint()|escape}">?</a>{/if}
+                                    <td class="otitle">{$elem.__dialog_open_delay->getTitle()}&nbsp;&nbsp;{if $elem.__dialog_open_delay->getHint() != ''}<a class="help-icon" title="{$elem.__dialog_open_delay->getHint()|escape}">?</a>{/if}
                                     </td>
-                                    <td>{include file=$elem.__portion_count->getRenderTemplate() field=$elem.__portion_count}</td>
+                                    <td>{include file=$elem.__dialog_open_delay->getRenderTemplate() field=$elem.__dialog_open_delay}</td>
                                     </tr>
                                                             
                                     <tr>
-                                    <td class="otitle">{$elem.__photo_count_in_stack->getTitle()}&nbsp;&nbsp;{if $elem.__photo_count_in_stack->getHint() != ''}<a class="help-icon" title="{$elem.__photo_count_in_stack->getHint()|escape}">?</a>{/if}
+                                    <td class="otitle">{$elem.__send_confirm_email->getTitle()}&nbsp;&nbsp;{if $elem.__send_confirm_email->getHint() != ''}<a class="help-icon" title="{$elem.__send_confirm_email->getHint()|escape}">?</a>{/if}
                                     </td>
-                                    <td>{include file=$elem.__photo_count_in_stack->getRenderTemplate() field=$elem.__photo_count_in_stack}</td>
-                                    </tr>
-                                                            
-                                    <tr>
-                                    <td class="otitle">{$elem.__quality->getTitle()}&nbsp;&nbsp;{if $elem.__quality->getHint() != ''}<a class="help-icon" title="{$elem.__quality->getHint()|escape}">?</a>{/if}
-                                    </td>
-                                    <td>{include file=$elem.__quality->getRenderTemplate() field=$elem.__quality}</td>
+                                    <td>{include file=$elem.__send_confirm_email->getRenderTemplate() field=$elem.__send_confirm_email}</td>
                                     </tr>
                                                                         </table>
                             </div>

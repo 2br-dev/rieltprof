@@ -12,9 +12,10 @@ use \RS\Html\Table\Type as TableType,
 */
 class LocationCtrl extends \RS\Controller\Admin\Crud
 {
-    const LEVEL_COUNTRY = 'country';
     const LEVEL_REGION = 'region';
     const LEVEL_CITY = 'city';
+    const LEVEL_COUNTY = 'county';
+    const LEVEL_DISTRICT = 'district';
 
     protected
         $level,
@@ -47,11 +48,11 @@ class LocationCtrl extends \RS\Controller\Admin\Crud
                         new TableType\Checkbox('id'),
                         new TableType\Text('title', t('Название'), array('Sortable' => SORTABLE_BOTH, 'CurrentSort' => SORTABLE_ASC, 'href' => $this->router->getAdminPattern(false, array(':pid' => '@id')), 'LinkAttr' => array('class' => 'call-update') )),
                     ),
-                    $this->level == self::LEVEL_CITY ? array(
-                        new TableType\Text('area', t('Муниципальный район'), array('Sortable' => SORTABLE_BOTH)),
-                        new TableType\Text('kladr_id', t('КЛАДР ID'), array('Sortable' => SORTABLE_BOTH)),
-                        new TableType\Text('zipcode', t('Индекс'), array('Sortable' => SORTABLE_BOTH)),
-                    ) : array(),
+//                    $this->level == self::LEVEL_CITY ? array(
+//                        new TableType\Text('area', t('Муниципальный район'), array('Sortable' => SORTABLE_BOTH)),
+//                        new TableType\Text('kladr_id', t('КЛАДР ID'), array('Sortable' => SORTABLE_BOTH)),
+//                        new TableType\Text('zipcode', t('Индекс'), array('Sortable' => SORTABLE_BOTH)),
+//                    ) : array(),
                     array(
                         new TableType\Text('id', '№', array('ThAttr' => array('width' => '50'), 'Sortable' => SORTABLE_BOTH)),
                         new TableType\Text('sortn', 'Порядок', array('ThAttr' => array('width' => '50'), 'Sortable' => SORTABLE_BOTH)),
@@ -96,27 +97,48 @@ class LocationCtrl extends \RS\Controller\Admin\Crud
     {
         $helper = $this->getHelper();
 
-        if ($this->level == self::LEVEL_COUNTRY) {
-            $helper->setTopTitle(t('Страны, регионы и города доставки'));
-        }
-
-        elseif ($this->level == self::LEVEL_REGION) {
-            $helper->setTopTitle($this->parent_item['title'].'. '.t('Регионы доставки'));
-            $helper['table']->getTable()->insertAnyRow(array(
-                new TableType\Text(null, null, array('href' => $this->router->getAdminUrl(false, array('pid' => 0)), 'Value' => t('.. (к списку городов)'), 'LinkAttr' => array('class' => 'call-update'), 'TdAttr' => array('colspan' => 4)))
-            ), 0);
+        if ($this->level == self::LEVEL_REGION) {
+            $helper->setTopTitle(t('Регионы, Города, Округа, Районы').' '.$this->level);
         }
 
         elseif ($this->level == self::LEVEL_CITY) {
+            $helper->setTopTitle($this->parent_item['title'].' '.$this->level);
+            $helper['table']->getTable()->insertAnyRow(array(
+                new TableType\Text(null, null, array('href' => $this->router->getAdminUrl(false, array('pid' => 0)), 'Value' => t('.. (к списку регионов)'), 'LinkAttr' => array('class' => 'call-update'), 'TdAttr' => array('colspan' => 4)))
+            ), 0);
+        }
 
+        elseif ($this->level == self::LEVEL_COUNTY) {
+//            echo '<pre>';
+//            var_dump($this->parent_item);
+//            exit();
             $columns = $helper['table']->getTable()->getColumns();
-            $helper->setTopTitle($this->parent_item['title'].'. '.t('Города'));
+            $helper->setTopTitle($this->parent_item['title'].'. '.$this->level);
+//            $columns[1]->setHref($this->router->getAdminPattern('edit', array(':id' => '@id')));
+//            $columns[1]->setLinkAttr(array('class' => 'crud-edit'));
+
+            $helper['table']->getTable()->insertAnyRow(array(
+                new TableType\Text(null, null, array('href' => $this->router->getAdminUrl(false, array('pid' => $this->parent_item->getParent()->id)), 'Value' => t('.. (к списку городов)'), 'LinkAttr' => array('class' => 'call-update'), 'TdAttr' => array('colspan' => 4)))
+            ), 0);
+        }
+        elseif ($this->level == self::LEVEL_DISTRICT) {
+//            echo '<pre>';
+//            var_dump($this->parent_item);
+//            exit();
+            $columns = $helper['table']->getTable()->getColumns();
+            $helper->setTopTitle($this->parent_item['title'].'. '.t('Районы'));
             $columns[1]->setHref($this->router->getAdminPattern('edit', array(':id' => '@id')));
             $columns[1]->setLinkAttr(array('class' => 'crud-edit'));
 
-            $helper['table']->getTable()->insertAnyRow(array(
-                new TableType\Text(null, null, array('href' => $this->router->getAdminUrl(false, array('pid' => $this->parent_item->getParent()->id)), 'Value' => t('.. (к списку регионов)'), 'LinkAttr' => array('class' => 'call-update'), 'TdAttr' => array('colspan' => 4)))
-            ), 0);
+            if($this->parent_item['is_county']) {
+                $helper['table']->getTable()->insertAnyRow(array(
+                    new TableType\Text(null, null, array('href' => $this->router->getAdminUrl(false, array('pid' => $this->parent_item->getParent()->id)), 'Value' => t('.. (к списку округов)'), 'LinkAttr' => array('class' => 'call-update'), 'TdAttr' => array('colspan' => 4)))
+                ), 0);
+            }else{
+                $helper['table']->getTable()->insertAnyRow(array(
+                    new TableType\Text(null, null, array('href' => $this->router->getAdminUrl(false, array('pid' => $this->parent_item->getParent()->id)), 'Value' => t('.. (к списку городов)'), 'LinkAttr' => array('class' => 'call-update'), 'TdAttr' => array('colspan' => 4)))
+                ), 0);
+            }
         }
 
         $this->api->setFilter('parent_id', $this->parent);
@@ -149,13 +171,13 @@ class LocationCtrl extends \RS\Controller\Admin\Crud
         $helper = parent::helperAdd();
         $pid    = $this->request('pid', TYPE_INTEGER, 0);
         
-        if ($pid){ //Если есть родитель и это регион, то отобразим нужные поля
-            $elem    = new \Shop\Model\Orm\Region($pid);
-            $country = $elem->getParent();
-            if (isset($country['id']) && $country['id']){
-                $helper->setFormSwitch('city');
-            } 
-        }
+//        if ($pid){ //Если есть родитель и это регион, то отобразим нужные поля
+//            $elem    = new \Shop\Model\Orm\Region($pid);
+//            $country = $elem->getParent();
+//            if (isset($country['id']) && $country['id']){
+//                $helper->setFormSwitch('city');
+//            }
+//        }
         return $helper;
     }
     
@@ -167,13 +189,13 @@ class LocationCtrl extends \RS\Controller\Admin\Crud
         $helper = parent::helperEdit();
         $id     = $this->request('id', TYPE_INTEGER, 0);
         
-        if ($id){ //Если есть родитель и это регион, то отобразим нужные поля
-            $elem    = new \Shop\Model\Orm\Region($id);
-            $country = $elem->getParent()->getParent();
-            if (isset($country['id']) && $country['id']){
-                $helper->setFormSwitch('city');
-            } 
-        }
+//        if ($id){ //Если есть родитель и это регион, то отобразим нужные поля
+//            $elem    = new \Shop\Model\Orm\Region($id);
+//            $country = $elem->getParent()->getParent();
+//            if (isset($country['id']) && $country['id']){
+//                $helper->setFormSwitch('city');
+//            }
+//        }
         return $helper;
     }
 
@@ -186,16 +208,36 @@ class LocationCtrl extends \RS\Controller\Admin\Crud
     {
         if ($this->parent > 0) {
             /**
-             * @var \Shop\Model\Orm\Region
+             * @var \Rieltprof\Model\Orm\Location
              */
             $this->parent_item = $this->api->getOneItem($this->parent);
-            if (!$this->parent_item['parent_id']){
-                return self::LEVEL_REGION;
-            } else {
+            if(!$this->parent_item['parent_id']){
                 return self::LEVEL_CITY;
+            }else{
+                if($this->parent_item['has_county'] && $this->parent_item['is_city']){
+                    return self::LEVEL_COUNTY;
+                }elseif($this->parent_item['is_city'] && !$this->parent_item['has_county']){
+                    return self::LEVEL_DISTRICT;
+                }else{
+                    if($this->parent_item['is_county']){
+                        return self::LEVEL_DISTRICT;
+                    }
+                }
+
             }
-        } else {
-            return self::LEVEL_COUNTRY;
+//            if($this->parent_item['is_city']){
+//                return self::LEVEL_CITY;
+//            }else{
+//                if($this->parent_item['is_county']){
+//                    return self::LEVEL_COUNTY;
+//                }elseif($this->parent_item['is_district']){
+//                    return self::LEVEL_DISTRICT;
+//                }else{
+//                    return self::LEVEL_REGION;
+//                }
+//            }
         }
+        return self::LEVEL_REGION;
+
     }
 }

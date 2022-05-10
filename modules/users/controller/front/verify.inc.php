@@ -62,7 +62,6 @@ class Verify extends Front
     public function actionCheckCode()
     {
         $code = $this->url->post('code', TYPE_STRING);
-
         $this->result->setSuccess(
             $this->verification_engine->checkCode($code)
         );

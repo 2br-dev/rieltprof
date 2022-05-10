@@ -399,6 +399,26 @@ class VerificationSession extends AbstractObject
             return $this->addError($check_phone_result);
         }
 
+        /**
+         * Костыль. Логика для проверки уже зарегистрированного телефона.
+         * Подходи только для проверки телефона при регистрации либо смене телефона из личного кабинета
+         * Не подойдет для авторизации по номеру телефона
+         */
+        $same_phone = \RS\Orm\Request::make()
+            ->from(new \Users\Model\Orm\User())
+            ->where([
+                'phone' => $this['phone']
+            ])->exec()->fetchAll();
+        $current_user = \RS\Application\Auth::getCurrentUser();
+        if(count($same_phone)){
+            if($current_user['id'] < 0 || $same_phone['id'] != $current_user['id']){
+                return $this->addError('Такой телефон уже занят');
+            }
+        }
+        /**
+         * Костыль - Конец
+         */
+
         $send_code_delay = $this->getRefreshCodeDelay();
 
         if ($send_code_delay == 0) {

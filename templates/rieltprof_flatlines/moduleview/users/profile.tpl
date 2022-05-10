@@ -17,28 +17,28 @@
             <input type="hidden" name="referer" value="{$referer}">
             <input type="hidden" name="is_company" value="0"/>
             <div class="main-data">
-                <div class="input-field no-available">
+                <div class="input-field">
                     {$user->getPropertyView('surname', ['class' => 'nempty'], [form => true, errors => false])}
                     <label for="">Фамилия</label>
                     <div class="formFieldError">{$user->getErrorsByForm('surname', ',')}</div>
                 </div>
-                <div class="input-field no-available">
+                <div class="input-field">
                     {$user->getPropertyView('name', ['class' => 'nempty'], [form => true, errors => false])}
-                    <label for="">Имя</label>
+                    <label for="">Имя*</label>
                     <div class="formFieldError">{$user->getErrorsByForm('name', ',')}</div>
                 </div>
-                <div class="input-field no-available">
+                <div class="input-field">
                     {$user->getPropertyView('midname', ['class' => 'nempty'])}
                     <label for="">Отчество</label>
                 </div>
-                <div class="input-field no-available">
+                <div class="auth-phone-block">
                     {$user->getPropertyView('phone', ['class' => 'nempty phone_mask'], [form => true, errors => false])}
-                    <label for="">Телефон</label>
-                    <div class="formFieldError">{$user->getErrorsByForm('phone', ',')}</div>
+
+                    <div class="formFieldError register-phone-error">{$user->getErrorsByForm('phone', ',')}</div>
                 </div>
-                <div class="input-field w100 no-available">
+                <div class="input-field w100">
                     {$user->getPropertyView('e_mail', ['class' => 'nempty'], [form => true, errors => false])}
-                    <label for="">E-mail</label>
+                    <label for="">E-mail*</label>
                     <div class="formFieldError">{$user->getErrorsByForm('e_mail', ',')}</div>
                 </div>
                 <div class="w100">
@@ -67,6 +67,7 @@
                 </div>
                 <div class="action">
                     <a href="{$router->getUrl('rieltprof-front-auth', ['Act' => 'logout'])}" class="btn critical">Выход</a>
+                    <button type="submit" class="link link-more btn">{t}Сохранить{/t}</button>
                 </div>
             </div>
             {if $conf_userfields->notEmpty()}

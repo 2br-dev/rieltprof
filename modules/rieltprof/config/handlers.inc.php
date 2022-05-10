@@ -4,6 +4,7 @@ namespace rieltprof\Config;
 
 use Alerts\Model\Manager;
 use Catalog\Controller\Block\SearchLine as CatalogSearchLine;
+use ExtCsv\Model\CsvPreset\Catalog;
 use Rieltprof\Model\Notice\UserRemovedFromPublic;
 use rieltprof\Model\Orm\District;
 use RS\Config\Loader as ConfigLoader;
@@ -30,6 +31,8 @@ class Handlers extends HandlerAbstract
             ->bind('initialize')
             ->bind('getmenus')
             ->bind('cron')
+//            ->bind('listproducts.beforegetlist')
+//            ->bind('controller.beforeexec.catalog-front-listproducts')
 
             ->bind('orm.init.users-user')
             ->bind('orm.afterwrite.users-user')
@@ -86,6 +89,37 @@ class Handlers extends HandlerAbstract
             ->bind('orm.init.catalog-dir')
             ;
     }
+
+//    public static function controllerBeforeExecCatalogFrontListProducts(array $params)
+//    {
+//        $controller = $params['controller'];
+//        $action = $params['action'];
+//
+//        if($action == 'index'){
+//            /**
+//             * @var \Catalog\Controller\Front\ListProducts $api
+//             */
+//            $api = $controller->api;
+//            $location_api = new \Rieltprof\Model\LocationApi();
+//            $regions = $location_api->getRegions();
+//            $controller->view->assign('regions', $regions);
+//        }
+//    }
+//
+//    public static function listproductsBeforegetlist(array $params)
+//    {
+//        /**
+//         * @var \Catalog\Controller\Front\ListProducts $controller
+//         */
+//        $controller = $params['controller'];
+//        /**
+//         * @var \Catalog\Model\Api $api
+//         */
+//        $api = $controller->api;
+//        if(!empty($_SESSION['selected_region'])){
+//            $api->setFilter('region', (int)$_SESSION['selected_region']);
+//        }
+//    }
 
     public static function cron($params)
     {
@@ -217,6 +251,8 @@ class Handlers extends HandlerAbstract
                 'maxLength' => 255,
                 'visible' => false,
                 'default' => t('Краснодарский край')
+//                'list' => [['\Rieltprof\Model\LocationApi', 'regionsList'], [0 => t('Выберите регион')]],
+//                'template' => '%rieltprof%/form/location/location.tpl'
             )),
             'city' => new Type\Varchar(array(
                 'description' => t('Населенный пункт'),
@@ -2630,6 +2666,14 @@ class Handlers extends HandlerAbstract
             'parent' => 0,
             'sortn' => 102
         );
+//        $items[] = [
+//            'title' => t('Локация'),
+//            'alias' => 'rieltproflocation',
+//            'link' => '%ADMINPATH%/rieltprof-locationctrl/',
+//            'typelink' => 'link',
+//            'parent' => 0,
+//            'sortn' => 110,
+//        ];
         return $items;
     }
 
@@ -2642,7 +2686,7 @@ class Handlers extends HandlerAbstract
         $flag = $params['flag'];
         if($flag == 'insert'){
             $orm->linkGroup(['rieltor']);
-            $orm['access'] = 0;
+            $orm['access'] = 1;
             $orm->update();
         }
     }
@@ -2717,14 +2761,14 @@ class Handlers extends HandlerAbstract
                 'description' => t('Доступ к поиску'),
                 'maxLength' => 1,
                 'CheckBoxView' => array(1, 0),
-                'default' => 0
+                'default' => 1
             )),
             t('Фото'),
                 'photo' => new \RS\Orm\Type\Image(array(
                     'description' => t('Фото'),
                     'max_file_size'    => 10000000, //Максимальный размер - 10 Мб
                     'allow_file_types' => array('image/pjpeg', 'image/jpeg', 'image/png', 'image/gif'),//Допустимы форматы jpg, png, gif
-                    'checker' => [['\Users\Model\Orm\User', 'checkUserPhotoField'], t('Загрузите ваше фото')],
+//                    'checker' => [['\Users\Model\Orm\User', 'checkUserPhotoField'], t('Загрузите ваше фото')],
                 )),
             t('Рейтинг'),
                 'rating' => new \RS\Orm\Type\Double([
@@ -2758,7 +2802,9 @@ class Handlers extends HandlerAbstract
         // if(!$user->inGroup('supervisor') && ($request_uri == '/admin/' || $request_uri == '/admin')){
         //     \RS\Application\Application::getInstance()->redirect('/');
         // }
-        $can_access_page = ($request_uri == '/register/' || $request_uri == '/auth/' || \RS\Router\Manager::obj()->isAdminZone());
+        $can_access_page = ($request_uri == '/register/' || $request_uri == '/auth/' || \RS\Router\Manager::obj()->isAdminZone() ||
+                            $request_uri == '/users-front-verify/sendCode/' || $request_uri == '/users-front-verify/checkCode/' ||
+                            $request_uri == '/users-front-verify/reset/');
         if (!$can_access_page){
             if(!\RS\Application\Auth::isAuthorize() || !$user['access']) {
                 \RS\Application\Application::getInstance()->redirect('/auth/');

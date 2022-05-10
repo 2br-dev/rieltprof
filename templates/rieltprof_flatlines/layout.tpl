@@ -10,7 +10,7 @@
 
 {addcss file="libs/magnific-popup.css"}
 {addcss file="common/lightgallery/css/lightgallery.min.css" basepath="common"}
-{addcss file="%users%/verification.css"}
+{addcss file="verification.css"}
 {addcss file="https://unpkg.com/swiper/swiper-bundle.min.css" basepath="root"}
 
 {addcss file="master.css"}
@@ -25,7 +25,7 @@
 {addjs file="maskedinput.js"}
 
 {addjs file="lightgallery/lightgallery-all.min.js" basepath="common"}
-{addjs file="%users%/verification.js"}
+{addjs file="verification.js"}
 {addjs file="lab/lab.min.js" basepath="common"}
 
 {addjs file="rs.profile.js"}

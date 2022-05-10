@@ -1,7 +1,12 @@
-{*{extends file="%THEME%/wrapper.tpl"}*}
-{block name="content"}
-{*    <div class="box">*}
-{*        {moduleinsert name="\Main\Controller\Block\Breadcrumbs"}*}
-        {$app->blocks->getMainContent()}
-{*    </div>*}
-{/block}
+{$current_user = \RS\Application\Auth::getCurrentUser()}
+{*{if $is_auth}*}
+{*    {if $current_user['access']}*}
+        {block name="content"}
+            {$app->blocks->getMainContent()}
+        {/block}
+{*    {else}*}
+{*        <p>Доступ на сайт для вашего эккаунта заблокирован. Обратитесь а администратору сайта.</p>*}
+{*    {/if}*}
+{*{else}*}
+{*    {moduleinsert name="\Rieltprof\Controller\Block\Login" indexTemplate="%users%/authorization.tpl"}*}
+{*{/if}*}

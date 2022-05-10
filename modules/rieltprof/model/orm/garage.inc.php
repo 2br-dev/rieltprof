@@ -387,13 +387,13 @@ class Garage extends OrmObject
                 'visible' => false,
             )),
             'group_id' => new Type\Varchar(array(
-                'maxLength' => '255',
+                'maxLength' => '150',
                 'description' => t('Идентификатор группы товаров'),
                 'hint' => t('Вы можете объединять схожие товары в группы, в этом случае другие товары группы будут выступать в качестве комплектаций.<br> Укажите у нескольких товаров один и тот же идентификатор и задайте характеристики у основной комплектации каждого товара группы.', array(), 'Описание поля `Идентификатор группы товаров`'),
                 'visible' => false
             )),
             'xml_id' => new Type\Varchar(array(
-                'maxLength' => '255',
+                'maxLength' => '150',
                 'description' => t('Идентификатор в системе 1C'),
                 'meVisible' => false,
                 'visible' => false
@@ -418,7 +418,6 @@ class Garage extends OrmObject
                 'visible' => false
             )),
             'recommended' => new Type\Varchar(array(
-                'maxLength' => 4000,
                 'description' => t('Рекомендуемые товары'),
                 'visible' => false,
             )),
@@ -426,7 +425,6 @@ class Garage extends OrmObject
                 'visible' => false
             )),
             'concomitant' => new Type\Varchar(array(
-                'maxLength' => 4000,
                 'description' => t('Сопутствующие товары'),
                 'visible' => false,
             )),

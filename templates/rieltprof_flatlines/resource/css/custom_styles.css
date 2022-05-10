@@ -569,3 +569,74 @@ button[type="submit"]{
 .global-wrapper#search .content .title {
     align-items: center;
 }
+.mfp-content {
+    background-color: #fff;
+}
+.modal-wrapper {
+    padding: 25px;
+}
+.register-phone-block, .auth-phone-block {
+    position: relative;
+    width: 100%;
+}
+.register-phone-error {
+    position: absolute;
+    top: 55px;
+    left: 10px;
+}
+.auth-phone-block .register-phone-error {
+    top: 70px;
+}
+.rs-verify-ok img{
+    width: 25px;
+    margin-bottom: -10px;
+    margin-left: -40px;
+}
+.auth-phone-block .rs-verify-ok img {
+    margin-bottom: -30px;
+    margin-left: -30px;
+}
+@media (max-width: 500px){
+    .rs-verify-ok img{
+        margin-left: 90%;
+        margin-bottom: 0;
+        top: 20px;
+        position: absolute;
+    }
+    .auth-phone-block .rs-verify-ok img {
+        margin-left: 0;
+        top: 35px;
+    }
+}
+.rs-verify-verify-error {
+    bottom: -11px;
+}
+.rs-verify-code-block {
+    margin-bottom: 0;
+}
+.rs-verify-refresh-code, .rs-verify-reset {
+    display: block;
+    line-height: 35px;
+    cursor: pointer;
+}
+.rs-verify-timer-line {
+    line-height: 35px;
+}
+.rs-verify-timer {
+    color: green;
+}
+.auth-phone-block .rs-verify-timer {
+    color: yellow;
+}
+.auth-phone-block .input-field {
+    width: 100% !important;
+}
+#profile-sidebar .action {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 15px;
+}
+#profile-sidebar .formFieldError {
+    color: yellow;
+}

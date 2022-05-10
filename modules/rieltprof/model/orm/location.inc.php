@@ -1,17 +1,9 @@
 <?php
-/**
-* ReadyScript (http://readyscript.ru)
-*
-* @copyright Copyright (c) ReadyScript lab. (http://readyscript.ru)
-* @license http://readyscript.ru/licenseAgreement/
-*/
 namespace Rieltprof\Model\Orm;
 
 use RS\Orm\OrmObject;
 use RS\Orm\Request as OrmRequest;
 use RS\Orm\Type;
-use Shop\Model\ZoneApi;
-use Shop\Model\Orm\Zone;
 
 /**
  * Регион доставки
@@ -47,12 +39,6 @@ class Location extends OrmObject
                     'description' => t('Родитель'),
                     'tree' => array(array('\Rieltprof\Model\LocationApi', 'staticTreeList'), 0, array(0 => t('- Верхний уровень -')))
                 )),
-                'zipcode' => new Type\Varchar(array(
-                    'maxLength' => 20,
-                    'visible' => false,
-                    'cityVisible' => true,
-                    'description' => t('Индекс'),
-                )),
                 'is_city' => new Type\Integer(array(
                     'maxLength' => 1,
                     'description' => t('Является городом?'),
@@ -60,47 +46,43 @@ class Location extends OrmObject
                     'visible' => false,
                     'default' => 0,
                 )),
-//                'area' => new Type\Varchar(array(
-//                    'description' => t('Муниципальный район'),
-//                    'visible' => false,
-//                    'cityVisible' => true,
-//                )),
+                'is_county' => new Type\Integer(array(
+                    'maxLength' => 1,
+                    'description' => t('Является городом?'),
+                    'checkboxview' => array(1,0),
+                    'visible' => false,
+                    'default' => 0,
+                )),
+                'is_district' => new Type\Integer(array(
+                    'maxLength' => 1,
+                    'description' => t('Является городом?'),
+                    'checkboxview' => array(1,0),
+                    'visible' => false,
+                    'default' => 0,
+                )),
                 'sortn' => new Type\Integer(array(
                     'description' => t('Порядок'),
                     'default' => 100,
                     'hint' => t('Чем меньше число, тем выше элемент в списке. Если у двух элементов одинаковый порядок, то сортировка происходит по Наименованию в алфавитном порядке')
                 )),
-//                'kladr_id' => new Type\Varchar(array(
-//                    'description' => t('ID по КЛАДР'),
-//                    'hint' => t('Узнать можно на сайте kladr-rf.ru'),
-//                )),
-//                'type_short' => new Type\Varchar(array(
-//                    'description' => t('Тип субъекта, населенного пункта сокращенно'),
-//                    'hint' => t('Заполняется обычно только при автоматическом импорте регионов. Может использоваться, внутри системы, чтобы получить имя населенного пункта без обозначения типа.'),
-//                    'maxLength' => 30
-//                )),
-//                'processed' => new Type\Integer(array(
-//                    'description' => t('Обновлено только что'),
-//                    'visible' => false
-//                )),
-//            t('Срок доставки'),
-//                'russianpost_arriveinfo' => new Type\Varchar(array(
-//                    'description' => t('Срок доставки Почтой России (строка)'),
-//                    'visible' => false,
-//                    'cityVisible' => true,
-//                )),
-//                'russianpost_arrive_min' => new Type\Varchar(array(
-//                    'description' => t('Минимальное количество дней доставки Почтой России'),
-//                    'maxLength' => 10,
-//                    'visible' => false,
-//                    'cityVisible' => true,
-//                )),
-//                'russianpost_arrive_max' => new Type\Varchar(array(
-//                    'description' => t('Максимальное количество дней доставки Почтой России'),
-//                    'maxLength' => 10,
-//                    'visible' => false,
-//                    'cityVisible' => true,
-//                ))
+                'has_county' => new Type\Integer([
+                    'description' => t('Есть округа'),
+                    'maxLength' => 1,
+                    'checkboxView' => [1,0],
+                    'default' => 0
+                ]),
+                'no_district' => new Type\Integer([
+                    'description' => t('Нет районов'),
+                    'maxLength' => 1,
+                    'checkboxView' => [1,0],
+                    'default' => 0
+                ]),
+                'public' => new Type\Integer([
+                    'description' => t('Отображать для выбора'),
+                    'maxLength' => 1,
+                    'checkboxView' => [1,0],
+                    'default' => 1
+                ])
         ));
         
         $this->addIndex(array('site_id', 'parent_id', 'is_city'));
@@ -147,22 +129,6 @@ class Location extends OrmObject
     function getParent()
     {
         return new self($this['parent_id']);
-    }  
-    
-    /**
-    * Возвращает магистральные зоны
-    */
-    function getZones()
-    {
-        $zoneApi = new ZoneApi();
-        $zone_ids = $zoneApi->getZonesByRegionId($this['id']);
-        if(empty($zone_ids)){
-            return array();
-        }
-        return OrmRequest::make()
-            ->from(new Zone())
-            ->whereIn('id', $zone_ids)
-            ->objects();
     }
 
     /**
@@ -173,11 +139,73 @@ class Location extends OrmObject
      */
     function beforeWrite($flag)
     {
-        //Посмотрим родителя, чтобы посмотреть нужно ли выставлять признак города или нет.
+        //Посмотрим родителя, чтобы посмотреть нужно ли выставлять соответствующи признак (город, округ, район).
         $this['is_city'] = 0;
         $parent = new Location($this['parent_id']);
-        if ($parent['parent_id']){ //Если родитель это регион
-            $this['is_city'] = 1;
+        // Если у родителя нет родителя - значить это город
+        if(count($parent->getValues())){ //Если есть родитель. А если нет - значит это самый первый уровень - Регионы
+            if (!$parent['parent_id']) {
+                $this['is_city'] = 1;
+            } else {
+                // Если у родителя есть признак город и отметка что у города есть округа - то выставляем отметку - это округ
+                if ($parent['is_city'] && $parent['has_county']) {
+                    $this['is_county'] = 1;
+                }
+                //Если у родителя отметка - Регион или Города (но без отметки имеет региодны) - выставляем отметку - это округ
+                if ($parent['is_county'] || ($parent['is_city'] && !$parent['has_county'])) {
+                    $this['is_district'] = 1;
+                }
+            }
         }
+
+//        if($flag == self::INSERT_FLAG){
+//            if($this->isRegion() || $this['is_city']){
+//                $dir_api = new \Catalog\Model\DirApi();
+//                // 1. Получаем директории верхнего уровня
+//                $dirs_type_action = $dir_api->setFilter('parent', 0)->getList();
+//                foreach ($dirs_type_action as $dir_type_action) {
+//                    $dir_api->clearFilter();
+//                    $dirs_type_object = $dir_api->setFilter('parent', $dir_type_action['id'])->getList();
+//                    foreach ($dirs_type_object as $dir_type_object) {
+//                        $new_dir = new \Catalog\Model\Orm\Dir();
+//                        $new_dir['name'] = $this['title'];
+//                        $new_dir['alias'] = \RS\Helper\Transliteration::str2url($new_dir['name']);
+//                        if ($dir_type_action['alias'] == 'arenda') {
+//                            $new_dir['alias'] = $new_dir['alias'] . '-rent';
+//                        }
+//                        $new_dir['alias'] = $new_dir['alias'] . '_' . $dir_type_object['id'];
+//                        //Если это регион
+//                        if ($this->isRegion()) {
+//                            $new_dir['parent'] = $dir_type_object['id'];
+//                            $new_dir->insert();
+//                        } else{
+//                            if ($this['is_city']) {
+//                                // Добавть директорию город в нужные регион. для этого получить директорию с названием региона соответствующего города
+//                                // Название региона в $parent['title']
+//                                $dir_api->clearFilter();
+//                                $dirs_region = $dir_api->setFilter('parent', $dir_type_object['id'])->getList();
+//                                $parent = new Location($this['parent_id']);
+//                                foreach ($dirs_region as $dir_region){
+//                                    if($dir_region['name'] == $parent['title']){
+//                                        $new_dir['parent'] = $dir_region['id'];
+//                                        $new_dir->insert();
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+    }
+
+    /**
+     * Проверяет объект - регион это или нет
+     * @return bool
+     */
+    public function isRegion()
+    {
+        $parent = new Location($this['parent_id']);
+        return count($parent->getValues()) ? false : true;
     }
 }

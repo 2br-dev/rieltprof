@@ -32,44 +32,4 @@
         {include file='%rieltprof%/statusbar.tpl'}
         {include file='%rieltprof%/form/add-contact.tpl'}
     </div>
-
-
-
-
-
-
-{*    <div class="index_wrapper">*}
-{*        <a href="{$router->getAdminUrl('add', ['referer' => '/', 'sale_dir' => 3, 'rent_dir' => 13, 'object' => 'Квартира', 'action' => 'sale'], 'rieltprof-flatctrl')}" class="crud-add">Добавить квартиру</a>*}
-{*        <a href="{$router->getAdminUrl('add', ['referer' => '/', 'sale' => 3, 'rent' => 13, 'object' => 'Гараж', 'action' => 'sale'], 'rieltprof-garagectrl')}" class="crud-add">Добавить гараж</a>*}
-{*        <a href="{$router->getAdminUrl('add', ['referer' => '/', 'sale' => 3, 'rent' => 13, 'object' => 'Гараж', 'action' => 'rent'], 'rieltprof-garagectrl')}" class="crud-add">Аренда гараж</a>*}
-{*        <a href="{$router->getAdminUrl('add', ['dir' => 1, 'referer' => $router->getUrl('users-front-profile')], 'gallerist-ctrl')}"*}
-{*           class="crud-add">Добавить картину</a>*}
-{*    </div>*}
-{*    *}{* Баннеры *}
-{*    {moduleinsert name="\Banners\Controller\Block\Slider" zone="fashion-center"}*}
-
-{*    <div class="box mt40">*}
-{*        *}{* Лидеры продаж *}
-{*        {moduleinsert name="\Catalog\Controller\Block\TopProducts" dirs="samye-prodavaemye-veshchi" pageSize="5"}*}
-{*             *}
-{*        <div class="oh mt40">*}
-{*            <div class="left">*}
-{*                *}{* Новости *}
-{*                {moduleinsert name="\Article\Controller\Block\LastNews" indexTemplate="blocks/lastnews/lastnews.tpl" category="2" pageSize="4"}*}
-{*            </div>*}
-{*            <div class="right">*}
-{*                *}{* Оплата и возврат *}
-{*                {moduleinsert name="\Article\Controller\Block\Article" indexTemplate="blocks/article/main_payment_block.tpl" article_id="molodezhnaya--glavnaya--ob-oplate"}*}
-{*                *}
-{*                *}{* Доставка *}
-{*                {moduleinsert name="\Article\Controller\Block\Article" indexTemplate="blocks/article/main_delivery_block.tpl" article_id="molodezhnaya--glavnaya--o-dostavke"}*}
-{*            </div>*}
-{*        </div>*}
-{*        *}{* Товары во вкладках *}
-{*        {moduleinsert name="\Catalog\Controller\Block\ProductTabs" categories=["populyarnye-veshchi", "novye-postupleniya"] pageSize=6}*}
-{*        *}
-{*        *}{* Бренды *}
-{*        {moduleinsert name="\Catalog\Controller\Block\BrandList"}*}
-
-{*    </div>*}
 {/block}

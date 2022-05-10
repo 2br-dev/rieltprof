@@ -12,8 +12,11 @@
 {/if}
 <div class="toolbar">
     <div class="toolbar-body">
-        <div class="input-field">
+        <div class="input-field mobile-hidden">
             {moduleinsert name="\Rieltprof\Controller\Block\SearchLine" indexTemplate='%catalog%/blocks/searchline/searchform.tpl'}
+        </div>
+        <div class="location">
+            {moduleinsert name="\Rieltprof\Controller\Block\Location" indexTemplate="%rieltprof%/block/location/location.tpl"}
         </div>
         <div class="separator"></div>
         <div class="segmented-radio">

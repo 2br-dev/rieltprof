@@ -133,7 +133,7 @@ class ListProducts extends Front
         /**
          * @deprecated (10.18) вместо данного события следует использовать событие "controller.afterinit.КОРОТКОЕ-ИМЯ-КОНТРОЛЛЕРА"
          */
-        EventManager::fire('init.api.' . $this->getUrlName(), $this);
+        EventManager::fire('init.api.' . $this->getUrlName(), $f);
     }
 
 
