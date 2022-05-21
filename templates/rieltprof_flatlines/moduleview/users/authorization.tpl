@@ -26,7 +26,7 @@
                                             type="text"
                                             name="login"
                                             value="{$data.login|default:$Setup.DEFAULT_DEMO_LOGIN}"
-                                    ><label for="">Логин</label>
+                                    ><label for="">E-mail или телефон</label>
                                 </div>
                             </div>
                             <div class="col">

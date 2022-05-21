@@ -36,7 +36,8 @@
                     <label for="">Отчество</label>
                 </div>
                 <div class="input-field no-available">
-                    {$user->getPropertyView('phone', ['class' => 'nempty phone_mask'], [form => true, errors => false])}
+{*                    {$user->getPropertyView('phone', ['class' => 'nempty phone_mask'], [form => true, errors => false])}*}
+                    <input type="text" name="phone" value="{$user['phone']}">
                     <label for="">Телефон</label>
                     <div class="formFieldError">{$user->getErrorsByForm('phone', ',')}</div>
                 </div>

@@ -157,46 +157,6 @@ class Location extends OrmObject
                 }
             }
         }
-
-//        if($flag == self::INSERT_FLAG){
-//            if($this->isRegion() || $this['is_city']){
-//                $dir_api = new \Catalog\Model\DirApi();
-//                // 1. Получаем директории верхнего уровня
-//                $dirs_type_action = $dir_api->setFilter('parent', 0)->getList();
-//                foreach ($dirs_type_action as $dir_type_action) {
-//                    $dir_api->clearFilter();
-//                    $dirs_type_object = $dir_api->setFilter('parent', $dir_type_action['id'])->getList();
-//                    foreach ($dirs_type_object as $dir_type_object) {
-//                        $new_dir = new \Catalog\Model\Orm\Dir();
-//                        $new_dir['name'] = $this['title'];
-//                        $new_dir['alias'] = \RS\Helper\Transliteration::str2url($new_dir['name']);
-//                        if ($dir_type_action['alias'] == 'arenda') {
-//                            $new_dir['alias'] = $new_dir['alias'] . '-rent';
-//                        }
-//                        $new_dir['alias'] = $new_dir['alias'] . '_' . $dir_type_object['id'];
-//                        //Если это регион
-//                        if ($this->isRegion()) {
-//                            $new_dir['parent'] = $dir_type_object['id'];
-//                            $new_dir->insert();
-//                        } else{
-//                            if ($this['is_city']) {
-//                                // Добавть директорию город в нужные регион. для этого получить директорию с названием региона соответствующего города
-//                                // Название региона в $parent['title']
-//                                $dir_api->clearFilter();
-//                                $dirs_region = $dir_api->setFilter('parent', $dir_type_object['id'])->getList();
-//                                $parent = new Location($this['parent_id']);
-//                                foreach ($dirs_region as $dir_region){
-//                                    if($dir_region['name'] == $parent['title']){
-//                                        $new_dir['parent'] = $dir_region['id'];
-//                                        $new_dir->insert();
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
     }
 
     /**
@@ -207,5 +167,14 @@ class Location extends OrmObject
     {
         $parent = new Location($this['parent_id']);
         return count($parent->getValues()) ? false : true;
+    }
+
+    public function afterWrite($flag)
+    {
+        if($flag == self::INSERT_FLAG){
+            if($this['is_district']){
+                $district =
+            }
+        }
     }
 }

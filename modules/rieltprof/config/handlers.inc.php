@@ -130,8 +130,8 @@ class Handlers extends HandlerAbstract
                 'public' => 1
             ])->exec()->fetchAll();
             // Если будет несколько запусков тогда нужно будет проверять на какой минуте запущен cron
-//        foreach ($params['minutes'] as $minute) {
-//            if($minute % 1438 == 0){
+        foreach ($params['minutes'] as $minute) {
+            if($minute % 1438 == 0){
                 //каждый день в 23:59 проверяем активные обявления на актуальность. Актуальность - не более 30 дней
                 foreach ($public_object as $key => $value){
                     // Проверяем объявление на атуальность
@@ -156,8 +156,8 @@ class Handlers extends HandlerAbstract
                         Manager::send($notice);
                     }
                 }
-//            }
-//        }
+            }
+        }
     }
 
     /**

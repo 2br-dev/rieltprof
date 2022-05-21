@@ -613,7 +613,7 @@ class Flat extends OrmObject
         return $values[$row_value[0]];
     }
 
-    /**6p3+r54
+    /**
      * Вызывается перед сохранением объекта
      *
      * @param string $flag - строковое представление текущей операции (insert или update)
